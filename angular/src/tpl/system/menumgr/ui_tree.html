@@ -1,0 +1,81 @@
+
+<div>
+	<div class="bg-light lter b-b wrapper-md">
+		<h1 class="m-n font-thin h3">菜单配置</h1>
+	</div>
+	<div class="wrapper-md">
+		<div class="panel panel-default m-all-0">
+			<div class="panel-body">
+				<div class="hbox hbox-auto-xs hbox-auto-sm"
+					ng-controller="sysMgrMenuAddManageController">
+					<div class="col" ></div>
+					<div class="col" ng-init="initLeftTree()">
+
+						模块功能列表信息：
+						<ul id="leftTree" angularztree class="ztree"
+							tree-control="leftTreeObj" tree-data="leftTreeData"
+							enable-edit="false" enbable-check="true"
+							on-click="leftTreeNodeClick"></ul>
+
+					</div>
+
+					<div class="col w-lg bg-light b-r">
+						<div class="wrapper-md">
+
+							<h5>操作方式</h5>
+							<div class="line b-b line-lg"></div>
+							<div class="m-t-sm m-b-sm">
+								<button ng-click="left_tree_expand_collapse_all(true)"
+									class="btn btn-default btn-sm">左侧树全部展开</button>
+								<button ng-click="right_tree_expand_collapse_all(true)"
+									class="btn btn-default btn-sm">右侧树全部展开</button>
+							</div>
+
+							<div class="m-t-sm m-b-sm">
+								<button ng-click="left_tree_expand_collapse_all(false)"
+									class="btn btn-default btn-sm">左侧树全部闭合</button>
+								<button ng-click="right_tree_expand_collapse_all(false)"
+									class="btn btn-default btn-sm">右侧树全部闭合</button>
+							</div>
+							<div class="line b-b line-lg"></div>
+							<div class="m-t-sm m-b-sm" ng-int="initRightTree()">
+								<button ng-click="addLeftItemToRightTree()"
+									class="btn btn-default btn-sm">添加左侧节点到右侧</button>
+							</div>
+							<div class="line b-b line-lg"></div>
+<!-- 							<button ng-click="saveTreeMenu()" class="btn btn-success btn-sm">
+								<i class="fa fa-fw m-r-xs fa-plus"></i>保存节点信息
+							</button> -->
+
+							<button type="submit" class="btn btn-primary"
+								ng-click="saveTreeMenu()">
+								<i></i>保存
+							</button>
+							<button type="submit" class="btn btn-primary" ng-click="back()">
+								<i class="fa fa-reply"></i>返回
+							</button>
+
+						</div>
+					</div>
+					<div class="col" ></div>
+					<div class="col" ng-init="initRightTree()" style="margin-left:10px">
+						菜单结构信息：
+						<ul id="rightTree" angularztree class="ztree"
+							tree-control="rightTreeObj" tree-data="rightTreeData"
+							enable-edit="true" enbable-check="false"
+							on-remove="rigthTreeRemoveNode" on-rename="rigthTreeRenameNode"
+							on-click="rightTreeNodeClick"></ul>
+
+						<div class="m-t-sm m-b-sm">
+							<button ng-click="addTreeItem()" class="btn btn-default btn-sm">添加子节点</button>
+							<button ng-click="addTreeRootItem()"
+								class="btn btn-default btn-sm">添加根节点</button>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

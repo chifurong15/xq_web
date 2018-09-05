@@ -1,0 +1,116 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">修改用户</h1>
+</div>
+<div class="wrapper-md" ng-controller="userContentController">
+  <div class="panel panel-default pmcontainer">
+    <div class="panel-body">
+      <div class="search-form">
+        <form class="form-inline" method="get">
+          <div class="form-item">
+            <label>用户角色</label>
+            <div class="input-group searchinputbox" style="width:159px;">
+              <select class="form-control w-sm inline v-middle" id="yhjs"  ng-model="x" ng-options="m.name for m in roles" ng-init="roleType()" ng-change="roleID(x)">
+                  <option value="">{{roleNames}}</option>
+              </select>
+            </div>
+            <i class="star" style="margin-left:5px;">*</i>
+          </div>
+          <div class="form-item">
+            <label>用户真实姓名</label>
+            <input class='form-control inputbox'  type="text" placeholder=""  ng-model='name' ng-change="dis()">
+            <i class="star">*</i>
+          </div>
+          <div class="form-item">
+            <label>用户名</label>
+            <input class='form-control inputbox'  type="text" placeholder=""  ng-model='userName' ng-change='findUserName(userName)'>
+            <i class="star">*</i>
+            <i class="red" id="yz"></i>
+          </div>
+        </form>
+        <form class="form-inline" method="get">
+          <div class="form-item">
+            <label>性别</label>
+            <div class="input-group searchinputbox" style="width:157px;">
+              <select class="form-control w-sm inline v-middle" id="xb">
+              <option value="1" ng-if="gender == '男'">{{gender}}</option>
+              <option value="2" ng-if="gender == '女'">{{gender}}</option>
+              <option value="1" ng-if="gender == '女'">男</option>
+              <option value="2" ng-if="gender == '男'">女</option>
+              </select>
+            </div>
+            <i class="star" style="margin-left:5px;">*</i>
+          </div>
+          <div class="form-item">
+            <label>所属行政区域</label>
+             <input class='form-control inputbox'  type="text" placeholder="" ng-model='regionId'>
+          </div>
+          <div class="form-item">
+            <label>移动电话</label>
+            <input class='form-control inputbox'  type="text" placeholder=""  ng-model='cellphone' ng-change='findCellphone(cellphone)'>
+            <i class="star">*</i>
+            <i class="red" id="yz1"></i>
+          </div>
+        </form>
+        <form class="form-inline" method="get">
+          
+         <!--  <div class="form-item">
+            <label>所属组织机构</label>
+            <input class='form-control inputbox'  type="text" placeholder="请输入所属组织机构">
+            <i class="star">*</i>
+          </div>
+          <div class="form-item">
+            <label>职务</label>
+            <input class='form-control inputbox'  type="text" placeholder="请输入职务">
+            <i class="star">*</i>
+          </div>
+          <div class="form-item">
+            <label>用户类型</label>
+            <input class='form-control inputbox'  type="text" placeholder="请输入用户类型">
+            <i class="star">*</i>
+          </div> -->
+           <div class="form-item">
+             <label>生日</label>
+            <div class='input-group date date_picker' datetimepicker  id='datetimepicker1'>
+                <input type='text' class="form-control input-short-o"  ng-model="birthday">  
+                <span class="input-group-addon" style="margin:0">  
+                  <span class="glyphicon glyphicon-calendar"></span>  
+                </span>
+            </div>
+          </div>
+          <div class="form-item">
+            <label>邮箱地址</label>
+            <input class='form-control inputbox'  type="text" placeholder="" ng-model="email">
+          </div>
+          <div class="form-item">
+            <label>微信账号</label>
+            <input class='form-control inputbox'  type="text" placeholder="" ng-model="weixin">
+          </div>
+        </form>
+        <form class="form-inline" method="get">
+          <div class="form-item">
+            <label>QQ号</label>
+            <input class='form-control inputbox'  type="text" placeholder="" ng-model="qq">
+          </div>
+        </form>
+        <form class="form-inline" method="get">
+          <div class="form-item">
+            <label>备注</label>
+            <textarea class="form-control textarea-long" ng-model='description' placeholder="" rows="4">
+            </textarea>
+          </div>
+        </form>
+      </div>
+      <div class="line line-dashed b-b line-lg pull-in"></div>
+      <div class="btn-box">
+        <button type="submit" class="btn btn-primary" ng-click="change()" id="btn1">
+          <i></i>修改
+        </button>
+        <button type="submit" class="btn btn-primary" ng-click="back()">
+          <i class="fa fa-reply"></i>返回
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

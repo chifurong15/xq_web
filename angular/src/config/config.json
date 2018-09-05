@@ -1,0 +1,48 @@
+{
+	"moduleId": "44d7bde1ba2e11e7a0e6ac1f6b182e9e",
+	"moduleName": "angular",
+	"version": "v1.0.0",
+	"type":"1",
+	"menus": [
+		{
+			"seqId": "111",
+			"parentId": "0",
+			"isLeaf":false,
+			"isRoot":true,
+			"name": "一级菜单",
+			"icon": "icon-nav-2",
+			"url": "",
+			"requireJS":[],
+			"description": "一级菜单-事件处置"
+		},
+		{
+			"seqId": "112",
+			"parentId": "111",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "二级菜单一",
+			"icon": "fa-chevron-right",
+			"url": "src/module/event/event-add/event-add.html",
+			"requireJS":["src/module/event/event-add/event-add.js"],
+			"description": "一级菜单-二级菜单一"
+		}
+	],
+	"components": [
+		{
+			"seqId": "1",
+			"name": "report",
+			"url": "componentXXX1.html",
+			"requireJS":["js/components/componentsXXX1.js", "js/components/componentXXX2.js"],
+			"description": "demo组件示例，URL为相对路径"
+		}
+	],
+	"pages":[
+		{
+			"seqId": "501",
+			"name": "单页面",
+			"url": "",
+			"requireJS":[""],
+			"description": "单页面"
+		}
+	]
+}

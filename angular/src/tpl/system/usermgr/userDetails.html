@@ -1,0 +1,133 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">用户详情</h1>
+</div>
+<div class="wrapper-md" ng-controller="userDetailsController">
+  <div class="panel panel-default pmcontainer">
+    <div class="panel-body">
+      <div class="search-form">
+        <form class="form-inline" method="get">
+          <div class="form-item">
+            <label>角色名称</label>
+            <input type="text" class="form-control inputbox" placeholder="请输入角色名称" ng-model="roleNames" disabled="disabled">
+            <i class="star">*</i>
+          </div>
+          <div class="form-item">
+            <label>用户真实姓名</label>
+            <input class='form-control inputbox'  type="text" placeholder=""  ng-model='name' disabled="disabled">
+            <i class="star">*</i>
+          </div>
+          <div class="form-item">
+            <label>用户名</label>
+            <input class='form-control inputbox'  type="text" placeholder=""  ng-model='userName' ng-blur='findUserName(userName)' disabled="disabled">
+            <i class="star">*</i>
+          </div>
+        </form>
+        <form class="form-inline" method="get">
+          <div class="form-item">
+            <label>性别</label>
+            <input class='form-control inputbox'  type="text" placeholder=""  ng-model='gender' disabled="disabled">
+            <i class="star" style="margin-left:5px;">*</i>
+          </div>
+          <div class="form-item">
+            <label>移动电话</label>
+            <input class='form-control inputbox'  type="text" placeholder=""  ng-model='cellphone' ng-blur='findCellphone(cellphone)' disabled="disabled">
+            <i class="star">*</i>
+          </div>
+          <div class="form-item">
+            <label>所属行政区域</label>
+             <input class='form-control inputbox'  type="text" placeholder="" ng-model='regionId' disabled="disabled">
+          </div>
+        </form>
+        <form class="form-inline" method="get">
+         <!--  <div class="form-item">
+            <label>所属组织机构</label>
+            <input class='form-control inputbox'  type="text" placeholder="请输入所属组织机构">
+            <i class="star">*</i>
+          </div>
+          <div class="form-item">
+            <label>职务</label>
+            <input class='form-control inputbox'  type="text" placeholder="请输入职务">
+            <i class="star">*</i>
+          </div>
+          <div class="form-item">
+            <label>用户类型</label>
+            <input class='form-control inputbox'  type="text" placeholder="请输入用户类型">
+            <i class="star">*</i>
+          </div> -->
+           <div class="form-item">
+            <label>生日</label>
+            <input class='form-control inputbox'  type="text" placeholder="" ng-model='birthday' disabled="disabled">
+          </div>
+          <div class="form-item">
+            <label>邮箱地址</label>
+            <input class='form-control inputbox'  type="text" placeholder="" ng-model="email" disabled="disabled">
+          </div>
+          <div class="form-item">
+            <label>微信账号</label>
+            <input class='form-control inputbox'  type="text" placeholder="" ng-model="weixin" disabled="disabled">
+          </div>
+        </form>
+        <form class="form-inline" method="get">
+          <div class="form-item">
+            <label>QQ号</label>
+            <input class='form-control inputbox'  type="text" placeholder="" ng-model="qq" disabled="disabled">
+          </div>
+          <!--
+          <div class="form-item">
+            <label>固定电话</label>
+            <input class='form-control inputbox'  type="text" placeholder="请输入固定电话">
+            <i class="star">*</i>
+          </div>
+          <div class="form-item">
+            <label>传真</label>
+            <input class='form-control inputbox'  type="text" placeholder="请输入传真">
+            <i class="star">*</i>
+          </div>
+          <div class="form-item">
+            <label>Sip电话</label>
+            <input class='form-control inputbox'  type="text" placeholder="请输入Sip电话">
+            <i class="star">*</i>
+          </div>
+          <div class="form-item">
+            <label>状态</label>
+            <select class="input-sm form-control w-sm inline v-middle">
+              <option>正常</option>
+              <option>无效</option>
+            </select>
+            <i class="star">*</i>
+          </div>
+          <div class="form-item">
+            <label>账号类型</label>
+            <input class='form-control inputbox'  type="text" placeholder="请输入账号类型">
+            <i class="star">*</i>
+          </div>
+          <div class="form-item">
+            <label>账号有效期</label>
+            <div class='input-group date date_picker' datetimepicker  id='datetimepicker2' style='z-index:0;'>  
+                <input type='text' class="form-control input-short-o"  ng-model="dateTwo" />  
+                <span class="input-group-addon" style="line-height:34px;">  
+                    <span class="glyphicon glyphicon-calendar"></span>  
+               </span>
+            </div>
+            <i class="star">*</i>
+          </div> -->
+        </form>
+        <form class="form-inline" method="get">
+          <div class="form-item">
+            <label>备注</label>
+            <textarea class="form-control textarea-long" ng-model='description' placeholder="" rows="4" disabled="disabled">
+            </textarea>
+          </div>
+        </form>
+      </div>
+      <div class="line line-dashed b-b line-lg pull-in"></div>
+      <div class="btn-box">
+        <button type="submit" class="btn btn-primary" ng-click="back()">
+          <i class="fa fa-reply"></i>返回
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

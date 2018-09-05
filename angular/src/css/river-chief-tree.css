@@ -1,0 +1,42 @@
+.float-menu {
+	display: none;
+	top: 0;
+	text-align: left;
+	font-size: 12px;
+	padding: 2px;
+	color: #1da1f2;
+	border-radius: 5px;
+	background-color: #fff;
+	border: 1px solid #1da1f2;
+}
+
+.float-menu ul li {
+	margin: 1px 0;
+	padding: 0 5px;
+	cursor: pointer;
+	color: #337ab7;
+	border-radius: 5px;
+	list-style: none outside none;
+	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.float-menu ul li:hover {
+	background-color: #1da1f2;
+	color: #fff;
+}
+
+table, table tr th {
+	text-align: center;
+	user-select: none;
+}
+
+.modal-detail {
+	position: absolute;
+	top: 50px;
+	left: 200px;
+	bottom: 0;
+	padding: 0 0 50px 0;
+	background-color: #f0f3f4;
+}
