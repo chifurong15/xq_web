@@ -7,22 +7,6 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
 		var isIE = !!navigator.userAgent.match(/MSIE/i);
 		isIE && angular.element($window.document.body).addClass('ie');
 		isSmartDevice($window) && angular.element($window.document.body).addClass('smart');
-
-		//富文本图片上传
-//		$localStorage.serviceUrl_upload = 'http://10.0.9.217:8082';
-		//河长日志  周加文接口域名地址
-		// $localStorage.serviceUrl_z= 'http://10.0.9.149:8080';
-		$http.get("config/ip.json").success(function(data) {
-			$localStorage.ipAdd = data['htmlUrl'];
-			$localStorage.patrolModuleName = "/patrolMgr";
-			$localStorage.regionTreeName = "/infomation";
-			$localStorage.chiefOnline = '/chiefOnline';
-			$localStorage.eventMgr = '/eventMgr'
-			$localStorage.serviceUrl = data['serviceUrl'];//ip地址加模块名
-			console.log('ipAdd = ' + $localStorage.ipAdd);
-		}).error(function() {
-			alert("config/ip.json/配置初始化出错了！")
-		});
 		
 		// logo显示隐藏
 		$scope.noblock = false;
@@ -62,16 +46,17 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
 		} else {
 			$localStorage.settings = $scope.app.settings;
 		}
-		if(angular.isDefined($localStorage.appConfig)) {
-			$scope.appConfig = $localStorage.appConfig;
+		if(moduleService.menus && moduleService.menus!= '' && moduleService.menus!= undefined && moduleService.menus!= null) {
+			$scope.appConfig = moduleService.getMoudleConfig();
 		} else {
 			//加载配置信息
 			moduleService.getConfig();
-			$scope.appConfig = $localStorage.appConfig;
-		}
+			$scope.appConfig = moduleService.getMoudleConfig();
+		};
+		moduleService.getIpConfig();
 		//获取二级菜单,默认就三级菜单
 		$scope.getSecondMenu = function(seqId) {
-			var menus = $localStorage.appMenus;
+			var menus = moduleService.getMoudleMenus();
 			var secondMenu = [];
 			for(var i = 0; i < menus.length; i++) {
 				if(menus[i].parentId == seqId) {

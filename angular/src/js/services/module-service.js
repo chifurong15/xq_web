@@ -1,23 +1,6 @@
 angular.module('app')
     .service('moduleService', ['$localStorage','$document', '$q', '$timeout', '$http', '$state', function ($localStorage,$document, $q, $timeout, $http, $state) {
-		
-    	this.getConfig = function(){
-    			
-	        $.ajax({
-	            type : "Get",
-	            url : "config/config.json", 
-	            async : false
-	        }).done(function(data){
-	        	//loadTreeData(data);
-	        	$localStorage.appMenus = data.menus;
-	        	$localStorage.appConfig = loadTree(data);
-	        	$localStorage.htmlAndJs = getHtmlAndJsPath(data);
-	        	console.log("appconifg:"+data);
-	        }).error(function(errordata){
-	        	
-	        });
-	           
-    	}
+    	
     	function getHtmlAndJsPath(data){
     		var menus = data.menus;
     		var pages = data.pages;
@@ -31,7 +14,7 @@ angular.module('app')
     			pushTargeItem(resData, pages, 3);
     		}
     		return resData;
-    	}
+    	};
     	function pushTargeItem(targetItems, items, type){
 			for(var i=0; i<items.length; i++){
 				if(items[i].url && items[i].url != "" ){
@@ -50,7 +33,7 @@ angular.module('app')
 					targetItems.push(item);
 				}
 			}
-    	}
+    	};
     	
     	
     	function findRoot(data){
@@ -63,13 +46,13 @@ angular.module('app')
     			}
     			return root;
     		}
-    	}
+    	};
     	
     	function loadTree(data){
     		var root = findRoot(data);
     		loadMenuTree(root, data.menus)
     		return root;
-    	}
+    	};
     	
     	
     	function loadMenuTree(node, menus){
@@ -94,7 +77,7 @@ angular.module('app')
 					
 				}
 			}
-    	}
+    	};
     	function pushItem(node, ele){
 			if(node.children && node.children.length > 0){
 				node.children.push(ele);
@@ -103,7 +86,56 @@ angular.module('app')
 				node.children = [];
 				node.children.push(ele);
 			}
-    	}
-    	
+    	};
+		return {
+			menus : '',
+			modulePrefix: '',
+			config: '',
+			htmlAndJs: '',
+			serviceUrl: '',
+			htmlUrl: '',
+			getConfig: function(){
+				var _this = this;
+				$.ajax({
+		            type : "Get",
+		            url : "config/config.json", 
+		            async : false
+		        }).done(function(data){
+		        	_this.modulePrefix = data.modulePrefix;
+		        	_this.menus = data.menus;
+		        	_this.config = data;
+		        }).error(function(errordata){
+		        	
+		        });
+			},
+			getIpConfig: function(){
+				var _this = this;
+				$.ajax({
+		            type : "Get",
+		            url : "config/ip.json", 
+		            async : false
+		        }).done(function(data){
+		        	_this.serviceUrl = data['serviceUrl'];
+		        	_this.htmlUrl = data['htmlUrl'];
+		        }).error(function(errordata){
+		        	
+		        });
+			},
+			getMoudleMenus: function(){
+				return this.menus;
+			},
+			getMoudleConfig: function(){
+				return loadTree(this.config);
+			},
+			getMoudleHtmlAndJs: function(){
+				return getHtmlAndJsPath(this.config);
+			},
+			getHtmlUrl: function(){
+				return this.htmlUrl;
+			},
+			getServiceUrl: function(){
+				return this.serviceUrl;
+			}
+		}
 
     }]);
