@@ -1,0 +1,161 @@
+/**
+ * ================================
+ * 描述说明
+ * @author yuanhaitao</br>2018/09/11
+ * @version 3.0.0
+ * ================================
+ */
+
+.mainBody {
+    position: fixed;
+    top: 54px;
+    bottom: 0;
+    padding-top: 10px;
+    left: 0;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 1000000;
+    background-color: #e3e3e3;
+}
+/*.left-panel{
+	min-width: 350px;
+}*/
+.left-panel .weather-default{
+	height: 125px;
+}
+.left-panel .panel .weather-panel{
+	background-color: #2a4788;    
+	box-shadow: 8px 7px 7px rgba(35, 4, 4, 0.78);
+}
+.patr-count{
+	padding-left: 5px;
+	color: #fff;
+}
+.patr-count span{
+	padding-left: 15px;
+}
+.tabs-content{
+	margin-top: 20px;
+}
+.m-t-5{
+	margin-top: 5px;
+}
+.m-t-10{
+	margin-top: 10px;
+}
+.m-t-15{
+	margin-top: 15px;
+}
+.m-t-20{
+	margin-top: 20px;
+}
+.p-all-0{
+	padding: 0;
+}
+.m-all-0{
+	margin: 0;
+}
+.left-news-content{
+	height: 150px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+.right-news-content{
+    overflow: hidden;
+    overflow-y: auto;
+}
+.mainbody-Table {
+    text-align: center;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.mainbody-Table thead tr, .mainbody-Table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    font-size: 12px;
+}
+.mainbody-Table thead tr th, .mainbody-Table tbody tr td {
+	text-align: center;
+}
+.mainbody-Table tbody tr {
+	cursor: pointer;
+}
+
+.mainbody-Table tbody {
+    display: block;
+    height: 200px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+.mainbody-tips span{
+	border-left: solid 3px #6b6767;
+    display: inline-block;
+    line-height: 18px;
+    padding-left: 15px;
+    font-weight: bold;
+}
+#check-active{
+	overflow: hidden;
+}
+#water-quality{
+	overflow: hidden;
+}
+.city-select{
+    display: inline-flex;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.33);
+    color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 8px 7px 7px rgba(35, 4, 4, 0.78);
+    z-index: 1;
+}
+.city-select label{
+	width: 100px;
+	height: 34px;
+    line-height: 34px;
+    margin: 0;
+}
+.map-legend{
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    z-index: 1;
+    background-color: #fff;
+    padding: 10px 20px;
+}
+.map-legend span{
+	margin: 0px 0px 10px -12px;
+    display: block;
+    border-left: solid 3px #9c9b9b;
+    padding-left: 10px;
+}
+.map-legend  li{
+	font-size: 12px;
+}
+.map-legend .legendImg{
+	width: 20px;
+	height: 20px;
+}
+#mapTips{
+	position: absolute;
+	top: 192px;
+	left: 315px;
+	z-index: 1;
+	background-color: rgb(79, 161, 132);
+	padding: 5px;
+	border-radius: 5px;
+	width: auto;
+	color: #fff;
+}
+.main-map {
+    position: relative;
+    width: 100%;
+    height: 650px;
+    overflow: hidden;
+}

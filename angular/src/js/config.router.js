@@ -26,46 +26,13 @@ angular.module('app')
 					})
 					.state('app.dashboard-v1', {
 						url: '/dashboard-v1',
-						templateUrl: 'tpl/app_dashboard_v1.html',
-						resolve: {
-							promiseObj: function($q, $rootScope, wish) {
-								var deferred = $q.defer(),
-									deps = {
-										Map: "esri/map",
-										Draw: "esri/toolbars/draw",
-										Edit: "esri/toolbars/edit",
-										Graphic: "esri/graphic",
-										FeatureLayer: "esri/layers/FeatureLayer",
-										Legend: "esri/dijit/Legend",
-										InfoTemplate: "esri/InfoTemplate",
-										Color: "esri/Color",
-										array: "dojo/_base/array",
-										ClassBreaksRenderer: "esri/renderers/ClassBreaksRenderer",
-										PictureMarkerSymbol: "esri/symbols/PictureMarkerSymbol",
-										SimpleMarkerSymbol: "esri/symbols/SimpleMarkerSymbol",
-										SimpleLineSymbol: "esri/symbols/SimpleLineSymbol",
-										SimpleFillSymbol: "esri/symbols/SimpleFillSymbol",
-										UniqueValueRenderer: "esri/renderers/UniqueValueRenderer",
-										event: "dojo/_base/event",
-										parser: "dojo/parser",
-										Polygon: "esri/geometry/Polygon",
-										registry: "dijit/registry",
-										BorderContainer: "dijit/layout/BorderContainer",
-										ContentPane: "dijit/layout/ContentPane",
-										ToggleButton: "dijit/form/ToggleButton",
-										WidgetSet: "dijit/WidgetSet",
-										domReady: "dojo/domReady!"
-									};
-								wish.loadDependencies(deps, function() {
-									deferred.resolve();
-									if(!$rootScope.$$phase) {
-										$rootScope.$apply();
-									}
-								});
-
-								return deferred.promise;
-							}
-						}
+		                    templateUrl: 'module/main/mainBody.html',
+		                    resolve: {
+		                    deps: ['$ocLazyLoad',
+		                        function( $ocLazyLoad ){
+		                        return $ocLazyLoad.load(['js/controllers/chart.js','module/main/mainBody.js']);
+		                    }]
+		                }
 					})
 					.state('app.dashboard-v2', {
 						url: '/dashboard-v2',

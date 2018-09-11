@@ -32,7 +32,7 @@ angular.module('app')
         };
         //返回图片点符号
         var _getPictureMarkerSymbol = function(imgPath, width, height){
-            var symbol = new w.PictureMarkerSymbol(imgPath, width, height).setOffset(0, 15);
+            var symbol = new w.PictureMarkerSymbol(imgPath, width, height).setOffset(0, height/2);
             return symbol;
         };
         //返回点文本符号

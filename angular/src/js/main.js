@@ -8,6 +8,16 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
 		isIE && angular.element($window.document.body).addClass('ie');
 		isSmartDevice($window) && angular.element($window.document.body).addClass('smart');
 		
+		$http.get("config/ip.json").success(function (data) {
+			//谢普耀接口 网管地址
+            $localStorage.gwUrl = data['serviceUrl'];
+            //沈金舟接口端口号
+            $localStorage.serviceUrl_chiefOnline = $localStorage.gwUrl + "/chiefOnline";
+		
+		}).error(function () {
+            alert("config/ip.json/配置初始化出错了！")
+        });
+        
 		// logo显示隐藏
 		$scope.noblock = false;
 		// config
@@ -29,7 +39,7 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
 			},
 			settings: {
 				themeID: 1,
-				navbarHeaderColor: 'bg-black',
+//				navbarHeaderColor: 'bg-black',
 				navbarCollapseColor: 'bg-white-only',
 				asideColor: 'bg-black',
 				headerFixed: true,

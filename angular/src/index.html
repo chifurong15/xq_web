@@ -35,6 +35,9 @@
 
 		<!-- huangshuifa -->
 		<link rel="stylesheet" href="vendor/arcgis/esriapi/esri/css/esri.css">
+		
+		<!--添加首页 yuanhaitao-->
+		<link rel="stylesheet" href="css/main.css">
 
 
 	</head>
@@ -137,10 +140,39 @@
 		<!--globaltree-->
 		<script src="js/globaltree.js" type="text/javascript" charset="utf-8"></script>
 		<script src="vendor/layui/layui.js"></script>
+		
 		<!-- load Esri JSAPI -->
 		<script src="vendor/arcgis/esriapi/init.js"></script>
-		<script src="js/services/mapserver.js"></script>
+		<script src="js/services/common/esriService.js"></script>
+		
+		<!-- load gisTerraformer -->
+		<script src="vendor/arcgis/terraformer/terraformer.min.js"></script>
+		<script src="vendor/arcgis/terraformer/terraformer-arcgis-parser.js"></script>
+		<script src="vendor/arcgis/terraformer/terraformer-wkt-parser.js"></script>
+		
+		<!-- load gisFactory -->
+		<script src="js/factory/esriApiDeps.js"></script>
+		<script src="js/factory/tianditu-factory.js"></script>
+		<script src="js/factory/SymbolUtil.js"></script>
+		<script src="js/factory/MapTool.js"></script>
+		<script src="js/factory/MapUtil.js"></script>
+		<script src="js/factory/ComponentTool.js"></script>
+		<script src="js/factory/GeometryUtil.js"></script>
+		<script src="js/factory/UtilityTool.js"></script>
+		
+		<!-- load gisService -->
+		<script src="js/services/patrolMgr/PatrolRiverService.js"></script>
+		<script src="js/services/riverChiefOnline/RiverChiefOnlineService.js"></script>
+		<script src="js/services/eventMgr/EventService.js"></script>
+		<script src="js/services/workbench/WorkbenchService.js"></script>
+		<script src="js/services/common/queryAdminregion.js"></script>
+		<script src="js/services/ComponentToolService.js"></script>
 		<script src="js/angular-http.js"></script>
+		<script src="js/localStorage.js"></script>
+		<script src="js/services/common/ReachService.js"></script>
+		<script src="js/httpInterceptor.js"></script>
+		<script src="vendor/layui/layui.js"></script>
+		<script src="vendor/layer/layer.js"></script>
 	</body>
 
 </html>

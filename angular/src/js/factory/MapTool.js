@@ -116,7 +116,7 @@ angular.module('app')
                 [255, 255, 0, 0.8]).setOutline(
                 new _w.SimpleLineSymbol(
                     _w.SimpleLineSymbol.STYLE_SOLID, new _w.Color(
-                        [255, 0, 0])).setWidth(2));
+                        [255, 0, 0, 0])), 2);
 
             flashingGraphic = new _w.Graphic(polygon, sfs);
             flashLayer.add(flashingGraphic);
@@ -132,14 +132,27 @@ angular.module('app')
                 flashLayer.clear();
                 clearInterval(flashingTimer);
             }
-        }
+        };
+
+        var _getflashingTimer = function () {
+            return flashingTimer;
+        };
+
+        var _clearflashingTimer = function () {
+            if (flashingTimer) {
+                clearInterval(flashingTimer);
+                flashLayer.clear();
+            }
+        };
 
         return {
             init: _init,
             getAngle: _getAngle,
             simplifyPath: _simplifyPath,
             graphicflashing: _graphicflashing,
-            controlLayerVisible: _controlLayerVisible
+            controlLayerVisible: _controlLayerVisible,
+            getflashingTimer: _getflashingTimer,
+            clearflashingTimer: _clearflashingTimer
         }
 
     }]);
