@@ -22,33 +22,33 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
 		$scope.noblock = false;
 		// config
 		$scope.app = {
-			name: 'angular',
-			version: '1.0.0',
-			logoImg: 'img/logo.png',
+            name: '天津市河长制管理信息系统',
+            version: '3.0.0',
+            logoImg: 'img/logo.png',
 
-			// for chart colors
-			color: {
-				primary: '#7266ba',
-				info: '#23b7e5',
-				success: '#27c24c',
-				warning: '#fad733',
-				danger: '#f05050',
-				light: '#e8eff0',
-				dark: '#3a3f51',
-				black: '#1c2b36'
-			},
-			settings: {
-				themeID: 1,
-//				navbarHeaderColor: 'bg-black',
-				navbarCollapseColor: 'bg-white-only',
-				asideColor: 'bg-black',
-				headerFixed: true,
-				asideFixed: false,
-				asideFolded: false,
-				asideDock: false,
-				container: false
-			}
-		}
+            // for chart colors
+            color: {
+                primary: '#7266ba',
+                info: '#23b7e5',
+                success: '#27c24c',
+                warning: '#fad733',
+                danger: '#f05050',
+                light: '#e8eff0',
+                dark: '#3a3f51',
+                black: '#1c2b36'
+            },
+            settings: {
+                themeID: 1,
+                navbarHeaderColor: '',
+                navbarCollapseColor: 'bg-white-only',
+                asideColor: '',
+                headerFixed: true,
+                asideFixed: true,
+                asideFolded: false,
+                asideDock: false,
+                container: false
+            }
+        }
 
 		// save settings to local storage
 		if(angular.isDefined($localStorage.settings)) {
