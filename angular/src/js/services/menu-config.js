@@ -4,6 +4,7 @@ angular.module('menu.config', [])
 
         this.targetHTML = function (menuId) {
             console.log('menuId'+menuId);
+            console.log(moduleService.getHtmlUrl())
             var htmlAndJsList = moduleService.getMoudleHtmlAndJs();
             for(var i=0;i<htmlAndJsList.length;i++){
                 var mathState = htmlAndJsList[i].type+"_"+htmlAndJsList[i].seqId;

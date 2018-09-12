@@ -49,6 +49,7 @@ angular.module('app')
     	};
     	
     	function loadTree(data){
+    		console.log(data)
     		var root = findRoot(data);
     		loadMenuTree(root, data.menus)
     		return root;
@@ -96,6 +97,7 @@ angular.module('app')
 			htmlUrl: '',
 			getConfig: function(){
 				var _this = this;
+				console.log($)
 				$.ajax({
 		            type : "Get",
 		            url : "config/config.json", 

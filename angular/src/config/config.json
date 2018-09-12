@@ -11,8 +11,8 @@
 			"isRoot":true,
 			"name": "一级菜单",
 			"icon": "icon-nav-2",
-			"url": "",
-			"requireJS":[],
+			"url": "src/module/event/event-add/event-add.html",
+			"requireJS":["src/module/event/event-add/event-add.js"],
 			"description": "一级菜单-事件处置"
 		},
 		{
@@ -20,11 +20,11 @@
 			"parentId": "111",
 			"isLeaf":true,
 			"isRoot":false,
-			"name": "二级菜单一",
-			"icon": "fa-chevron-right",
+			"name": "二级菜单",
+			"icon": "menu-icon-6",
 			"url": "src/module/event/event-add/event-add.html",
 			"requireJS":["src/module/event/event-add/event-add.js"],
-			"description": "一级菜单-二级菜单一"
+			"description": "一级菜单-二级菜单"
 		}
 	],
 	"components": [
