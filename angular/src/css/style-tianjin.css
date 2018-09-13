@@ -1415,12 +1415,26 @@ body {
 	background-color: #2a4788;    
 	box-shadow: 8px 7px 7px rgba(35, 4, 4, 0.78);
 }
-.patr-count{
-	padding-left: 5px;
+.weather-iframe {
+	width: 140px;
+	float: left;
+}
+.left-panel .panel .weather-date {
+	color: #fff;
+	text-align: right;
+}
+.left-panel .panel .weather-date .date {
+	font-size: 16px;
+}
+.left-panel .panel .weather-date .time {
+	font-size: 30px;
+}
+.patr-count {
+	display: flex;
 	color: #fff;
 }
-.patr-count span{
-	padding-left: 15px;
+.patr-count span {
+	flex: 1;
 }
 .tabs-content{
 	margin-top: 20px;
@@ -1539,4 +1553,32 @@ body {
 	border-radius: 5px;
 	width: auto;
 	color: #fff;
+}
+
+
+
+
+
+/*通报管理*/
+.bulletin .fr {
+	float: right;
+}
+.bulletin .fl {
+	float: left;
+}
+.bulletin-view-info {
+	padding: 15px 0;
+	color: #428bca;
+}
+.bulletin-view-info span {
+	margin-right: 15px;
+}
+.bulletin-view-title {
+	padding-bottom: 15px;
+	font-size: 16px;
+	text-align: center;
+	border-bottom: 1px solid #ccc;
+}
+.bulletin-view-content {
+	padding: 15px 0;
 }

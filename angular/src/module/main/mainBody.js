@@ -29,8 +29,10 @@
             'queryAdminregion',
             'UtilityTool',
             'WorkbenchService',
+			'$ajaxhttp',
+            'moduleService',
             function mainBodyCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http,
-                                  wish, esriApiDeps, tiandituFactory, MapTool, MapUtil, SymbolUtil, queryAdminregion, UtilityTool, WorkbenchService) {
+                                  wish, esriApiDeps, tiandituFactory, MapTool, MapUtil, SymbolUtil, queryAdminregion, UtilityTool, WorkbenchService, $ajaxhttp, moduleService) {
 				
 				var promise = esriApiDeps.query();
                 var w = wish.get();
@@ -50,6 +52,8 @@
                     patrolCount();
                     /*行政区域*/
                     regionList();
+                    getBulletin();
+                    getDate();
                 };
 				
                 var region = {
@@ -89,16 +93,16 @@
                 	console.log(_cityRankH)
                 	
                 	var chartHeight = _outH - _weatH - _newsH - _reachH - 60;
-	                $('#main').css('height', chartHeight);
+//	                $('#main').css('height', chartHeight);
 	                
 	                var patrolHeight = _outH - _mapH - 10;
-	                $('#patrol-num').css('height', patrolHeight);
+//	                $('#patrol-num').css('height', patrolHeight);
 	                
 	                var checkHeight = _outH - _rankH - _cityRankH - 10;
-	                $('#check-active').css('height', checkHeight);
+//	                $('#check-active').css('height', checkHeight);
 	                
 	                var rNewsHeight = checkHeight - 100;
-	                $('#right-news-content').css('height', rNewsHeight);
+//	                $('#right-news-content').css('height', rNewsHeight);
 	                
                 }
 
@@ -204,6 +208,61 @@
 	                	}
 	                });
 				};
+				
+				// 调查报告
+				function getBulletin () {
+					$ajaxhttp.myhttp({
+						url: moduleService.getServiceUrl() + '/v1/bulletin/selectByFirst?type=1',
+						method: 'get',
+						callBack: function (res){
+							$scope['bulletin1'] = res.data;
+						}
+					});
+					$ajaxhttp.myhttp({
+						url: moduleService.getServiceUrl() + '/v1/bulletin/selectByFirst?type=2',
+						method: 'get',
+						callBack: function (res){
+							$scope['bulletin2'] = res.data;
+						}
+					});
+					$ajaxhttp.myhttp({
+						url: moduleService.getServiceUrl() + '/v1/bulletin/selectByFirst?type=3',
+						method: 'get',
+						callBack: function (res){
+							$scope['bulletin3'] = res.data;
+						}
+					});
+					$ajaxhttp.myhttp({
+						url: moduleService.getServiceUrl() + '/v1/bulletin/selectByFirst?type=4',
+						method: 'get',
+						callBack: function (res){
+							$scope['bulletin4'] = res.data;
+						}
+					});
+				}
+				// 天气日期
+				function getDate () {
+                    setInterval(function () {
+						var date = new Date(),
+							year = date.getFullYear(),
+							month = date.getMonth() + 1,
+							day = date.getDate(),
+							hour = date.getHours(),
+							min = date.getMinutes(),
+							second = date.getSeconds();
+							
+						$scope.$apply(function () {
+							$scope.weatherDate = {
+								year: year,
+								month: month,
+								day: day,
+								hour: hour < 10 ? '0' + hour : hour,
+								min: min < 10 ? '0' + min : min,
+								second: second < 10 ? '0' + second : second
+							}
+						})
+                    }, 1000);
+				}
 
             }
         ]);

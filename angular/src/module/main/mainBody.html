@@ -7,13 +7,22 @@
         <div class="left-panel col-xs-3 p-all-0">
 	        <div id="weather" class="panel panel-default weather-default m-all-0">
 	        	<div class="panel-body weather-panel">
-	        		<iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=79&color=%23FFFFFF&bgc=%23&icon=1&num=1&site=12"></iframe>
+	        		<!--<iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=79&color=%23FFFFFF&bgc=%23&icon=1&num=1&site=12"></iframe>-->
+					<div class="clearfix">
+						<div class="weather-iframe">
+							<iframe allowtransparency="true" frameborder="0" width="180" height="36" scrolling="no" src="//tianqi.eastday.com/plugin/widget_v1.html?sc=3&z=2&t=1&v=0&d=3&bd=0&k=&f=ffffff&q=1&a=1&c=54511&w=180&h=36&align=left"></iframe>
+						</div>
+						<div class="weather-date">
+							<p class="date">{{weatherDate.year}}年{{weatherDate.month}}月{{weatherDate.day}}日</p>
+							<p class="time">{{weatherDate.hour}}:{{weatherDate.min}}:{{weatherDate.second}}</p>
+						</div>
+					</div>
 					<div class="patr-count">
-						<span>今日巡河：</span>
-						<span>市；1</span>
-						<span>区：5</span>
-						<span>镇：30</span>
-						<span>村：100</span>
+						<span>今日巡河:</span>
+						<span>市:1</span>
+						<span>区:5</span>
+						<span>镇:30</span>
+						<span>村:100</span>
 					</div>
 	        	</div>
 	        </div>
@@ -22,49 +31,16 @@
 	        	<div class="panel-body">
 	        		<ul class="nav nav-tabs" role="tablist">
 	                    <li class="active col-xs-6 text-c">
-	                        <a href="#statusWork" onclick="return false;" data-toggle="tab">工作简报</a>
+	                        <a href="#statusWork" onclick="return false;" data-toggle="tab">每周动态</a>
 	                    </li>
 	                    <li class="col-xs-6 text-c">
-	                        <a href="#statusActive" onclick="return false;" data-toggle="tab">每周动态</a>
+	                        <a href="#statusActive" onclick="return false;" data-toggle="tab">月度考核简报</a>
 	                    </li>
 	                </ul>
 	                <div class="tab-content tabs-content left-news-content">
-	                    <div class="tab-pane active" id="statusWork">
-	                    	<p>
-	                    		<b>	一、河长制考核情况</b></br>
-	                    		4月份，河长制考核排名前三位的区为河东区、南开区、宝坻区，排名后三位的区为滨海新区、静海区、红桥区。河东区由上月第12名上升到本月第1名；宝坻区由上月第7名提升到本月第3名；宁河区由上月第9名提升到本月第4名。
-	                    	</p>
-	                    	<p>
-	                    		<b>	二、区级河长巡河情况</b></br>
-	                    		4月份，区级河长巡河排名靠前的区为武清区、河西区、静海区、北辰区，排名后两位的区为宝坻区、红桥区。
-	                    	</p>
-	                    	<p>
-	                    		<b> 三、监督管理职责履职不到位情况</b></br>
-	                    		4月份，市级检查发现各区监督管理职责履职不到位问题6个。
-	                    	</p>
-	                    	<p>
-	                    		<b> 四、整改督办通报约谈情况</b></br>
-	                    		4月份印发整改通知5个。
-	                    	</p>
-		                </div>
+	                    <div class="tab-pane active" id="statusWork" ng-bind-html="bulletin2.detail"></div>
 		                
-		                <div class="tab-pane" id="statusActive">
-		                	<p>
-	                    		2、工作简报工作简报工作简报工作简报工作简报工作简报
-	                    	</p>
-	                    	<p>
-	                    		2、工作简报工作简报工作简报工作简报工作简报工作简报
-	                    	</p>
-	                    	<p>
-	                    		2、工作简报工作简报工作简报工作简报工作简报工作简报
-	                    	</p>
-	                    	<p>
-	                    		2、工作简报工作简报工作简报工作简报工作简报工作简报
-	                    	</p>
-	                    	<p>
-	                    		2、工作简报工作简报工作简报工作简报工作简报工作简报
-	                    	</p>
-						</div>
+		                <div class="tab-pane" id="statusActive" ng-bind-html="bulletin3.detail"></div>
 	                </div>
 	        	</div>
 	        </div>
@@ -296,42 +272,19 @@
 	        <div id="check-active" class="panel panel-default m-all-0">
 	        	<div class="panel-body">
 	        		<div class="mainbody-tips">
-	        			<span>
-	        				暗查暗访
-	        			</span>
+	        			<span>暗查暗访</span>
 	        		</div>
 	        		<ul class="nav nav-tabs m-t-15" role="tablist">
 	                    <li class="active col-xs-6 text-c">
-	                        <a href="#statusNotice" onclick="return false;" data-toggle="tab">暗查暗访通报</a>
+	                        <a href="#statusNotice" onclick="return false;" data-toggle="tab">通报</a>
 	                    </li>
 	                    <li class="col-xs-6 text-c">
-	                        <a href="#statusProblem" onclick="return false;" data-toggle="tab">发现问题</a>
+	                        <a href="#statusProblem" onclick="return false;" data-toggle="tab">督导检查通报</a>
 	                    </li>
 	                </ul>
 	                <div id="right-news-content" class="tab-content tabs-content right-news-content">
-	                    <div class="tab-pane active" id="statusNotice">
-	                    	<p>
-	                    		1、工作简报工作简报工作简报工作简报工作简报工作简报
-	                    	</p>
-	                    	<p>
-	                    		1、工作简报工作简报工作简报工作简报工作简报工作简报
-	                    	</p>
-	                    	<p>
-	                    		1、工作简报工作简报工作简报工作简报工作简报工作简报
-	                    	</p>
-		                </div>
-		                
-		                <div class="tab-pane" id="statusProblem">
-		                	<p>
-	                    		2、工作简报工作简报工作简报工作简报工作简报工作简报
-	                    	</p>
-	                    	<p>
-	                    		2、工作简报工作简报工作简报工作简报工作简报工作简报
-	                    	</p>
-	                    	<p>
-	                    		2、工作简报工作简报工作简报工作简报工作简报工作简报
-	                    	</p>
-						</div>
+	                    <div class="tab-pane active" id="statusNotice" ng-bind-html="bulletin1.detail"></div>
+		                <div class="tab-pane" id="statusProblem" ng-bind-html="bulletin4.detail"></div>
 	                </div>
 	        	</div>
 	        </div>
