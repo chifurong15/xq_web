@@ -20,6 +20,8 @@
 				function bulletinAddCtrl($localStorage, $scope,
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
+				
+					var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
 					
 					$scope.init = function () {
 						var bulletin = globalParam.getter().bulletin || {};
@@ -38,7 +40,7 @@
 					function getData(id) {
 						
 						$ajaxhttp.myhttp({
-							url: moduleService.getServiceUrl() + '/v1/bulletin/detail',
+							url: apiPrefix + '/v1/bulletin/detail',
 							method: 'get',
 							params: {
 								id: id
@@ -105,34 +107,9 @@
 						
 						// 新增
 						if (!$scope.id) {
-							/*$ajaxhttp.myhttp({
-								url: moduleService.getServiceUrl() + '/v1/bulletin/add',
-								method: 'POST',
-				                headers: {'Content-Type': undefined},
-				                transformRequest: angular.identity,
-								params: {
-									title: $scope.title,
-									issuer: $scope.issuer,
-									postTime: $scope.postTime,
-									year: new moment($scope.month).format('YYYY'),
-									month: new moment($scope.month).format('MM'),
-									attandUrl: $scope.attandUrl && $scope.attandUrl.slice(0, $scope.attandUrl.length - 1),
-									detail: data,
-									type: $scope.type
-								},
-								callBack: function (res) {
-								    if (res.resCode === 1) {
-	                                    layer.msg('新建成功', {time:2000});
-	                                    clear();//创建成功后清空
-	                                }else {
-	                                    layer.msg(res.resMsg, {time:2000});
-	                                    clear();
-	                                }
-								}
-							});*/
 							
 							$http({
-								url: moduleService.getServiceUrl() + '/v1/bulletin/add',
+								url: apiPrefix + '/v1/bulletin/add',
 								method: 'post',
 				                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 				                transformRequest: function(obj) {  
@@ -148,7 +125,8 @@
 									postTime: $scope.postTime,
 									year: new moment($scope.month).format('YYYY'),
 									month: new moment($scope.month).format('MM'),
-									attandUrl: $scope.attandUrl && $scope.attandUrl.slice(0, $scope.attandUrl.length - 1),
+//									attandUrl: $scope.attandUrl && $scope.attandUrl.slice(0, $scope.attandUrl.length - 1),
+									attandUrl: $scope.attandUrl,
 									detail: data,
 									type: $scope.type
 								}
@@ -164,30 +142,8 @@
 						}
 						// 编辑
 						else {
-							/*$ajaxhttp.myhttp({
-								url: moduleService.getServiceUrl() + '/v1/bulletin/update',
-								method: 'put',
-								data: {
-									id: $scope.id,
-									title: $scope.title,
-									issuer: $scope.issuer,
-									postTime: $scope.postTime,
-									year: new moment($scope.month).format('YYYY'),
-									month: new moment($scope.month).format('MM'),
-									attandUrl: $scope.attandUrl.slice(0, $scope.attandUrl.length - 1),
-									detail: data,
-									type: $scope.type
-								},
-								callBack: function (res) {
-								    if (res.resCode === 1) {
-	                                    layer.msg('操作成功', {time:2000});
-	                                }else {
-	                                    layer.msg(res.resMsg, {time:2000});
-	                                }
-								}
-							});*/
 							$http({
-								url: moduleService.getServiceUrl() + '/v1/bulletin/update',
+								url: apiPrefix + '/v1/bulletin/update',
 								method: 'put',
 				                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 				                transformRequest: function(obj) {  
@@ -204,7 +160,8 @@
 									postTime: $scope.postTime,
 									year: new moment($scope.month).format('YYYY'),
 									month: new moment($scope.month).format('MM'),
-									attandUrl: $scope.attandUrl.slice(0, $scope.attandUrl.length - 1),
+//									attandUrl: $scope.attandUrl.slice(0, $scope.attandUrl.length - 1),
+									attandUrl: $scope.attandUrl,
 									detail: data,
 									type: $scope.type
 								}
@@ -247,35 +204,25 @@
 						for (var i = 0; i < e.files.length; i++) {
 	            			var form = new FormData();
 							var file = e.files[i];
-							if (!$scope.attandName) $scope.attandName = '';
-							$scope.attandName += file.name + ';';
+//							if (!$scope.attandName) $scope.attandName = '';
+//							$scope.attandName += file.name + ';';
+							$scope.attandName = file.name;
 				            form.append('file', file);
 				            form.append('fileName', file.name);
 				            $http({
 				                method: 'POST',
-				                url: moduleService.getServiceUrl() + '/v1/bulletin/upload',
+				                url: apiPrefix + '/v1/bulletin/upload',
 				                data: form,
 				                headers: {'Content-Type': undefined},
 				                transformRequest: angular.identity
 				            }).success(function (res) {
-								if (!$scope.attandUrl) $scope.attandUrl = '';
-			                	$scope.attandUrl += res.data.url + ';';
+//								if (!$scope.attandUrl) $scope.attandUrl = '';
+//			                	$scope.attandUrl += res.data.url + ';';
+			                	$scope.attandUrl = res.data.url;
 				            }).error(function (data) {
 				                 console.log('upload fail');
 				            })
 						}
-						
-			            /*$ajaxhttp.myhttp({
-							url: moduleService.getServiceUrl() + '/v1/bulletin/upload',
-							method: 'post',
-							params: {
-								file: file,
-								fileName: file.name
-							},
-							callBack: function (res) {
-			                	console.log(res);
-							}
-						})*/
 					}
 					
 					//清空表单

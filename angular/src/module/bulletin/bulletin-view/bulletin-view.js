@@ -20,6 +20,8 @@
 				function bulletinViewCtrl($localStorage, $scope,
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
+				
+					var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
 							
 					$scope.init = function () {
 						var bulletin = globalParam.getter().bulletin || {};
@@ -37,7 +39,7 @@
 					// 数据详情
 					function getData (id) {
 						$ajaxhttp.myhttp({
-							url: moduleService.getServiceUrl() + '/v1/bulletin/detail',
+							url: apiPrefix + '/v1/bulletin/detail',
 							method: 'get',
 							params: {
 								id: id

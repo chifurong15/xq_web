@@ -20,6 +20,8 @@
 				function bulletinListCtrl($localStorage, $scope,
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
+				
+					var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
 							
 					$scope.init = function () {
 						getList();
@@ -27,7 +29,7 @@
 					// 获取数据列表
 					function getList () {
 						$ajaxhttp.myhttp({
-							url: moduleService.getServiceUrl() + '/v1/bulletin/list',
+							url: apiPrefix + '/v1/bulletin/list',
 							method: 'get',
 							params: {
 								pageNumber: $scope.paginationConf.currentPage,
@@ -75,7 +77,7 @@
 							btn: ['确定', '取消']
 						}, function () {
 							$ajaxhttp.myhttp({
-								url: moduleService.getServiceUrl() + '/v1/bulletin/delete',
+								url: apiPrefix + '/v1/bulletin/delete',
 								method: 'DELETE',
 								params: {
 									id: id

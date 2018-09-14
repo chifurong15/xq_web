@@ -34,6 +34,8 @@
             function mainBodyCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http,
                                   wish, esriApiDeps, tiandituFactory, MapTool, MapUtil, SymbolUtil, queryAdminregion, UtilityTool, WorkbenchService, $ajaxhttp, moduleService) {
 				
+				var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
+				
 				var promise = esriApiDeps.query();
                 var w = wish.get();
                 // 初始化
@@ -212,28 +214,28 @@
 				// 调查报告
 				function getBulletin () {
 					$ajaxhttp.myhttp({
-						url: moduleService.getServiceUrl() + '/v1/bulletin/selectByFirst?type=1',
+						url: apiPrefix + '/v1/bulletin/selectByFirst?type=1',
 						method: 'get',
 						callBack: function (res){
 							$scope['bulletin1'] = res.data;
 						}
 					});
 					$ajaxhttp.myhttp({
-						url: moduleService.getServiceUrl() + '/v1/bulletin/selectByFirst?type=2',
+						url: apiPrefix + '/v1/bulletin/selectByFirst?type=2',
 						method: 'get',
 						callBack: function (res){
 							$scope['bulletin2'] = res.data;
 						}
 					});
 					$ajaxhttp.myhttp({
-						url: moduleService.getServiceUrl() + '/v1/bulletin/selectByFirst?type=3',
+						url: apiPrefix + '/v1/bulletin/selectByFirst?type=3',
 						method: 'get',
 						callBack: function (res){
 							$scope['bulletin3'] = res.data;
 						}
 					});
 					$ajaxhttp.myhttp({
-						url: moduleService.getServiceUrl() + '/v1/bulletin/selectByFirst?type=4',
+						url: apiPrefix + '/v1/bulletin/selectByFirst?type=4',
 						method: 'get',
 						callBack: function (res){
 							$scope['bulletin4'] = res.data;
