@@ -20,11 +20,11 @@
 			"parentId": "1",
 			"isLeaf":true,
 			"isRoot":false,
-			"name": "信息管理",
+			"name": "通报管理",
 			"icon": "menu-icon-6",
 			"url": "src/module/bulletin/bulletin-list/bulletin-list.html",
 			"requireJS":["src/module/bulletin/bulletin-list/bulletin-list.js"],
-			"description": "信息管理-信息管理列表"
+			"description": "通报管理-通报管理列表"
 		},
 		{
 			"seqId": "1-2",
