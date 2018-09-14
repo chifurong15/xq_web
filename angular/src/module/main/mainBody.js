@@ -56,6 +56,7 @@
                     regionList();
                     getBulletin();
                     getDate();
+                    getCountHZOnline();
                 };
 				
                 var region = {
@@ -213,35 +214,61 @@
 				
 				// 调查报告
 				function getBulletin () {
-					$ajaxhttp.myhttp({
-						url: apiPrefix + '/v1/bulletin/selectByFirst?type=1',
-						method: 'get',
-						callBack: function (res){
-							$scope['bulletin1'] = res.data;
-						}
-					});
-					$ajaxhttp.myhttp({
-						url: apiPrefix + '/v1/bulletin/selectByFirst?type=2',
-						method: 'get',
-						callBack: function (res){
-							$scope['bulletin2'] = res.data;
-						}
-					});
-					$ajaxhttp.myhttp({
-						url: apiPrefix + '/v1/bulletin/selectByFirst?type=3',
-						method: 'get',
-						callBack: function (res){
-							$scope['bulletin3'] = res.data;
-						}
-					});
-					$ajaxhttp.myhttp({
-						url: apiPrefix + '/v1/bulletin/selectByFirst?type=4',
-						method: 'get',
-						callBack: function (res){
-							$scope['bulletin4'] = res.data;
-						}
-					});
+//					$ajaxhttp.myhttp({
+//						url: apiPrefix + '/v1/bulletin/selectByFirst?type=1',
+//						method: 'get',
+//						callBack: function (res){
+//							$scope['bulletin1'] = res;
+//						}
+//					});
+//					$ajaxhttp.myhttp({
+//						url: apiPrefix + '/v1/bulletin/selectByFirst?type=2',
+//						method: 'get',
+//						callBack: function (res){
+//							console.log(res);
+//							$scope.bulletin2 = res;
+//						}
+//					});
+//					$ajaxhttp.myhttp({
+//						url: apiPrefix + '/v1/bulletin/selectByFirst?type=3',
+//						method: 'get',
+//						callBack: function (res){
+//							$scope['bulletin3'] = res;
+//						}
+//					});
+//					$ajaxhttp.myhttp({
+//						url: apiPrefix + '/v1/bulletin/selectByFirst?type=4',
+//						method: 'get',
+//						callBack: function (res){
+//							$scope['bulletin4'] = res;
+//						}
+//					});
+					$http({
+	                	url: apiPrefix + '/v1/bulletin/selectByFirst?type=1',
+	                	method: 'get'
+	                }).success(function(res){
+						$scope.bulletin1 = res;
+	                });
+					$http({
+	                	url: apiPrefix + '/v1/bulletin/selectByFirst?type=2',
+	                	method: 'get'
+	                }).success(function(res){
+						$scope.bulletin2 = res;
+	                });
+					$http({
+	                	url: apiPrefix + '/v1/bulletin/selectByFirst?type=3',
+	                	method: 'get'
+	                }).success(function(res){
+						$scope.bulletin3 = res;
+	                });
+					$http({
+	                	url: apiPrefix + '/v1/bulletin/selectByFirst?type=4',
+	                	method: 'get'
+	                }).success(function(res){
+						$scope.bulletin4 = res;
+	                });
 				}
+				
 				// 天气日期
 				function getDate () {
                     setInterval(function () {
@@ -264,6 +291,30 @@
 							}
 						})
                     }, 1000);
+				}
+				
+				// 巡河总数
+				function getCountHZOnline () {
+					
+					$ajaxhttp.myhttp({
+						url: 'http://10.0.9.248:51000/chairmanOnline/v1/countHZOnline',
+						method: 'get',
+						callBack: function (res) {
+		                	if(res.resCode == 1){
+		                		$scope.countHZOnline = res.data;
+		                	}
+						}
+					});
+					/*$scope.countHZOnline = {
+						townTotal: 20,
+						villageTotal: 12,
+						cityCount: 81,
+						countyCount: 2,
+						villageCount: 3,
+						countyTotal: 9,
+						cityTotal: 8,
+						townCount: 11
+					}*/
 				}
 
             }

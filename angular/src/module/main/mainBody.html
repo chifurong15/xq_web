@@ -1,13 +1,13 @@
 <div ng-controller="mainBodyCtrl" ng-init="init()">
 
-    <div id="mainBody" class="mainBody row m-all-0">
-        <!--<a href="javascript:void(0)" ng-click="mainBodyBtn()" class="mainBody-btn"></a>-->
-        <!--<img src="img/main-bg2.png" id="mainBody2" />-->
-        <!--<img src="img/main-bg.png" id="mainBody" />-->
-        <div class="left-panel col-xs-3 p-all-0">
-	        <div id="weather" class="panel panel-default weather-default m-all-0">
-	        	<div class="panel-body weather-panel">
-	        		<!--<iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=79&color=%23FFFFFF&bgc=%23&icon=1&num=1&site=12"></iframe>-->
+	<div id="mainBody" class="mainBody row m-all-0">
+		<!--<a href="javascript:void(0)" ng-click="mainBodyBtn()" class="mainBody-btn"></a>-->
+		<!--<img src="img/main-bg2.png" id="mainBody2" />-->
+		<!--<img src="img/main-bg.png" id="mainBody" />-->
+		<div class="left-panel col-xs-3 p-all-0">
+			<div id="weather" class="panel panel-default weather-default m-all-0">
+				<div class="panel-body weather-panel">
+					<!--<iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=79&color=%23FFFFFF&bgc=%23&icon=1&num=1&site=12"></iframe>-->
 					<div class="clearfix">
 						<div class="weather-iframe">
 							<iframe allowtransparency="true" frameborder="0" width="180" height="36" scrolling="no" src="//tianqi.eastday.com/plugin/widget_v1.html?sc=3&z=2&t=1&v=0&d=3&bd=0&k=&f=ffffff&q=1&a=1&c=54511&w=180&h=36&align=left"></iframe>
@@ -19,371 +19,403 @@
 					</div>
 					<div class="patr-count">
 						<span>今日巡河:</span>
-						<span>市:1</span>
-						<span>区:5</span>
-						<span>镇:30</span>
-						<span>村:100</span>
+						<span>市:{{countHZOnline.cityCount}}</span>
+						<span>区:{{countHZOnline.countyTotal}}</span>
+						<span>镇:{{countHZOnline.townCount}}</span>
+						<span>村:{{countHZOnline.villageCount}}</span>
 					</div>
-	        	</div>
-	        </div>
-	        
-	        <div id="news-l" class="panel panel-default m-all-0">
-	        	<div class="panel-body">
-	        		<ul class="nav nav-tabs" role="tablist">
-	                    <li class="active col-xs-6 text-c">
-	                        <a href="#statusWork" onclick="return false;" data-toggle="tab">每周动态</a>
-	                    </li>
-	                    <li class="col-xs-6 text-c">
-	                        <a href="#statusActive" onclick="return false;" data-toggle="tab">月度考核简报</a>
-	                    </li>
-	                </ul>
-	                <div class="tab-content tabs-content left-news-content">
-	                    <div class="tab-pane active" id="statusWork" ng-bind-html="bulletin2.detail"></div>
-		                
-		                <div class="tab-pane" id="statusActive" ng-bind-html="bulletin3.detail"></div>
-	                </div>
-	        	</div>
-	        </div>
-	        
-	        <div id="reach-table" class="panel panel-default m-all-0 m-t-10">
-	        	<div class="panel-body">
-	        		<div class="mainbody-tips">
-	        			<span>
+				</div>
+			</div>
+
+			<div id="news-l" class="panel panel-default m-all-0">
+				<div class="panel-body">
+					<ul class="nav nav-tabs" role="tablist">
+						<li class="active col-xs-6 text-c">
+							<a href="#statusWork" onclick="return false;" data-toggle="tab">每周动态</a>
+						</li>
+						<li class="col-xs-6 text-c">
+							<a href="#statusActive" onclick="return false;" data-toggle="tab">月度考核简报</a>
+						</li>
+					</ul>
+					<div class="tab-content tabs-content left-news-content">
+						<!--<div class="tab-pane active" id="statusWork" ng-bind-html="bulletin2.detail"></div>-->
+						<div class="tab-pane active" id="statusWork">
+							<div ng-repeat="list in bulletin2">
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{list.id}}" style="font-weight:700">{{list.title}}</a>
+								<div id="collapse_{{list.id}}" class="panel-collapse collapse" ng-bind-html="list.detail"></div>
+							</div>
+						</div>
+						<div class="tab-pane" id="statusActive">
+							<div ng-repeat="list in bulletin3">
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{list.id}}" style="font-weight:700">{{list.title}}</a>
+								<div id="collapse_{{list.id}}" class="panel-collapse collapse" ng-bind-html="list.detail"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="reach-table" class="panel panel-default m-all-0 m-t-10">
+				<div class="panel-body">
+					<div class="mainbody-tips">
+						<span>
 	        				本周问题较多河道
 	        			</span>
-	        		</div>
-	        		<table class="table table-hover mainbody-Table">
-	        			<thead>
-						    <tr>
-	            	            <th>序号</th>
-	        	                <th>河道段</th>
-	    	                    <th>河长</th>
-		                        <th>级别</th>
-		                    </tr>
-	        			</thead>
-	                    <!--<tr ng-repeat="module in moduleList" ng-init="index = $index+1">-->
-	                    <tbody>
-		                    <tr>
-		                    	<td>1</td>
-		                    	<td>测试</td>
-		                    	<td>测试</td>
-		                    	<td>测试</td>
-		                    </tr>
-		                     <tr>
-		                    	<td>2</td>
-		                    	<td>测试</td>
-		                    	<td>测试</td>
-		                    	<td>测试</td>
-		                    </tr>
-		                    <tr>
-		                    	<td>3</td>
-		                    	<td>测试</td>
-		                    	<td>测试</td>
-		                    	<td>测试</td>
-		                    </tr>
-		                    <tr>
-		                    	<td>4</td>
-		                    	<td>测试</td>
-		                    	<td>测试</td>
-		                    	<td>测试</td>
-		                    </tr>
-		                    <tr>
-		                    	<td>5</td>
-		                    	<td>测试</td>
-		                    	<td>测试</td>
-		                    	<td>测试</td>
-		                    </tr>
-		                     <tr>
-		                    	<td>6</td>
-		                    	<td>测试</td>
-		                    	<td>测试</td>
-		                    	<td>测试</td>
-		                    </tr>
-		                     <tr>
-		                    	<td>7</td>
-		                    	<td>测试</td>
-		                    	<td>测试</td>
-		                    	<td>测试</td>
-		                    </tr>
-	                    </tbody>
+					</div>
+					<table class="table table-hover mainbody-Table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>河道段</th>
+								<th>河长</th>
+								<th>级别</th>
+							</tr>
+						</thead>
+						<!--<tr ng-repeat="module in moduleList" ng-init="index = $index+1">-->
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>测试</td>
+								<td>测试</td>
+								<td>测试</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>测试</td>
+								<td>测试</td>
+								<td>测试</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>测试</td>
+								<td>测试</td>
+								<td>测试</td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>测试</td>
+								<td>测试</td>
+								<td>测试</td>
+							</tr>
+							<tr>
+								<td>5</td>
+								<td>测试</td>
+								<td>测试</td>
+								<td>测试</td>
+							</tr>
+							<tr>
+								<td>6</td>
+								<td>测试</td>
+								<td>测试</td>
+								<td>测试</td>
+							</tr>
+							<tr>
+								<td>7</td>
+								<td>测试</td>
+								<td>测试</td>
+								<td>测试</td>
+							</tr>
+						</tbody>
 					</table>
-	        	</div>
-	        </div>
-	        
-	        <div id="water-quality" class="panel panel-default m-all-0 m-t-10">
-	        	<div class="panel-body">
-		        	<div class="mainbody-tips">
-	        			<span>
+				</div>
+			</div>
+
+			<div id="water-quality" class="panel panel-default m-all-0 m-t-10">
+				<div class="panel-body">
+					<div class="mainbody-tips">
+						<span>
 	        				天津市水质情况
 	        			</span>
-	        		</div>
-	        	</div>
-	        	<div id="main" style="min-width: 350px;height:150px;"></div>
-	        </div>
-	    </div>
-	    <div class="mid-panel col-xs-6 p-all-0">
-	        <div id="mid-map" class="panel panel-default m-all-0">
-	        	<div class="panel-body">
-	        		<div id="map" class="main-map">
-	        			
-	        			<div id="mapTips"></div>
-	        			
-		        		<div class="city-select form-group">
-						    <label class="label-tittle">区域选择</label>
-						    <select class="selectpicker form-control" ng-model="region" ng-options="region as region.name for region in regionlist" ng-change="regionChange(region)">
-						    	<option value="">--请选择--</option>
-						    </select> 
-		        		</div>
-		        		<div class="map-legend">
-		        			<span>图标类别</span>
-		        			<ul>
-		        				<li>
-		        					<img class="legendImg" src="img/esri-icon/patrol/walkR.gif"/>
-		        					巡河：{{rightStausCount.countPatrol}}人
-		        				</li>
-		        				<li>
-		        					<img class="legendImg" src="img/esri-icon/hzstatus/riverChief.png"/>
-		        					在线：{{rightStausCount.countOnline}}人
-		        				</li>
-		        			</ul>
-		        		</div>
-	        		</div>
-	        	</div>
-	        </div>
-	        
-	        <div id="patrol-num" class="panel panel-default m-all-0" style="overflow: hidden;">
-	        	<div class="panel-body">
-	        		<div class="mainbody-tips">
-	        			<span>
+					</div>
+				</div>
+				<div id="main" style="min-width: 350px;height:150px;"></div>
+			</div>
+		</div>
+		<div class="mid-panel col-xs-6 p-all-0">
+			<div id="mid-map" class="panel panel-default m-all-0">
+				<div class="panel-body">
+					<div id="map" class="main-map">
+
+						<div id="mapTips"></div>
+
+						<div class="city-select form-group">
+							<label class="label-tittle">区域选择</label>
+							<select class="selectpicker form-control" ng-model="region" ng-options="region as region.name for region in regionlist" ng-change="regionChange(region)">
+								<option value="">--请选择--</option>
+							</select>
+						</div>
+						<div class="map-legend">
+							<span>图标类别</span>
+							<ul>
+								<li>
+									<img class="legendImg" src="img/esri-icon/patrol/walkR.gif" /> 巡河：{{rightStausCount.countPatrol}}人
+								</li>
+								<li>
+									<img class="legendImg" src="img/esri-icon/hzstatus/riverChief.png" /> 在线：{{rightStausCount.countOnline}}人
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="patrol-num" class="panel panel-default m-all-0" style="overflow: hidden;">
+				<div class="panel-body">
+					<div class="mainbody-tips">
+						<span>
 	        				当前巡河人数
 	        			</span>
-	        		</div>
-	        		<table class="table table-hover mainbody-Table">
-	                    <thead>
-						    <tr>
-		                        <th>排名</th>
-		                        <th>区域名称</th>
-		                        <th>总巡河人数</th>
-		                        <th>区级河长人数</th>
-		                        <th>街镇级河长人数</th>
-		                        <th>村级河长人数</th>
-		                    </tr>
-	                    </thead>
-	                    <tbody>
-		                    <tr ng-repeat = "item in itemlist" ng-init="$index = $index + 1 ">
-		                    	<td>{{$index}}</td>
-		                    	<td>{{item.regionName}}</td>
-		                    	<td>{{item.countAll}}</td>
-		                    	<td>{{item.countyCount}}</td>
-		                    	<td>{{item.townCount}}</td>
-		                    	<td>{{item.villageCount}}</td>
-		                    </tr>
-	                    </tbody>
+					</div>
+					<table class="table table-hover mainbody-Table">
+						<thead>
+							<tr>
+								<th>排名</th>
+								<th>区域名称</th>
+								<th>总巡河人数</th>
+								<th>区级河长人数</th>
+								<th>街镇级河长人数</th>
+								<th>村级河长人数</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="item in itemlist" ng-init="$index = $index + 1 ">
+								<td>{{$index}}</td>
+								<td>{{item.regionName}}</td>
+								<td>{{item.countAll}}</td>
+								<td>{{item.countyCount}}</td>
+								<td>{{item.townCount}}</td>
+								<td>{{item.villageCount}}</td>
+							</tr>
+						</tbody>
 					</table>
-	        	</div>
-	        </div>
-	        
-	    </div>
-	    <div class="right-panel col-xs-3 p-all-0">
-	        <div id="rank" class="panel panel-default m-all-0">
-	        	<div class="panel-body">
-	        		<div class="mainbody-tips">
-	        			<span>
+				</div>
+			</div>
+
+		</div>
+		<div class="right-panel col-xs-3 p-all-0">
+			<div id="rank" class="panel panel-default m-all-0">
+				<div class="panel-body">
+					<div class="mainbody-tips">
+						<span>
 	        				考核排名
 	        			</span>
-	        		</div>
-	        		<table class="table table-hover m-t-15 mainbody-Table">
-	                    <thead>
-						    <tr>
-		                        <th>考核前三名</th>
-		                        <th>考核后三名</th>
-		                        <th>暗查暗访未发现问题</th>
-		                        <th>暗查暗访后三名</th>
-		                    </tr>
-	                    </thead>
-	                    <!--<tr ng-repeat="module in moduleList" ng-init="index = $index+1">-->
-	                    <tbody>
-		                    <tr>
-		                    	<td>河东区</td>
-		                    	<td>滨海新区</td>
-		                    	<td>河东区</td>
-		                    	<td>滨海新区</td>
-		                    </tr>
-		                    <tr>
-		                    	<td>南开区</td>
-		                    	<td>静海区</td>
-		                    	<td>南开区</td>
-		                    	<td>静海区</td>
-		                    </tr>
-		                    <tr>
-		                    	<td>宝坻区</td>
-		                    	<td>红桥区</td>
-		                    	<td>宝坻区</td>
-		                    	<td>红桥区</td>
-		                    </tr>
-		                    <tr>
-		                    	<td></td>
-		                    	<td></td>
-		                    	<td>河西区</td>
-		                    	<td></td>
-		                    </tr>
-		                    <tr>
-		                    	<td></td>
-		                    	<td></td>
-		                    	<td>和平区</td>
-		                    	<td></td>
-		                    </tr>
-		                    <tr>
-		                    	<td></td>
-		                    	<td></td>
-		                    	<td>西青区</td>
-		                    	<td></td>
-		                    </tr>
-		                    <tr>
-		                    	<td></td>
-		                    	<td></td>
-		                    	<td>北辰区</td>
-		                    	<td></td>
-		                    </tr>
-		                    <tr>
-		                    	<td></td>
-		                    	<td></td>
-		                    	<td>武清区</td>
-		                    	<td></td>
-		                    </tr>
-	                    </tbody>
+					</div>
+					<table class="table table-hover m-t-15 mainbody-Table">
+						<thead>
+							<tr>
+								<th>考核前三名</th>
+								<th>考核后三名</th>
+								<th>暗查暗访未发现问题</th>
+								<th>暗查暗访后三名</th>
+							</tr>
+						</thead>
+						<!--<tr ng-repeat="module in moduleList" ng-init="index = $index+1">-->
+						<tbody>
+							<tr>
+								<td>河东区</td>
+								<td>滨海新区</td>
+								<td>河东区</td>
+								<td>滨海新区</td>
+							</tr>
+							<tr>
+								<td>南开区</td>
+								<td>静海区</td>
+								<td>南开区</td>
+								<td>静海区</td>
+							</tr>
+							<tr>
+								<td>宝坻区</td>
+								<td>红桥区</td>
+								<td>宝坻区</td>
+								<td>红桥区</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td>河西区</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td>和平区</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td>西青区</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td>北辰区</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td>武清区</td>
+								<td></td>
+							</tr>
+						</tbody>
 					</table>
-	        	</div>
-	        </div>
-	        
-	        <div id="cityRank" class="panel panel-default m-all-0">
-	        	<div class="panel-body">
-	        		<div class="panel-body">
-	        			<div class="mainbody-tips">
-		        			<span>
+				</div>
+			</div>
+
+			<div id="cityRank" class="panel panel-default m-all-0">
+				<div class="panel-body">
+					<div class="panel-body">
+						<div class="mainbody-tips">
+							<span>
 		        				全市考核排名
 		        			</span>
-		        		</div>
-		        	</div>
-		        	<div id="main1" style="min-width: 350px;height:250px;"></div>
-	        	</div>
-	        </div>
-	        
-	        <div id="check-active" class="panel panel-default m-all-0">
-	        	<div class="panel-body">
-	        		<div class="mainbody-tips">
-	        			<span>暗查暗访</span>
-	        		</div>
-	        		<ul class="nav nav-tabs m-t-15" role="tablist">
-	                    <li class="active col-xs-6 text-c">
-	                        <a href="#statusNotice" onclick="return false;" data-toggle="tab">通报</a>
-	                    </li>
-	                    <li class="col-xs-6 text-c">
-	                        <a href="#statusProblem" onclick="return false;" data-toggle="tab">督导检查通报</a>
-	                    </li>
-	                </ul>
-	                <div id="right-news-content" class="tab-content tabs-content right-news-content">
-	                    <div class="tab-pane active" id="statusNotice" ng-bind-html="bulletin1.detail"></div>
-		                <div class="tab-pane" id="statusProblem" ng-bind-html="bulletin4.detail"></div>
-	                </div>
-	        	</div>
-	        </div>
-	    </div>
-    </div>
+						</div>
+					</div>
+					<div id="main1" style="min-width: 350px;height:250px;"></div>
+				</div>
+			</div>
 
+			<div id="check-active" class="panel panel-default m-all-0">
+				<div class="panel-body">
+					<div class="mainbody-tips">
+						<span>暗查暗访</span>
+					</div>
+					<ul class="nav nav-tabs m-t-15" role="tablist">
+						<li class="active col-xs-6 text-c">
+							<a href="#statusNotice" onclick="return false;" data-toggle="tab">通报</a>
+						</li>
+						<li class="col-xs-6 text-c">
+							<a href="#statusProblem" onclick="return false;" data-toggle="tab">督导检查通报</a>
+						</li>
+					</ul>
+					<div id="right-news-content" class="tab-content tabs-content right-news-content">
+						<div class="tab-pane" id="statusNotice">
+							<div ng-repeat="list in bulletin1">
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{list.id}}" style="font-weight:700">{{list.title}}</a>
+								<div id="collapse_{{list.id}}" class="panel-collapse collapse" ng-bind-html="list.detail"></div>
+							</div>
+						</div>
+						<div class="tab-pane" id="statusProblem">
+							<div ng-repeat="list in bulletin4">
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{list.id}}" style="font-weight:700">{{list.title}}</a>
+								<div id="collapse_{{list.id}}" class="panel-collapse collapse" ng-bind-html="list.detail"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </div>
 <script>
 	var myChart = echarts.init(document.getElementById('main'));
 	var myChart1 = echarts.init(document.getElementById('main1'));
 	var option = {
-	    tooltip : {
-	        trigger: 'item',
-	        formatter: "{a} <br/>{b} : {c} ({d}%)"
-	    },
-	    legend: {
-	        orient: 'vertical',
+		tooltip: {
+			trigger: 'item',
+			formatter: "{a} <br/>{b} : {c} ({d}%)"
+		},
+		legend: {
+			orient: 'vertical',
 			x: 'left',
-			top:'10%',
-			left:'10%',
-	        data: ['1类','2类','3类','4类','5类']
-	    },
-	    series : [
-	        {
-	            name: '访问来源',
-	            type: 'pie',
-	            radius : '55%',
-	            center: ['50%', '60%'],
-	            data:[
-	                {value:335, name:'1类'},
-	                {value:310, name:'2类'},
-	                {value:234, name:'3类'},
-	                {value:135, name:'4类'},
-	                {value:1548, name:'5类'}
-	            ],
-	            itemStyle: {
-	                emphasis: {
-	                    shadowBlur: 10,
-	                    shadowOffsetX: 0,
-	                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-	                }
-	            }
-	        }
-	    ]
+			top: '10%',
+			left: '10%',
+			data: ['1类', '2类', '3类', '4类', '5类']
+		},
+		series: [{
+			name: '访问来源',
+			type: 'pie',
+			radius: '55%',
+			center: ['50%', '60%'],
+			data: [{
+					value: 335,
+					name: '1类'
+				},
+				{
+					value: 310,
+					name: '2类'
+				},
+				{
+					value: 234,
+					name: '3类'
+				},
+				{
+					value: 135,
+					name: '4类'
+				},
+				{
+					value: 1548,
+					name: '5类'
+				}
+			],
+			itemStyle: {
+				emphasis: {
+					shadowBlur: 10,
+					shadowOffsetX: 0,
+					shadowColor: 'rgba(0, 0, 0, 0.5)'
+				}
+			}
+		}]
 	};
 	// 使用刚指定的配置项和数据显示图表。
-	
 
 	var option1 = {
-	    tooltip: {
-	        trigger: 'axis',
-	        axisPointer: {
-	            type: 'cross',
-	            crossStyle: {
-	                color: '#999'
-	            }
-	        }
-	    },
-	    toolbox: {
-	        feature: {
-	            dataView: {show: true, readOnly: false},
-	            magicType: {show: true, type: ['line', 'bar']},
-	            restore: {show: true},
-	            saveAsImage: {show: true}
-	        }
-	    },
-	    legend: {
-	        data:['和平区','南开区','滨海新区']
-	    },
-	    xAxis: [
-	        {
-	            type: 'category',
-	            data: ['和平区','南开区','滨海新区'],
-	            axisPointer: {
-	                type: 'shadow'
-	            }
-	        }
-	    ],
-	    yAxis: [
-	        {
-	            type: 'value',
-	            name: '排名',
-	            min: 0,
-	            max: 250,
-	            interval: 50,
-	            axisLabel: {
-	                formatter: '{value} '
-	            }
-	        }
-	    ],
-	    series: [
-	        {
-	            name:'和平区',
-	            type:'bar',
-	            data:[52.0, 84.9, 97.0]
-	        }
-	    ]
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {
+				type: 'cross',
+				crossStyle: {
+					color: '#999'
+				}
+			}
+		},
+		toolbox: {
+			feature: {
+				dataView: {
+					show: true,
+					readOnly: false
+				},
+				magicType: {
+					show: true,
+					type: ['line', 'bar']
+				},
+				restore: {
+					show: true
+				},
+				saveAsImage: {
+					show: true
+				}
+			}
+		},
+		legend: {
+			data: ['和平区', '南开区', '滨海新区']
+		},
+		xAxis: [{
+			type: 'category',
+			data: ['和平区', '南开区', '滨海新区'],
+			axisPointer: {
+				type: 'shadow'
+			}
+		}],
+		yAxis: [{
+			type: 'value',
+			name: '排名',
+			min: 0,
+			max: 250,
+			interval: 50,
+			axisLabel: {
+				formatter: '{value} '
+			}
+		}],
+		series: [{
+			name: '和平区',
+			type: 'bar',
+			data: [52.0, 84.9, 97.0]
+		}]
 	};
-    myChart.setOption(option);
-    myChart1.setOption(option1);
+	myChart.setOption(option);
+	myChart1.setOption(option1);
 </script>

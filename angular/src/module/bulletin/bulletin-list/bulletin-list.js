@@ -59,16 +59,27 @@
 	                };
 	                // 新建
 	                $scope.add = function () {
+						globalParam.setter({
+							bulletin: {}
+						})
 						routeService.route('1-2', true);
 	                }
 	                // 编辑
 	                $scope.edit = function (id) {
-						globalParam.setter({
-							bulletin: {
+						
+						$ajaxhttp.myhttp({
+							url: apiPrefix + '/v1/bulletin/detail',
+							method: 'get',
+							params: {
 								id: id
+							},
+							callBack: function (res) {
+								globalParam.setter({
+									bulletin: res.data
+								})
+								routeService.route('1-2', true);
 							}
 						})
-						routeService.route('1-2', true);
 	                }
 	                
 	                // 删除

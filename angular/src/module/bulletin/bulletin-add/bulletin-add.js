@@ -25,40 +25,39 @@
 					
 					$scope.init = function () {
 						var bulletin = globalParam.getter().bulletin || {};
-						if (!!getQueryString('id')) {
-							bulletin.id = getQueryString('id');
-						}
-						
+						console.log(bulletin);
 						// 编辑时获取原数据
 						if (bulletin.id) {
 							$location.search('id', bulletin.id);
-							getData(bulletin.id);
+							setData(bulletin);
+						} else if (!bulletin.id && !!getQueryString('id')) {
+							// 根据id查询
+							$ajaxhttp.myhttp({
+								url: apiPrefix + '/v1/bulletin/detail',
+								method: 'get',
+								params: {
+									id: getQueryString('id')
+								},
+								callBack: function (res) {
+									setData(res.data);
+								}
+							})
 						}
 					}
 					
-					// 根据id查询
-					function getData(id) {
+					// 还原编辑数据
+					function setData (data) {
+						var attandNamePart = data.attandUrl.split('_');
+						$scope.id = data.id;
+						$scope.title = data.title;
+						$scope.issuer = data.issuer;
+						$scope.postTime = data.postTime;
+						$scope.month = data.year + '-' + data.month;
+						$scope.attandUrl = data.attandUrl;
+						$scope.type = data.type;
+						$scope.attandName = attandNamePart.splice(1, attandNamePart.length - 1).join('');
+						CKEDITOR.instances.editor.setData(data.detail || ' ');
 						
-						$ajaxhttp.myhttp({
-							url: apiPrefix + '/v1/bulletin/detail',
-							method: 'get',
-							params: {
-								id: id
-							},
-							callBack: function (res) {
-								var data = res.data;
-								var attandNamePart = data.attandUrl.split('_');
-								$scope.id = data.id;
-								$scope.title = data.title;
-								$scope.issuer = data.issuer;
-								$scope.postTime = data.postTime;
-								$scope.month = data.year + '-' + data.month;
-								$scope.attandUrl = data.attandUrl;
-								$scope.type = data.type;
-								$scope.attandName = attandNamePart.splice(1, attandNamePart.length - 1).join('');
-								CKEDITOR.instances.editor.setData(data.detail);
-							}
-						})
 					}
 					
 					// 保存
