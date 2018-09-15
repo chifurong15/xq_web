@@ -5,6 +5,39 @@
 	"type":"1",
 	"menus": [
 		{
+			"seqId": "5",
+			"parentId": "0",
+			"isLeaf":false,
+			"isRoot":true,
+			"name": "分析统计",
+			"icon": "icon-nav-2",
+			"url": "src/module/fenxitongji/fenxitongji-index/fenxitongji-index.html",
+			"requireJS":["src/module/fenxitongji/fenxitongji-index/fenxitongji-index.js"],
+			"description": "分析统计首页"
+		},
+		{
+			"seqId": "5-1",
+			"parentId": "5",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "河长巡河",
+			"icon": "menu-icon-6",
+			"url": "src/module/fenxitongji/fenxitongji-index/fenxitongji-index.html",
+			"requireJS":["src/module/fenxitongji/fenxitongji-index/fenxitongji-index.js"],
+			"description": "分析统计-河长巡河"
+		},
+		{
+			"seqId": "5-2",
+			"parentId": "5",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "巡河情况",
+			"icon": "menu-icon-6",
+			"url": "src/module/fenxitongji/fenxitongji-detail/fenxitongji-detail.html",
+			"requireJS":["src/module/fenxitongji/fenxitongji-detail/fenxitongji-detail.js"],
+			"description": "分析统计-河长的巡河情况"
+		},
+		{
 			"seqId": "1",
 			"parentId": "0",
 			"isLeaf":false,

@@ -236,7 +236,7 @@
 					
 					// 返回按钮
 					$scope.back = function () {
-						routeService.route('1-1', true);
+						routeService.route(1, true);
 					}
 					
 					// 获取url参数

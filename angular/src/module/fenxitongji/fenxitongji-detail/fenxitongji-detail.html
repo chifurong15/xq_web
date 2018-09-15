@@ -1,0 +1,85 @@
+<div class="fenxintongji" ng-controller="fenxintongjiDetailCtrl" ng-init="init()">
+    <div class="wrapper">
+        <div class="panel panel-default m-n">
+            <div class="panel-body">
+                <form class="form-inline" method="get">
+                    <div class="form-item">
+                        <label>行政区域</label>
+                        <input type="text" class="form-control input-short-o" ng-model="regionName" readonly="">
+                        <span class="input-group-addon" ng-click="regionTree();"><i class="fa fa-search"></i></span>
+                    </div>
+                    <div class="form-item">
+                        <label>开始时间</label>
+                        <div class="input-group date date_picker" id="startTime">
+                            <input type="text" class="form-control input-short-o" ng-model="startTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>结束时间</label>
+                        <div class="input-group date date_picker" id="endTime">
+                            <input type="text" class="form-control input-short-o" ng-model="endTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="search()"><i class="fa fa-search"></i>搜索</button>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default panel-m" style="border-top: none;">
+            <div class="panel-body">
+                <div class="form-radio">
+                    <label class="radio-inline i-checks" ng-repeat="type in typeList">
+                        <input type="radio" name="type" ng-model="isSelected" ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>
+                        {{type.typeName}}
+                    </label>
+                </div>
+                <div class="tab-content">
+                    <div class="table-responsive" style="margin-top: 20px;">
+                        <table class="table table-bordered table-hover">
+                            <tbody>
+                            	<tr>
+                                    <th>序号</th>
+                                    <th>姓名</th>
+                                    <th>级别</th>
+                                    <th>应巡</th>
+                                    <th>已巡</th>
+                                    <th>达标率</th>
+                                </tr>
+                                <tr ng-repeat="lst in dataList" ng-init="index = $index+1">
+                                    <td>{{index}}</td>
+                                    <td>{{lst.reachmanName}}</td>
+                                    <td ng-if="lst.reachmanLevel == 3">区级</td>
+                                    <td ng-if="lst.reachmanLevel == 4">镇级</td>
+                                    <td ng-if="lst.reachmanLevel == 5">村级</td>
+                                    <td>{{lst.needReachNum}}</td>
+                                    <td>{{lst.hadReachNum}}</td>
+                                    <td>{{lst.patrolRate}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 行政区域树模态框 -->
+<div class="modal fade" id="regionTree" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">行政区域选择</h4>
+            </div>
+            <div class="modal-body" style="max-height: 400px; overflow: auto">
+                <ul id="regionTreeContainer" class="ztree"></ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="getRegion(regionId);">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
