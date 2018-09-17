@@ -27,7 +27,7 @@
 	                $scope.init = function () {
 	                	$scope.regionId = null;
 						// 区等级
-						$scope.regionGrade = 5;
+						$scope.regionGrade = 3;
                     	chartContainer();
 	                	getDataList();
 	                	regionTreeList();

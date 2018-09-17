@@ -36,6 +36,7 @@
 				
 				var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
 				
+				
 				var promise = esriApiDeps.query();
                 var w = wish.get();
                 // 初始化
@@ -315,6 +316,16 @@
 						cityTotal: 8,
 						townCount: 11
 					}*/
+				}
+				
+				// 通报预览
+				$scope.viewBulletin = function (id) {
+					globalParam.setter({
+						bulletin: {
+							id: id
+						}
+					})
+					routeService.route('1-3', true);
 				}
 
             }
