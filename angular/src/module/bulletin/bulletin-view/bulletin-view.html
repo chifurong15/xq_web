@@ -13,6 +13,7 @@
                 <div class="tab-content">
                 	<h1 class="bulletin-view-title">{{bulletin.title}}</h1>
                 	<div class="bulletin-view-content" ng-bind-html="bulletin.detail"></div>
+                	
                 	<p ng-if="!!bulletin.attandUrl">附件:<a ng-href="bulletin.attandUrl" target="_blank">{{attandName}}</a></p>
                 </div>
         	</div>

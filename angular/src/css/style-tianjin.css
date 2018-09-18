@@ -799,6 +799,9 @@ body {
     font-size: 12px;
     height: 30px;
 }
+.table > tfoot > tr > td {
+    text-align: center;
+}
 
 .table-tj tr.current td, .table-tj tr:hover td, .table-tj tr:hover a {
     background-color: #347ab8;

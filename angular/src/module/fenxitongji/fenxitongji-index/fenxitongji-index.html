@@ -21,7 +21,7 @@
                             <input type="text" class="form-control input-short-o" ng-model="endTime">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         </div>
-                    </div>
+                    </div>                    
                     <button type="submit" class="btn btn-primary" ng-click="search()"><i class="fa fa-search"></i>搜索</button>
                 </form>
             </div>
@@ -41,7 +41,7 @@
                     <li>
                         <a href="#chartStatistics" onclick="return false;" data-toggle="tab">图表</a>
                     </li>
-                </ul>
+                </ul>                
                 <div class="tab-content">
                     <div class="tab-pane active" id="tableStatistics">
                         <div class="table-responsive" style="margin-top: 20px;">
@@ -51,11 +51,11 @@
 	                                    <th>序号</th>
 	                                    <th>行政区域</th>
 	                                    <th ng-if="regionGrade < 4">区级河长巡河次数</th>
-	                                    <th ng-if="regionGrade < 4">区级达标率</th>
+	                                    <th ng-if="regionGrade < 4">区级达标率(%)</th>
 	                                    <th ng-if="regionGrade <= 3 && regionGrade < 5">镇级河长巡河次数</th>
-	                                    <th ng-if="regionGrade <= 3 && regionGrade < 5">镇级达标率</th>
+	                                    <th ng-if="regionGrade <= 3 && regionGrade < 5">镇级达标率(%)</th>
 	                                    <th ng-if="regionGrade <= 5">村级河长巡河次数</th>
-	                                    <th ng-if="regionGrade <= 5">村级达标率</th>
+	                                    <th ng-if="regionGrade <= 5">村级达标率(%)</th>
 	                                </tr>
 	                                <tr ng-repeat="lst in dataList" ng-init="index = $index+1">
 	                                    <td>{{index}}</td>
@@ -99,7 +99,7 @@
 	            <div class="modal-header">
 	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 	                <h4 class="modal-title">行政区域选择</h4>
-	            </div>
+	            </div>	                                	
 	            <div class="modal-body" style="max-height: 400px; overflow: auto">
 	                <ul id="regionTreeContainer" class="ztree"></ul>
 	            </div>
@@ -111,4 +111,3 @@
 	    </div>
 	</div>
 </div>
-

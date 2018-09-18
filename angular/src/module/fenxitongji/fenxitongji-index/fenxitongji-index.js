@@ -392,9 +392,12 @@
 	
 	                window.onresize = function () {
 	                    chartContainer();
-	                    for (var i = 0;i < chartList.chartInstance.length; i ++) {
-	                    	chartList.chartInstance[i].resize();
+	                    if(this.chartInstance){
+	                    	 for (var i = 0;i < chartList.chartInstance.length; i ++) {
+		                    	chartList.chartInstance[i].resize();
+		                    }
 	                    }
+	                   
 	                }
 			} ]);
 })(window, angular);

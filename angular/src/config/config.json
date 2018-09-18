@@ -38,6 +38,17 @@
 			"description": "分析统计-河长的巡河情况"
 		},
 		{
+			"seqId": "5-3",
+			"parentId": "5",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "问题分析",
+			"icon": "menu-icon-6",
+			"url": "src/module/fenxitongji/fenxitongji-question/fenxitongji-question.html",
+			"requireJS":["src/module/fenxitongji/fenxitongji-question/fenxitongji-question.js"],
+			"description": "分析统计-问题分析"
+		},		
+		{
 			"seqId": "1",
 			"parentId": "0",
 			"isLeaf":false,

@@ -32,8 +32,8 @@
 	                	$scope.startTime = params.startTime;
 	                	$scope.endTime = params.endTime;
 	                	$scope.isSelected = params.type || 2;
-	                	$scope.grade = params.grade;
-	                	
+	                	$scope.type = params.type || 2;
+	                	$scope.grade = params.grade;	                	
 	                	getDataList();
 	                	regionTreeList();
 	                }
@@ -177,7 +177,8 @@
 	                function getDataList (isSearch) {
 	                	var params = {
                             regionId: $scope.regionId,
-                            grade: $scope.grade
+                            grade: $scope.grade,
+                            type: $scope.type
 	                	};
 	                	if (isSearch) {
 	                		params.startTime = $scope.startTime;
