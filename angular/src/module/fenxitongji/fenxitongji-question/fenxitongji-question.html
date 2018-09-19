@@ -2,12 +2,7 @@
     <div class="wrapper">
         <div class="panel panel-default m-n">
             <div class="panel-body">
-                <form class="form-inline" method="get">
-                    <div class="form-item">
-                        <label>行政区域</label>
-                        <input type="text" class="form-control input-short-o" ng-model="regionName" readonly="">
-                        <span class="input-group-addon" ng-click="regionTree();"><i class="fa fa-search"></i></span>
-                    </div>
+                <form class="form-inline" method="get">                    
                     <div class="form-item">
                         <label>开始时间</label>
                         <div class="input-group date date_picker" id="startTime">
@@ -46,48 +41,35 @@
                                 	<tr>
 	                                    <th rowspan="2" style='line-height: 50px;'>序号</th>
 	                                    <th rowspan="2" style='line-height: 50px;'>区名</th>
-	                                    <th colspan="2">分类（二级分类名称）</th>
-	                                    <th colspan="2">分类（二级分类名称）</th>
-	                                    <th colspan="2">分类（二级分类名称）</th>
-	                                    <th colspan="2">合计</th>	                                    
-	                                </tr>
-	                                <tr>	                               
-	                                	<td>已办结</td>
-	                                	<td>待办</td>
-	                                	<td>已办结</td>
-	                                	<td>待办</td>
-	                                	<td>已办结</td>
-	                                	<td>待办</td>
-	                                	<td>已办结</td>
-	                                	<td>待办</td>
-	                                </tr>
+	                                    <th colspan="2" ng-repeat="lst in dataList[0].list">{{lst.typeName}}</th>
+	                                    <th colspan="2" style='line-height: 50px;'>合计</th>
+                                	</tr>
+	                                    
 	                                <tr>
-	                                	<td>1</td>
-	                                	<td><a href="">1</a></td>
-	                                	<td><a href="">1</a></td>
-	                                	<td><a href="">1</a></td>
-	                                	<td><a href="">1</a></td>
-	                                	<td><a href="">1</a></td>
-	                                	<td><a href="">1</a></td>
-	                                	<td><a href="">1</a></td>
-	                                	<td><a href="">1</a></td>
-	                                	<td><a href="">1</a></td>
+	                                	<td ng-repeat="lst in dataList[0].list">
+	                                		<span ng-if="$index%2==0">已办结</span>
+	                                		<span ng-if="$index%2==1">待办</span>	                                		
+	                                	</td>
+	                                	<td ng-repeat="lst in dataList[0].list">
+	                                		<span ng-if="$index%2==0">已办结</span>
+	                                		<span ng-if="$index%2==1">待办</span>	                                		
+	                                	</td>
+	                                	<td>
+	                                		<span>已办结</span>
+	                                	</td>
+	                                	<td>
+	                                		<span>待办</span>	                                		
+	                                	</td>
+	                                </tr>
+	                                
+	                                <tr ng-repeat="lst in dataList" >
+                    					<td ng-init="arr = trans($index)">{{$index+1}}</td>
+	                                	<td>{{lst.regionName}}</td>
+                    					<td ng-repeat="v in arr track by $index">{{v}}</td>
+					                    <td ng-init="finishedTotal = add(lst.list)">{{finishedTotal}}</td>
+					                    <td ng-init="unfinishedTotal = add2(lst.list)">{{unfinishedTotal}}</td>
 	                                </tr>
 	                            </tbody>
-	                            <tfoot>
-	                            	<tr>
-	                            		<td>合计</td>
-	                                	<td><a href="">1</a></td>
-	                                	<td><a href="">1</a></td>
-	                                	<td><a href="">1</a></td>
-	                                	<td><a href="">1</a></td>
-	                                	<td><a href="">1</a></td>
-	                                	<td><a href="">1</a></td>
-	                                	<td><a href="">1</a></td>
-	                                	<td><a href="">1</a></td>
-	                                	<td><a href="">1</a></td>
-	                            	</tr>
-	                            </tfoot>
                             </table>
                         </div>
                     </div>
@@ -95,23 +77,4 @@
             </div>
         </div>
     </div>    
-</div>
-
-<!-- 行政区域树模态框 -->
-<div class="modal fade" id="regionTree" tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title">行政区域选择</h4>
-            </div>	                                	
-            <div class="modal-body" style="max-height: 400px; overflow: auto">
-                <ul id="regionTreeContainer" class="ztree"></ul>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" ng-click="getRegion(regionId)">确定</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            </div>
-        </div>
-    </div>
 </div>

@@ -36,6 +36,7 @@
 	                	$scope.grade = params.grade;	                	
 	                	getDataList();
 	                	regionTreeList();
+
 	                }
 	                var $regionCode, $regionTreeContainer = $('#regionTreeContainer');
 	                var regionTree, reachTree, treeNode_find, treeNode_id;
@@ -45,7 +46,11 @@
 	                
 	                var regionTreeUrl = 'http://117.8.229.5:9000/information/v1/administrativeRegion/regionTree';
 	                
-	                
+	                $scope.selecOption = [
+	                	{"id":1,"option":"通报"},
+	                	{"id":2,"option":"每周动态"},
+	                	{"id":3,"option":"月度考核简报"},
+	                	{"id":4,"option":"督导检查通报"}];
 	                
 	                
 
@@ -171,28 +176,57 @@
 	                $scope.search = function () {
 	                	getDataList(1);
 	                }
+	                $scope.add = function (list) {
+	                  var total = 0;
+	                  for (var i = 0;i < list.length;i++){
+	                    total += list[i].finishedNum * 1;
+	                  }
+	                  return total;
+	                }
+	                $scope.add2 = function (list) {
+	                  var total = 0;
+	                  for (var i = 0;i < list.length;i++){
+	                    total += list[i].unfinishedNum * 1;
+	                  }
+	                  return total;
+	                }
+	                $scope.trans = function (index) {
+	                    var arr = [];
+	                    for (var i = 0; i < $scope.dataList.length; i ++){
+	                        if (i == index){
+	                            var item = $scope.dataList[i].list;
+	                            for (var j = 0;j < item.length;j++){
+	                                arr.push(item[j].finishedNum);
+	                                arr.push(item[j].unfinishedNum);
+	                            }
+	                            break;
+	                        }
+	                    }
+	                    return arr;
+	                }
 
 	                // 获取列表
-	                var chartList;
 	                function getDataList (isSearch) {
 	                	var params = {
                             regionId: $scope.regionId,
-                            grade: $scope.grade,
-                            type: $scope.type
+                            grade: $scope.grade                            
 	                	};
 	                	if (isSearch) {
 	                		params.startTime = $scope.startTime;
 							params.endTime = $scope.endTime;
-	                	} else {
-	                		params.type = $scope.type || 2
-	                	}
-	                	
+	                	} 
+
 	                    $http({
-	                        url: apiPrefix + '/v1/resumption/findPersonReachNum',
-	                        method: 'get',
-	                        params: params
+	                        url: apiPrefix + '/v1/resumption/listProblemStatistic',
+	                        method: 'get'
 	                    }).success(function (res) {
-	                        $scope.dataList = res.data.list;
+	                        $scope.dataList = res.data;	                        
+	                        $scope.regionName = res.regionName;
+	                		console.log('aahhhaha',$scope.dataList)
+	                		console.log('aahhhaha',$scope.dataList[0].regionName);
+	                        console.log('aahhhaha',$scope.dataList[0].list);
+
+	                        
 	                    }).error(function (error) {
 	
 	                    })

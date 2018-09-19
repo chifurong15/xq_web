@@ -64,19 +64,19 @@
 	                                    	<a ng-click="view(lst.regionId, 3)">{{lst.countyHasPatrolNum}}</a>
 	                                    </td>
 	                                    <td ng-if="regionGrade < 4">
-	                                    	<a ng-click="view(lst.regionId, 3)">{{lst.countyPatrolRate}}</a>
+	                                    	<a ng-click="view(lst.regionId, 3)">{{lst.countyPatrolRate > 1 ? 100 : lst.countyPatrolRate * 100}}</a>
 	                                    </td>
 	                                    <td ng-if="regionGrade <= 3 && regionGrade < 5">
 	                                    	<a ng-click="view(lst.regionId, 4)">{{lst.townHasPatrolNum}}</a>
 	                                    </td>
 	                                    <td ng-if="regionGrade <= 3 && regionGrade < 5">
-	                                    	<a ng-click="view(lst.regionId, 4)">{{lst.townPatrolRate}}</a>
+	                                    	<a ng-click="view(lst.regionId, 4)">{{lst.townPatrolRate > 1 ? 100 : lst.townPatrolRate * 100}}</a>
 	                                    </td>
 	                                    <td ng-if="regionGrade <= 5">
 	                                    	<a ng-click="view(lst.regionId, 5)">{{lst.villageHasPatrolNum}}</a>
 	                                    </td>
 	                                    <td ng-if="regionGrade <= 5">
-	                                    	<a ng-click="view(lst.regionId, 5)">{{lst.villagePatrolRate}}</a>
+	                                    	<a ng-click="view(lst.regionId, 5)">{{lst.villagePatrolRate > 1 ? 100 : lst.villagePatrolRate * 100}}</a>
 	                                    </td>
 	                                </tr>
 	                            </tbody>
@@ -85,8 +85,11 @@
                     </div>
                     <div class="tab-pane" id="chartStatistics">
                         <div id="chart1" class="tj-chart-con"></div>
-                        <div id="chart2" class="tj-chart-con"></div>
-                        <div id="chart3" class="tj-chart-con"></div>
+                        <div style="overflow: hidden;width: 100%;">
+                        	<div id="chart2" class="tj-chart-con" style="float: left;width: 50%;"></div>
+                        	<div id="chart3" class="tj-chart-con" style="float: left;width: 50%;"></div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
