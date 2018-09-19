@@ -1327,6 +1327,9 @@ body {
     background: none;
     border: none;
 }
+.tab-pane #chart1,.tab-pane #chart2,.tab-pane #chart3{
+	height: 250px !important;
+}
 
 .chart-tab li.active a:hover, .chart-tab li.active a:focus, .chart-tab li.active a:active {
     border: none;
