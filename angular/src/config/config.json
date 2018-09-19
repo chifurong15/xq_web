@@ -42,11 +42,11 @@
 			"parentId": "5",
 			"isLeaf":true,
 			"isRoot":false,
-			"name": "问题分析",
+			"name": "问题统计",
 			"icon": "menu-icon-6",
 			"url": "src/module/fenxitongji/fenxitongji-question/fenxitongji-question.html",
 			"requireJS":["src/module/fenxitongji/fenxitongji-question/fenxitongji-question.js"],
-			"description": "分析统计-问题分析"
+			"description": "分析统计-问题统计"
 		},		
 		{
 			"seqId": "1",
