@@ -29,6 +29,11 @@
 
 			<div id="news-l" class="panel panel-default m-all-0">
 				<div class="panel-body">
+					<div class="mainbody-tips">
+						<span>
+	        				河长制工作情况汇总
+	        			</span>
+					</div>
 					<ul class="nav nav-tabs" role="tablist">
 						<li class="active col-xs-6 text-c">
 							<a href="#statusWork" onclick="return false;" data-toggle="tab">每周动态</a>
@@ -38,25 +43,46 @@
 						</li>
 					</ul>
 					<div class="tab-content tabs-content left-news-content">
+						
 						<!--<div class="tab-pane active" id="statusWork" ng-bind-html="bulletin2.detail"></div>-->
 						<div class="tab-pane active" id="statusWork">
 							<div ng-repeat="list in bulletin2">
 								<!--<a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{list.id}}" style="font-weight:700">{{list.title}}</a>
 								<div id="collapse_{{list.id}}" class="panel-collapse collapse" ng-bind-html="list.detail"></div>-->
-								<a href="javascript:void(0);" style="font-weight:700" ng-click="viewBulletin(list.id)">{{list.title}}</a>
+								<a href="javascript:void(0);" style="font-weight:400;color: #183a7c;" ng-click="viewBulletin(list.id)">{{list.title}}</a>
 							</div>
 						</div>
 						<div class="tab-pane" id="statusActive">
 							<div ng-repeat="list in bulletin3">
 								<!--<a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{list.id}}" style="font-weight:700">{{list.title}}</a>
 								<div id="collapse_{{list.id}}" class="panel-collapse collapse" ng-bind-html="list.detail"></div>-->
-								<a href="javascript:void(0);" style="font-weight:700" ng-click="viewBulletin(list.id)">{{list.title}}</a>
+								<a href="javascript:void(0);" style="font-weight:400;color: #183a7c;" ng-click="viewBulletin(list.id)">{{list.title}}</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
+			<!-- 模态框（Modal） -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								&times;
+							</button>
+							<h4 class="modal-title" id="myModalLabel">
+								{{bulletin.title}}
+							</h4>
+						</div>
+						<div class="modal-body" ng-bind-html="bulletin.detail"></div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-dismiss="modal">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
 			<div id="reach-table" class="panel panel-default m-all-0 m-t-10">
 				<div class="panel-body">
 					<div class="mainbody-tips">
@@ -69,54 +95,24 @@
 							<tr>
 								<th>序号</th>
 								<th>河道段</th>
+								<th>问题数</th>
 								<th>河长</th>
 								<th>级别</th>
 							</tr>
 						</thead>
 						<!--<tr ng-repeat="module in moduleList" ng-init="index = $index+1">-->
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>测试</td>
-								<td>测试</td>
-								<td>测试</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>测试</td>
-								<td>测试</td>
-								<td>测试</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>测试</td>
-								<td>测试</td>
-								<td>测试</td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td>测试</td>
-								<td>测试</td>
-								<td>测试</td>
-							</tr>
-							<tr>
-								<td>5</td>
-								<td>测试</td>
-								<td>测试</td>
-								<td>测试</td>
-							</tr>
-							<tr>
-								<td>6</td>
-								<td>测试</td>
-								<td>测试</td>
-								<td>测试</td>
-							</tr>
-							<tr>
-								<td>7</td>
-								<td>测试</td>
-								<td>测试</td>
-								<td>测试</td>
-							</tr>
+							<tr ng-repeat="lst in problemList">
+								<td>{{$index+1}}</td>
+								<td>{{lst.reachName}}</td>
+								<td>{{lst.problemNum}}</td>
+								<td>{{lst.reachManName}}</td>
+								<td ng-if="lst.grade==1">省级</td>
+								<td ng-if="lst.grade==2">市级</td>
+								<td ng-if="lst.grade==3">区级</td>
+								<td ng-if="lst.grade==4">镇级</td>
+								<td ng-if="lst.grade==5">村级</td>
+							</tr>							
 						</tbody>
 					</table>
 				</div>
@@ -297,14 +293,14 @@
 							<div ng-repeat="list in bulletin1">
 								<!--<a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{list.id}}" style="font-weight:700">{{list.title}}</a>
 								<div id="collapse_{{list.id}}" class="panel-collapse collapse" ng-bind-html="list.detail"></div>-->
-								<a href="javascript:void(0);" style="font-weight:700" ng-click="viewBulletin(list.id)">{{list.title}}</a>
+								<a href="javascript:void(0);" style="font-weight:400;color: #183a7c;" ng-click="viewBulletin(list.id)">{{list.title}}</a>
 							</div>
 						</div>
 						<div class="tab-pane" id="statusProblem">
 							<div ng-repeat="list in bulletin4">
 								<!--<a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{list.id}}" style="font-weight:700">{{list.title}}</a>
 								<div id="collapse_{{list.id}}" class="panel-collapse collapse" ng-bind-html="list.detail"></div>-->
-								<a href="javascript:void(0);" style="font-weight:700" ng-click="viewBulletin(list.id)">{{list.title}}</a>
+								<a href="javascript:void(0);" style="font-weight:400;color: #183a7c;" ng-click="viewBulletin(list.id)">{{list.title}}</a>
 							</div>
 						</div>
 					</div>

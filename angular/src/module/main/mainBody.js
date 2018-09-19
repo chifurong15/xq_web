@@ -35,7 +35,7 @@
                                   wish, esriApiDeps, tiandituFactory, MapTool, MapUtil, SymbolUtil, queryAdminregion, UtilityTool, WorkbenchService, $ajaxhttp, moduleService) {
 				
 				var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
-				
+				var apiPrefix1 = moduleService.getServiceUrl() + '/resumption';
 				
 				var promise = esriApiDeps.query();
                 var w = wish.get();
@@ -58,6 +58,7 @@
                     getBulletin();
                     getDate();
                     getCountHZOnline();
+                    getProblem();
                 };
 				
                 var region = {
@@ -325,7 +326,40 @@
 							id: id
 						}
 					})
-					routeService.route('1-3', true);
+					getData(id);
+					$('#myModal').modal('show');
+				}
+				
+				// 数据详情
+				function getData (id) {
+					$ajaxhttp.myhttp({
+						url: apiPrefix + '/v1/bulletin/detail',
+						method: 'get',
+						params: {
+							id: id
+						},
+						callBack: function (res) {
+							var attandNamePart = res.data.attandUrl.split('_');
+							$scope.bulletin = res.data;
+							$scope.attandName = attandNamePart.splice(1, attandNamePart.length - 1).join('');
+						}
+					})
+				}
+				
+				function getProblem(){
+					$http({
+						url: apiPrefix1 + '/v1/resumption/listWithMoreProblemReach',
+						method: 'get'
+					}).success(function(res){
+						$scope.problemList=res.data;
+						console.log('222',$scope.problemList)
+					}).error(function (error) {
+	
+	                })
+				}				
+				
+				$scope.closeModal = function () {
+					$('#myModal').modal('hide');
 				}
 
             }
