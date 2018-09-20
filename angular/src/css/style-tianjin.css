@@ -11,6 +11,13 @@ body {
     overflow: hidden;
 }
 
+.modal-body{
+	height: 300px;
+	overflow: auto;
+}
+
+
+
 /* 系统框架 - 顶部 */
 .navbar-tj, .navbar-header {
     background-color: #183a7c;
@@ -806,6 +813,17 @@ body {
 .table-tj tr.current td, .table-tj tr:hover td, .table-tj tr:hover a {
     background-color: #347ab8;
     color: #fff;
+}
+
+.bTable  th,
+.bTable  td{
+	display: table-cell;
+	display: table-cell;
+    vertical-align:middle !important;
+}
+
+.bTable tbody .box span{
+	text-align: center;
 }
 
 .dialog-table th, .dialog-table td {
