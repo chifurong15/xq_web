@@ -222,7 +222,7 @@
 				            }).success(function (res) {
 //								if (!$scope.attandUrl) $scope.attandUrl = '';
 //			                	$scope.attandUrl += res.data.url + ';';
-			                	$scope.attandUrl = res.data.url;
+			                	$scope.attandUrl = res.data.virtualPath;
 				            }).error(function (data) {
 				                 console.log('upload fail');
 				            })

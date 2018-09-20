@@ -338,40 +338,40 @@
 	                        for (var i = 0; i < $scope.dataList.length; i++) {
 	                        	var item = $scope.dataList[i];
 	                        	
-	                            xAxis.push(item.regionName);
-	                           
+	                            xAxis.push(item.regionName);	                           
+	                           	
 	                            if ($scope.regionGrade == 3) {
 		                            series[0].series0.push(item.countyHasPatrolNum);
-		                            series[0].series1.push(item.countyNeedPatrolNum);
+		                            series[0].series1.push(item.countyNeedPatrolNum);		                           
 		                            series[0].series2.push(item.countyPatrolRate);
 		                            
 		                            series[1].series0.push(item.townHasPatrolNum);
-		                            series[1].series1.push(item.townNeedPatrolNum);
+		                            series[1].series1.push(item.townNeedPatrolNum);		                            
 		                            series[1].series2.push(item.townPatrolRate);
 		                            
 		                            series[2].series0.push(item.villageHasPatrolNum);
-		                            series[2].series1.push(item.villageNeedPatrolNum);
+		                            series[2].series1.push(item.villageNeedPatrolNum);		                            
 		                            series[2].series2.push(item.villagePatrolRate);
 	                            }
+
 	                            
 	                            if ($scope.regionGrade == 4) {	                            	
 		                            series[0].series0.push(item.townHasPatrolNum);
-		                            series[0].series1.push(item.townNeedPatrolNum);
+		                            series[0].series1.push(item.townNeedPatrolNum);		                           
 		                            series[0].series2.push(item.townPatrolRate);
 		                            
 		                            series[1].series0.push(item.villageHasPatrolNum);
-		                            series[1].series1.push(item.villageNeedPatrolNum);
+		                            series[1].series1.push(item.villageNeedPatrolNum);	                            
 		                            series[1].series2.push(item.villagePatrolRate);
 	                            }
 	                            
 	                            if ($scope.regionGrade == 5) {	                            	
 		                            series[0].series0.push(item.villageHasPatrolNum);
-		                            series[0].series1.push(item.villageNeedPatrolNum);
+		                            series[0].series1.push(item.villageNeedPatrolNum);		                            
 		                            series[0].series2.push(item.villagePatrolRate);
 	                            }
 	                            
-	                        }
-	                        
+	                        }  
 	                        for (var j = 0; j < this.chartInstance.length; j ++) {
 	                        	var chartData = JSON.parse(JSON.stringify(this.chartOption));
 	                        	chartData.xAxis.data = /*series[j].*/xAxis;

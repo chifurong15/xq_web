@@ -51,7 +51,7 @@
 	                        method: 'get',
 	                        params:params
 	                    }).success(function (res) {
-	                        alert(1)
+	                        
 	                    }).error(function (error) {
 	
 	                    })

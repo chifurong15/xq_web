@@ -36,6 +36,7 @@
 	                	$scope.grade = params.grade;	                	
 	                	getDataList();
 	                	regionTreeList();
+	                	//getGrade();
 
 	                }
 	                var $regionCode, $regionTreeContainer = $('#regionTreeContainer');
@@ -87,7 +88,21 @@
 					$scope.goBack=function(){
 						history.back(-1);
 					}	
-
+					
+					//获取当前用户等级
+					var grade;
+					function getGrade(){
+						$http({
+	                        url: apiPrefix + '/v1/resumption/findCurrentUserGrade',
+	                        method: 'get'
+	                   }).success(function (res) {
+	                   		grade=res.data;
+	                        console.log('wwww',res)
+	                    }).error(function (error) {
+	
+	                    })
+					}
+					
 	                // 行政区域树配置
 	                var regionTreeSetting = {
 	                    data: {
