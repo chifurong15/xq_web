@@ -41,7 +41,7 @@
                     <li>
                         <a href="#chartStatistics" onclick="return false;" data-toggle="tab">图表</a>
                     </li>
-                </ul>                
+                </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="tableStatistics">
                         <div class="table-responsive" style="margin-top: 20px;">
@@ -50,34 +50,34 @@
                                 	<tr>
 	                                    <th>序号</th>
 	                                    <th>行政区域</th>
-	                                    <th ng-if="regionGrade < 4">区级河长巡河次数</th>
-	                                    <th ng-if="regionGrade < 4">区级达标率(%)</th>
-	                                    <th ng-if="regionGrade <= 3 && regionGrade < 5">镇级河长巡河次数</th>
-	                                    <th ng-if="regionGrade <= 3 && regionGrade < 5">镇级达标率(%)</th>
-	                                    <th ng-if="regionGrade <= 5">村级河长巡河次数</th>
-	                                    <th ng-if="regionGrade <= 5">村级达标率(%)</th>
+	                                    <th ng-if="regionGrade < 3">区级河长巡河次数</th>
+	                                    <th ng-if="regionGrade < 3">区级达标率(%)</th>
+	                                    <th ng-if="regionGrade < 4">镇级河长巡河次数</th>
+	                                    <th ng-if="regionGrade < 4">镇级达标率(%)</th>
+	                                    <th ng-if="regionGrade < 5">村级河长巡河次数</th>
+	                                    <th ng-if="regionGrade < 5">村级达标率(%)</th>
 	                                </tr>
 	                                <tr ng-repeat="lst in dataList" ng-init="index = $index+1">
 	                                    <td>{{index}}</td>
 	                                    <td>{{lst.regionName}}</td>
-	                                    <td ng-if="regionGrade < 4">
+	                                    <td ng-if="regionGrade < 3">
 	                                    	<a ng-click="view(lst.regionId, 3)">{{lst.countyHasPatrolNum}}</a>
 	                                    </td>
-	                                    <td ng-if="regionGrade < 4" ng-switch="lst.countyPatrolRate">
+	                                    <td ng-if="regionGrade < 3" ng-switch="lst.countyPatrolRate">
 	                                    	<a ng-click="view(lst.regionId, 3)" ng-switch-when="0">0</a>
 	                                    	<a ng-click="view(lst.regionId, 3)" ng-switch-default>{{lst.countyPatrolRate}}%</a>
 	                                    </td>
-	                                    <td ng-if="regionGrade <= 3 && regionGrade < 5">
+	                                    <td ng-if="regionGrade < 4">
 	                                    	<a ng-click="view(lst.regionId, 4)">{{lst.townHasPatrolNum}}</a>
 	                                    </td>
-	                                    <td ng-if="regionGrade <= 3 && regionGrade < 5" ng-switch="lst.townPatrolRate">
+	                                    <td ng-if="regionGrade < 4" ng-switch="lst.townPatrolRate">
 	                                    	<a ng-click="view(lst.regionId, 4)" ng-switch-when="0">0</a>
 	                                    	<a ng-click="view(lst.regionId, 4)" ng-switch-default>{{lst.townPatrolRate}}%</a>
 	                                    </td>
-	                                    <td ng-if="regionGrade <= 5">
+	                                    <td ng-if="regionGrade < 5">
 	                                    	<a ng-click="view(lst.regionId, 5)">{{lst.villageHasPatrolNum}}</a>
 	                                    </td>
-	                                    <td ng-if="regionGrade <= 5" ng-switch="lst.villagePatrolRate">
+	                                    <td ng-if="regionGrade < 5" ng-switch="lst.villagePatrolRate">
 	                                    	<a ng-click="view(lst.regionId, 5)" ng-switch-when="0">0</a>	                                    	
 	                                    	<a ng-click="view(lst.regionId, 5)" ng-switch-default>{{lst.villagePatrolRate}}%</a>
 	                                    </td>
@@ -87,10 +87,10 @@
                         </div>
                     </div>
                     <div class="tab-pane" id="chartStatistics">
-                        <div id="chart1" class="tj-chart-con"></div>
+                        <div id="chart3" class="tj-chart-con" ></div>                        
                         <div style="overflow: hidden;width: 100%;">
                         	<div id="chart2" class="tj-chart-con" style="float: left;width: 50%;"></div>
-                        	<div id="chart3" class="tj-chart-con" style="float: left;width: 50%;"></div>
+                        	<div id="chart1" class="tj-chart-con" style="float: left;width: 50%;"></div>
                         </div>
                         
                     </div>
