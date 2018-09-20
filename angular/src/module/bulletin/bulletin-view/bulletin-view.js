@@ -36,6 +36,27 @@
 						getData(bulletin.id);
 					}
 					
+					//返回
+					$scope.goBack=function(){
+						history.back(-1);
+					}	
+					
+					//附件下载
+					$scope.download = function () {
+						var params={
+							attandUrl:$scope.bulletin.attandUrl
+						}
+	                	$http({
+	                        url: apiPrefix + '/v1/bulletin/download',
+	                        method: 'get',
+	                        params:params
+	                    }).success(function (res) {
+	                        alert(1)
+	                    }).error(function (error) {
+	
+	                    })
+	                }
+					
 					// 数据详情
 					function getData (id) {
 						$ajaxhttp.myhttp({

@@ -3,11 +3,11 @@
         <div class="panel panel-default m-n">
             <div class="panel-body">
                 <form class="form-inline" method="get">
-                    <div class="form-item">
+                    <!--<div class="form-item">
                         <label>行政区域</label>
                         <input type="text" class="form-control input-short-o" ng-model="regionName" readonly="">
                         <span class="input-group-addon" ng-click="regionTree();"><i class="fa fa-search"></i></span>
-                    </div>
+                    </div>-->
                     <div class="form-item">
                         <label>开始时间</label>
                         <div class="input-group date date_picker" id="startTime">
@@ -63,20 +63,23 @@
 	                                    <td ng-if="regionGrade < 4">
 	                                    	<a ng-click="view(lst.regionId, 3)">{{lst.countyHasPatrolNum}}</a>
 	                                    </td>
-	                                    <td ng-if="regionGrade < 4">
-	                                    	<a ng-click="view(lst.regionId, 3)">{{lst.countyPatrolRate}}</a>
+	                                    <td ng-if="regionGrade < 4" ng-switch="lst.countyPatrolRate">
+	                                    	<a ng-click="view(lst.regionId, 3)" ng-switch-when="0">0</a>
+	                                    	<a ng-click="view(lst.regionId, 3)" ng-switch-default>{{lst.countyPatrolRate}}%</a>
 	                                    </td>
 	                                    <td ng-if="regionGrade <= 3 && regionGrade < 5">
 	                                    	<a ng-click="view(lst.regionId, 4)">{{lst.townHasPatrolNum}}</a>
 	                                    </td>
-	                                    <td ng-if="regionGrade <= 3 && regionGrade < 5">
-	                                    	<a ng-click="view(lst.regionId, 4)">{{lst.townPatrolRate}}</a>
+	                                    <td ng-if="regionGrade <= 3 && regionGrade < 5" ng-switch="lst.townPatrolRate">
+	                                    	<a ng-click="view(lst.regionId, 4)" ng-switch-when="0">0</a>
+	                                    	<a ng-click="view(lst.regionId, 4)" ng-switch-default>{{lst.townPatrolRate}}%</a>
 	                                    </td>
 	                                    <td ng-if="regionGrade <= 5">
 	                                    	<a ng-click="view(lst.regionId, 5)">{{lst.villageHasPatrolNum}}</a>
 	                                    </td>
-	                                    <td ng-if="regionGrade <= 5">
-	                                    	<a ng-click="view(lst.regionId, 5)">{{lst.villagePatrolRate}}</a>
+	                                    <td ng-if="regionGrade <= 5" ng-switch="lst.villagePatrolRate">
+	                                    	<a ng-click="view(lst.regionId, 5)" ng-switch-when="0">0</a>	                                    	
+	                                    	<a ng-click="view(lst.regionId, 5)" ng-switch-default>{{lst.villagePatrolRate}}%</a>
 	                                    </td>
 	                                </tr>
 	                            </tbody>
@@ -94,6 +97,8 @@
                 </div>
             </div>
         </div>
+    	<div style="overflow: hidden;"><button type="button" class="btn btn-default" ng-click="goBack()" style="position: absolute;right: 15px;">返回</button></div>
+
     </div>
 	<!-- 行政区域树模态框 -->
 	<div class="modal fade" id="regionTree" tabindex="-1">

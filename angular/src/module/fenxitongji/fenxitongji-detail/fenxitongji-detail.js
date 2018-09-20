@@ -46,7 +46,10 @@
 	                var regionTreeUrl = 'http://117.8.229.5:9000/information/v1/administrativeRegion/regionTree';
 	                
 	                
-	                
+	                //返回
+					$scope.goBack=function(){
+						history.back(-1);
+					}	
 	                
 
 	                // 开始时间

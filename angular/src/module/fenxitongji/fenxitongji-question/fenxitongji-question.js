@@ -83,6 +83,11 @@
 	                    startTime.data('DateTimePicker').maxDate(e.date);
 	                });
 
+					//返回
+					$scope.goBack=function(){
+						history.back(-1);
+					}	
+
 	                // 行政区域树配置
 	                var regionTreeSetting = {
 	                    data: {

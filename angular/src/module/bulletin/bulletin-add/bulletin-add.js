@@ -60,6 +60,11 @@
 						
 					}
 					
+					//返回
+					$scope.goBack=function(){
+						history.back(-1);
+					}	
+					
 					// 保存
 					$scope.submit = function() {
 						

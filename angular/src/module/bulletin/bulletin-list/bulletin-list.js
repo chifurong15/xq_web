@@ -53,6 +53,11 @@
 	                    $scope.$apply();
 	                });
 	                
+	                //返回
+					$scope.goBack=function(){
+						history.back(-1);
+					}	
+	                
 	                // 搜索
 	                $scope.search = function () {
 	                    getList();

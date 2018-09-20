@@ -211,7 +211,13 @@
 	
 	                    })
 	                };
-
+					
+					//返回
+					$scope.goBack=function(){
+						history.back(-1);
+					}					
+					
+					
 	                // 河长巡河柱状图
 	                function patrolMgrChart(data) {
 	                	this.chartInstance = [];
