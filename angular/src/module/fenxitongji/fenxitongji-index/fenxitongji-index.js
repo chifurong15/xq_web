@@ -28,7 +28,7 @@
 	                	$scope.regionId = null;
 
 						// 区等级
-						$scope.regionGrade = 2;
+						//$scope.regionGrade = 2;
                     	chartContainer();
 	                	getDataList();
 	                	regionTreeList();
@@ -49,7 +49,7 @@
 	                        url: apiPrefix + '/v1/resumption/findCurrentUserGrade',
 	                        method: 'get'
 	                    }).success(function (res) {
-	                        //$scope.regionGrade = res.data;
+	                        $scope.regionGrade = res.data;
 	                       // alert('11--'+$scope.regionGrade)
 	                    }).error(function (error) {
 	
