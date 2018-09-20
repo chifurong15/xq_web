@@ -64,19 +64,19 @@
 	                                    	<a ng-click="view(lst.regionId, 3)">{{lst.countyHasPatrolNum}}</a>
 	                                    </td>
 	                                    <td ng-if="regionGrade < 4">
-	                                    	<a ng-click="view(lst.regionId, 3)">{{lst.countyPatrolRate > 1 ? 100 : lst.countyPatrolRate * 100}}</a>
+	                                    	<a ng-click="view(lst.regionId, 3)">{{lst.countyPatrolRate}}</a>
 	                                    </td>
 	                                    <td ng-if="regionGrade <= 3 && regionGrade < 5">
 	                                    	<a ng-click="view(lst.regionId, 4)">{{lst.townHasPatrolNum}}</a>
 	                                    </td>
 	                                    <td ng-if="regionGrade <= 3 && regionGrade < 5">
-	                                    	<a ng-click="view(lst.regionId, 4)">{{lst.townPatrolRate > 1 ? 100 : lst.townPatrolRate * 100}}</a>
+	                                    	<a ng-click="view(lst.regionId, 4)">{{lst.townPatrolRate}}</a>
 	                                    </td>
 	                                    <td ng-if="regionGrade <= 5">
 	                                    	<a ng-click="view(lst.regionId, 5)">{{lst.villageHasPatrolNum}}</a>
 	                                    </td>
 	                                    <td ng-if="regionGrade <= 5">
-	                                    	<a ng-click="view(lst.regionId, 5)">{{lst.villagePatrolRate > 1 ? 100 : lst.villagePatrolRate * 100}}</a>
+	                                    	<a ng-click="view(lst.regionId, 5)">{{lst.villagePatrolRate}}</a>
 	                                    </td>
 	                                </tr>
 	                            </tbody>
