@@ -371,7 +371,8 @@
 		                            series[0].series2.push(item.villagePatrolRate);
 	                            }
 	                            
-	                        }  
+	                        }
+	                           
 	                        for (var j = 0; j < this.chartInstance.length; j ++) {
 	                        	var chartData = JSON.parse(JSON.stringify(this.chartOption));
 	                        	chartData.xAxis.data = /*series[j].*/xAxis;

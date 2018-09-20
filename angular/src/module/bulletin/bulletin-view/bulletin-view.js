@@ -22,7 +22,7 @@
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
 					var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
-							
+					$scope.getServiceUrl= moduleService.getServiceUrl();	
 					$scope.init = function () {
 						var bulletin = globalParam.getter().bulletin || {};
 						if (!!getQueryString('id')) {
@@ -51,6 +51,9 @@
 	                        method: 'get',
 	                        params:params
 	                    }).success(function (res) {
+	                    	//if(resCode==1){
+	                    		alert('下载成功');
+	                    	//}
 	                        
 	                    }).error(function (error) {
 	
