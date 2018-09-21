@@ -258,16 +258,26 @@
 	                    this.chartOption = {
 						    title: {
 						        text: '',
-						        left: 'center'
+						        left: 'center'						        
+						    },	
+						    toolbox: {
+						        feature: {
+						            dataView: {show: true, readOnly: false},
+						            restore: {show: true},
+						            saveAsImage: {show: true}
+						        }
 						    },
-						    legend: {
+	    					legend: {
         						top: 40,
-						        data: ['已巡查次数', '应巡查次数', '巡查达标率']
+						        data: ['已巡查次数', '应巡查次数', '巡查达标率'],
 						    },
 						    grid: {
 								top: '50%'
 						    },
-						    tooltip: {},
+						    tooltip: {
+						    	trigger:'axis',
+						        formatter:'{a0}: {c}<br />{a1}: {c1}<br />{a2}: {c2}%'
+						    },
 						    xAxis: {
 						        data: [],
 						        silent: false,
@@ -321,8 +331,8 @@
 	                                data: [],
 	                                itemStyle: {
 	                                    normal: {
-	                                        color: 'rgb(63,182,117)'
-	                                    }
+	                                        color: 'rgb(63,182,117)'	                                        
+	                                    }	                                     
 	                                }
 						        }
 						    ]
