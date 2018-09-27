@@ -100,7 +100,8 @@
 								},
 								callBack: function (res) {
 									if(res.resCode == 1) {
-										layer.msg('删除成功！', {time:1000});
+										getList();
+										layer.msg('删除成功！', {time:1000});										
 									} else {
 										layer.msg(res.resMsg,{time:1000});
 									}

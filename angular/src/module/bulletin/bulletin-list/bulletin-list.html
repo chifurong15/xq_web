@@ -18,8 +18,8 @@
 	                    </div>
 	        			<div class="input-group">
 	                        <select ng-model="type" class="form-control select-short">
-	                        	<option value="">请选择类型</option>
-	                        	<option value="1">通报</option>
+	                        	<option value="">全部</option>
+	                        	<option value="1">暗查暗访</option>
 	                        	<option value="2">每周动态</option>
 	                        	<option value="3">月度考核简报</option>
 	                        	<option value="4">督导检查通报</option>
@@ -45,7 +45,7 @@
 	                                    <th width="20%">操作</th>
 	                                </tr>
                                 	<tr ng-repeat="list in bulletinList">
-	                                    <th ng-if="list.type == 1">通报</th>
+	                                    <th ng-if="list.type == 1">暗查暗访</th>
 	                                    <th ng-if="list.type == 2">每周动态</th>
 	                                    <th ng-if="list.type == 3">月度考核简报</th>
 	                                    <th ng-if="list.type == 4">督导检查通报</th>
