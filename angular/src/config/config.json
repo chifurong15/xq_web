@@ -64,18 +64,18 @@
 			"parentId": "1",
 			"isLeaf":true,
 			"isRoot":false,
-			"name": "通报管理",
+			"name": "信息发布",
 			"icon": "menu-icon-6",
 			"url": "src/module/bulletin/bulletin-list/bulletin-list.html",
 			"requireJS":["src/module/bulletin/bulletin-list/bulletin-list.js"],
-			"description": "通报管理-通报管理列表"
+			"description": "信息发布-信息发布列表"
 		},
 		{
 			"seqId": "1-2",
 			"parentId": "1",
 			"isLeaf":true,
 			"isRoot":false,
-			"name": "新增通报",
+			"name": "新增信息",
 			"icon": "menu-icon-6",
 			"url": "src/module/bulletin/bulletin-add/bulletin-add.html",
 			"requireJS":["src/module/bulletin/bulletin-add/bulletin-add.js"],
@@ -86,11 +86,11 @@
 			"parentId": "1",
 			"isLeaf":true,
 			"isRoot":false,
-			"name": "通报详情",
+			"name": "信息详情",
 			"icon": "menu-icon-6",
 			"url": "src/module/bulletin/bulletin-view/bulletin-view.html",
 			"requireJS":["src/module/bulletin/bulletin-view/bulletin-view.js"],
-			"description": "信息管理-通报详情"
+			"description": "信息管理-信息详情"
 		},
 		{
 			"seqId": "2",
@@ -130,11 +130,33 @@
 			"parentId": "3",
 			"isLeaf":true,
 			"isRoot":false,
-			"name": "考核评估",
+			"name": "地表水质环境评分管理",
 			"icon": "menu-icon-6",
 			"url": "src/module/kaohepinggu/kaohepinggu-index/kaohepinggu-index.html",
 			"requireJS":["src/module/kaohepinggu/kaohepinggu-index/kaohepinggu-index.js"],
-			"description": "考核评估-首页"
+			"description": "地表水质环境评分管理-首页"
+		},
+		{
+			"seqId": "3-2",
+			"parentId": "3",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "水质数据",
+			"icon": "menu-icon-6",
+			"url": "src/module/kaohepinggu/kaohepinggu-shuizhi/kaohepinggu-shuizhi.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-shuizhi/kaohepinggu-shuizhi.js"],
+			"description": "水质数据"
+		},
+		{
+			"seqId": "3-3",
+			"parentId": "3",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "污水处理厂",
+			"icon": "menu-icon-6",
+			"url": "src/module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-wushui.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-wushui.js"],
+			"description": "污水处理厂"
 		},
 		{
 			"seqId": "4",

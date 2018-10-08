@@ -8,6 +8,11 @@
 			<div id="weather" class="panel panel-default weather-default m-all-0">
 				<div class="panel-body weather-panel">
 					<!--<iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=79&color=%23FFFFFF&bgc=%23&icon=1&num=1&site=12"></iframe>-->
+					<div class="mainbody-tips">
+						<span>
+	        				天气情况
+	        			</span>
+					</div>
 					<div class="clearfix">
 						<div class="weather-iframe">
 							<iframe allowtransparency="true" frameborder="0" width="180" height="36" scrolling="no" src="//tianqi.eastday.com/plugin/widget_v1.html?sc=3&z=2&t=1&v=0&d=3&bd=0&k=&f=ffffff&q=1&a=1&c=54511&w=180&h=36&align=left"></iframe>
@@ -43,26 +48,51 @@
 						</li>
 					</ul>
 					<div class="tab-content tabs-content left-news-content">
-						
-						<!--<div class="tab-pane active" id="statusWork" ng-bind-html="bulletin2.detail"></div>-->
 						<div class="tab-pane active" id="statusWork">
-							<div ng-repeat="list in bulletin2">
-								<!--<a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{list.id}}" style="font-weight:700">{{list.title}}</a>
-								<div id="collapse_{{list.id}}" class="panel-collapse collapse" ng-bind-html="list.detail"></div>-->
-								<a href="javascript:void(0);" style="font-weight:400;color: #183a7c;" ng-click="viewBulletin(list.id)">{{list.title}}</a>
+							<div ng-repeat="list in bulletin2">								
+								<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">{{list.title}}</a>
 							</div>
 						</div>
 						<div class="tab-pane" id="statusActive">
-							<div ng-repeat="list in bulletin3">
-								<!--<a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{list.id}}" style="font-weight:700">{{list.title}}</a>
-								<div id="collapse_{{list.id}}" class="panel-collapse collapse" ng-bind-html="list.detail"></div>-->
-								<a href="javascript:void(0);" style="font-weight:400;color: #183a7c;" ng-click="viewBulletin(list.id)">{{list.title}}</a>
+							<div ng-repeat="list in bulletin3">								
+								<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">{{list.title}}</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
+			
+			<div id="check-active" class="panel panel-default m-all-0">
+				<div class="panel-body">
+					<div class="mainbody-tips">
+						<span>通报</span>
+					</div>
+					<ul class="nav nav-tabs m-t-15" role="tablist">
+						<li class="active col-xs-6 text-c">
+							<a href="#statusNotice" onclick="return false;" data-toggle="tab">暗查暗访</a>
+						</li>
+						<li class="col-xs-6 text-c">
+							<a href="#statusProblem" onclick="return false;" data-toggle="tab">督导检查通报</a>
+						</li>
+					</ul>
+					<div id="right-news-content" class="tab-content tabs-content right-news-content">
+						<div class="tab-pane active" id="statusNotice">
+							<div ng-repeat="list in bulletin1">								
+								<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">{{list.title}}</a>
+							</div>
+							<!--<div ng-repeat="list in bulletin1">								
+								<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">{{list.title}}</a>
+							</div>-->
+						</div>
+						<div class="tab-pane" id="statusProblem">
+							<div ng-repeat="list in bulletin4">								
+								<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">{{list.title}}</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
 			<!-- 模态框（Modal） -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
 				<div class="modal-dialog">
@@ -83,7 +113,7 @@
 				</div>
 			</div>
 			
-			<div id="reach-table" class="panel panel-default m-all-0 m-t-10">
+			<!--<div id="reach-table" class="panel panel-default m-all-0 m-t-10">
 				<div class="panel-body">
 					<div class="mainbody-tips">
 						<span>
@@ -100,7 +130,6 @@
 								<th>级别</th>
 							</tr>
 						</thead>
-						<!--<tr ng-repeat="module in moduleList" ng-init="index = $index+1">-->
 						<tbody>
 							<tr ng-repeat="lst in problemList">
 								<td>{{$index+1}}</td>
@@ -116,9 +145,9 @@
 						</tbody>
 					</table>
 				</div>
-			</div>
+			</div>-->
 
-			<div id="water-quality" class="panel panel-default m-all-0 m-t-10">
+			<!--<div id="water-quality" class="panel panel-default m-all-0 m-t-10" >
 				<div class="panel-body">
 					<div class="mainbody-tips">
 						<span>
@@ -127,7 +156,7 @@
 					</div>
 				</div>
 				<div id="main" style="min-width: 350px;height:150px;"></div>
-			</div>
+			</div>-->
 		</div>
 		<div class="mid-panel col-xs-6 p-all-0">
 			<div id="mid-map" class="panel panel-default m-all-0">
@@ -157,6 +186,40 @@
 				</div>
 			</div>
 
+			<!--<div id="patrol-num" class="panel panel-default m-all-0" style="overflow: hidden;">
+				<div class="panel-body">
+					<div class="mainbody-tips">
+						<span>
+	        				当前巡河人数
+	        			</span>
+					</div>
+					<table class="table table-hover mainbody-Table">
+						<thead>
+							<tr>
+								<th>排名</th>
+								<th>区域名称</th>
+								<th>总巡河人数</th>
+								<th>区级河长人数</th>
+								<th>街镇级河长人数</th>
+								<th>村级河长人数</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="item in itemlist" ng-init="$index = $index + 1 ">
+								<td>{{$index}}</td>
+								<td>{{item.regionName}}</td>
+								<td>{{item.countAll}}</td>
+								<td>{{item.countyCount}}</td>
+								<td>{{item.townCount}}</td>
+								<td>{{item.villageCount}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>-->
+
+		</div>
+		<div class="right-panel col-xs-3 p-all-0">
 			<div id="patrol-num" class="panel panel-default m-all-0" style="overflow: hidden;">
 				<div class="panel-body">
 					<div class="mainbody-tips">
@@ -188,10 +251,8 @@
 					</table>
 				</div>
 			</div>
-
-		</div>
-		<div class="right-panel col-xs-3 p-all-0">
-			<div id="rank" class="panel panel-default m-all-0">
+			
+			<!--<div id="rank" class="panel panel-default m-all-0">
 				<div class="panel-body">
 					<div class="mainbody-tips">
 						<span>
@@ -207,7 +268,6 @@
 								<th>暗查暗访后三名</th>
 							</tr>
 						</thead>
-						<!--<tr ng-repeat="module in moduleList" ng-init="index = $index+1">-->
 						<tbody>
 							<tr>
 								<td>河东区</td>
@@ -260,22 +320,69 @@
 						</tbody>
 					</table>
 				</div>
-			</div>
+			</div>-->
 
-			<div id="cityRank" class="panel panel-default m-all-0">
+			<div id="cityRank" class="panel panel-default m-all-0">				
 				<div class="panel-body">
-					<div class="panel-body">
-						<div class="mainbody-tips">
-							<span>
-		        				全市考核排名
-		        			</span>
-						</div>
+					<div class="mainbody-tips">
+						<span>
+	        				全市考核排名
+	        			</span>
 					</div>
 					<div id="main1" style="min-width: 350px;height:250px;"></div>
 				</div>
 			</div>
-
-			<div id="check-active" class="panel panel-default m-all-0">
+			
+			<div class="tianjinProblem">
+				<div id="water-quality" class="panel panel-default m-all-0 m-t-10" style="float: left;width: 50%;">
+					<div class="panel-body">
+						<div class="mainbody-tips">
+							<span>
+		        				天津市水质情况
+		        			</span>
+						</div>
+						<div id="main" style="min-width: 350px;height:150px;"></div>
+					</div>
+				</div>
+				
+				<div id="reach-table" class="panel panel-default m-all-0 m-t-10" style="float: left;width: 50%;">
+					<div class="panel-body">
+						<div class="mainbody-tips">
+							<span>
+		        				本周问题较多河道
+		        			</span>
+						</div>
+						<table class="table table-hover mainbody-Table">
+							<thead>
+								<tr>
+									<th>序号</th>
+									<th>河道段</th>
+									<th>问题数</th>
+									<th>河长</th>
+									<th>级别</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="lst in problemList">
+									<td>{{$index+1}}</td>
+									<td>{{lst.reachName}}</td>
+									<td>{{lst.problemNum}}</td>
+									<td>{{lst.reachManName}}</td>
+									<td ng-if="lst.grade==1">省级</td>
+									<td ng-if="lst.grade==2">市级</td>
+									<td ng-if="lst.grade==3">区级</td>
+									<td ng-if="lst.grade==4">镇级</td>
+									<td ng-if="lst.grade==5">村级</td>
+								</tr>							
+							</tbody>
+						</table>
+					</div>
+				</div>				
+				
+			</div>
+			
+			
+			<!--<div id="check-active" class="panel panel-default m-all-0">
 				<div class="panel-body">
 					<div class="mainbody-tips">
 						<span>通报</span>
@@ -290,22 +397,21 @@
 					</ul>
 					<div id="right-news-content" class="tab-content tabs-content right-news-content">
 						<div class="tab-pane active" id="statusNotice">
-							<div ng-repeat="list in bulletin1">
-								<!--<a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{list.id}}" style="font-weight:700">{{list.title}}</a>
-								<div id="collapse_{{list.id}}" class="panel-collapse collapse" ng-bind-html="list.detail"></div>-->
-								<a href="javascript:void(0);" style="font-weight:400;color: #183a7c;" ng-click="viewBulletin(list.id)">{{list.title}}</a>
+							<div ng-repeat="list in bulletin1">								
+								<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">{{list.title}}</a>
+							</div>
+							<div ng-repeat="list in bulletin1">								
+								<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">{{list.title}}</a>
 							</div>
 						</div>
 						<div class="tab-pane" id="statusProblem">
-							<div ng-repeat="list in bulletin4">
-								<!--<a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{list.id}}" style="font-weight:700">{{list.title}}</a>
-								<div id="collapse_{{list.id}}" class="panel-collapse collapse" ng-bind-html="list.detail"></div>-->
-								<a href="javascript:void(0);" style="font-weight:400;color: #183a7c;" ng-click="viewBulletin(list.id)">{{list.title}}</a>
+							<div ng-repeat="list in bulletin4">								
+								<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">{{list.title}}</a>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>-->
 		</div>
 	</div>
 
@@ -316,20 +422,21 @@
 	var option = {
 		tooltip: {
 			trigger: 'item',
+			confine:true,
 			formatter: "{a} <br/>{b} : {c} ({d}%)"
 		},
+		color:['#ff0000','#000000','#000099','#008000','#ffff00'],
 		legend: {
-			orient: 'vertical',
-			x: 'left',
-			top: '10%',
-			left: '10%',
+			orient: 'horizontal',			
+			x: 'center',
+			bottom:'18%',
 			data: ['1类', '2类', '3类', '4类', '5类']
 		},
 		series: [{
 			name: '访问来源',
 			type: 'pie',
-			radius: '55%',
-			center: ['50%', '60%'],
+			radius: '35%',
+			center: ['50%', '33%'],
 			data: [{
 					value: 335,
 					name: '1类'
@@ -357,7 +464,14 @@
 					shadowOffsetX: 0,
 					shadowColor: 'rgba(0, 0, 0, 0.5)'
 				}
-			}
+			},
+			label:{  
+                  normal: {
+		                textStyle: {
+		                    color: '#000'
+		                }
+		          }
+            }
 		}]
 	};
 	// 使用刚指定的配置项和数据显示图表。
@@ -390,9 +504,14 @@
 				}
 			}
 		},
+		grid: {
+			top:'30%',
+			left:'18%'
+	    },
 		legend: {
 			data: ['和平区', '南开区', '滨海新区']
 		},
+		color:['#f00'],
 		xAxis: [{
 			type: 'category',
 			data: ['和平区', '南开区', '滨海新区'],

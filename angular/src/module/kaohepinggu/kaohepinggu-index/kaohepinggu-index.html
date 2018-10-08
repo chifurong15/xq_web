@@ -1,14 +1,81 @@
-<div ng-controller="yourController">
+<div class="kaohepingfen-shuizhi" ng-controller="shuizhiListCtrl" ng-init="init()">
     <div class="wrapper-md ">
     	<div class="panel panel-default m-n">
-        	<div class="panel-body">移动平台</div>
+        	<div class="panel-body"><span class="tag">地表水质环境评分管理</span><span class="tag-right"></span></div>
         </div>
     	<div class="panel panel-default">
         	<div class="panel-body">
-                <div class="tab-content text-center">
-                	<img src="img/kaohepinggu.png" />
+        		<div class="table-bar">
+        			<form class="form-inline clearfix">        					                    
+	        			<div class="input-group date date_picker form-item" id="J-searchTime">
+	                        <label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">日期</font></font></label>
+	        				<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime">
+	                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+	                    </div>
+	        			<div class="input-group form-item" >
+	                        <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">状态</font></font></label>
+	        				<select ng-model="type" class="form-control select-short" style="width: auto;">
+	                        	<option value="">全部</option>
+	                        	<option value="1">暗查暗访</option>
+	                        	<option value="2">每周动态</option>
+	                        	<option value="3">月度考核简报</option>
+	                        	<option value="4">督导检查通报</option>
+	                        </select>
+	                    </div>
+	                    <div class="form-item">
+	                        <label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">创建人</font></font></label>
+	                        <input type="text" class="form-control input-short" >
+	                    </div>	                    
+        				<div class="input-group">
+		                    <button class="btn btn-primary" ng-click="search()">
+		                    	<i class="fa fa-search"></i>搜索
+		                    </button>
+	                    </div>
+	                    <div class="input-group fr">
+		                    <button type="button" class="btn btn-primary" ng-click="add()">
+		                        <i class="fa fa-plus"></i> 新建
+		                    </button>
+	                    </div>
+                    </form>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                	<tr>
+	                                    <th width="10%">类型</th>
+	                                    <th width="40%">标题</th>
+	                                    <th width="10%">上传日期</th>
+	                                    <th width="10%">上传人</th>
+	                                    <th width="20%">操作</th>
+	                                </tr>
+                                	<tr ng-repeat="list in bulletinList">
+	                                    <th ng-if="list.type == 1">暗查暗访</th>
+	                                    <th ng-if="list.type == 2">每周动态</th>
+	                                    <th ng-if="list.type == 3">月度考核简报</th>
+	                                    <th ng-if="list.type == 4">督导检查通报</th>
+	                                    <th>{{list.title}}</th>
+	                                    <th>{{list.postTime}}</th>
+	                                    <th>{{list.issuer}}</th>
+	                                    <th>
+	                                    	<button type="button" class="btn btn-link" ng-click="view(list.id)">查看</button>
+	                                    	<button type="button" class="btn btn-link" ng-click="edit(list.id)">编辑</button>
+	                                    	<button type="button" class="btn btn-link" ng-click="del(list.id)">删除</button>
+	                                    </th>
+	                                </tr>
+                            	</tbody>
+                            </table>
+                			<tm-pagination conf="paginationConf"></tm-pagination>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="chartStatistics">
+                        <div id="patrolChart" class="tj-chart-con"></div>
+                    </div>
                 </div>
         	</div>
         </div>
+    	<div style="overflow: hidden;"><button type="button" class="btn btn-default" ng-click="goBack()" style="position: absolute;right: 20px;">返回</button></div>
+   		
     </div>
 </div>

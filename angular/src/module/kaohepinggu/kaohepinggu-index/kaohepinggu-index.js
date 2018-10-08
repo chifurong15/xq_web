@@ -3,7 +3,7 @@
 	angular
 		.module("app")
 		.controller(
-			'yourController',
+			'shuizhiListCtrl',
 			[
 				'$localStorage',
 				'$scope',
