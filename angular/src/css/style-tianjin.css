@@ -1497,6 +1497,7 @@ body {
     line-height: 30px;
     background: url(../img/tag2.png) 0px -1px no-repeat;
     top: 14px;
+    right: -6px;
 }
 .form-radio .i-checks input:checked + i:before {
     top: 4px;
@@ -1566,7 +1567,7 @@ body {
 .left-panel .panel .weather-panel{
 	background-color: #fff;
 }
-body ..c-ffffff a{
+body .c-ffffff a{
 	color: #60a2e5;
 }
 .weather-iframe {
