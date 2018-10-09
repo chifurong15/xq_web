@@ -43,7 +43,8 @@
 					
 					//附件预览
 					$scope.lookLine = function () {
-						$('#myModal').modal('show');
+						//$('#myModal').modal('show');
+						alert(1)
 						var params={
 							attandUrl:$scope.bulletin.attandUrl
 						}
@@ -52,7 +53,8 @@
 	                        method: 'get',
 	                        params:params
 	                   }).success(function (res) {	                    	
-	                    		$scope.lookLineContent=res;	                    	
+								alert(2)
+	                    		//$scope.lookLineContent=res;
 	                        
 	                    }).error(function (error) {
 	

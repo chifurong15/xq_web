@@ -137,6 +137,17 @@
 			"description": "地表水质环境评分管理-首页"
 		},
 		{
+			"seqId": "3-1-2",
+			"parentId": "3",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "新增管理",
+			"icon": "menu-icon-6",
+			"url": "src/module/kaohepinggu/kaohepinggu-index/koahepinggu-add/kaohepinggu-add.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-index/koahepinggu-add/kaohepinggu-add.js"],
+			"description": "地表水质环境评分管理-新增"
+		},
+		{
 			"seqId": "3-2",
 			"parentId": "3",
 			"isLeaf":true,

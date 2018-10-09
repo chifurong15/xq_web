@@ -8,7 +8,7 @@
         		<div class="table-bar">
         			<form class="form-inline clearfix">        					                    
 	        			<div class="input-group date date_picker form-item" id="J-searchTime">
-	                        <label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">日期</font></font></label>
+	                        <label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">期号</font></font></label>
 	        				<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime">
 	                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 	                    </div>
@@ -33,7 +33,7 @@
 	                    </div>
 	                    <div class="input-group fr">
 		                    <button type="button" class="btn btn-primary" ng-click="add()">
-		                        <i class="fa fa-plus"></i> 新建
+		                        <i class="fa fa-plus"></i> 新增
 		                    </button>
 	                    </div>
                     </form>
@@ -43,36 +43,65 @@
                         <div class="table-responsive" style="margin-top: 20px;">
                             <table class="table table-bordered table-hover">
                                 <tbody>
-                                	<tr>
-	                                    <th width="10%">类型</th>
-	                                    <th width="40%">标题</th>
-	                                    <th width="10%">上传日期</th>
-	                                    <th width="10%">上传人</th>
-	                                    <th width="20%">操作</th>
+                                	<tr class='tHeader'>
+	                                    <th width="5%">序号</th>
+	                                    <th width="20%">标题</th>
+	                                    <th width="10%">期号</th>
+	                                    <th width="10%">状态</th>
+	                                    <th width="15%">创建时间</th>
+	                                    <th width="15%">创建人</th>
+	                                    <th width="15%">备注</th>
+	                                    <th width="10%">操作</th>
 	                                </tr>
-                                	<tr ng-repeat="list in bulletinList">
-	                                    <th ng-if="list.type == 1">暗查暗访</th>
-	                                    <th ng-if="list.type == 2">每周动态</th>
-	                                    <th ng-if="list.type == 3">月度考核简报</th>
-	                                    <th ng-if="list.type == 4">督导检查通报</th>
-	                                    <th>{{list.title}}</th>
-	                                    <th>{{list.postTime}}</th>
-	                                    <th>{{list.issuer}}</th>
-	                                    <th>
-	                                    	<button type="button" class="btn btn-link" ng-click="view(list.id)">查看</button>
-	                                    	<button type="button" class="btn btn-link" ng-click="edit(list.id)">编辑</button>
-	                                    	<button type="button" class="btn btn-link" ng-click="del(list.id)">删除</button>
-	                                    </th>
+                                	<tr>
+	                                    <td>1</td>
+	                                    <td>地表水环境评分</td>
+	                                    <td>2018-8</td>
+	                                    <td><span class="label label-danger">已上报</span></td>
+	                                    <td>2018-09-30</td>
+	                                    <td>地表水管理工作人员</td>
+	                                    <td>我是认真的</td>
+	                                    <td>
+	                                    	<button type="button" class="btn btn-success" >查看</button>
+	                                    	<button type="button" class="btn btn-primary" >返回</button>
+	                                    </td>
+	                                </tr>
+	                                <tr>
+	                                    <td>2</td>
+	                                    <td>地表水环境评分</td>
+	                                    <td>2018-8</td>
+	                                    <td><span class="label label-info">已退回</span></td>
+	                                    <td>2018-09-30</td>
+	                                    <td>地表水管理工作人员</td>
+	                                    <td>我是认真的</td>
+	                                    <td>
+	                                    	<button type="button" class="btn btn-success" >查看</button>
+	                                    	<button type="button" class="btn btn-warning">修改</button>	                                    	
+	                                    </td>
+	                                </tr>
+	                                <tr>
+	                                    <td>3</td>
+	                                    <td>地表水环境评分</td>
+	                                    <td>2018-8</td>
+	                                    <td><span class="label label-success">未上报</span></td>
+	                                    <td>2018-09-30</td>
+	                                    <td>地表水管理工作人员</td>
+	                                    <td>我是认真的</td>
+	                                    <td>
+	                                    	<button type="button" class="btn btn-success">查看</button>
+	                                    	<button type="button" class="btn btn-danger" >上报</button>
+	                                    </td>
 	                                </tr>
                             	</tbody>
                             </table>
-                			<tm-pagination conf="paginationConf"></tm-pagination>
+                			<!--<tm-pagination conf="paginationConf"></tm-pagination>-->
                         </div>
                     </div>
                     <div class="tab-pane" id="chartStatistics">
                         <div id="patrolChart" class="tj-chart-con"></div>
                     </div>
                 </div>
+        	
         	</div>
         </div>
     	<div style="overflow: hidden;"><button type="button" class="btn btn-default" ng-click="goBack()" style="position: absolute;right: 20px;">返回</button></div>

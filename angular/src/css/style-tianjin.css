@@ -336,16 +336,18 @@ body {
 
 .aside-main li {
     float: left;
-    width: 72px;
-    height: 80px;
+    width: 172px;
+    height: 60px;
     border-bottom: 1px solid #fff;
 }
 
 .aside-main li:hover, .aside-main li a.active {
-    background-color: #2b68a5;
+    background-color: #006edd;
 }
 
 .aside-main li a {
+	display: flex;
+	justify-content: space-around;
     float: left;
     height: 100%;
     width: 100%;
@@ -354,9 +356,8 @@ body {
 
 .aside-main li i {
     float: left;
-    width: 40px;
+    width: 56px;
     height: 40px;
-    margin: 0 16px;
     color: #fff;
     font-size: 22px;
     text-align: center;
@@ -368,11 +369,12 @@ body {
     color: #fff;
     font-size: 12px;
     width: 100%;
-    text-align: center;
+    text-align: left;
+    line-height: 40px;
 }
 
 .aside-main li.active {
-    background-color: #2b68a5;
+    background-color: #006edd;
 }
 
 /* 导航菜单图标 */
@@ -446,8 +448,8 @@ body {
     overflow: hidden;
     overflow-y: auto;
     right: 0;
-    left: 72px;
-    top: 54px;
+    left: 172px;
+    top: 40px;
     bottom: 0;
     width: auto;
     position: absolute;
@@ -878,6 +880,9 @@ body {
 
 .table-tj a {
     color: #428bca;
+}
+.table .tHeader{
+	background: #f0f0f0;
 }
 
 .table > tbody > tr > th, .table > tbody > tr > td {
@@ -1751,4 +1756,8 @@ body .c-ffffff a{
 }
 .bulletin-view-content {
 	padding: 15px 0;
+}
+
+.kaohepingfen-shuizhi .form-item{
+	min-width: auto;
 }
