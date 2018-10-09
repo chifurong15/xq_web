@@ -41,19 +41,18 @@
 						history.back(-1);
 					}	
 					
-					//附件下载
-					$scope.download = function () {
+					//附件预览
+					$scope.lookLine = function () {
+						$('#myModal').modal('show');
 						var params={
 							attandUrl:$scope.bulletin.attandUrl
 						}
 	                	$http({
-	                        url: apiPrefix + '/v1/bulletin/download',
+	                        url: apiPrefix + '/v1/bulletin/lookload',
 	                        method: 'get',
 	                        params:params
-	                    }).success(function (res) {
-	                    	//if(resCode==1){
-	                    		alert('下载成功');
-	                    	//}
+	                   }).success(function (res) {	                    	
+	                    		$scope.lookLineContent=res;	                    	
 	                        
 	                    }).error(function (error) {
 	

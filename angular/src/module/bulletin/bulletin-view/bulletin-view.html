@@ -13,11 +13,35 @@
                 <div class="tab-content">
                 	<h1 class="bulletin-view-title">{{bulletin.title}}</h1>
                 	<div class="bulletin-view-content" ng-bind-html="bulletin.detail"></div>
-        			<p ng-if="!!bulletin.attandUrl">附件:<a ng-href="http://10.0.9.196:8888/bulletin/v1/bulletin/download?attandUrl={{bulletin.attandUrl}}"  target="_blank" download="">{{attandName}}</a></p>
+        			<p ng-if="!!bulletin.attandUrl">
+        				附件:<span>{{attandName}}</span>
+        				<a ng-href="http://10.0.9.196:8888/bulletin/v1/bulletin/download?attandUrl={{bulletin.attandUrl}}" target="_blank" download="">下载</a>
+        				<a ng-href="{{getServiceUrl}}/bulletin/v1/bulletin/lookload?attandUrl={{bulletin.attandUrl}}" target="_blank">预览</a>
+        			</p>
 				</div>
         	</div>
         </div>
     	<div style="overflow: hidden;"><button type="button" class="btn btn-default" ng-click="goBack()" style="position: absolute;right: 20px;">返回</button></div>
-        
+        <!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" id="myModalLabel">
+							在线预览
+						</h4>
+					</div>
+					
+					<div class="modal-body" ng-bind-html="lookLineContent"></div>
+					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">返回</button>
+					</div>
+				</div>
+			</div>
+		</div>
     </div>
 </div>
