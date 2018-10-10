@@ -29,9 +29,9 @@
     
     <ul class="nav navbar-nav navbar-right">
 
-        <li ng-repeat="menu in appConfig" class="btn-navbar">
+        <li ng-repeat="menu in appConfig" class="btn-navbar" >
             <a href="" ng-click="getSecondMenu(menu.seqId);" ui-sref="app.index({param:'1_'+menu.seqId})">
-                <i class="{{menu.icon}}"></i> <label>{{menu.name}}</label>
+                <i class="{{menu.icon}}" aria-hidden="true"></i> <label>{{menu.name}}</label>
             </a>
         </li>
 
@@ -47,7 +47,7 @@
     </ul>
 
 </div>
-<!-- / navbar collapse -->
+
 	
 	
 	

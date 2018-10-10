@@ -222,7 +222,8 @@
 
 	                    $http({
 	                        url: apiPrefix + '/v1/resumption/listProblemStatistic',
-	                        method: 'get'
+	                        method: 'get',
+	                        params:params,
 	                    }).success(function (res) {
 	                        $scope.dataList = res.data;	                        
 	                        $scope.regionName = res.regionName;
