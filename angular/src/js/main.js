@@ -56,6 +56,9 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
 		moduleService.getIpConfig();
 		//获取二级菜单,默认就三级菜单
 		$scope.getSecondMenu = function(seqId) {
+			$(".btn-navbar > a").click(function(){
+				$(this).addClass("navStyle").parent().siblings().find("a").removeClass("navStyle");
+			});	
 			var menus = moduleService.getMoudleMenus();
 			var secondMenu = [];
 			for(var i = 0; i < menus.length; i++) {
