@@ -23,7 +23,7 @@
 	                    </div>
 	                    <div class="form-item">
 	                        <label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">创建人</font></font></label>
-	                        <input type="text" class="form-control input-short" >
+	                        <input type="text" class="form-control input-short" ng-model="createuser">
 	                    </div>	                    
         				<div class="input-group">
 		                    <button class="btn btn-primary" ng-click="search()">
@@ -52,48 +52,41 @@
 	                                    <th width="15%">备注</th>
 	                                    <th width="10%">操作</th>
 	                                </tr>
-                                	<tr>
-	                                    <td>1</td>
-	                                    <td>地表水环境评分</td>
-	                                    <td>2018-8</td>
-	                                    <td><span class="label label-danger">已上报</span></td>
-	                                    <td>2018-09-30</td>
-	                                    <td>地表水管理工作人员</td>
-	                                    <td>我是认真的</td>
-	                                    <td>
-	                                    	<button type="button" class="btn btn-success" ng-click="view()">查看</button>
-	                                    	<button type="button" class="btn btn-primary" >返回</button>
+	                                <tr ng-repeat="item in surfaceWaterList" ng-if="num != 2">
+	                                    <td>{{$index+1}}</td>
+	                                    <td>{{item.title}}</td>
+	                                    <td>{{item.issue}}</td>
+	                                    <td ng-if="item.status==0"><span class="label label-danger">已上报</span></td>
+	                                    <td ng-if="item.status==1"><span class="label label-info">已退回</span></td>
+	                                    <td ng-if="item.status==2"><span class="label label-success">未上报</span></td>
+	                                    <td>{{item.createtime}}</td>
+	                                    <td>{{item.createuser}}</td>
+	                                    <td>{{item.remark}}</td>
+	                                    <td style="text-align: left;">
+	                                    	<button type="button" class="btn btn-success" ng-click="view(item.id)">查看</button>
+	                                    	<button ng-if="item.status==1" type="button" class="btn btn-warning" ng-click="edit(item.id)">修改</button>	                                    	
+	                                    	<button ng-if="item.status==2" type="button" class="btn btn-danger" ng-click="report(item.id)">上报</button>	                                    	
 	                                    </td>
 	                                </tr>
-	                                <tr>
-	                                    <td>2</td>
-	                                    <td>地表水环境评分</td>
-	                                    <td>2018-8</td>
-	                                    <td><span class="label label-info">已退回</span></td>
-	                                    <td>2018-09-30</td>
-	                                    <td>地表水管理工作人员</td>
-	                                    <td>我是认真的</td>
-	                                    <td>
-	                                    	<button type="button" class="btn btn-success" >查看</button>
-	                                    	<button type="button" class="btn btn-warning" ng-click="edit()">修改</button>	                                    	
-	                                    </td>
-	                                </tr>
-	                                <tr>
-	                                    <td>3</td>
-	                                    <td>地表水环境评分</td>
-	                                    <td>2018-8</td>
-	                                    <td><span class="label label-success">未上报</span></td>
-	                                    <td>2018-09-30</td>
-	                                    <td>地表水管理工作人员</td>
-	                                    <td>我是认真的</td>
-	                                    <td>
-	                                    	<button type="button" class="btn btn-success">查看</button>
-	                                    	<button type="button" class="btn btn-danger" >上报</button>
+                                	<tr ng-repeat="item in surfaceWaterList" ng-if="num == 2">
+	                                    <td>{{$index+1}}</td>
+	                                    <td>{{item.title}}</td>
+	                                    <td>{{item.issue}}</td>
+	                                    <td ng-if="num==2 && item.status==0"><span class="label label-danger">已上报</span></td>
+	                                    <td ng-if="num==2 && item.status==1"><span class="label label-info">已退回</span></td>
+	                                    <td ng-if="item.status==2"><span class="label label-success">未上报</span></td>
+	                                    <td>{{item.createtime}}</td>
+	                                    <td>{{item.createuser}}</td>
+	                                    <td>{{item.remark}}</td>
+	                                    <td style="text-align: left;">
+	                                    	<button type="button" class="btn btn-success" ng-click="view(item.id)">查看</button>
+	                                    	<button ng-if="item.status==0" type="button" class="btn btn-primary" ng-click="sendBack(item.id)">退回</button>
+	                                    	<button ng-if="item.status==2" type="button" class="btn btn-danger" ng-click="report(item.id)">上报</button>	                                    	
 	                                    </td>
 	                                </tr>
                             	</tbody>
                             </table>
-                			<!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+                			<tm-pagination conf="paginationConf"></tm-pagination>
                         </div>
                     </div>
                     <div class="tab-pane" id="chartStatistics">

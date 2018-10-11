@@ -141,7 +141,6 @@ body {
     background-color: #428bca;
     border-color: #357ebd;
 }
-
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary.focus,
@@ -1787,3 +1786,8 @@ body .c-ffffff a{
 .kaohepingfen-add .modal-dialog .form-inline .input-group > .form-control{
 	width: 58% !important;
 }
+
+.kaohepingfen-add .form-radio{
+	width: 100%;
+}
+

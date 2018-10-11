@@ -131,7 +131,7 @@
 			"isLeaf":true,
 			"isRoot":false,
 			"name": "地表水质环境评分管理",
-			"icon": "menu-icon-6",
+			"icon": "fa fa-bug",
 			"url": "src/module/kaohepinggu/kaohepinggu-index/kaohepinggu-index.html",
 			"requireJS":["src/module/kaohepinggu/kaohepinggu-index/kaohepinggu-index.js"],
 			"description": "地表水质环境评分管理-首页"
@@ -142,7 +142,7 @@
 			"isLeaf":true,
 			"isRoot":false,
 			"name": "新增地表管理",
-			"icon": "menu-icon-6",
+			"icon": "fa fa-bug",
 			"url": "src/module/kaohepinggu/kaohepinggu-index/koahepinggu-add/kaohepinggu-add.html",
 			"requireJS":["src/module/kaohepinggu/kaohepinggu-index/koahepinggu-add/kaohepinggu-add.js"],
 			"description": "地表水质环境评分管理-新增"
@@ -153,7 +153,7 @@
 			"isLeaf":true,
 			"isRoot":false,
 			"name": "地表管理详情",
-			"icon": "menu-icon-6",
+			"icon": "fa fa-bug",
 			"url": "src/module/kaohepinggu/kaohepinggu-index/kaohepinggu-detail/kaohepinggu-detail.html",
 			"requireJS":["src/module/kaohepinggu/kaohepinggu-index/kaohepinggu-detail/kaohepinggu-detail.js"],
 			"description": "地表水质环境评分管理-详情"
@@ -164,10 +164,43 @@
 			"isLeaf":true,
 			"isRoot":false,
 			"name": "水质数据",
-			"icon": "menu-icon-6",
+			"icon": "fa fa-lemon-o",
 			"url": "src/module/kaohepinggu/kaohepinggu-shuizhi/kaohepinggu-shuizhi.html",
 			"requireJS":["src/module/kaohepinggu/kaohepinggu-shuizhi/kaohepinggu-shuizhi.js"],
 			"description": "水质数据"
+		},
+		{
+			"seqId": "3-2-2",
+			"parentId": "3",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "新增水质管理",
+			"icon": "fa fa-lemon-o",
+			"url": "src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-add/kaohepinggu-add.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-add/kaohepinggu-add.js"],
+			"description": "水质管理-新增"
+		},
+		{
+			"seqId": "3-2-3",
+			"parentId": "3",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "修改水质管理",
+			"icon": "fa fa-lemon-o",
+			"url": "src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-update/kaohepinggu-update.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-update/kaohepinggu-update.js"],
+			"description": "水质管理-修改"
+		},
+		{
+			"seqId": "3-2-4",
+			"parentId": "3",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "自动水质管理",
+			"icon": "fa fa-lemon-o",
+			"url": "src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-detail/kaohepinggu-detail.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-detail/kaohepinggu-detail.js"],
+			"description": "水质管理-导出"
 		},
 		{
 			"seqId": "3-3",
@@ -175,7 +208,7 @@
 			"isLeaf":true,
 			"isRoot":false,
 			"name": "污水处理厂",
-			"icon": "menu-icon-6",
+			"icon": "fa fa-database",
 			"url": "src/module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-wushui.html",
 			"requireJS":["src/module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-wushui.js"],
 			"description": "污水处理厂"
@@ -186,7 +219,7 @@
 			"isLeaf":true,
 			"isRoot":false,
 			"name": "新增污水管理",
-			"icon": "menu-icon-6",
+			"icon": "fa fa-database",
 			"url": "src/module/kaohepinggu/kaohepinggu-wushui/koahepinggu-add/kaohepinggu-add.html",
 			"requireJS":["src/module/kaohepinggu/kaohepinggu-wushui/koahepinggu-add/kaohepinggu-add.js"],
 			"description": "地表水质环境评分管理-新增"
@@ -197,7 +230,7 @@
 			"isLeaf":true,
 			"isRoot":false,
 			"name": "污水管理详情",
-			"icon": "menu-icon-6",
+			"icon": "fa fa-database",
 			"url": "src/module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-detail/kaohepinggu-detail.html",
 			"requireJS":["src/module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-detail/kaohepinggu-detail.js"],
 			"description": "污水处理厂-详情"
