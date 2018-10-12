@@ -33,21 +33,6 @@
 						$scope.date=new moment($scope.searchTime).format('YYYY') + '-' + month;
 						console.log('期号',$scope.date);
 						console.log('状态',$scope.type)
-//						$ajaxhttp.myhttp({
-//							url: apiPrefix + '/v1/bulletin/list',
-//							method: 'get',
-//							params: {
-//								pageNumber: $scope.paginationConf.currentPage,
-//								pageSize: $scope.paginationConf.itemsPerPage,
-//								year: $scope.searchTime && new moment($scope.searchTime).format('YYYY'),
-//								month: $scope.searchTime && new moment($scope.searchTime).format('M'),
-//								type: $scope.type
-//							},
-//							callBack: function (res) {
-//								$scope.bulletinList = res.data.list;
-//                  			$scope.paginationConf.totalItems = res.data.total;
-//							}
-//						})
 					}
 					
 					$('#J-searchTime').datetimepicker({
@@ -97,8 +82,21 @@
 								id: id
 							}
 						})
-						routeService.route('3-1-3', true);
+						routeService.route('3-2-3', true);
 	                }
-					console.log('欢迎加入河长制');
+					
+					// 配置分页基本参数
+	                $scope.paginationConf = {
+	                    currentPage: $location.search().currentPage ? $location.search().currentPage : 1,
+	                    itemsPerPage: 10,
+	                    pagesLength: 10,
+				        perPageOptions: [1, 2, 3, 4, 5, 10],
+	                    onChange: function () {
+	                        //console.log($scope.paginationConf.currentPage);
+	                        $location.search('currentPage', $scope.paginationConf.currentPage);
+	                    }
+	                };
+	                // 当他们一变化的时候，重新获取数据条目
+	                $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', getList);
 			} ]);
 })(window, angular);

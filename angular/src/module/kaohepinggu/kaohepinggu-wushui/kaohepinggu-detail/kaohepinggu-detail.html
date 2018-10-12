@@ -1,7 +1,10 @@
 <div class="kaohepingfen-add" ng-controller="wushuiViewCtrl" ng-init="init()">
     <div class="wrapper-md ">
     	<div class="panel panel-default m-n">
-        	<div class="panel-body"><span class="tag">污水处理厂</span><span class="tag-right"></span><span class="tag-right tag-left"></span><span class="tag tag1">查看</span><span class="tag-right"></span></div>
+        	<div class="panel-body" style="position: relative;">
+        		<span class="tag">污水处理厂</span><span class="tag-right"></span><span class="tag-right tag-left"></span><span class="tag tag1">查看</span><span class="tag-right"></span>
+        		<div style="overflow: hidden;"><button type="button" class="btn btn-primary" ng-click="goBack()" style="position: absolute;right: 20px;bottom: 20px;">返回</button></div>
+        	</div>
 		</div>
         
     	<div class="panel panel-default">
@@ -59,7 +62,6 @@
                 
         	</div>
         </div>
-    	<div style="overflow: hidden;"><button type="button" class="btn btn-default" ng-click="goBack()" style="position: absolute;right: 20px;">返回</button></div>
-       
+    	
     </div>
 </div>

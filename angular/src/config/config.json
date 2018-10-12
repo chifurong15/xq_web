@@ -185,7 +185,7 @@
 			"parentId": "3",
 			"isLeaf":true,
 			"isRoot":false,
-			"name": "修改水质管理",
+			"name": "水质管理详情",
 			"icon": "fa fa-lemon-o",
 			"url": "src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-update/kaohepinggu-update.html",
 			"requireJS":["src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-update/kaohepinggu-update.js"],
