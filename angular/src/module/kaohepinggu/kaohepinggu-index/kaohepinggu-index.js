@@ -36,7 +36,8 @@
 							url: apiPrefix + '/v1/SurfaceWater/userinfo',
 							method: 'get',					
 							callBack: function (res) {
-								//console.log(res)
+								$scope.num = res.grade;
+								console.log(res)
 							}
 						})
 						let month=new moment($scope.searchTime).format('M')<10 ? '0'+ new moment($scope.searchTime).format('M') : new moment($scope.searchTime).format('M');
