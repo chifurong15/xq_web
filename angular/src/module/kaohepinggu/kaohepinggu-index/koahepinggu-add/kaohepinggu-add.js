@@ -324,25 +324,34 @@
 						for (var i = 0; i < e.files.length; i++) {
 	            			var form = new FormData();
 							var file = e.files[i];
-							console.log(file)
 							$scope.attandName = file.name;
-				            //form.append('file', file);
-				           // form.append('fileName', file.name);
-				            form = {
-				            	file: file,
-				            	fileName: file.name
-				            }
-				            console.log('form:',form.file)
+				            form.append('file', file);
+				            form.append('fileName', file.name);	
+				            form.append('parentid', getQueryString('id'));
 				            $ajaxhttp.myhttp({
-				                method: 'POST',
-				                url: apiPrefix + '/v1/SurfaceWaterGrade/upload?parentid=' + id,
-				                params:form,
-				                headers: {'Content-Type': undefined},
-				                transformRequest: angular.identity,
-				                callback: function (res) {
-				                	alert('导入成功')
-				                }
-				            })
+								url: apiPrefix + '/v1/SurfaceWaterGrade/deletelist',
+								method: 'DELETE',
+								params: {
+									parentid: id
+								},
+								callBack: function (res) {
+									if(res.resCode == 1){
+										$http({
+							                method: 'POST',
+							                url: apiPrefix + '/v1/SurfaceWaterGrade/upload',
+							                data: form,
+							                headers: {'Content-Type': undefined},
+							                transformRequest: angular.identity
+							            }).success(function (data) {
+							            	if(data.resCode == 1){							            		
+							            		getScoreList()
+							            	}
+							            }).error(function (data) {
+							                 console.log('upload fail');
+							            })
+									}
+								}
+							})
 						}
 					}
 					
