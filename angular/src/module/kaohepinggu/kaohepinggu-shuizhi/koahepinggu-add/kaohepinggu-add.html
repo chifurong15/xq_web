@@ -1,0 +1,163 @@
+<div class="kaohepingfen-add" ng-controller="shuizhiAddCtrl" ng-init="init()">
+    <div class="wrapper-md ">
+    	<div class="panel panel-default m-n">
+        	<div class="panel-body"><span class="tag">水质数据</span><span class="tag-right"></span><span class="tag-right tag-left"></span><span class="tag tag1">{{!id ? '新增' : '编辑'}}</span><span class="tag-right"></span></div>
+        </div>
+    	<div class="panel panel-default">
+    		<div class="panel-body">
+				<form class="form-inline">					
+					<div class="form-item">
+                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
+                        <input type="text" class="form-control input-short" ng-model="title">
+                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                    </div>
+                    <div class="form-item">
+                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">创建时间</font></font></label>
+                        <input type="text" class="form-control input-short" ng-model="currentdate"  readonly="readonly">
+                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                    </div>
+                    <div class="input-group date date_picker form-item" id="J-searchTime">
+	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">期号</font></font></label>
+	        				<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime">
+	                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+	               </div>                    
+					<div class="form-item">
+                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">创建人</font></font></label>
+                        <input type="text" class="form-control input-short" ng-model="author">
+                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                    </div>
+                    <div class="form-item">
+                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">备注</font></font></label>
+                        <input type="text" class="form-control input-short" ng-model="issuer">
+                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                    </div>
+                    <div style="text-align: center;">
+	                    <button type="button" class="btn btn-primary" ng-click="submit()">保存</button>
+	                    <button type="button" class="btn btn-default" ng-click="back()">取消</button>
+                    </div>
+				</form>
+			
+				<div style="text-align: right;">
+	                <input type="file" class="hidden" id="J-attandUploader" ng-model="attandUrl" onchange="angular.element(this).scope().uploadFile(this)"/>
+					<button class="btn btn-primary" onclick="document.getElementById('J-attandUploader').click()">{{attandName ? attandName : '导入'}}</button>
+	           </div>	           
+				<div class="tab-content">
+	                    <div class="tab-pane active" id="tableStatistics">
+	                        <div class="table-responsive" style="margin-top: 20px;">
+	                            <table class="table table-bordered table-hover">
+	                                <tbody>
+	                                	<tr class='tHeader'>
+		                                    <th width="5%">分析编号</th>
+		                                    <th width="5%">断面序号</th>
+		                                    <th width="10%">断面名称</th>	                                    
+		                                    <th width="10%">河流</th>	                                    
+		                                    <th width="10%">采样日期</th>	                                    
+		                                    <th width="10%">水温（℃）</th>	                                    
+		                                    <th width="10%">总磷（mg/L）</th>	                                    
+		                                    <th width="10%">氨氮（mg/L）</th>	                                    
+		                                    <th width="10%">高锰酸盐指数（mg/L）</th>	                                    
+		                                    <th width="10%">溶解氧（mg/L）</th>
+		                                    <th width="10%">操作</th>
+		                                </tr>
+	                                	<tr>		                                   
+		                                    <td>1</td>
+		                                    <td>233</td>
+		                                    <td>我是认真的</td>
+		                                    <td>河流</td>
+		                                    <td>2018-09-23</td>
+		                                    <td>23</td>
+		                                    <td>23</td>
+		                                    <td>23</td>
+		                                    <td>23</td>
+		                                    <td>23</td>
+		                                    <td>
+		                                    	<button type="button" class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button>	                                    	
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>2</td>	                                   
+		                                    <td>233</td>
+		                                    <td>我是认真的</td>
+		                                    <td>河流</td>
+		                                    <td>2018-09-23</td>
+		                                    <td>23</td>
+		                                    <td>23</td>
+		                                    <td>23</td>
+		                                    <td>23</td>
+		                                    <td>23</td>
+		                                    <td>
+		                                    	<button type="button" class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button>	                                    	
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>3</td>	                                    
+		                                    <td>233</td>
+		                                    <td>我是认真的</td>
+		                                    <td>河流</td>
+		                                    <td>2018-09-23</td>
+		                                    <td>23</td>
+		                                    <td>23</td>
+		                                    <td>23</td>
+		                                    <td>23</td>
+		                                    <td>23</td>
+		                                    <td>
+		                                    	<button type="button" class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button>	                                    	
+		                                    </td>
+		                                </tr>
+	                            	</tbody>
+	                            </table>
+	                			<!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+	                        </div>
+	                    </div>
+	                    <div class="tab-pane" id="chartStatistics">
+	                        <div id="patrolChart" class="tj-chart-con"></div>
+	                    </div>
+	                </div>
+	        	
+    		</div>
+    	</div>
+    	<div style="overflow: hidden;"><button type="button" class="btn btn-default" ng-click="goBack()" style="position: absolute;right: 20px;">返回</button></div>
+    </div>
+    
+    <!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						新增条目
+					</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-inline">
+						<div class="input-group form-item" >
+	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">行政区域</font></font></label>
+	        				<select ng-model="area" class="form-control select-short" style="width: auto;">
+	                        	<option value=""></option>
+	                        	<option value="0">已上报</option>
+	                        	<option value="1">已退回</option>
+	                        	<option value="2">未上报</option>
+	                        </select>
+	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+		                </div>
+						<div class="form-item">
+	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">考核分数</font></font></label>
+	                        <input type="number" min="0" max="100" class="form-control input-short" ng-model="score">
+	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+	                    </div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" ng-click="save()">保存</button>
+		            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+    
+</div>
+
