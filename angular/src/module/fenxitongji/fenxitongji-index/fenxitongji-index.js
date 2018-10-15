@@ -49,8 +49,7 @@
 	                        url: apiPrefix + '/v1/resumption/findCurrentUserGrade',
 	                        method: 'get'
 	                    }).success(function (res) {
-	                        $scope.regionGrade = res.data;
-	                       // alert('11--'+$scope.regionGrade)
+	                        $scope.regionGrade = res.data;	                       
 	                    }).error(function (error) {
 	
 	                    })
