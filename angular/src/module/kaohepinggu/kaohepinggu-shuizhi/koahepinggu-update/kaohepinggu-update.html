@@ -11,20 +11,14 @@
     			<form class="form-inline clearfix">
         			<div class="input-group form-item" >
                         <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">断面</font></font></label>
-        				<select ng-model="type1" class="form-control select-short" style="width: 160px;">
-                        	<option value=""></option>
-                        	<option value="0">已上报</option>
-                        	<option value="1">已退回</option>
-                        	<option value="2">未上报</option>
+        				<select ng-model="section" class="form-control select-short" style="width: 160px;">
+                        	<option value="{{item}}" ng-repeat="item in nameOption">{{item}}</option>                        	
                         </select>
                     </div>
                     <div class="input-group form-item" >
                         <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">河流</font></font></label>
-        				<select ng-model="type2" class="form-control select-short" style="width: 160px;">
-                        	<option value=""></option>
-                        	<option value="0">已上报</option>
-                        	<option value="1">已退回</option>
-                        	<option value="2">未上报</option>
+        				<select ng-model="riverName" class="form-control select-short" style="width: 160px;">
+                        	<option value="{{items}}" ng-repeat="items in riverOption">{{items}}</option>                        	
                         </select>
                     </div>                    
     				<div class="input-group">
@@ -50,45 +44,21 @@
 		                                    <th width="10%">高锰酸盐指数（mg/L）</th>	                                    
 		                                    <th width="10%">溶解氧（mg/L）</th>		                                    
 		                                </tr>
-	                                	<tr>		                                   
-		                                    <td>1</td>
-		                                    <td>233</td>
-		                                    <td>我是认真的</td>
-		                                    <td>河流</td>
-		                                    <td>2018-09-23</td>
-		                                    <td>23</td>
-		                                    <td>23</td>
-		                                    <td>23</td>
-		                                    <td>23</td>
-		                                    <td>23</td>		                                    
-		                                </tr>
-		                                <tr>
-		                                    <td>2</td>	                                   
-		                                    <td>233</td>
-		                                    <td>我是认真的</td>
-		                                    <td>河流</td>
-		                                    <td>2018-09-23</td>
-		                                    <td>23</td>
-		                                    <td>23</td>
-		                                    <td>23</td>
-		                                    <td>23</td>
-		                                    <td>23</td>		                                    
-		                                </tr>
-		                                <tr>
-		                                    <td>3</td>	                                    
-		                                    <td>233</td>
-		                                    <td>我是认真的</td>
-		                                    <td>河流</td>
-		                                    <td>2018-09-23</td>
-		                                    <td>23</td>
-		                                    <td>23</td>
-		                                    <td>23</td>
-		                                    <td>23</td>
-		                                    <td>23</td>
-		                                </tr>
+	                                	<tr ng-repeat="item in detailList">		                                   
+		                                    <td>{{$index+1}}</td>
+		                                    <td></td>
+		                                    <td>{{item.name}}</td>
+		                                    <td>{{item.riverName}}</td>
+		                                    <td>{{item.samplingTime}}</td>
+		                                    <td>{{item.water_temperature}}</td>
+		                                    <td>{{item.total_phosphorus}}</td>
+		                                    <td>{{item.ammonia_nitrogen}}</td>
+		                                    <td>{{item.permanganate_index}}</td>
+		                                    <td>{{item.DO}}</td>		                                    
+		                                </tr>		                                
 	                            	</tbody>
 	                            </table>
-	                			<!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+	                			<tm-pagination conf="paginationConf"></tm-pagination>
 	                        </div>
 	                    </div>
 	                    <div class="tab-pane" id="chartStatistics">

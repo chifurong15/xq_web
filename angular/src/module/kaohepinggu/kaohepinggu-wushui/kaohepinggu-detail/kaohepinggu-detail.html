@@ -10,8 +10,8 @@
     	<div class="panel panel-default">
         	<div class="panel-body">
         		<div>
-        			<h3 style="display: inline-block;font-size: 16px;">天津市津南区污水处理厂</h3>
-        			<b style="margin: 0 30px;">2018-09</b>
+        			<h3 style="display: inline-block;font-size: 16px;font-weight:700;">{{title}}</h3>
+        			<b style="margin: 0 30px;">{{issue}}</b>
         		</div>
                 <div class="tab-content">
                     <div class="tab-pane active" id="tableStatistics">
@@ -26,33 +26,17 @@
 	                                    <th width="10%">是否达标</th>
 	                                    <th width="30%">不达标原因</th>
 	                                </tr>
-                                	<tr>
-	                                    <td>1</td>
-	                                    <td>天津市滨海新区中唐污水处理厂</td>
-	                                    <td>河西区</td>
-	                                    <td>河西区</td>
-	                                    <td>是</td>
-	                                    <td>环境不错</td>
-	                                </tr>
-	                                <tr>
-	                                    <td>2</td>	                                   
-	                                    <td>天津市滨海新区中唐污水处理厂</td>
-	                                    <td>河西区</td>
-	                                    <td>河西区</td>
-	                                    <td>是</td>
-	                                    <td>环境不错</td>	                                    
-	                                </tr>
-	                                <tr>
-	                                    <td>3</td>	                                    
-	                                    <td>天津市滨海新区中唐污水处理厂</td>
-	                                    <td>河西区</td>
-	                                    <td>河西区</td>
-	                                    <td>是</td>
-	                                    <td>环境不错</td>                                   
-	                                </tr>
+                                	<tr ng-repeat="item in dataList">
+	                                    <td>{{item.code}}</td>
+	                                    <td>{{item.name}}</td>
+	                                    <td>{{item.region}}</td>
+	                                    <td>{{item.assess}}</td>
+	                                    <td>{{item.status}}</td>
+	                                    <td>{{item.reason}}</td>
+	                                </tr>	                               
                             	</tbody>
                             </table>
-                			<!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+                			<tm-pagination conf="paginationConf"></tm-pagination>
                         </div>
                     </div>
                     <div class="tab-pane" id="chartStatistics">

@@ -53,10 +53,6 @@
 							},
 							callBack: function (res) {
 								$scope.detailList = res.data;
-								console.log('shuju',res)
-//								var attandNamePart = res.data.attandUrl.split('_');
-//								$scope.bulletin = res.data;
-//								$scope.attandName = attandNamePart.splice(1, attandNamePart.length - 1).join('');
 							}
 						})
 					}

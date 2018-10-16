@@ -21,19 +21,16 @@
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
-					var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
+					var apiPrefix = moduleService.getServiceUrl() + '/template';
 					$scope.getServiceUrl= moduleService.getServiceUrl();	
 					$scope.init = function () {
 						var bulletin = globalParam.getter().bulletin || {};
-						if (!!getQueryString('id')) {
-							bulletin.id = getQueryString('id');
-						}
 						
-						// 编辑时获取原数据
-						if (bulletin.id) {
-							$location.search('id', bulletin.id);
-						}
-						getData(bulletin.id);
+						$scope.id = localStorage.getItem('id');
+						$scope.title = localStorage.getItem('title');
+						$scope.issue = localStorage.getItem('issue');
+						
+						getData();
 					}
 					
 					//返回
@@ -43,17 +40,18 @@
 					
 					
 					// 数据详情
-					function getData (id) {
+					function getData () {
 						$ajaxhttp.myhttp({
-							url: apiPrefix + '/v1/bulletin/detail',
+							url: apiPrefix + '/v1/SewageDisposeReport/list',
 							method: 'get',
 							params: {
-								id: id
+								parentid: $scope.id,
+								pageNumber: $scope.paginationConf.currentPage,
+								pageSize: $scope.paginationConf.itemsPerPage
 							},
 							callBack: function (res) {
-								var attandNamePart = res.data.attandUrl.split('_');
-								$scope.bulletin = res.data;
-								$scope.attandName = attandNamePart.splice(1, attandNamePart.length - 1).join('');
+								$scope.dataList = res.data.list;
+								$scope.paginationConf.totalItems = res.data.total;
 							}
 						})
 					}
@@ -69,5 +67,19 @@
 				        }
 				        return null;
 				    }
+					
+					// 配置分页基本参数
+	                $scope.paginationConf = {
+	                    currentPage: $location.search().currentPage ? $location.search().currentPage : 1,
+	                    itemsPerPage: 10,
+	                    pagesLength: 10,
+				        perPageOptions: [1, 2, 3, 4, 5, 10],
+	                    onChange: function () {
+	                        //console.log($scope.paginationConf.currentPage);
+	                        $location.search('currentPage', $scope.paginationConf.currentPage);
+	                    }
+	                };
+	                // 当他们一变化的时候，重新获取数据条目
+	                $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', getData);
 			} ]);
 })(window, angular);

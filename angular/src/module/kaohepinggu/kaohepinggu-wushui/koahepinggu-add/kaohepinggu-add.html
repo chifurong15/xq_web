@@ -37,69 +37,46 @@
                         <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
                     </div>                 
         			
-                    <div style="text-align: center;position: relative;left: -25%;top: 25px;">
+                    <div style="text-align: center;position: relative;left: -21%;top: 25px;">
 	                    <button type="button" class="btn btn-primary" style="margin: 0 50px;" ng-click="submit()">保存</button>
 	                    <button type="button" class="btn btn-default" ng-click="back()">取消</button>
                     </div>
 				</form>
 			
 				<div style="text-align: right;">
+	                <button type="button" class="btn btn-primary" ng-click="showModal()">新增条目</button>
 	                <input type="file" class="hidden" id="J-attandUploader" ng-model="attandUrl" onchange="angular.element(this).scope().uploadFile(this)"/>
-					<button class="btn btn-primary" onclick="document.getElementById('J-attandUploader').click()">{{attandName ? attandName : '导入月报'}}</button>
-	           </div>	           
+					<button class="btn btn-default" onclick="document.getElementById('J-attandUploader').click()">导入(.xls)</button>
+	           </div>           
 				<div class="tab-content">
                     <div class="tab-pane active" id="tableStatistics">
                         <div class="table-responsive" style="margin-top: 20px;">
                             <table class="table table-bordered table-hover">
                                 <tbody>
                                 	<tr class='tHeader'>
-	                                    <th width="10%">污水处理厂编号</th>
+	                                    <th width="15%">污水处理厂编号</th>
 	                                    <th width="20%">名称</th>
 	                                    <th width="10%">所在行政区</th>
 	                                    <th width="20%">考核区</th>
-	                                    <th width="10%">是否达标</th>
+	                                    <th width="5%">是否达标</th>
 	                                    <th width="20%">不达标原因</th>
 	                                    <th width="10%">操作</th>
 	                                </tr>
-                                	<tr>
-	                                    <td>1</td>
-	                                    <td>天津市滨海新区中唐污水处理厂</td>
-	                                    <td>河西区</td>
-	                                    <td>河西区</td>
-	                                    <td>是</td>
-	                                    <td>环境不错</td>
+                                	<tr ng-repeat="item in detailList">
+	                                    <td>{{item.code}}</td>
+	                                    <td>{{item.name}}</td>
+	                                    <td>{{item.region}}</td>
+	                                    <td>{{item.assess}}</td>
+	                                    <td>{{item.status== 1 ? '否' : '是'}}</td>
+	                                    <td>{{item.reason}}</td>
 	                                    <td>
-	                                    	<button type="button" class="btn btn-primary btn-sm" ng-click="addOne()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></button>
-	                                    	<button type="button" class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button>	                                    	
+	                                    	<button type="button" class="btn btn-primary btn-sm" ng-click="showModal(item)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></button>
+	                                    	<button type="button" class="btn btn-danger btn-sm" ng-click="delete(item.id)"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button>	                                    	
 	                                    </td>
-	                                </tr>
-	                                <tr>
-	                                    <td>2</td>	                                   
-	                                    <td>天津市滨海新区中唐污水处理厂</td>
-	                                    <td>河西区</td>
-	                                    <td>河西区</td>
-	                                    <td>是</td>
-	                                    <td>环境不错</td>
-	                                    <td>
-	                                    	<button type="button" class="btn btn-primary btn-sm" ng-click="addOne()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></button>
-	                                    	<button type="button" class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button>	                                    	
-	                                    </td>
-	                                </tr>
-	                                <tr>
-	                                    <td>3</td>	                                    
-	                                    <td>天津市滨海新区中唐污水处理厂</td>
-	                                    <td>河西区</td>
-	                                    <td>河西区</td>
-	                                    <td>是</td>
-	                                    <td>环境不错</td>  
-	                                    <td>
-	                                    	<button type="button" class="btn btn-primary btn-sm" ng-click="addOne()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></button>
-	                                    	<button type="button" class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button>	                                    	
-	                                    </td>
-	                                </tr>
+	                                </tr>	                                
                             	</tbody>
                             </table>
-                			<!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+                			<tm-pagination conf="paginationConf"></tm-pagination>
                         </div>
                     </div>
                     <div class="tab-pane" id="chartStatistics">
@@ -132,27 +109,24 @@
 	                    </div>
 						<div class="input-group form-item" >
 	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">所在行政区</font></font></label>
-	        				<select ng-model="area" class="form-control select-short" style="width: auto;">
-	                        	<option value=""></option>
-	                        	<option value="0">已上报</option>
-	                        	<option value="1">已退回</option>
-	                        	<option value="2">未上报</option>
+	        				<select ng-model="region" class="form-control select-short" style="width: auto;">
+	                        	<option value="{{item}}" ng-repeat="item in allArea">{{item}}</option>	                        	
 	                        </select>
 	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 		                </div>
 		                <div class="input-group form-item" >
 	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">考核区</font></font></label>
-	        				<select ng-model="examineArea" class="form-control select-short" style="width: auto;">
-	                        	<option value=""></option>
-	                        	<option value="0">已上报</option>
-	                        	<option value="1">已退回</option>
-	                        	<option value="2">未上报</option>
+	        				<select ng-model="assess" class="form-control select-short" style="width: auto;">
+	                        	<option value="{{item}}" ng-repeat="item in allArea">{{item}}</option>
 	                        </select>
 	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 		                </div>
 		                <div class="form-item">
 	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否达标</font></font></label>
-	                        <input type="text"  class="form-control input-short" ng-model="checkOut">
+	                        <select ng-model="status" class="form-control select-short">
+	                        	<option value="0">是</option>
+	                        	<option value="1">否</option>
+	                        </select>
 	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 	                    </div>	                    
 						<div class="form-item">
@@ -164,7 +138,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" ng-click="save()">保存</button>
-		            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+		            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
 				</div>
 			</div>
 		</div>

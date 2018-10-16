@@ -36,38 +36,41 @@
 							setData(bulletin);
 						} else if (!bulletin.id && !!getQueryString('id')) {
 							// 根据id查询
-//							$ajaxhttp.myhttp({
-//								url: apiPrefix + '/v1/SurfaceWater/detail',
-//								method: 'get',
-//								params: {
-//									id: getQueryString('id')
-//								},
-//								callBack: function (res) {
-//									//console.log('要修改的数据',res.data)									
-//									setData(res.data);
-//								}
-//							})
+							$ajaxhttp.myhttp({
+								url: apiPrefix + '/v1/WaterQuality/detail',
+								method: 'get',
+								params: {
+									id: getQueryString('id')
+								},
+								callBack: function (res) {
+									setData(res.data);
+								}
+							})
 						}
 						
 						getDate ();
-						getAllArea();
-						getScoreList();
+						getAllName();
+						getWaterList();
 						
 					}
 					
 					var id = getQueryString('id') ? getQueryString('id') : $scope.newid ;
 					//获取得分条目列表					
-					function getScoreList () {
+					function getWaterList () {
 						//alert(getQueryString('id'));
-//						$http({
-//							url: apiPrefix + '/v1/SurfaceWaterGrade/list?parentid=' + id,
-//							method: 'get'						
-//						}).success(function(data){
-//							if(data.resCode == 1){
-//								$scope.scoreList = data.data;
-//								console.log('得分列表',data.data)
-//							}
-//						})
+						$http({
+							url: apiPrefix + '/v1/WaterQualityGrade/list?parentid=' + id,
+							method: 'get',
+							params:{
+								pageNumber: $scope.paginationConf.currentPage,
+								pageSize: $scope.paginationConf.itemsPerPage
+							}
+						}).success(function(res){
+							if(res.resCode == 1){
+								$scope.waterList = res.data.list;
+                    			$scope.paginationConf.totalItems = res.data.total;								
+							}
+						})
 					}
 					
 					//日期					
@@ -153,7 +156,7 @@
                             });
 						} 
 						
-						// 新增评分管理					
+						// 新增水质管理					
 						var params = {
 								title: $scope.title,
 								createtime: $scope.currentdate,
@@ -162,41 +165,41 @@
 								remark: $scope.issuer
 						}
 						if (!$scope.id) {
-//							$ajaxhttp.myhttp({
-//								url: apiPrefix + '/v1/SurfaceWater/add',
-//								method: 'POST',
-//								params: params,
-//								callBack: function (res) {
-//									if(res.resCode == 1){
-//										$scope.newid = res.data.id;
-//										layer.msg('新建成功', {time:2000});
-//	                                	clear();//创建成功后清空
-//									}else{
-//	                                	layer.msg(res.resMsg, {time:2000});										
-//									}
-//								}
-//							})							
-						}else{//修改评分报告
-//							$ajaxhttp.myhttp({
-//								url: apiPrefix + '/v1/SurfaceWater/updatelist',
-//								method: 'PUT',
-//								params: {
-//									id: $scope.id,
-//									title: $scope.title,
-//									createtime: $scope.currentdate,
-//									issue: $scope.searchTime,
-//									createUser: $scope.author,
-//									remark: $scope.issuer
-//								},
-//								callBack: function (res) {
-//									if(res.resCode == 1){
-//										layer.msg('修改成功', {time:2000});
-//	                                	clear();//创建成功后清空
-//									}else{
-//	                                	layer.msg(res.resMsg, {time:2000});										
-//									}
-//								}
-//							})
+							$ajaxhttp.myhttp({
+								url: apiPrefix + '/v1/WaterQuality/add',
+								method: 'POST',
+								params: params,
+								callBack: function (res) {
+									if(res.resCode == 1){
+										$scope.newid = res.data.id;
+										layer.msg('新建成功', {time:2000});
+	                                	clear();//创建成功后清空
+									}else{
+	                                	layer.msg(res.resMsg, {time:2000});										
+									}
+								}
+							})							
+						}else{//修改水质报告
+							$ajaxhttp.myhttp({
+								url: apiPrefix + '/v1/WaterQuality/updatelist',
+								method: 'PUT',
+								params: {
+									id: $scope.id,
+									title: $scope.title,
+									createtime: $scope.currentdate,
+									issue: $scope.searchTime,
+									createUser: $scope.author,
+									remark: $scope.issuer
+								},
+								callBack: function (res) {
+									if(res.resCode == 1){
+										layer.msg('修改成功', {time:2000});
+	                                	clear();//创建成功后清空
+									}else{
+	                                	layer.msg(res.resMsg, {time:2000});										
+									}
+								}
+							})
 							
 						}
 					}
@@ -211,7 +214,7 @@
 							$scope.total_phosphorus = item.total_phosphorus;
 							$scope.ammonia_nitrogen = item.ammonia_nitrogen;
 							$scope.permanganate_index = item.permanganate_index;
-							$scope.DO = item.DO;
+							$scope.DO = item.dO;
 							$scope.selfId = item.id;
 						}else{
 							$scope.type=2;//新增
@@ -225,6 +228,11 @@
 					
 					//保存条目
 					$scope.save = function () {
+						
+						console.log($scope.section+'-----'+$scope.riverName)
+						
+						
+						
 						if (!$scope.samplingTime) {
                             layer.alert("请选择日期", {
                                 skin: 'my-skin',
@@ -262,90 +270,159 @@
                                 anim: 3
                             });                            
 						}
+						
 						if($scope.type == 2){ //新增
 							console.log($scope.type)
+//							if (!$scope.name) {
+//	                          layer.alert("请输入断面名称", {
+//	                              skin: 'my-skin',
+//	                              closeBtn: 1,
+//	                              anim: 3
+//	                          });
+//							}else if(!$scope.riverName){
+//								layer.alert("请输入河流名称", {
+//	                              skin: 'my-skin',
+//	                              closeBtn: 1,
+//	                              anim: 3
+//	                          });
+//							}
 							
 //							$ajaxhttp.myhttp({
-//								url: apiPrefix + '/v1/SurfaceWaterGrade/haveDistrict',
+//								url: apiPrefix + '/v1/WaterQualityGrade/haveDistrict',
 //								method: 'get',
 //								params: {
 //									parentid: $scope.id,
-//									popedom: $scope.area
+//									name: $scope.name
 //								},
 //								callBack: function (res) {
-//									if(res.data == 10){ //可以添加
-//										$ajaxhttp.myhttp({
-//											url: apiPrefix + '/v1/SurfaceWaterGrade/add',
-//											method: 'POST',
-//											params: {
-//												parentid: $scope.id,
-//												popedom: $scope.area,
-//												grade: $scope.score
-//											},
-//											callBack: function (res) {
-//												if(res.resCode == 1){
-//													layer.msg('新增成功', {time:2000});
-//													getScoreList();										
-//				                                	clear();//创建成功后清空
-//				                                	$('#myModal').modal('hide');						
-//												}else{
-//				                                	layer.msg(res.resMsg, {time:2000});										
-//												}
-//											}
-//										})			
-//									}else{
-//	                                	layer.msg('行政区域不能相同', {time:2000});										
+//									if(res.data == 10){ 
+//										//可以添加
+//										
 //									}
 //								}
-//							})					
-					
-						}else if($scope.type == 1){ //修改
+//							})		
 
 //							$ajaxhttp.myhttp({
-//								url: apiPrefix + '/v1/SurfaceWaterGrade/update',
-//								method: 'PUT',
+//								url: apiPrefix + '/v1/WaterQualityGrade/add',
+//								method: 'POST',
 //								params: {
-//									id: $scope.selfId,
-//									popedom: $scope.area,
-//									grade: $scope.score
+//									parentid: $scope.id,
+//									samplingTime: $scope.samplingTime,
+//									water_temperature: $scope.water_temperature,
+//									total_phosphorus: $scope.total_phosphorus,
+//									ammonia_nitrogen: $scope.ammonia_nitrogen,
+//									permanganate_index: $scope.permanganate_index,
+//									DO: $scope.DO,
 //								},
 //								callBack: function (res) {
 //									if(res.resCode == 1){
-//										layer.msg('修改成功', {time:2000});
+//										layer.msg('新增成功', {time:2000});
+//										//getScoreList();										
 //	                                	clear();//创建成功后清空
-//	                                	getScoreList();	
 //	                                	$('#myModal').modal('hide');						
 //									}else{
 //	                                	layer.msg(res.resMsg, {time:2000});										
 //									}
 //								}
 //							})
+											
+					
+						}else if($scope.type == 1){ //修改
+
+							$ajaxhttp.myhttp({
+								url: apiPrefix + '/v1/WaterQualityGrade/update',
+								method: 'PUT',
+								params: {
+									id: $scope.selfId ,
+									samplingTime: $scope.samplingTime ,
+									water_temperature: $scope.water_temperature , 
+									total_phosphorus: $scope.total_phosphorus ,
+									ammonia_nitrogen: $scope.ammonia_nitrogen ,
+									permanganate_index: $scope.permanganate_index ,
+									DO: $scope.DO 		
+								},
+								callBack: function (res) {
+									if(res.resCode == 1){
+										layer.msg('修改成功', {time:2000});
+	                                	clear();//创建成功后清空
+	                                	getWaterList();	
+	                                	$('#myModal').modal('hide');						
+									}else{
+	                                	layer.msg(res.resMsg, {time:2000});										
+									}
+								}
+							})
 						}
 						
 					}
 					
-					//删除单条得分条目
+					//删除单条水质条目
 					$scope.delete = function (id) {
+						$ajaxhttp.myhttp({
+							url: apiPrefix + '/v1/WaterQualityGrade/delete',
+							method: 'DELETE',
+							params: {
+								id: id
+							},
+							callBack: function (res) {
+								if(res.resCode == 1){
+									layer.msg('删除成功', {time:2000});
+									getWaterList();
+								}
+							}
+						})	
+					}
+					
+					//获取所有的断面  河流
+					function getAllName () {
+						$http({
+			                method: 'GET',
+			                url: apiPrefix + '/v1/WaterQualityGrade/selectCascade',				               
+			            }).success(function (res) {
+		                	
+		                	var data = res.data;
+		                	//断面
+		                	$scope.nameOption = [] ;
+		                	//河流
+		                	$scope.riverOption = [] ;
+		                	data.map(function(item , index){
+		                		$scope.nameOption.push(item.name);
+		                		$scope.riverOption.push(item.mdSection.riverName)
+		                	})		                	
+		                	$scope.riverOption = removeDuplicates($scope.riverOption);
+			            })
+					}
+					
+//					 function getName() {
+//						console.log($scope.name)
 //						$ajaxhttp.myhttp({
-//							url: apiPrefix + '/v1/SurfaceWaterGrade/delete',
-//							method: 'DELETE',
+//							url: apiPrefix + '/v1/WaterQualityGrade/selectRiver?name=' + $scope.name,
+//							method: 'get',
 //							params: {
-//								id: id
+//								name: $scope.name
 //							},
 //							callBack: function (res) {
-//								if(res.resCode == 1){
-//									layer.msg('删除成功', {time:2000});
-//									getScoreList();
-//								}
+//								$scope.riverName = res.data
 //							}
-//						})	
-					}
+//						})						
+//					}
+					
+					
+					
+					//数组去重
+					function removeDuplicates(arr) {					  
+					      var temp = {}, r = [];					  
+					     for (var i in arr)					 
+					          temp[arr[i]] = true;					  
+					      for (var k in temp)					 
+					         r.push(k);					 
+					     return r;					 
+					}					
 					
 					//取消
 					$scope.back = function () {
 						routeService.route(3, true);
-					}
-					
+					}					
 					
 					//清空表单
 					var clear = function () {
@@ -353,12 +430,14 @@
 						$scope.issuer = '';
 						$scope.searchTime = '';
 						$scope.author = '';
-						$scope.samplingTime='';
-						$scope.water_temperature='';
-						$scope.total_phosphorus='';
-						$scope.ammonia_nitrogen='';
-						$scope.permanganate_index='';
-						$scope.DO='';
+						$scope.section = '',
+						$scope.riverName = '',
+						$scope.samplingTime = '';
+						$scope.water_temperature = '';
+						$scope.total_phosphorus = '';
+						$scope.ammonia_nitrogen = '';
+						$scope.permanganate_index = '';
+						$scope.DO = '';
 					}					
 					
 					// 上传文件
@@ -370,42 +449,32 @@
 				            form.append('file', file);
 				            form.append('fileName', file.name);	
 				            form.append('parentid', getQueryString('id'));
-//				            $ajaxhttp.myhttp({
-//								url: apiPrefix + '/v1/SurfaceWaterGrade/deletelist',
-//								method: 'DELETE',
-//								params: {
-//									parentid: id
-//								},
-//								callBack: function (res) {
-//									if(res.resCode == 1){
-//										$http({
-//							                method: 'POST',
-//							                url: apiPrefix + '/v1/SurfaceWaterGrade/upload',
-//							                data: form,
-//							                headers: {'Content-Type': undefined},
-//							                transformRequest: angular.identity
-//							            }).success(function (data) {
-//							            	if(data.resCode == 1){							            		
-//							            		getScoreList()
-//							            	}
-//							            }).error(function (data) {
-//							                 console.log('upload fail');
-//							            })
-//									}
-//								}
-//							})
+				            $ajaxhttp.myhttp({
+								url: apiPrefix + '/v1/WaterQualityGrade/deletelist',
+								method: 'DELETE',
+								params: {
+									parentid: id
+								},
+								callBack: function (res) {
+									if(res.resCode == 1){
+										$http({
+							                method: 'POST',
+							                url: apiPrefix + '/v1/WaterQualityGrade/upload',
+							                data: form,
+							                headers: {'Content-Type': undefined},
+							                transformRequest: angular.identity
+							            }).success(function (data) {
+							            	if(data.resCode == 1){							            		
+							            		getWaterList()
+							            	}
+							            }).error(function (data) {
+							                 console.log('upload fail');
+							            })
+									}
+								}
+							})
 						}
-					}
-					
-					//获取所有的区
-					 function getAllArea () {
-					 	    $http({
-				                method: 'GET',
-				                url: apiPrefix + '/v1/SurfaceWaterGrade/districtlist',				               
-				            }).success(function (res) {
-			                	$scope.allArea = res.data;
-				            })
-					 }
+					}					
 					
 					// 获取url参数
 					function  getQueryString (params, url) {
@@ -418,5 +487,19 @@
 				        }
 				        return null;
 				    }
+					
+					// 配置分页基本参数
+	                $scope.paginationConf = {
+	                    currentPage: $location.search().currentPage ? $location.search().currentPage : 1,
+	                    itemsPerPage: 10,
+	                    pagesLength: 10,
+				        perPageOptions: [1, 2, 3, 4, 5, 10],
+	                    onChange: function () {
+	                        //console.log($scope.paginationConf.currentPage);
+	                        $location.search('currentPage', $scope.paginationConf.currentPage);
+	                    }
+	                };
+	                // 当他们一变化的时候，重新获取数据条目
+	                $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', getWaterList);
 			} ]);
 })(window, angular);

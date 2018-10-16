@@ -37,7 +37,6 @@
 							method: 'get',					
 							callBack: function (res) {
 								$scope.num = res.grade;
-								console.log(res)
 							}
 						})
 						let month=new moment($scope.searchTime).format('M')<10 ? '0'+ new moment($scope.searchTime).format('M') : new moment($scope.searchTime).format('M');
@@ -56,7 +55,6 @@
 							},
 							callBack: function (res) {
 								$scope.surfaceWaterList = res.data.list;
-								//console.log('地表水列表',$scope.surfaceWaterList)
                     			$scope.paginationConf.totalItems = res.data.total;
 							}
 						})

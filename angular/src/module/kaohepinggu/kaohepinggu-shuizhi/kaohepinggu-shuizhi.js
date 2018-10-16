@@ -20,19 +20,48 @@
 				function shuizhiListCtrl($localStorage, $scope,
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
-							
+					
+					var apiPrefix = moduleService.getServiceUrl() + '/template';
+					
 					$scope.init = function () {
-						//getList();
+						getList();
 					}
 					
 					// 获取数据列表
 					function getList () {
-						//console.log('时间年份',new moment($scope.searchTime).format('YYYY'))
-						//console.log('时间月份',new moment($scope.searchTime).format('M')<10 ? '0'+ new moment($scope.searchTime).format('M') : new moment($scope.searchTime).format('M'))
+						
+						$scope.num = '';//02市长办登录
+						
+//						$ajaxhttp.myhttp({
+//							url: apiPrefix + '/v1/SurfaceWater/userinfo',
+//							method: 'get',					
+//							callBack: function (res) {
+//								$scope.num = res.grade;
+//								console.log(res)
+//							}
+//						})
+
 						let month=new moment($scope.searchTime).format('M')<10 ? '0'+ new moment($scope.searchTime).format('M') : new moment($scope.searchTime).format('M');
 						$scope.date=new moment($scope.searchTime).format('YYYY') + '-' + month;
-						console.log('期号',$scope.date);
-						console.log('状态',$scope.type)
+						
+						$ajaxhttp.myhttp({
+							url: apiPrefix + '/v1/WaterQuality/list',
+							method: 'get',
+							params: {
+								pageNumber: $scope.paginationConf.currentPage,
+								pageSize: $scope.paginationConf.itemsPerPage,
+								issue: $scope.searchTime && $scope.date,
+								status: $scope.type,
+								num: $scope.num,
+								createUser:$scope.createuser
+							},
+							callBack: function (res) {
+								$scope.waterQualityList = res.data.list;
+								console.log('水zhi列表',$scope.waterQualityList)
+                    			$scope.paginationConf.totalItems = res.data.total;
+							}
+						})
+						
 					}
 					
 					$('#J-searchTime').datetimepicker({
@@ -60,19 +89,16 @@
 	                // 编辑
 	                $scope.edit = function (id) {
 						
-//						$ajaxhttp.myhttp({
-//							url: apiPrefix + '/v1/bulletin/detail',
-//							method: 'get',
-//							params: {
-//								id: id
-//							},
-//							callBack: function (res) {
-//								globalParam.setter({
-//									bulletin: res.data
-//								})
-//							}
-//						})
-						routeService.route('3-1-2', true);
+						$ajaxhttp.myhttp({
+							url: apiPrefix + '/v1/WaterQuality/detail?id=' + id,
+							method: 'get',							
+							callBack: function (res) {
+								globalParam.setter({
+									bulletin: res.data
+								})
+							}
+						})
+						routeService.route('3-2-2', true);
 	                }
 	                
 	                 // 查看
@@ -84,7 +110,58 @@
 						})
 						routeService.route('3-2-3', true);
 	                }
+	                
+	                 // 上报
+	                $scope.report = function (id) {
+						$ajaxhttp.myhttp({
+							url: apiPrefix + '/v1/WaterQuality/update',
+							method: 'PUT',
+							params: {
+								id: id ,
+								status:0
+							},
+							callBack: function (res) {
+								if(res.resCode == 1){
+									getList();
+								}
+							}
+						})
+	                }
+	                
+	                //修改 水质报告
+	                $scope.edit = function (id) {						
+						$ajaxhttp.myhttp({
+							url: apiPrefix + '/v1/WaterQuality/detail',
+							method: 'get',
+							params: {
+								id: id
+							},
+							callBack: function (res) {
+								globalParam.setter({
+									bulletin: res.data
+								})
+							}
+						})						
+						routeService.route('3-2-2', true);
+	                }
 					
+					// 退回
+	                $scope.sendBack = function (id) {
+						$ajaxhttp.myhttp({
+							url: apiPrefix + '/v1/WaterQuality/update',
+							method: 'PUT',
+							params: {
+								id: id ,
+								status:1
+							},
+							callBack: function (res) {
+								if(res.resCode == 1){
+									getList();
+								}
+							}
+						})
+	                }	                
+	                
 					// 配置分页基本参数
 	                $scope.paginationConf = {
 	                    currentPage: $location.search().currentPage ? $location.search().currentPage : 1,

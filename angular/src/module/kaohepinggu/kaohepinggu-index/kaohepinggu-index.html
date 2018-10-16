@@ -1,4 +1,4 @@
-<div class="kaohepingfen-dibiao" ng-controller="dibiaoListCtrl" ng-init="init()">
+<div class="kaohepingfen" ng-controller="dibiaoListCtrl" ng-init="init()">
     <div class="wrapper-md ">
     	<div class="panel panel-default m-n">
         	<div class="panel-body" style="position: relative;">
@@ -15,7 +15,7 @@
 	        				<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime">
 	                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 	                    </div>
-	        			<div class="input-group form-item" >
+	        			<div class="input-group form-item">
 	                        <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">状态</font></font></label>
 	        				<select ng-model="type" class="form-control select-short" style="width: auto;">
 	                        	<option value=""></option>
@@ -77,7 +77,6 @@
 	                                    <td>{{item.issue}}</td>
 	                                    <td ng-if="num==2 && item.status==0"><span class="label label-danger">已上报</span></td>
 	                                    <td ng-if="num==2 && item.status==1"><span class="label label-info">已退回</span></td>
-	                                    <td ng-if="item.status==2"><span class="label label-success">未上报</span></td>
 	                                    <td>{{item.createtime}}</td>
 	                                    <td>{{item.createuser}}</td>
 	                                    <td>{{item.remark}}</td>
