@@ -25,7 +25,8 @@
 					
 					$scope.init = function () {						
 						
-						var bulletin = globalParam.getter().bulletin || {};	
+						var bulletin = globalParam.getter().bulletin || {};							
+						
 						$scope.id = bulletin.id;
 						getData(getQueryString('id'));
 						getDate ();
@@ -34,8 +35,12 @@
 					
 					//搜索
 					$scope.search = function () {
-						console.log($scope.section+'-----'+$scope.riverName)
-						getData();
+						if($scope.getSectionChangeId){							
+							$scope.section = $scope.nameOption[$scope.getSectionChangeId].id;
+							$scope.riverName = $scope.riverOption[$scope.getSectionChangeId].id;
+							console.log($scope.section+'-----'+$scope.riverName)
+						}						
+						//getData();
 					}
 					
 					// 数据详情
@@ -69,12 +74,28 @@
 		                	//河流
 		                	$scope.riverOption = [] ;
 		                	data.map(function(item , index){
-		                		$scope.nameOption.push(item.name);
-		                		$scope.riverOption.push(item.mdSection.riverName)
+		                		$scope.nameOption.push({id:index,name:item.name});
+		                		$scope.riverOption.push({id:index,riverName:item.mdSection.riverName})
 		                	})		                	
-		                	$scope.riverOption = removeDuplicates($scope.riverOption);
+//		                	console.log('断面list:', $scope.nameOption);
 			            })
 					}
+					
+					//断面类型切换 
+					$scope.getSectionChange = function(id){
+						if(!id || id != null){
+					    	$scope.getSectionChangeId = id;
+					    	//根据断面类型获取河流类型
+					    	getStationWarn(id);
+						}
+					}
+					
+					function getStationWarn(i){
+						$scope.riverName = $scope.riverOption[i].id;
+						console.log('河流',$scope.riverName)
+					}
+					
+					
 					$('#J-searchTime').datetimepicker({
 	                    format: 'YYYY-MM',
 	                    locale: moment.locale('zh-cn')
@@ -102,16 +123,7 @@
 							})
 	                    }, 1000);
 					}
-					
-					//数组去重
-					function removeDuplicates(arr) {					  
-					      var temp = {}, r = [];					  
-					     for (var i in arr)					 
-					          temp[arr[i]] = true;					  
-					      for (var k in temp)					 
-					         r.push(k);					 
-					     return r;					 
-					}					
+									
 					//返回
 					$scope.goBack=function(){
 						history.back(-1);
