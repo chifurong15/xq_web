@@ -52,14 +52,14 @@
 						getDate ();
 						getAllArea();
 						getScoreList();
+						getAllName ();
 						
 					}
 					
-					var id = getQueryString('id') ? getQueryString('id') : $scope.newid ;
+					var id = localStorage.getItem('id');
 					
 					//获取得分条目列表
 					function getScoreList () {
-						//alert(getQueryString('id'));
 						$http({
 							url: apiPrefix + '/v1/SewageDisposeReport/list?parentid=' + id,
 							method: 'get',
@@ -75,7 +75,15 @@
 						})
 					}
 					
-					
+					//获取所有的污水处理厂
+					function getAllName () {
+						$http({
+							url: apiPrefix + '/v1/SewageDisposeReport/selectWorks',
+							method: 'get'
+						}).success(function(res){
+							$scope.dataList = res.data;
+						})
+					}
 					
 					$('#J-searchTime').datetimepicker({
 	                    format: 'YYYY-MM',
@@ -285,6 +293,8 @@
 												}
 											}
 										})			
+									}else{
+										layer.msg('不能添加已有的处理厂', {time:2000});
 									}
 								}
 							})					

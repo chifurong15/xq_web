@@ -113,17 +113,14 @@
 						
 						<div class="input-group form-item" ng-if="type == 2">
 	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">断面名称</font></font></label>
-	                        <select ng-model="section" class="form-control select-short">
-								<option value="{{item}}" ng-repeat="item in nameOption">{{item}}</option>								
+	                        <select ng-model="section.id" ng-options="s.id as s.name for s in nameOption" ng-change="getSectionChange(section.id)" class="form-control select-short" style="width: 160px;">
 							</select>
 	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 	                    </div>
 	                    
-	                    <div class="input-group form-item" ng-if="type == 2">
-	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">河流</font></font></label>
-	                        <select ng-model="riverName" class="form-control select-short">
-								<option value="{{items}}" ng-repeat="items in riverOption">{{items}}</option>
-							</select>
+	                    <div class="form-item" ng-if="type == 2">
+	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">河流</font></font></label>	                        
+							<input type="text" class="form-control input-short" ng-model="riverName" readonly="">
 	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 	                    </div>
 	                    

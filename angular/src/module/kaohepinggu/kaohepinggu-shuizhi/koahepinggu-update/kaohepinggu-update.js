@@ -35,12 +35,8 @@
 					
 					//搜索
 					$scope.search = function () {
-						if($scope.getSectionChangeId){							
-							$scope.section = $scope.nameOption[$scope.getSectionChangeId].id;
-							$scope.riverName = $scope.riverOption[$scope.getSectionChangeId].id;
-							console.log($scope.section+'-----'+$scope.riverName)
-						}						
-						//getData();
+//						console.log($scope.section+'-----'+$scope.riverName)
+						getData();
 					}
 					
 					// 数据详情
@@ -81,18 +77,14 @@
 			            })
 					}
 					
-					//断面类型切换 
-					$scope.getSectionChange = function(id){
-						if(!id || id != null){
-					    	$scope.getSectionChangeId = id;
-					    	//根据断面类型获取河流类型
-					    	getStationWarn(id);
-						}
-					}
 					
-					function getStationWarn(i){
-						$scope.riverName = $scope.riverOption[i].id;
-						console.log('河流',$scope.riverName)
+					//监听断面
+					$scope.getSectionChange = function(){
+						//console.log('断面---',$scope.section + "----河流----"+ $scope.riverName);
+					}
+					//监听河流					
+					$scope.getRiverChange = function(){
+						//console.log('断面---',$scope.section + "----和流----"+ $scope.riverName);
 					}
 					
 					

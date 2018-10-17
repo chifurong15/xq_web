@@ -54,7 +54,7 @@
 						
 					}
 					
-					var id = getQueryString('id') ? getQueryString('id') : $scope.newid ;
+					var id = localStorage.getItem('id');
 					//获取得分条目列表					
 					function getWaterList () {
 						//alert(getQueryString('id'));
@@ -228,11 +228,6 @@
 					
 					//保存条目
 					$scope.save = function () {
-						
-						console.log($scope.section+'-----'+$scope.riverName)
-						
-						
-						
 						if (!$scope.samplingTime) {
                             layer.alert("请选择日期", {
                                 skin: 'my-skin',
@@ -269,63 +264,50 @@
                                 closeBtn: 1,
                                 anim: 3
                             });                            
-						}
-						
+						}						
 						if($scope.type == 2){ //新增
-							console.log($scope.type)
-//							if (!$scope.name) {
-//	                          layer.alert("请输入断面名称", {
-//	                              skin: 'my-skin',
-//	                              closeBtn: 1,
-//	                              anim: 3
-//	                          });
-//							}else if(!$scope.riverName){
-//								layer.alert("请输入河流名称", {
-//	                              skin: 'my-skin',
-//	                              closeBtn: 1,
-//	                              anim: 3
-//	                          });
-//							}
+							//console.log($scope.type)					
 							
-//							$ajaxhttp.myhttp({
-//								url: apiPrefix + '/v1/WaterQualityGrade/haveDistrict',
-//								method: 'get',
-//								params: {
-//									parentid: $scope.id,
-//									name: $scope.name
-//								},
-//								callBack: function (res) {
-//									if(res.data == 10){ 
-//										//可以添加
-//										
-//									}
-//								}
-//							})		
-
-//							$ajaxhttp.myhttp({
-//								url: apiPrefix + '/v1/WaterQualityGrade/add',
-//								method: 'POST',
-//								params: {
-//									parentid: $scope.id,
-//									samplingTime: $scope.samplingTime,
-//									water_temperature: $scope.water_temperature,
-//									total_phosphorus: $scope.total_phosphorus,
-//									ammonia_nitrogen: $scope.ammonia_nitrogen,
-//									permanganate_index: $scope.permanganate_index,
-//									DO: $scope.DO,
-//								},
-//								callBack: function (res) {
-//									if(res.resCode == 1){
-//										layer.msg('新增成功', {time:2000});
-//										//getScoreList();										
-//	                                	clear();//创建成功后清空
-//	                                	$('#myModal').modal('hide');						
-//									}else{
-//	                                	layer.msg(res.resMsg, {time:2000});										
-//									}
-//								}
-//							})
-											
+							$ajaxhttp.myhttp({
+								url: apiPrefix + '/v1/WaterQualityGrade/haveSection',
+								method: 'get',
+								params: {
+									parentid: $scope.id,
+									name: $scope.sectionType
+								},
+								callBack: function (res) {
+									if(res.data == 10){ 
+										//可以添加
+										$ajaxhttp.myhttp({
+											url: apiPrefix + '/v1/WaterQualityGrade/add',
+											method: 'POST',
+											params: {
+												parentid: $scope.id,
+												name: $scope.sectionType,
+												riverName: $scope.riverName,
+												samplingTime: $scope.samplingTime,
+												water_temperature: $scope.water_temperature,
+												total_phosphorus: $scope.total_phosphorus,
+												ammonia_nitrogen: $scope.ammonia_nitrogen,
+												permanganate_index: $scope.permanganate_index,
+												DO: $scope.DO,
+											},
+											callBack: function (res) {
+												if(res.resCode == 1){
+													layer.msg('新增成功', {time:2000});
+													getWaterList();										
+				                                	clear();//创建成功后清空
+				                                	$('#myModal').modal('hide');						
+												}else{
+				                                	layer.msg(res.resMsg, {time:2000});										
+												}
+											}
+										})
+									}else{
+										layer.msg('不能添加已有的断面', {time:2000});										
+									}
+								}
+							})												
 					
 						}else if($scope.type == 1){ //修改
 
@@ -386,38 +368,20 @@
 		                	//河流
 		                	$scope.riverOption = [] ;
 		                	data.map(function(item , index){
-		                		$scope.nameOption.push(item.name);
-		                		$scope.riverOption.push(item.mdSection.riverName)
-		                	})		                	
-		                	$scope.riverOption = removeDuplicates($scope.riverOption);
+		                		$scope.nameOption.push({id:index,name:item.name});
+		                		$scope.riverOption.push({id:index,riverName:item.mdSection.riverName})
+		                	})
 			            })
 					}
 					
-//					 function getName() {
-//						console.log($scope.name)
-//						$ajaxhttp.myhttp({
-//							url: apiPrefix + '/v1/WaterQualityGrade/selectRiver?name=' + $scope.name,
-//							method: 'get',
-//							params: {
-//								name: $scope.name
-//							},
-//							callBack: function (res) {
-//								$scope.riverName = res.data
-//							}
-//						})						
-//					}
-					
-					
-					
-					//数组去重
-					function removeDuplicates(arr) {					  
-					      var temp = {}, r = [];					  
-					     for (var i in arr)					 
-					          temp[arr[i]] = true;					  
-					      for (var k in temp)					 
-					         r.push(k);					 
-					     return r;					 
-					}					
+					//监听断面
+					$scope.getSectionChange = function(id){
+						//$scope.riverName = $scope.riverOption[$scope.section].riverName ;
+						$scope.sectionType = $scope.nameOption[id].name ;
+						$scope.riverName = $scope.riverOption[id].riverName ;
+						console.log('断面---',$scope.nameOption[id].name );
+						console.log('河流---',$scope.riverOption[id].riverName );
+					}	
 					
 					//取消
 					$scope.back = function () {

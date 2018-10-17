@@ -101,12 +101,14 @@
 					</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-inline">
-						<div class="form-item">
+					<form class="form-inline">						
+	                    <div class="input-group form-item" >
 	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">名称</font></font></label>
-	                        <input type="text" class="form-control input-short" ng-model="name">
+	        				<select ng-model="name" class="form-control select-short" style="width: 160px!important;">
+	                        	<option value="{{item}}" ng-repeat="item in dataList">{{item}}</option>	                        	
+	                        </select>
 	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
-	                    </div>
+		                </div>
 						<div class="input-group form-item" >
 	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">所在行政区</font></font></label>
 	        				<select ng-model="region" class="form-control select-short" style="width: auto;">
@@ -130,7 +132,7 @@
 	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 	                    </div>	                    
 						<div class="form-item">
-	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">不达标原因</font></font></label>
+	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">原因</font></font></label>
 	                        <input type="text"  class="form-control input-short" ng-model="reason">
 	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 	                    </div>

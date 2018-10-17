@@ -32,13 +32,13 @@
 						
 						$scope.num = '';//02市长办登录
 						
-//						$ajaxhttp.myhttp({
-//							url: apiPrefix + '/v1/SewageDisposeReport/userinfo',
-//							method: 'get',					
-//							callBack: function (res) {
-//								$scope.num = res.grade;
-//							}
-//						})
+						$ajaxhttp.myhttp({
+							url: apiPrefix + '/v1/SewageDispose/userinfo',
+							method: 'get',					
+							callBack: function (res) {
+								$scope.num = res.grade;
+							}
+						})
 						let month=new moment($scope.searchTime).format('M')<10 ? '0'+ new moment($scope.searchTime).format('M') : new moment($scope.searchTime).format('M');
 						$scope.date=new moment($scope.searchTime).format('YYYY') + '-' + month;
 
@@ -83,7 +83,8 @@
 	                }
 	                
 	                //修改 污水报告
-	                $scope.edit = function (id) {						
+	                $scope.edit = function (id) {
+	                	localStorage.setItem('id',id);
 						$ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/SewageDispose/detail',
 							method: 'get',

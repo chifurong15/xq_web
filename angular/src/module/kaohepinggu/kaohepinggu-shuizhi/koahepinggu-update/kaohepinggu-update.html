@@ -11,14 +11,15 @@
     			<form class="form-inline clearfix">
         			<div class="input-group form-item" >
                         <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">断面</font></font></label>
-        				<select ng-model="section.id" ng-options="s.id as s.name for s in nameOption" ng-change="getSectionChange(section.id)" class="form-control select-short" style="width: 160px;">
-						</select>					
-						
+						<select ng-model="section"  ng-change="getSectionChange()" class="form-control select-short" style="width: 160px;">
+							<option value="{{item.name}}" ng-repeat="item in nameOption">{{item.name}}</option>
+						</select>
                     </div>
                     <div class="input-group form-item" >
                         <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">河流</font></font></label>
-        				<select ng-model="riverName" ng-options="r.id as r.riverName for r in riverOption" ng-change="getRiverChange()" class="form-control select-short" style="width: 160px;">
-						</select>
+        				<select ng-model="riverName" ng-change="getRiverChange()" class="form-control select-short" style="width: 160px;">
+							<option value="{{item.riverName}}" ng-repeat="item in riverOption">{{item.riverName}}</option>
+						</select>						
                     </div>                    
     				<div class="input-group">
 	                    <button class="btn btn-primary" ng-click="search()">

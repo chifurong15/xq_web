@@ -32,14 +32,14 @@
 						
 						$scope.num = '';//02市长办登录
 						
-//						$ajaxhttp.myhttp({
-//							url: apiPrefix + '/v1/SurfaceWater/userinfo',
-//							method: 'get',					
-//							callBack: function (res) {
-//								$scope.num = res.grade;
-//								console.log(res)
-//							}
-//						})
+						$ajaxhttp.myhttp({
+							url: apiPrefix + '/v1/WaterQuality/userinfo',
+							method: 'get',					
+							callBack: function (res) {
+								$scope.num = res.grade;
+								console.log(res)
+							}
+						})
 
 						let month=new moment($scope.searchTime).format('M')<10 ? '0'+ new moment($scope.searchTime).format('M') : new moment($scope.searchTime).format('M');
 						$scope.date=new moment($scope.searchTime).format('YYYY') + '-' + month;
@@ -88,7 +88,7 @@
 	                
 	                // 编辑
 	                $scope.edit = function (id) {
-						
+						localStorage.setItem('id',id);					
 						$ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/WaterQuality/detail?id=' + id,
 							method: 'get',							

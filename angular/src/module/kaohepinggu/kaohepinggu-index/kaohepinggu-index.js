@@ -83,7 +83,8 @@
 	                }
 	                
 	                //修改 评分报告
-	                $scope.edit = function (id) {						
+	                $scope.edit = function (id) {
+	                	localStorage.setItem('id',id);
 						$ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/SurfaceWater/detail',
 							method: 'get',

@@ -55,10 +55,9 @@
 						
 					}
 					
-					var id = getQueryString('id') ? getQueryString('id') : $scope.newid ;
+					var id = localStorage.getItem('id');
 					//获取得分条目列表					
 					function getScoreList () {
-						//alert(getQueryString('id'));
 						$http({
 							url: apiPrefix + '/v1/SurfaceWaterGrade/list?parentid=' + id,
 							method: 'get'						
