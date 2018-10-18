@@ -21,7 +21,7 @@
 			"isLeaf":true,
 			"isRoot":false,
 			"name": "河长巡河",
-			"icon": "menu-icon-6",
+			"icon": "fa fa-wheelchair-alt",
 			"url": "src/module/fenxitongji/fenxitongji-index/fenxitongji-index.html",
 			"requireJS":["src/module/fenxitongji/fenxitongji-index/fenxitongji-index.js"],
 			"description": "分析统计-河长巡河"
@@ -32,7 +32,7 @@
 			"isLeaf":true,
 			"isRoot":false,
 			"name": "巡河情况",
-			"icon": "menu-icon-6",
+			"icon": "fa fa-wheelchair-alt",
 			"url": "src/module/fenxitongji/fenxitongji-detail/fenxitongji-detail.html",
 			"requireJS":["src/module/fenxitongji/fenxitongji-detail/fenxitongji-detail.js"],
 			"description": "分析统计-河长的巡河情况"
@@ -43,7 +43,7 @@
 			"isLeaf":true,
 			"isRoot":false,
 			"name": "问题统计",
-			"icon": "menu-icon-6",
+			"icon": "fa fa-signal",
 			"url": "src/module/fenxitongji/fenxitongji-question/fenxitongji-question.html",
 			"requireJS":["src/module/fenxitongji/fenxitongji-question/fenxitongji-question.js"],
 			"description": "分析统计-问题统计"
@@ -65,7 +65,7 @@
 			"isLeaf":true,
 			"isRoot":false,
 			"name": "信息发布",
-			"icon": "menu-icon-6",
+			"icon": "fa fa-tags",
 			"url": "src/module/bulletin/bulletin-list/bulletin-list.html",
 			"requireJS":["src/module/bulletin/bulletin-list/bulletin-list.js"],
 			"description": "信息发布-信息发布列表"
@@ -137,6 +137,90 @@
 			"description": "地表水质环境评分管理-首页"
 		},
 		{
+			"seqId": "3-0",
+			"parentId": "3",
+			"isLeaf":false,
+			"isRoot":false,
+			"name": "水质数据",
+			"icon": "",
+			"url": "",
+			"requireJS":[""],
+			"description": "水质数据"
+		},
+		{
+			"seqId": "3-2",
+			"parentId": "3-0",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "水质数据",
+			"icon": "fa fa-lemon-o",
+			"url": "src/module/kaohepinggu/kaohepinggu-shuizhi/kaohepinggu-shuizhi.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-shuizhi/kaohepinggu-shuizhi.js"],
+			"description": "水质数据"
+		},		
+		{
+			"seqId": "3-2-4",
+			"parentId": "3-0",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "自动水质管理",
+			"icon": "fa fa-sign-out",
+			"url": "src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-detail/kaohepinggu-detail.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-detail/kaohepinggu-detail.js"],
+			"description": "水质管理-导出"
+		},
+		{
+			"seqId": "3-3",
+			"parentId": "3",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "污水处理厂",
+			"icon": "fa fa-trash-o",
+			"url": "src/module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-wushui.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-wushui.js"],
+			"description": "污水处理厂"
+		},				
+		{
+			"seqId": "4",
+			"parentId": "0",
+			"isLeaf":false,
+			"isRoot":true,
+			"name": "移动平台",
+			"icon": "fa fa-tablet",
+			"url": "src/module/yidongpingtai/yidongpingtai-index/yidongpingtai-index.html",
+			"requireJS":["src/module/yidongpingtai/yidongpingtai-index/yidongpingtai-index.js"],
+			"description": "移动平台"
+		},
+		{
+			"seqId": "4-1",
+			"parentId": "4",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "移动平台",
+			"icon": "fa fa-mobile",
+			"url": "src/module/yidongpingtai/yidongpingtai-index/yidongpingtai-index.html",
+			"requireJS":["src/module/yidongpingtai/yidongpingtai-index/yidongpingtai-index.js"],
+			"description": "移动平台-首页"
+		}
+	],
+	"components": [
+		{
+			"seqId": "1",
+			"name": "report",
+			"url": "componentXXX1.html",
+			"requireJS":["js/components/componentsXXX1.js", "js/components/componentXXX2.js"],
+			"description": "demo组件示例，URL为相对路径"
+		}
+	],
+	"pages":[
+		{
+			"seqId": "501",
+			"name": "单页面",
+			"url": "",
+			"requireJS":[""],
+			"description": "单页面"
+		},
+		{
 			"seqId": "3-1-2",
 			"parentId": "3",
 			"isLeaf":true,
@@ -157,17 +241,6 @@
 			"url": "src/module/kaohepinggu/kaohepinggu-index/kaohepinggu-detail/kaohepinggu-detail.html",
 			"requireJS":["src/module/kaohepinggu/kaohepinggu-index/kaohepinggu-detail/kaohepinggu-detail.js"],
 			"description": "地表水质环境评分管理-详情"
-		},
-		{
-			"seqId": "3-2",
-			"parentId": "3",
-			"isLeaf":true,
-			"isRoot":false,
-			"name": "水质数据",
-			"icon": "fa fa-lemon-o",
-			"url": "src/module/kaohepinggu/kaohepinggu-shuizhi/kaohepinggu-shuizhi.html",
-			"requireJS":["src/module/kaohepinggu/kaohepinggu-shuizhi/kaohepinggu-shuizhi.js"],
-			"description": "水质数据"
 		},
 		{
 			"seqId": "3-2-2",
@@ -192,28 +265,6 @@
 			"description": "水质管理-修改"
 		},
 		{
-			"seqId": "3-2-4",
-			"parentId": "3",
-			"isLeaf":true,
-			"isRoot":false,
-			"name": "自动水质管理",
-			"icon": "fa fa-lemon-o",
-			"url": "src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-detail/kaohepinggu-detail.html",
-			"requireJS":["src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-detail/kaohepinggu-detail.js"],
-			"description": "水质管理-导出"
-		},
-		{
-			"seqId": "3-3",
-			"parentId": "3",
-			"isLeaf":true,
-			"isRoot":false,
-			"name": "污水处理厂",
-			"icon": "fa fa-database",
-			"url": "src/module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-wushui.html",
-			"requireJS":["src/module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-wushui.js"],
-			"description": "污水处理厂"
-		},
-		{
 			"seqId": "3-3-2",
 			"parentId": "3",
 			"isLeaf":true,
@@ -222,7 +273,7 @@
 			"icon": "fa fa-database",
 			"url": "src/module/kaohepinggu/kaohepinggu-wushui/koahepinggu-add/kaohepinggu-add.html",
 			"requireJS":["src/module/kaohepinggu/kaohepinggu-wushui/koahepinggu-add/kaohepinggu-add.js"],
-			"description": "地表水质环境评分管理-新增"
+			"description": "污水处理厂-新增"
 		},
 		{
 			"seqId": "3-3-3",
@@ -234,46 +285,6 @@
 			"url": "src/module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-detail/kaohepinggu-detail.html",
 			"requireJS":["src/module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-detail/kaohepinggu-detail.js"],
 			"description": "污水处理厂-详情"
-		},		
-		{
-			"seqId": "4",
-			"parentId": "0",
-			"isLeaf":false,
-			"isRoot":true,
-			"name": "移动平台",
-			"icon": "fa fa-tablet",
-			"url": "src/module/yidongpingtai/yidongpingtai-index/yidongpingtai-index.html",
-			"requireJS":["src/module/yidongpingtai/yidongpingtai-index/yidongpingtai-index.js"],
-			"description": "移动平台"
-		},
-		{
-			"seqId": "4-1",
-			"parentId": "4",
-			"isLeaf":true,
-			"isRoot":false,
-			"name": "移动平台",
-			"icon": "menu-icon-6",
-			"url": "src/module/yidongpingtai/yidongpingtai-index/yidongpingtai-index.html",
-			"requireJS":["src/module/yidongpingtai/yidongpingtai-index/yidongpingtai-index.js"],
-			"description": "移动平台-首页"
-		}
-	],
-	"components": [
-		{
-			"seqId": "1",
-			"name": "report",
-			"url": "componentXXX1.html",
-			"requireJS":["js/components/componentsXXX1.js", "js/components/componentXXX2.js"],
-			"description": "demo组件示例，URL为相对路径"
-		}
-	],
-	"pages":[
-		{
-			"seqId": "501",
-			"name": "单页面",
-			"url": "",
-			"requireJS":[""],
-			"description": "单页面"
 		}
 	]
 }

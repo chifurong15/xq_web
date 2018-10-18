@@ -57,7 +57,6 @@
 							},
 							callBack: function (res) {
 								$scope.waterQualityList = res.data.list;
-								console.log('水zhi列表',$scope.waterQualityList)
                     			$scope.paginationConf.totalItems = res.data.total;
 							}
 						})
@@ -83,7 +82,7 @@
 						globalParam.setter({
 							bulletin: {}
 						})
-						routeService.route('3-2-2', true);
+						routeService.route('3-2-2', false);
 	                }
 	                
 	                // 编辑
@@ -98,7 +97,7 @@
 								})
 							}
 						})
-						routeService.route('3-2-2', true);
+						routeService.route('3-2-2', false);
 	                }
 	                
 	                 // 查看
@@ -108,7 +107,7 @@
 								id: id
 							}
 						})
-						routeService.route('3-2-3', true);
+						routeService.route('3-2-3', false);
 	                }
 	                
 	                 // 上报
@@ -142,7 +141,7 @@
 								})
 							}
 						})						
-						routeService.route('3-2-2', true);
+						routeService.route('3-2-2', false);
 	                }
 					
 					// 退回

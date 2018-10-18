@@ -341,18 +341,20 @@ body {
     padding: 0;
 }
 
-.aside-main li {
+.aside-main .nav > li {
     float: left;
     width: 172px;
-    height: 60px;
+
     border-bottom: 1px solid #fff;
 }
 
-.aside-main li:hover, .aside-main li a.active {
+.aside-main .nav > li :hover, .aside-main .nav > li a.active {
     background-color: #006edd;
 }
-
-.aside-main li a {
+.aside-main .nav-sub > li :hover, .aside-main .nav-sub > li a.active {
+    background-color: #57a0ea;
+}
+.aside-main .nav > li a {
 	display: flex;
 	justify-content: space-around;
     float: left;
@@ -361,7 +363,7 @@ body {
     padding: 10px 0;
 }
 
-.aside-main li i {
+.aside-main .nav > li i {
     float: left;
     width: 56px;
     height: 40px;
@@ -371,7 +373,7 @@ body {
     line-height: 40px;
 }
 
-.aside-main li label, .aside-main li span {
+.aside-main .nav > li label, .aside-main .nav > li span {
     float: left;
     color: #fff;
     font-size: 12px;
@@ -379,11 +381,31 @@ body {
     text-align: left;
     line-height: 40px;
 }
-
+.aside-main  li .auto span {
+	position: relative;
+	left: -56px;
+}
+.aside-main  li .auto .pull-right{
+	left: -6px;
+}
 .aside-main li.active {
     background-color: #006edd;
 }
-
+.aside-main .nav-sub li.active {
+    background-color: #57a0ea;
+}
+.aside-main .nav .nav-sub{
+	width: 100%;
+}
+.aside-main .nav .nav-sub li:nth-of-type(1){
+	border-top: 1px solid #fff;
+}
+.aside-main .nav .nav-sub li:nth-last-of-type(1){
+	border: 0;
+}
+.aside-main .nav .nav-sub li span{
+	text-align: center;
+}
 /* 导航菜单图标 */
 .menu-icon-1 {
     background: url("../img/navbar.png") 0 0 no-repeat;

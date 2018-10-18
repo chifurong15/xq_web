@@ -79,7 +79,7 @@
 						globalParam.setter({
 							bulletin: {}
 						})
-						routeService.route('3-3-2', true);
+						routeService.route('3-3-2', false);
 	                }
 	                
 	                //修改 污水报告
@@ -97,7 +97,7 @@
 								})
 							}
 						})						
-						routeService.route('3-3-2', true);
+						routeService.route('3-3-2', false);
 	                }
 	                
 	                 // 查看
@@ -105,7 +105,7 @@
 	                	localStorage.setItem('id',id);
 	                	localStorage.setItem('title',title);
 	                	localStorage.setItem('issue',issue);						
-						routeService.route('3-3-3', true);
+						routeService.route('3-3-3', false);
 	                }
 	                
 	                 // 上报

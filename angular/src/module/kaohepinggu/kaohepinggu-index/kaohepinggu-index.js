@@ -79,7 +79,7 @@
 						globalParam.setter({
 							bulletin: {}
 						})
-						routeService.route('3-1-2', true);
+						routeService.route('3-1-2', false);
 	                }
 	                
 	                //修改 评分报告
@@ -97,7 +97,7 @@
 								})
 							}
 						})						
-						routeService.route('3-1-2', true);
+						routeService.route('3-1-2', false);
 	                }
 	                
 	                 // 查看
@@ -107,7 +107,7 @@
 								id: id
 							}
 						})
-						routeService.route('3-1-3', true);
+						routeService.route('3-1-3', false);
 	                }
 	                
 	                 // 上报
