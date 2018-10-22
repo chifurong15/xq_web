@@ -1,0 +1,104 @@
+<div class="kaohepingfen" ng-controller="scoreListCtrl" ng-init="init()">
+    <div class="wrapper-md ">
+    	<div class="panel panel-default m-n">
+        	<div class="panel-body" style="position: relative;">
+        		<span class="tag">考核评分类型管理</span><span class="tag-right"></span>
+        		<div style="overflow: hidden;"><button type="button" class="btn btn-primary" ng-click="goBack()" style="position: absolute;right: 20px;bottom: 20px;">返回</button></div>
+        	</div>
+        </div>
+    	<div class="panel panel-default">
+        	<div class="panel-body">        		
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                	<tr class='tHeader'>
+	                                    <th width="20%">评分类型</th>
+	                                    <th width="20%">权重</th>
+	                                    <th width="10%">总分</th>
+	                                    <th width="10%">排序</th>
+	                                    <th width="20%">操作</th>
+	                                </tr>
+	                                <tr ng-repeat="item in scoreList">
+	                                    <td>{{item.gradetype}}</td>
+	                                    <td>{{item.weight}}</td>
+	                                    <td>{{item.totalpoints}}</td>	                                    
+	                                    <td>{{item.sort}}</td>
+	                                    <td style="text-align: left;">
+	                                    	<button type="button" class="btn btn-success" ng-click="showModal(1,item.gradetype)">增加子项目</button>
+	                                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,item)">修改</button>	                                    	
+	                                    	<button type="button" class="btn btn-danger" ng-click="del()" >删除</button>	                                    	
+	                                    </td>
+	                                </tr>
+	                                
+	                                <tr ng-repeat="item in scoreList[0].children" ng-if="scoreList[0].children">
+	                                    <td>{{item.gradetype}}</td>
+	                                    <td>{{item.weight}}</td>
+	                                    <td>{{item.totalpoints}}</td>	                                    
+	                                    <td>{{item.sort}}</td>
+	                                    <td style="text-align: left;">
+	                                    	<button type="button" class="btn btn-success" ng-click="showModal(1,item.gradetype)">增加子项目</button>
+	                                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,item)">修改</button>	                                    	
+	                                    	<button type="button" class="btn btn-danger" ng-click="delete()" >删除</button>	                                    	
+	                                    </td>
+	                                </tr>
+                                	
+                            	</tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="chartStatistics">
+                        <div id="patrolChart" class="tj-chart-con"></div>
+                    </div>
+                </div>
+        	
+        	</div>
+        </div>
+    	
+    </div>
+</div>
+
+<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width: 450px;position: absolute;left: 50%;margin-left: -230px">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						{{type == 1 ? "修改" : "新增"}}考核评分类型
+					</h4>
+				</div>
+				<div class="modal-body" style="text-align: center;">
+					<form class="form-inline">						
+						<div class="form-item">
+	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">评分类型</font></font></label>
+	                        <input type="text"  class="form-control input-short" ng-model="gradetype">
+	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+	                    </div>
+	                    <div class="form-item">
+	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">权重</font></font></label>
+	                        <input name="number" min="0" max="100"  step="1" class="form-control input-short" ng-model="weight">
+	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+	                    </div>
+	                    <div class="form-item">
+	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">总分</font></font></label>
+	                        <input name="number" min="0" max="100"  step="1" class="form-control input-short" ng-model="totalpoints">
+	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+	                    </div>
+	                    <div class="form-item">
+	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">排序</font></font></label>
+	                        <input name="number" min="0" max="100"  step="1" class="form-control input-short" ng-model="sort">
+	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+	                    </div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" ng-click="submit()">保存</button>
+		            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
