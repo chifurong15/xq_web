@@ -274,7 +274,6 @@ body {
 .form-item {
     position: relative;
     display: inline-block;
-    min-width: 290px;
     margin: 5px 0;
     padding-right: 15px;
     vertical-align: middle;
@@ -1554,6 +1553,9 @@ body {
 .form-item .near{
 	width: 60px;
 }
+.anchaanfang .form-item .near{
+	width: 76px;
+}
 .form-inline .fr{
 	float: right;
 	margin: 5px 0;
@@ -1805,11 +1807,37 @@ body .c-ffffff a{
 .kaohepingfen-add .modal-dialog{
 	width: 500px;
 }
-.kaohepingfen-add .modal-dialog .form-inline .input-group > .form-control{
+/*.kaohepingfen-add .modal-dialog .form-inline .input-group > .form-control{
 	width: 58% !important;
-}
+}*/
 
+.kaohepingfen-add .modal-body .input-group{
+	width: 281px;
+}
+.kaohepingfen-add .modal-body .input-group .select-short{
+	width: 160px !important;
+}
 .kaohepingfen-add .form-radio{
 	width: 100%;
 }
 
+.anchaanfang .js-tab {
+	width: 100%;
+	overflow: hidden;
+	border-bottom:1px solid #ccc ;
+}
+.anchaanfang .js-tab > li{
+	float: left;
+	padding: 5px 35px;
+}
+.anchaanfang .tab-active {
+	color: cornflowerblue;
+	border-bottom:2px solid cornflowerblue ;
+}
+.anchaanfang .tab-show{
+	display: none;
+}
+
+.anchaanfang .form-item .checkbox label {
+	width: auto !important;
+}
