@@ -1841,3 +1841,37 @@ body .c-ffffff a{
 .anchaanfang .form-item .checkbox label {
 	width: auto !important;
 }
+.anchaanfang .scoreTitle{
+	overflow: hidden;	
+	width: 100%;	
+	border: 1px solid #ccc;
+	background: #f0f0f0;
+}
+.anchaanfang .scoreTitle > li {
+	padding: 6px 0;
+	color: #333;
+	float: left;
+	border-left: 1px solid #ccc;
+	text-indent: 10px;
+}
+
+.anchaanfang .scoreOne > li{
+	width: 100%;
+	position: relative;	
+    overflow: hidden;
+
+}
+.anchaanfang .scoreOne > li > span , .anchaanfang .scoreTwo > li > span ,.anchaanfang .scoreThree > li > span{
+	display: inline-block;
+	width: 20%;
+	float: left;
+	padding: 12px 0;
+	height: 40px;
+    border: 1px solid #ccc;
+    border-top: 0;
+    border-right: 0;
+	text-indent: 10px;    
+}
+.anchaanfang .fa-sort-desc{
+	margin: 0 5px;
+}
