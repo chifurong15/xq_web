@@ -1,0 +1,24 @@
+<div class="bulletin" ng-controller="bulletinViewCtrl" ng-init="init()">
+    <div class="wrapper-md ">
+    	<div class="panel panel-default m-n">
+        	<div class="panel-body">通报管理&nbsp;>>&nbsp;详情</div>
+        </div>
+        <div class="bulletin-view-info text-right">
+        	<span>月份:{{bulletin.month}}</span>
+        	<span>上传人:{{bulletin.issuer}}</span>
+        	<span>上传时间:{{bulletin.createTime}}</span>
+        </div>
+    	<div class="panel panel-default">
+        	<div class="panel-body">
+                <div class="tab-content">
+                	<h1 class="bulletin-view-title">{{bulletin.title}}</h1>
+                	<div class="bulletin-view-content" ng-bind-html="bulletin.detail"></div>
+        			<!--<p ng-if="!!bulletin.attandUrl">附件:<a ng-href="/bulletin/v1/bulletin/download?attandUrl={{bulletin.attandUrl}}"  target="_blank">{{attandName}}</a></p>-->
+        			<p ng-if="!!bulletin.attandUrl">附件:<a ng-click='download()'>{{attandName}}</a></p>
+               </div>
+        	</div>
+        </div>
+    	<div style="overflow: hidden;"><button type="button" class="btn btn-default" ng-click="goBack()" style="position: absolute;right: 20px;">返回</button></div>
+        
+    </div>
+</div>

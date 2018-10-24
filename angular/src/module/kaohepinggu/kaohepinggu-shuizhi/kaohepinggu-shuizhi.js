@@ -21,6 +21,7 @@
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
+
 					var apiPrefix = moduleService.getServiceUrl() + '/template';
 					$scope.userInfo = $localStorage.userLoginInfo.userInfo;
 					

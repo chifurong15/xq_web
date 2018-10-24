@@ -1,0 +1,84 @@
+<div ng-controller="lakesDetailCtrl">
+	<div class="bg-light lter b-b wrapper-md">
+		<h1 class="m-n font-thin h3">湖泊详情</h1>
+	</div>
+	<div class="wrapper-md">
+		<div class="panel panel-default m-all-0">
+			<div class="panel-body">
+				<div class="panel-content proMgr-container-box">
+					<div class="left-panel wid-60">
+						<form id="lakesAddForm" class="form-inline" method="get" novalidate="novalidate">
+							<div class="form-item">
+								<label>湖泊名称</label>
+								<input type="text" class="form-control input-short" ng-model="lakesName" readonly="readonly"/>
+							</div>
+							<div class="form-item">
+		                        <label>所属区域</label>
+								<input type="text" class="form-control input-short" ng-model="regionName" readonly="readonly"/>
+		                    </div>
+							<div class="form-item">
+								<label>所属水系</label>
+								<input type="text" class="form-control input-short" ng-model="waterName" readonly="readonly"/>
+							</div>
+		                    <br/>
+							<div class="form-item">
+								<label>湖泊类型</label>
+								<input type="text" class="form-control input-short" ng-model="lake_type" readonly="readonly"/>
+							</div>
+							<div class="form-item">
+								<label>湖泊面积</label>
+								<input type="text" class="form-control input-short" ng-model="acreage" readonly="readonly"/>
+	                            <span>km</span><span class="required">*</span>
+							</div>
+							<div class="form-item">
+								<label>湖泊岸别</label>
+								<input type="text" class="form-control input-short" ng-model="shore_type" readonly="readonly"/>
+							</div
+							<br/>
+							<div class="form-item">
+	                            <label>经度</label>
+	                            <input type="text" class="form-control input-short" ng-model="longitude" readonly="readonly"/>
+	                        </div>
+	                        <div class="form-item">
+	                            <label>纬度</label>
+	                            <input type="text" class="form-control input-short" ng-model="latitude" readonly="readonly"/>
+	                        </div>
+	                        <div class="form-item">
+	                            <label>湖泊编码</label>
+	                            <input type="text" class="form-control input-short" ng-model="lakesCode" readonly="readonly"/>
+	                        </div>
+							<br/>
+
+							<br/>
+                            <div class="form-item">
+                                <label>概述</label>
+                            </div>
+                            <div id="editor" readonly="readonly">
+                            </div>
+							<br/>
+							<div class="form-item">
+								<label>备注</label>
+								<textarea class="form-control textarea-long" ng-model="remark" rows="4" readonly="readonly"></textarea>
+							</div>
+						</form>
+					</div>
+					<!-- map -->
+					<div class="right-panel wid-35">
+						<div class="proMgr-basin_map"></div>
+					</div>
+				</div>
+			</div>
+			<div class="panel-footer m-b-10">
+				<div class="btn-box">
+					<button type="submit" class="btn btn-default" ng-click="back()">
+						<i class="fa fa-reply"></i>返回
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+    var ue =  CKEDITOR.replace( 'editor' );
+
+</script>

@@ -1,0 +1,74 @@
+<div ng-controller="usageControll" ng-init="init()">
+    <div class="tab-content wrapper">
+        <div class="panel panel-default m-n">
+            <div class="panel-body">
+                <form class="form-inline" method="get">
+                    <!-- <div class="form-item">
+                        <label>行政区域</label>
+                        <input type="text" class="form-control input-short-o" ng-model="regionName"/>
+                        <span class="input-group-addon" data-toggle="modal" data-target="#myModal"><i class="fa fa-search"></i></span>
+                        <button type="submit" class="btn btn-primary" ng-click="search()"><i class="fa fa-search"></i>搜索
+                    	</button>
+                    </div> -->
+			        <ul class="nav nav-tabs chart-tab" role="tablist">
+			            <li class="active">
+			                <a href="#tableStatistics" onclick="return false;" data-toggle="tab">表格</a>
+			            </li>
+			            <li>
+			                <a href="#chartStatistics" onclick="return false;" data-toggle="tab">图表</a>
+			            </li>
+			        </ul>
+                </form>
+            </div>
+        </div>
+        <div class="tab-pane active" id="tableStatistics">
+        	<div class="panel panel-default panel-m" style="border-top: none;">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <tr>
+                                <th>序号</th>
+                                <th>区级名称</th>
+                                <th>区级河长人数</th>
+                                <th>镇级河长人数</th>
+                                <th>村级河长人数</th>
+                                <th>APP使用率</th>
+                            </tr>
+                            <tr ng-repeat="(ind,module) in tableList">
+                                <td>{{ind + 1}}</td>
+                                <td>{{module.regionName}}</td>
+                                <td>{{module.countryManNum}}</td>
+                                <td>{{module.townManNum}}</td>
+                                <td>{{module.villageManNum}}</td>
+                                <td>{{fixedCount(module.countryUseRate)}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- <tm-pagination conf="paginationConf"></tm-pagination> -->
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="chartStatistics">
+            <div class="panel panel-default m-n" style="border-top: none;">
+                <div class="panel-body">
+                	<div id="echartBox"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h4 class="modal-title" id="myModalLabel">请选择</h4>
+	            </div>
+	            <div class="modal-body"><ul id="regionTreeContainer" class="ztree"></ul></div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	                <button type="button" class="btn btn-primary">确认选择</button>
+	            </div>
+	        </div><!-- /.modal-content -->
+	    </div><!-- /.modal -->
+	</div>
+</div>

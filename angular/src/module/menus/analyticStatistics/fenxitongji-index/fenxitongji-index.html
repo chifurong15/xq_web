@@ -1,0 +1,121 @@
+<div class="fenxintongji" ng-controller="fenxintongjiIndexCtrl" ng-init="init()">
+    <div class="wrapper">
+        <div class="panel panel-default m-n">
+            <div class="panel-body">
+                <form class="form-inline" method="get">
+                    <!--<div class="form-item">
+                        <label>行政区域</label>
+                        <input type="text" class="form-control input-short-o" ng-model="regionName" readonly="">
+                        <span class="input-group-addon" ng-click="regionTree();"><i class="fa fa-search"></i></span>
+                    </div>-->
+                    <div class="form-item">
+                        <label>开始时间</label>
+                        <div class="input-group date date_picker" id="startTime">
+                            <input type="text" class="form-control input-short-o" ng-model="startTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>结束时间</label>
+                        <div class="input-group date date_picker" id="endTime">
+                            <input type="text" class="form-control input-short-o" ng-model="endTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>                    
+                    <button type="submit" class="btn btn-primary" ng-click="search()"><i class="fa fa-search"></i>搜索</button>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default panel-m" style="border-top: none;">
+            <div class="panel-body">
+                <div class="form-radio">
+                    <label class="radio-inline i-checks" ng-repeat="type in typeList">
+                        <input type="radio" name="type" ng-model="isSelected" ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>
+                        {{type.typeName}}
+                    </label>
+                </div>
+                <ul class="nav nav-tabs chart-tab" role="tablist">
+                    <li class="active">
+                        <a href="#tableStatistics" onclick="return false;" data-toggle="tab">表格</a>
+                    </li>
+                    <li>
+                        <a href="#chartStatistics" onclick="return false;" data-toggle="tab">图表</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                	<tr class='tHeader'>
+	                                    <th>序号</th>
+	                                    <th>行政区域</th>
+	                                    <th ng-if="regionGrade < 3">区级河长巡河次数</th>
+	                                    <th ng-if="regionGrade < 3">区级达标率(%)</th>
+	                                    <th ng-if="regionGrade < 4">镇级河长巡河次数</th>
+	                                    <th ng-if="regionGrade < 4">镇级达标率(%)</th>
+	                                    <th ng-if="regionGrade < 5">村级河长巡河次数</th>
+	                                    <th ng-if="regionGrade < 5">村级达标率(%)</th>
+	                                </tr>
+	                                <tr ng-repeat="lst in dataList" ng-init="index = $index+1">
+	                                    <td>{{index}}</td>
+	                                    <td>{{lst.regionName}}</td>
+	                                    <td ng-if="regionGrade < 3">
+	                                    	<a ng-click="view(lst.regionId, 3)">{{lst.countyHasPatrolNum}}</a>
+	                                    </td>
+	                                    <td ng-if="regionGrade < 3" ng-switch="lst.countyPatrolRate">
+	                                    	<a ng-click="view(lst.regionId, 3)" ng-switch-when="0">0</a>
+	                                    	<a ng-click="view(lst.regionId, 3)" ng-switch-default>{{lst.countyPatrolRate}}%</a>
+	                                    </td>
+	                                    <td ng-if="regionGrade < 4">
+	                                    	<a ng-click="view(lst.regionId, 4)">{{lst.townHasPatrolNum}}</a>
+	                                    </td>
+	                                    <td ng-if="regionGrade < 4" ng-switch="lst.townPatrolRate">
+	                                    	<a ng-click="view(lst.regionId, 4)" ng-switch-when="0">0</a>
+	                                    	<a ng-click="view(lst.regionId, 4)" ng-switch-default>{{lst.townPatrolRate}}%</a>
+	                                    </td>
+	                                    <td ng-if="regionGrade < 5">
+	                                    	<a ng-click="view(lst.regionId, 5)">{{lst.villageHasPatrolNum}}</a>
+	                                    </td>
+	                                    <td ng-if="regionGrade < 5" ng-switch="lst.villagePatrolRate">
+	                                    	<a ng-click="view(lst.regionId, 5)" ng-switch-when="0">0</a>	                                    	
+	                                    	<a ng-click="view(lst.regionId, 5)" ng-switch-default>{{lst.villagePatrolRate}}%</a>
+	                                    </td>
+	                                </tr>
+	                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="chartStatistics">
+                        <div id="chart3" class="tj-chart-con" ></div>                        
+                        <div style="overflow: hidden;width: 100%;">
+                        	<div id="chart2" class="tj-chart-con" style="float: left;width: 50%!important;"></div>
+                        	<div id="chart1" class="tj-chart-con" style="float: left;width: 50%!important;"></div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    	<div style="overflow: hidden;"><button type="button" class="btn btn-default" ng-click="goBack()" style="position: absolute;right: 15px;">返回</button></div>
+
+    </div>
+	<!-- 行政区域树模态框 -->
+	<div class="modal fade" id="regionTree" tabindex="-1">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+	                <h4 class="modal-title">行政区域选择</h4>
+	            </div>	                                	
+	            <div class="modal-body" style="max-height: 400px; overflow: auto">
+	                <ul id="regionTreeContainer" class="ztree"></ul>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-primary" ng-click="getRegion(regionId)">确定</button>
+	                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</div>

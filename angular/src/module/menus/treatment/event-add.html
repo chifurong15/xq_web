@@ -1,0 +1,183 @@
+<div ng-controller="eventAdd" ng-init="init()">
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3">新建问题</h1>
+    </div>
+    <div class="wrapper-md">
+        <div class="panel panel-default m-all-0" id="wrapperMd">
+            <div class="panel-body">
+                <div class="search-form" style="padding-right: 340px;position: relative;">
+                    <form class="form-inline" method="get">
+                        <div class="form-item">
+                            <label>事发地区</label>
+                            <input type="text" class="form-control input-short-o" ng-model="eventRegion"/>
+                            <a data-toggle="modal" data-target="#myModal" class="input-group-addon"><i
+                                    class="fa fa-search"></i></a>
+                            <span class="required">*</span>
+                        </div>
+                    </form>
+                    <form class="form-inline" method="get">
+                        <div class="form-item">
+                            <label>问题内容</label>
+                            <textarea class="form-control textarea-long" rows="4"
+                                      ng-model="eventDescription"></textarea>
+                        </div>
+                    </form>
+                    <form class="form-inline" method="get">
+                        <div class="form-item">
+                            <label>事发地</label>
+                            <input type="text" class="form-control input-long" ng-model="eventLocation"/>
+                            <span class="required">*</span>
+                        </div>
+                    </form>
+                    <form class="form-inline" method="get">
+                        <div class="form-item">
+                            <label>事发河道</label>
+                            <input type="text" class="form-control input-short-o" ng-model="reachName"/>
+                            <a data-toggle="modal" data-target="#reachName" ng-click="getReachData()" class="input-group-addon"><i
+                                    class="fa fa-search"></i></a>
+                            <span class="required">*</span>
+                        </div>
+                    </form>
+                    <form class="form-inline" method="get">
+                        <div class="form-item">
+                            <label>问题类型</label>
+                            <input type="text" class="form-control input-short-o" ng-model="eventTypeName"/>
+                            <a data-toggle="modal" data-target="#eventTypeModal" class="input-group-addon"><i
+                                    class="fa fa-search"></i></a>
+                            <span class="required">*</span>
+                        </div>
+                        <div class="form-item">
+                            <label>问题等级</label>
+                            <select class="form-control select-short" ng-change="selectChange();" ng-model="eventLevel">
+                                <option value="0">一般</option>
+                                <option value="1">紧急</option>
+                                <option value="2">特急</option>
+                            </select>
+                            <span class="required">*</span>
+                        </div>
+                        <div class="form-item">
+                            <label>问题来源</label>
+                            <select class="form-control select-short" ng-change="selectChange();"
+                                    ng-model="eventResource">
+                                <option value="A">河长APP</option>
+                                <option value="B">电话上报</option>
+                                <option value="C">公众APP</option>
+                                <option value="D">微信</option>
+                                <option value="F">曝光台</option>
+                                <option value="G">钉钉平台</option>
+                            </select>
+                            <span class="required">*</span>
+                        </div>
+                        <div class="form-item">
+                            <label>事发时间</label>
+                            <div class='input-group date date_picker' datetimepicker  id='datetimepicker1'>  
+                                <input type='text' class="form-control input-short-o"  ng-model="dateOne" />  
+                                <span class="input-group-addon" style="margin:0">  
+                                    <span class="glyphicon glyphicon-calendar" style="margin: 0;line-height: 34px;"></span>  
+                                </span>
+                            </div>
+                            <span class="required">*</span>
+                        </div>
+                        <div class="form-item">
+                            <label>是否保密</label>
+                            <div class="radio"><input type="radio" name="iCheck" ng-click="isPrivaryClick(1)"> <span>是</span></div>
+                            <div class="radio"><input type="radio" name="iCheck" ng-click="isPrivaryClick(0)" checked> <span>否</span></div>
+                        </div>
+                        <div class="form-item">
+                            <label>上报电话</label>
+                            <input type="number" class="form-control input-short" ng-model="reportTel" value=""/>
+                            <span class="required">*</span>
+                        </div>
+                        <div class="form-item">
+                            <label>联系方式</label>
+                            <input type="number" class="form-control input-short" ng-model="contactType" value=""/>
+                        </div>
+                        <div class="form-item">
+                            <label>联系地址</label>
+                            <input type="text" class="form-control input-short" ng-model="contactAddress" value=""/>
+                        </div>
+                    </form>
+                    <div class="form-item">
+                        <label style="width: auto">说明:上报电话请填写手机号码或者座机号码，联系方式无限制</label>
+                    </div>
+                    <div class="basin_map proMgr-basin_map" id="mapContainer" style="position: absolute;top: 15px;right: 30px;width: 320px;height: 240px;
+                    border: 1px solid #cfdadd;
+                    background: #eee;
+                    z-index: 0;">
+                        <div class="proMgr-map-tool">
+                            <ul class="drawTool">
+                                <li ng-click="doDraw();">
+                                    <a id="doDraw" href="javascript:void(0);" title="画面"><i class="fa fa-pencil"></i></a>
+                                </li>
+                                <li ng-click="clearDraw();">
+                                    <a id="clearDraw" href="javascript:void(0);" title="清除"><i class="fa fa-ban"></i></a>
+                                </li>
+                                <li ng-click="mapExpand();">
+                                    <a id="mapExpand"  href="javascript:void(0);" title="缩放"><i class="fa" ng-class="{true : 'fa-expand',false : 'fa-compress' }[switchMapIcon]"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+
+            <div class="panel-body">
+                <div class="btn-box">
+                    <button type="submit" class="btn btn-primary" ng-click="submit()"><i class="fa fa-plus"></i>确定</button>
+                    <button type="submit" class="btn btn-default" ng-click="back()"><i class="fa fa-ban"></i>取消</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">选择区域</h4>
+                    </div>
+                    <div class="modal-body">
+                        <my-tree></my-tree>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="eventTypeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">选择问题类型</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul id="typeTree" class="ztree"></ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="reachName" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">选择河道</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul id="reachNameTree" class="ztree"></ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

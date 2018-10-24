@@ -21,8 +21,10 @@
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
+
 					var apiPrefix = moduleService.getServiceUrl() + '/template';
 					$scope.userInfo = $localStorage.userLoginInfo.userInfo;					
+
 					$scope.init = function () {
 						$ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/SewageDispose/userinfo1',

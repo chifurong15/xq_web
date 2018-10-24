@@ -1,0 +1,70 @@
+<div ng-controller="policyDocAdd" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body">
+                <form method="get">
+                    <div class="form-inline">
+                        <div class="form-item">
+                            <label>文档名称</label>
+                            <input type="text" class="form-control input-short" ng-model="doc.name"/>
+                            <span class="required">*</span>
+                        </div>
+                        <div class="form-item">
+                            <label>文档类别</label>
+                            <select class="form-control select-short" ng-change="selectChange();" ng-model="doc.type">
+                                <option>政策文件</option>
+                            </select>
+                            <span class="required">*</span>
+                        </div>
+                        <div class="form-item">
+                            <label>行政区域</label>
+                            <input type="text" class="form-control input-short-o" ng-model="doc.region"/>
+                            <a href="javascript:void(0);" ng-click="regionTree()" class="input-group-addon">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="form-inline">
+                        <div class="form-item">
+                            <label>关键字</label>
+                            <input type="text" class="form-control input-long" ng-model="doc.keyword"/>
+                            <span class="required">*</span>
+                        </div>
+                        <div class="form-item">
+                            <label>是否公开</label>
+                            <input type="radio" name="iCheck" checked>
+                            <span>是</span>
+                            <input type="radio" name="iCheck">
+                            <span>否</span>
+                        </div>
+                    </div>
+                    <div class="form-inline">
+                        <div class="form-item">
+                            <label>简介</label>
+                            <textarea class="form-control textarea-long" rows="4" ng-model="doc.remark"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label style="width: auto">说明:关键字以"，"分割，关键字、简介不填默认为河道、文档名称</label>
+                    </div>
+                </form>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="btn-box">
+                    <button type="submit" class="btn btn-primary" ng-click="add()">
+                        <i class="fa fa-check"></i>新增
+                    </button>
+                    <button type="submit" class="btn btn-success" ng-click="filupload()">
+                        <i class="fa fa-link"></i>更换附件
+                    </button>
+                    <button type="submit" class="btn btn-default" ng-click="back()">
+                        <i class="fa fa-reply"></i>返回
+                    </button>
+                </div>
+            </div>
+            <div id="pdf1"></div>
+        </div>
+    </div>
+</div>
+<!-- PDFObject -->
+<script src="vendor/PDFObject/pdfobject.js"></script>
+<script>PDFObject.embed("/AngularJS.pdf", "#pdf1");</script>

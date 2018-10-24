@@ -15,7 +15,7 @@ angular.module('app')
         this.reachexisthz = true;// 该河道存在河长
         this.getData = null;
         //var serviceURL = $localStorage.wfsServiceUrl;
-        var serviceURL = $localStorage.serviceUrl_reachTree;
+        var serviceURL = 'http://117.8.229.5:9000/watersource';
         var serviceName = $localStorage.wfsWorkSpaceName;
         this.needDisplayReachLevel = "1,2,3,4,5";
         this.userClickRegionId = null;

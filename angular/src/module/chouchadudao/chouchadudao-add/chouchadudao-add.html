@@ -1,0 +1,102 @@
+<div class="anchaanfang" ng-controller="anchaanfangAddCtrl" ng-init="init()">
+    <div class="wrapper-md ">
+    	<div class="panel panel-default m-n">
+        	<div class="panel-body" style="position: relative;">
+        		<span class="tag">暗查暗访</span><span class="tag-right"></span><span class="tag-right tag-left"></span><span class="tag tag1">{{!id ? '新增' : '编辑'}}</span><span class="tag-right"></span>
+        		<div style="overflow: hidden;"><button type="button" class="btn btn-primary" ng-click="goBack()" style="position: absolute;right: 20px;bottom: 20px;">返回</button></div>
+        	</div>
+        </div>
+    	<div class="panel panel-default">
+    		<div class="panel-body">
+				<form class="form-inline" style="padding-left: 25%;">
+					<div class="form-item" >
+                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
+                        <input type="text" class="form-control input-short" ng-model="title">
+                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                    </div>
+                    <div class="input-group form-item">
+                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查区域</font></font></label>
+        				<select ng-model="type" class="form-control select-short" style="width: 160px;">
+                        	<option value=""></option>
+                        	<option value="0">已上报</option>
+                        	<option value="1">已退回</option>
+                        	<option value="2">未上报</option>
+                        </select>
+	                </div>
+	                <br />
+	                <div class="input-group date date_picker form-item" id="J-searchTime">
+                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查日期</font></font></label>
+        				<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+	                </div>
+                    <div class="input-group form-item" style="position: relative;left: 5px;">
+                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查河道</font></font></label>
+        				<select ng-model="type" class="form-control select-short" style="width: 160px;">
+                        	<option value=""></option>
+                        	<option value="0">已上报</option>
+                        	<option value="1">已退回</option>
+                        	<option value="2">未上报</option>
+                        </select>
+	                </div>
+	                <br />
+	                <div class="form-item" >
+                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">带队领导</font></font></label>
+                        <input type="text" class="form-control input-short" ng-model="title">
+                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                    </div>                    
+	                <div class="form-item" >
+                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">问题点坐标</font></font></label>
+                        <input type="text" class="form-control input-short" ng-model="title">
+                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                    </div>
+                    <br />
+                    <div class="form-item" >
+                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查内容</font></font></label>
+                        <div class="checkbox">
+							<label><input type="checkbox" value="1">1</label>
+							<label><input type="checkbox" value="2">2</label>
+							<label><input type="checkbox" value="3">3</label>
+							<label><input type="checkbox" value="4">4</label>
+							<label><input type="checkbox" value="5">5</label>
+							<br />
+							<label><input type="checkbox" value="6">6</label>
+							<label><input type="checkbox" value="7">7</label>
+							<label><input type="checkbox" value="8">8</label>
+							<label><input type="checkbox" value="9">9</label>
+							<label><input type="checkbox" value="10">10</label>
+						</div>
+                    </div> 
+                    <div class="form-item" style="margin-left: 16px;">
+                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">问题点描述</font></font></label>
+						<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="issuer" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                    </div>
+                    <br />                 
+                    <div class="form-item">
+                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">内容描述</font></font></label>
+						<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="issuer" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                    </div>  
+        			<div class="form-item" >
+                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">方案附件</font></font></label>
+                        <input type="text" class="form-control input-short" ng-model="title" style="width: 90px;">
+                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+	                    <button type="button" class="btn btn-default" style="position: relative;top: -10px;">预览</button>
+                    </div>                    
+				</form>
+				<div style="text-align: center;margin: 35px 0;">
+	                <button type="button" class="btn btn-primary" style="margin: 0 50px;" ng-click="submit()" >创建并下发</button>
+                    <button type="button" class="btn btn-default" ng-click="back()">取消</button>
+                </div>
+				<!--<div style="text-align: right;">
+	                <input type="file" class="hidden" id="J-attandUploader" ng-model="attandUrl" onchange="angular.element(this).scope().uploadFile(this)"/>
+					<button class="btn btn-default" onclick="document.getElementById('J-attandUploader').click()">导入(.xls)</button>
+	            </div>-->
+	        	
+    		</div>
+    	</div>
+    	
+    </div>
+   
+</div>
+

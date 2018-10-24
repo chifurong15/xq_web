@@ -21,11 +21,11 @@
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
-					var apiPrefix = moduleService.getServiceUrl() + '/resumption';
-					
-					
+					// var apiPrefix = moduleService.getServiceUrl() + '/resumption';
+                    var apiPrefix = 'http://10.0.9.116:8081/resumption';
+
 	                $scope.init = function () {
-	                	$scope.regionId = null;
+                        $scope.regionId = $localStorage.userLoginInfo.userInfo.regionId;
 
 						var params = globalParam.getter().fenxiParams || {};
 	                	$scope.regionId = params.regionId;

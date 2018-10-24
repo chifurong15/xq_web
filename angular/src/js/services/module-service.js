@@ -1,6 +1,6 @@
 angular.module('app')
     .service('moduleService', ['$localStorage','$document', '$q', '$timeout', '$http', '$state', function ($localStorage,$document, $q, $timeout, $http, $state) {
-    	
+
     	function getHtmlAndJsPath(data){
     		var menus = data.menus;
     		var pages = data.pages;
@@ -34,8 +34,8 @@ angular.module('app')
 				}
 			}
     	};
-    	
-    	
+
+
     	function findRoot(data){
     		if(data.menus){
     			var root=[];
@@ -47,19 +47,19 @@ angular.module('app')
     			return root;
     		}
     	};
-    	
+
     	function loadTree(data){
     		console.log(data)
     		var root = findRoot(data);
     		loadMenuTree(root, data.menus)
     		return root;
     	};
-    	
-    	
+
+
     	function loadMenuTree(node, menus){
-    		
+
 			for(var i=0; i<menus.length; i++){
-				
+
 				if(node.seqId == menus[i].parentId){
 					//找到子节点
 					if(menus[i].isRoot == false && menus[i].isLeaf == false){
@@ -75,7 +75,7 @@ angular.module('app')
 						//即是根节点又是叶子节点？
 						pushItem(node, menus[i]);
 					}
-					
+
 				}
 			}
     	};
@@ -100,27 +100,27 @@ angular.module('app')
 				console.log($)
 				$.ajax({
 		            type : "Get",
-		            url : "config/config.json", 
+		            url : "config/config.json",
 		            async : false
 		        }).done(function(data){
 		        	_this.modulePrefix = data.modulePrefix;
 		        	_this.menus = data.menus;
 		        	_this.config = data;
 		        }).error(function(errordata){
-		        	
+
 		        });
 			},
 			getIpConfig: function(){
 				var _this = this;
 				$.ajax({
 		            type : "Get",
-		            url : "config/ip.json", 
+		            url : "config/ip.json",
 		            async : false
 		        }).done(function(data){
 		        	_this.serviceUrl = data['serviceUrl'];
 		        	_this.htmlUrl = data['htmlUrl'];
 		        }).error(function(errordata){
-		        	
+
 		        });
 			},
 			getMoudleMenus: function(){

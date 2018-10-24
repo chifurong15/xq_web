@@ -982,7 +982,7 @@ body {
 
     .app-aside-fixed .aside-wrap {
         position: fixed;
-        top: 60px;
+        top: 54px;
         bottom: 0;
         left: 0;
         z-index: 1000;
