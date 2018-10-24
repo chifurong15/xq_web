@@ -18,96 +18,91 @@
         		</ul>
         		<ul class="scoreOne">
         			<li ng-repeat="item in scoreList">
-        				<span style="width: 20%;padding: 10px 0;">{{item.gradetype}}</span>
-                        <span style="width: 20%;padding: 10px 0;">{{item.weight}}</span>
-                        <span style="width: 20%;padding: 10px 0;">{{item.totalpoints}}</span>	                                    
-                        <span style="width: 20%;padding: 10px 0;">{{item.sort}}</span>
-        				<span style="display: inline-block;width: 20%;padding: 3px;border-right: 1px solid #ccc;">
+        				<span style="text-indent: 0px;">
+        					<i class="fa fa-sort-desc" aria-hidden="true" ng-if="item.gradetype && item.children.length != 0"></i>
+        					<i class="fa fa-sort-desc" aria-hidden="true" ng-if="item.gradetype && item.children.length == 0" style="color: #fff;"></i>
+        					{{item.gradetype}}
+        				</span>
+                        <span>{{item.weight}}</span>
+                        <span>{{item.totalpoints}}</span>	                                    
+                        <span>{{item.sort}}</span>
+        				<span style="display: inline-block;padding: 3px 0;border-right: 1px solid #ccc;">
         					<button type="button" class="btn btn-success" ng-click="showModal(1,item)">增加子项目</button>
 	                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,item)">修改</button>
 	                        <button type="button" class="btn btn-danger" ng-click="delete(item.id)" ng-if="item.children.length == 0">删除</button>
         				</span>
         				<ul class="scoreTwo">
         					<li ng-repeat="items in item.children" >
-        						<span style="text-indent:25px;">{{items.gradetype}}</span>
+        						<span style="text-indent:10px;">
+        							<i class="fa fa-sort-desc" aria-hidden="true" ng-if="items.gradetype && items.children.length != 0"></i>
+        							<i class="fa fa-sort-desc" aria-hidden="true" ng-if="items.gradetype && items.children.length == 0" style="color: #fff;"></i>
+        							{{items.gradetype}}
+        						</span>
 		                        <span>{{items.weight}}</span>
 		                        <span>{{items.totalpoints}}</span>	                                    
 		                        <span>{{items.sort}}</span>
-		        				<span style="display: inline-block;border-right: 1px solid #ccc;">
+		        				<span style="display: inline-block;padding: 3px 0;border-right: 1px solid #ccc;">
 		        					<button type="button" class="btn btn-success" ng-click="showModal(1,items)">增加子项目</button>
 			                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,items)">修改</button>
 			                    	<button type="button" class="btn btn-danger" ng-click="delete(items.id)" ng-if="items.children.length == 0">删除</button>
 		        				</span>
 		        				<ul class="scoreThree">
 		        					<li ng-repeat="itemss in items.children" ng-if="items.children">
-		        						<span style="text-indent: 45px;">{{itemss.gradetype}}</span>
+		        						<span style="text-indent: 20px;">
+		        							<i class="fa fa-sort-desc" aria-hidden="true" ng-if="itemss.gradetype && itemss.children.length != 0"></i>
+		        							<i class="fa fa-sort-desc" aria-hidden="true" ng-if="itemss.gradetype && itemss.children.length == 0" style="#fff"></i>
+		        							{{itemss.gradetype}}
+		        						</span>
 				                        <span>{{itemss.weight}}</span>
 				                        <span>{{itemss.totalpoints}}</span>	                                    
 				                        <span>{{itemss.sort}}</span>
-				        				<span style="display: inline-block;border-right: 1px solid #ccc;">
+				        				<span style="display: inline-block;padding: 3px 0;border-right: 1px solid #ccc;">
 				        					<button type="button" class="btn btn-success" ng-click="showModal(1,itemss)">增加子项目</button>
 					                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,itemss)">修改</button>
 					                    	<button type="button" class="btn btn-danger" ng-click="delete(itemss.id)" ng-if="itemss.children.length == 0">删除</button>
-				        				</span>	
-		        					</li>
+				        				</span>
+				        				<ul class="scoreFour">
+			        						<li ng-repeat="item4 in itemss.children" ng-if="itemss.children">
+			        							<span style="text-indent:35px;">
+			        								<i class="fa fa-sort-desc" aria-hidden="true" ng-if="item4.gradetype && item4.children.length != 0"></i>
+			        								<i class="fa fa-sort-desc" aria-hidden="true" ng-if="item4.gradetype && item4.children.length == 0" style="color: #fff;"></i>
+			        								{{item4.gradetype}}
+			        							</span>
+						                        <span>{{item4.weight}}</span>
+						                        <span>{{item4.totalpoints}}</span>	                                    
+						                        <span>{{item4.sort}}</span>
+						        				<span style="display: inline-block;padding: 3px 0;border-right: 1px solid #ccc;">
+						        					<button type="button" class="btn btn-success" ng-click="showModal(1,item4)">增加子项目</button>
+							                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,item4)">修改</button>
+							                    	<button type="button" class="btn btn-danger" ng-click="delete(item4.id)" ng-if="item4.children.length == 0">删除</button>
+						        				</span>
+						        				<ul class="scoreFour">
+					        						<li ng-repeat="item5 in item4.children" ng-if="item4.children">
+					        							<span style="text-indent:55px;">
+					        								<i class="fa fa-sort-desc" aria-hidden="true" ng-if="item5.gradetype && item5.children.length != 0"></i>
+					        								<i class="fa fa-sort-desc" aria-hidden="true" ng-if="item5.gradetype && item5.children.length == 0" style="color: #fff;"></i>
+					        								{{item5.gradetype}}
+					        							</span>
+								                        <span>{{item5.weight}}</span>
+								                        <span>{{item5.totalpoints}}</span>	                                    
+								                        <span>{{item5.sort}}</span>
+								        				<span style="display: inline-block;padding: 3px 0;border-right: 1px solid #ccc;">
+								        					<button type="button" class="btn btn-success" ng-click="showModal(1,item5)">增加子项目</button>
+									                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,item5)">修改</button>
+									                    	<button type="button" class="btn btn-danger" ng-click="delete(item5.id)" ng-if="item5.children.length == 0">删除</button>
+								        				</span>
+					        						</li>
+					        					</ul>
+			        						</li>
+			        					</ul>
+		        					</li>	        					
+		        					
 		        				</ul>
         					</li>        					
         				</ul>
         			</li>        			
         		</ul>
-                <!--<div class="tab-content">
-                    <div class="tab-pane active" id="tableStatistics">
-                        <div class="table-responsive" style="margin-top: 20px;">
-                            <table class="table table-bordered table-hover">
-                                <tbody>
-                                	<tr class='tHeader'>
-	                                    <th width="20%">评分类型</th>
-	                                    <th width="20%">权重</th>
-	                                    <th width="10%">总分</th>
-	                                    <th width="10%">排序</th>
-	                                    <th width="20%">操作</th>
-	                                </tr>
-	                                <tr ng-repeat="item in scoreList">
-	                                    <td>{{item.gradetype}}</td>
-	                                    <td>{{item.weight}}</td>
-	                                    <td>{{item.totalpoints}}</td>	                                    
-	                                    <td>{{item.sort}}</td>
-	                                    <td style="text-align: left;">
-	                                    	<button type="button" class="btn btn-success" ng-click="showModal(1,item)">增加子项目</button>
-	                                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,item)">修改</button>
-	                                    </td>
-	                                </tr>
-	                                
-	                                <tr ng-repeat="item in scoreList[0].children" ng-if="scoreList[0].children">
-	                                    <td>{{item.gradetype}}</td>
-	                                    <td>{{item.weight}}</td>
-	                                    <td>{{item.totalpoints}}</td>	                                    
-	                                    <td>{{item.sort}}</td>
-	                                    <td style="text-align: left;">
-	                                    	<button type="button" class="btn btn-success" ng-click="showModal(1,item)">增加子项目</button>
-	                                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,item)">修改</button>
-	                                    </td>
-	                                </tr>
-	                                <tr ng-repeat="item in scoreList[0].children[0].children" ng-if="scoreList[0].children[0]">
-	                                    <td>{{item.gradetype}}</td>
-	                                    <td>{{item.weight}}</td>
-	                                    <td>{{item.totalpoints}}</td>	                                    
-	                                    <td>{{item.sort}}</td>
-	                                    <td style="text-align: left;">
-	                                    	<button type="button" class="btn btn-success" ng-click="showModal(1,item)">增加子项目</button>
-	                                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,item)">修改</button>	                                    	
-	                                    	<button type="button" class="btn btn-danger" ng-click="delete()" >删除</button>	                                    	
-	                                    </td>
-	                                </tr>                                	
-                            	</tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="chartStatistics">
-                        <div id="patrolChart" class="tj-chart-con"></div>
-                    </div>
-                </div>
-        	-->
+                
         	</div>
         </div>
     	

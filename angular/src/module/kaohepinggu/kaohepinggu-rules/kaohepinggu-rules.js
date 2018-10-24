@@ -50,20 +50,22 @@
 							$scope.id = 2;//新增评分类型
 							$scope.index = index;
 						}else if(id == 3){
+							console.log('0000',item)
 							$scope.id = 3;//新增违规细则
 							$scope.index1 = index;
 							$scope.gradeIllegal1 = item.gradeillegal;
-							$scope.gradetype1 = item.gradetype;
+							$scope.gradetype1 = item.childList[0].gradetype;
 							
 						}else if(id == 4){
+							console.log(item)
 							$scope.id = 4;//修改评分细则
 							$scope.index2 = index;
 							$scope.gradeIllegal1 = item.gradeillegal;
-							$scope.gradetype1 = item.gradetype;							
+							$scope.gradetype1 = item.childList[0].gradetype;							
 							$scope.gradedetailed = item.gradedetailed;
 							$scope.gradeway = item.gradeway;
 							$scope.deductMarks = item.deductMarks;
-							$scope.processLimited = item.processLimited;
+							$scope.processLimitted = item.processLimitted;
 						
 						}
 						
@@ -85,7 +87,7 @@
 						$scope.gradedetailed = '';
 						$scope.gradeway = '';
 						$scope.deductMarks = '';
-						$scope.processLimited = '';
+						$scope.processLimitted = '';
 						
 					}
 					

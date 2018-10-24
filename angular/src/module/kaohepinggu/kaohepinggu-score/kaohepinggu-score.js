@@ -87,9 +87,7 @@
 							gradelevel: $scope.gradelevel
 						}
 						
-						if($scope.type == 2){ //新增
-							console.log($scope.type)
-							console.log(params)
+						if($scope.type == 2){ //新增							
 							$ajaxhttp.myhttp({
 								url: apiPrefix + '/v1/assessment/add',
 								method: 'POST',
@@ -139,7 +137,7 @@
 							$scope.sort = item.sort;
 						}else{
 							$scope.type=2;//新增
-							$scope.parentid = item.parentid;
+							$scope.parentid = item.id;
 							$scope.gradelevel = item.gradelevel;
 						}
 					}
