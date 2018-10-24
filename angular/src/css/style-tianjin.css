@@ -1863,11 +1863,14 @@ body .c-ffffff a{
     overflow: hidden;
 
 }
-.anchaanfang .scoreOne > li > span , .anchaanfang .scoreTwo > li > span ,.anchaanfang .scoreThree > li > span{
+.anchaanfang .scoreOne > li > span , 
+.anchaanfang .scoreTwo > li > span ,
+.anchaanfang .scoreThree > li > span ,
+.anchaanfang .scoreFour> li > span{
 	display: inline-block;
 	width: 20%;
 	float: left;
-	padding: 12px 0;
+	padding: 10px 0;
 	height: 40px;
     border: 1px solid #ccc;
     border-top: 0;
