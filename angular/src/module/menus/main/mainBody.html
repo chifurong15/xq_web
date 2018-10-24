@@ -1,0 +1,359 @@
+<div ng-controller="mainBodyCtrl" ng-init="init()">
+
+	<div id="mainBody" class="mainBody row m-all-0">
+		<!--<a href="javascript:void(0)" ng-click="mainBodyBtn()" class="mainBody-btn"></a>-->
+		<!--<img src="img/main-bg2.png" id="mainBody2" />-->
+		<!--<img src="img/main-bg.png" id="mainBody" />-->
+		<div class="left-panel col-xs-3 p-all-0">
+			<div id="weather" class="panel panel-default weather-default m-all-0">
+				<div class="panel-body weather-panel">
+					<!--<iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=79&color=%23FFFFFF&bgc=%23&icon=1&num=1&site=12"></iframe>-->
+					<div class="mainbody-tips">
+						<span>
+	        				天气情况
+	        			</span>
+					</div>
+					<div class="clearfix">
+						<div class="weather-iframe">
+							<iframe allowtransparency="true" frameborder="0" width="180" height="36" scrolling="no" src="//tianqi.eastday.com/plugin/widget_v1.html?sc=3&z=2&t=1&v=0&d=3&bd=0&k=&f=ffffff&q=1&a=1&c=54511&w=180&h=36&align=left"></iframe>
+						</div>
+						<div class="weather-date">
+							<p class="date">{{weatherDate.year}}年{{weatherDate.month}}月{{weatherDate.day}}日</p>
+							<p class="time">{{weatherDate.hour}}:{{weatherDate.min}}:{{weatherDate.second}}</p>
+						</div>
+					</div>
+					<div class="patr-count">
+						<span>今日巡河:</span>
+						<span>市:{{countHZOnline.cityCount}}</span>
+						<span>区:{{countHZOnline.countyCount}}</span>
+						<span>镇:{{countHZOnline.townCount}}</span>
+						<span>村:{{countHZOnline.villageCount}}</span>
+					</div>
+				</div>
+			</div>
+
+			<div id="news-l" class="panel panel-default m-all-0">
+				<div class="panel-body">
+					<div class="mainbody-tips">
+						<span>
+	        				河长制工作情况汇总
+	        			</span>
+					</div>
+					<ul class="nav nav-tabs" role="tablist">
+						<li class="active col-xs-6 text-c">
+							<a href="#statusWork" onclick="return false;" data-toggle="tab">每周动态</a>
+						</li>
+						<li class="col-xs-6 text-c">
+							<a href="#statusActive" onclick="return false;" data-toggle="tab">月度考核简报</a>
+						</li>
+					</ul>
+					<div class="tab-content tabs-content left-news-content">
+						<div class="tab-pane active" id="statusWork">
+							<div ng-repeat="list in bulletin2">								
+								<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">{{list.title}}</a>
+							</div>
+						</div>
+						<div class="tab-pane" id="statusActive">
+							<div ng-repeat="list in bulletin3">								
+								<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">{{list.title}}</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div id="check-active" class="panel panel-default m-all-0">
+				<div class="panel-body">
+					<div class="mainbody-tips">
+						<span>通报</span>
+					</div>
+					<ul class="nav nav-tabs m-t-15" role="tablist">
+						<li class="active col-xs-6 text-c">
+							<a href="#statusNotice" onclick="return false;" data-toggle="tab">暗查暗访</a>
+						</li>
+						<li class="col-xs-6 text-c">
+							<a href="#statusProblem" onclick="return false;" data-toggle="tab">督导检查通报</a>
+						</li>
+					</ul>
+					<div id="right-news-content" class="tab-content tabs-content right-news-content">
+						<div class="tab-pane active" id="statusNotice">
+							<div ng-repeat="list in bulletin1">								
+								<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">{{list.title}}</a>
+							</div>
+							<!--<div ng-repeat="list in bulletin1">								
+								<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">{{list.title}}</a>
+							</div>-->
+						</div>
+						<div class="tab-pane" id="statusProblem">
+							<div ng-repeat="list in bulletin4">								
+								<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">{{list.title}}</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 模态框（Modal） -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								&times;
+							</button>
+							<h4 class="modal-title" id="myModalLabel">
+								{{bulletin.title}}
+							</h4>
+						</div>
+						<div class="modal-body" ng-bind-html="bulletin.detail"></div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-dismiss="modal">返回</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="mid-panel col-xs-6 p-all-0">
+			<div id="mid-map" class="panel panel-default m-all-0">
+				<div class="panel-body">
+					<div id="map" class="main-map">
+
+						<div id="mapTips"></div>
+
+						<div class="city-select form-group">
+							<label class="label-tittle">区域选择</label>
+							<select class="selectpicker form-control" ng-model="region.id" ng-options="region.id as region.name for region in regionlist" ng-change="regionChange(region.id)">
+								<option value="">--请选择--</option>
+							</select>
+						</div>
+						<div class="map-legend">
+							<span>图标类别</span>
+							<ul>
+								<li>
+									<img class="legendImg" src="img/esri-icon/patrol/walkR.gif" /> 巡河：{{rightStausCount.countPatrol}}人
+								</li>
+								<li>
+									<img class="legendImg" src="img/esri-icon/hzstatus/riverChief.png" /> 在线：{{rightStausCount.countOnline}}人
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="right-panel col-xs-3 p-all-0">
+			<div id="patrol-num" class="panel panel-default m-all-0" style="overflow: hidden;">
+				<div class="panel-body">
+					<div class="mainbody-tips">
+						<span>
+	        				当前巡河人数
+	        			</span>
+					</div>
+					<table class="table table-hover mainbody-Table">
+						<thead>
+							<tr>
+								<th>排名</th>
+								<th>区域名称</th>
+								<th>总巡河人数</th>
+								<th>区级河长人数</th>
+								<th>街镇级河长人数</th>
+								<th>村级河长人数</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="item in itemlist" ng-init="$index = $index + 1 ">
+								<td>{{$index}}</td>
+								<td>{{item.regionName}}</td>
+								<td>{{item.countAll}}</td>
+								<td>{{item.countyCount}}</td>
+								<td>{{item.townCount}}</td>
+								<td>{{item.villageCount}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<div id="cityRank" class="panel panel-default m-all-0">				
+				<div class="panel-body">
+					<div class="mainbody-tips">
+						<span>
+	        				全市考核排名
+	        			</span>
+					</div>
+					<div id="main1" style="min-width: 350px;height:250px;"></div>
+				</div>
+			</div>
+			
+			<div class="tianjinProblem">
+				<div id="water-quality" class="panel panel-default m-all-0 m-t-10" style="float: left;width: 50%;">
+					<div class="panel-body">
+						<div class="mainbody-tips">
+							<span>
+		        				天津市水质情况
+		        			</span>
+						</div>
+						<div id="main" style="min-width: 350px;height:150px;"></div>
+					</div>
+				</div>
+				
+				<div id="reach-table" class="panel panel-default m-all-0 m-t-10" style="float: left;width: 50%;">
+					<div class="panel-body">
+						<div class="mainbody-tips">
+							<span>
+		        				本周问题较多河道
+		        			</span>
+						</div>
+						<table class="table table-hover mainbody-Table">
+							<thead>
+								<tr>
+									<th>序号</th>
+									<th>河道段</th>
+									<th>问题数</th>
+									<th>河长</th>
+									<th>级别</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="lst in problemList">
+									<td>{{$index+1}}</td>
+									<td>{{lst.reachName}}</td>
+									<td>{{lst.problemNum}}</td>
+									<td>{{lst.reachManName}}</td>
+									<td ng-if="lst.grade==1">省级</td>
+									<td ng-if="lst.grade==2">市级</td>
+									<td ng-if="lst.grade==3">区级</td>
+									<td ng-if="lst.grade==4">镇级</td>
+									<td ng-if="lst.grade==5">村级</td>
+									<td ng-hide="lst.grade"></td>
+								</tr>							
+							</tbody>
+						</table>
+					</div>
+				</div>			
+			</div>		
+		</div>
+	</div>
+
+</div>
+<script>
+	var myChart = echarts.init(document.getElementById('main'));
+	var myChart1 = echarts.init(document.getElementById('main1'));
+	var option = {
+		tooltip: {
+			trigger: 'item',
+			confine:true,
+			formatter: "{a} <br/>{b} : {c} ({d}%)"
+		},
+		color:['#ff0000','#000000','#000099','#008000','#ffff00'],
+		legend: {
+			orient: 'horizontal',			
+			x: 'center',
+			bottom:'18%',
+			data: ['1类', '2类', '3类', '4类', '5类']
+		},
+		series: [{
+			name: '访问来源',
+			type: 'pie',
+			radius: '35%',
+			center: ['50%', '33%'],
+			data: [{
+					value: 335,
+					name: '1类'
+				},
+				{
+					value: 310,
+					name: '2类'
+				},
+				{
+					value: 234,
+					name: '3类'
+				},
+				{
+					value: 135,
+					name: '4类'
+				},
+				{
+					value: 1548,
+					name: '5类'
+				}
+			],
+			itemStyle: {
+				emphasis: {
+					shadowBlur: 10,
+					shadowOffsetX: 0,
+					shadowColor: 'rgba(0, 0, 0, 0.5)'
+				}
+			},
+			label:{  
+                  normal: {
+		                textStyle: {
+		                    color: '#000'
+		                }
+		          }
+            }
+		}]
+	};
+	// 使用刚指定的配置项和数据显示图表。
+
+	var option1 = {
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: {
+				type: 'cross',
+				crossStyle: {
+					color: '#999'
+				}
+			}
+		},
+		toolbox: {
+			feature: {
+				dataView: {
+					show: true,
+					readOnly: false
+				},
+				magicType: {
+					show: true,
+					type: ['line', 'bar']
+				},
+				restore: {
+					show: true
+				},
+				saveAsImage: {
+					show: true
+				}
+			}
+		},
+		grid: {
+			top:'30%',
+			left:'18%'
+	    },
+		legend: {
+			data: ['和平区', '南开区', '滨海新区']
+		},
+		color:['#f00'],
+		xAxis: [{
+			type: 'category',
+			data: ['和平区', '南开区', '滨海新区'],
+			axisPointer: {
+				type: 'shadow'
+			}
+		}],
+		yAxis: [{
+			type: 'value',
+			name: '排名',
+			min: 0,
+			max: 250,
+			interval: 50,
+			axisLabel: {
+				formatter: '{value} '
+			}
+		}],
+		series: [{
+			name: '和平区',
+			type: 'bar',
+			data: [52.0, 84.9, 97.0]
+		}]
+	};
+	myChart.setOption(option);
+	myChart1.setOption(option1);
+</script>

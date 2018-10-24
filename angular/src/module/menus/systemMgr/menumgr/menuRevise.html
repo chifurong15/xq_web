@@ -1,0 +1,55 @@
+
+<div class="wrapper-md" ng-controller="menuReviseController">
+  <div class="panel panel-default pmcontainer">
+    <div class="panel-body">
+      <div class="search-form">
+        <form class="form-inline" method="get">
+          <div class="form-item">
+            <label>菜单名称</label>
+            <input class='form-control inputbox'  type="text" placeholder=""  ng-model='name'>
+          </div>
+          <div class="form-item">
+            <label>样式</label>
+             <input class='form-control inputbox'  type="text" placeholder="" ng-model='ico'>
+          </div>
+        </form>
+        <!-- <form class="form-inline" method="get">
+          <div class="form-item">
+            <label>父菜单路径</label>
+            <input class='form-control inputbox' style="width:400px;" type="text" placeholder=""  ng-model='parents'>
+          </div>
+        </form> -->
+        <form class="form-inline" method="get">
+          <div class="form-item">
+            <label>功能路径</label>
+            <input class='form-control inputbox' style="width:400px;" type="text" placeholder=""  ng-model='funcurl' disabled="disabled">
+          </div>
+        </form>
+        <form class="form-inline" method="get">
+          <div class="form-item">
+            <label>依赖JS</label>
+             <input class='form-control inputbox' style="width:400px;" type="text" placeholder="" ng-model='requireJS' disabled="disabled">
+          </div>
+        </form>
+        <form class="form-inline" method="get">
+          <div class="form-item">
+            <label>备注</label>
+            <textarea class="form-control textarea-long" ng-model='description' placeholder="" rows="4">
+            </textarea>
+          </div>
+        </form>
+      </div>
+      <div class="line line-dashed b-b line-lg pull-in"></div>
+      <div class="btn-box">
+        <button type="submit" class="btn btn-primary" ng-click="change()">
+          <i></i>修改
+        </button>
+        <button type="submit" class="btn btn-primary" ng-click="back()">
+          <i class="fa fa-reply"></i>返回
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

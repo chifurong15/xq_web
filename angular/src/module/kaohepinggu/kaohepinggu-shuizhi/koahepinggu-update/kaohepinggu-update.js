@@ -21,7 +21,8 @@
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
-					var apiPrefix = moduleService.getServiceUrl() + '/template';
+					// var apiPrefix = moduleService.getServiceUrl() + '/template';
+                    var apiPrefix = 'http://10.0.9.133:8080/template';
 					
 					$scope.init = function () {						
 						

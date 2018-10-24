@@ -7,7 +7,13 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
 		var isIE = !!navigator.userAgent.match(/MSIE/i);
 		isIE && angular.element($window.document.body).addClass('ie');
 		isSmartDevice($window) && angular.element($window.document.body).addClass('smart');
-        
+
+        //UIP基础平台接口，包括系统管理等
+        $localStorage.gwUrl = "http://117.8.229.5:9000";
+        $localStorage.serviceUrl = $localStorage.gwUrl + "/uip";
+        $localStorage.serviceUrl_chiefOnline = $localStorage.gwUrl + "/patrolMgr";
+        $localStorage.serviceUrl_reachTree = $localStorage.gwUrl + "/watersource";
+        $localStorage.serviceUrl_eventMgr = $localStorage.gwUrl + "/eventMgr/";
 		// logo显示隐藏
 		$scope.noblock = false;
 		// config
@@ -39,6 +45,43 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
                 container: false
             }
         }
+
+        $scope.initUserInfo = function () {
+            //获取用户信息
+            $scope.userInfo = {};
+            if ($localStorage.userLoginInfo != undefined) {
+                $scope.userInfo.username = $localStorage.userLoginInfo.userInfo.name;
+                $scope.userInfo = $localStorage.userLoginInfo.userInfo;
+            }else{
+                window.location.href = "#/access/signin";
+            }
+        }
+
+        $scope.logout = function () {
+            var layerIndex = layer.confirm('确定注销当前用户吗？', {
+                btn: ['确定', '取消']
+                // 按钮
+            }, function () {
+                var userId = $localStorage.userLoginInfo.userInfo.id;
+                $http({
+                    method: 'POST',
+                    url: $localStorage.serviceUrl + "/login/logout",
+                    params: {userId: userId}
+                }).success(
+                    function success(result) {
+                        if (result.resCode == 1) {
+                            window.location.href = "#/access/signin";
+                            localStorage.clear();
+                        } else {
+                        }
+                    }, function failure(result) {
+
+                    });
+                layer.close(layerIndex);
+            }, function () {
+
+            });
+        };
 
 		// save settings to local storage
 		if(angular.isDefined($localStorage.settings)) {

@@ -1,0 +1,72 @@
+<div class="fenxintongji" ng-controller="fenxintongjiQuestionCtrl" ng-init="init()">
+    <div class="wrapper">
+        <div class="panel panel-default m-n">
+            <div class="panel-body">
+                <form class="form-inline" method="get">                    
+                    <div class="form-item">
+                        <label>开始时间</label>
+                        <div class="input-group date date_picker" id="startTime">
+                            <input type="text" class="form-control input-short-o" ng-model="startTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>结束时间</label>
+                        <div class="input-group date date_picker" id="endTime">
+                            <input type="text" class="form-control input-short-o" ng-model="endTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>                    
+                    <button type="submit" class="btn btn-primary" ng-click="search()"><i class="fa fa-search"></i>搜索</button>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default panel-m" style="border-top: none;">
+            <div class="panel-body">                
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover ">
+                                <tbody class="bTable">
+                                	<tr class='tHeader'>
+	                                    <th rowspan="2">序号</th>
+	                                    <th rowspan="2">区域</th>
+	                                    <th colspan="2" ng-repeat="lst in dataList[0].list">{{lst.typeName}}</th>
+	                                    <th colspan="2">合计</th>
+                                	</tr>
+	                                    
+	                                <tr class="box tHeader">
+	                                	<td ng-repeat="lst in dataList[0].list">
+	                                		<span ng-if="$index%2==0">已办结</span>
+	                                		<span ng-if="$index%2==1">待办</span>	                                		
+	                                	</td>
+	                                	<td ng-repeat="lst in dataList[0].list">
+	                                		<span ng-if="$index%2==0">已办结</span>
+	                                		<span ng-if="$index%2==1">待办</span>	                                		
+	                                	</td>
+	                                	<td>
+	                                		<span>已办结</span>
+	                                	</td>
+	                                	<td>
+	                                		<span>待办</span>	                                		
+	                                	</td>
+	                                </tr>
+	                                
+	                                <tr ng-repeat="lst in dataList" >
+                    					<td ng-init="arr = trans($index)">{{$index+1}}</td>
+	                                	<td>{{lst.regionName}}</td>
+                    					<td ng-repeat="v in arr track by $index">{{v}}</td>
+					                    <td ng-init="finishedTotal = add(lst.list)">{{finishedTotal}}</td>
+					                    <td ng-init="unfinishedTotal = add2(lst.list)">{{unfinishedTotal}}</td>
+	                                </tr>
+	                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    	<div style="overflow: hidden;"><button type="button" class="btn btn-default" ng-click="goBack()" style="position: absolute;right: 15px;">返回</button></div>
+    	
+    </div>    
+</div>

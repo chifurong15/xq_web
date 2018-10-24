@@ -1,0 +1,274 @@
+<div ng-controller="patrolMgrCtrl" ng-init="init()">
+
+    <aside class="aside-info" id="onlineChiefAside">
+        <div class="tree-body">
+            <ul class="nav nav-tabs nav-tabs-tj" role="tablist">
+                <li class="active">
+                    <a href="#region" onclick="return false;" data-toggle="tab">区域</a>
+                </li>
+                <li>
+                    <a href="#parts" onclick="return false;" data-toggle="tab">河道</a>
+                </li>
+            </ul>
+            <div class="tab-content tab-content-tj">
+                <div class="tab-pane active" id="region">
+                    <ul id="regionTreeContainer" class="ztree"></ul>
+                </div>
+                <div class="tab-pane" id="parts">
+                    <ul id="reachTreeContainer" class="ztree"></ul>
+                </div>
+            </div>
+        </div>
+        <div class="dragDiv" style=" background-color: #d9e4ee; width: 4px;height: 100%;position: absolute;right: 0;top: 0;"></div>
+    </aside>
+
+    <a href="javascript:void(0);" class="tree-body-btn" ng-click="treeBodyShow($event)">
+        <i class="fa fa-angle-left iconRight"></i>
+    </a>
+
+    <section class="container-tj">
+
+        <!-- 地图工具栏 -->
+        <div class="map-toolbar" id="measureTools">
+            <ul>
+                <li style="float: right"><a href="javascript:void(0);" id="toolbarClose" ng-click="toolbarClose()" class="toolbar-6" title="收缩"></a></li>
+                <li><a href="javascript:void(0);" ng-click="mapResourceShow()" class="toolbar-1" title="资源层选择"></a></li>
+                <li><a href="javascript:void(0);" ng-click="mapTypeShow()" class="toolbar-2" title="底图选择"></a></li>
+                <li><a href="javascript:void(0);" ng-click="measureFunc('area')" class="toolbar-3" title="测面积"></a></li>
+                <li><a href="javascript:void(0);" ng-click="measureFunc('distance')" class="toolbar-4" title="测量距离"></a>
+                </li>
+                <li><a href="javascript:void(0);" ng-click="measureFunc('clear')" class="toolbar-5" title="清除"></a></li>
+                <div class="list-group" id="mapResource">
+                    <label class="list-group-item">
+                        <div class="radio">
+                            <label class="i-checks">
+                                <input type="radio" name="mapResource" checked ng-click="changeMapResource('vecAnno')"><i></i> 矢量标注
+                            </label>
+                        </div>
+                    </label>
+                    <label class="list-group-item">
+                        <div class="radio">
+                            <label class="i-checks">
+                                <input type="radio" name="mapResource" ng-click="changeMapResource('imgAnno')"><i></i> 影像标注
+                            </label>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="mapType-group" id="mapTypes">
+                    <div class="mapType-group-item" ng-style="x" ng-repeat="x in types" ng-click="showMapTypes(x.style)"
+                         ng-class="{'active':selected==x.style}"></div>
+                </div>
+            </ul>
+            <div class="map-toolbar-bg"></div>
+        </div>
+
+        <div id="map" class="map-tj"></div>
+
+    </section>
+
+    <div class="infoCon-tj">
+        <!-- 缩放按钮 -->
+        <a href="javascript:void(0);" class="info-tj-btn-1" ng-click="infoTjShow($event)">
+            <i class="fa fa-angle-right iconRight"></i>
+        </a>
+        <!-- 右侧内容框 -->
+        <div class="info-tj">
+            <div class="info-tj-tit">
+                <h4>查询</h4>
+            </div>
+            <form class="form-horizontal info-tj-form">
+                <div class="form-group">
+                    <label class="col-sm-2">开始时间</label>
+                    <div class="col-sm-10 input-group date date_picker" id="startTime">
+                        <input type="text" class="form-control input-sm" ng-model="startTime"/>
+                        <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2">结束时间</label>
+                    <div class="col-sm-10 input-group date date_picker" style="float: left;" id="endTime">
+                        <input type="text" class="form-control input-sm" ng-model="endTime"/>
+                        <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2">姓名</label>
+                    <div class="col-sm-7" style="padding: 0">
+                        <input type="text" class="form-control input-sm" ng-model="userName" placeholder="请输入名称">
+                    </div>
+                    <div class="col-sm-2" style="float: right">
+                        <button type="submit" class="btn btn-primary btn-sm" ng-click="search();"><i class="fa fa-search"></i>搜索</button>
+                    </div>
+                </div>
+            </form>
+
+            <table class="table table-bordered table-hover table-tj">
+                <tr>
+                    <th width="15%">姓名</th>
+                    <!--<th width="15%" hidden>姓名拼音</th>-->
+                    <th width="12%">级别</th>
+                    <th width="28%">应巡次数</th>
+                    <th width="15%">实际次数</th>
+                    <th width="15%">发现问题</th>
+                    <th>日志数</th>
+                </tr>
+                <tr ng-repeat="list in riverChiefList" ng-init="index = $index + 1">
+                    <td>{{list.userChName}}</td>
+                    <!--<td hidden>{{list.userName}}</td>-->
+                    <td>{{gradeToZh(list.grade)}}</td>
+                    <td>{{list.shouldPatrolCountStr}}</td>
+                    <td><a href="javascript:void(0);" ng-click="patrolListShow(list.userid);">{{list.patrolCount}}</a></td>
+                    <td>{{list.eventCount}}</td>
+                    <td><a href="javascript:void(0);" ng-click="logWorkListShow(list.userid);">{{list.logWorkCount}}</a></td>
+                </tr>
+            </table>
+            <tm-pagination conf="paginationConf"></tm-pagination>
+
+            <div class="patrolTabs">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li id="patrolLists" class="active">
+                        <a href="#patrolList" onclick="return false;" data-toggle="tab">巡河记录</a>
+                    </li>
+                    <li id="logWorkLists">
+                        <a href="#logWorkList" onclick="return false;" data-toggle="tab">巡河日志</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="patrolList">
+                        <table class="table table-bordered table-hover table-tj">
+                            <tr>
+                                <th width="35%">开始时间</th>
+                                <th width="35%">结束时间</th>
+                                <th>河道段</th>
+                            </tr>
+                            <tr ng-repeat="patrol in patrolList" ng-init="index = $index + 1" ng-click="patrolDetailShow(patrol.id);">
+                                <td>{{patrol.startTime |limitTo: 16 }}</td>
+                                <td>{{patrol.endTime |limitTo: 16}}</td>
+                                <td>{{patrol.reachName}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="logWorkList">
+                        <table class="table table-bordered table-hover table-tj">
+                            <tr>
+                                <th width="35%">标题</th>
+                                <th width="35%">河道段</th>
+                                <th>创建时间</th>
+                            </tr>
+                            <tr ng-repeat="logWork in logWorkList" ng-init="index = $index + 1" ng-click="logWorkDetailShow(logWork.id);">
+                                <td>{{logWork.title}}</td>
+                                <td>{{logWork.reachname}}</td>
+                                <td>{{logWork.createdate |limitTo: 16 }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="logWorkDetail" tabindex="-1">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">巡河日志详情</h4>
+                </div>
+                <div class="modal-body">
+                    <!--<img src="img/logwork.png" style="width: 100%; height: 100%" />-->
+                    <table class="table table-bordered log-table">
+                        <tr>
+                            <th rowspan="4" width="10%">河长级别</th>
+                            <td rowspan="4" width="10%">镇级</td>
+                            <th colspan="2" width="20%">天津市</th>
+                            <th rowspan="4" width="10%">河长姓名</th>
+                            <td rowspan="4" width="10%">程国顺</td>
+                            <th rowspan="4" width="10%">联系方式</th>
+                            <td rowspan="4" width="10%">13012239501</td>
+                            <th rowspan="4" width="10%">河长职位</th>
+                            <td rowspan="4" width="10%">街办事处副主任</td>
+                        </tr>
+                        <tr>
+                            <th width="10%">行政区域</th>
+                            <td>河西区</td>
+                        </tr>
+                        <tr>
+                            <th>镇(街)名</th>
+                            <td>马场</td>
+                        </tr>
+                        <tr>
+                            <th>村名</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>河长角色</th>
+                            <td>河长</td>
+                            <th>巡河日期</th>
+                            <td>2018-08-09</td>
+                            <th>巡河时长(分钟)</th>
+                            <td>12</td>
+                            <th>巡河距离(米)</th>
+                            <td>874</td>
+                            <th>巡河轨迹</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>巡河纪要</th>
+                            <td colspan="5"></td>
+                            <th>巡河照片</th>
+                            <td colspan="3"></td>
+                        </tr>
+                        <tr>
+                            <th rowspan="3">巡河内容</th>
+                            <th>河湖水质</th>
+                            <td colspan="2">正常</td>
+                            <td colspan="2">呵护水体水质感官异常</td>
+                            <td colspan="4">合乎口门排水异常</td>
+                        </tr>
+                        <tr>
+                            <th>河湖堤岸水面环境卫生</th>
+                            <td colspan="2">正常</td>
+                            <td colspan="2">堤岸水面环境日常保洁异常</td>
+                            <td colspan="2">甬路、台阶、护栏、绿化带等沿岸设施维护异常</td>
+                            <td colspan="2">护坡杂草清理、垃圾收集清运异常</td>
+                        </tr>
+                        <tr>
+                            <th>河湖岸线管理</th>
+                            <td colspan="2">正常</td>
+                            <td colspan="2">违反河湖规定</td>
+                            <td colspan="2">违反规划控制线和生态红线的建设</td>
+                            <td colspan="2">历史侵占、占压的违章行为清退治理</td>
+                        </tr>
+                        <tr>
+                            <th rowspan="3">河湖名称</th>
+                            <td rowspan="3">津河</td>
+                            <th rowspan="3">河道段名称</th>
+                            <td rowspan="3">卫津河八里台桥桥中-丁家桥段</td>
+                            <th colspan="2">发现问题</th>
+                            <td colspan="4">色度异常</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">问题处置</th>
+                            <td colspan="4">处理中</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">问题跟踪</th>
+                            <td colspan="4">区级河长处理中</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

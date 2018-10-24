@@ -1,0 +1,43 @@
+
+<div class="wrapper-md" ng-controller="changeController">
+  <div class="panel panel-default pmcontainer">
+    <div class="panel-body">
+      <div class="search-form">
+        <form class="form-inline" method="get">
+          <div class="form-item">
+            <label>角色名称</label>
+              <input type="text" class="form-control inputbox" ng-model="names">
+            <i class="star">*</i>
+          </div>
+          <div class="form-item">
+            <label>基础类型</label>
+            <input class="form-control inputbox" type="text" ng-model='typeName' disabled="disabled">
+            <i class="star">*</i>
+          </div>
+          <div class="form-item">
+            <label>状态</label>
+            <input class="form-control inputbox" type="text" ng-if="status === 1" placeholder="正常" disabled="disabled">
+            <input class="form-control inputbox" type="text" ng-if="status === 2" placeholder="禁用" disabled="disabled">
+            <i class="star">*</i>
+          </div>
+        </form>
+        <form class="form-inline" method="get">
+          <div class="form-item">
+            <label>描述</label>
+            <textarea class="form-control textarea-long" ng-model='description' rows="4" style="float: left;">
+            </textarea>
+          </div>
+        </form>
+      </div>
+      <div class="line line-dashed b-b line-lg pull-in"></div>
+      <div class="btn-box">
+        <button type="submit" class="btn btn-primary" ng-click="change()">
+          <i></i>确定
+        </button>
+        <button type="submit" class="btn btn-primary" ng-click="back()">
+          <i class="fa fa-reply"></i>返回
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

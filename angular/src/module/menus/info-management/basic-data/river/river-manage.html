@@ -1,0 +1,132 @@
+<div ng-controller="imRiver" ng-init="init()" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body">
+                <form class="form-inline" method="get">
+                    <div class="form-item">
+                        <label>河流名称</label>
+                        <input type="text" class="form-control input-short" ng-model="riverName"/>
+                    </div>
+                    <div class="form-item">
+                        <label>河流类型</label>
+						<select ng-init="riverType()" ng-model="river_type" ng-options="rv.dictName for rv in riverTypes"
+                                ng-change="river_Change(river_type)" class="form-control select-short">
+                            <option  value="">请选择</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <label>所属水系</label>
+                        <input ng-model="water_ztree_name" type="text" class="form-control input-short-o"  ng-click="show()">
+						<a class="input-group-addon" ng-click="show()"><i class="fa fa-search"></i></a>
+                    </div>
+                    <button type="button" class="btn btn-primary" ng-click="find()">
+                        <i class="fa fa-search"></i>搜索
+                    </button>
+
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <div class="table-bar">
+                        <button type="button" class="btn btn-primary btn-xs" ng-click="riverAdd()">
+                            <i class="fa fa-plus"></i> 新增
+                        </button>
+                    </div>
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th class="wid-5">序号</th>
+                            <th class="wid-10">河流名称</th>
+                            <th class="wid-10">河流编码</th>
+                            <th class="wid-10">河流类型</th>
+                            <th class="wid-10">河流长度</th>
+                            <th class="wid-10">所属水系</th>
+                            <th class="wid-10">所属行政区划</th>
+                            <th class="wid-10">概述</th>
+                            <th class="wid-10">备注</th>
+                            <th class="wid-20">操作</th>
+                        </tr>
+                        <tr ng-repeat="module in moduleList | filter:{waterName : selectedWater } " ng-init="index=$index+1">
+							<td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{index + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
+                            <td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{module.riverName}}</td>
+                            <td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{module.riverCode}}</td>
+                            <td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{module.riverTypeName}}</td>
+                            <td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{module.length}}</td>
+                            <td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{module.waterName}}</td>
+                            <td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{module.regionName}}</td>
+                            <td ng-class-odd="'active'" ng-class-even="'bg-FFF'"><a ng-click="overView(module.id)">查看详情</a></td>
+                            <td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{module.remark}}</td>
+                            <td ng-class-odd="'active'" ng-class-even="'bg-FFF'" class="td-tool">
+                            	<a class="btn btn-primary btn-xs" ng-click="moveUp(module.id)" ng-if="moveIcon"><i class="fa fa-chevron-up" title="上移"></i></a>
+                            	<a class="btn btn-primary btn-xs" ng-click="moveDown(module.id)" ng-if="moveIcon"><i class="fa fa-chevron-down" title="下移"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-click="riverDetail(module.id)"><i class="fa fa-info" title="详细"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-click="riverEdit(module.id)"><i class="fa fa-edit" title="修改"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-click="moduleDelete(module.id,module.name);"><i class="fa fa-trash-o" title="删除"></i></a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+        </div>
+    </div>
+    <!--描述：查看详情-->
+	<div class="modal fade" id="overViewBox"  role="dialog_region"  data-backdrop="static">
+		<div class="modal-dialog water_dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">概述</h4>
+				</div>
+				<div class="modal-body" style="overflow: hidden;">
+					<div id="ckeditorDetail">
+						<div ng-bind-html="detailContent|trustHtml"></div>
+					</div>
+					<script>
+						var ckeditorDetail = document.getElementById( 'ckeditorDetail' );
+						ckeditorDetail.setAttribute( 'contenteditable', false );
+					</script>
+				</div>
+				<div class="modal-footer">
+					<a href="javascript:;" class="btn btn-primary btn-o"  data-dismiss="modal">
+						<i class="fa fa-check"></i>
+						<span>确 定</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="myModal_ztree"  role="dialog" data-backdrop="static">
+		<div class="modal-dialog water_dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">选择水系</h4>
+				</div>
+				<div class="modal-body">
+					<div class="input-group">
+				        <input type="text" ng-model="waterName" class="form-control" placeholder="请输入水系名称">
+				        <span class="input-group-btn">
+				        	<button class="btn btn-default" type="button" ng-click="select()">查询</button>
+				        </span>
+				    </div>
+					<ul id="regionTree" class="ztree ztree_box_modal"></ul>
+				</div>
+				<div class="modal-footer text-l">
+					<a href="javascript:;" class="btn btn-primary btn-o" ng-click="modalOk()">
+						<i class="fa fa-check"></i>
+						<span>确 定</span>
+					</a>
+					<!--<a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
+						<i class="fa fa-reply"></i>
+						<span>关闭</span>
+					</a>-->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- zTree_V3 -->
+<script src="vendor/zTree_v3/js/jquery.ztree.core.js"></script>
+<script src="vendor/zTree_v3/js/jquery.ztree.excheck.js"></script>

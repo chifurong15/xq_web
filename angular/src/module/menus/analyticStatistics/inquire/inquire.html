@@ -1,0 +1,290 @@
+<div ng-controller="inquireCtrl" ng-init="init()">
+    <div class="wrapper">
+        <div class="panel panel-default m-n">
+            <div class="panel-body">
+                <form class="form-inline" method="get">
+                    <div class="form-item">
+                        <label>姓 名</label>
+                        <input type="text" class="form-control input-short" ng-model="userName"/>
+                    </div>
+                    <div class="form-item">
+                        <label>行政区域</label>
+                        <input type="text" class="form-control input-short-o" ng-model="regionName" readonly/>
+                        <span class="input-group-addon" ng-click="regionTree();"><i class="fa fa-search"></i></span>
+                    </div>
+                    <div class="form-item">
+                        <label>河 段</label>
+                        <input type="text" class="form-control input-short-o" ng-model="name" readonly/>
+                        <span class="input-group-addon" ng-click="reachTree(regionId);"><i
+                                class="fa fa-search"></i></span>
+                    </div>
+                    <div class="form-item">
+                        <label>开始时间</label>
+                        <div class="input-group date date_picker" id="startTime">
+                            <input type="text" class="form-control input-short-o" ng-model="startTime"/>
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>结束时间</label>
+                        <div class="input-group date date_picker" id="endTime">
+                            <input type="text" class="form-control input-short-o" ng-model="endTime"/>
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="search()"><i class="fa fa-search"></i>搜索
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default panel-m" style="border-top: none;">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <!--<th>序号</th>-->
+                            <th width="10%">河长姓名</th>
+                            <th width="10%">级别</th>
+                            <th width="50%">河段</th>
+                            <th width="10%">巡河次数</th>
+                            <th width="10%">月巡河达标率(%)</th>
+                            <th width="10%">上报问题</th>
+                        </tr>
+                        <tr ng-repeat="list in riverChiefList" ng-init="index = $index + 1">
+                            <!--<td>{{index}}</td>-->
+                            <td>{{list.userChName}}</td>
+                            <td>{{gradeToZh(list.grade)}}</td>
+                            <td style="text-align: left; padding: 5px 20px">{{list.bindReaches}}</td>
+                            <td><a href="javascript:void(0);" ng-click="patrolListShow(list.userid);">{{list.patrolCount}}</a>
+                            </td>
+                            <td>{{list.monthPatrolRate*100 | number:2}}</td>
+                            <td><a href="javascript:void(0);"
+                                   ng-click="eventListShow(list.userid);">{{list.eventCount}}</a></td>
+                        </tr>
+                    </table>
+                    <tm-pagination conf="paginationConf"></tm-pagination>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 行政区域树模态框 -->
+    <div class="modal fade" id="regionTree" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">行政区域选择</h4>
+                </div>
+                <div class="modal-body" style="max-height: 400px; overflow: auto">
+                    <ul id="regionTreeContainer" class="ztree"></ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="getRegion(regionId);">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 河道树模态框 -->
+    <div class="modal fade" id="reachTree" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">河道选择</h4>
+                </div>
+                <div class="modal-body" style="max-height: 400px; overflow: auto">
+                    <ul id="reachTreeContainer" class="ztree"></ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="getReach(reachId);">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 巡河次数列表 -->
+    <div class="modal fade" id="patrolList" tabindex="-1">
+        <div class="modal-dialog inquire-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">巡河列表</h4>
+                </div>
+                <div class="modal-body inquire-model-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <tr>
+                                <th>序号</th>
+                                <th>所巡河段</th>
+                                <th>巡河里程(米)</th>
+                                <th>开始时间</th>
+                                <th>结束时间</th>
+                                <th>巡河时间(分钟)</th>
+                            </tr>
+                            <tr ng-repeat="patrol in patrolList" ng-init="index = $index + 1"
+                                ng-click="patrolDetailShow(patrol.id);">
+                                <td>{{index}}</td>
+                                <td>{{patrol.reachName}}</td>
+                                <td>{{patrol.distance | number:2}}</td>
+                                <td>{{patrol.startTime}}</td>
+                                <td>{{patrol.endTime}}</td>
+                                <td>{{patrol.patrolDuration}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 巡查轨迹 -->
+    <div class="modal fade" id="patrolDetailShow" tabindex="-1">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">巡查轨迹</h4>
+                </div>
+                <div class="modal-body" style="padding: 0">
+                    <div id="patrolmap" style="height:400px; overflow:auto;padding: 0;margin: 0"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 上报问题列表 -->
+    <div class="modal fade" id="eventList" tabindex="-1">
+        <div class="modal-dialog inquire-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">问题列表</h4>
+                </div>
+                <div class="modal-body inquire-model-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <tr>
+                                <th>上报时间</th>
+                                <th>所在河段</th>
+                                <th>问题描述</th>
+                                <th>所属区域</th>
+                                <th>问题状态</th>
+                                <th>当前处理人</th>
+                            </tr>
+                            <tr ng-repeat="event in eventList" ng-init="index = $index + 1"
+                                ng-click="eventDetailShow(event);">
+                                <td>{{event.reporttime}}</td>
+                                <td>{{event.eventreachname}}</td>
+                                <td>{{event.typename}}</td>
+                                <td>{{event.eventbelongcounty}}</td>
+                                <td>{{event.eventStatus}}</td>
+                                <td>{{event.reportperson}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 问题详情 -->
+    <div class="modal fade" id="eventDetailShow" tabindex="-1">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">问题详情</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th width="15%">问题编号</th>
+                                <td width="16%">{{eventDetail.serialno}}</td>
+                                <th width="15%">问题类型</th>
+                                <td width="16%">{{eventDetail.typename}}</td>
+                                <th width="15%">问题等级</th>
+                                <td>
+                                    <span ng-if='eventDetail.eventlevel == "0"'>一般</span>
+                                    <span ng-if='eventDetail.eventlevel == "1"'>紧急</span>
+                                    <span ng-if='eventDetail.eventlevel == "2"'>特级</span>
+                                    <span ng-hide='eventDetail.eventlevel'></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>问题来源</th>
+                                <td>
+                                    <span ng-if='evtDetails.eventresource == "A"' class="eveDetail-value">河长版APP</span>
+                                    <span ng-if='evtDetails.eventresource == "B"' class="eveDetail-value">电话上报</span>
+                                    <span ng-if='evtDetails.eventresource == "C"' class="eveDetail-value">公众版APP</span>
+                                    <span ng-if='evtDetails.eventresource == "D"' class="eveDetail-value">河长制微信号</span>
+                                    <span ng-if='evtDetails.eventresource == "F"' class="eveDetail-value">曝光台</span>
+                                    <span ng-hide='evtDetails.eventresource' class="eveDetail-value"></span>
+                                </td>
+                                <th>受理人员</th>
+                                <td>{{eventDetail.acceptperson}}</td>
+                                <th>受理时间</th>
+                                <td>{{eventDetail.reporttime}}</td>
+                            </tr>
+                            <tr>
+                                <th>水系名称</th>
+                                <td>{{eventDetail.eventbasinname}}</td>
+                                <th>河道名称</th>
+                                <td>{{eventDetail.eventrivername}}</td>
+                                <th>河段名称</th>
+                                <td>{{eventDetail.eventreachname}}</td>
+                            </tr>
+                            <tr>
+                                <th>事发时间</th>
+                                <td>{{eventDetail.createtime}}</td>
+                                <th>问题区域</th>
+                                <td>{{eventDetail.regionName}}</td>
+                                <th>问题地点</th>
+                                <td>{{eventDetail.address}}</td>
+                            </tr>
+                            <tr>
+                                <th>问题内容</th>
+                                <td colspan="5" style="text-align: left; padding-left: 20px">{{eventDetail.content}}</td>
+                            </tr>
+                            <tr>
+                                <th>处理前</th>
+                                <td colspan="5">
+                                    <div id="layer-photos-before" class="layer-photos-demo" style="margin-left: 30px;"
+                                         ng-show="before">
+                                        <img style="margin: 0 5px;" ng-repeat="item in before" layer-pid=""
+                                             layer-src="{{eventImgUrl}}{{item.accessoryurl}}"
+                                             src="{{eventImgUrl}}{{item.accessoryurl}}" alt="处理前图片" width="60px" height="60px">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>处理后</th>
+                                <td colspan="5">
+                                    <div id="layer-photos-later" class="layer-photos-demo" style="margin-left: 30px;"
+                                         ng-show="after">
+                                        <img style="margin: 0 5px;" ng-repeat="item in after" layer-pid=""
+                                             layer-src="{{eventImgUrl}}{{item.afterAccessory}}"
+                                             src="{{eventImgUrl}}{{item.afterAccessory}}" alt="处理后图片" width="60px"
+                                             height="60px">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

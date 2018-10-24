@@ -1,0 +1,647 @@
+<div ng-controller="riverChiefOnlineCtrl" ng-init="init()">
+    
+    <aside class="aside-info" id="onlineChiefAside">
+        <div class="tree-body">
+            <div class="content-tj-top">
+                <div class="row">
+                    <div class="col-md-3" style="padding: 0;">
+                        <p>市级</p>
+                        <label>{{leftStausCount.cityCount}}/{{leftStausCount.cityTotal}}</label>
+                    </div>
+                    <div class="col-md-3" style="padding: 0;">
+                        <p>区级</p>
+                        <label>{{leftStausCount.countyCount}}/{{leftStausCount.countyTotal}}</label>
+                    </div>
+                    <div class="col-md-3" style="padding: 0;">
+                        <p>街镇级</p>
+                        <label>{{leftStausCount.townCount}}/{{leftStausCount.townTotal}}</label>
+                    </div>
+                    <div class="col-md-3" style="padding: 0;">
+                        <p>村级</p>
+                        <label>{{leftStausCount.villageCount}}/{{leftStausCount.villageTotal}}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-tree-tj">
+                <div class="panel-body" style="padding: 0;">
+                    <ul id="regionTreeContainer" class="ztree"></ul>
+                </div>
+            </div>
+        </div>
+        <div class="dragDiv" style=" background-color: #d9e4ee; width: 4px;height: 100%;position: absolute;right: 0;top: 0;"></div>
+    </aside>
+
+    <a href="javascript:void(0);" class="tree-body-btn" ng-click="treeBodyShow($event)">
+        <i class="fa fa-angle-left iconRight"></i>
+    </a>
+
+    <section class="container-tj" style="user-select: none;">
+
+        <!-- 地图工具栏 -->
+        <div class="map-toolbar" id="measureTools">
+            <ul>
+                <li style="float: right"><a href="javascript:void(0);" id="toolbarClose" ng-click="toolbarClose()" class="toolbar-6" title="收缩"></a></li>
+                <li><a href="javascript:void(0);" ng-click="mapResourceShow()" class="toolbar-1" title="资源层选择"></a></li>
+                <li><a href="javascript:void(0);" ng-click="mapTypeShow()" class="toolbar-2" title="底图选择"></a></li>
+                <li><a href="javascript:void(0);" ng-click="measureFunc('area')" class="toolbar-3" title="测面积"></a></li>
+                <li><a href="javascript:void(0);" ng-click="measureFunc('distance')" class="toolbar-4" title="测量距离"></a>
+                </li>
+                <li><a href="javascript:void(0);" ng-click="measureFunc('clear')" class="toolbar-5" title="清除"></a></li>
+                <div class="list-group" id="mapResource">
+                    <label class="list-group-item">
+                        <div class="radio">
+                            <label class="i-checks">
+                                <input type="radio" name="mapResource" checked ng-click="changeMapResource('vecAnno')"><i></i> 矢量标注
+                            </label>
+                        </div>
+                    </label>
+                    <label class="list-group-item">
+                        <div class="radio">
+                            <label class="i-checks">
+                                <input type="radio" name="mapResource" ng-click="changeMapResource('imgAnno')"><i></i> 影像标注
+                            </label>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="mapType-group" id="mapTypes">
+                    <div class="mapType-group-item" ng-style="x" ng-repeat="x in types" ng-click="showMapTypes(x.style)"
+                         ng-class="{'active':selected==x.style}"></div>
+                </div>
+            </ul>
+            <div class="map-toolbar-bg"></div>
+        </div>
+
+        <div id="map" class="map-tj"></div>
+
+    </section>
+
+    <div class="infoCon-tj">
+        <!-- 缩放按钮 -->
+        <a href="javascript:void(0);" class="info-tj-btn-1" ng-click="infoTjShow($event)">
+            <i class="fa fa-angle-right iconRight"></i>
+        </a>
+        <!-- 右侧内容框 -->
+        <div class="info-tj">
+            <div class="info-tj-tit">
+                <h4>查询</h4>
+            </div>
+            <div class="checkbox-tj-box" style="font-size: 12px;margin-top: 5px;">
+                <div class="checkbox checkbox-tj" style="margin-bottom: 5px;" ng-click="changeCheck('patrol')">
+                    <label class="i-checks">
+                        <input type="checkbox" ng-model="patrol"><i></i> 巡河
+                    </label>
+                </div>
+                <div class="checkbox checkbox-tj" style="margin-bottom: 5px;" ng-click="changeCheck('online')">
+                    <label class="i-checks">
+                        <input type="checkbox" ng-model="online"><i></i> 在线
+                    </label>
+                </div>
+                <div class="checkbox checkbox-tj" style="margin-bottom: 5px;" ng-click="changeCheck('offLine')">
+                    <label class="i-checks">
+                        <input type="checkbox" ng-model="offLine"><i></i> 离线
+                    </label>
+                </div>
+            </div>
+            <div class="checkbox-tj-box" style="font-size: 12px;margin-top: 0">
+                <div class="checkbox checkbox-tj" style="margin-bottom: 5px;" ng-click="changeCheck('cityLevel')">
+                    <label class="i-checks">
+                        <input type="checkbox" ng-model="cityLevel"><i></i> 市级
+                    </label>
+                </div>
+                <div class="checkbox checkbox-tj" style="margin-bottom: 5px;" ng-click="changeCheck('areaLevel')">
+                    <label class="i-checks">
+                        <input type="checkbox" ng-model="areaLevel"><i></i> 区级
+                    </label>
+                </div>
+                <div class="checkbox checkbox-tj" style="margin-bottom: 5px;" ng-click="changeCheck('townLevel')">
+                    <label class="i-checks">
+                        <input type="checkbox" ng-model="townLevel"><i></i> 镇街级
+                    </label>
+                </div>
+                <div class="checkbox checkbox-tj" style="margin-bottom: 5px;" ng-click="changeCheck('villLevel')">
+                    <label class="i-checks">
+                        <input type="checkbox" ng-model="villLevel"><i></i> 村级
+                    </label>
+                </div>
+            </div>
+            <form class="form-horizontal info-tj-form">
+                <div class="form-group">
+                	<form class="form-horizontal info-tj-form">
+                        <div class="form-group">
+                            <label class="col-sm-2">河段</label>
+		                    <div class="col-sm-10" style="padding:0">
+		                        <input type="text" class="form-control input-sm" ng-model="riverReachName" placeholder="请输入河段">
+		                    </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2">姓名</label>
+		                    <div class="col-sm-7" style="padding:0">
+		                        <input type="text" class="form-control input-sm" ng-model="riverChiefName" placeholder="请输入名称">
+		                    </div>
+                            <div class="col-sm-2" style="float: right;">
+                                <button type="submit" class="btn btn-primary btn-sm" ng-click="searchRiverChief()"><i class="fa fa-search"></i>搜索
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </form>
+            <div style="width: 100%;max-height: 400px;overflow-y: all;overflow-x: hidden;">
+                <table class="table table-bordered table-hover table-tj">
+                    <tr>
+                        <th width="10%">状态</th>
+                        <th width="20%">姓名</th>
+                        <th width="15%">级别</th>
+                        <th width="15%">角色</th>
+                        <!-- <th width="15%">河道</th> -->
+                        <th>河道段</th>
+                    </tr>
+                    <tr style="cursor: pointer;" ng-repeat="item in riverChiefList" ng-click="patrolDataList(item)">
+                        <td>
+                            <span ng-if="item.status === 1" style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #32b16c;"></span>
+                            <span ng-if="item.status === 2" style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #00a1e9;"></span>
+                            <span ng-if="item.status === 0" style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #afafaf;"></span>
+                        </td>
+                        <td>{{item.username}}</td>
+                        <td>{{riverChiefLevel(item.chairmanlevel)}}</td>
+                        <td>{{item.rolename}}</td>
+                        <!-- <td>
+                            <div ng-attr-title="{{item.river}}" style="width:100%; overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;line-clamp: 2;-webkit-box-orient: vertical;">{{item.river}}</div>
+                        </td> -->
+                        <td>
+                            <div ng-attr-title="{{item.reach}}" style="width:100%;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;line-clamp: 2;-webkit-box-orient: vertical;">{{item.reach}}</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+           
+
+            <div class="row row-tj">
+                <div class="col-md-4">
+                    <label class="row-tj-blue">巡河:</label>
+                    <span>{{rightStausCount.countPatrol}}</span>
+                </div>
+                <div class="col-md-4">
+                    <label class="row-tj-green">在线:</label>
+                    <span>{{rightStausCount.countOnline}}</span>
+                </div>
+                <div class="col-md-4">
+                    <label class="row-tj-gery">离线:</label>
+                    <span>{{rightStausCount.countOffline}}</span>
+                </div>
+            </div>
+
+            <div class="" style="position: relative;height: auto;">
+                <ul class="nav nav-tabs nav-tabs-riverChief" id="myTab" role="tablist">
+                    <li>
+                        <a href="#riverChiefDetail" onclick="return false;" data-toggle="tab">详情</a>
+                    </li>
+                    <li class="active">
+                        <a href="#riverChiefPatrol" onclick="return false;" data-toggle="tab">巡河</a>
+                    </li>
+                    <li>
+                        <a href="#riverChiefEvent" onclick="return false;" data-toggle="tab">问题</a>
+                    </li>
+                </ul>
+                <div class="tab-content tab-content-tj" style="padding: 0;position: static;overflow: visible;">
+                    <div class="tab-pane" id="riverChiefDetail">
+                    	<p ng-show="!detailReachName" style="text-align: center;line-height: 100px;">请先选择河长</p>
+                    	<div ng-show="detailReachName">
+                    		<ul style="list-style: none;padding: 0 5px;margin: 0;border: 1px solid #F1F1F3;">
+                    			<li style="height: 50px;border-bottom: 1px solid #F1F1F3;line-height: 50px;">
+                    				<section class="col-md-4" style="color: #43425D;font-weight: bold;">
+                    					<i style="float: left;margin-top: 10px;margin-right: 5px;width: 30px;height: 30px;background-image: url(img/icon/Icon1.png);background-position: center;background-repeat: no-repeat;background-size: 100%;"></i>河长
+                    				</section>
+                    				<section class="col-md-8" style="text-align: left;color: #4D4F5C;">{{riverChiefDetail.name}}</section>
+                    			</li>
+                    			<li style="height: 50px;border-bottom: 1px solid #F1F1F3;line-height: 50px;">
+                    				<section class="col-md-4" style="color: #43425D;font-weight: bold;">
+                    					<i style="float: left;margin-top: 10px;margin-right: 5px;width: 30px;height: 30px;background-image: url(img/icon/Icon2.png);background-position: center;background-repeat: no-repeat;background-size: 100%;"></i>区域
+                    				</section>
+                    				<section class="col-md-8" style="text-align: left;color: #4D4F5C;">{{riverChiefDetail.regionName}}</section>
+                    			</li>
+                    			<li style="height: 50px;border-bottom: 1px solid #F1F1F3;line-height: 50px;">
+                    				<section class="col-md-4" style="color: #43425D;font-weight: bold;">
+                    					<i style="float: left;margin-top: 10px;margin-right: 5px;width: 30px;height: 30px;background-image: url(img/icon/Icon3.png);background-position: center;background-repeat: no-repeat;background-size: 100%;"></i>级别
+                    				</section>
+                    				<section class="col-md-8" style="text-align: left;color: #4D4F5C;">{{riverChiefLevelData}}</section>
+                    			</li>
+                    			<li style="height: 50px;border-bottom: 1px solid #F1F1F3;line-height: 50px;">
+                    				<section class="col-md-4" style="color: #43425D;font-weight: bold;">
+                    					<i style="float: left;margin-top: 10px;margin-right: 5px;width: 30px;height: 30px;background-image: url(img/icon/Icon4.png);background-position: center;background-repeat: no-repeat;background-size: 100%;"></i>角色
+                    				</section>
+                    				<section class="col-md-8" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #4D4F5C;">{{detailRiverChiefName}}</section>
+                    			</li>
+                    			<li style="min-height: 50px;border-bottom: 1px solid #F1F1F3;">
+                    				<section class="col-md-4" style="color: #43425D;font-weight: bold;margin-top: 10px">
+                    					<i style="float: left;margin-right: 5px;width: 30px;height: 30px;background-image: url(img/icon/Icon5.png);background-position: center;background-repeat: no-repeat;background-size: 100%;"></i>职务
+                    				</section>
+                    				<section class="col-md-8" style="text-align: left;color: #4D4F5C;">{{riverChiefDetail.position}}</section>
+                    			</li>
+                    			<li style="min-height: 50px;border-bottom: 1px solid #F1F1F3;overflow: hidden;">
+                    				<section class="col-md-4" style="color: #43425D;font-weight: bold;margin-top: 10px">
+                    					<i style="float: left;margin-right: 5px;width: 30px;height: 30px;background-image: url(img/icon/Icon6.png);background-position: center;background-repeat: no-repeat;background-size: 100%;"></i>河段
+                    				</section>
+                    				<section class="col-md-8" style="margin-top: 10px" ng-bind-html="detailReachName"></section>
+                    			</li>
+                    			<li style="height: 50px;line-height: 50px;">
+                    				<section class="col-md-4" style="color: #43425D;font-weight: bold;">
+                    					<i style="float: left;margin-top: 10px;margin-right: 5px;width: 30px;height: 30px;background-image: url(img/icon/iconCellPhone.png);background-position: center;background-repeat: no-repeat;background-size: 100%;"></i>电话
+                    				</section>
+                    				<section class="col-md-8" style="text-align: left;color: #4D4F5C;">{{riverChiefDetail.cellphone}}</section>
+                    			</li>
+                    		</ul>
+                    	</div>
+                    </div>
+                    <div class="tab-pane active" id="riverChiefPatrol">
+                        <form class="form-horizontal info-tj-form">
+                            <div class="form-group">
+                                <label class="col-sm-2">开始时间</label>
+                                <div class="col-sm-7 input-group date date_picker" id="beginTime">
+                                    <input type="text" class="form-control input-sm" ng-model="beginTime"/>
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2">结束时间</label>
+                                <div class="col-sm-7 input-group date date_picker" style="float: left;" id="endTime">
+                                    <input type="text" class="form-control input-sm" ng-model="endTime"/>
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                                <div class="col-sm-2" style="float: right;margin-right: 10px;">
+                                    <button type="submit" class="btn btn-primary btn-sm" ng-click="searchPatrolData()"><i class="fa fa-search"></i>搜索
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <table class="table table-bordered table-hover table-tj">
+                            <tr>
+                                <th>选择</th>
+                                <th>开始时间</th>
+                                <th>结束时间</th>
+                                <th>河道段</th>
+                            </tr>
+                            <tr ng-repeat="(ind,item) in patrolList">
+                                <td>
+                                    <div class="checkbox checkbox-tj" style="margin-bottom: 5px;" ng-click="patrolCheck(ind)">
+                                        <label class="i-checks">
+                                            <input type="checkbox" ng-model="item.isCheck"><i></i>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>{{item.startTime}}</td>
+                                <td>{{item.endTime}}</td>
+                                <td>{{item.reachName}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="riverChiefEvent">
+                    	<form class="form-horizontal info-tj-form">
+                            <div class="form-group">
+                                <label class="col-sm-2">开始时间</label>
+                                <div class="col-sm-7 input-group date date_picker" id="beginTimeEve">
+                                    <input type="text" class="form-control input-sm" ng-model="beginTimeEve"/>
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2">结束时间</label>
+                                <div class="col-sm-7 input-group date date_picker" style="float: left;" id="endTimeEve">
+                                    <input type="text" class="form-control input-sm" ng-model="endTimeEve"/>
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                                <div class="col-sm-2" style="float: right;margin-right: 10px;">
+                                    <button type="submit" class="btn btn-primary btn-sm" ng-click="searchEveData()"><i class="fa fa-search"></i>搜索
+                                    </button>
+                                </div>
+                            </div>
+                       	</form>
+						<table class="table table-bordered table-hover table-tj" style="margin-top: 10px">
+                            <tr>
+                                <th>选择</th>
+                                <th>上报时间</th>
+                                <th>河道段</th>
+                                <th>姓名</th>
+                                <th>状态</th>
+                            </tr>
+                            <tr ng-repeat="(ind,item) in riverChiefEveList" ng-click="eventClick(item)">
+                                <td>
+                                    <div class="checkbox checkbox-tj" style="margin-bottom: 5px;" ng-click="eventTableCheck(ind)">
+                                        <label class="i-checks">
+                                            <input type="checkbox" ng-model="item.isCheck"><i></i>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>{{item.reporttime}}</td>
+                                <td>{{item.eventreachname}}</td>
+                                <td>{{item.reportperson}}</td>
+                                <td>{{item.eventStatus}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+	<div class="modal fade" id="checkCircle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span style="color: #fff;" aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">轨迹信息</h4>
+				</div>
+				<div class="modal-body" style="padding: 0">
+                    <div id="patrolmap" style="height:400px; overflow:auto;padding: 0;margin: 0"></div>
+				</div>
+				<div class="modal-footer">
+					<!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
+                    <button type="button" class="btn btn-default" ng-click="closeCheckModal();">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+    <!--问题详情模态框-->
+    <div class="modal fade" id="eventDetailModal" tabindex="-1">
+        <div id="remarkPanel" class="modal-dialog evetModal" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{evtDetails.eventreachname}}详细信息</h4>
+                </div>
+                <div id="remarkModalPanel" class="modal-body" style="max-height: 450px; overflow: hidden;overflow-y: auto;">
+                    <div class="panel panel-default">
+                        <div class="panel-heading font-bold">基础信息</div>
+                        <div class="panel-body">
+                            <form class="bs-example form-horizontal eveDetail-panel">
+                                <div class="form-inline">
+                                    <label class="eveDetail-label">问题编号:</label>
+                                    <span class="eveDetail-value">{{evtDetails.serialno}}</span>
+                                </div>
+                                <div class="form-inline">
+                                    <label class="eveDetail-label">问题类型:</label>
+                                    <span class="eveDetail-value">{{evtDetails.typename}}</span>
+                                </div>
+                                <div class="form-inline">
+                                    <label class="eveDetail-label">问题等级:</label>
+                                    <span ng-if='evtDetails.eventlevel == "0"' class="eveDetail-value">一般</span>
+                                    <span ng-if='evtDetails.eventlevel == "1"' class="eveDetail-value">紧急</span>
+                                    <span ng-if='evtDetails.eventlevel == "2"' class="eveDetail-value">特级</span>
+                                    <span ng-hide='evtDetails.eventlevel' class="eveDetail-value"></span>
+                                </div>
+                            </form>
+                            <form class="bs-example form-horizontal eveDetail-panel">
+                                <div class="form-inline">
+                                    <label class="eveDetail-label">问题来源:</label>
+                                    <span ng-if='evtDetails.eventresource == "A"' class="eveDetail-value">河长版APP</span>
+                                    <span ng-if='evtDetails.eventresource == "B"' class="eveDetail-value">电话上报</span>
+                                    <span ng-if='evtDetails.eventresource == "C"' class="eveDetail-value">公众版APP</span>
+                                    <span ng-if='evtDetails.eventresource == "D"' class="eveDetail-value">河长制微信号</span>
+                                    <span ng-if='evtDetails.eventresource == "F"' class="eveDetail-value">曝光台</span>
+                                    <span ng-hide='evtDetails.eventresource' class="eveDetail-value"></span>
+                                </div>
+                                <div class="form-inline">
+                                    <label class="eveDetail-label">受理人员:</label>
+                                    <span class="eveDetail-value">{{evtDetails.acceptperson}}</span>
+                                </div>
+                                <div class="form-inline">
+                                    <label class="eveDetail-label">受理时间:</label>
+                                    <span class="eveDetail-value">{{evtDetails.reporttime}}</span>
+                                </div>
+                            </form>
+                            <form class="bs-example form-horizontal eveDetail-panel">
+                                <div class="form-inline">
+                                    <label class="eveDetail-label">水系名称:</label>
+                                    <span class="eveDetail-value">{{evtDetails.eventbasinname}}</span>
+                                </div>
+                                <div class="form-inline">
+                                    <label class="eveDetail-label">河道名称:</label>
+                                    <span class="eveDetail-value">{{evtDetails.eventrivername}}</span>
+                                </div>
+                                <div class="form-inline">
+                                    <label class="eveDetail-label">河段名称:</label>
+                                    <span class="eveDetail-value">{{evtDetails.eventreachname}}</span>
+                                </div>
+                            </form>
+                            <form class="bs-example form-horizontal eveDetail-panel">
+                                <div class="form-inline">
+                                    <label class="eveDetail-label">事发时间:</label>
+                                    <span class="eveDetail-value">{{evtDetails.createtime}}</span>
+                                </div>
+                                </br>
+                                <div class="form-inline">
+                                    <label class="eveDetail-label">问题地点:</label>
+                                    <span class="eveDetail-value" style="width: 500px;">{{evtDetails.address}}</span>
+                                </div>
+                                </br>
+                                <div class="form-inline">
+                                    <label class="eveDetail-label">事发地区:</label>
+                                    <span class="eveDetail-value" style="width: 500px;">{{evtDetails.address}}</span>
+                                </div>
+                            </form>
+                            <form class="bs-example form-horizontal eveDetail-panel">
+                                <div class="form-inline">
+                                    <label class="eveDetail-label">问题内容:</label>
+                                    <span class="eveDetail-value">{{evtDetails.content}}</span>
+                                </div>
+                            </form>
+                            <form class="bs-example form-horizontal eveDetail-panel" style="margin-top: 5px;">
+                                <div class="form-inline">
+                                    <label>处理前:</label>
+                                    <div id="layer-photos-before" class="layer-photos-demo" style="margin-left: 30px;" ng-show="before">
+                                        <img style="margin: 0 5px;" ng-repeat="item in before" layer-pid="" layer-src="{{eventImgUrl}}{{item.accessoryurl}}" src="{{eventImgUrl}}{{item.accessoryurl}}" alt="处理前图片" width="60px" height="60px">
+                                    </div>
+                                </div>
+                            </form>
+                            <form class="bs-example form-horizontal eveDetail-panel" style="margin-top: 5px;">
+                                <div class="form-inline">
+                                    <label>处理后:</label>
+                                    <div id="layer-photos-later" class="layer-photos-demo" style="margin-left: 30px;" ng-show="after">
+                                        <img style="margin: 0 5px;" ng-repeat="item in after" layer-pid="" layer-src="{{eventImgUrl}}{{item.afterAccessory}}" src="{{eventImgUrl}}{{item.afterAccessory}}" alt="处理后图片" width="60px" height="60px">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="closeEveModal()">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 巡河历史轨迹详情 -->
+    <div class="modal fade" id="historyDetailModal" tabindex="-1">
+        <div class="modal-dialog" id="historyDetailModalContent" role="document" style="margin-top: 5%;">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #009DFF;">
+                </div>
+                <div class="modal-body">
+                    <div id="patrolStep">
+                        <div class="patrolStepContentBox">
+                            <div class="patrol_left_content">
+                                <div class="row left_top_content" style="margin-left: 0;">
+                                    <section class="col-md-3 col-md-push-0">
+                                        <span class="left">巡河日期</span><span class="right" style="color: #297FCA">{{disAndTime.dateStr}}</span>
+                                    </section>
+                                    <section class="col-md-3 col-md-push-1">
+                                        <span class="left">总巡河时间</span><span class="right" style="color: #2EBD41">{{disAndTime.formatTotalTime}}</span>
+                                    </section>
+                                    <section class="col-md-3 col-md-push-2">
+                                        <span class="left">总巡河距离</span><span class="right" style="color: #FF7700">{{disAndTime.formatTotalDistance}}</span>
+                                    </section>
+                                </div>
+                                <div style="border:1px solid rgba(203,224,242,1);border-radius:4px;" ng-repeat="item in patrolModalList">
+                                    <div>
+                                        <div>
+                                            <p style="background-color: #E5EDF3;line-height: 30px;padding-left: 10px;">{{item.riverName}}</p>
+                                        </div>
+                                        <div style="font-size: 12px;padding-left: 10px;margin-top: 0;">
+                                            <div style="width: calc(100% / 3);margin-top: 0;line-height: 30px;display: inline-block;white-space: nowrap;" ng-attr-title="{{event.content}}">
+                                                <i style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #297FCA;margin-right: 10px;"></i> 河道段名称&#x3000;{{item.reachName}}
+                                            </div><div style="width: calc(100% / 3);margin-top: 0;line-height: 30px;display: inline-block;">
+                                                <i style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #297FCA;margin-right: 10px;"></i> 巡河时间&#x3000;{{item.createtime}}
+                                            </div><div style="width: calc(100% / 3);margin-top: 0;line-height: 30px;display: inline-block;">
+                                                <i style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #297FCA;margin-right: 10px;"></i>巡河距离&#x3000;{{item.distance}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                      <div>
+                                        <div>
+                                          <table class="table table-hover" style="margin: 0px;">
+                                            <thead>
+                                              <tr style="background-color: #E5EDF3;font-size: 12px;font-weight: normal;">
+                                                <th style="padding: 8px 0px;text-align: center;min-width: 36px;">序号</th>
+                                                <th style="padding: 8px 10px;text-align: center;">问题时间</th>
+                                                <th style="padding: 8px 10px;text-align: center;">问题地点</th>
+                                                <th style="padding: 8px 10px;text-align: center;">问题类型</th>
+                                                <th style="padding: 8px 10px;text-align: center;">问题描述</th>
+                                                <th style="padding: 8px 10px;text-align: center;">问题跟踪</th>
+                                                <th style="padding: 8px 10px;text-align: center;">照片</th>
+                                                <th style="padding: 8px 10px;text-align: center;">录音头像</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr ng-repeat="(ind,event) in item.eventList">
+                                                <td>{{ind + 1}}</td>
+                                                <td>{{event.reporttime}}</td>
+                                                <td>{{event.address}}</td>
+                                                <td style="max-width: 120px;overflow: hidden;" ng-attr-title="{{event.content}}">{{event.typename}}</td>
+                                                <td style="max-width: 150px;overflow: hidden;" ng-attr-title="{{event.content}}">{{event.content}}</td>
+                                                <td>{{statusEvent(event.status)}}</td>
+                                                <td ng-click="goEventDetail(event)" style="cursor: pointer;"><span style="padding: 5px 7px;font-size: 12px;color: #FFAB2B;background-color: #FFF6E8;border-radius: 3px;">查看</span></td>
+                                                <td ng-click="goEventDetail(event)" style="cursor: pointer;">
+                                                    <span style="padding: 5px 7px;font-size: 12px; color: #6DD230;background-color: #EFFAE9;border-radius: 3px;">查看</span>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                        <tm-pagination conf="paginationConf"></tm-pagination>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="patrol_right_content">
+                                <ul class="list-group" style="font-size: 12px;">
+                                    <li class="list-group-item" style="border-color:#CBE0F2;">
+                                        <img style="width: 70px;height: 70px;vertical-align:top;" src="img/chiefHeader.png">
+                                        <div style="display:inline-block;font-size: 12px;">
+                                            <section>河长姓名&#x3000;{{riverChiefDetail.name}}</section>
+                                            <section>河长级别&#x3000;{{riverChiefLevelData}}</section>
+                                            <section>河长职位&#x3000;{{riverChiefDetail.position}}</section>
+                                            <section>联系方式&#x3000;{{riverChiefDetail.cellphone}}</section>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" style="border-color:#CBE0F2">
+                                        <span style="font-size: 14px;font-weight: bold;color: #297FCA;margin-right: 40px;">天津市</span><span>行政区&#x3000;&#x3000;{{riverChiefDetail.countyName}}</span>
+                                    </li>
+                                    <li class="list-group-item" style="border-color:#CBE0F2">
+                                        <span>镇(街)名&#x3000;&#x3000;{{riverChiefDetail.townName}}</span>
+                                    </li>
+                                    <li class="list-group-item" style="border-color:#CBE0F2">
+                                        <span>村名&#x3000;&#x3000;{{riverChiefDetail.villageName}}</span>
+                                    </li>
+                                </ul>
+                                <ul class="list-group">
+                                    <li class="list-group-item" style="border-color:#CBE0F2;font-weight: bold;font-size: 14px;">巡河日志</li>
+                                    <li class="list-group-item" style="border-color:#CBE0F2;font-size: 12px;">
+                                        <span><i style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #297FCA;margin-right: 10px;"></i>日志内容</span><span style="margin-left: 15px;">{{chiefLogDetail.content}}</span>
+                                    </li>
+                                    <li class="list-group-item" style="border-color:#CBE0F2;font-size: 12px;">
+                                        <form class="bs-example form-horizontal eveDetail-panel" style="margin-top: 5px;">
+                                            <div style="margin: 0;">
+                                                <label style="vertical-align: top;"><i style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #297FCA;margin-right: 10px;"></i>巡河照片</label>
+                                                <div style="display: inline-block;" id="layer-photos-before" class="layer-photos-demo" style="margin-left: 10px;">
+                                                    <img style="margin: 0 5px;" ng-repeat="item in logImgArr" layer-pid="" layer-src="{{eventImgUrl}}{{item}}" src="{{eventImgUrl}}{{item}}" alt="巡河照片" width="60px" height="60px">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </li>
+                                    <li class="list-group-item" style="border-color:#CBE0F2;font-size: 12px;">
+                                        <form class="bs-example form-horizontal eveDetail-panel" style="margin-top: 5px;">
+                                            <div style="margin: 0;">
+                                                <label style="vertical-align: top;"><i style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #297FCA;margin-right: 10px;"></i>巡河音像</label>
+                                                <div style="display: inline-block;" id="layer-photos-before" class="layer-photos-demo" style="margin-left: 10px;">
+                                                    <div style="display: inline-block;" ng-repeat="item in mediaArr">
+                                                        <img ng-show="item.accessorytype == 3" style="margin: 0 5px;width:60px; height:60px;" src="img/music_img.png" alt="巡河音像">
+                                                        <img ng-show="item.accessorytype == 4" style="margin: 0 5px;width:60px; height:60px;" src="img/audio_img.png" alt="巡河音像">
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="closeHisModal()">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m" id="videoPlayerBox" style="position: absolute;z-index: 999;left: 30%;top: 30%;display: none;">
+        <video
+            id="my-player"
+            class="video-js"
+            controls
+            preload="auto"
+            poster="//vjs.zencdn.net/v/oceans.png"
+            data-setup='{}'>
+          <source ng-src="{{videoUrl}}" type="video/mp4"></source>
+        </video>
+    </div>
+    <div id="mapTips" style="z-index: 1000"></div>
+</div>
+<script>
+	//调用示例
+	layui.use('layer', function() {
+		layer.photos({
+		  photos: '#layer-photos-before'
+		  ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+		}); 
+	}); 
+	layui.use('layer', function() {
+	
+		layer.photos({
+		  photos: '#layer-photos-later'
+		  ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+		}); 
+	}); 
+</script>

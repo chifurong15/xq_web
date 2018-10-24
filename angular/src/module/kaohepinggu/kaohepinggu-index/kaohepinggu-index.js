@@ -21,20 +21,21 @@
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
-					var apiPrefix = moduleService.getServiceUrl() + '/template';
-					
+					// var apiPrefix = moduleService.getServiceUrl() + '/template';
+                    var apiPrefix = 'http://10.0.9.133:8081/template';
+                    $scope.userInfo = $localStorage.userLoginInfo.userInfo;
 					$scope.init = function () {
 						getList();
 					}
-					
+
 					// 获取数据列表
 					function getList () {
-						
+
 						$scope.num = '';//02市长办登录
-						
+
 						$ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/SurfaceWater/userinfo',
-							method: 'get',					
+							method: 'get',
 							callBack: function (res) {
 								$scope.num = res.grade;
 							}

@@ -1,0 +1,34 @@
+
+<div class="wrapper-md" ng-controller="roleAuthorityController" ng-init="init()">
+    <div class="col-sm-4">
+        <div class="panel panel-default m-all-0 ztree-box">
+            <div class="panel-body">
+              <div class="panel-heading">
+              角色
+              </div>
+              <ul id="tree1" class="ztree"></ul>
+          </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="panel panel-default m-all-0 ztree-box">
+            <div class="panel-body">
+              <div class="panel-heading">
+              正在操作的角色:{{name}}
+              </div>
+              <ul id="tree2" class="ztree"></ul>
+              <button class="tree-2-b" ng-click='changess()'>授权</button>
+          </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="panel panel-default m-all-0 ztree-box">
+            <div class="panel-body">
+              <div class="panel-heading">
+              当前角色拥有的权限如下：
+              </div>
+              <ul id="tree3" class="ztree"></ul>
+          </div>
+        </div>
+    </div>
+</div>

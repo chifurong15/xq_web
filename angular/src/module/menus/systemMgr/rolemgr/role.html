@@ -1,0 +1,62 @@
+
+<div class="wrapper-md" ng-controller="roleController" ng-init="init()">
+  <div class="panel panel-default m-all-0">
+      <div class="panel-body">
+        <form method="get">
+          <div class="form-inline">
+            <button class="btn btn-primary" ng-click="addRole()">
+               <i class="fa fa-plus"></i>新增角色
+            </button>
+            <div class="input-group" style="margin-left:20px;">
+              <select class="input-sm form-control w-sm inline v-middle" style="width:100px;" ng-model="x" ng-options="m.name for m in roles" ng-init="roleType()" ng-change='roleTypeFind(x)'>
+                <option value="">-- 请选择 --</option>
+              </select>
+            </div>
+            <div class="form-group" style="float:right;margin-right:20px;">
+              <input id="find" type="text" class="form-control" placeholder="输入角色名" ng-model="name" style="margin-right:10px;">
+              <button type="submit" class="btn btn-primary" ng-click="find()">
+                <i class="fa fa-search"></i>搜索
+              </button>
+            </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>角色名称</th>
+              <th>基础类型</th>
+              <th>状态</th>
+              <th>备注</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="role in roleList" ng-init="index=$index+1"> 
+            	<td>{{index + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
+              <td>{{role.name}}</td>
+              <td>{{role.typeName}}</td>
+              <td>
+              	   <span class="label bg-success zxs" title="Active" ng-if="role.status === 1">激活</span>
+                  <span class="label bg-danger zxs" title="InActive" ng-if="role.status === 2">禁用</span>
+              <!-- {{role.status}} -->
+              </td>
+              <td>{{role.description}}</td>
+              <td>
+                <button ng-click="cancel(role.id)" ng-if="role.status === 1" class='zxss btn btn-primary btn-xs'>禁用</button>
+                <button ng-click="cancel(role.id)" ng-if="role.status === 2" class='zxss btn btn-primary btn-xs'>激活</button>
+                <a class="btn btn-primary btn-xs" ng-click="revise(role.id)"><i class="fa fa-edit" title="修改"></i></a>
+                <a class="btn btn-primary btn-xs" ng-click="deletes(role.id)"><i class="fa fa-trash-o" title="删除"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <tm-pagination conf="paginationConf"></tm-pagination>
+  </div>
+</div>

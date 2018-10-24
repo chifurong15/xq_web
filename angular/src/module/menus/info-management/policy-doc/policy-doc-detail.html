@@ -1,0 +1,60 @@
+<div ng-controller="policyDocDetail" ng-init="init()">
+	<div class="wrapper-md">
+		<div class="panel panel-default m-n">
+			<div class="panel-body">
+				<form method="get">
+					<div class="form-inline">
+						<div class="form-item">
+							<label>文档名称</label>
+							<input type="text" class="form-control input-long" ng-model="docDetail.name" readonly/>
+						</div>
+						<div class="form-item">
+							<label>文档类别</label>
+							<select class="form-control select-short" ng-model="docDetail.typeName"
+									readonly>
+								<option>政策文件</option>
+							</select>
+						</div>
+						<div class="form-item">
+							<label>行政区域</label>
+							<input type="text" class="form-control input-short" ng-model="docDetail.regionName" readonly/>
+						</div>
+					</div>
+					<div class="form-inline">
+						<div class="form-item">
+							<label>河长</label>
+							<input type="text" class="form-control input-short" ng-model="docDetail.userName" readonly/>
+						</div>
+						<div class="form-item">
+							<label>上传时间</label>
+							<input type="text" class="form-control input-short" ng-model="docDetail.createdate" readonly/>
+						</div>
+						<div class="form-item">
+							<label>是否公开</label>
+							<div class="radio"><input type="radio" name="iCheck" checked><span>是</span></div>
+							<div class="radio"><input type="radio" name="iCheck"><span>否</span></div>
+						</div>
+					</div>
+					<div class="form-inline">
+						<div class="form-item">
+							<label>关键字</label>
+							<input type="text" class="form-control input-long" ng-model="docDetail.keywords" readonly/>
+						</div>
+					</div>
+					<!-- <div class="form-item">
+                    <label style="width: auto">说明:关键字以"，"分割，关键字、简介不填默认为河道、文档名称</label></div> -->
+				</form>
+				<div class="line line-dashed b-b line-lg pull-in"></div>
+				<div class="btn-box">
+					<button type="submit" class="btn btn-default" ng-click="back()">
+						<i class="fa fa-reply"></i>返回
+					</button>
+				</div>
+			</div>
+			<!--<div id="pdf1"></div>-->
+		</div>
+	</div>
+</div>
+<!-- PDFObject -->
+<!--<script src="vendor/PDFObject/pdfobject.js"></script>
+<script>PDFObject.embed("/AngularJS.pdf", "#pdf1");</script>-->

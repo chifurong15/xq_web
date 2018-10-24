@@ -1,0 +1,156 @@
+<div ng-controller="instituteSystemListCtrl" ng-init="init()">
+	<div class="wrapper-md">
+		<div class="panel panel-default m-n">
+			<div class="panel-body">
+				<form method="get" class="selectPanel">
+					<div class="form-radio">
+						<label class="radio-inline i-checks" ng-repeat="type in typeList">
+                            <input type="radio" name="type" ng-model="isSelected" ng-click="radioBtn(isSelected)"
+                                   value="{{type.id}}"><i></i>
+                        			{{type.typeName}}
+                        </label>
+					</div>
+					<div class="form-item datatimer">
+	                    <label>开始日期</label>
+	                    <div class="input-group date date_picker" id="beginTime" style="display: inline-flex;">
+	                        <input type="text" class="form-control input-sm" ng-model="beginTime" style="z-index: 0;"/>
+	                        <span class="input-group-addon">
+	                            <i class="fa fa-calendar"></i>
+	                        </span>
+	                    </div>
+                    </div>
+                	<div class="form-item datatimer">
+	                    <label>结束日期</label>
+	                    <div class="input-group date date_picker" id="endTime" style="display: inline-flex;">
+	                        <input type="text" class="form-control input-sm" ng-model="endTime" style="z-index: 0;"/>
+	                        <span class="input-group-addon">
+	                            <i class="fa fa-calendar"></i>
+	                        </span>
+	                    </div>
+                	</div>
+					<div class="form-item" style="display: inline-flex;" >
+						<label>是否公有</label>
+						<select class="form-control select-short" ng-change="selectChange();" ng-model="doc.public" >
+							<option value="1">公有</option>
+							<option value="2">私有</option>
+						</select>
+					</div>
+					
+					<button type="submit" class="btn btn-primary" ng-click="fileSearch()">
+                        <i class="fa fa-search"></i>搜索
+                    </button>
+                    
+                    <button type="submit" class="btn btn-primary" ng-click="reSet()" style="margin-left:20px ;">
+                        <i class="fa fa-search"></i>重置
+                    </button>
+				</form>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="table-responsive">
+					<div class="table-bar">
+						<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#docList">
+                            <i class="fa fa-plus"></i> 新增文档
+                        </button>
+					</div>
+					<table class="table table-bordered table-hover" data-filter="#filter">
+						<tr>
+							<th>序号</th>
+							<th>时间</th>
+							<th>行政区域</th>
+							<th>文档数</th>
+							<!--<th>浏览总量</th>-->
+						</tr>
+						<tr ng-repeat="doc in docList" ng-init="index=$index+1">
+							<td>{{index + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
+							<td>{{doc.createdate}}</td>
+							<td>{{doc.regionName}}</td>
+							<td>
+								<a href="javascript:void(0);" ng-click="docDlist(doc)">{{doc.count}}</a>
+							</td>
+							<!--<td>{{doc.clicks}}</td>-->
+						</tr>
+					</table>
+				</div>
+				<tm-pagination conf="paginationConf"></tm-pagination>
+			</div>
+		</div>
+	</div>
+
+	<!-- 文件上传模态框 -->
+	<div class="modal fade" id="docList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+					<h4 class="modal-title" id="myModalLabel">文档上传</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-inline" method="get">
+						<div class="form-item">
+							<label>所属区域</label>
+							<div class="form-group">
+								<input ng-model="region" type="text" class="form-control input-short-o" ng-click="regionShow()">
+								<a class="input-group-addon" ng-click="regionShow()"><i class="fa fa-search"></i></a>
+							</div>
+						</div>
+						<div class="file-item">
+							<label>上传文件</label>
+							<div class="form-group">
+								<div class="wid-100">
+									<input id="uploadfile" type="file" name="file">
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" ng-click="fileAdd()" data-dismiss="modal">确定</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--所属区域模态框-->
+	<div class="modal fade" id="regionZtree" role="dialog_region" ng-init="init_region()" data-backdrop="static">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">选择区域</h4>
+				</div>
+				<div class="modal-body">
+					<ul id="regionTreeContainer" class="ztree common-modal-content"></ul>
+				</div>
+				<div class="modal-footer">
+					<a href="javascript:;" class="btn btn-primary btn-o" ng-click="regionModalOk()">
+						<i class="fa fa-check"></i>
+						<span>确 定</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$("#uploadfile").fileinput({
+		allowedFileExtensions: ['doc', 'docx', 'pdf'],
+		uploadAsync: true, //默认异步上传
+		showRemove: true, //显示移除按钮
+		maxFileCount: 1, //表示允许同时上传的最大文件个数
+		language: 'zh', //设置语言
+		uploadUrl: '#', //上传的地址
+		showUpload: false, //显示批量上传按钮
+		showCaption: true, //是否显示标题
+		showPreview: false, //是否显示预览
+		dropZoneEnabled: true, //是否显示拖拽区域
+		validateInitialCount: true,
+		slugCallback: function(filename) {
+			return filename.replace('(', '_').replace(']', '_');
+		}
+	});
+</script>

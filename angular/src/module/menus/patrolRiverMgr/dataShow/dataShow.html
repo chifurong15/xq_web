@@ -1,0 +1,185 @@
+<div ng-controller="dataShowCtrl" ng-init="init()">
+
+
+	<aside class="aside-info">
+		<div class="tree-body">
+			<ul class="nav nav-tabs nav-tabs-tj" role="tablist">
+				<li class="active">
+					<a href="#regionTree" onclick="return false;" data-toggle="tab">区域</a>
+				</li>
+				<li>
+					<a href="#componentTree" onclick="return false;" data-toggle="tab">部件</a>
+				</li>
+			</ul>
+			<div class="tab-content tab-content-tj">
+				<div class="tab-pane active" id="regionTree">
+					<ul id="regionTreeContainer" class="ztree"></ul>
+				</div>
+				<div class="tab-pane" id="componentTree">
+					<ul id="componentTreeContainer" class="ztree"></ul>
+				</div>
+			</div>
+		</div>
+	</aside>
+	
+	<a href="javascript:void(0);" class="tree-body-btn" ng-click="treeBodyShow($event)">
+		<i class="fa fa-angle-left iconRight"></i>
+	</a>
+	
+	<section class="container-tj">
+		<!-- 地图工具栏 -->
+		<div class="map-toolbar" id="measureTools">
+			<ul>
+				<li style="float: right"><a href="javascript:void(0);" id="toolbarClose" ng-click="toolbarClose()"
+											class="toolbar-6" title="收缩"></a></li>
+				<li><a href="javascript:void(0);" ng-click="mapResourceShow()" class="toolbar-1" title="资源层选择"></a></li>
+				<li><a href="javascript:void(0);" ng-click="mapTypeShow()" class="toolbar-2" title="底图选择"></a></li>
+				<li><a href="javascript:void(0);" ng-click="measureFunc('area')" class="toolbar-3" title="测面积"></a></li>
+				<li><a href="javascript:void(0);" ng-click="measureFunc('distance')" class="toolbar-4" title="测量距离"></a>
+				</li>
+				<li><a href="javascript:void(0);" ng-click="measureFunc('clear')" class="toolbar-5" title="清除"></a></li>
+				<div class="list-group" id="mapResource">
+					<label class="list-group-item">
+						<div class="radio">
+							<label class="i-checks">
+								<input type="radio" name="mapResource" checked ng-click="changeMapResource('vecAnno')"><i></i> 矢量标注
+							</label>
+						</div>
+					</label>
+					<label class="list-group-item">
+						<div class="radio">
+							<label class="i-checks">
+								<input type="radio" name="mapResource" ng-click="changeMapResource('imgAnno')"><i></i> 影像标注
+							</label>
+						</div>
+					</label>
+				</div>
+				
+				<div class="mapType-group" id="mapTypes">
+					<div class="mapType-group-item" ng-style="x" ng-repeat="x in types" ng-click="showMapTypes(x.style)"
+						 ng-class="{'active':selected==x.style}"></div>
+				</div>
+			</ul>
+			<div class="map-toolbar-bg"></div>
+		</div>
+		
+		<div id="map" class="map-tj"></div>
+	
+	</section>
+	
+	<div class="infoCon-tj">
+		<!-- 缩放按钮 -->
+		<!--<a href="javascript:void(0);" class="info-tj-btn" ng-click="infoTjShow($event)">
+			<i class="fa fa-angle-right iconRight"></i>
+		</a>-->
+		<!-- 右侧内容框 -->
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs info-tj-tabs">
+			<li ng-repeat="list in componentTitleList" id="{{list.id}}_li" ng-class="list.isLiHover ? 'active' : ''">
+				<a href="#" onclick="return false;" ng-click="getTargetComponentList('{{list.id}}')" data-toggle="tab">{{list.name}}</a>
+			</li>
+		</ul>
+		<div class="tab-content">
+			<div class="tab-pane active">
+				<div class="info-tj">
+					<div class="info-tj-tit">
+						<h4>查询</h4>
+					</div>
+					<form class="form-horizontal info-tj-form">
+						<div class="form-group">
+							<label class="col-sm-1">名称</label>
+							<div class="col-sm-9">
+								<input type="text" ng-model="conditionVal" class="form-control input-sm" placeholder="请输入条件搜索">
+							</div>
+							<div class="col-sm-2">
+								<button type="submit" class="btn btn-primary btn-sm" ng-click="search();"><i class="fa fa-search"></i>搜索</button>
+							</div>
+						</div>
+					</form>
+					<table class="table table-bordered table-hover table-tj">
+						<tr>
+							<th>序号</th>
+							<th width="35%">名称</th>
+							<th width="35%">位置</th>
+							<th>操作</th>
+						</tr>
+						<tr ng-repeat="list in componentList" ng-init="index = $index + 1" ng-click="showComponentInfo(list);">
+							<td>{{index}}</td>
+							<td>{{list.name}}</td>
+							<td>{{list.regionName}}</td>
+							<td><a href="javascript:void(0);" ng-click="showComponentDetail(list.id);">查看详情</a></td>
+						</tr>
+					</table>
+					<tm-pagination conf="paginationConf"></tm-pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="componentDetail" tabindex="-1">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+							aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">{{componentDetail.name}} 详细信息</h4>
+				</div>
+				<div class="modal-body">
+					<table class="table table-bordered dialog-table">
+						<tr>
+							<th width="15%">名称</th>
+							<td width="35%">{{componentDetail.name}}</td>
+							<th width="15%">来源</th>
+							<td width="35%">{{componentDetail.sourceName}}</td>
+						</tr>
+						<tr>
+							<th>区域</th>
+							<td>{{componentDetail.regionName}}</td>
+							<th>级别</th>
+							<td>{{componentDetail.complevelName}}</td>
+						</tr>
+						<tr>
+							<th>状态</th>
+							<th>{{componentDetail.statusName}}</th>
+							<th>类型</th>
+							<td>{{componentDetail.mainclassname}}</td>
+						</tr>
+						<tr>
+							<th>所属河道</th>
+							<td>{{componentDetail.reachName}}</td>
+							<th>地址</th>
+							<td>{{componentDetail.specificComponent.address}}</td>
+						</tr>
+						<tr>
+							<th>处理规模</th>
+							<td>{{componentDetail.specificComponent.handleAbility}} 万吨/天</td>
+							<th>工程竣工时间</th>
+							<td></td>
+						</tr>
+						<tr>
+							<th>污水处理工艺</th>
+							<td>{{componentDetail.specificComponent.handleTechnology}}</td>
+							<th>排水去向</th>
+							<td>{{componentDetail.specificComponent.remark}}</td>
+						</tr>
+						<tr>
+							<th>联系人</th>
+							<td>{{componentDetail.specificComponent.principal}}</td>
+							<th>联系人电话</th>
+							<td>{{componentDetail.specificComponent.celphone}}</td>
+						</tr>
+						<tr>
+							<th>主管单位</th>
+							<td>{{componentDetail.specificComponent.dutyunit}}</td>
+							<th>行业主管单位</th>
+							<td>{{componentDetail.specificComponent.undercentralizedunit}}</td>
+						</tr>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

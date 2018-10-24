@@ -38,7 +38,7 @@ angular.module('app')
             this._patrolLineInterval = null; //轨迹线刷新的interval
 
             this.isGraphicClick = false;
-            var _serviceUrl = $localStorage.serviceUrl_chiefOnline;
+            // var _serviceUrl = moduleService.getServiceUrl();
             var coordsArr;
 
             var startImgPath, walkImgPath, endImgPath;
@@ -47,7 +47,7 @@ angular.module('app')
             this.refreshDataTimer = null; //河长点位数据的计时器
             var refreshTime = 30000;
             var _that = this;
-            //var _serviceUrl = "http://10.0.9.248:8088/";
+            var _serviceUrl = "http://117.8.229.5:9000" + "/chiefOnline";
 
             this.init = function (map, layerId, userRegionId) {
                 this._map = map;

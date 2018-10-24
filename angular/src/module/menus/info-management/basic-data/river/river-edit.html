@@ -1,0 +1,145 @@
+<div ng-controller="imRiverEdit" ng-init="init()">
+	<div class="wrapper-md">
+		<div class="panel panel-default m-n">
+			<div class="panel-body">
+				<div class="panel-content proMgr-container-box">
+					<div class="left-panel wid-60">
+						<form id="riverAddForm" class="form-inline" method="get" novalidate="novalidate">
+							<div class="form-item">
+								<label>河流名称</label>
+								<input type="text" class="form-control input-short" ng-model="riverName"  ng-blur="isRepeat()"/>
+                                <span class="required">*</span>
+							</div>
+							<div class="form-item">
+	                            <label>河流长度</label>
+	                            <input type="text" class="form-control input-short" ng-model="length"/>
+	                            <span>km</span><span class="required">*</span>
+	                        </div>
+	                      	<div class="form-item">
+								<label>河流类型</label>
+								<select ng-init="riverType()" ng-model="river_type.dictValue" ng-options="rv.dictValue as rv.dictName for rv in riverTypes"
+                                        ng-change="river_Change(river_type.dictValue)" class="form-control select-short">
+                                    <option  value="">请选择</option>
+                                </select>
+                                <span class="required">*</span>
+							</div>
+							<br/>
+							<div class="form-item">
+		                        <label>所属区域</label>
+								<input ng-model="region" type="text" class="form-control input-short-o"  ng-click="regionShow()">
+								<a class="input-group-addon" ng-click="regionShow()"><i class="fa fa-search"></i></a>
+                                <span class="required">*</span>
+		                    </div>
+							<div class="form-item">
+								<label>所属水系</label>
+								<input ng-model="water_ztree" type="text" class="form-control input-short-o"  ng-click="waterShow()">
+								<a class="input-group-addon"  ng-click="waterShow()"><i class="fa fa-search"></i></a>
+                                <span class="required">*</span>
+							</div>
+		                    <br/>
+							<div class="form-item">
+	                            <label>起点</label>
+	                            <input type="text" class="form-control input-short" ng-model="startPoint"/>
+	                        </div>
+	                        <div class="form-item">
+	                            <label>终点</label>
+	                            <input type="text" class="form-control input-short" ng-model="endPoint"/>
+	                        </div>
+							<br/>
+
+							<br/>
+                            <div class="form-item">
+                                <label>概述</label>
+                            </div>
+                            <div id="editor">
+                            </div>
+							<br/>
+							<div class="form-item">
+								<label>备注</label>
+								<textarea class="form-control textarea-long" ng-model="remark" rows="4" maxlength="512"></textarea>
+							</div>
+						</form>
+					</div>
+					<!-- map -->
+					<div class="right-panel wid-35">
+						<div class="proMgr-basin_map"></div>
+					</div>
+				</div>
+			</div>
+			<div class="panel-footer m-b-10">
+				<div class="btn-box">
+					<button type="submit" class="btn btn-primary" ng-click="submit()">
+						<i class="fa fa-plus"></i>确定
+					</button>
+					<button type="submit" class="btn btn-default" ng-click="back()">
+						<i class="fa fa-reply"></i>返回
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--描述：所属区域树-->
+	<div class="modal fade" id="region_ztree"  role="dialog_region" ng-init="init_region()" data-backdrop="static">
+		<div class="modal-dialog water_dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">选择区域</h4>
+				</div>
+				<div class="modal-body">
+				<div class="input-group">
+			        <input type="text" ng-model="areaName" class="form-control" placeholder="请输入区域名称">
+			        <span class="input-group-btn">
+			        	<button class="btn btn-default" type="button" ng-click="select_region()">查询</button>
+			        </span>
+			    </div>
+					<ul id="regionTree" class="ztree ztree_box_modal"></ul>
+				</div>
+				<div class="modal-footer">
+					<a href="javascript:;" class="btn btn-primary btn-o" ng-click="region_modalOk()">
+						<i class="fa fa-check"></i>
+						<span>确 定</span>
+					</a>
+					<!--<a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
+						<i class="fa fa-reply"></i>
+						<span>关闭</span>
+					</a>-->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--描述：所属水系树-->
+	
+	<div class="modal fade" id="water_ztree"  role="dialog_water" data-backdrop="static">
+		<div class="modal-dialog water_dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">选择水系</h4>
+				</div>
+				<div class="modal-body">
+				<div class="input-group">
+			        <input type="text" ng-model="waterName" class="form-control" placeholder="请输入水系名称">
+			        <span class="input-group-btn">
+			        <button class="btn btn-default" type="button" ng-click="select_water()">查询</button>
+			        </span>
+			    </div>
+					<ul id="waterZtree" class="ztree ztree_box_modal"></ul>
+				</div>
+				<div class="modal-footer">
+					<a href="javascript:;" class="btn btn-primary btn-o" ng-click="water_modalOk()">
+						<i class="fa fa-check"></i>
+						<span>确 定</span>
+					</a>
+					<!--<a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
+						<i class="fa fa-reply"></i>
+						<span>关闭</span>
+					</a>-->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+    var ue =  CKEDITOR.replace( 'editor' );
+</script>

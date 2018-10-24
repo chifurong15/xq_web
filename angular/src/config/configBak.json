@@ -1,0 +1,345 @@
+{
+	"moduleId": "44d7bde1ba2e11e7a0e6ac1f6b182e9e",
+	"moduleName": "angular",
+	"version": "v1.0.0",
+	"type":"1",
+	"menus": [
+		{
+			"seqId": "5",
+			"parentId": "0",
+			"isLeaf":false,
+			"isRoot":true,
+			"name": "分析统计",
+			"icon": "fa fa-area-chart",
+			"url": "src/module/fenxitongji/fenxitongji-index/fenxitongji-index.html",
+			"requireJS":["src/module/fenxitongji/fenxitongji-index/fenxitongji-index.js"],
+			"description": "分析统计首页"
+		},
+		{
+			"seqId": "5-1",
+			"parentId": "5",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "河长巡河",
+			"icon": "fa fa-wheelchair-alt",
+			"url": "src/module/fenxitongji/fenxitongji-index/fenxitongji-index.html",
+			"requireJS":["src/module/fenxitongji/fenxitongji-index/fenxitongji-index.js"],
+			"description": "分析统计-河长巡河"
+		},
+		{
+			"seqId": "5-2",
+			"parentId": "5",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "巡河情况",
+			"icon": "fa fa-wheelchair-alt",
+			"url": "src/module/fenxitongji/fenxitongji-detail/fenxitongji-detail.html",
+			"requireJS":["src/module/fenxitongji/fenxitongji-detail/fenxitongji-detail.js"],
+			"description": "分析统计-河长的巡河情况"
+		},
+		{
+			"seqId": "5-3",
+			"parentId": "5",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "问题统计",
+			"icon": "fa fa-signal",
+			"url": "src/module/fenxitongji/fenxitongji-question/fenxitongji-question.html",
+			"requireJS":["src/module/fenxitongji/fenxitongji-question/fenxitongji-question.js"],
+			"description": "分析统计-问题统计"
+		},		
+		{
+			"seqId": "1",
+			"parentId": "0",
+			"isLeaf":false,
+			"isRoot":true,
+			"name": "信息管理",
+			"icon": "fa fa-bars",
+			"url": "src/module/bulletin/bulletin-list/bulletin-list.html",
+			"requireJS":["src/module/bulletin/bulletin-list/bulletin-list.js"],
+			"description": "信息管理首页"
+		},
+		{
+			"seqId": "1-1",
+			"parentId": "1",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "信息发布",
+			"icon": "fa fa-tags",
+			"url": "src/module/bulletin/bulletin-list/bulletin-list.html",
+			"requireJS":["src/module/bulletin/bulletin-list/bulletin-list.js"],
+			"description": "信息发布-信息发布列表"
+		},
+		{
+			"seqId": "1-2",
+			"parentId": "1",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "新增信息",
+			"icon": "menu-icon-6",
+			"url": "src/module/bulletin/bulletin-add/bulletin-add.html",
+			"requireJS":["src/module/bulletin/bulletin-add/bulletin-add.js"],
+			"description": "信息管理-新增通报"
+		},
+		{
+			"seqId": "1-3",
+			"parentId": "1",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "信息详情",
+			"icon": "menu-icon-6",
+			"url": "src/module/bulletin/bulletin-view/bulletin-view.html",
+			"requireJS":["src/module/bulletin/bulletin-view/bulletin-view.js"],
+			"description": "信息管理-信息详情"
+		},
+		{
+			"seqId": "2",
+			"parentId": "0",
+			"isLeaf":false,
+			"isRoot":true,
+			"name": "抽查督导",
+			"icon": "fa fa-search",
+			"url": "src/module/chouchadudao/chouchadudao-index/chouchadudao-index.html",
+			"requireJS":["src/module/chouchadudao/chouchadudao-index/chouchadudao-index.js"],
+			"description": "抽查督导"
+		},
+		{
+			"seqId": "2-1",
+			"parentId": "2",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "暗查暗访",
+			"icon": "menu-icon-6",
+			"url": "src/module/chouchadudao/chouchadudao-index/chouchadudao-index.html",
+			"requireJS":["src/module/chouchadudao/chouchadudao-index/chouchadudao-index.js"],
+			"description": "抽查督导-首页-暗查暗访"
+		},		
+		{
+			"seqId": "3",
+			"parentId": "0",
+			"isLeaf":false,
+			"isRoot":true,
+			"name": "考核评估",
+			"icon": "fa fa-pencil",
+			"url": "src/module/kaohepinggu/kaohepinggu-index/kaohepinggu-index.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-index/kaohepinggu-index.js"],
+			"description": "考核评估"
+		},
+		{
+			"seqId": "3-1",
+			"parentId": "3",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "地表水质环境评分管理",
+			"icon": "fa fa-bug",
+			"url": "src/module/kaohepinggu/kaohepinggu-index/kaohepinggu-index.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-index/kaohepinggu-index.js"],
+			"description": "地表水质环境评分管理-首页"
+		},
+		{
+			"seqId": "3-0",
+			"parentId": "3",
+			"isLeaf":false,
+			"isRoot":false,
+			"name": "水质数据",
+			"icon": "",
+			"url": "",
+			"requireJS":[""],
+			"description": "水质数据"
+		},
+		{
+			"seqId": "3-2",
+			"parentId": "3-0",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "水质数据",
+			"icon": "fa fa-lemon-o",
+			"url": "src/module/kaohepinggu/kaohepinggu-shuizhi/kaohepinggu-shuizhi.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-shuizhi/kaohepinggu-shuizhi.js"],
+			"description": "水质数据"
+		},		
+		{
+			"seqId": "3-2-4",
+			"parentId": "3-0",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "自动水质管理",
+			"icon": "fa fa-sign-out",
+			"url": "src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-detail/kaohepinggu-detail.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-detail/kaohepinggu-detail.js"],
+			"description": "水质管理-导出"
+		},
+		{
+			"seqId": "3-3",
+			"parentId": "3",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "污水处理厂",
+			"icon": "fa fa-trash-o",
+			"url": "src/module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-wushui.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-wushui.js"],
+			"description": "污水处理厂"
+		},
+		{
+			"seqId": "3-4",
+			"parentId": "3",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "考核评分",
+			"icon": "fa fa-trash-o",
+			"url": "src/module/kaohepinggu/kaohepinggu-score/kaohepinggu-score.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-score/kaohepinggu-score.js"],
+			"description": "考核评分-考核评分"
+		},
+		{
+			"seqId": "3-5",
+			"parentId": "3",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "违规细则",
+			"icon": "fa fa-trash-o",
+			"url": "src/module/kaohepinggu/kaohepinggu-rules/kaohepinggu-rules.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-rules/kaohepinggu-rules.js"],
+			"description": "考核评分-违规细则"
+		},					
+		{
+			"seqId": "4",
+			"parentId": "0",
+			"isLeaf":false,
+			"isRoot":true,
+			"name": "移动平台",
+			"icon": "fa fa-tablet",
+			"url": "src/module/yidongpingtai/yidongpingtai-index/yidongpingtai-index.html",
+			"requireJS":["src/module/yidongpingtai/yidongpingtai-index/yidongpingtai-index.js"],
+			"description": "移动平台"
+		},
+		{
+			"seqId": "4-1",
+			"parentId": "4",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "移动平台",
+			"icon": "fa fa-mobile",
+			"url": "src/module/yidongpingtai/yidongpingtai-index/yidongpingtai-index.html",
+			"requireJS":["src/module/yidongpingtai/yidongpingtai-index/yidongpingtai-index.js"],
+			"description": "移动平台-首页"
+		}
+	],
+	"components": [
+		{
+			"seqId": "1",
+			"name": "report",
+			"url": "componentXXX1.html",
+			"requireJS":["js/components/componentsXXX1.js", "js/components/componentXXX2.js"],
+			"description": "demo组件示例，URL为相对路径"
+		}
+	],
+	"pages":[
+		{
+			"seqId": "501",
+			"name": "单页面",
+			"url": "",
+			"requireJS":[""],
+			"description": "单页面"
+		},
+		{
+			"seqId": "3-1-2",
+			"parentId": "3",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "新增地表管理",
+			"icon": "fa fa-bug",
+			"url": "src/module/kaohepinggu/kaohepinggu-index/koahepinggu-add/kaohepinggu-add.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-index/koahepinggu-add/kaohepinggu-add.js"],
+			"description": "地表水质环境评分管理-新增"
+		},
+		{
+			"seqId": "3-1-3",
+			"parentId": "3",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "地表管理详情",
+			"icon": "fa fa-bug",
+			"url": "src/module/kaohepinggu/kaohepinggu-index/kaohepinggu-detail/kaohepinggu-detail.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-index/kaohepinggu-detail/kaohepinggu-detail.js"],
+			"description": "地表水质环境评分管理-详情"
+		},
+		{
+			"seqId": "3-2-2",
+			"parentId": "3",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "新增水质管理",
+			"icon": "fa fa-lemon-o",
+			"url": "src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-add/kaohepinggu-add.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-add/kaohepinggu-add.js"],
+			"description": "水质管理-新增"
+		},
+		{
+			"seqId": "3-2-3",
+			"parentId": "3",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "水质管理详情",
+			"icon": "fa fa-lemon-o",
+			"url": "src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-update/kaohepinggu-update.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-update/kaohepinggu-update.js"],
+			"description": "水质管理-修改"
+		},
+		{
+			"seqId": "3-3-2",
+			"parentId": "3",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "新增污水管理",
+			"icon": "fa fa-database",
+			"url": "src/module/kaohepinggu/kaohepinggu-wushui/koahepinggu-add/kaohepinggu-add.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-wushui/koahepinggu-add/kaohepinggu-add.js"],
+			"description": "污水处理厂-新增"
+		},
+		{
+			"seqId": "3-3-3",
+			"parentId": "3",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "污水管理详情",
+			"icon": "fa fa-database",
+			"url": "src/module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-detail/kaohepinggu-detail.html",
+			"requireJS":["src/module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-detail/kaohepinggu-detail.js"],
+			"description": "污水处理厂-详情"
+		},
+		{
+			"seqId": "2-1-1",
+			"parentId": "2",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "暗查暗访-新增",
+			"icon": "menu-icon-6",
+			"url": "src/module/chouchadudao/chouchadudao-add/chouchadudao-add.html",
+			"requireJS":["src/module/chouchadudao/chouchadudao-add/chouchadudao-add.js"],
+			"description": "抽查督导-新增"
+		},
+		{
+			"seqId": "2-1-2",
+			"parentId": "2",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "暗查暗访-详情",
+			"icon": "menu-icon-6",
+			"url": "src/module/chouchadudao/chouchadudao-detail/chouchadudao-detail.html",
+			"requireJS":["src/module/chouchadudao/chouchadudao-detail/chouchadudao-detail.js"],
+			"description": "抽查督导-详情"
+		},
+		{
+			"seqId": "2-1-3",
+			"parentId": "2",
+			"isLeaf":true,
+			"isRoot":false,
+			"name": "暗查暗访-上报",
+			"icon": "menu-icon-6",
+			"url": "src/module/chouchadudao/chouchadudao-reported/chouchadudao-reported.html",
+			"requireJS":["src/module/chouchadudao/chouchadudao-reported/chouchadudao-reported.js"],
+			"description": "抽查督导-上报"
+		}
+	]
+}

@@ -1,0 +1,109 @@
+<div class="kaohepingfen" ng-controller="shuizhiListCtrl" ng-init="init()">
+	<div class="wrapper-md ">
+		<div class="panel panel-default m-n">
+			<div class="panel-body" style="position: relative;">
+				<span class="tag">水质数据</span><span class="tag-right"></span>
+				<div style="overflow: hidden;"><button type="button" class="btn btn-primary" ng-click="goBack()" style="position: absolute;right: 20px;bottom: 20px;">返回</button></div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="table-bar">
+					<form class="form-inline clearfix">
+						<div class="input-group date date_picker form-item" id="J-searchTime">
+							<label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">期号</font></font></label>
+							<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime">
+							<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						</div>
+						<div class="input-group form-item">
+							<label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">状态</font></font></label>
+							<select ng-model="type" class="form-control select-short" style="width: auto;">
+								<option value=""></option>
+								<option value="0">已上报</option>
+								<option value="1">已退回</option>
+								<option value="2">未上报</option>
+							</select>
+						</div>
+						<div class="form-item">
+							<label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">创建人</font></font></label>
+							<input type="text" class="form-control input-short" ng-model="createuser">
+						</div>
+						<div class="input-group">
+							<button class="btn btn-primary" ng-click="search()">
+		                    	<i class="fa fa-search"></i>搜索
+		                    </button>
+						</div>
+						<div class="input-group fr">
+							<button type="button" class="btn btn-primary" ng-click="add()">
+		                        <i class="fa fa-plus"></i> 新增
+		                    </button>
+						</div>
+					</form>
+				</div>
+				<div class="tab-content">
+					<div class="tab-pane active" id="tableStatistics">
+						<div class="table-responsive" style="margin-top: 20px;">
+							<table class="table table-bordered table-hover">
+								<tbody>
+									<tr class='tHeader'>
+										<th width="5%">序号</th>
+										<th width="15%">标题</th>
+										<th width="5%">批号</th>
+										<th width="10%">期号</th>
+										<th width="10%">状态</th>
+										<th width="15%">创建时间</th>
+										<th width="10%">创建人</th>
+										<th width="15%">备注</th>
+										<th width="10%">操作</th>
+									</tr>
+									<tr ng-repeat="item in waterQualityList" ng-if="num == 2">
+										<td>{{$index+1}}</td>
+										<td>{{item.title}}</td>
+										<td>{{item.bATCHNumber}}</td>
+										<td>{{item.issue}}</td>
+                                        <td>
+                                            <span ng-if="item.status==0" class="label label-danger">已上报</span>
+                                            <span ng-if="item.status==1" class="label label-info">已退回</span>
+                                        </td>
+										<td>{{item.createtime}}</td>
+										<td>{{item.createuser}}</td>
+										<td>{{item.remark}}</td>
+										<td style="text-align: left;">
+											<button type="button" class="btn btn-success" ng-click="view(item.id)">查看</button>
+											<button type="button" class="btn btn-primary" ng-click="sendBack(item.id)">退回</button>
+										</td>
+									</tr>
+									<tr ng-repeat="item in waterQualityList" ng-if="num != 2">
+										<td>{{$index+1}}</td>
+										<td>{{item.title}}</td>
+										<td>{{item.bATCHNumber}}</td>										
+										<td>{{item.issue}}</td>
+                                        <td>
+                                            <span ng-if="item.status==0" class="label label-danger">已上报</span>
+                                            <span ng-if="item.status==1" class="label label-info">已退回</span>
+                                            <span ng-if="item.status==2" class="label label-success">未上报</span>
+                                        </td>
+										<td>{{item.createtime}}</td>
+										<td>{{item.createuser}}</td>
+										<td>{{item.remark}}</td>
+										<td style="text-align: left;">
+											<button type="button" class="btn btn-success" ng-click="view(item.id)">查看</button>
+											<button ng-if="item.status==1" type="button" class="btn btn-warning" ng-click="edit(item.id)">修改</button>
+											<button ng-if="item.status==2" type="button" class="btn btn-danger" ng-click="report(item.id)">上报</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<tm-pagination conf="paginationConf"></tm-pagination>
+						</div>
+					</div>
+					<div class="tab-pane" id="chartStatistics">
+						<div id="patrolChart" class="tj-chart-con"></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+</div>

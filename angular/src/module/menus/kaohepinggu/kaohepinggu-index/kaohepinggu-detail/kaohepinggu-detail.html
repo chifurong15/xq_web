@@ -1,0 +1,43 @@
+<div class="kaohepingfen-add" ng-controller="kaohepingfenViewCtrl" ng-init="init()">
+    <div class="wrapper-md ">
+    	<div class="panel panel-default m-n">
+        	<div class="panel-body" style="position: relative;">
+        		<span class="tag">地表水质评分管理</span><span class="tag-right"></span><span class="tag-right tag-left"></span><span class="tag tag1">详情</span><span class="tag-right"></span>
+        		<div style="overflow: hidden;"><button type="button" class="btn btn-primary" ng-click="goBack()" style="position: absolute;right: 20px;bottom: 20px;">返回</button></div>
+        	</div>
+		</div>
+        
+    	<div class="panel panel-default">
+        	<div class="panel-body">
+        		<div>
+        			<h3 style="font-size: 16px;font-weight: 700;">地表水津南区评分管理</h3>
+        		</div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                	<tr class='tHeader'>
+	                                    <th width="10%">序号</th>
+	                                    <th width="30%">行政区域</th>
+	                                    <th width="30%">考核得分</th>
+	                                </tr>
+                                	<tr ng-repeat="item in detailList">
+	                                    <td>{{$index+1}}</td>
+	                                    <td>{{item.popedom}}</td>
+	                                    <td>{{item.grade}}</td>
+	                                </tr>	                               
+                            	</tbody>
+                            </table>
+                			<!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="chartStatistics">
+                        <div id="patrolChart" class="tj-chart-con"></div>
+                    </div>
+                </div>
+                
+        	</div>
+       </div>    	
+    </div>
+</div>
