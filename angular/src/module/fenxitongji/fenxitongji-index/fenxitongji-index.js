@@ -33,7 +33,7 @@
 	                	getDataList();
 	                	regionTreeList();
 	                	getGrade();	
-	                	alert($scope.token)
+
 	                }
 	                var $regionCode, $regionTreeContainer = $('#regionTreeContainer');
 	                var regionTree, reachTree, treeNode_find, treeNode_id;
@@ -195,7 +195,7 @@
 								endTime: $scope.endTime
 							}
 						})
-						routeService.route('5-2', true);
+						routeService.route('5-2', false);
 	                }
 
 	                // 获取列表

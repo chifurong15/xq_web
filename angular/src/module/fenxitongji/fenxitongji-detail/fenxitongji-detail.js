@@ -179,6 +179,8 @@
 	                var chartList;
 	                function getDataList (isSearch) {
 	                	var params = {
+	                		pageNumber: $scope.paginationConf.currentPage,
+							pageSize: $scope.paginationConf.itemsPerPage,
                             regionId: $scope.regionId,
                             grade: $scope.grade,
                             type: $scope.type
@@ -196,10 +198,27 @@
 	                        params: params
 	                    }).success(function (res) {
 	                        $scope.dataList = res.data.list;
+                    		$scope.paginationConf.totalItems = res.data.total;	                        
 	                    }).error(function (error) {
 	
 	                    })
 	                };
+	                
+	                // 配置分页基本参数
+	                $scope.paginationConf = {
+	                    currentPage: $location.search().currentPage ? $location.search().currentPage : 1,
+	                    itemsPerPage: 10,
+	                    pagesLength: 10,
+				        perPageOptions: [1, 2, 3, 4, 5, 10],
+	                    onChange: function () {
+	                        //console.log($scope.paginationConf.currentPage);
+	                        $location.search('currentPage', $scope.paginationConf.currentPage);
+	                    }
+	                };
+	                // 当他们一变化的时候，重新获取数据条目
+	                $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', getDataList);
+	                
+	                
 
 			} ]);
 })(window, angular);
