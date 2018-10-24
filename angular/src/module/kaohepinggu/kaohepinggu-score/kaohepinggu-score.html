@@ -27,9 +27,10 @@
                         <span>{{item.totalpoints}}</span>	                                    
                         <span>{{item.sort}}</span>
         				<span style="display: inline-block;padding: 3px 0;border-right: 1px solid #ccc;">
-        					<button type="button" class="btn btn-success" ng-click="showModal(1,item)">增加子项目</button>
-	                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,item)">修改</button>
-	                        <button type="button" class="btn btn-danger" ng-click="delete(item.id)" ng-if="item.children.length == 0">删除</button>
+        					<button type="button" class="btn btn-success" ng-click="showModal(1,item)" ng-if="num == 2">增加子项目</button>
+	                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,item)" ng-if="num == 2">修改</button>
+	                        <button type="button" class="btn btn-danger" ng-click="delete(item.id)" ng-if="num == 2 && item.children.length == 0">删除</button>
+        					<span ng-if="num !=2 ">暂无</span>
         				</span>
         				<ul class="scoreTwo">
         					<li ng-repeat="items in item.children" >
@@ -42,9 +43,10 @@
 		                        <span>{{items.totalpoints}}</span>	                                    
 		                        <span>{{items.sort}}</span>
 		        				<span style="display: inline-block;padding: 3px 0;border-right: 1px solid #ccc;">
-		        					<button type="button" class="btn btn-success" ng-click="showModal(1,items)">增加子项目</button>
-			                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,items)">修改</button>
-			                    	<button type="button" class="btn btn-danger" ng-click="delete(items.id)" ng-if="items.children.length == 0">删除</button>
+		        					<button type="button" class="btn btn-success" ng-click="showModal(1,items)" ng-if="num == 2">增加子项目</button>
+			                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,items)" ng-if="num == 2">修改</button>
+			                    	<button type="button" class="btn btn-danger" ng-click="delete(items.id)" ng-if="num == 2 && items.children.length == 0">删除</button>
+		        					<span ng-if="num !=2 ">暂无</span>
 		        				</span>
 		        				<ul class="scoreThree">
 		        					<li ng-repeat="itemss in items.children" ng-if="items.children">
@@ -57,9 +59,10 @@
 				                        <span>{{itemss.totalpoints}}</span>	                                    
 				                        <span>{{itemss.sort}}</span>
 				        				<span style="display: inline-block;padding: 3px 0;border-right: 1px solid #ccc;">
-				        					<button type="button" class="btn btn-success" ng-click="showModal(1,itemss)">增加子项目</button>
-					                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,itemss)">修改</button>
-					                    	<button type="button" class="btn btn-danger" ng-click="delete(itemss.id)" ng-if="itemss.children.length == 0">删除</button>
+				        					<button type="button" class="btn btn-success" ng-click="showModal(1,itemss)" ng-if="num == 2">增加子项目</button>
+					                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,itemss)" ng-if="num == 2">修改</button>
+					                    	<button type="button" class="btn btn-danger" ng-click="delete(itemss.id)" ng-if="num == 2 && itemss.children.length == 0">删除</button>
+				        					<span ng-if="num !=2 ">暂无</span>
 				        				</span>
 				        				<ul class="scoreFour">
 			        						<li ng-repeat="item4 in itemss.children" ng-if="itemss.children">
@@ -72,9 +75,10 @@
 						                        <span>{{item4.totalpoints}}</span>	                                    
 						                        <span>{{item4.sort}}</span>
 						        				<span style="display: inline-block;padding: 3px 0;border-right: 1px solid #ccc;">
-						        					<button type="button" class="btn btn-success" ng-click="showModal(1,item4)">增加子项目</button>
-							                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,item4)">修改</button>
-							                    	<button type="button" class="btn btn-danger" ng-click="delete(item4.id)" ng-if="item4.children.length == 0">删除</button>
+						        					<button type="button" class="btn btn-success" ng-click="showModal(1,item4)" ng-if="num == 2">增加子项目</button>
+							                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,item4)" ng-if="num == 2">修改</button>
+							                    	<button type="button" class="btn btn-danger" ng-click="delete(item4.id)" ng-if="num == 2 && item4.children.length == 0">删除</button>
+						        					<span ng-if="num !=2 ">暂无</span>
 						        				</span>
 						        				<ul class="scoreFour">
 					        						<li ng-repeat="item5 in item4.children" ng-if="item4.children">
@@ -87,9 +91,10 @@
 								                        <span>{{item5.totalpoints}}</span>	                                    
 								                        <span>{{item5.sort}}</span>
 								        				<span style="display: inline-block;padding: 3px 0;border-right: 1px solid #ccc;">
-								        					<button type="button" class="btn btn-success" ng-click="showModal(1,item5)">增加子项目</button>
-									                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,item5)">修改</button>
-									                    	<button type="button" class="btn btn-danger" ng-click="delete(item5.id)" ng-if="item5.children.length == 0">删除</button>
+								        					<button type="button" class="btn btn-success" ng-click="showModal(1,item5)" ng-if="num == 2">增加子项目</button>
+									                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,item5)" ng-if="num == 2">修改</button>
+									                    	<button type="button" class="btn btn-danger" ng-click="delete(item5.id)" ng-if="num == 2 && item5.children.length == 0">删除</button>
+								        					<span ng-if="num !=2 ">暂无</span>
 								        				</span>
 					        						</li>
 					        					</ul>

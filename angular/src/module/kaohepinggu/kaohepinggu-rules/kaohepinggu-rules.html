@@ -10,7 +10,7 @@
         	<div class="panel-body">
         		<div class="table-bar">
         			<form class="form-inline clearfix">
-	                    <div class="input-group fr">
+	                    <div class="input-group fr" ng-if="num == 2">
 		                    <button type="button" class="btn btn-primary" ng-click="showModal(1)">
 		                        <i class="fa fa-plus"></i> 新增评分规则
 		                    </button>
@@ -37,10 +37,11 @@
                         <span style="width: 15%;padding: 10px 0;">{{item.deductMarks}}</span>
                         <span style="width: 15%;padding: 10px 0;">{{item.processLimitted}}</span>
         				<span style="display: inline-block;width: 15%;padding: 3px;border-right: 1px solid #ccc;">
-        					<button type="button" class="btn btn-success" ng-click="showModal(3,item)" ng-if="item.level == 2">新增违规细则</button>
-	                        <button type="button" class="btn btn-success" ng-click="showModal(2, item.id)" ng-if="item.level == 1">新增评分类型</button> 
-	                        <button type="button" class="btn btn-warning" ng-click="showModal(4,item.id,item)" ng-if="item.level == 3">修改</button>                        	
-	                      	<button type="button" class="btn btn-danger" ng-click="delete(item.id)" ng-if="item.level == 3">删除</button>
+        					<button type="button" class="btn btn-success" ng-click="showModal(3,item)" ng-if="num == 2 && item.level == 2">新增违规细则</button>
+	                        <button type="button" class="btn btn-success" ng-click="showModal(2, item.id)" ng-if="num == 2 && item.level == 1">新增评分类型</button> 
+	                        <button type="button" class="btn btn-warning" ng-click="showModal(4,item.id,item)" ng-if="num == 2 && item.level == 3">修改</button>                        	
+	                      	<button type="button" class="btn btn-danger" ng-click="delete(item.id)" ng-if="num == 2 && item.level == 3">删除</button>
+	                      	<span ng-if="num !=2 ">暂无</span>
         				</span>
         				<ul class="scoreTwo">
         					<li ng-repeat="items in item.childList" >
@@ -51,10 +52,11 @@
 		                        <span style="width: 15%;">{{items.deductMarks}}</span>
 		                        <span style="width: 15%;">{{items.processLimitted}}</span>
 		        				<span style="display: inline-block;width: 15%;padding: 3px;border-right: 1px solid #ccc;">		        				
-		        					<button type="button" class="btn btn-success" ng-click="showModal(3,item.id ,item)" ng-if="items.level == 2">新增违规细则</button>
-			                        <button type="button" class="btn btn-success" ng-click="showModal(2 ,item.id)" ng-if="items.level == 1">新增评分类型</button> 
-			                        <button type="button" class="btn btn-warning" ng-click="showModal(4 ,item.id ,item)" ng-if="items.level == 3">修改</button>                        	
-			                      	<button type="button" class="btn btn-danger" ng-click="delete(items.id)" ng-if="items.level == 3">删除</button>
+		        					<button type="button" class="btn btn-success" ng-click="showModal(3,item.id ,item)" ng-if="num == 2 && items.level == 2">新增违规细则</button>
+			                        <button type="button" class="btn btn-success" ng-click="showModal(2 ,item.id)" ng-if="num == 2 && items.level == 1">新增评分类型</button> 
+			                        <button type="button" class="btn btn-warning" ng-click="showModal(4 ,item.id ,item)" ng-if="num == 2 && items.level == 3">修改</button>                        	
+			                      	<button type="button" class="btn btn-danger" ng-click="delete(items.id)" ng-if="num == 2 && items.level == 3">删除</button>
+	                      			<span ng-if="num !=2 ">暂无</span>		        					
 		        				</span>
 		        				<ul class="scoreThree">
 		        					<li ng-repeat="itemss in items.childList" ng-if="items.childList">
@@ -65,79 +67,19 @@
 				                        <span style="width: 15%;">{{itemss.deductMarks}}</span>
 				                        <span style="width: 15%;">{{itemss.processLimitted}}</span>
 				        				<span style="display: inline-block;width: 15%;padding: 3px;border-right: 1px solid #ccc;">
-				        					<button type="button" class="btn btn-success" ng-click="showModal(3,item.id ,item)" ng-if="itemss.level == 2">新增违规细则</button>
-					                        <button type="button" class="btn btn-success" ng-click="showModal(2,item.id)" ng-if="itemss.level == 1">新增评分类型</button> 
-					                        <button type="button" class="btn btn-warning" ng-click="showModal(4,item.id,item)" ng-if="itemss.level == 3">修改</button>                        	
-					                      	<button type="button" class="btn btn-danger" ng-click="delete(itemss.id)" ng-if="itemss.level == 3">删除</button>
-										</span>	
+				        					<button type="button" class="btn btn-success" ng-click="showModal(3,item.id ,item)" ng-if="num == 2 &&  itemss.level == 2">新增违规细则</button>
+					                        <button type="button" class="btn btn-success" ng-click="showModal(2,item.id)" ng-if="num == 2 && itemss.level == 1">新增评分类型</button> 
+					                        <button type="button" class="btn btn-warning" ng-click="showModal(4,item.id,item)" ng-if="num == 2 && itemss.level == 3">修改</button>                        	
+					                      	<button type="button" class="btn btn-danger" ng-click="delete(itemss.id)" ng-if="num == 2 && itemss.level == 3">删除</button>
+											<span ng-if="num !=2 ">暂无</span>
+				        				</span>	
 		        					</li>
 		        				</ul>
         					</li>        					
         				</ul>
         			</li>        			
-        		</ul>
+        		</ul>                
                 
-                
-                
-                
-                
-                <!--<div class="tab-content">
-                    <div class="tab-pane active" id="tableStatistics">
-                        <div class="table-responsive" style="margin-top: 20px;">
-                            <table class="table table-bordered table-hover">
-                                <tbody>
-                                	<tr class='tHeader'>
-	                                    <th width="10%">评分规则</th>
-	                                    <th width="15%">评分类型</th>
-	                                    <th width="20%">评分细则</th>
-	                                    <th width="10%">评分方式</th>
-	                                    <th width="10%">扣分</th>
-	                                    <th width="10%">处理时限</th>
-	                                    <th width="10%">操作</th>
-	                                </tr>
-	                                <tr>
-	                                    <td>111</td>
-	                                    <td>1111</td>
-	                                    <td>111</td>	                                    
-	                                    <td>1111</td>
-	                                    <td>1111</td>
-	                                    <td>1111</td>
-	                                    <td style="text-align: left;">
-	                                    	<button type="button" class="btn btn-success" ng-click="showModal(3)">新增违规细则</button>                        	
-	                                    </td>
-	                                </tr>
-	                                <tr>
-	                                    <td>111</td>
-	                                    <td>1111</td>
-	                                    <td>111</td>	                                    
-	                                    <td>1111</td>
-	                                    <td>1111</td>
-	                                    <td>1111</td>
-	                                    <td style="text-align: left;">
-	                                    	<button type="button" class="btn btn-success" ng-click="showModal(2)">新增评分类型</button>                        	
-	                                    </td>
-	                                </tr>
-	                                <tr>
-	                                    <td>111</td>
-	                                    <td>1111</td>
-	                                    <td>111</td>	                                    
-	                                    <td>1111</td>
-	                                    <td>1111</td>
-	                                    <td>1111</td>
-	                                    <td style="text-align: left;">
-	                                    	<button type="button" class="btn btn-warning" ng-click="showModal(4)">修改</button>                        	
-	                                    	<button type="button" class="btn btn-danger" ng-click="">删除</button>                        	
-	                                    </td>
-	                                </tr>
-                            	</tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="chartStatistics">
-                        <div id="patrolChart" class="tj-chart-con"></div>
-                    </div>
-                </div>
-        	-->
         	</div>
         </div>
     	

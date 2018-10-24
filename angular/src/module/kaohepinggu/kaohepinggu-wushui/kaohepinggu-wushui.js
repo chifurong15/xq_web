@@ -22,7 +22,7 @@
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
 
-					var apiPrefix = moduleService.getServiceUrl() + '/template';
+					var apiPrefix = moduleService.getServiceUrl() + '/sewage';
 					$scope.userInfo = $localStorage.userLoginInfo.userInfo;					
 
 					$scope.init = function () {

@@ -21,10 +21,10 @@
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
-					// var apiPrefix = moduleService.getServiceUrl() + '/template';
-                    var apiPrefix = 'http://10.0.9.133:8082/template';
+					var apiPrefix = moduleService.getServiceUrl() + '/sewage';
+
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
-					$scope.getServiceUrl= moduleService.getServiceUrl();	
+
 					$scope.init = function () {
 						var bulletin = globalParam.getter().bulletin || {};
 						
