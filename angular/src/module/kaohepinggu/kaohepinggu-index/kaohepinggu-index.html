@@ -59,9 +59,11 @@
 	                                    <td>{{$index+1}}</td>
 	                                    <td>{{item.title}}</td>
 	                                    <td>{{item.issue}}</td>
-	                                    <td ng-if="item.status==0"><span class="label label-danger">已上报</span></td>
-	                                    <td ng-if="item.status==1"><span class="label label-info">已退回</span></td>
-	                                    <td ng-if="item.status==2"><span class="label label-success">未上报</span></td>
+	                                    <td>
+	                                    	<span ng-if="item.status==0" class="label label-danger">已上报</span>
+	                                    	<span ng-if="item.status==1" class="label label-info">已退回</span>
+	                                    	<span ng-if="item.status==2" class="label label-success">未上报</span>
+	                                    </td>
 	                                    <td>{{item.createtime}}</td>
 	                                    <td>{{item.createuser}}</td>
 	                                    <td>{{item.remark}}</td>
@@ -75,8 +77,10 @@
 	                                    <td>{{$index+1}}</td>
 	                                    <td>{{item.title}}</td>
 	                                    <td>{{item.issue}}</td>
-	                                    <td ng-if="num==2 && item.status==0"><span class="label label-danger">已上报</span></td>
-	                                    <td ng-if="num==2 && item.status==1"><span class="label label-info">已退回</span></td>
+	                                    <td>
+	                                    	<span ng-if="item.status==0" class="label label-danger">已上报</span>
+	                                    	<span ng-if="item.status==1" class="label label-info">已退回</span>
+	                                    </td>
 	                                    <td>{{item.createtime}}</td>
 	                                    <td>{{item.createuser}}</td>
 	                                    <td>{{item.remark}}</td>

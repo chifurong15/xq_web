@@ -22,25 +22,25 @@
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
 					var apiPrefix = moduleService.getServiceUrl() + '/template';
+					$scope.userInfo = $localStorage.userLoginInfo.userInfo;
 					
 					$scope.init = function () {
-						getList();
+						$ajaxhttp.myhttp({
+							url: apiPrefix + '/v1/WaterQuality/userinfo1',
+							method: 'get',
+							params:{
+								id: $scope.userInfo.id
+							},					
+							callBack: function (res) {
+								$scope.num = res.data;
+								getList();
+							}
+						})
 					}
 					
 					// 获取数据列表
 					function getList () {
 						
-						$scope.num = '';//02市长办登录
-						
-						$ajaxhttp.myhttp({
-							url: apiPrefix + '/v1/WaterQuality/userinfo',
-							method: 'get',					
-							callBack: function (res) {
-								$scope.num = res.grade;
-								console.log(res)
-							}
-						})
-
 						let month=new moment($scope.searchTime).format('M')<10 ? '0'+ new moment($scope.searchTime).format('M') : new moment($scope.searchTime).format('M');
 						$scope.date=new moment($scope.searchTime).format('YYYY') + '-' + month;
 						
@@ -71,6 +71,10 @@
 	                    $scope.$apply();
 	                });
 					
+					//返回
+					$scope.goBack=function(){
+						history.back(-1);
+					}
 					
 					// 搜索
 	                $scope.search = function () {
