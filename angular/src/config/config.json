@@ -297,7 +297,33 @@
       "requireJS": [
         "src/module/chouchadudao/chouchadudao-index/chouchadudao-index.js"
       ],
-      "description": "抽查督导-首页-暗查暗访"
+      "description": "二级菜单-抽查督导-首页-暗查暗访"
+    },
+    {
+      "seqId": "2-2",
+      "parentId": "2",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "抽查",
+      "icon": "menu-icon-6",
+      "url": "src/module/chouchadudao/chouchadudao-choucha/chouchadudao-index/chouchadudao-index.html",
+      "requireJS": [
+        "src/module/chouchadudao/chouchadudao-choucha/chouchadudao-index/chouchadudao-index.js"
+      ],
+      "description": "二级菜单-抽查督导-抽查"
+    },
+    {
+      "seqId": "2-3",
+      "parentId": "2",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "督查",
+      "icon": "menu-icon-6",
+      "url": "src/module/chouchadudao/chouchadudao-ducha/chouchadudao-index/chouchadudao-index.html",
+      "requireJS": [
+        "src/module/chouchadudao/chouchadudao-ducha/chouchadudao-index/chouchadudao-index.js"
+      ],
+      "description": "二级菜单-抽查督导-督查"
     },
     {
       "seqId": "3",
@@ -660,6 +686,32 @@
         "src/module/chouchadudao/chouchadudao-reported/chouchadudao-reported.js"
       ],
       "description": "抽查督导-上报"
+    },
+    {
+      "seqId": "2-2-1",
+      "parentId": "2",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "抽查-新建",
+      "icon": "menu-icon-6",
+      "url": "src/module/chouchadudao/chouchadudao-choucha/chouchadudao-add/chouchadudao-add.html",
+      "requireJS": [
+        "src/module/chouchadudao/chouchadudao-choucha/chouchadudao-add/chouchadudao-add.js"
+      ],
+      "description": "抽查督导-抽查-新建"
+    },
+    {
+      "seqId": "2-2-2",
+      "parentId": "2",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "抽查-详情",
+      "icon": "menu-icon-6",
+      "url": "src/module/chouchadudao/chouchadudao-choucha/chouchadudao-detail/chouchadudao-detail.html",
+      "requireJS": [
+        "src/module/chouchadudao/chouchadudao-choucha/chouchadudao-detail/chouchadudao-detail.js"
+      ],
+      "description": "抽查督导-抽查-详情"
     },
     {
       "seqId": "801",

@@ -32,7 +32,8 @@
                     	chartContainer();
 	                	getDataList();
 	                	regionTreeList();
-	                	getGrade();	                	
+	                	getGrade();	
+	                	alert($scope.token)
 	                }
 	                var $regionCode, $regionTreeContainer = $('#regionTreeContainer');
 	                var regionTree, reachTree, treeNode_find, treeNode_id;
@@ -47,7 +48,7 @@
 	                function getGrade(){
 	                	$http({
 	                        url: apiPrefix + '/v1/resumption/findCurrentUserGrade',
-	                        method: 'get'
+	                        method: 'get'              
 	                    }).success(function (res) {
 	                        $scope.regionGrade = res.data;	                       
 	                    }).error(function (error) {
