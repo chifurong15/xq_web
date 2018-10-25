@@ -15,17 +15,14 @@
 	        				<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime">
 	                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 	                    </div>
-	        			<div class="input-group form-item">
-	                        <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文号</font></font></label>
-	        				<select ng-model="type" class="form-control select-short" style="width: auto;">
-	                        	<option value="0">已上报</option>
-	                        	<option value="1">已退回</option>
-	                        	<option value="2">未上报</option>
-	                        </select>
+	        			<div class="form-item" >
+	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文号</font></font></label>
+	                        <input type="text" class="form-control input-short" ng-model="title">
 	                    </div>
 	                    <div class="input-group form-item">
 	                        <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">状态</font></font></label>
 	        				<select ng-model="type" class="form-control select-short" style="width: auto;">
+	                        	<option value="">请选择</option>
 	                        	<option value="0">全部</option>
 	                        	<option value="1">已上报</option>
 	                        	<option value="2">已下发</option>

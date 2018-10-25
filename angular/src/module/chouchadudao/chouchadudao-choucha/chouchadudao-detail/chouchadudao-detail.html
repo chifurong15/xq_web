@@ -24,10 +24,23 @@
 			                    <div class="input-group form-item">
 			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查区域</font></font></label>
 			        				<select ng-model="type" class="form-control select-short" style="width: 160px;">
-			                        	<option value=""></option>
-			                        	<option value="0">已上报</option>
-			                        	<option value="1">已退回</option>
-			                        	<option value="2">未上报</option>
+			                        	<option value="">请选择</option>
+			                        	<option value="0">和平区</option>
+			                        	<option value="1">河北区</option>
+			                        	<option value="2">滨海新区</option>
+			                        	<option value="3">河东区</option>
+			                        	<option value="4">河西区</option>
+			                        	<option value="5">南开区</option>
+			                        	<option value="6">红桥区</option>
+			                        	<option value="7">东丽区</option>
+			                        	<option value="8">西青区</option>
+			                        	<option value="9">津南区</option>
+			                        	<option value="10">北辰区</option>
+			                        	<option value="11">武清区</option>
+			                        	<option value="12">宝坻区</option>
+			                        	<option value="13">静海区</option>
+			                        	<option value="14">宁河区</option>
+			                        	<option value="15">蓟州区</option>
 			                        </select>
 				                </div>
 				                <br />
@@ -39,25 +52,25 @@
 			                    <div class="input-group form-item" style="position: relative;left: 5px;">
 			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查河道</font></font></label>
 			        				<select ng-model="type" class="form-control select-short" style="width: 160px;">
-			                        	<option value=""></option>
-			                        	<option value="0">已上报</option>
-			                        	<option value="1">已退回</option>
-			                        	<option value="2">未上报</option>
+			                        	<option value="">请选择</option>
+			                        	<option value="0">河道一</option>
+			                        	<option value="1">河道二</option>
+			                        	<option value="2">河道三</option>
 			                        </select>
 				                </div>
 				                <br />
 				                <div class="input-group form-item">
 			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">任务类型</font></font></label>
-			        				<select ng-model="type" class="form-control select-short" style="width: 160px;">
-			                        	<option value=""></option>
+			        				<select  class="form-control select-short" style="width: 160px;">
+			                        	<option value="">请选择</option>
 			                        	<option value="0">临时任务</option>
 			                        	<option value="1">常规任务</option>
 			                        </select>
 				                </div>
 				                <div class="input-group form-item" style="position: relative;left: 5px;">
 			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发人员</font></font></label>
-			        				<select ng-model="type" class="form-control select-short" style="width: 160px;">
-			                        	<option value=""></option>
+			        				<select  class="form-control select-short" style="width: 160px;">
+			                        	<option value="">请选择</option>
 			                        	<option value="0">人员一</option>
 			                        	<option value="1">人员二</option>
 			                        	<option value="2">人员三</option>
@@ -73,49 +86,49 @@
         						<form class="form-inline" style="float:left;padding-left: 15%;">
 	        						<div class="form-item" >
 				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>检查时间</font></label>
-				                        <input type="text" class="form-control input-short" ng-model="title">
+				                        <input type="text" class="form-control input-short" >
 				                    </div>
 				                    <br />
 				                    <div class="form-item">
 				                    	<div style="height: 34px; position: relative;left: -95px;">
 				                    		<label>问题1</label>
 					                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上报问题类型</font></label>
-					                        <input type="text" class="form-control input-short" ng-model="title">
+					                        <input type="text" class="form-control input-short" >
 				                    	</div>			                    	
 				                        <br />
 				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上报问题描述</font></label>
-	                        			<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="issuer" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+	                        			<textarea class="form-control" id="deblock_udid" name="deblock_udid"  rows="3" style="width: 160px;max-width: 160px;"></textarea>
 				                    </div>
 				                    <br />
 				                    <div class="form-item">
 				                    	<div style="height: 34px; position: relative;left: -95px;">
 				                    		<label>问题2</label>
 					                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上报问题类型</font></label>
-					                        <input type="text" class="form-control input-short" ng-model="title">
+					                        <input type="text" class="form-control input-short" >
 				                    	</div>
 				                    	
 				                        <br />
 				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上报问题描述</font></label>
-	                        			<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="issuer" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+	                        			<textarea class="form-control" id="deblock_udid" name="deblock_udid"  rows="3" style="width: 160px;max-width: 160px;"></textarea>
 				                    </div>
 				                    <br />
 				                    <div class="form-item">
 				                    	<div style="height: 34px; position: relative;left: -95px;">
 				                    		<label>问题2</label>
 					                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上报问题类型</font></label>
-					                        <input type="text" class="form-control input-short" ng-model="title">
+					                        <input type="text" class="form-control input-short" >
 				                    	</div>
 				                    	
 				                        <br />
 				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上报问题描述</font></label>
-	                        			<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="issuer" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+	                        			<textarea class="form-control" id="deblock_udid" name="deblock_udid"  rows="3" style="width: 160px;max-width: 160px;"></textarea>
 				                    </div>
 	        					</form>
 		        					
 		        				<form class="form-inline" style="float:left;">
 	        						<div class="form-item" >
 				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上报人</font></label>
-				                        <input type="text" class="form-control input-short" ng-model="title">
+				                        <input type="text" class="form-control input-short" >
 				                    </div>
 				                    <br />
 				                    <div class="form-item">

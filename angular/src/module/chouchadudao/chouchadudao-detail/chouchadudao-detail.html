@@ -27,58 +27,71 @@
 			                    <div class="input-group form-item">
 			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查区域</font></font></label>
 			        				<select ng-model="type" class="form-control select-short" style="width: 160px;">
-			                        	<option value=""></option>
-			                        	<option value="0">已上报</option>
-			                        	<option value="1">已退回</option>
-			                        	<option value="2">未上报</option>
+			                        	<option value="">请选择</option>
+			                        	<option value="0">和平区</option>
+			                        	<option value="1">河北区</option>
+			                        	<option value="2">滨海新区</option>
+			                        	<option value="3">河东区</option>
+			                        	<option value="4">河西区</option>
+			                        	<option value="5">南开区</option>
+			                        	<option value="6">红桥区</option>
+			                        	<option value="7">东丽区</option>
+			                        	<option value="8">西青区</option>
+			                        	<option value="9">津南区</option>
+			                        	<option value="10">北辰区</option>
+			                        	<option value="11">武清区</option>
+			                        	<option value="12">宝坻区</option>
+			                        	<option value="13">静海区</option>
+			                        	<option value="14">宁河区</option>
+			                        	<option value="15">蓟州区</option>
 			                        </select>
 				                </div>
 				                <br />
 				                <div class="input-group date date_picker form-item" id="J-searchTime">
 			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查日期</font></font></label>
-			        				<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime">
+			        				<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" >
 			                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 				                </div>
 			                    <div class="input-group form-item" style="position: relative;left: 5px;">
 			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查河道</font></font></label>
 			        				<select ng-model="type" class="form-control select-short" style="width: 160px;">
-			                        	<option value=""></option>
-			                        	<option value="0">已上报</option>
-			                        	<option value="1">已退回</option>
-			                        	<option value="2">未上报</option>
+			                        	<option value="">请选择</option>
+			                        	<option value="0">河道1</option>
+			                        	<option value="1">河道2</option>
+			                        	<option value="2">河道3</option>
 			                        </select>
 				                </div>
 				                <br />
 				                <div class="form-item" >
 			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">带队领导</font></font></label>
-			                        <input type="text" class="form-control input-short" ng-model="title">
+			                        <input type="text" class="form-control input-short">
 			                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 			                    </div>                    
 				                <div class="form-item" >
 			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">问题点坐标</font></font></label>
-			                        <input type="text" class="form-control input-short" ng-model="title">
+			                        <input type="text" class="form-control input-short">
 			                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 			                    </div>
 			                    <br />
 			                    <div class="form-item" >
 			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查内容</font></font></label>
-			                        <input type="text" class="form-control input-short" ng-model="title">
+			                        <input type="text" class="form-control input-short">
 			                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 			                    </div> 
 			                    <div class="form-item">
 			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">问题点描述</font></font></label>
-									<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="issuer" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+									<textarea class="form-control" id="deblock_udid" name="deblock_udid" rows="3" style="width: 160px;max-width: 160px;"></textarea>
 			                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 			                    </div>
 			                    <br />                 
 			                    <div class="form-item">
 			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">内容描述</font></font></label>
-									<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="issuer" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+									<textarea class="form-control" id="deblock_udid" name="deblock_udid" rows="3" style="width: 160px;max-width: 160px;"></textarea>
 			                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 			                    </div>  
 			        			<div class="form-item" >
 			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">方案附件</font></font></label>
-			                        <input type="text" class="form-control input-short" ng-model="title">
+			                        <input type="text" class="form-control input-short" >
 			                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 				                    <button type="button" class="btn btn-primary" style="position: relative;top: -10px;">预览</button>
 			                    </div>                    
@@ -94,12 +107,12 @@
 				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">第1次</font></font></label>	
 				                        <br />
 				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上报人</font></font></label>
-				                        <input type="text" class="form-control input-short" ng-model="title">
+				                        <input type="text" class="form-control input-short" >
 				                   </div>
 				                    <br />
 				                    <div class="form-item" >
 				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上报时间</font></font></label>
-				                        <input type="text" class="form-control input-short" ng-model="title">
+				                        <input type="text" class="form-control input-short" >
 				                    </div>
 	        					</form>        					
         						<form class="form-inline" style="float: left;">
@@ -130,7 +143,7 @@
 				                </div>
 				                <div class="form-item" >
 			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通报附件</font></font></label>
-			                        <input type="text" class="form-control input-short" ng-model="title">
+			                        <input type="text" class="form-control input-short" >
 			                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 				                    <button type="button" class="btn btn-primary" style="position: relative;top: -10px;">预览</button>
 			                    </div>		 
@@ -150,7 +163,7 @@
 				                </div>
 				                <div class="form-item" >
 			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通报附件</font></font></label>
-			                        <input type="text" class="form-control input-short" ng-model="title">
+			                        <input type="text" class="form-control input-short" >
 			                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 				                    <button type="button" class="btn btn-primary" style="position: relative;top: -10px;">预览</button>
 			                    </div>		 
