@@ -29,6 +29,12 @@
 .patrolDetailContent .layer-photos-demo{
 	display: flex;
 }
-.problemFile{
+#problemFile{
 	height: 350px;
+}
+.remarkInfo {
+    display: flex;
+}
+.remarkInfo .textareaH{
+	min-width: 440px;
 }
