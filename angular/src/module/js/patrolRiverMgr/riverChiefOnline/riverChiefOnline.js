@@ -86,7 +86,7 @@
                     logo: false
                 });
                 tiandituFactory.initTianditu($scope.map, region);
-                
+
                 dojo.connect($scope.map, 'onClick', function (evt) {
                     console.log("click XY：" + evt.mapPoint.x+", "+ evt.mapPoint.y);
                 });
@@ -136,47 +136,47 @@
                     console.log(result);
                 });
 
-				/**
-				 * zTree节点基本设置
-				 */
-				var setting = {
-					async: {
-						enable: true,
-						type: 'get',
-						dataType: 'json',
-					},
-					data: {
-						key: {
-							title: 'title'
-						},
-						simpleData: {
-							enable: true
-						}
-					},
-					edit: {
-						enable: false
-					},
-					view: {
-						nameIsHTML: true,
-						expandSpeed: 'slow',
-						dblClickExpand: false,
-						txtSelectedEnable: false,
-					}
-				};
-				/**
-				 * 区域节点异步请求数据URL
-				 */
-				function asyncGetRegionNodesURL(treeId, treeNode) {
-					return $localStorage.serviceUrl_chiefOnline + '/chairmanOnline/v1/loadRegion?regionId=' + treeNode.id;
-				};
-				/**
-				 * 区域节点点击问题
-				 */
-				function dblClickRegionNodes(event, treeId, treeNode) {
+                /**
+                 * zTree节点基本设置
+                 */
+                var setting = {
+                    async: {
+                        enable: true,
+                        type: 'get',
+                        dataType: 'json',
+                    },
+                    data: {
+                        key: {
+                            title: 'title'
+                        },
+                        simpleData: {
+                            enable: true
+                        }
+                    },
+                    edit: {
+                        enable: false
+                    },
+                    view: {
+                        nameIsHTML: true,
+                        expandSpeed: 'slow',
+                        dblClickExpand: false,
+                        txtSelectedEnable: false,
+                    }
+                };
+                /**
+                 * 区域节点异步请求数据URL
+                 */
+                function asyncGetRegionNodesURL(treeId, treeNode) {
+                    return $localStorage.serviceUrl_chiefOnline + '/chairmanOnline/v1/loadRegion?regionId=' + treeNode.id;
+                };
+                /**
+                 * 区域节点点击问题
+                 */
+                function dblClickRegionNodes(event, treeId, treeNode) {
 //					$scope.checkRegionId = treeNode.id;
 //					$scope.searchRiverChief();
 //					rightStatusCount();
-				};
+                };
                 var timer;
                 $scope.online = false;//在线
                 $scope.patrol = true;//巡查
@@ -186,7 +186,7 @@
                 $scope.villLevel = false; //村级
                 $scope.cityLevel = true;//市级
                 var reigonCheckArr = ['2','3'];
-				function onClickRegionNodes(event, treeId, treeNode){
+                function onClickRegionNodes(event, treeId, treeNode){
                     clearInterval(timer);
                     if(treeNode.grade == 2){
                         $scope.cityLevel = true;
@@ -213,7 +213,7 @@
                         $scope.villLevel = true;
                         reigonCheckArr = ['5'];
                     };
-					$scope.checkRegionId = treeNode.id;
+                    $scope.checkRegionId = treeNode.id;
                     //节点点击定位
                     if(MapUtil.isCoordValid(treeNode["longitude"],treeNode["latitude"])){
                         if(treeNode["grade"] != null){
@@ -227,54 +227,54 @@
                     //ReachService.getReachList();
 
 
-					$scope.searchRiverChief();
+                    $scope.searchRiverChief();
                     rightStatusCount();
-				};
-				/**
-				 * 区域节点展开问题
-				 */
-				function regionNodeExpand(event, treeId, treeNode) {
+                };
+                /**
+                 * 区域节点展开问题
+                 */
+                function regionNodeExpand(event, treeId, treeNode) {
 //					console.log(treeNode);
-				};
+                };
 
-				/**
-				 * 区域节点异步请求成功回调函数
-				 */
-				function asyncGetRegionNodesSuccess(event, treeId, treeNode, res) {
-					var treeObj = $.fn.zTree.getZTreeObj(treeId);
-					//更新节点数据
-					treeObj.addNodes(treeNode, -1, res.data);
-					if (treeNode.children[0].resCode) {
-						treeObj.removeNode(treeNode.children[0]);
-						treeObj.updateNode(treeNode);
-					};
-				};
-				/**
-				 * 区域 zTree节点补充设置
-				 */
-				var regionSetting = {
-					async: {
-						url: asyncGetRegionNodesURL
-					},
-					callback: {
-						onAsyncSuccess: asyncGetRegionNodesSuccess,
-						onDblClick: dblClickRegionNodes,
-						onClick: onClickRegionNodes,
-						onExpand: regionNodeExpand
-					}
-				};
-				/**
-				 * zTree 节点深拷贝
-				 */
-				var regionTreeSetting = $.extend(true, {}, setting, regionSetting);
-				/**
-				 * 区域树加载
-				 */
+                /**
+                 * 区域节点异步请求成功回调函数
+                 */
+                function asyncGetRegionNodesSuccess(event, treeId, treeNode, res) {
+                    var treeObj = $.fn.zTree.getZTreeObj(treeId);
+                    //更新节点数据
+                    treeObj.addNodes(treeNode, -1, res.data);
+                    if (treeNode.children[0].resCode) {
+                        treeObj.removeNode(treeNode.children[0]);
+                        treeObj.updateNode(treeNode);
+                    };
+                };
+                /**
+                 * 区域 zTree节点补充设置
+                 */
+                var regionSetting = {
+                    async: {
+                        url: asyncGetRegionNodesURL
+                    },
+                    callback: {
+                        onAsyncSuccess: asyncGetRegionNodesSuccess,
+                        onDblClick: dblClickRegionNodes,
+                        onClick: onClickRegionNodes,
+                        onExpand: regionNodeExpand
+                    }
+                };
+                /**
+                 * zTree 节点深拷贝
+                 */
+                var regionTreeSetting = $.extend(true, {}, setting, regionSetting);
+                /**
+                 * 区域树加载
+                 */
                 var treeInit = function(){
                     $http({
                         method: 'get',
                         url: $localStorage.serviceUrl_chiefOnline + '/chairmanOnline/v1/loadRegion',
-    //                  url: $localStorage.serviceUrl_chiefOnline + '/chairmanOnline/v1/region'
+                        //                  url: $localStorage.serviceUrl_chiefOnline + '/chairmanOnline/v1/region'
                     }).success(function (data) {
                         $scope.checkRegionId = data.data[0].id;
                         //区划边界
@@ -292,7 +292,7 @@
                         $scope.searchRiverChief();
                     });
                 };
-				treeInit();
+                treeInit();
                 // 右侧区域收缩
                 $scope.infoTjShow = function (event) {
                     if ($('.iconRight').hasClass('fa-angle-right')) {
@@ -365,31 +365,31 @@
                         };
                     });
                 };
-				//右侧人员状态及数据统计
-				var rightStatusCount = function(){
-					$http({
-	                	url: $localStorage.serviceUrl_chiefOnline + '/chairmanOnline/v1/countHZStatus/' + $scope.checkRegionId,
-	                	method: 'get'
-	                }).success(function(res){
-	                	if(res.resCode == 1){
-	                		$scope.rightStausCount = res.data;
-	                	}
-	                });
-				};
+                //右侧人员状态及数据统计
+                var rightStatusCount = function(){
+                    $http({
+                        url: $localStorage.serviceUrl_chiefOnline + '/chairmanOnline/v1/countHZStatus/' + $scope.checkRegionId,
+                        method: 'get'
+                    }).success(function(res){
+                        if(res.resCode == 1){
+                            $scope.rightStausCount = res.data;
+                        }
+                    });
+                };
                 //勾选筛选条件的问题
                 $scope.changeCheck = function(type){
-                	switch (type){
-                		case 'online':
-                			$scope.online = !$scope.online;
-                			break;
-                			case 'patrol':
-                			$scope.patrol = !$scope.patrol;
-                			break;
-                			case 'offLine':
-                			$scope.offLine = !$scope.offLine;
-                			break;
-                			case 'areaLevel':
-                			$scope.areaLevel = !$scope.areaLevel;
+                    switch (type){
+                        case 'online':
+                            $scope.online = !$scope.online;
+                            break;
+                        case 'patrol':
+                            $scope.patrol = !$scope.patrol;
+                            break;
+                        case 'offLine':
+                            $scope.offLine = !$scope.offLine;
+                            break;
+                        case 'areaLevel':
+                            $scope.areaLevel = !$scope.areaLevel;
                             if($scope.areaLevel){
                                 if(reigonCheckArr.indexOf('3')<0){
                                     reigonCheckArr.push('3');
@@ -400,9 +400,9 @@
                                     reigonCheckArr.splice(len,1);
                                 };
                             };
-                			break;
-                			case 'townLevel':
-                			$scope.townLevel = !$scope.townLevel;
+                            break;
+                        case 'townLevel':
+                            $scope.townLevel = !$scope.townLevel;
                             if($scope.townLevel){
                                 if(reigonCheckArr.indexOf('4')<0){
                                     reigonCheckArr.push('4');
@@ -413,9 +413,9 @@
                                     reigonCheckArr.splice(len,1);
                                 };
                             };
-                			break;
-                			case 'villLevel':
-                			$scope.villLevel = !$scope.villLevel;
+                            break;
+                        case 'villLevel':
+                            $scope.villLevel = !$scope.villLevel;
                             if($scope.villLevel){
                                 if(reigonCheckArr.indexOf('5')<0){
                                     reigonCheckArr.push('5');
@@ -426,8 +426,8 @@
                                     reigonCheckArr.splice(len,1);
                                 };
                             };
-                			break;
-                            case 'cityLevel':
+                            break;
+                        case 'cityLevel':
                             $scope.cityLevel = !$scope.cityLevel;
                             if($scope.cityLevel){
                                 if(reigonCheckArr.indexOf('2')<0){
@@ -440,9 +440,9 @@
                                 };
                             };
                             break;
-                		default:
-                			break;
-                	};
+                        default:
+                            break;
+                    };
                 };
                 //获取河长表格数据的函数
                 var getRiverChiefTabData = function() {
@@ -509,89 +509,89 @@
                 //点击搜索按钮搜索列表数据
                 $scope.searchRiverChief = function(){
                     getRiverChiefTabData();
-                	updateDataFunc();
+                    updateDataFunc();
                 };
                 //河长级别转化函数
                 $scope.riverChiefLevel = function(level){
-                	var levelText = '';
-                	switch (level){
-                		case 2:
-                    		levelText = '市级'
-                    		break;
-                		case 3:
-                		levelText = '区级'
-                			break;
-                		case 4:
-                		levelText = '镇级'
-                			break;
-                		case 5:
-                		levelText = '村级'
-                			break;
-                		default:
-                			break;
-                	};
-                	return levelText;
+                    var levelText = '';
+                    switch (level){
+                        case 2:
+                            levelText = '市级'
+                            break;
+                        case 3:
+                            levelText = '区级'
+                            break;
+                        case 4:
+                            levelText = '镇级'
+                            break;
+                        case 5:
+                            levelText = '村级'
+                            break;
+                        default:
+                            break;
+                    };
+                    return levelText;
                 };
                 //获取巡河数据函数
                 var getPatrolData = function(){
-                	//巡河数据参数
-                	var params = {
-                		userId: $scope.userId,
-                		startTime: $scope.beginTime,
-                		endTime: $scope.endTime
-                	};
-                	$http({
-                		method: 'GET',
-                		url: $localStorage.serviceUrl_patrolMgr + '/charimanPatrol/v1/patrolDetail',
-                		params: params
-                	}).success(function(res){
-                		if(res.resCode == 1){
-                			$scope.patrolList = res.data;
+                    //巡河数据参数
+                    var params = {
+                        userId: $scope.userId,
+                        startTime: $scope.beginTime,
+                        endTime: $scope.endTime
+                    };
+                    $http({
+                        method: 'GET',
+                        url: $localStorage.serviceUrl_patrolMgr + '/charimanPatrol/v1/patrolDetail',
+                        params: params
+                    }).success(function(res){
+                        if(res.resCode == 1){
+                            $scope.patrolList = res.data;
                             for(let i = 0;i<$scope.patrolList.length;i++){
                                 $scope.patrolList[i].isCheck = false;
                             }
-                		}
-                	}).error(function(res){
-                		
-                	})
+                        }
+                    }).error(function(res){
+
+                    })
                 };
                 //点击巡河搜索按钮重新获取巡河数据
                 $scope.searchPatrolData = function(){
-                	getPatrolData();
+                    getPatrolData();
                 };
                 //获取河长详情数据
                 var getRiverChiefData = function(){
-                	//河长详情参数
-                	var params = {
-                		userId: $scope.userId,
-                	};
-                	$http({
-                		method: 'GET',
-                		url: $localStorage.serviceUrl_chiefOnline + '/chairmanOnline/v1/getHZDetail',
-                		params: params
-                	}).success(function(res){
-                		if(res.resCode == 1){
-                			$scope.riverChiefDetail = res.data;
-                			switch (res.data.level){
-		                		case 2:
-		                		$scope.riverChiefLevelData = '市级'
-		                			break;
-		                			case 3:
-		                		$scope.riverChiefLevelData = '区级'
-		                			break;
-		                			case 4:
-		                		$scope.riverChiefLevelData = '镇级'
-		                			break;
-		                			case 5:
-		                		$scope.riverChiefLevelData = '村级'
-		                			break;
-		                		default:
-		                			break;
-		                	};
-                		}
-                	}).error(function(res){
-                		
-                	})
+                    //河长详情参数
+                    var params = {
+                        userId: $scope.userId,
+                    };
+                    $http({
+                        method: 'GET',
+                        url: $localStorage.serviceUrl_chiefOnline + '/chairmanOnline/v1/getHZDetail',
+                        params: params
+                    }).success(function(res){
+                        if(res.resCode == 1){
+                            $scope.riverChiefDetail = res.data;
+                            switch (res.data.level){
+                                case 2:
+                                    $scope.riverChiefLevelData = '市级'
+                                    break;
+                                case 3:
+                                    $scope.riverChiefLevelData = '区级'
+                                    break;
+                                case 4:
+                                    $scope.riverChiefLevelData = '镇级'
+                                    break;
+                                case 5:
+                                    $scope.riverChiefLevelData = '村级'
+                                    break;
+                                default:
+                                    break;
+                            };
+                        }
+                    }).error(function(res){
+
+                    })
                 };
                 // 开始时间
                 var beginTimeEve = $('#beginTimeEve').datetimepicker({
@@ -614,30 +614,30 @@
                 });
                 //获取问题列表数据
                 var getEveList = function(){
-                	//问题参数
-                	var params = {
-                		reportPersonId: $scope.userId,
-                		startTime: $scope.beginTimeEve,
-            			endTime: $scope.endTimeEve        
-                	};
-                	$http({
-                		method: 'GET',
-                		url: $localStorage.serviceUrl_eventMgr + '/v1/event/queryEventByReachOrRegion',
-                		params: params
-                	}).success(function(res){
-                		if(res.resCode == 1){
-                			$scope.riverChiefEveList= res.data;
+                    //问题参数
+                    var params = {
+                        reportPersonId: $scope.userId,
+                        startTime: $scope.beginTimeEve,
+                        endTime: $scope.endTimeEve
+                    };
+                    $http({
+                        method: 'GET',
+                        url: $localStorage.serviceUrl_eventMgr + '/v1/event/queryEventByReachOrRegion',
+                        params: params
+                    }).success(function(res){
+                        if(res.resCode == 1){
+                            $scope.riverChiefEveList= res.data;
                             for(let i = 0;i<$scope.riverChiefEveList.length;i++){
                                 $scope.riverChiefEveList[i].isCheck = false;
                             }
-                		}
-                	}).error(function(res){
-                		
-                	})
+                        }
+                    }).error(function(res){
+
+                    })
                 };
                 //点击问题搜索按钮搜索问题列表数据
                 $scope.searchEveData = function(){
-                	getEveList();
+                    getEveList();
                 };
                 //点击河长获取河长相关详细数据
                 $scope.patrolDataList = function(item){
@@ -664,18 +664,18 @@
                             newReachStr += str;
                         };
                     };
-                	$scope.userId = item.id;
-                	$scope.detailRiverChiefName = item.rolename;
-                	$scope.detailReachName = newReachStr;
+                    $scope.userId = item.id;
+                    $scope.detailRiverChiefName = item.rolename;
+                    $scope.detailReachName = newReachStr;
                     $scope.searchRiverChief();
-                	getPatrolData();
-                	getRiverChiefData();
-                	getEveList();
+                    getPatrolData();
+                    getRiverChiefData();
+                    getEveList();
                 };
-				// 打开部件详情模态框
-				$scope.showComponentDetail = function (id) {
-					$('#componentDetail').modal('show');
-				};
+                // 打开部件详情模态框
+                $scope.showComponentDetail = function (id) {
+                    $('#componentDetail').modal('show');
+                };
                 //轮询函数
                 var updateDataFunc = function(){
                     clearInterval(timer);
@@ -717,7 +717,7 @@
                     $(this).css('background','#428bca');//鼠标移动到改标签背景显示蓝色
                 });
                 $('.dragDiv').mouseleave(function(){
-                     $('.dragDiv').css('background','#d9e4ee');//鼠标离开背景为边框色
+                    $('.dragDiv').css('background','#d9e4ee');//鼠标离开背景为边框色
                 });
                 $('.dragDiv').mousedown(function(e){
                     leftSlideW = $('#onlineChiefAside')[0].offsetWidth;//鼠标点下时记录左边栏宽度
@@ -778,31 +778,31 @@
                     RiverChiefOnlineService.clearRefreshInterval();
                     $('#checkCircle').modal('hide');
                 };
-                
-                
+
+
                 //查看图片详情
-				$rootScope.$on("eventUrl1", function (evt, eventUrl1) {
-					console.log(eventUrl1)
-					$scope.before = eventUrl1.data.beforeAccessory;
+                $rootScope.$on("eventUrl1", function (evt, eventUrl1) {
+                    console.log(eventUrl1)
+                    $scope.before = eventUrl1.data.beforeAccessory;
                     $scope.after = eventUrl1.data.afterAccessory;
-					console.log($scope.before)
-					$scope.$apply();
-				});
-				
-				//查看图片详情
-				$rootScope.$on("eventUrl2", function (evt, eventUrl2) {
-					// console.log(eventUrl2)
-					$scope.before = eventUrl2.data.beforeAccessory;
+                    console.log($scope.before)
+                    $scope.$apply();
+                });
+
+                //查看图片详情
+                $rootScope.$on("eventUrl2", function (evt, eventUrl2) {
+                    // console.log(eventUrl2)
+                    $scope.before = eventUrl2.data.beforeAccessory;
                     $scope.after = eventUrl2.data.afterAccessory;
-					// console.log($scope.before)
-					$scope.$apply();
-				});
-                 //判断是否所有的值都相同的函数
+                    // console.log($scope.before)
+                    $scope.$apply();
+                });
+                //判断是否所有的值都相同的函数
                 function attrOnly(array, attr){
-    //              var first;
+                    //              var first;
                     if(array.length>0){
                         //获取第一个元素的对应的属性
-    //                  first = array[0][attr];
+                        //                  first = array[0][attr];
                         //都跟第一个元素做比对，只要有一个不对应，那说明不是唯一属性值了
                         return array.every(function(item){
                             if(item[attr] == true){
@@ -810,7 +810,7 @@
                             }else{
                                 return false;
                             };
-                            
+
                         });
                     };
                 };
@@ -875,9 +875,9 @@
                             };
                         };
                         $scope.checkAll = attrOnly(patrolArr,'isCheck');
-                        
+
                     };
-                    
+
                     //绘制勾选的历史轨迹
                     if($scope.patrolList[ind].isCheck){
                         //RiverChiefOnlineService.addGraphicByTableSelect(patrolArr);           //单条轨迹
@@ -917,7 +917,7 @@
                             $scope.chiefLogDetail = res.data.logWorkInfo;
                         }
                     }).error(function(res){
-                        
+
                     })
                 };
                 //查看日志附件
@@ -939,11 +939,11 @@
                             }
                         }
                     }).error(function(res){
-                        
+
                     })
                 };
                 //请求巡河时间及长度
-                 $scope.getDisAndTime = function(id){
+                $scope.getDisAndTime = function(id){
                     $http({
                         method: 'GET',
                         url: $localStorage.serviceUrl_patrolMgr + '/v1/resumption/totalTimeAndDistance?userId=' + id
@@ -952,7 +952,7 @@
                             $scope.disAndTime = res.data;
                         }
                     }).error(function(res){
-                        
+
                     })
                 };
                 //点击的地图中历史轨迹线, 显示详细信息窗口
@@ -974,7 +974,7 @@
                     $scope.evtDetails = evtDetail1.attributes;
                     $scope.$apply();
                 });
-                
+
                 //问题状态类型
                 $scope.statusEvent = function(val){
                     var text = '';
@@ -1075,14 +1075,14 @@
                         $('#historyDetailModal').modal('show');
                         $scope.TraclEventDetail = false;
                     };
-                    
+
                 };
                 // 音视频播放
                 // $scope.play = function(item){
                 //     $('#videoPlayerBox').show();
                 //     $scope.videoUrl = $scope.eventImgUrl + item.url;
                 // }
-                
+
             }
         ]);
 })(window, angular);
