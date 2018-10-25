@@ -1830,7 +1830,10 @@ body .c-ffffff a{
 }
 .anchaanfang .js-tab > li{
 	float: left;
+	font-size: 15px;
+	line-height: 26px;
 	padding: 5px 35px;
+	cursor: pointer;
 }
 .anchaanfang .tab-active {
 	color: cornflowerblue;
@@ -1879,4 +1882,8 @@ body .c-ffffff a{
 }
 .anchaanfang .fa-sort-desc{
 	margin: 0 5px;
+}
+
+.anchaanfang .form-item img{
+	margin: 10px 5px;
 }

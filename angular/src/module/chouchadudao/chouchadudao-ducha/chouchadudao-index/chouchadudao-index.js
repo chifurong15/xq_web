@@ -3,7 +3,7 @@
 	angular
 		.module("app")
 		.controller(
-			'anchaListCtrl',
+			'duchaListCtrl',
 			[
 				'$localStorage',
 				'$scope',
@@ -17,7 +17,7 @@
 				'$ajaxhttp',
 				'moduleService',
 				'globalParam',
-				function anchaListCtrl($localStorage, $scope,
+				function duchaListCtrl($localStorage, $scope,
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
@@ -77,31 +77,19 @@
 						globalParam.setter({
 							bulletin: {}
 						})
-						routeService.route('2-1-1', false);
+						routeService.route('2-2-1', false);
 	                }
-	                
-	                //修改 评分报告
-	                $scope.edit = function (id) {
-	                						
-						routeService.route('2-1-1', false);
-	                }
-	                
-	                 // 查看    通报     处理
+	                	               
+	                 // 查看    检查
 	                $scope.view = function (id) {
 						localStorage.setItem('selectedId',id);
-						routeService.route('2-1-2', false);
+						routeService.route('2-2-2', false);
 	                }
-	                
-	                 // 上报
-	                $scope.report = function (id) {
-						routeService.route('2-1-3', false);						
-	                }
-	               	
-	               	//返回
+	                //返回
 					$scope.goBack=function(){
 						history.back(-1);
 					} 
-	               
+	                
 					// 配置分页基本参数
 	                $scope.paginationConf = {
 	                    currentPage: $location.search().currentPage ? $location.search().currentPage : 1,
