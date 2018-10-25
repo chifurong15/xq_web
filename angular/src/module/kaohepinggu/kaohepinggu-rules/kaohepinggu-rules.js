@@ -191,9 +191,9 @@
 								gradedetailed: $scope.gradedetailed,
 								gradeway: $scope.gradeway,
 								deductMarks: $scope.deductMarks,
-								processLimitted: $scope.processLimited
+								processLimitted: $scope.processLimitted
 							}
-							
+							//console.log($scope.processLimited)
 							$ajaxhttp.myhttp({
 								url: apiPrefix + '/v1/IllegalXize/add2',
 								method: 'POST',
