@@ -11,9 +11,9 @@
       "isRoot": true,
       "name": "巡河管理",
       "icon": "fa fa-tasks",
-      "url": "src/module/menus/patrolRiverMgr/riverChiefOnline/riverChiefOnline.html",
+      "url": "module/menus/patrolRiverMgr/riverChiefOnline/riverChiefOnline.html",
       "requireJS": [
-        "src/module/js/patrolRiverMgr/riverChiefOnline/riverChiefOnline.js"
+        "module/js/patrolRiverMgr/riverChiefOnline/riverChiefOnline.js"
       ],
       "description": "一级菜单-巡河管理"
     },
@@ -24,9 +24,9 @@
       "isRoot": false,
       "name": "河长在线",
       "icon": "menu-icon-2",
-      "url": "src/module/menus/patrolRiverMgr/riverChiefOnline/riverChiefOnline.html",
+      "url": "module/menus/patrolRiverMgr/riverChiefOnline/riverChiefOnline.html",
       "requireJS": [
-        "src/module/js/patrolRiverMgr/riverChiefOnline/riverChiefOnline.js"
+        "module/js/patrolRiverMgr/riverChiefOnline/riverChiefOnline.js"
       ],
       "description": "一级菜单-河长在线"
     },
@@ -37,9 +37,9 @@
       "isRoot": false,
       "name": "巡河管理",
       "icon": "menu-icon-3",
-      "url": "src/module/menus/patrolRiverMgr/patrolMgr/patrolMgr.html",
+      "url": "module/menus/patrolRiverMgr/patrolMgr/patrolMgr.html",
       "requireJS": [
-        "src/module/js/patrolRiverMgr/patrolMgr/patrolMgr.js"
+        "module/js/patrolRiverMgr/patrolMgr/patrolMgr.js"
       ],
       "description": "一级菜单-巡河管理"
     },
@@ -50,9 +50,9 @@
       "isRoot": false,
       "name": "问题管理",
       "icon": "menu-icon-4",
-      "url": "src/module/menus/patrolRiverMgr/eventMgr/eventMgr.html",
+      "url": "module/menus/patrolRiverMgr/eventMgr/eventMgr.html",
       "requireJS": [
-        "src/module/js/patrolRiverMgr/eventMgr/eventMgr.js"
+        "module/js/patrolRiverMgr/eventMgr/eventMgr.js"
       ],
       "description": "一级菜单-问题管理"
     },
@@ -64,8 +64,8 @@
       "isRoot":true,
       "name": "问题处理",
       "icon": "fa fa-question-circle",
-      "url": "src/module/menus/treatment/event-add.html",
-      "requireJS":["src/module/js/treatment/event-add.js"],
+      "url": "module/menus/treatment/event-add.html",
+      "requireJS":["module/js/treatment/event-add.js"],
       "description": "一级菜单-问题处置"
     },
     {
@@ -75,8 +75,8 @@
       "isRoot":false,
       "name": "新建问题",
       "icon": "fa fa-chevron-right",
-      "url": "src/module/menus/treatment/event-add.html",
-      "requireJS":["src/module/js/treatment/event-add.js"],
+      "url": "module/menus/treatment/event-add.html",
+      "requireJS":["module/js/treatment/event-add.js"],
       "description": "三级菜单-问题处置-待办问题"
     },
     {
@@ -86,8 +86,8 @@
       "isRoot":false,
       "name": "待办问题",
       "icon": "fa fa-chevron-right",
-      "url": "src/module/menus/treatment/event-backlog.html",
-      "requireJS":["src/module/js/treatment/event-backlog.js"],
+      "url": "module/menus/treatment/event-backlog.html",
+      "requireJS":["module/js/treatment/event-backlog.js"],
       "description": "三级菜单-问题处置-待办问题"
     },
     {
@@ -97,8 +97,8 @@
       "isRoot":false,
       "name": "问题跟踪",
       "icon": "fa fa-chevron-right",
-      "url": "src/module/menus/treatment/event-trace.html",
-      "requireJS":["src/module/js/treatment/event-trace.js"],
+      "url": "module/menus/treatment/event-trace.html",
+      "requireJS":["module/js/treatment/event-trace.js"],
       "description": "三级菜单-问题处置-问题跟踪"
     },
     {
@@ -108,8 +108,8 @@
       "isRoot":false,
       "name": "综合查询",
       "icon": "fa fa-chevron-right",
-      "url": "src/module/menus/treatment/integrated-search.html",
-      "requireJS":["src/module/js/treatment/integrated-search.js"],
+      "url": "module/menus/treatment/integrated-search.html",
+      "requireJS":["module/js/treatment/integrated-search.js"],
       "description": "三级菜单-问题处置-综合查询"
     },
     {
@@ -119,8 +119,8 @@
       "isRoot":true,
       "name": "展示发布",
       "icon": "fa fa-desktop",
-      "url": "src/module/menus/patrolRiverMgr/dataShow/dataShow.html",
-      "requireJS":["src/module/js/patrolRiverMgr/dataShow/dataShow.js"],
+      "url": "module/menus/patrolRiverMgr/dataShow/dataShow.html",
+      "requireJS":["module/js/patrolRiverMgr/dataShow/dataShow.js"],
       "description": "一级菜单-展示发布"
     },
     {
@@ -141,9 +141,9 @@
       "isRoot": true,
       "name": "分析统计",
       "icon": "fa fa-area-chart",
-      "url": "src/module/fenxitongji/fenxitongji-index/fenxitongji-index.html",
+      "url": "module/fenxitongji/fenxitongji-index/fenxitongji-index.html",
       "requireJS": [
-        "src/module/fenxitongji/fenxitongji-index/fenxitongji-index.js"
+        "module/fenxitongji/fenxitongji-index/fenxitongji-index.js"
       ],
       "description": "分析统计首页"
     },
@@ -154,8 +154,8 @@
       "isRoot":true,
       "name": "信息服务",
       "icon": "fa fa-info-circle",
-      "url": "src/module/menus/infoService/infoService.html",
-      "requireJS":["src/module/menus/infoService/infoService.js"],
+      "url": "module/menus/infoService/infoService.html",
+      "requireJS":["module/menus/infoService/infoService.js"],
       "description": "信息管理首页"
     },
     {
@@ -165,8 +165,8 @@
       "isRoot":false,
       "name": "信息服务",
       "icon": "menu-icon-6",
-      "url": "src/module/menus/infoService/infoService.html",
-      "requireJS":["src/module/menus/infoService/infoService.js"],
+      "url": "module/menus/infoService/infoService.html",
+      "requireJS":["module/menus/infoService/infoService.js"],
       "description": "信息管理首页"
     },
     {
@@ -176,9 +176,9 @@
       "isRoot": false,
       "name": "综合查询",
       "icon": "menu-icon-6",
-      "url": "src/module/menus/analyticStatistics/inquire/inquire.html",
+      "url": "module/menus/analyticStatistics/inquire/inquire.html",
       "requireJS": [
-        "src/module/js/analyticStatistics/inquire/inquire.js"
+        "module/js/analyticStatistics/inquire/inquire.js"
       ],
       "description": "二级菜单-综合查询"
     },
@@ -189,9 +189,9 @@
       "isRoot": false,
       "name": "河长巡河",
       "icon": "menu-icon-6",
-      "url": "src/module/fenxitongji/fenxitongji-index/fenxitongji-index.html",
+      "url": "module/fenxitongji/fenxitongji-index/fenxitongji-index.html",
       "requireJS": [
-        "src/module/fenxitongji/fenxitongji-index/fenxitongji-index.js"
+        "module/fenxitongji/fenxitongji-index/fenxitongji-index.js"
       ],
       "description": "分析统计-河长巡河"
     },
@@ -203,9 +203,9 @@
       "isRoot": false,
       "name": "问题统计",
       "icon": "fa fa-signal",
-      "url": "src/module/fenxitongji/fenxitongji-question/fenxitongji-question.html",
+      "url": "module/fenxitongji/fenxitongji-question/fenxitongji-question.html",
       "requireJS": [
-        "src/module/fenxitongji/fenxitongji-question/fenxitongji-question.js"
+        "module/fenxitongji/fenxitongji-question/fenxitongji-question.js"
       ],
       "description": "分析统计-问题统计"
     },
@@ -216,9 +216,9 @@
       "isRoot": true,
       "name": "信息管理",
       "icon": "fa fa-bars",
-      "url": "src/module/bulletin/bulletin-list/bulletin-list.html",
+      "url": "module/bulletin/bulletin-list/bulletin-list.html",
       "requireJS": [
-        "src/module/bulletin/bulletin-list/bulletin-list.js"
+        "module/bulletin/bulletin-list/bulletin-list.js"
       ],
       "description": "信息管理首页"
     },
@@ -229,9 +229,9 @@
       "isRoot": false,
       "name": "信息发布",
       "icon": "fa fa-tags",
-      "url": "src/module/bulletin/bulletin-list/bulletin-list.html",
+      "url": "module/bulletin/bulletin-list/bulletin-list.html",
       "requireJS": [
-        "src/module/bulletin/bulletin-list/bulletin-list.js"
+        "module/bulletin/bulletin-list/bulletin-list.js"
       ],
       "description": "信息发布-信息发布列表"
     },
@@ -242,9 +242,9 @@
       "isRoot": false,
       "name": "新增信息",
       "icon": "menu-icon-6",
-      "url": "src/module/bulletin/bulletin-add/bulletin-add.html",
+      "url": "module/bulletin/bulletin-add/bulletin-add.html",
       "requireJS": [
-        "src/module/bulletin/bulletin-add/bulletin-add.js"
+        "module/bulletin/bulletin-add/bulletin-add.js"
       ],
       "description": "信息管理-新增通报"
     },
@@ -255,9 +255,9 @@
       "isRoot": false,
       "name": "信息详情",
       "icon": "menu-icon-6",
-      "url": "src/module/bulletin/bulletin-view/bulletin-view.html",
+      "url": "module/bulletin/bulletin-view/bulletin-view.html",
       "requireJS": [
-        "src/module/bulletin/bulletin-view/bulletin-view.js"
+        "module/bulletin/bulletin-view/bulletin-view.js"
       ],
       "description": "信息管理-信息详情"
     },
@@ -268,9 +268,9 @@
       "isRoot": true,
       "name": "抽查督导",
       "icon": "fa fa-search",
-      "url": "src/module/chouchadudao/chouchadudao-index/chouchadudao-index.html",
+      "url": "module/chouchadudao/chouchadudao-index/chouchadudao-index.html",
       "requireJS": [
-        "src/module/chouchadudao/chouchadudao-index/chouchadudao-index.js"
+        "module/chouchadudao/chouchadudao-index/chouchadudao-index.js"
       ],
       "description": "抽查督导"
     },
@@ -281,9 +281,9 @@
       "isRoot": false,
       "name": "暗查暗访",
       "icon": "menu-icon-6",
-      "url": "src/module/chouchadudao/chouchadudao-index/chouchadudao-index.html",
+      "url": "module/chouchadudao/chouchadudao-index/chouchadudao-index.html",
       "requireJS": [
-        "src/module/chouchadudao/chouchadudao-index/chouchadudao-index.js"
+        "module/chouchadudao/chouchadudao-index/chouchadudao-index.js"
       ],
       "description": "二级菜单-抽查督导-首页-暗查暗访"
     },
@@ -294,9 +294,9 @@
       "isRoot": false,
       "name": "抽查",
       "icon": "menu-icon-6",
-      "url": "src/module/chouchadudao/chouchadudao-choucha/chouchadudao-index/chouchadudao-index.html",
+      "url": "module/chouchadudao/chouchadudao-choucha/chouchadudao-index/chouchadudao-index.html",
       "requireJS": [
-        "src/module/chouchadudao/chouchadudao-choucha/chouchadudao-index/chouchadudao-index.js"
+        "module/chouchadudao/chouchadudao-choucha/chouchadudao-index/chouchadudao-index.js"
       ],
       "description": "二级菜单-抽查督导-抽查"
     },
@@ -307,9 +307,9 @@
       "isRoot": false,
       "name": "督查",
       "icon": "menu-icon-6",
-      "url": "src/module/chouchadudao/chouchadudao-ducha/chouchadudao-index/chouchadudao-index.html",
+      "url": "module/chouchadudao/chouchadudao-ducha/chouchadudao-index/chouchadudao-index.html",
       "requireJS": [
-        "src/module/chouchadudao/chouchadudao-ducha/chouchadudao-index/chouchadudao-index.js"
+        "module/chouchadudao/chouchadudao-ducha/chouchadudao-index/chouchadudao-index.js"
       ],
       "description": "二级菜单-抽查督导-督查"
     },
@@ -320,9 +320,9 @@
       "isRoot": true,
       "name": "考核评估",
       "icon": "fa fa-pencil",
-      "url": "src/module/kaohepinggu/kaohepinggu-index/kaohepinggu-index.html",
+      "url": "module/kaohepinggu/kaohepinggu-index/kaohepinggu-index.html",
       "requireJS": [
-        "src/module/kaohepinggu/kaohepinggu-index/kaohepinggu-index.js"
+        "module/kaohepinggu/kaohepinggu-index/kaohepinggu-index.js"
       ],
       "description": "考核评估"
     },
@@ -333,9 +333,9 @@
       "isRoot": false,
       "name": "地表水质环境评分管理",
       "icon": "fa fa-bug",
-      "url": "src/module/kaohepinggu/kaohepinggu-index/kaohepinggu-index.html",
+      "url": "module/kaohepinggu/kaohepinggu-index/kaohepinggu-index.html",
       "requireJS": [
-        "src/module/kaohepinggu/kaohepinggu-index/kaohepinggu-index.js"
+        "module/kaohepinggu/kaohepinggu-index/kaohepinggu-index.js"
       ],
       "description": "地表水质环境评分管理-首页"
     },
@@ -359,9 +359,9 @@
       "isRoot": false,
       "name": "水质数据",
       "icon": "fa fa-lemon-o",
-      "url": "src/module/kaohepinggu/kaohepinggu-shuizhi/kaohepinggu-shuizhi.html",
+      "url": "module/kaohepinggu/kaohepinggu-shuizhi/kaohepinggu-shuizhi.html",
       "requireJS": [
-        "src/module/kaohepinggu/kaohepinggu-shuizhi/kaohepinggu-shuizhi.js"
+        "module/kaohepinggu/kaohepinggu-shuizhi/kaohepinggu-shuizhi.js"
       ],
       "description": "水质数据"
     },
@@ -372,9 +372,9 @@
       "isRoot": false,
       "name": "自动水质管理",
       "icon": "fa fa-sign-out",
-      "url": "src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-detail/kaohepinggu-detail.html",
+      "url": "module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-detail/kaohepinggu-detail.html",
       "requireJS": [
-        "src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-detail/kaohepinggu-detail.js"
+        "module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-detail/kaohepinggu-detail.js"
       ],
       "description": "水质管理-导出"
     },
@@ -385,9 +385,9 @@
       "isRoot": false,
       "name": "污水处理厂",
       "icon": "fa fa-trash-o",
-      "url": "src/module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-wushui.html",
+      "url": "module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-wushui.html",
       "requireJS": [
-        "src/module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-wushui.js"
+        "module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-wushui.js"
       ],
       "description": "污水处理厂"
     },
@@ -398,9 +398,9 @@
       "isRoot": false,
       "name": "考核评分",
       "icon": "fa fa-trash-o",
-      "url": "src/module/kaohepinggu/kaohepinggu-score/kaohepinggu-score.html",
+      "url": "module/kaohepinggu/kaohepinggu-score/kaohepinggu-score.html",
       "requireJS": [
-        "src/module/kaohepinggu/kaohepinggu-score/kaohepinggu-score.js"
+        "module/kaohepinggu/kaohepinggu-score/kaohepinggu-score.js"
       ],
       "description": "考核评分-考核评分"
     },
@@ -411,9 +411,9 @@
       "isRoot": false,
       "name": "违规细则",
       "icon": "fa fa-trash-o",
-      "url": "src/module/kaohepinggu/kaohepinggu-rules/kaohepinggu-rules.html",
+      "url": "module/kaohepinggu/kaohepinggu-rules/kaohepinggu-rules.html",
       "requireJS": [
-        "src/module/kaohepinggu/kaohepinggu-rules/kaohepinggu-rules.js"
+        "module/kaohepinggu/kaohepinggu-rules/kaohepinggu-rules.js"
       ],
       "description": "考核评分-违规细则"
     },
@@ -424,9 +424,9 @@
       "isRoot": true,
       "name": "移动平台",
       "icon": "fa fa-tablet",
-      "url": "src/module/yidongpingtai/yidongpingtai-index/yidongpingtai-index.html",
+      "url": "module/yidongpingtai/yidongpingtai-index/yidongpingtai-index.html",
       "requireJS": [
-        "src/module/yidongpingtai/yidongpingtai-index/yidongpingtai-index.js"
+        "module/yidongpingtai/yidongpingtai-index/yidongpingtai-index.js"
       ],
       "description": "移动平台"
     },
@@ -437,9 +437,9 @@
       "isRoot": false,
       "name": "移动平台",
       "icon": "fa fa-mobile",
-      "url": "src/module/yidongpingtai/yidongpingtai-index/yidongpingtai-index.html",
+      "url": "module/yidongpingtai/yidongpingtai-index/yidongpingtai-index.html",
       "requireJS": [
-        "src/module/yidongpingtai/yidongpingtai-index/yidongpingtai-index.js"
+        "module/yidongpingtai/yidongpingtai-index/yidongpingtai-index.js"
       ],
       "description": "移动平台-首页"
     },
@@ -451,9 +451,9 @@
       "name": "系统管理",
       "menuType": 1,
       "icon": "fa fa-gears",
-      "url": "src/module/menus/systemMgr/menumgr/menu.html",
+      "url": "module/menus/systemMgr/menumgr/menu.html",
       "requireJS": [
-        "src/module/js/systemMgr/menumgr/menu.js"
+        "module/js/systemMgr/menumgr/menu.js"
       ],
       "description": "一级菜单-系统管理"
     },
@@ -464,9 +464,9 @@
       "isRoot": false,
       "name": "菜单设置",
       "icon": "fa fa-navicon",
-      "url": "src/module/menus/systemMgr/menumgr/menu.html",
+      "url": "module/menus/systemMgr/menumgr/menu.html",
       "requireJS": [
-        "src/module/js/systemMgr/menumgr/menu.js"
+        "module/js/systemMgr/menumgr/menu.js"
       ],
       "description": "系统管理-菜单管理-菜单设置"
     },
@@ -477,9 +477,9 @@
       "isRoot": false,
       "name": "角色设置",
       "icon": "fa fa-sitemap",
-      "url": "src/module/menus/systemMgr/rolemgr/role.html",
+      "url": "module/menus/systemMgr/rolemgr/role.html",
       "requireJS": [
-        "src/module/js/systemMgr/rolemgr/role.js"
+        "module/js/systemMgr/rolemgr/role.js"
       ],
       "description": "系统管理-角色管理-角色设置"
     },
@@ -503,9 +503,9 @@
       "isRoot": false,
       "name": "菜单权限",
       "icon": "fa-chevron-right",
-      "url": "src/module/menus/systemMgr/authority/menuAuthority.html",
+      "url": "module/menus/systemMgr/authority/menuAuthority.html",
       "requireJS": [
-        "src/module/js/systemMgr/authority/menuAuthority.js"
+        "module/js/systemMgr/authority/menuAuthority.js"
       ],
       "description": "系统管理-权限管理-菜单权限"
     },
@@ -516,9 +516,9 @@
       "isRoot": false,
       "name": "角色权限",
       "icon": "fa-chevron-right",
-      "url": "src/module/menus/systemMgr/authority/roleAuthority.html",
+      "url": "module/menus/systemMgr/authority/roleAuthority.html",
       "requireJS": [
-        "src/module/js/systemMgr/authority/roleAuthority.js"
+        "module/js/systemMgr/authority/roleAuthority.js"
       ],
       "description": "系统管理-权限管理-角色权限"
     },
@@ -529,9 +529,9 @@
       "isRoot": false,
       "name": "用户列表",
       "icon": "fa fa-users",
-      "url": "src/module/menus/systemMgr/usermgr/userList.html",
+      "url": "module/menus/systemMgr/usermgr/userList.html",
       "requireJS": [
-        "src/module/js/systemMgr/usermgr/userList.js"
+        "module/js/systemMgr/usermgr/userList.js"
       ],
       "description": "系统管理-用户管理-用户列表"
     }
@@ -565,9 +565,9 @@
       "isRoot": false,
       "name": "巡河情况",
       "icon": "menu-icon-6",
-      "url": "src/module/fenxitongji/fenxitongji-detail/fenxitongji-detail.html",
+      "url": "module/fenxitongji/fenxitongji-detail/fenxitongji-detail.html",
       "requireJS": [
-        "src/module/fenxitongji/fenxitongji-detail/fenxitongji-detail.js"
+        "module/fenxitongji/fenxitongji-detail/fenxitongji-detail.js"
       ],
       "description": "分析统计-河长的巡河情况"
     },
@@ -578,9 +578,9 @@
       "isRoot": false,
       "name": "新增地表管理",
       "icon": "fa fa-bug",
-      "url": "src/module/kaohepinggu/kaohepinggu-index/koahepinggu-add/kaohepinggu-add.html",
+      "url": "module/kaohepinggu/kaohepinggu-index/koahepinggu-add/kaohepinggu-add.html",
       "requireJS": [
-        "src/module/kaohepinggu/kaohepinggu-index/koahepinggu-add/kaohepinggu-add.js"
+        "module/kaohepinggu/kaohepinggu-index/koahepinggu-add/kaohepinggu-add.js"
       ],
       "description": "地表水质环境评分管理-新增"
     },
@@ -591,9 +591,9 @@
       "isRoot": false,
       "name": "地表管理详情",
       "icon": "fa fa-bug",
-      "url": "src/module/kaohepinggu/kaohepinggu-index/kaohepinggu-detail/kaohepinggu-detail.html",
+      "url": "module/kaohepinggu/kaohepinggu-index/kaohepinggu-detail/kaohepinggu-detail.html",
       "requireJS": [
-        "src/module/kaohepinggu/kaohepinggu-index/kaohepinggu-detail/kaohepinggu-detail.js"
+        "module/kaohepinggu/kaohepinggu-index/kaohepinggu-detail/kaohepinggu-detail.js"
       ],
       "description": "地表水质环境评分管理-详情"
     },
@@ -604,9 +604,9 @@
       "isRoot": false,
       "name": "新增水质管理",
       "icon": "fa fa-lemon-o",
-      "url": "src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-add/kaohepinggu-add.html",
+      "url": "module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-add/kaohepinggu-add.html",
       "requireJS": [
-        "src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-add/kaohepinggu-add.js"
+        "module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-add/kaohepinggu-add.js"
       ],
       "description": "水质管理-新增"
     },
@@ -617,9 +617,9 @@
       "isRoot": false,
       "name": "水质管理详情",
       "icon": "fa fa-lemon-o",
-      "url": "src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-update/kaohepinggu-update.html",
+      "url": "module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-update/kaohepinggu-update.html",
       "requireJS": [
-        "src/module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-update/kaohepinggu-update.js"
+        "module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-update/kaohepinggu-update.js"
       ],
       "description": "水质管理-修改"
     },
@@ -630,9 +630,9 @@
       "isRoot": false,
       "name": "新增污水管理",
       "icon": "fa fa-database",
-      "url": "src/module/kaohepinggu/kaohepinggu-wushui/koahepinggu-add/kaohepinggu-add.html",
+      "url": "module/kaohepinggu/kaohepinggu-wushui/koahepinggu-add/kaohepinggu-add.html",
       "requireJS": [
-        "src/module/kaohepinggu/kaohepinggu-wushui/koahepinggu-add/kaohepinggu-add.js"
+        "module/kaohepinggu/kaohepinggu-wushui/koahepinggu-add/kaohepinggu-add.js"
       ],
       "description": "污水处理厂-新增"
     },
@@ -643,9 +643,9 @@
       "isRoot": false,
       "name": "污水管理详情",
       "icon": "fa fa-database",
-      "url": "src/module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-detail/kaohepinggu-detail.html",
+      "url": "module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-detail/kaohepinggu-detail.html",
       "requireJS": [
-        "src/module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-detail/kaohepinggu-detail.js"
+        "module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-detail/kaohepinggu-detail.js"
       ],
       "description": "污水处理厂-详情"
     },
@@ -656,9 +656,9 @@
       "isRoot": false,
       "name": "暗查暗访-新增",
       "icon": "menu-icon-6",
-      "url": "src/module/chouchadudao/chouchadudao-add/chouchadudao-add.html",
+      "url": "module/chouchadudao/chouchadudao-add/chouchadudao-add.html",
       "requireJS": [
-        "src/module/chouchadudao/chouchadudao-add/chouchadudao-add.js"
+        "module/chouchadudao/chouchadudao-add/chouchadudao-add.js"
       ],
       "description": "抽查督导-新增"
     },
@@ -669,9 +669,9 @@
       "isRoot": false,
       "name": "暗查暗访-详情",
       "icon": "menu-icon-6",
-      "url": "src/module/chouchadudao/chouchadudao-detail/chouchadudao-detail.html",
+      "url": "module/chouchadudao/chouchadudao-detail/chouchadudao-detail.html",
       "requireJS": [
-        "src/module/chouchadudao/chouchadudao-detail/chouchadudao-detail.js"
+        "module/chouchadudao/chouchadudao-detail/chouchadudao-detail.js"
       ],
       "description": "抽查督导-详情"
     },
@@ -682,9 +682,9 @@
       "isRoot": false,
       "name": "暗查暗访-上报",
       "icon": "menu-icon-6",
-      "url": "src/module/chouchadudao/chouchadudao-reported/chouchadudao-reported.html",
+      "url": "module/chouchadudao/chouchadudao-reported/chouchadudao-reported.html",
       "requireJS": [
-        "src/module/chouchadudao/chouchadudao-reported/chouchadudao-reported.js"
+        "module/chouchadudao/chouchadudao-reported/chouchadudao-reported.js"
       ],
       "description": "抽查督导-上报"
     },
@@ -695,9 +695,9 @@
       "isRoot": false,
       "name": "抽查-新建",
       "icon": "menu-icon-6",
-      "url": "src/module/chouchadudao/chouchadudao-choucha/chouchadudao-add/chouchadudao-add.html",
+      "url": "module/chouchadudao/chouchadudao-choucha/chouchadudao-add/chouchadudao-add.html",
       "requireJS": [
-        "src/module/chouchadudao/chouchadudao-choucha/chouchadudao-add/chouchadudao-add.js"
+        "module/chouchadudao/chouchadudao-choucha/chouchadudao-add/chouchadudao-add.js"
       ],
       "description": "抽查督导-抽查-新建"
     },
@@ -708,9 +708,9 @@
       "isRoot": false,
       "name": "抽查-详情",
       "icon": "menu-icon-6",
-      "url": "src/module/chouchadudao/chouchadudao-choucha/chouchadudao-detail/chouchadudao-detail.html",
+      "url": "module/chouchadudao/chouchadudao-choucha/chouchadudao-detail/chouchadudao-detail.html",
       "requireJS": [
-        "src/module/chouchadudao/chouchadudao-choucha/chouchadudao-detail/chouchadudao-detail.js"
+        "module/chouchadudao/chouchadudao-choucha/chouchadudao-detail/chouchadudao-detail.js"
       ],
       "description": "抽查督导-抽查-详情"
     },
@@ -719,70 +719,70 @@
       "name": "菜单创建",
       "url": "module/menus/systemMgr/menumgr/ui_tree.html",
       "requireJS": [
-        "src/module/js/systemMgr/menumgr/tree-directive.js",
-        "src/module/js/systemMgr/menumgr/menu-tree.js"
+        "module/js/systemMgr/menumgr/tree-directive.js",
+        "module/js/systemMgr/menumgr/menu-tree.js"
       ],
       "description": "菜单创建 页面 "
     },
     {
       "seqId": "802",
       "name": "角色创建",
-      "url": "src/module/menus/systemMgr/rolemgr/new.html",
+      "url": "module/menus/systemMgr/rolemgr/new.html",
       "requireJS": [
-        "src/module/js/systemMgr/rolemgr/new.js"
+        "module/js/systemMgr/rolemgr/new.js"
       ],
       "description": "角色创建 页面 "
     },
     {
       "seqId": "803",
       "name": "角色修改",
-      "url": "src/module/menus/systemMgr/rolemgr/change.html",
+      "url": "module/menus/systemMgr/rolemgr/change.html",
       "requireJS": [
-        "src/module/js/systemMgr/rolemgr/change.js"
+        "module/js/systemMgr/rolemgr/change.js"
       ],
       "description": "角色修改 页面 "
     },
     {
       "seqId": "804",
       "name": "用户创建",
-      "url": "src/module/menus/systemMgr/usermgr/createUser.html",
+      "url": "module/menus/systemMgr/usermgr/createUser.html",
       "requireJS": [
-        "src/module/js/systemMgr/usermgr/createUser.js"
+        "module/js/systemMgr/usermgr/createUser.js"
       ],
       "description": "用户创建 页面 "
     },
     {
       "seqId": "805",
       "name": "用户修改",
-      "url": "src/module/menus/systemMgr/usermgr/userContent.html",
+      "url": "module/menus/systemMgr/usermgr/userContent.html",
       "requireJS": [
-        "src/module/js/systemMgr/usermgr/userContent.js"
+        "module/js/systemMgr/usermgr/userContent.js"
       ],
       "description": "用户修改页面 "
     },
     {
       "seqId": "806",
       "name": "用户详情",
-      "url": "src/module/menus/systemMgr/usermgr/userDetails.html",
+      "url": "module/menus/systemMgr/usermgr/userDetails.html",
       "requireJS": [
-        "src/module/js/systemMgr/usermgr/userDetails.js"
+        "module/js/systemMgr/usermgr/userDetails.js"
       ],
       "description": "用户详情页面 "
     },
     {
       "seqId": "807",
       "name": "菜单修改",
-      "url": "src/module/menus/systemMgr/menumgr/menuRevise.html",
+      "url": "module/menus/systemMgr/menumgr/menuRevise.html",
       "requireJS": [
-        "src/module/js/systemMgr/menumgr/menuRevise.js"
+        "module/js/systemMgr/menumgr/menuRevise.js"
       ],
       "description": "菜单修改 页面 "
     },
     {
       "seqId": "69",
       "name": "问题详情",
-      "url": "src/module/menus/treatment/event-detail.html",
-      "requireJS":["src/module/js/treatment/event-detail.js"],
+      "url": "module/menus/treatment/event-detail.html",
+      "requireJS":["module/js/treatment/event-detail.js"],
       "description": "问题处置-问题详情"
     },
     {
@@ -795,29 +795,29 @@
     {
       "seqId": "82",
       "name": "新增通报",
-      "url": "src/module/menus/bulletin/bulletin-add/bulletin-add.html",
-      "requireJS":["src/module/menus/bulletin/bulletin-add/bulletin-add.js"],
+      "url": "module/menus/bulletin/bulletin-add/bulletin-add.html",
+      "requireJS":["module/menus/bulletin/bulletin-add/bulletin-add.js"],
       "description": "信息管理-新增通报"
     },
     {
       "seqId": "83",
       "name": "通报详情",
-      "url": "src/module/menus/bulletin/bulletin-view/bulletin-view.html",
-      "requireJS":["src/module/menus/bulletin/bulletin-view/bulletin-view.js"],
+      "url": "module/menus/bulletin/bulletin-view/bulletin-view.html",
+      "requireJS":["module/menus/bulletin/bulletin-view/bulletin-view.js"],
       "description": "信息管理-通报详情"
     },
     {
       "seqId": "849",
       "name": "制度列表",
-      "url": "src/module/menus/info-management/institute-system/institute-system-detail.html",
-      "requireJS":["src/module/js/info-management/institute-system/institute-system-detail.js"],
+      "url": "module/menus/info-management/institute-system/institute-system-detail.html",
+      "requireJS":["module/js/info-management/institute-system/institute-system-detail.js"],
       "description": "信息管理-制度列表"
     },
     {
       "seqId": "850",
       "name": "制度详情",
-      "url": "src/module/menus/info-management/institute-system/institute-system-detail.html",
-      "requireJS":["src/module/js/info-management/institute-system/institute-system-detail.js"],
+      "url": "module/menus/info-management/institute-system/institute-system-detail.html",
+      "requireJS":["module/js/info-management/institute-system/institute-system-detail.js"],
       "description": "信息管理-制度列表"
     }
   ]
