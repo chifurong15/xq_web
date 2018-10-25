@@ -25,7 +25,7 @@
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
 					
 					$scope.init = function () {
-						//$scope.num = "2";
+						$scope.num = "2";
 						$ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/assessment/userinfo1',
 							method: 'get',
@@ -33,7 +33,7 @@
 								id: $scope.userInfo.id
 							},
 							callBack: function (res) {
-								$scope.num = res.data;
+								//$scope.num = res.data;
 								getList();
 							}
 						})
