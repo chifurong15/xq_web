@@ -34,6 +34,7 @@
 							},
 							callBack: function (res) {
 								$scope.num = res.data;
+								//$scope.num = '';
 								getList();
 							}
 						})

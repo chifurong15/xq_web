@@ -29,13 +29,14 @@
 						var bulletin = globalParam.getter().bulletin || {};
 						
 						$scope.id = bulletin.id;
-						console.log(bulletin);
+						$scope.pid = bulletin.id;
 
 						// 编辑时获取原数据
 						if (bulletin.id) {
 							$location.search('id', bulletin.id);
 							setData(bulletin);
 						} else if (!bulletin.id && !!getQueryString('id')) {
+							$scope.pid = getQueryString('id');
 							// 根据id查询
 							$ajaxhttp.myhttp({
 								url: apiPrefix + '/v1/SurfaceWater/detail',
@@ -54,18 +55,17 @@
 						getAllArea();
 						getScoreList();
 						
-					}
+						$scope.pid = getQueryString('id') ? getQueryString('id') : $scope.newid;
+					}					
 					
-					var id = localStorage.getItem('id');
 					//获取得分条目列表					
 					function getScoreList () {
 						$http({
-							url: apiPrefix + '/v1/SurfaceWaterGrade/list?parentid=' + id,
+							url: apiPrefix + '/v1/SurfaceWaterGrade/list?parentid=' + $scope.pid,
 							method: 'get'						
 						}).success(function(data){
 							if(data.resCode == 1){
 								$scope.scoreList = data.data;
-								console.log('得分列表',data.data)
 							}
 						})
 					}
@@ -159,6 +159,7 @@
 								callBack: function (res) {
 									if(res.resCode == 1){
 										$scope.newid = res.data.id;
+										$scope.pid = res.data.id;										
 										layer.msg('新建成功', {time:2000});
 	                                	clear();//创建成功后清空
 									}else{
@@ -225,13 +226,11 @@
                             });                            
 						}
 						if($scope.type == 2){ //新增
-							console.log($scope.type)
-							
 							$ajaxhttp.myhttp({
 								url: apiPrefix + '/v1/SurfaceWaterGrade/haveDistrict',
 								method: 'get',
 								params: {
-									parentid: $scope.id,
+									parentid: $scope.pid,
 									popedom: $scope.area
 								},
 								callBack: function (res) {
@@ -240,7 +239,7 @@
 											url: apiPrefix + '/v1/SurfaceWaterGrade/add',
 											method: 'POST',
 											params: {
-												parentid: $scope.id,
+												parentid: $scope.pid,
 												popedom: $scope.area,
 												grade: $scope.score
 											},
@@ -332,7 +331,7 @@
 								url: apiPrefix + '/v1/SurfaceWaterGrade/deletelist',
 								method: 'DELETE',
 								params: {
-									parentid: id
+									parentid: $scope.id ? $scope.id : $scope.pid
 								},
 								callBack: function (res) {
 									if(res.resCode == 1){

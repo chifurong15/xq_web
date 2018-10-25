@@ -1,0 +1,273 @@
+(function (window, angular) {
+    'use strict';
+
+    var app = angular.module("app");
+    app.filter("trustHtml", function ($sce) {
+        return function (input) {
+            return $sce.trustAsHtml(input);
+        }
+    });
+    app.controller(
+        'superviseReportMgtCtrl', [
+            '$localStorage',
+            '$scope',
+            '$location',
+            '$log',
+            '$q',
+            '$rootScope',
+            'globalParam',
+            '$window',
+            'routeService',
+            '$http',
+			'$ajaxhttp',
+			'moduleService',
+            function superviseReportMgtCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http, $ajaxhttp, moduleService) {
+				
+				/**
+				 * ==============================================
+				 * @name  superviseReportMgtCtrl
+				 * @author  | 2018/10/25
+				 * @version 
+				 * @desc  社会监督举报
+				 * ==============================================
+				 */
+				$scope.init = function(){
+					/**
+					 * 初始化行政区划树
+					 */
+					regionTreeList();
+					
+					/**
+					 * 获取列表数据
+					 */
+					getModuleList();
+					
+					/**
+					 * 获取处理状态
+					 */
+					getDealList();
+				}
+				
+				var jsname = /^[a-zA-Z0-9_-]{4,16}$/,
+					regionTree,
+					regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree';
+					
+				/**
+				 * 初始化行政区划树
+				 */
+				var regionTreeSetting = {
+	                data: {
+	                    simpleData: {enable: true},
+	                    keep: {parent: true}
+	                },
+	                view: {
+	                    nameIsHTML: true,
+	                    expandSpeed: 'slow',
+	                    dblClickExpand: false,
+	                    txtSelectedEnable: false
+	                },
+	                callback: {
+	                    beforeExpand: regionTreeOnExpand,
+	                    onClick: regionTreeOnClick
+	                }
+	            };
+				
+				/**
+				 * 捕获行政区域节点被点击
+				 * @param {Object} event
+				 * @param {Object} treeId
+				 * @param {Object} treeNode
+				 */
+                function regionTreeOnClick(event, treeId, treeNode) {
+                    console.log(treeNode);
+                    $scope.regionId = treeNode.id;
+                    $scope.regionName = treeNode.name;
+                    $scope.grade = treeNode.grade;
+                }
+
+                /**
+                 * 用于捕获行政区域父节点展开之前的问题回调函数，并且根据返回值确定是否允许展开操作
+                 * @param {Object} treeId
+                 * @param {Object} treeNode
+                 */
+                function regionTreeOnExpand(treeId, treeNode) {
+                    console.log('===========regionTreeOnExpand===========');
+	                var cnodes = treeNode.children;
+	                $http({
+	                    method: 'get',
+	                    url: regionTreeUrl,
+	                    params: {
+	                        parentCode: treeNode.id
+	                    },
+	                }).success(
+	                    function (res) {
+	                        console.log(res);
+	                        regionTree.addNodes(treeNode, res.data, true);
+	                    }
+	                );
+                }
+
+                /**
+                 * 生成区域树
+                 */
+                function regionTreeList () {
+	                $http({
+	                    method: 'get',
+	                    url: regionTreeUrl
+	                }).success(function (res) {
+	                    console.log(res)
+	                    if(res.resCode == 1){
+	                    	regionTree = $.fn.zTree.init($("#regionTreeContainer"), regionTreeSetting, res.data);
+	                    }else{
+	                    }
+	                }).error(function () {
+	                });
+	            };
+				
+				/**
+                 * 区域树模态框
+                 */
+                $scope.getRegionShow = function () {
+                	$('#regionTreeModal').modal('show');
+                    regionTreeList();
+                }
+				
+				/**
+				 * 区域树搜索
+				 */
+				$scope.getSelectRegion = function(){
+					console.log('我是区域树搜索...')	
+				}
+				
+				/**
+				 * 关闭模态框
+				 */
+				$scope.getModalOk = function(){
+                	$('#regionTreeModal').modal('hide');
+					console.log('我是区域树关闭...')	
+				}
+				
+				/**
+				 * 时间选择
+				 */
+				
+                var datepicker1 = $('#beginTime').datetimepicker({
+			        format: 'YYYY-MM-DD',
+			        locale: moment.locale('zh-cn')
+			    }).on('dp.change', function (e) {
+			        var result = new moment(e.date).format('YYYY-MM-DD');
+			        $scope.beginTime = result;
+			        $scope.$apply();
+    			});
+    			
+    			var datepicker2 = $('#endTime').datetimepicker({
+			        format: 'YYYY-MM-DD',
+			        locale: moment.locale('zh-cn')
+			    }).on('dp.change', function (e) {
+			        var result = new moment(e.date).format('YYYY-MM-DD');
+			        $scope.endTime= result;
+			        $scope.$apply();
+			    });
+ 				
+ 				/**
+ 				 * 动态设置最小值
+ 				 */
+				datepicker1.on('dp.change', function (e) {
+			        datepicker2.data('DateTimePicker').minDate(e.date);
+			    });
+			    /**
+			     * 动态设置最大值
+			     */
+			    datepicker2.on('dp.change', function (e) {
+			        datepicker1.data('DateTimePicker').maxDate(e.date);
+			    });
+				
+				/**
+				 * 列表数据
+				 */
+				function getModuleList(){
+					$scope.moduleList = [
+						{
+							'id':1,
+							'region':'河西区',
+							'resource':'88908890',
+							'peoblemReach':'永定河河西区段',
+							'reportPerson':'张三',
+							'contact':'13732288520',
+							'reportDate':'2018-10-11'
+						},
+						{
+							'id':2,
+							'region':'河西区',
+							'resource':'市河长办监督电话',
+							'peoblemReach':'海河河西区段',
+							'reportPerson':'张三',
+							'contact':'13732288888',
+							'reportDate':'2018-10-18'
+						},
+						{
+							'id':3,
+							'region':'和平区',
+							'resource':'电子邮件',
+							'peoblemReach':'海河和平区段',
+							'reportPerson':'李四',
+							'contact':'13732280001',
+							'reportDate':'2018-10-20'
+						}
+					]
+				}
+				
+				/**
+				 * 获取问题类型
+				 */
+				function getDealList(){
+					$scope.dealList = [
+						{
+							'id':1,
+							'name':'未处理'
+						},
+						{
+							'id':2,
+							'name':'已处理'
+						},
+						{
+							'id':3,
+							'name':'处理中'
+						}
+					]
+				}
+				
+				/**
+				 * 监督举报新增
+				 */
+				$scope.getReachAdd = function(){
+					routeService.route('3-6-3', false);
+				}
+				
+				/**
+				 * 查看当前列表详情
+				 */
+				$scope.getHydrologicDetail = function(id){
+					routeService.route('3-6-4', false);
+				};
+				
+				
+				/**
+				 * 巡查删除
+				 */
+				
+				$scope.getHydrologicDelete = function(id,name) {
+					var layerIndex = layer.confirm('确定删除本条数据吗？', {
+	                      btn: ['确定', '取消']
+	                      // 按钮
+	                  }, function () {
+							layer.msg("删除成功！",{time:2000});
+	                 }, function () {});
+				}
+				
+				
+				
+            }
+        ]);
+
+})(window, angular)

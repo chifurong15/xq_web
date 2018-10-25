@@ -1,0 +1,74 @@
+<div ng-controller="patrolDetailMgtCtrl" ng-init="init()">
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3">巡查详情</h1>
+    </div>
+    <div class="wrapper-md">
+        <div class="panel panel-default m-all-0">
+			<div class="panel-body">
+				<div class="panel-content">
+					<div class="patrolDetailContent">
+						<div class="form-item">
+							<label>河道名称：</label>
+							<span ng-bind="problemList.reachName"></span>
+						</div>
+						<div class="form-item">
+	                        <label>行政区域：</label>
+							<span ng-bind="problemList.partrolRegion"></span>
+	                    </div>
+						<br />
+                      	<div class="form-item">
+							<label>河道问题：</label>
+							<span ng-bind="problemList.partrolProblem"></span>
+						</div>
+						<div class="form-item">
+							<label>扣分类型：</label>
+							<span ng-bind="problemList.partrolType"></span>
+						</div>
+						<br />	
+						<div class="form-item">
+							<label>所扣分数：</label>
+							<span ng-bind="problemList.partrolScore"></span>
+						</div>
+						<div class="form-item">
+							<label>巡查人员：</label>
+							<span ng-bind="problemList.patrolPerson"></span>
+						</div>
+						<br />
+                        <div class="form-item">
+                            <label>巡查日期：</label>
+							<span ng-bind="problemList.patrolDate"></span>
+                        </div>
+                        <div class="form-item">
+							<label>所在位置：</label>
+							<span ng-bind="problemList.patrolAdress"></span>
+						</div>
+						<br />
+						<div class="form-item">
+							<label>问题照片：</label>
+		                	<div id="layer-photos-before" class="layer-photos-demo" style="margin-left: 30px;">
+							  	<img style="margin: 0 5px;" layer-pid="" layer-src="/src/img/bg.jpg" src="/src/img/bg.jpg" alt="问题照片" width="60px" height="60px">
+							  	<img style="margin: 0 5px;" layer-pid="" layer-src="/src/img/bg.jpg" src="/src/img/bg.jpg" alt="问题照片" width="60px" height="60px">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel-footer m-b-10">
+				<div class="btn-box">
+					<button type="submit" class="btn btn-default" ng-click="getBack()">
+						<i class="fa fa-reply"></i>返回
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	layui.use('layer', function() {
+		layer.photos({
+		  photos: '#layer-photos-before'
+		  ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+		}); 
+	});
+
+</script>
