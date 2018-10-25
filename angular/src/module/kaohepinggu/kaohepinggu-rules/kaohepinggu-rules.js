@@ -242,25 +242,25 @@
 								gradedetailed: $scope.gradedetailed,
 								gradeway: $scope.gradeway,
 								deductMarks: $scope.deductMarks,
-								processLimitted: $scope.processLimited
+								processLimitted: $scope.processLimitted
 							}							
 							console.log($scope.gradeIllegal1)
 							console.log($scope.gradetype1)
-//							$ajaxhttp.myhttp({
-//								url: apiPrefix + '/v1/IllegalXize/update',
-//								method: 'PUT',
-//								params:params,
-//								callBack: function (res) {
-//									if(res.resCode == 1){
-//										layer.msg('修改成功', {time:2000});
-//										getList();										
-//	                                	clear();//创建成功后清空
-//	                                	$('#myModal').modal('hide');						
-//									}else{
-//	                                	layer.msg(res.resMsg, {time:2000});										
-//									}
-//								}
-//							})
+							$ajaxhttp.myhttp({
+								url: apiPrefix + '/v1/IllegalXize/update',
+								method: 'PUT',
+								params:params,
+								callBack: function (res) {
+									if(res.resCode == 1){
+										layer.msg('修改成功', {time:2000});
+										getList();										
+	                                	clear();//创建成功后清空
+	                                	$('#myModal').modal('hide');						
+									}else{
+	                                	layer.msg(res.resMsg, {time:2000});										
+									}
+								}
+							})
 						}
 						
 					}
