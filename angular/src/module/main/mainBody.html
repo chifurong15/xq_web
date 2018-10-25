@@ -118,6 +118,43 @@
 				<div class="panel-body">
 					<div id="map" class="main-map">
 
+                        <!--全屏操作-->
+                        <div class="mapCtrl">
+                            <a href="javascript:void(0);" id="fullScreen" ng-click="fullScreen();"><i class="fa fa-expand"></i></a>
+                            <a href="javascript:void(0);" id="exitScreen" ng-click="exitScreen();" style="display: none"><i class="fa fa-compress"></i></a>
+                        </div>
+
+                        <!--地图部件操作-->
+                        <div class="unitCtrl">
+                            <ul>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <img src="img/unitIcon-1.png" />
+                                        <span>入河排污口</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <img src="img/unitIcon-2.png" />
+                                        <span>污水处理厂</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <img src="img/unitIcon-3.png" />
+                                        <span>公示牌</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <img src="img/unitIcon-4.png" />
+                                        <span>监测断面</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+
 						<div id="mapTips"></div>
 
 						<div class="city-select form-group">

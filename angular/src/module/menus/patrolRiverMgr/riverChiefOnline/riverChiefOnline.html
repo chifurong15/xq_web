@@ -585,7 +585,7 @@
                                         <form class="bs-example form-horizontal eveDetail-panel" style="margin-top: 5px;">
                                             <div style="margin: 0;">
                                                 <label style="vertical-align: top;"><i style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #297FCA;margin-right: 10px;"></i>巡河照片</label>
-                                                <div style="display: inline-block;" id="layer-photos-before" class="layer-photos-demo" style="margin-left: 10px;">
+                                                <div style="display: inline-block;" id="layer-photos-patrolMgr" class="layer-photos-demo" style="margin-left: 10px;">
                                                     <img style="margin: 0 5px;" ng-repeat="item in logImgArr" layer-pid="" layer-src="{{eventImgUrl}}{{item}}" src="{{eventImgUrl}}{{item}}" alt="巡河照片" width="60px" height="60px">
                                                 </div>
                                             </div>
@@ -595,7 +595,7 @@
                                         <form class="bs-example form-horizontal eveDetail-panel" style="margin-top: 5px;">
                                             <div style="margin: 0;">
                                                 <label style="vertical-align: top;"><i style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #297FCA;margin-right: 10px;"></i>巡河音像</label>
-                                                <div style="display: inline-block;" id="layer-photos-before" class="layer-photos-demo" style="margin-left: 10px;">
+                                                <div style="display: inline-block;" class="layer-photos-demo" style="margin-left: 10px;">
                                                     <div style="display: inline-block;" ng-repeat="item in mediaArr">
                                                         <img ng-show="item.accessorytype == 3" style="margin: 0 5px;width:60px; height:60px;" src="img/music_img.png" alt="巡河音像">
                                                         <img ng-show="item.accessorytype == 4" style="margin: 0 5px;width:60px; height:60px;" src="img/audio_img.png" alt="巡河音像">
@@ -643,5 +643,12 @@
 		  photos: '#layer-photos-later'
 		  ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
 		}); 
-	}); 
+	});
+    layui.use('layer', function() {
+
+        layer.photos({
+            photos: '#layer-photos-patrolMgr'
+            ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+        });
+    });
 </script>
