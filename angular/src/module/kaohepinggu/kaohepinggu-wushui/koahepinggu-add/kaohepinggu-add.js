@@ -30,13 +30,14 @@
 						var bulletin = globalParam.getter().bulletin || {};
 						
 						$scope.id = bulletin.id;
-						console.log(bulletin);
+						$scope.pid = bulletin.id;
 
 						// 编辑时获取原数据
 						if (bulletin.id) {
 							$location.search('id', bulletin.id);
 							setData(bulletin);
 						} else if (!bulletin.id && !!getQueryString('id')) {
+							$scope.pid = getQueryString('id');
 							// 根据id查询
 							$ajaxhttp.myhttp({
 								url: apiPrefix + '/v1/SewageDispose/detail',
@@ -55,15 +56,14 @@
 						getAllArea();
 						getScoreList();
 						getAllName ();
-						
+						$scope.pid = getQueryString('id') ? getQueryString('id') : $scope.newid;
 					}
 					
-					var id = localStorage.getItem('id');
 					
 					//获取得分条目列表
 					function getScoreList () {
 						$http({
-							url: apiPrefix + '/v1/SewageDisposeReport/list?parentid=' + id,
+							url: apiPrefix + '/v1/SewageDisposeReport/list?parentid=' + $scope.pid,
 							method: 'get',
 							params:{
 								pageNumber: $scope.paginationConf.currentPage,
@@ -174,6 +174,7 @@
 								callBack: function (res) {
 									if(res.resCode == 1){
 										$scope.newid = res.data.id;
+										$scope.pid = res.data.id;
 										layer.msg('新建成功', {time:2000});
 	                                	clear();//创建成功后清空
 									}else{
@@ -268,7 +269,7 @@
 								url: apiPrefix + '/v1/SewageDisposeReport/haveSewage',
 								method: 'get',
 								params: {
-									parentid: $scope.id,
+									parentid: $scope.pid,
 									name: $scope.name
 								},
 								callBack: function (res) {
@@ -277,7 +278,7 @@
 											url: apiPrefix + '/v1/SewageDisposeReport/add',
 											method: 'POST',
 											params: {
-												parentid:$scope.id,
+												parentid:$scope.pid,
 												name: $scope.name,
 												region: $scope.region,
 												assess:$scope.assess,
@@ -379,7 +380,7 @@
 								url: apiPrefix + '/v1/SewageDisposeReport/deletelist',
 								method: 'DELETE',
 								params: {
-									parentid: id
+									parentid: $scope.id ? $scope.id : $scope.pid
 								},
 								callBack: function (res) {
 									if(res.resCode == 1){
