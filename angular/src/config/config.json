@@ -412,10 +412,41 @@
       "name": "违规细则",
       "icon": "fa fa-trash-o",
       "url": "module/kaohepinggu/kaohepinggu-rules/kaohepinggu-rules.html",
-      "requireJS": [
-        "module/kaohepinggu/kaohepinggu-rules/kaohepinggu-rules.js"
-      ],
+      "requireJS": ["module/kaohepinggu/kaohepinggu-rules/kaohepinggu-rules.js"],
       "description": "考核评分-违规细则"
+    },
+    {
+      "seqId": "3-6",
+      "parentId": "3",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "巡查管理",
+      "icon": "menu-icon-6",
+      "url": "module/kaohepinggu/kaohepinggu-patrolMgt/patrolMgt.html",
+      "requireJS": ["module/kaohepinggu/kaohepinggu-patrolMgt/patrolMgt.js"],
+      "description": "考核评分-巡查管理"
+    },
+    {
+      "seqId": "3-7",
+      "parentId": "3",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "监督评价",
+      "icon": "menu-icon-6",
+      "url": "module/kaohepinggu/kaohepinggu-superviseEvaluateMgt/superviseEvaluateMgt.html",
+      "requireJS": ["module/kaohepinggu/kaohepinggu-superviseEvaluateMgt/superviseEvaluateMgt.js"],
+      "description": "考核评分-社会监督评价"
+    },
+    {
+      "seqId": "3-8",
+      "parentId": "3",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "监督举报",
+      "icon": "menu-icon-6",
+      "url": "module/kaohepinggu/kaohepinggu-superviseReportMgt/superviseReportMgt.html",
+      "requireJS": ["module/kaohepinggu/kaohepinggu-superviseReportMgt/superviseReportMgt.js"],
+      "description": "考核评分-社会监督举报"
     },
     {
       "seqId": "4",
@@ -819,6 +850,34 @@
       "url": "module/menus/info-management/institute-system/institute-system-detail.html",
       "requireJS":["module/js/info-management/institute-system/institute-system-detail.js"],
       "description": "信息管理-制度列表"
+    },
+    {
+      "seqId": "3-6-1",
+      "name": "巡查详情",
+      "url": "module/kaohepinggu/kaohepinggu-patrolMgt/patrolDetailMgt.html",
+      "requireJS":["module/kaohepinggu/kaohepinggu-patrolMgt/patrolDetailMgt.js"],
+      "description": "巡查管理-巡查详情"
+    },
+    {
+      "seqId": "3-6-2",
+      "name": "监督评价详情",
+      "url": "module/kaohepinggu/kaohepinggu-superviseEvaluateMgt/superviseEvaluateDetailMgt.html",
+      "requireJS":["module/kaohepinggu/kaohepinggu-superviseEvaluateMgt/superviseEvaluateDetailMgt.js"],
+      "description": "巡查管理-监督评价详情"
+    },
+    {
+      "seqId": "3-6-3",
+      "name": "监督举报新增",
+      "url": "module/kaohepinggu/kaohepinggu-superviseReportMgt/superviseReportAddMgt.html",
+      "requireJS":["module/kaohepinggu/kaohepinggu-superviseReportMgt/superviseReportAddMgt.js"],
+      "description": "巡查管理-监督举报新增"
+    },
+    {
+      "seqId": "3-6-4",
+      "name": "监督举报详情",
+      "url": "module/kaohepinggu/kaohepinggu-superviseReportMgt/superviseReportDetailMgt.html",
+      "requireJS":["module/kaohepinggu/kaohepinggu-superviseReportMgt/superviseReportDetailMgt.js"],
+      "description": "巡查管理-监督举报详情"
     }
   ]
 }
