@@ -12,6 +12,7 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
         $localStorage.gwUrl = "http://117.8.229.5:9000";
         $localStorage.serviceUrl = $localStorage.gwUrl + "/uip";
         $localStorage.serviceUrl_chiefOnline = $localStorage.gwUrl + "/patrolMgr";
+        $localStorage.serviceUrl_patrolMgr = $localStorage.gwUrl + "/patrolMgr";
         $localStorage.serviceUrl_reachTree = $localStorage.gwUrl + "/watersource";
         $localStorage.serviceUrl_eventMgr = $localStorage.gwUrl + "/eventMgr/";
 		// logo显示隐藏
