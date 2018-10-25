@@ -375,7 +375,7 @@
 							$scope.attandName = file.name;
 				            form.append('file', file);
 				            form.append('fileName', file.name);	
-				            form.append('parentid', getQueryString('id'));
+				            form.append('parentid', $scope.id ? $scope.id : $scope.pid);
 				            $ajaxhttp.myhttp({
 								url: apiPrefix + '/v1/SewageDisposeReport/deletelist',
 								method: 'DELETE',

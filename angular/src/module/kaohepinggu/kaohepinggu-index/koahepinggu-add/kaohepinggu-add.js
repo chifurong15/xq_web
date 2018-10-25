@@ -319,14 +319,14 @@
 					}					
 					
 					// 上传文件
-					$scope.uploadFile = function (e) {						
+					$scope.uploadFile = function (e) {
 						for (var i = 0; i < e.files.length; i++) {
 	            			var form = new FormData();
 							var file = e.files[i];
 							$scope.attandName = file.name;
 				            form.append('file', file);
 				            form.append('fileName', file.name);	
-				            form.append('parentid', getQueryString('id'));
+				            form.append('parentid', $scope.id ? $scope.id : $scope.pid);
 				            $ajaxhttp.myhttp({
 								url: apiPrefix + '/v1/SurfaceWaterGrade/deletelist',
 								method: 'DELETE',
