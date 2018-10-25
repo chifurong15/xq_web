@@ -314,6 +314,19 @@
       "description": "二级菜单-抽查督导-督查"
     },
     {
+      "seqId": "2-4",
+      "parentId": "2",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "督办",
+      "icon": "menu-icon-6",
+      "url": "module/chouchadudao/chouchadudao-duban/chouchadudao-index/chouchadudao-index.html",
+      "requireJS": [
+        "module/chouchadudao/chouchadudao-duban/chouchadudao-index/chouchadudao-index.js"
+      ],
+      "description": "二级菜单-抽查督导-督办"
+    },
+    {
       "seqId": "3",
       "parentId": "0",
       "isLeaf": false,
@@ -752,9 +765,9 @@
       "isRoot": false,
       "name": "督查-新增",
       "icon": "menu-icon-6",
-      "url": "src/module/chouchadudao/chouchadudao-ducha/chouchadudao-add/chouchadudao-add.html",
+      "url": "module/chouchadudao/chouchadudao-ducha/chouchadudao-add/chouchadudao-add.html",
       "requireJS": [
-        "src/module/chouchadudao/chouchadudao-ducha/chouchadudao-add/chouchadudao-add.js"
+        "module/chouchadudao/chouchadudao-ducha/chouchadudao-add/chouchadudao-add.js"
       ],
       "description": "二级菜单-抽查督导-督查-新增"
     },
@@ -765,11 +778,37 @@
       "isRoot": false,
       "name": "督查-详情",
       "icon": "menu-icon-6",
-      "url": "src/module/chouchadudao/chouchadudao-ducha/chouchadudao-detail/chouchadudao-detail.html",
+      "url": "module/chouchadudao/chouchadudao-ducha/chouchadudao-detail/chouchadudao-detail.html",
       "requireJS": [
-        "src/module/chouchadudao/chouchadudao-ducha/chouchadudao-detail/chouchadudao-detail.js"
+        "module/chouchadudao/chouchadudao-ducha/chouchadudao-detail/chouchadudao-detail.js"
       ],
       "description": "二级菜单-抽查督导-督查-详情"
+    },
+    {
+      "seqId": "2-4-1",
+      "parentId": "2",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "督办-新增",
+      "icon": "menu-icon-6",
+      "url": "module/chouchadudao/chouchadudao-duban/chouchadudao-add/chouchadudao-add.html",
+      "requireJS": [
+        "module/chouchadudao/chouchadudao-duban/chouchadudao-add/chouchadudao-add.js"
+      ],
+      "description": "二级菜单-抽查督导-督办-新增"
+    },
+    {
+      "seqId": "2-4-2",
+      "parentId": "2",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "督办-详情",
+      "icon": "menu-icon-6",
+      "url": "module/chouchadudao/chouchadudao-duban/chouchadudao-detail/chouchadudao-detail.html",
+      "requireJS": [
+        "module/chouchadudao/chouchadudao-duban/chouchadudao-detail/chouchadudao-detail.js"
+      ],
+      "description": "二级菜单-抽查督导-督办-详情"
     },
     {
       "seqId": "801",
