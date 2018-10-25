@@ -1,5 +1,5 @@
 {
-  "htmlUrl":"http://127.0.0.1:8080",
+  "htmlUrl":"http://127.0.0.1:8080/src",
   "serviceUrl": "http://117.8.229.5:9000",
   "enabledDebug": true,
   "type": "1",

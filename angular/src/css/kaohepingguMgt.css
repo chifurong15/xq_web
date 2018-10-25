@@ -1,0 +1,34 @@
+/**
+ * ====================================================
+ * 描述说明
+ * @author Yuanht
+ * date 2018/10/25
+ * @version 1.0.0
+ * @desc 考核评估 | 巡查管理 | 社会监督评价 | 社会监督举报
+ * ====================================================
+ */
+
+.form-patrolMgt .date-tj{
+    position: relative; 
+    display: inline-flex;
+}
+.form-patrolMgt .date-tj input{
+    height: 34px;
+    margin-right: 0;
+}
+.table-patrolMgt thead tr th{
+	text-align: center;
+}
+.patrolDetailContent .form-item{
+	min-width: 280px;
+}
+.patrolDetailContent .form-item span{
+	margin-top: 0;
+	line-height: 33px;
+}
+.patrolDetailContent .layer-photos-demo{
+	display: flex;
+}
+.problemFile{
+	height: 350px;
+}

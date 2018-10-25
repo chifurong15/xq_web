@@ -83,19 +83,19 @@
 				 */
                 function chartContainer () {
                 	var _outH = $('#mainBody').outerHeight(true);
-                	console.log(_outH)
+                	// console.log(_outH)
                 	var _weatH = $('#weather').outerHeight(true);
-                	console.log(_weatH)
+                	// console.log(_weatH)
                 	var _newsH = $('#news-l').outerHeight(true);
-                	console.log(_newsH)
+                	// console.log(_newsH)
                 	var _reachH = $('#reach-table').outerHeight(true);
-                	console.log(_reachH)
+                	// console.log(_reachH)
                 	var _mapH = $('#mid-map').outerHeight(true);
-                	console.log(_mapH)
+                	// console.log(_mapH)
                 	var _rankH = $('#rank').outerHeight(true);
-                	console.log(_rankH)
+                	// console.log(_rankH)
                 	var _cityRankH = $('#cityRank').outerHeight(true);
-                	console.log(_cityRankH)
+                	// console.log(_cityRankH)
                 	
                 	var chartHeight = _outH - _weatH - _newsH - _reachH - 60;
 //	                $('#main').css('height', chartHeight);

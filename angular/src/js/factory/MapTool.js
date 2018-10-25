@@ -4,7 +4,7 @@
  * @date: 2018-8-15 14:11
  */
 angular.module('app')
-    .factory('MapTool', ['wish', function(wish){
+    .factory('MapTool', ['wish', 'SymbolUtil', function(wish, SymbolUtil){
         var _w = wish.get();
         var _map = null;
         var _vecLayer = null;
@@ -103,24 +103,40 @@ angular.module('app')
             }
             return graphicset;
         };
+        var _graphicOnMap = function(layer, val){
+            var graphics = layer.graphics;
+            if (graphics.length > 0) {
+                for (var i = 0; i < graphics.length; i++) {
+                    var id = graphics[i].attributes.id;
+                    if (id === val) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        };
 
         //闪烁
-        var _graphicflashing = function (polygon) {
+        var _graphicflashing = function (geometry, geotype) {
             flashingIndex = 0;
-            if(flashLayer != undefined){
+            if(flashLayer !== null){
                 flashLayer.clear();
             }
-            if (flashingTimer) clearInterval(flashingTimer);
+            if (flashingTimer){
+                clearInterval(flashingTimer);
+            }
 
-            var sfs = new _w.SimpleFillSymbol().setColor(
-                [255, 255, 0, 0.8]).setOutline(
-                new _w.SimpleLineSymbol(
-                    _w.SimpleLineSymbol.STYLE_SOLID, new _w.Color(
-                        [255, 0, 0, 0])), 2);
+            var _symbol;
+            if(geotype === "polygon"){
+                _symbol = SymbolUtil.getFillSymbol("solid", "solid", [255, 0, 0, 0], 2, [255, 255, 0, 0.8]);
+            }else if(geotype === "polyline"){
+                _symbol = SymbolUtil.getLineSymbol("solid", [21,170,241], 8); //[255, 153, 18]
+            }else {
 
-            flashingGraphic = new _w.Graphic(polygon, sfs);
+            }
+
+            flashingGraphic = new _w.Graphic(geometry, _symbol);
             flashLayer.add(flashingGraphic);
-
             flashingTimer = setInterval(_doGraphicFlashing, 500);
         };
 
@@ -149,6 +165,7 @@ angular.module('app')
             init: _init,
             getAngle: _getAngle,
             simplifyPath: _simplifyPath,
+            graphicOnMap: _graphicOnMap,
             graphicflashing: _graphicflashing,
             controlLayerVisible: _controlLayerVisible,
             getflashingTimer: _getflashingTimer,

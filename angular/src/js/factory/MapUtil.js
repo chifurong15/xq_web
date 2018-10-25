@@ -7,31 +7,40 @@ angular.module('app')
     .factory('MapUtil',['wish', function(wish){
         var _w = wish.get();
         var _map = null;
-        var _defaults = null;
+        //var _defaults = null;
         var that = this;
 
         var _init = function(map, options){
             this._map = map;
-            if(typeof options === "undefined"){
-                _defaults = { //天津市
-                    "longitude": 117.19203455803067,
-                    "latitude": 39.08350838137276,
-                    "regionlevel": 2
-                };
-                this.center2LongLat(_defaults.longitude, _defaults.latitude, _defaults.regionlevel)
-            }else {
-                this.center2LongLat(options.longitude, options.latitude, options.regionlevel)
-            }
+            // if(typeof options === "undefined"){
+            //     _defaults = { //天津市
+            //         "longitude": 117.19203455803067,
+            //         "latitude": 39.08350838137276,
+            //         "regionlevel": 2
+            //     };
+            //     this.center2LongLat(_defaults.longitude, _defaults.latitude, _defaults.regionlevel)
+            // }else {
+            //     this.center2LongLat(options.longitude, options.latitude, options.regionlevel)
+            // }
         };
         var _addLayer = function(layer, index){
             this._map.addLayer(layer, index);
         };
-
-        var _centerAtPoint = function (point) {
-            this._map.centerAt(point);
+        /**
+         * 定位到点
+         * @param x
+         * @param y
+         */
+        var _center2point = function(x, y){
+            if(_isCoordValid(x, y)){
+                var point  = new _w.Point(x, y, this._map.spatialReference);
+                this._map.centerAt(point);
+            }else{
+                return;
+            }
         };
         /**
-         * 定位[x,y]到指定点
+         * 定位到指定点,缩放级别
          * @param point
          * @param regionLevel
          * @private
@@ -49,7 +58,12 @@ angular.module('app')
         var _center2LongLat = function(long, lat, regionLevel){
             if(this.isCoordValid(long, lat)){
                 var point  = new _w.Point(long, lat);
-                this.center2zoom(point, regionLevel);
+                if(regionLevel){
+                    this.center2zoom(point, regionLevel);
+                }else {
+                    this.center2point(point);
+                }
+
             }
         };
 
@@ -77,7 +91,7 @@ angular.module('app')
         return {
             init: _init,
             addLayer: _addLayer,
-            centerAtPoint: _centerAtPoint,
+            center2point: _center2point,
             center2zoom: _center2zoom,
             center2LongLat: _center2LongLat,
             isCoordValid: _isCoordValid,
