@@ -1986,3 +1986,69 @@ body .c-ffffff a {
 .anchaanfang .form-item img {
     margin: 10px 5px;
 }
+
+/* 首页全屏操作 */
+.mapCtrl {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 2px 2px 2px rgba(35, 4, 4, 0.78);
+    border-radius: 4px;
+    top: 10px;
+    left: 10px;
+    z-index: 100;
+    cursor: pointer;
+}
+
+.mapCtrl a {
+    float: left;
+    width: 100%;
+    height: 100%;
+    color: #000;
+    font-size: 18px;
+    text-align: center;
+    line-height: 40px;
+}
+
+/* 地图部件管理 */
+.unitCtrl {
+    position: absolute;
+    width: 160px;
+    height: auto;
+    top: 80px;
+    left: 10px;
+    z-index: 100;
+    padding: 10px 5px;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 2px 2px 2px rgba(35, 4, 4, 0.78);
+}
+
+.unitCtrl li {
+    float: left;
+    width: 64px;
+    height: 72px;
+    margin: 5px;
+}
+
+.unitCtrl li a {
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+
+.unitCtrl li a img {
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    border: 1px solid #999;
+    margin: 0 12px;
+}
+.unitCtrl li a span {
+    display: block;
+    line-height: 30px;
+    text-align: center;
+    font-size: 12px;
+    color: #333;
+}
