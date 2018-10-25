@@ -68,11 +68,11 @@
 										<td>文号</td>
 	                                    <td>督查检查方式</td>                              
 	                                    <td>
-	                                    	<span class="label label-danger">已上报</span>
+	                                    	<span class="label label-info">已下发</span>
 	                                    </td>	                                   
 	                                    <td style="text-align: left;">
-	                                    	<button type="button" class="btn btn-success" ng-click="view(0)">查看</button>
-											<button type="button" class="btn btn-warning" ng-click="view(1)">组建并通知</button>	                                    	
+	                                    	<button type="button" class="btn btn-success" ng-click="view(0 ,0)">查看</button>
+											<button type="button" class="btn btn-danger" ng-click="view(0 ,1)">上报</button>	                                    	
 	                                    </td>
 	                                </tr>
 	                                <tr>
@@ -82,13 +82,13 @@
 										<td>文号</td>
 	                                    <td>督查检查方式</td>                              
 	                                    <td>
-	                                    	<span class="label label-info">已下发</span>
+	                                    	<span class="label label-danger">已上报</span>
 	                                    </td>	                                   
 	                                    <td style="text-align: left;">
-	                                    	<button type="button" class="btn btn-success" ng-click="view(0)">查看</button>
-											<button type="button" class="btn btn-danger" ng-click="view(1)">上报</button>	                                    	
+	                                    	<button type="button" class="btn btn-success" ng-click="view(0 ,0)">查看</button>
+											<button type="button" class="btn btn-warning" ng-click="view(0 ,1)">组建并通知</button>	                                    	
 	                                    </td>
-	                                </tr>
+	                                </tr>	                                
 	                                <tr>
 	                                    <td>3</td>
 	                                    <td>我是标题</td>
@@ -99,8 +99,8 @@
 	                                    	<span class="label label-success">已通知</span>
 	                                    </td>	                                   
 	                                    <td style="text-align: left;">
-	                                    	<button type="button" class="btn btn-success" ng-click="view(0)">查看</button>
-											<button type="button" class="btn btn-info" ng-click="view(1)">检查并通报</button>	                                    	
+	                                    	<button type="button" class="btn btn-success" ng-click="view(0,0)">查看</button>
+											<button type="button" class="btn btn-info" ng-click="view(0,1)">检查并通报</button>	                                    	
 	                                    </td>
 	                                </tr>
 	                                <tr>
@@ -113,8 +113,8 @@
 	                                    	<span class="label label-primary">已通报</span>
 	                                    </td>	                                   
 	                                    <td style="text-align: left;">
-	                                    	<button type="button" class="btn btn-success" ng-click="view(0)">查看</button>
-											<button type="button" class="btn btn-dark" ng-click="view(1)">一区一单</button>	                                    	
+	                                    	<button type="button" class="btn btn-success" ng-click="view(0,0)">查看</button>
+											<button type="button" class="btn btn-dark" ng-click="view(0 ,1)">一区一单</button>	                                    	
 	                                    </td>
 	                                </tr>
 	                                <tr>
@@ -127,7 +127,7 @@
 	                                    	<span class="label label-warning">已处理</span>
 	                                    </td>	                                   
 	                                    <td style="text-align: left;">
-	                                    	<button type="button" class="btn btn-success" ng-click="view(0)">查看</button>
+	                                    	<button type="button" class="btn btn-success" ng-click="view(0,0)">查看</button>
 	                                    </td>
 	                                </tr>
 	                                <tr>
@@ -140,8 +140,8 @@
 	                                    	<span class="label label-primary">已通报</span>
 	                                    </td>	                                   
 	                                    <td style="text-align: left;">
-	                                    	<button type="button" class="btn btn-success" ng-click="view(0)">查看</button>
-											<button type="button" class="btn btn-primary" ng-click="view(1)">处理</button>	                                    	
+	                                    	<button type="button" class="btn btn-success" ng-click="view(0,0)">查看</button>
+											<button type="button" class="btn btn-primary" ng-click="view(0 ,1)">处理</button>	                                    	
 	                                    </td>
 	                                </tr>
 	                                

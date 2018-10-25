@@ -3,7 +3,7 @@
 	angular
 		.module("app")
 		.controller(
-			'chouchaViewCtrl',
+			'duchaViewCtrl',
 			[
 				'$localStorage',
 				'$scope',
@@ -35,13 +35,23 @@
 							$location.search('id', bulletin.id);
 						}
 						getData(bulletin.id);
-						
+						$scope.noOps = localStorage.getItem('no-ops');
 						var selectedId = localStorage.getItem('selectedId');
 						$('.js-tab').find('li').eq(selectedId).addClass('tab-active').siblings().removeClass('tab-active');
 						$(".js-con").find('.con').hide().eq(selectedId).show();
 						
 					}
 					
+					// 单选按钮组
+	                $scope.typeList = [
+	                    {"id": 1, "typeName": "是"},
+	                    {"id": 2, "typeName": "否"}
+	                ];
+	                $scope.radioBtn = function(type){
+	                    $scope.type = type;
+//	                    getDataList();
+	                }
+	                
 					//返回
 					$scope.goBack = function(){
 						history.back(-1);

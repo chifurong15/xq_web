@@ -77,13 +77,17 @@
 						globalParam.setter({
 							bulletin: {}
 						})
-						routeService.route('2-2-1', false);
+						routeService.route('2-3-1', false);
 	                }
 	                	               
 	                 // 查看    检查
-	                $scope.view = function (id) {
+	                $scope.view = function (id , op) {
 						localStorage.setItem('selectedId',id);
-						routeService.route('2-2-2', false);
+													
+						localStorage.setItem('no-ops',op);
+						
+						
+						routeService.route('2-3-2', false);
 	                }
 	                //返回
 					$scope.goBack=function(){

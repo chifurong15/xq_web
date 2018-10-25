@@ -1854,7 +1854,9 @@ body .c-ffffff a{
 }
 .anchaanfang .scoreTitle > li {
 	padding: 6px 0;
-	color: #333;
+	color: #58666e;
+    font-size: 14px;
+    font-weight: 600;
 	float: left;
 	border-left: 1px solid #ccc;
 	text-indent: 10px;
@@ -1886,4 +1888,11 @@ body .c-ffffff a{
 
 .anchaanfang .form-item img{
 	margin: 10px 5px;
+}
+.anchaanfang .fileNote{
+	float: right;
+}
+.anchaanfang .fileNote span{
+	margin: 0 15px;
+	color: #30a4fe;
 }

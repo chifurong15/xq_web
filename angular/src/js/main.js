@@ -52,7 +52,7 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
             $scope.userInfo = {};
             if ($localStorage.userLoginInfo != undefined) {
                 $scope.userInfo.username = $localStorage.userLoginInfo.userInfo.name;
-                $scope.userInfo = $localStorage.userLoginInfo.userInfo;
+                $scope.userInfo = $localStorage.userLoginInfo.userInfo;                
             }else{
                 window.location.href = "#/access/signin";
             }
