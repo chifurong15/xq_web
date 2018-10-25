@@ -1,0 +1,150 @@
+<div class="anchaanfang" ng-controller="dubanListCtrl" ng-init="init()">
+    <div class="wrapper-md ">
+    	<div class="panel panel-default m-n">
+        	<div class="panel-body" style="position: relative;">
+        		<span class="tag">督办</span><span class="tag-right"></span>
+        	</div>
+        	
+        </div>
+    	<div class="panel panel-default">
+        	<div class="panel-body">
+        		<div class="table-bar">
+        			<form class="form-inline clearfix">        					                    
+	        			<div class="input-group date date_picker form-item" id="J-searchTime">
+	                        <label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发日期</font></font></label>
+	        				<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime">
+	                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+	                    </div>
+	        			<div class="form-item" >
+	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办对象</font></font></label>
+	                        <input type="text" class="form-control input-short" ng-model="title">
+	                    </div>
+	                    <div class="input-group form-item">
+	                        <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">状态</font></font></label>
+	        				<select ng-model="type" class="form-control select-short" style="width: auto;">
+	                        	<option value="0">全部</option>
+	                        	<option value="1">已下发</option>
+	                        	<option value="2">已处理</option>
+	                        	<option value="3">已完结</option>
+	                        	<option value="4">已退回</option>
+	                        	<option value="5">已回复</option>
+	                        	<option value="6">未按期</option>
+	                        </select>
+	                    </div>	                                 
+        				<div class="input-group">
+		                    <button class="btn btn-primary" ng-click="search()">
+		                    	<i class="fa fa-search"></i>搜索
+		                    </button>
+	                    </div>
+	                    <div class="input-group fr">
+		                    <button type="button" class="btn btn-primary" ng-click="add()">
+		                        <i class="fa fa-plus"></i> 新增
+		                    </button>
+	                    </div>
+                    </form>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                	<tr class='tHeader'>
+	                                    <th width="5%">序号</th>
+	                                    <th width="15%">标题</th>
+	                                    <th width="15%">下发日期</th>
+	                                    <th width="15%">督办对象</th>
+	                                    <th width="15%">状态</th>
+	                                    <th width="15%">操作</th>
+	                                </tr>
+	                                <tr>
+	                                    <td>1</td>
+	                                    <td>环境督办</td>
+	                                    <td>2018-10</td>
+										<td>津南区河长办</td>
+	                                    <td>
+	                                    	<span class="label label-info">已下发</span>
+	                                    </td>	                                   
+	                                    <td style="text-align: left;">
+	                                    	<button type="button" class="btn btn-success" ng-click="view(0 ,0)">查看</button>
+											<button type="button" class="btn btn-danger" ng-click="view(0 ,1)">回复</button>	                                    	
+	                                    </td>
+	                                </tr>
+	                                <tr>
+	                                    <td>2</td>
+	                                    <td>环境督办</td>
+	                                    <td>2018-10</td>
+										<td>津南区河长办</td>                             
+	                                    <td>
+	                                    	<span class="label label-danger">已处理</span>
+	                                    </td>	                                   
+	                                    <td style="text-align: left;">
+	                                    	<button type="button" class="btn btn-success" ng-click="view(0 ,0)">查看</button>
+											<button type="button" class="btn btn-warning" ng-click="view(0 ,1)">核查</button>	                                    	
+	                                    </td>
+	                                </tr>	                                
+	                                <tr>
+	                                    <td>3</td>
+	                                    <td>环境督办</td>
+	                                    <td>2018-10</td>
+										<td>津南区河长办</td>                              
+	                                    <td>
+	                                    	<span class="label label-success">已完结</span>
+	                                    </td>	                                   
+	                                    <td style="text-align: left;">
+	                                    	<button type="button" class="btn btn-success" ng-click="view(0,0)">查看</button>
+	                                    </td>
+	                                </tr>
+	                                <tr>
+	                                    <td>4</td>
+	                                    <td>环境督办</td>
+	                                    <td>2018-10</td>
+										<td>津南区河长办</td>                              
+	                                    <td>
+	                                    	<span class="label label-primary">已退回</span>
+	                                    </td>	                                   
+	                                    <td style="text-align: left;">
+	                                    	<button type="button" class="btn btn-success" ng-click="view(0,0)">查看</button>
+											<button type="button" class="btn btn-dark" ng-click="view(0 ,1)">处理</button>	                                    	
+	                                    </td>
+	                                </tr>
+	                                <tr>
+	                                    <td>5</td>
+	                                    <td>环境督办</td>
+	                                    <td>2018-10</td>
+										<td>津南区河长办</td>                              
+	                                    <td>
+	                                    	<span class="label label-warning">已回复</span>
+	                                    </td>	                                   
+	                                    <td style="text-align: left;">
+	                                    	<button type="button" class="btn btn-success" ng-click="view(0,0)">查看</button>
+	                                    </td>
+	                                </tr>
+	                                <tr>
+	                                    <td>6</td>
+	                                    <td>环境督办</td>
+	                                    <td>2018-10</td>
+										<td>津南区河长办</td>                              
+	                                    <td>
+	                                    	<span class="label label-primary">未按期</span>
+	                                    </td>	                                   
+	                                    <td style="text-align: left;">
+	                                    	<button type="button" class="btn btn-success" ng-click="view(0,0)">查看</button>
+											<button type="button" class="btn btn-primary" ng-click="view(0 ,1)">处理</button>	                                    	
+	                                    </td>
+	                                </tr>
+	                                
+                            	</tbody>
+                            </table>
+                			<!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="chartStatistics">
+                        <div id="patrolChart" class="tj-chart-con"></div>
+                    </div>
+                </div>
+        	
+        	</div>
+        </div>
+    	
+    </div>
+</div>

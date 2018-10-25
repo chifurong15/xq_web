@@ -1,0 +1,345 @@
+<div class="anchaanfang" ng-controller="dubanViewCtrl" ng-init="init()">
+    <div class="wrapper-md ">
+    	<div class="panel panel-default m-n">
+        	<div class="panel-body" style="position: relative;">
+        		<span class="tag">督办</span><span class="tag-right"></span><span class="tag-right tag-left"></span><span class="tag tag1">详情</span><span class="tag-right"></span>
+        		<div style="overflow: hidden;"><button type="button" class="btn btn-primary" ng-click="goBack()" style="position: absolute;right: 20px;bottom: 20px;">返回</button></div>
+        	</div>
+		</div>
+        
+    	<div class="panel panel-default">
+        	<div class="panel-body">
+        		<ul class="js-tab">
+        			<li class="basis tab-active" >基础资料</li>        			
+        			<li class="liaisonMan">回复反馈</li>
+        			<li class="supervisor">结果反馈</li>
+        			<li class="bulletin">核查结果</li>        			     			
+        		</ul>
+        		<div class="panel-body js-con">
+        			<!--基础资料-->
+        			<div class="basis-con con">        				
+			    		<div class="panel-body">
+							<div style="overflow: hidden">
+			    				<form class="form-inline" style="float:left;padding-left: 25%;">
+									<div class="form-item" >
+				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
+				                        <input type="text" class="form-control input-short" ng-model="title">
+									</div>
+				                    <br />
+				                    <div class="input-group date date_picker form-item" id="J-searchTime">
+				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发日期</font></font></label>
+				        				<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime">
+				                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+					               </div>        
+				                    <br />   
+				                    <div class="form-item">
+				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办原因</font></font></label>
+										<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="issuer" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+									</div>        
+								</form>
+								<form class="form-inline" style="float:left;">
+									<div class="form-item" >
+				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办项目</font></font></label>
+				                        <input type="text" class="form-control input-short" ng-model="title">
+				                    </div>
+				                    <br />
+				                    <div class="input-group date date_picker form-item" id="J-searchTime">
+				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">期限时间</font></font></label>
+				        				<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime">
+				                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+					                </div> 
+					                <br />
+					                <div class="form-item" >
+				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办对象</font></font></label>
+				                        <input type="text" class="form-control input-short" ng-model="title">
+				                    </div>
+				                    <br />				                    	                    
+				                    <div class="form-item" >
+				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">附件描述</font></font></label>
+				                        <input type="text" class="form-control input-short" ng-model="title">
+					                    <button type="button" class="btn btn-primary">预览</button>
+				                    </div>				                    
+								</form>					
+			    			</div>
+			    			
+							<div class="tab-content">
+			                    <div class="tab-pane active" id="tableStatistics">
+			                        <div class="table-responsive" style="margin-top: 20px;">
+			                            <table class="table table-bordered table-hover">
+			                                <tbody>
+			                                	<tr class='tHeader'>
+				                                    <th width="5%">序号</th>
+				                                    <th width="15%">标题</th>
+				                                    <th width="20%">下发日期</th>
+				                                    <th width="20%">督办对象</th>
+				                                </tr>
+				                                <tr>
+				                                    <td>1</td>
+				                                    <td>专项检查</td>
+				                                    <td>2018-10-22</td>
+													<td>专项检查</td>				                                    
+				                                </tr>
+				                                <tr>
+				                                    <td>2</td>
+				                                    <td>专项检查</td>
+				                                    <td>2018-10-22</td>
+													<td>专项检查</td>	
+				                                </tr>
+				                                <tr>
+				                                    <td>3</td>
+				                                    <td>专项检查</td>
+				                                    <td>2018-10-22</td>
+													<td>专项检查</td>	
+				                                </tr>
+				                                <tr>
+				                                    <td>4</td>
+				                                    <td>专项检查</td>
+				                                    <td>2018-10-22</td>
+													<td>专项检查</td>	
+				                                </tr>
+			                            	</tbody>
+			                            </table>
+			                			<!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+			                        </div>
+			                    </div>
+			                </div>
+			                <div style="text-align: center;margin: 35px 0;" ng-if="noOps == 1">
+				                <button type="button" class="btn btn-primary" style="margin: 0 50px;" ng-click="submit()" >确认回复</button>
+			                    <button type="button" class="btn btn-default" ng-click="back()">取消</button>
+			                </div>
+			    		</div>
+        			
+        			</div>
+        			<!--回复反馈-->
+					<div class="liaisonMan-con con tab-show">
+        				<div class="panel-body">
+        					<div style="overflow: hidden">
+			    				<form class="form-inline" style="float:left;padding-left: 25%;">
+				                    <div class="input-group date date_picker form-item" id="J-searchTime">
+				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回复日期</font></font></label>
+				        				<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime">
+				                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+					               </div>        
+				                    <br />   
+				                    <div class="form-item">
+				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回复结果</font></font></label>
+				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">已收文</font></font></label>										
+									</div>        
+								</form>
+								<form class="form-inline" style="float:left;">
+									<div class="form-item">
+				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回复描述</font></font></label>
+										<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="issuer" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+									</div>   			                    
+								</form>					
+			    			</div>
+			    			
+        				
+        				</div>
+        			</div>
+        			
+        				
+        			<!--结果反馈-->
+        			<div class="supervisor-con con tab-show">
+        				<div class="panel-body">
+        					
+        					<div style="overflow: hidden">
+			    				<form class="form-inline" style="float:left;padding-left: 25%;">
+									<div class="form-item" >
+				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理结果</font></font></label>
+				                        <input type="text" class="form-control input-short" ng-model="title">
+									</div>				                         
+				                    <br />   
+				                    <div class="form-item">
+				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">结果描述</font></font></label>
+										<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="issuer" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+									</div>        
+								</form>
+								<form class="form-inline" style="float:left;">
+									<div class="input-group date date_picker form-item" id="J-searchTime">
+				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理日期</font></font></label>
+				        				<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime">
+				                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+					                </div>
+				                    <br />				                    	                    
+				                    <div class="form-item" >
+				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">结果附件</font></font></label>
+				                        <input type="text" class="form-control input-short" ng-model="title">
+					                    <button type="button" class="btn btn-primary">预览</button>
+				                    </div>				                    
+								</form>					
+			    			</div>
+			    			
+        					<div class="tab-content">
+			                    <div class="tab-pane active" id="tableStatistics">
+			                        <div class="table-responsive" style="margin-top: 20px;">
+			                            <table class="table table-bordered table-hover">
+			                                <tbody>
+			                                	<tr class='tHeader'>
+				                                    <th width="5%">序号</th>
+				                                    <th width="15%">标题</th>
+				                                    <th width="15%">下发日期</th>
+				                                    <th width="15%">督办对象</th>
+				                                    <th width="15%">操作</th>
+				                                </tr>
+				                                <tr>
+				                                    <td>1</td>
+				                                    <td>我是标题</td>
+				                                    <td>2018-10-22</td>
+				                                    <td>静海区</td>
+				                                    <td style="text-align: center;">
+				                                    	<button type="button" class="btn btn-info">修改</button>
+				                                    	<button type="button" class="btn btn-danger">删除</button>
+				                                    </td>
+				                                </tr>
+				                                <tr>
+				                                    <td>2</td>
+				                                    <td>我是标题</td>
+				                                    <td>2018-10-22</td>
+				                                    <td>静海区</td>
+				                                    <td style="text-align: center;">
+				                                    	<button type="button" class="btn btn-info">修改</button>
+				                                    	<button type="button" class="btn btn-danger">删除</button>
+				                                    </td>
+				                                </tr>
+				                                <tr>
+				                                    <td>3</td>				                                    
+				                                    <td>我是标题</td>
+				                                    <td>2018-10-22</td>
+				                                    <td>静海区</td>
+				                                    <td style="text-align: center;">
+				                                    	<button type="button" class="btn btn-info">修改</button>
+				                                    	<button type="button" class="btn btn-danger">删除</button>
+				                                    </td>
+				                                </tr>
+				                                <tr>
+				                                    <td>4</td>
+				                                  	<td>我是标题</td>
+				                                    <td>2018-10-22</td>
+				                                    <td>静海区</td>
+				                                    <td style="text-align: center;">
+				                                    	<button type="button" class="btn btn-info">修改</button>
+				                                    	<button type="button" class="btn btn-danger">删除</button>
+				                                    </td>
+				                                </tr>
+			                            	</tbody>
+			                            </table>
+			                			<!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+			                        </div>
+			                    </div>
+			                </div>
+			    			
+			    			<div style="text-align: center;margin: 35px 0;" ng-if="noOps ==1">
+				                <button type="button" class="btn btn-primary" style="margin: 0 50px;" ng-click="submit()" >确认处理</button>
+			                    <button type="button" class="btn btn-default" ng-click="back()">取消</button>
+			                </div>
+        				
+        				</div>
+        			</div>
+        			
+        			<!--核查结果-->        			
+        			<div class="bulletin-con con tab-show">
+        				<div class="panel-body">
+							<div style="overflow: hidden">
+								<form class="form-inline" style="float:left;padding-left: 25%;">
+									<div class="form-item" >
+				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">结果状态</font></font></label>
+				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">核查通过</font></font></label>
+				                    </div>
+				                    <br />
+				                    <div class="form-item">
+				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通报内容</font></font></label>
+										<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="issuer" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+									</div>        
+								</form>
+								<form class="form-inline" style="float:left;">
+									<div class="form-item" >
+				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">结果附件</font></font></label>
+				                        <input type="text" class="form-control input-short" ng-model="title">
+					                    <button type="button" class="btn btn-primary">预览</button>
+				                    </div>  
+				                    <br />
+				                    <div class="" style="display: inline-block;">
+				                        <label style="position: relative;top: -42px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">相关照片</font></font></label>
+				                        <div style="display: inline-block;margin-left: 35px;margin-top: 20px;">
+				                        	<img src="https://ss1.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=0fd5d24f9f45d688bc02b4a494c27dab/4b90f603738da977f53a9d57bd51f8198618e3b1.jpg" alt="" style="width: 100px;height: 100px;"/>
+				                        	<img src="https://ss1.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=0fd5d24f9f45d688bc02b4a494c27dab/4b90f603738da977f53a9d57bd51f8198618e3b1.jpg" alt="" style="width: 100px;height: 100px" />
+										</div>
+				                    </div>   
+				                         
+								</form>
+							
+							</div>
+							
+							<div class="tab-content">
+			                    <div class="tab-pane active" id="tableStatistics">
+			                        <div class="table-responsive" style="margin-top: 20px;">
+			                            <table class="table table-bordered table-hover">
+			                                <tbody>
+			                                	<tr class='tHeader'>
+				                                    <th width="5%">序号</th>
+				                                    <th width="15%">标题</th>
+				                                    <th width="15%">下发日期</th>
+				                                    <th width="15%">督办对象</th>
+				                                    <th width="15%">操作</th>
+				                                </tr>
+				                                <tr>
+				                                    <td>1</td>
+				                                    <td>我是标题</td>
+				                                    <td>2018-10-22</td>
+				                                    <td>静海区</td>
+				                                    <td style="text-align: center;">
+				                                    	<button type="button" class="btn btn-info">修改</button>
+				                                    	<button type="button" class="btn btn-danger">删除</button>
+				                                    </td>
+				                                </tr>
+				                                <tr>
+				                                    <td>2</td>
+				                                    <td>我是标题</td>
+				                                    <td>2018-10-22</td>
+				                                    <td>静海区</td>
+				                                    <td style="text-align: center;">
+				                                    	<button type="button" class="btn btn-info">修改</button>
+				                                    	<button type="button" class="btn btn-danger">删除</button>
+				                                    </td>
+				                                </tr>
+				                                <tr>
+				                                    <td>3</td>				                                    
+				                                    <td>我是标题</td>
+				                                    <td>2018-10-22</td>
+				                                    <td>静海区</td>
+				                                    <td style="text-align: center;">
+				                                    	<button type="button" class="btn btn-info">修改</button>
+				                                    	<button type="button" class="btn btn-danger">删除</button>
+				                                    </td>
+				                                </tr>
+				                                <tr>
+				                                    <td>4</td>
+				                                  	<td>我是标题</td>
+				                                    <td>2018-10-22</td>
+				                                    <td>静海区</td>
+				                                    <td style="text-align: center;">
+				                                    	<button type="button" class="btn btn-info">修改</button>
+				                                    	<button type="button" class="btn btn-danger">删除</button>
+				                                    </td>
+				                                </tr>
+			                            	</tbody>
+			                            </table>
+			                			<!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+			                        </div>
+			                    </div>
+			                </div>
+							
+							<div style="text-align: center;margin: 35px 0;" ng-if="noOps ==1">
+				                <button type="button" class="btn btn-primary" style="margin: 0 50px;" ng-click="submit()" >确认处理</button>
+			                    <button type="button" class="btn btn-default" ng-click="back()">取消</button>
+			                </div>
+						</div>
+        			</div>
+        			
+        		</div> 
+        		
+        	</div>
+       	</div>
+    </div>
+</div>
