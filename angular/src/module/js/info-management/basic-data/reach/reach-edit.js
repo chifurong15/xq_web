@@ -1079,7 +1079,7 @@ var dictionaryUrl = "/dictionary/v1";
                             }).success(
                                 function () {
                                     layer.msg('修改成功！', {time: 2000});
-                                    routeService.route(52, true);
+                                    routeService.route(12, true);
                                 })
                         }
 					}else if(_status == 2){//新增湖泊
@@ -1161,7 +1161,7 @@ var dictionaryUrl = "/dictionary/v1";
                             }).success(
                                 function () {
                                     layer.msg('修改成功！', {time: 2000});
-                                    routeService.route(52, true);
+                                    routeService.route(12, true);
                                 }
                             );
                         }
