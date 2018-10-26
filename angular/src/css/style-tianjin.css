@@ -1674,7 +1674,7 @@ body .c-ffffff a {
 
 .left-panel .panel .weather-date p {
     color: #60a2e5;
-    line-height: 22px;
+    line-height: 30px;
     padding-right: 10px;
 }
 
@@ -1690,6 +1690,7 @@ body .c-ffffff a {
     margin-left: 20px;
     display: flex;
     color: #60a2e5;
+    line-height: 30px;
 }
 
 .patr-count span {
