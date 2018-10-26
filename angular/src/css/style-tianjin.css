@@ -97,12 +97,16 @@ body {
 .mainBody #patrol-num tbody {
     height: 120px;
 }
-
+.mainBody #reach-table{
+    flex: 1;
+    margin-top: 5px;
+}
 .mainBody #reach-table tbody {
     height: 145px;
 }
 .mainBody #water-quality {
     height: 33%;
+    margin-top: 5px;
 }
 
 .mainBody .mid-panel, .mainBody #mid-map,
