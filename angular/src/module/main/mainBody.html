@@ -42,9 +42,11 @@
 						<div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingOne">
-									<h4 class="panel-title">
+									<h4 class="panel-title" ng-click="tab1()">
 										<a role="button" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 											每周动态
+											<i class="fa fa-caret-down" aria-hidden="true" ng-show="!isShow1"></i>
+											<i class="fa fa-caret-up" aria-hidden="true" ng-show="isShow1"></i>
 										</a>
 									</h4>
 								</div>
@@ -61,9 +63,11 @@
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingTwo">
-									<h4 class="panel-title">
+									<h4 class="panel-title" ng-click="tab2()">
 										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
 											月度考核简报
+											<i class="fa fa-caret-down" aria-hidden="true" ng-show="isShow2"></i>
+											<i class="fa fa-caret-up" aria-hidden="true" ng-show="!isShow2"></i>
 										</a>
 									</h4>
 								</div>
@@ -91,9 +95,11 @@
 						<div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingThree">
-									<h4 class="panel-title">
+									<h4 class="panel-title"  ng-click="tab3()">
 										<a role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
 											暗查暗访
+											<i class="fa fa-caret-down" aria-hidden="true" ng-show="!isShow3"></i>
+											<i class="fa fa-caret-up" aria-hidden="true" ng-show="isShow3"></i>
 										</a>
 									</h4>
 								</div>
@@ -110,9 +116,11 @@
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingFour">
-									<h4 class="panel-title">
+									<h4 class="panel-title" ng-click="tab4()">
 										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
 											督导检查通报
+											<i class="fa fa-caret-down" aria-hidden="true" ng-show="isShow4"></i>
+											<i class="fa fa-caret-up" aria-hidden="true" ng-show="!isShow4"></i>
 										</a>
 									</h4>
 								</div>

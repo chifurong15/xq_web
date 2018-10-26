@@ -139,6 +139,23 @@
                         }
                     }
                 }
+                $scope.isShow1 = true;
+                $scope.isShow2 = true;
+                $scope.isShow3 = true;
+                $scope.isShow4 = true;
+                $scope.tab1 = function () {
+                    $scope.isShow1 = !$scope.isShow1 ;
+                }
+                $scope.tab2 = function () {
+                    $scope.isShow2 = !$scope.isShow2 ;
+                }
+                $scope.tab3 = function () {
+                    $scope.isShow3 = !$scope.isShow3 ;
+                }
+                $scope.tab4 = function () {
+                    $scope.isShow4 = !$scope.isShow4 ;
+                }
+
 
                 /**
                  * 左侧底部图表自适应
