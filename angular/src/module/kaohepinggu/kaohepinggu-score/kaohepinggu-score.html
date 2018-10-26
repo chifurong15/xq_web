@@ -9,6 +9,16 @@
     	<div class="panel panel-default">
         	<div class="panel-body">  
         		
+        		<div class="table-bar">
+        			<form class="form-inline clearfix">
+	                    <div class="input-group fr" ng-if="num == 2">
+		                    <button type="button" class="btn btn-primary" ng-click="showModal(1)">
+		                        <i class="fa fa-plus"></i> 新增考核评分
+		                    </button>
+	                    </div>
+                    </form>
+                </div>
+        		
         		<ul class="scoreTitle">
         			<li style="width: 20%;border-left: 0;">评分类型</li>
         			<li style="width: 20%;">权重</li>
