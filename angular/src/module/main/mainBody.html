@@ -31,68 +31,108 @@
 					</div>
 				</div>
 			</div>
+			<div style="margin-top:5px;display: flex;flex: 1;justify-content: space-between;flex-direction: column">
+				<div id="news-l" class="panel panel-default m-all-0">
+					<div class="panel-body">
+						<div class="mainbody-tips">
+							<span>
+								河长制工作动态信息
+							</span>
+						</div>
+						<div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="headingOne">
+									<h4 class="panel-title">
+										<a role="button" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+											每周动态
+										</a>
+									</h4>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+									<div class="panel-body">
+										<div ng-repeat="list in bulletin2" class="titleAndTime">
+											<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">
+												<span>{{list.title.length > 18 ? list.title.substring(0,15) + "..." : list.title }}</span>
+												<span>{{list.postTime}}</span>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="headingTwo">
+									<h4 class="panel-title">
+										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+											月度考核简报
+										</a>
+									</h4>
+								</div>
+								<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+									<div class="panel-body">
+										<div ng-repeat="list in bulletin3" class="titleAndTime">
+											<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">
+												<span>{{list.title.length > 18 ? list.title.substring(0,15) + "..." : list.title }}</span>
+												<span>{{list.postTime}}</span>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
-			<div id="news-l" class="panel panel-default m-all-0">
-				<div class="panel-body">
-					<div class="mainbody-tips">
-						<span>
-	        				河长制工作情况汇总
-	        			</span>
-					</div>
-					<ul class="nav nav-tabs" role="tablist">
-						<li class="active col-xs-6 text-c">
-							<a href="#statusWork" onclick="return false;" data-toggle="tab">每周动态</a>
-						</li>
-						<li class="col-xs-6 text-c">
-							<a href="#statusActive" onclick="return false;" data-toggle="tab">月度考核简报</a>
-						</li>
-					</ul>
-					<div class="tab-content tabs-content left-news-content">
-						<div class="tab-pane active" id="statusWork">
-							<div ng-repeat="list in bulletin2">								
-								<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">{{list.title}}</a>
-							</div>
-						</div>
-						<div class="tab-pane" id="statusActive">
-							<div ng-repeat="list in bulletin3">								
-								<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">{{list.title}}</a>
-							</div>
-						</div>
 					</div>
 				</div>
-			</div>
-			
-			<div id="check-active" class="panel panel-default m-all-0">
-				<div class="panel-body">
-					<div class="mainbody-tips">
-						<span>通报</span>
-					</div>
-					<ul class="nav nav-tabs m-t-15" role="tablist">
-						<li class="active col-xs-6 text-c">
-							<a href="#statusNotice" onclick="return false;" data-toggle="tab">暗查暗访</a>
-						</li>
-						<li class="col-xs-6 text-c">
-							<a href="#statusProblem" onclick="return false;" data-toggle="tab">督导检查通报</a>
-						</li>
-					</ul>
-					<div id="right-news-content" class="tab-content tabs-content right-news-content">
-						<div class="tab-pane active" id="statusNotice">
-							<div ng-repeat="list in bulletin1">								
-								<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">{{list.title}}</a>
-							</div>
-							<!--<div ng-repeat="list in bulletin1">								
-								<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">{{list.title}}</a>
-							</div>-->
+
+				<div id="check-active" class="panel panel-default m-all-0" style="margin-top: 5px;">
+					<div class="panel-body">
+						<div class="mainbody-tips">
+							<span>通报</span>
 						</div>
-						<div class="tab-pane" id="statusProblem">
-							<div ng-repeat="list in bulletin4">								
-								<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">{{list.title}}</a>
+						<div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="headingThree">
+									<h4 class="panel-title">
+										<a role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+											暗查暗访
+										</a>
+									</h4>
+								</div>
+								<div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+									<div class="panel-body">
+										<div ng-repeat="list in bulletin1" class="titleAndTime">
+											<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">
+												<span>{{list.title.length > 18 ? list.title.substring(0,15) + "..." : list.title }}</span>
+												<span>{{list.postTime}}</span>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="headingFour">
+									<h4 class="panel-title">
+										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+											督导检查通报
+										</a>
+									</h4>
+								</div>
+								<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+									<div class="panel-body">
+										<div ng-repeat="list in bulletin4" class="titleAndTime">
+											<a href="javascript:void(0);"  ng-click="viewBulletin(list.id)">
+												<span>{{list.title.length > 18 ? list.title.substring(0,15) + "..." : list.title }}</span>
+												<span>{{list.postTime}}</span>
+											</a>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
+
 					</div>
 				</div>
+
 			</div>
-			
 			<!-- 模态框（Modal） -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
 				<div class="modal-dialog">
@@ -179,38 +219,40 @@
 			</div>
 		</div>
 		<div class="right-panel col-xs-3 p-all-0">
-			<div id="patrol-num" class="panel panel-default m-all-0" style="overflow: hidden;">
-				<div class="panel-body">
-					<div class="mainbody-tips">
-						<span>
-	        				当前巡河人数
-	        			</span>
-					</div>
-					<table class="table table-hover mainbody-Table">
-						<thead>
-							<tr>
-								<th>排名</th>
-								<th>区域名称</th>
-								<th>总巡河人数</th>
-								<th>区级河长人数</th>
-								<th>街镇级河长人数</th>
-								<th>村级河长人数</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="item in itemlist" ng-init="$index = $index + 1 ">
-								<td>{{$index}}</td>
-								<td>{{item.regionName}}</td>
-								<td>{{item.countAll}}</td>
-								<td>{{item.countyCount}}</td>
-								<td>{{item.townCount}}</td>
-								<td>{{item.villageCount}}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			
+
+			<!--<div id="patrol-num" class="panel panel-default m-all-0" style="overflow: hidden;">-->
+				<!--<div class="panel-body">-->
+					<!--<div class="mainbody-tips">-->
+						<!--<span>-->
+	        				<!--当前巡河人数-->
+	        			<!--</span>-->
+					<!--</div>-->
+					<!--<table class="table table-hover mainbody-Table">-->
+						<!--<thead>-->
+							<!--<tr>-->
+								<!--<th>排名</th>-->
+								<!--<th>区域名称</th>-->
+								<!--<th>总巡河人数</th>-->
+								<!--<th>区级河长人数</th>-->
+								<!--<th>街镇级河长人数</th>-->
+								<!--<th>村级河长人数</th>-->
+							<!--</tr>-->
+						<!--</thead>-->
+						<!--<tbody>-->
+							<!--<tr ng-repeat="item in itemlist" ng-init="$index = $index + 1 ">-->
+								<!--<td>{{$index}}</td>-->
+								<!--<td>{{item.regionName}}</td>-->
+								<!--<td>{{item.countAll}}</td>-->
+								<!--<td>{{item.countyCount}}</td>-->
+								<!--<td>{{item.townCount}}</td>-->
+								<!--<td>{{item.villageCount}}</td>-->
+							<!--</tr>-->
+						<!--</tbody>-->
+					<!--</table>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!---->
+
 			<div id="cityRank" class="panel panel-default m-all-0">				
 				<div class="panel-body">
 					<div class="mainbody-tips">
@@ -221,54 +263,53 @@
 					<div id="main1" style="min-width: 350px;height:250px;"></div>
 				</div>
 			</div>
-			
-			<div class="tianjinProblem">
-				<div id="water-quality" class="panel panel-default m-all-0 m-t-10" style="float: left;width: 50%;">
-					<div class="panel-body">
-						<div class="mainbody-tips">
-							<span>
-		        				天津市水质情况
-		        			</span>
-						</div>
-						<div id="main" style="min-width: 350px;height:150px;"></div>
+
+			<div id="water-quality" class="panel panel-default m-all-0 m-t-10">
+				<div class="panel-body">
+					<div class="mainbody-tips">
+						<span>
+							天津市水质情况
+						</span>
 					</div>
+					<div id="main" style="min-width: 350px;height:150px;"></div>
 				</div>
+			</div>
 				
-				<div id="reach-table" class="panel panel-default m-all-0 m-t-10" style="float: left;width: 50%;">
-					<div class="panel-body">
-						<div class="mainbody-tips">
-							<span>
-		        				本周问题较多河道
-		        			</span>
-						</div>
-						<table class="table table-hover mainbody-Table">
-							<thead>
-								<tr>
-									<th>序号</th>
-									<th>河道段</th>
-									<th>问题数</th>
-									<th>河长</th>
-									<th>级别</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr ng-repeat="lst in problemList">
-									<td>{{$index+1}}</td>
-									<td>{{lst.reachName}}</td>
-									<td>{{lst.problemNum}}</td>
-									<td>{{lst.reachManName}}</td>
-									<td ng-if="lst.grade==1">省级</td>
-									<td ng-if="lst.grade==2">市级</td>
-									<td ng-if="lst.grade==3">区级</td>
-									<td ng-if="lst.grade==4">镇级</td>
-									<td ng-if="lst.grade==5">村级</td>
-									<td ng-hide="lst.grade"></td>
-								</tr>							
-							</tbody>
-						</table>
+			<div id="reach-table" class="panel panel-default m-all-0 m-t-10">
+				<div class="panel-body">
+					<div class="mainbody-tips">
+						<span>
+							本周问题较多河道
+						</span>
 					</div>
-				</div>			
-			</div>		
+					<table class="table table-hover mainbody-Table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>河道段</th>
+								<th>问题数</th>
+								<th>河长</th>
+								<th>级别</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="lst in problemList">
+								<td>{{$index+1}}</td>
+								<td>{{lst.reachName}}</td>
+								<td>{{lst.problemNum}}</td>
+								<td>{{lst.reachManName}}</td>
+								<td ng-if="lst.grade==1">省级</td>
+								<td ng-if="lst.grade==2">市级</td>
+								<td ng-if="lst.grade==3">区级</td>
+								<td ng-if="lst.grade==4">镇级</td>
+								<td ng-if="lst.grade==5">村级</td>
+								<td ng-hide="lst.grade"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
 		</div>
 	</div>
 
@@ -286,14 +327,14 @@
 		legend: {
 			orient: 'horizontal',			
 			x: 'center',
-			bottom:'18%',
+			bottom:'13%',
 			data: ['1类', '2类', '3类', '4类', '5类']
 		},
 		series: [{
 			name: '访问来源',
 			type: 'pie',
-			radius: '35%',
-			center: ['50%', '33%'],
+			radius: '50%',
+			center: ['50%', '35%'],
 			data: [{
 					value: 335,
 					name: '1类'
@@ -362,7 +403,7 @@
 			}
 		},
 		grid: {
-			top:'30%',
+			bottom:'25%',
 			left:'18%'
 	    },
 		legend: {
@@ -374,7 +415,10 @@
 			data: ['和平区', '南开区', '滨海新区'],
 			axisPointer: {
 				type: 'shadow'
-			}
+			},
+            axisTick: {
+                alignWithLabel: true
+            }
 		}],
 		yAxis: [{
 			type: 'value',
@@ -389,7 +433,8 @@
 		series: [{
 			name: '和平区',
 			type: 'bar',
-			data: [52.0, 84.9, 97.0]
+			data: [52.0, 84.9, 97.0],
+            barWidth: '30%',
 		}]
 	};
 	myChart.setOption(option);

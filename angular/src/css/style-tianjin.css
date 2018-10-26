@@ -20,7 +20,9 @@ body {
     display: table-cell;
     vertical-align: middle;
 }
-
+#news-l , #check-active{
+    height: 50%;
+}
 .downOrLook {
     color: #3189e1;
     padding: 5px;
@@ -34,19 +36,14 @@ body {
 }
 
 .left-panel #weather {
-    height: 16%;
+    height: 20%;
 }
-
-.left-panel .panel-default {
-    height: 41%;
-}
-
 .right-panel #patrol-num {
     height: 36%;
 }
 
 .right-panel #cityRank {
-    height: 24%;
+    height: 30%;
 }
 
 .right-panel #cityRank #main1 {
@@ -71,8 +68,6 @@ body {
 .mainBody .panel-body {
     padding: 5px;
 }
-
-.mainBody #news-l .ng-scope,
 .mainBody #right-news-content {
     padding: 0 15px;
 }
@@ -106,9 +101,8 @@ body {
 .mainBody #reach-table tbody {
     height: 145px;
 }
-
-.mainBody #reach-table, .mainBody #water-quality {
-    height: 100%;
+.mainBody #water-quality {
+    height: 33%;
 }
 
 .mainBody .mid-panel, .mainBody #mid-map,
@@ -2051,4 +2045,24 @@ body .c-ffffff a {
     text-align: center;
     font-size: 12px;
     color: #333;
+}
+/*首页*/
+.home-tabs li{
+    width: 100%;
+    margin:5px 0 ;
+}
+#accordion1 ,#accordion2{
+    height: 80%;
+    overflow: auto;
+}
+#accordion1 h4 ,#accordion2 h4{
+   font-size: 13px;
+}
+.titleAndTime{
+    margin: 0 10px;
+}
+.titleAndTime a{
+    display: flex;
+    justify-content: space-between;
+    line-height: 26px;
 }
