@@ -2098,3 +2098,16 @@ body .c-ffffff a {
 	float: left;
 	display: inline-block;
 }
+
+.vjs-control-bar{
+    display: none !important;
+}
+.vjs-big-play-button{
+    display: none !important;
+}
+.vjs-caption-settings.vjs-modal-overlay.vjs-hidden{
+    display: none !important;
+}
+.vjs-error-display.vjs-modal-dialog.vjs-hidden{
+    display: none !important;
+}
