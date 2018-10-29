@@ -10,7 +10,12 @@
     	<div class="panel panel-default">
         	<div class="panel-body">
         		<div>
-        			<h3 style="font-size: 16px;font-weight: 700;">地表水津南区评分管理</h3>
+        			<h3 style="font-size: 16px;font-weight: 700;display: inline-block;">地表水津南区评分管理</h3>
+					<div style="display: inline-block;float: right;">
+						<button type="button" class="btn btn-info" ng-click="add()">新增</button>
+						<input type="file" class="hidden" id="J-attandUploader" ng-model="attandUrl" onchange="angular.element(this).scope().uploadFile(this)"/>
+						<button class="btn btn-success" onclick="document.getElementById('J-attandUploader').click()" ng-if="num == 1">导入(.xls)</button>
+					</div>
         		</div>
                 <div class="tab-content">
                     <div class="tab-pane active" id="tableStatistics">
@@ -21,11 +26,16 @@
 	                                    <th width="10%">序号</th>
 	                                    <th width="30%">行政区域</th>
 	                                    <th width="30%">考核得分</th>
+	                                    <th width="15%">操作</th>
 	                                </tr>
                                 	<tr ng-repeat="item in detailList">
 	                                    <td>{{$index+1}}</td>
 	                                    <td>{{item.popedom}}</td>
 	                                    <td>{{item.grade}}</td>
+										<td>
+											<button type="button" class="btn btn-primary btn-sm" ng-click="edit(item)">修改</button>
+											<button type="button" class="btn btn-danger btn-sm" ng-click="delete(item.id)">删除</button>
+										</td>
 	                                </tr>	                               
                             	</tbody>
                             </table>
@@ -40,4 +50,41 @@
         	</div>
        </div>    	
     </div>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						{{type == 1 ? "修改" : "新增"}}条目
+					</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-inline">
+						<div class="input-group form-item" >
+							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">行政区域</font></font></label>
+							<select ng-model="area" class="form-control select-short" style="width: auto;">
+								<option value="">请选择</option>
+								<option value="{{item}}" ng-repeat="item in allArea">{{item}}</option>
+							</select>
+							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+						</div>
+						<div class="form-item">
+							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">考核分数</font></font></label>
+							<input name="number" min="0" max="100"  step="0.01" class="form-control input-short" ng-model="score">
+							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" ng-click="save()">保存</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </div>

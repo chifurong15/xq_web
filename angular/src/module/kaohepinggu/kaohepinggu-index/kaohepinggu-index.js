@@ -38,6 +38,7 @@
 								getList();
 							}
 						})
+                        getDate();
 					}
 					
 					// 获取数据列表
@@ -71,6 +72,13 @@
 	                    $scope.searchTime = new moment(c.date).format('YYYY-MM');
 	                    $scope.$apply();
 	                });
+                    $('#J-searchTime1').datetimepicker({
+                        format: 'YYYY-MM',
+                        locale: moment.locale('zh-cn')
+                    }).on('dp.change', function (c) {
+                        $scope.searchTime1 = new moment(c.date).format('YYYY-MM');
+                        $scope.$apply();
+                    });
 					
 					//返回
 					$scope.goBack=function(){
@@ -81,18 +89,106 @@
 	                $scope.search = function () {
 	                    getList();
 	                };
-					
+
+					//重置搜索条件
+					$scope.reset = function () {
+						$scope.searchTime = '';
+						$scope.type = '';
+						$scope.createuser = '';
+					}
+
+                    $scope.cancel = function () {
+                        $('#myModal').modal('hide');
+                        clear();
+                    }
+
 					// 新建
 	                $scope.add = function () {
-						globalParam.setter({
-							bulletin: {}
-						})
-						routeService.route('3-1-2', false);
+						//routeService.route('3-1-2', false);
+                        $('#myModal').modal('show');
 	                }
-	                
-	                //修改 评分报告
+
+	                //新增评分报告
+					$scope.save = function () {
+                        if (!$scope.title) {
+                            layer.alert("请输入标题", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        } else if (!$scope.searchTime1) {
+                            layer.alert("请选择期号", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        } else if (!$scope.author) {
+                            layer.alert("请输入创建人", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        } else if (!$scope.issuer) {
+                            layer.alert("请输入备注", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        }
+                        var params = {
+                            title: $scope.title,
+                            createtime: $scope.currentdate,
+                            issue: $scope.searchTime1,
+                            createUser: $scope.author,
+                            remark: $scope.issuer
+                        }
+                        if(!$scope.id){//新增报告
+                            $ajaxhttp.myhttp({
+                                url: apiPrefix + '/v1/SurfaceWater/add',
+                                method: 'POST',
+                                params: params,
+                                callBack: function (res) {
+                                    if(res.resCode == 1){
+                                        $scope.newid = res.data.id;
+                                        $scope.pid = res.data.id;
+                                        layer.msg('新建成功', {time:2000});
+                                        clear();//创建成功后清空
+                                        $('#myModal').modal('hide');
+                                    }else{
+                                        layer.msg(res.resMsg, {time:2000});
+                                    }
+                                }
+                            })
+						}else{//修改报告
+                            $ajaxhttp.myhttp({
+                                url: apiPrefix + '/v1/SurfaceWater/updatelist',
+                                method: 'PUT',
+                                params: {
+                                    id: $scope.id,
+                                    title: $scope.title,
+                                    createtime: $scope.currentdate,
+                                    issue: $scope.searchTime1,
+                                    createUser: $scope.author,
+                                    remark: $scope.issuer
+                                },
+                                callBack: function (res) {
+                                    if(res.resCode == 1){
+                                        layer.msg('修改成功', {time:2000});
+                                        clear();//创建成功后清空
+                                    }else{
+                                        layer.msg(res.resMsg, {time:2000});
+                                    }
+                                }
+                            })
+						}
+
+                    }
+
+	                //修改
 	                $scope.edit = function (id) {
-	                	localStorage.setItem('id',id);
+						$('#myModal').modal('show');
+						$scope.id = id ;
+	                	//localStorage.setItem('id',id);
 						$ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/SurfaceWater/detail',
 							method: 'get',
@@ -100,15 +196,24 @@
 								id: id
 							},
 							callBack: function (res) {
-								globalParam.setter({
-									bulletin: res.data
-								})
+                                $scope.title = res.data.title;
+                                $scope.searchTime1 = res.data.issue;
+                                $scope.issuer = res.data.remark;
+                                $scope.author = res.data.createuser;
 							}
 						})						
-						routeService.route('3-1-2', false);
+						//routeService.route('3-1-2', false);
 	                }
-	                
-	                 // 查看
+
+                    //清空表单
+                    var clear = function () {
+                        $scope.title = '';
+                        $scope.issuer = '';
+                        $scope.searchTime1 = '';
+                        $scope.author = '';
+                    }
+
+                    // 查看
 	                $scope.view = function (id) {
 						globalParam.setter({
 							bulletin: {
@@ -151,7 +256,27 @@
 							}
 						})
 	                }
-					
+
+                    //获取当前时间
+                    function getDate () {
+                        setInterval(function () {
+                            var date = new Date(),
+                                year = date.getFullYear(),
+                                month = date.getMonth() + 1,
+                                day = date.getDate(),
+                                hour = date.getHours(),
+                                min = date.getMinutes(),
+                                second = date.getSeconds();
+
+                            $scope.$apply(function () {
+                                $scope.currentdate=year + '-' + month  + '-' + day + ' ' +
+                                    (hour < 10 ? '0' + hour : hour) + ':' +
+                                    (min < 10 ? '0' + min : min) + ':' +
+                                    (second < 10 ? '0' + second : second) ;
+                            })
+                        }, 1000);
+                    }
+
 					// 配置分页基本参数
 	                $scope.paginationConf = {
 	                    currentPage: $location.search().currentPage ? $location.search().currentPage : 1,

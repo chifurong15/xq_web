@@ -81,7 +81,14 @@
 	                $scope.search = function () {
 	                    getList();
 	                };
-					
+
+                    //重置搜索条件
+                    $scope.reset = function () {
+                        $scope.searchTime = '';
+                        $scope.type = '';
+                        $scope.createuser = '';
+                    }
+
 					// 新建
 	                $scope.add = function () {
 						globalParam.setter({
