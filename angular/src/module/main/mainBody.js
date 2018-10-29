@@ -143,6 +143,7 @@
                 $scope.isShow2 = true;
                 $scope.isShow3 = true;
                 $scope.isShow4 = true;
+                $scope.isShow5 = true;
                 $scope.tab1 = function () {
                     $scope.isShow1 = !$scope.isShow1 ;
                 }
@@ -155,7 +156,9 @@
                 $scope.tab4 = function () {
                     $scope.isShow4 = !$scope.isShow4 ;
                 }
-
+                $scope.tab5 = function () {
+                    $scope.isShow5 = !$scope.isShow5 ;
+                }
 
                 /**
                  * 左侧底部图表自适应
