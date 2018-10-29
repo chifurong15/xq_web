@@ -5,211 +5,6 @@
   "type": "1",
   "menus": [
     {
-      "seqId": "10",
-      "parentId": "0",
-      "isLeaf": false,
-      "isRoot": true,
-      "name": "巡河管理",
-      "icon": "fa fa-tasks",
-      "url": "module/menus/patrolRiverMgr/riverChiefOnline/riverChiefOnline.html",
-      "requireJS": [
-        "module/js/patrolRiverMgr/riverChiefOnline/riverChiefOnline.js"
-      ],
-      "description": "一级菜单-巡河管理"
-    },
-    {
-      "seqId": "101",
-      "parentId": "10",
-      "isLeaf": true,
-      "isRoot": false,
-      "name": "河长在线",
-      "icon": "menu-icon-2",
-      "url": "module/menus/patrolRiverMgr/riverChiefOnline/riverChiefOnline.html",
-      "requireJS": [
-        "module/js/patrolRiverMgr/riverChiefOnline/riverChiefOnline.js"
-      ],
-      "description": "一级菜单-河长在线"
-    },
-    {
-      "seqId": "102",
-      "parentId": "10",
-      "isLeaf": true,
-      "isRoot": false,
-      "name": "巡河管理",
-      "icon": "menu-icon-3",
-      "url": "module/menus/patrolRiverMgr/patrolMgr/patrolMgr.html",
-      "requireJS": [
-        "module/js/patrolRiverMgr/patrolMgr/patrolMgr.js"
-      ],
-      "description": "一级菜单-巡河管理"
-    },
-    {
-      "seqId": "103",
-      "parentId": "10",
-      "isLeaf": true,
-      "isRoot": false,
-      "name": "问题管理",
-      "icon": "menu-icon-4",
-      "url": "module/menus/patrolRiverMgr/eventMgr/eventMgr.html",
-      "requireJS": [
-        "module/js/patrolRiverMgr/eventMgr/eventMgr.js"
-      ],
-      "description": "一级菜单-问题管理"
-    },
-
-    {
-      "seqId": "61",
-      "parentId": "0",
-      "isLeaf":false,
-      "isRoot":true,
-      "name": "问题处理",
-      "icon": "fa fa-question-circle",
-      "url": "module/menus/treatment/event-add.html",
-      "requireJS":["module/js/treatment/event-add.js"],
-      "description": "一级菜单-问题处置"
-    },
-    {
-      "seqId": "62",
-      "parentId": "61",
-      "isLeaf":true,
-      "isRoot":false,
-      "name": "新建问题",
-      "icon": "fa fa-chevron-right",
-      "url": "module/menus/treatment/event-add.html",
-      "requireJS":["module/js/treatment/event-add.js"],
-      "description": "三级菜单-问题处置-待办问题"
-    },
-    {
-      "seqId": "64",
-      "parentId": "61",
-      "isLeaf":true,
-      "isRoot":false,
-      "name": "待办问题",
-      "icon": "fa fa-chevron-right",
-      "url": "module/menus/treatment/event-backlog.html",
-      "requireJS":["module/js/treatment/event-backlog.js"],
-      "description": "三级菜单-问题处置-待办问题"
-    },
-    {
-      "seqId": "65",
-      "parentId": "61",
-      "isLeaf":true,
-      "isRoot":false,
-      "name": "问题跟踪",
-      "icon": "fa fa-chevron-right",
-      "url": "module/menus/treatment/event-trace.html",
-      "requireJS":["module/js/treatment/event-trace.js"],
-      "description": "三级菜单-问题处置-问题跟踪"
-    },
-    {
-      "seqId": "68",
-      "parentId": "61",
-      "isLeaf":true,
-      "isRoot":false,
-      "name": "综合查询",
-      "icon": "fa fa-chevron-right",
-      "url": "module/menus/treatment/integrated-search.html",
-      "requireJS":["module/js/treatment/integrated-search.js"],
-      "description": "三级菜单-问题处置-综合查询"
-    },
-    {
-      "seqId": "70",
-      "parentId": "0",
-      "isLeaf":false,
-      "isRoot":true,
-      "name": "展示发布",
-      "icon": "fa fa-desktop",
-      "url": "module/menus/patrolRiverMgr/dataShow/dataShow.html",
-      "requireJS":["module/js/patrolRiverMgr/dataShow/dataShow.js"],
-      "description": "一级菜单-展示发布"
-    },
-    {
-      "seqId": "711",
-      "parentId": "70",
-      "isLeaf":true,
-      "isRoot":false,
-      "name": "展示发布",
-      "icon": "menu-icon-6",
-      "url": "module/menus/patrolRiverMgr/dataShow/dataShow.html",
-      "requireJS":["module/js/patrolRiverMgr/dataShow/dataShow.js"],
-      "description": "一级菜单-展示发布"
-    },
-    {
-      "seqId": "5",
-      "parentId": "0",
-      "isLeaf": false,
-      "isRoot": true,
-      "name": "分析统计",
-      "icon": "fa fa-area-chart",
-      "url": "module/fenxitongji/fenxitongji-index/fenxitongji-index.html",
-      "requireJS": [
-        "module/fenxitongji/fenxitongji-index/fenxitongji-index.js"
-      ],
-      "description": "分析统计首页"
-    },
-    {
-      "seqId": "80",
-      "parentId": "0",
-      "isLeaf":false,
-      "isRoot":true,
-      "name": "信息服务",
-      "icon": "fa fa-info-circle",
-      "url": "module/menus/infoService/infoService.html",
-      "requireJS":["module/menus/infoService/infoService.js"],
-      "description": "信息管理首页"
-    },
-    {
-      "seqId": "81",
-      "parentId": "80",
-      "isLeaf":true,
-      "isRoot":false,
-      "name": "信息服务",
-      "icon": "menu-icon-6",
-      "url": "module/menus/infoService/infoService.html",
-      "requireJS":["module/menus/infoService/infoService.js"],
-      "description": "信息管理首页"
-    },
-    {
-      "seqId": "5-0",
-      "parentId": "5",
-      "isLeaf": true,
-      "isRoot": false,
-      "name": "综合查询",
-      "icon": "menu-icon-6",
-      "url": "module/menus/analyticStatistics/inquire/inquire.html",
-      "requireJS": [
-        "module/js/analyticStatistics/inquire/inquire.js"
-      ],
-      "description": "二级菜单-综合查询"
-    },
-    {
-      "seqId": "5-1",
-      "parentId": "5",
-      "isLeaf": true,
-      "isRoot": false,
-      "name": "河长巡河",
-      "icon": "menu-icon-6",
-      "url": "module/fenxitongji/fenxitongji-index/fenxitongji-index.html",
-      "requireJS": [
-        "module/fenxitongji/fenxitongji-index/fenxitongji-index.js"
-      ],
-      "description": "分析统计-河长巡河"
-    },
-    
-    {
-      "seqId": "5-3",
-      "parentId": "5",
-      "isLeaf": true,
-      "isRoot": false,
-      "name": "问题统计",
-      "icon": "fa fa-signal",
-      "url": "module/fenxitongji/fenxitongji-question/fenxitongji-question.html",
-      "requireJS": [
-        "module/fenxitongji/fenxitongji-question/fenxitongji-question.js"
-      ],
-      "description": "分析统计-问题统计"
-    },
-    {
       "seqId": "1",
       "parentId": "0",
       "isLeaf": false,
@@ -260,6 +55,58 @@
         "module/bulletin/bulletin-view/bulletin-view.js"
       ],
       "description": "信息管理-信息详情"
+    },
+    {
+      "seqId": "11",
+      "parentId": "1",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "河流管理",
+      "icon": "menu-icon-13",
+      "url": "module/menus/info-management/basic-data/river/river-manage.html",
+      "requireJS": [
+        "module/js/info-management/basic-data/river/river-manage.js"
+      ],
+      "description": "三级菜单-基础资料-河流管理"
+    },
+    {
+      "seqId": "12",
+      "parentId": "1",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "河段管理",
+      "icon": "menu-icon-14",
+      "url": "module/menus/info-management/basic-data/reach/reach-manage.html",
+      "requireJS": [
+        "module/js/info-management/basic-data/reach/reach-manage.js"
+      ],
+      "description": "三级菜单-基础资料-河湖库段"
+    },
+    {
+      "seqId": "13",
+      "parentId": "1",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "政策文件",
+      "icon": "menu-icon-15",
+      "url": "module/menus/info-management/policy-doc/policy-doc.html",
+      "requireJS": [
+        "module/js/info-management/policy-doc/policy-doc.js"
+      ],
+      "description": "三级菜单-基础资料-政策文件"
+    },
+    {
+      "seqId": "14",
+      "parentId": "1",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "制度体系",
+      "icon": "menu-icon-16",
+      "url": "module/menus/info-management/institute-system/institute-system-list.html",
+      "requireJS": [
+        "module/js/info-management/institute-system/institute-system-list.js"
+      ],
+      "description": "三级菜单-基础资料-制度体系"
     },
     {
       "seqId": "2",
@@ -425,7 +272,9 @@
       "name": "违规细则",
       "icon": "fa fa-trash-o",
       "url": "module/kaohepinggu/kaohepinggu-rules/kaohepinggu-rules.html",
-      "requireJS": ["module/kaohepinggu/kaohepinggu-rules/kaohepinggu-rules.js"],
+      "requireJS": [
+        "module/kaohepinggu/kaohepinggu-rules/kaohepinggu-rules.js"
+      ],
       "description": "考核评分-违规细则"
     },
     {
@@ -436,7 +285,9 @@
       "name": "巡查管理",
       "icon": "menu-icon-6",
       "url": "module/kaohepinggu/kaohepinggu-patrolMgt/patrolMgt.html",
-      "requireJS": ["module/kaohepinggu/kaohepinggu-patrolMgt/patrolMgt.js"],
+      "requireJS": [
+        "module/kaohepinggu/kaohepinggu-patrolMgt/patrolMgt.js"
+      ],
       "description": "考核评分-巡查管理"
     },
     {
@@ -447,7 +298,9 @@
       "name": "监督评价",
       "icon": "menu-icon-6",
       "url": "module/kaohepinggu/kaohepinggu-superviseEvaluateMgt/superviseEvaluateMgt.html",
-      "requireJS": ["module/kaohepinggu/kaohepinggu-superviseEvaluateMgt/superviseEvaluateMgt.js"],
+      "requireJS": [
+        "module/kaohepinggu/kaohepinggu-superviseEvaluateMgt/superviseEvaluateMgt.js"
+      ],
       "description": "考核评分-社会监督评价"
     },
     {
@@ -458,7 +311,9 @@
       "name": "监督举报",
       "icon": "menu-icon-6",
       "url": "module/kaohepinggu/kaohepinggu-superviseReportMgt/superviseReportMgt.html",
-      "requireJS": ["module/kaohepinggu/kaohepinggu-superviseReportMgt/superviseReportMgt.js"],
+      "requireJS": [
+        "module/kaohepinggu/kaohepinggu-superviseReportMgt/superviseReportMgt.js"
+      ],
       "description": "考核评分-社会监督举报"
     },
     {
@@ -486,6 +341,123 @@
         "module/yidongpingtai/yidongpingtai-index/yidongpingtai-index.js"
       ],
       "description": "移动平台-首页"
+    },
+    {
+      "seqId": "5",
+      "parentId": "0",
+      "isLeaf": false,
+      "isRoot": true,
+      "name": "分析统计",
+      "icon": "fa fa-area-chart",
+      "url": "module/fenxitongji/fenxitongji-index/fenxitongji-index.html",
+      "requireJS": [
+        "module/fenxitongji/fenxitongji-index/fenxitongji-index.js"
+      ],
+      "description": "分析统计首页"
+    },
+    {
+      "seqId": "5-0",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "综合查询",
+      "icon": "menu-icon-6",
+      "url": "module/menus/analyticStatistics/inquire/inquire.html",
+      "requireJS": [
+        "module/js/analyticStatistics/inquire/inquire.js"
+      ],
+      "description": "二级菜单-综合查询"
+    },
+    {
+      "seqId": "5-1",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "河长巡河",
+      "icon": "menu-icon-6",
+      "url": "module/fenxitongji/fenxitongji-index/fenxitongji-index.html",
+      "requireJS": [
+        "module/fenxitongji/fenxitongji-index/fenxitongji-index.js"
+      ],
+      "description": "分析统计-河长巡河"
+    },
+    {
+      "seqId": "5-3",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "问题统计",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/fenxitongji-question/fenxitongji-question.html",
+      "requireJS": [
+        "module/fenxitongji/fenxitongji-question/fenxitongji-question.js"
+      ],
+      "description": "分析统计-问题统计"
+    },
+    {
+      "seqId": "61",
+      "parentId": "0",
+      "isLeaf": false,
+      "isRoot": true,
+      "name": "问题处理",
+      "icon": "fa fa-question-circle",
+      "url": "module/menus/treatment/event-add.html",
+      "requireJS": [
+        "module/js/treatment/event-add.js"
+      ],
+      "description": "一级菜单-问题处置"
+    },
+    {
+      "seqId": "62",
+      "parentId": "61",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "新建问题",
+      "icon": "fa fa-chevron-right",
+      "url": "module/menus/treatment/event-add.html",
+      "requireJS": [
+        "module/js/treatment/event-add.js"
+      ],
+      "description": "三级菜单-问题处置-待办问题"
+    },
+    {
+      "seqId": "64",
+      "parentId": "61",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "待办问题",
+      "icon": "fa fa-chevron-right",
+      "url": "module/menus/treatment/event-backlog.html",
+      "requireJS": [
+        "module/js/treatment/event-backlog.js"
+      ],
+      "description": "三级菜单-问题处置-待办问题"
+    },
+    {
+      "seqId": "65",
+      "parentId": "61",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "问题跟踪",
+      "icon": "fa fa-chevron-right",
+      "url": "module/menus/treatment/event-trace.html",
+      "requireJS": [
+        "module/js/treatment/event-trace.js"
+      ],
+      "description": "三级菜单-问题处置-问题跟踪"
+    },
+    {
+      "seqId": "68",
+      "parentId": "61",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "综合查询",
+      "icon": "fa fa-chevron-right",
+      "url": "module/menus/treatment/integrated-search.html",
+      "requireJS": [
+        "module/js/treatment/integrated-search.js"
+      ],
+      "description": "三级菜单-问题处置-综合查询"
     },
     {
       "seqId": "7",
@@ -578,7 +550,113 @@
         "module/js/systemMgr/usermgr/userList.js"
       ],
       "description": "系统管理-用户管理-用户列表"
+    },
+
+    {
+      "seqId": "80",
+      "parentId": "0",
+      "isLeaf": false,
+      "isRoot": true,
+      "name": "信息服务",
+      "icon": "fa fa-info-circle",
+      "url": "module/menus/infoService/infoService.html",
+      "requireJS": [
+        "module/menus/infoService/infoService.js"
+      ],
+      "description": "信息管理首页"
+    },
+    {
+      "seqId": "81",
+      "parentId": "80",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "信息服务",
+      "icon": "menu-icon-6",
+      "url": "module/menus/infoService/infoService.html",
+      "requireJS": [
+        "module/menus/infoService/infoService.js"
+      ],
+      "description": "信息管理首页"
+    },
+    {
+      "seqId": "70",
+      "parentId": "0",
+      "isLeaf": false,
+      "isRoot": true,
+      "name": "展示发布",
+      "icon": "fa fa-desktop",
+      "url": "module/menus/patrolRiverMgr/dataShow/dataShow.html",
+      "requireJS": [
+        "module/js/patrolRiverMgr/dataShow/dataShow.js"
+      ],
+      "description": "一级菜单-展示发布"
+    },
+    {
+      "seqId": "711",
+      "parentId": "70",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "展示发布",
+      "icon": "menu-icon-6",
+      "url": "module/menus/patrolRiverMgr/dataShow/dataShow.html",
+      "requireJS": [
+        "module/js/patrolRiverMgr/dataShow/dataShow.js"
+      ],
+      "description": "一级菜单-展示发布"
+    },
+    {
+      "seqId": "10",
+      "parentId": "0",
+      "isLeaf": false,
+      "isRoot": true,
+      "name": "巡河管理",
+      "icon": "fa fa-tasks",
+      "url": "module/menus/patrolRiverMgr/riverChiefOnline/riverChiefOnline.html",
+      "requireJS": [
+        "module/js/patrolRiverMgr/riverChiefOnline/riverChiefOnline.js"
+      ],
+      "description": "一级菜单-巡河管理"
+    },
+    {
+      "seqId": "101",
+      "parentId": "10",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "河长在线",
+      "icon": "menu-icon-2",
+      "url": "module/menus/patrolRiverMgr/riverChiefOnline/riverChiefOnline.html",
+      "requireJS": [
+        "module/js/patrolRiverMgr/riverChiefOnline/riverChiefOnline.js"
+      ],
+      "description": "一级菜单-河长在线"
+    },
+    {
+      "seqId": "102",
+      "parentId": "10",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "巡河管理",
+      "icon": "menu-icon-3",
+      "url": "module/menus/patrolRiverMgr/patrolMgr/patrolMgr.html",
+      "requireJS": [
+        "module/js/patrolRiverMgr/patrolMgr/patrolMgr.js"
+      ],
+      "description": "一级菜单-巡河管理"
+    },
+    {
+      "seqId": "103",
+      "parentId": "10",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "问题管理",
+      "icon": "menu-icon-4",
+      "url": "module/menus/patrolRiverMgr/eventMgr/eventMgr.html",
+      "requireJS": [
+        "module/js/patrolRiverMgr/eventMgr/eventMgr.js"
+      ],
+      "description": "一级菜单-问题管理"
     }
+
   ],
   "components": [
     {
@@ -878,71 +956,198 @@
       "seqId": "69",
       "name": "问题详情",
       "url": "module/menus/treatment/event-detail.html",
-      "requireJS":["module/js/treatment/event-detail.js"],
+      "requireJS": [
+        "module/js/treatment/event-detail.js"
+      ],
       "description": "问题处置-问题详情"
     },
     {
       "seqId": "501",
       "name": "单页面",
       "url": "",
-      "requireJS":[""],
+      "requireJS": [
+        ""
+      ],
       "description": "单页面"
     },
     {
       "seqId": "82",
       "name": "新增通报",
       "url": "module/menus/bulletin/bulletin-add/bulletin-add.html",
-      "requireJS":["module/menus/bulletin/bulletin-add/bulletin-add.js"],
+      "requireJS": [
+        "module/menus/bulletin/bulletin-add/bulletin-add.js"
+      ],
       "description": "信息管理-新增通报"
     },
     {
       "seqId": "83",
       "name": "通报详情",
       "url": "module/menus/bulletin/bulletin-view/bulletin-view.html",
-      "requireJS":["module/menus/bulletin/bulletin-view/bulletin-view.js"],
+      "requireJS": [
+        "module/menus/bulletin/bulletin-view/bulletin-view.js"
+      ],
       "description": "信息管理-通报详情"
     },
     {
       "seqId": "849",
       "name": "制度列表",
       "url": "module/menus/info-management/institute-system/institute-system-detail.html",
-      "requireJS":["module/js/info-management/institute-system/institute-system-detail.js"],
+      "requireJS": [
+        "module/js/info-management/institute-system/institute-system-detail.js"
+      ],
       "description": "信息管理-制度列表"
     },
     {
       "seqId": "850",
       "name": "制度详情",
       "url": "module/menus/info-management/institute-system/institute-system-detail.html",
-      "requireJS":["module/js/info-management/institute-system/institute-system-detail.js"],
+      "requireJS": [
+        "module/js/info-management/institute-system/institute-system-detail.js"
+      ],
       "description": "信息管理-制度列表"
     },
     {
       "seqId": "3-6-1",
       "name": "巡查详情",
       "url": "module/kaohepinggu/kaohepinggu-patrolMgt/patrolDetailMgt.html",
-      "requireJS":["module/kaohepinggu/kaohepinggu-patrolMgt/patrolDetailMgt.js"],
+      "requireJS": [
+        "module/kaohepinggu/kaohepinggu-patrolMgt/patrolDetailMgt.js"
+      ],
       "description": "巡查管理-巡查详情"
     },
     {
       "seqId": "3-6-2",
       "name": "监督评价详情",
       "url": "module/kaohepinggu/kaohepinggu-superviseEvaluateMgt/superviseEvaluateDetailMgt.html",
-      "requireJS":["module/kaohepinggu/kaohepinggu-superviseEvaluateMgt/superviseEvaluateDetailMgt.js"],
+      "requireJS": [
+        "module/kaohepinggu/kaohepinggu-superviseEvaluateMgt/superviseEvaluateDetailMgt.js"
+      ],
       "description": "巡查管理-监督评价详情"
     },
     {
       "seqId": "3-6-3",
       "name": "监督举报新增",
       "url": "module/kaohepinggu/kaohepinggu-superviseReportMgt/superviseReportAddMgt.html",
-      "requireJS":["module/kaohepinggu/kaohepinggu-superviseReportMgt/superviseReportAddMgt.js"],
+      "requireJS": [
+        "module/kaohepinggu/kaohepinggu-superviseReportMgt/superviseReportAddMgt.js"
+      ],
       "description": "巡查管理-监督举报新增"
     },
     {
       "seqId": "3-6-4",
       "name": "监督举报详情",
       "url": "module/kaohepinggu/kaohepinggu-superviseReportMgt/superviseReportDetailMgt.html",
-      "requireJS":["module/kaohepinggu/kaohepinggu-superviseReportMgt/superviseReportDetailMgt.js"],
+      "requireJS": [
+        "module/kaohepinggu/kaohepinggu-superviseReportMgt/superviseReportDetailMgt.js"
+      ],
       "description": "巡查管理-监督举报详情"
+    },
+    {
+      "seqId": "505",
+      "name": "河流页面",
+      "url": "module/menus/info-management/basic-data/river/river-manage.html",
+      "requireJS": [
+        "module/js/info-management/basic-data/river/river-manage.js"
+      ],
+      "description": "河流页面"
+    },
+    {
+      "seqId": "506",
+      "name": "新增河流",
+      "url": "module/menus/info-management/basic-data/river/river-add.html",
+      "requireJS": [
+        "module/js/info-management/basic-data/river/river-add.js",
+        "vendor/ckeditor/ckeditor.js",
+        "vendor/ckeditor/config.js"
+      ],
+      "description": "新增河流"
+    },
+    {
+      "seqId": "507",
+      "name": "查看河流详情",
+      "url": "module/menus/info-management/basic-data/river/river-detail.html",
+      "requireJS": [
+        "module/js/info-management/basic-data/river/river-detail.js"
+      ],
+      "description": "查看水系详情"
+    },
+    {
+      "seqId": "508",
+      "name": "修改河流信息",
+      "url": "module/menus/info-management/basic-data/river/river-edit.html",
+      "requireJS": [
+        "module/js/info-management/basic-data/river/river-edit.js",
+        "vendor/ckeditor/ckeditor.js",
+        "vendor/ckeditor/config.js"
+      ],
+      "description": "修改河流信息"
+    },
+    {
+      "seqId": "509",
+      "name": "新增河湖库段",
+      "url": "module/menus/info-management/basic-data/reach/reach-add.html",
+      "requireJS": [
+        "module/js/info-management/basic-data/reach/reach-add.js",
+        "vendor/ckeditor/ckeditor.js",
+        "vendor/ckeditor/config.js"
+      ],
+      "description": "新增河湖库段"
+    },
+    {
+      "seqId": "510",
+      "name": "查看河湖库段详情",
+      "url": "module/menus/info-management/basic-data/reach/reach-detail.html",
+      "requireJS": [
+        "module/js/info-management/basic-data/reach/reach-detail.js"
+      ],
+      "description": "查看河湖库段详情"
+    },
+    {
+      "seqId": "511",
+      "name": "修改河湖库段信息",
+      "url": "module/menus/info-management/basic-data/reach/reach-edit.html",
+      "requireJS": [
+        "module/js/info-management/basic-data/reach/reach-edit.js",
+        "vendor/ckeditor/ckeditor.js",
+        "vendor/ckeditor/config.js"
+      ],
+      "description": "修改河湖库段信息"
+    },
+    {
+      "seqId": "545",
+      "name": "政策文件详细列表",
+      "url": "module/menus/info-management/policy-doc/policy-doc-list.html",
+      "requireJS": [
+        "module/js/info-management/policy-doc/policy-doc-list.js"
+      ],
+      "description": "政策文件详细列表"
+    },
+    {
+      "seqId": "546",
+      "name": "新增政策文件",
+      "url": "module/menus/info-management/policy-doc/policy-doc-add.html",
+      "requireJS": [
+        "module/js/info-management/policy-doc/policy-doc-add.js"
+      ],
+      "description": "新增政策文件"
+    },
+    {
+      "seqId": "547",
+      "name": "查看政策文件",
+      "url": "module/menus/info-management/policy-doc/policy-doc-detail.html",
+      "requireJS": [
+        "module/js/info-management/policy-doc/policy-doc-detail.js"
+      ],
+      "description": "查看政策文件"
+    },
+    {
+      "seqId": "548",
+      "name": "修改政策文件",
+      "url": "module/menus/info-management/policy-doc/policy-doc-edit.html",
+      "requireJS": [
+        "module/js/info-management/policy-doc/policy-doc-edit.js"
+      ],
+      "description": "修改政策文件"
     }
   ]
 }

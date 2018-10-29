@@ -43,7 +43,7 @@
 
                     $scope.back = function() {
                         // 跳转到菜单页面
-                        routeService.route(54, true);
+                        routeService.route(14, true);
                     }
 				}
 			]);

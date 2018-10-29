@@ -931,7 +931,7 @@ var dictionaryUrl = "/dictionary/v1";
 
 						$scope.back = function() {
 							// 跳转到菜单页面
-							routeService.route(52, true);
+							routeService.route(12, true);
 						}
 
 						//管理人员树

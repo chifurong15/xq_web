@@ -45,7 +45,7 @@
 					
 					$scope.back = function() {
 						// 跳转到菜单页面
-						routeService.route(53, true);
+						routeService.route(13, true);
 					}
 					
 				}

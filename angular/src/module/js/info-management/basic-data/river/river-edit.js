@@ -414,7 +414,7 @@ var dictionaryUrl = "/dictionary/v1";
                                 }
 								// 返回按钮
 								$scope.back = function() {
-									routeService.route(51, true);
+									routeService.route(11, true);
 								}
 								
 								
