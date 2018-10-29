@@ -2101,3 +2101,16 @@ body .c-ffffff a {
 .anchaanfang .filter-option{
 	margin-top: 1px !important;
 }
+
+.vjs-control-bar{
+    display: none !important;
+}
+.vjs-big-play-button{
+    display: none !important;
+}
+.vjs-caption-settings.vjs-modal-overlay.vjs-hidden{
+    display: none !important;
+}
+.vjs-error-display.vjs-modal-dialog.vjs-hidden{
+    display: none !important;
+}
