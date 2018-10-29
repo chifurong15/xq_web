@@ -21,58 +21,68 @@
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
-					var apiPrefix = moduleService.getServiceUrl() + '/template';
+					var apiPrefix = moduleService.getServiceUrl() + '/spotcheck';
 					
 					$scope.init = function () {
+                        getList();
+                        getAllRegion();
 //						$ajaxhttp.myhttp({
 //							url: apiPrefix + '/v1/SurfaceWater/userinfo',
 //							method: 'get',					
 //							callBack: function (res) {
 //								$scope.num = res.data;
-//								getList();
+//
 //							}
 //						})
 					}
-					
+
 					// 获取数据列表
 					function getList () {
-												
+
 						let month=new moment($scope.searchTime).format('M')<10 ? '0'+ new moment($scope.searchTime).format('M') : new moment($scope.searchTime).format('M');
 						$scope.date=new moment($scope.searchTime).format('YYYY') + '-' + month;
 
-//						$ajaxhttp.myhttp({
-//							url: apiPrefix + '/v1/SurfaceWater/list',
-//							method: 'get',
-//							params: {
-//								pageNumber: $scope.paginationConf.currentPage,
-//								pageSize: $scope.paginationConf.itemsPerPage,
-//								issue: $scope.searchTime && $scope.date,
-//								status: $scope.type,
-//								num: $scope.num,
-//								createUser:$scope.createuser
-//							},
-//							callBack: function (res) {
-//								$scope.surfaceWaterList = res.data.list;
-//                  			$scope.paginationConf.totalItems = res.data.total;
-//							}
-//						})
+						$ajaxhttp.myhttp({
+							url: apiPrefix + '/v1/spotcheck/listSpotcheck',
+							method: 'get',
+							params: {
+								pageNumber: $scope.paginationConf.currentPage,
+								pageSize: $scope.paginationConf.itemsPerPage,
+                                status:$scope.status,
+								regionName:$scope.region,
+                                checkTime:$scope.postTime
+							},
+							callBack: function (res) {
+								$scope.spotcheckList = res.data.list;
+                 				$scope.paginationConf.totalItems = res.data.total;
+							}
+						})
 					}
-					
-					$('#J-searchTime').datetimepicker({
-	                    format: 'YYYY-MM',
-	                    locale: moment.locale('zh-cn')
-	                }).on('dp.change', function (c) {
-	                    $scope.searchTime = new moment(c.date).format('YYYY-MM');
-	                    $scope.$apply();
-	                });
-					
-					
+
+                    $('#J-postTime').datetimepicker({
+                        format: 'YYYY-MM-DD',
+                        locale: moment.locale('zh-cn')
+                    }).on('dp.change', function (c) {
+                        $scope.postTime = new moment(c.date).format('YYYY-MM-DD');
+                        $scope.$apply();
+                    });
+
+
 					// 搜索
 	                $scope.search = function () {
-	                    getList();
+                        getList();
 	                };
-					
-					// 新建
+
+
+                    //重置搜索条件
+                    $scope.reset = function () {
+                        $scope.postTime = '';
+                        $scope.status = '';
+                        $scope.region = '';
+                    }
+
+
+                    // 新建
 	                $scope.add = function () {
 						globalParam.setter({
 							bulletin: {}
@@ -80,15 +90,42 @@
 						routeService.route('2-2-1', false);
 	                }
 	                	               
-	                 // 查看    检查
+	                 // 查看
 	                $scope.view = function (id) {
-						localStorage.setItem('selectedId',id);
+						if(id){
+                            globalParam.setter({
+                                bulletin: {
+                                	id : id
+								}
+                            })
+						}
+						//localStorage.setItem('selectedId',id);
+						//localStorage.setItem('detailId',detailId);
 						routeService.route('2-2-2', false);
 	                }
-	                //返回
-					$scope.goBack=function(){
-						history.back(-1);
-					} 
+
+	                //检查
+					$scope.check = function (id) {
+                        if(id){
+                            globalParam.setter({
+                                bulletin: {
+                                    id : id
+                                }
+                            })
+                        }
+                        routeService.route('2-2-3', false);
+                    }
+
+                    //获取所有的区
+                    function getAllRegion(){
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/spotcheck/listRegion',
+                            method: 'get',
+                            callBack: function (res) {
+                                $scope.RegionList = res.data;
+                            }
+                        })
+                    }
 	                
 					// 配置分页基本参数
 	                $scope.paginationConf = {

@@ -10,46 +10,34 @@
     	<div class="panel panel-default">
         	<div class="panel-body">
         		<div class="table-bar">
-        			<form class="form-inline clearfix">        					                    
-	        			<div class="input-group date date_picker form-item" id="J-searchTime">
-	                        <label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查日期</font></font></label>
-	        				<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime">
-	                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-	                    </div>
+        			<form class="form-inline clearfix">
+						<div class="form-item input-group date date_picker"id="J-postTime">
+							<label><font style="vertical-align: inherit;"><fot style="vertical-align: inherit;">检查日期</fot></font></label>
+							<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="postTime">
+							<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						</div>
 	        			<div class="input-group form-item">
 	                        <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查区域</font></font></label>
-	        				<select ng-model="type" class="form-control select-short" style="width: auto;">
+	        				<select class="form-control select-short" style="width: auto;" ng-model="region">
 	                        	<option value="">请选择</option>
-	                        	<option value="0">和平区</option>
-	                        	<option value="1">河北区</option>
-	                        	<option value="2">滨海新区</option>
-	                        	<option value="3">河东区</option>
-	                        	<option value="4">河西区</option>
-	                        	<option value="5">南开区</option>
-	                        	<option value="6">红桥区</option>
-	                        	<option value="7">东丽区</option>
-	                        	<option value="8">西青区</option>
-	                        	<option value="9">津南区</option>
-	                        	<option value="10">北辰区</option>
-	                        	<option value="11">武清区</option>
-	                        	<option value="12">宝坻区</option>
-	                        	<option value="13">静海区</option>
-	                        	<option value="14">宁河区</option>
-	                        	<option value="15">蓟州区</option>
+	                        	<option value="{{item}}" ng-repeat="item in RegionList">{{item}}</option>
 	                        </select>
 	                    </div>
 	                    <div class="input-group form-item">
 	                        <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">状态</font></font></label>
-	        				<select class="form-control select-short" style="width: auto;">
+	        				<select class="form-control select-short" style="width: auto;" ng-model="status">
 	                        	<option value="">请选择</option>
-	                        	<option value="0">已抽查</option>
-	                        	<option value="1">已下发</option>
+	                        	<option value="0">已下发</option>
+	                        	<option value="1">已检查</option>
 	                        </select>
 	                    </div>	                    
         				<div class="input-group">
 		                    <button class="btn btn-primary" ng-click="search()">
 		                    	<i class="fa fa-search"></i>搜索
 		                    </button>
+							<button type="button" class="btn btn-primary" ng-click="reset()" style="margin: 0 5px;">
+								<i class="fa fa-refresh"></i>重置
+							</button>
 	                    </div>
 	                    <div class="input-group fr">
 		                    <button type="button" class="btn btn-primary" ng-click="add()">
@@ -74,72 +62,32 @@
 	                                    <th width="10%">状态</th>
 	                                    <th width="10%">操作</th>
 	                                </tr>
-	                                <tr>
-	                                    <td>1</td>
-	                                    <td>我是标题</td>
-	                                    <td>2018-10</td>
-										<td>河东区</td>
-	                                    <td>河道</td>
-	                                    <td>临时任务</td>
-	                                    <td>陈某某</td>	                                    
+	                                <tr ng-repeat="item in spotcheckList">
+	                                    <td>{{$index+1}}</td>
+	                                    <td>{{item.title}}</td>
+	                                    <td>{{item.checkDate}}</td>
+										<td>
+											{{item.regionName}}
+											<!--<span ng-repeat="items in item.regionName.split(',')" key="{{$index}}">{{items}}<br></span>-->
+										</td>
 	                                    <td>
-	                                    	<span class="label label-danger">已下发</span>
+											{{item.checkRiver}}
+											<!--<span ng-repeat="itemss in item.checkRiver.split(',')" key="{{$index}}">{{itemss}}<br></span>-->
+										</td>
+	                                    <td>{{item.taskType == 0 ? '临时任务' : '常规任务'}}</td>
+	                                    <td>{{item.sendPerson}}</td>
+	                                    <td>
+	                                    	<span class="label label-danger" ng-if="item.status == 0">已下发</span>
+											<span class="label label-info" ng-if="item.status == 1">已检查</span>
 	                                    </td>	                                   
 	                                    <td style="text-align: left;">
-	                                    	<button type="button" class="btn btn-success" ng-click="view(0)">查看</button>
-
-	                                    </td>
-	                                </tr>
-	                                <tr>
-	                                    <td>2</td>
-	                                    <td>我是标题</td>
-	                                    <td>2018-10</td>
-										<td>河东区</td>
-	                                    <td>河道</td>
-	                                    <td>临时任务</td>
-	                                    <td>陈某某</td> 
-	                                    <td>
-	                                    	<span class="label label-info">已抽查</span>
-	                                    </td>	                                   
-	                                    <td style="text-align: left;">
-	                                    	<button type="button" class="btn btn-success" ng-click="view(0)">查看</button>	                                    		                                    	
-	                                    </td>
-	                                </tr>
-	                                <tr>
-	                                    <td>3</td>
-	                                    <td>我是标题</td>
-	                                    <td>2018-10</td>
-	                                    <td>河东区</td>
-	                                    <td>河道</td>	                                   
-	                                    <td>临时任务</td>
-	                                    <td>陈某某</td>	                                    
-	                                    <td>
-	                                    	<span class="label label-danger">已下发</span>
-	                                    </td>	                                   
-	                                    <td style="text-align: left;">
-	                                    	<button type="button" class="btn btn-success" ng-click="view(0)">查看</button>
-
-	                                    </td>
-	                                </tr>
-	                                <tr>
-	                                    <td>4</td>
-	                                    <td>我是标题</td>
-	                                    <td>2018-10</td>
-	                                    <td>河东区</td>
-	                                    <td>河道</td>
-	                                    <td>临时任务</td>
-	                                    <td>陈某某</td>	                                    
-	                                    <td>
-	                                    	<span class="label label-danger">已下发</span>
-	                                    </td>	                                   
-	                                    <td style="text-align: left;">
-	                                    	<button type="button" class="btn btn-success" ng-click="view(0)">查看</button>
-
+	                                    	<button type="button" class="btn btn-success" ng-click="view(item.id)">查看</button>
+											<button type="button" class="btn btn-warning" ng-if="item.status == 0" ng-click="check(item.id)">检查</button>
 	                                    </td>
 	                                </tr>
                             	</tbody>
                             </table>
-                			<!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+                			<tm-pagination conf="paginationConf"></tm-pagination>
                         </div>
                     </div>
                     <div class="tab-pane" id="chartStatistics">
