@@ -13,6 +13,8 @@ body {
 
 #mainBody {
     height: 100%;
+    display: flex;
+    justify-content: space-between;
     padding-bottom: 62px;
 }
 
@@ -23,11 +25,17 @@ body {
 #news-l , #check-active{
     height: 50%;
 }
+
 .downOrLook {
     color: #3189e1;
     padding: 5px;
 }
-
+.left-panel{
+    width: 23%;
+}
+.right-panel{
+    flex: 1;
+}
 .left-panel, .right-panel {
     height: 100%;
     display: flex;
@@ -1689,12 +1697,13 @@ body .c-ffffff a {
 .left-panel .panel .weather-date .time {
     font-size: 20px;
 }
-
+.body .c-ffffff{
+    margin-left: -20px!important;
+}
 .patr-count {
-    margin-left: 20px;
+    width: 100%;
     display: flex;
     color: #60a2e5;
-    line-height: 30px;
 }
 
 .patr-count span {
@@ -1776,7 +1785,6 @@ body .c-ffffff a {
     height: 35px;
     line-height: 35px;
     padding-left: 15px;
-    font-weight: bold;
     font-size: 14px;
     color: #fff;
 }
@@ -2059,6 +2067,7 @@ body .c-ffffff a {
 #accordion1 ,#accordion2{
     height: 80%;
     overflow: auto;
+    margin-top: 5px;
 }
 #accordion1 h4 ,#accordion2 h4{
    font-size: 13px;
@@ -2083,4 +2092,9 @@ body .c-ffffff a {
     display: flex;
     justify-content: space-between;
     line-height: 26px;
+}
+.anchaanfang .bootstrap-select{
+	width: 180px;
+	float: left;
+	display: inline-block;
 }
