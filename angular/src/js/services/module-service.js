@@ -136,8 +136,10 @@ angular.module('app')
 				return this.htmlUrl;
 			},
 			getServiceUrl: function(){
-				return this.serviceUrl;
-//				return 'http://10.0.9.116:8080';
+				// return this.serviceUrl;
+                return 'http://10.0.9.116:8082'
+             	//return 'http://10.0.9.203:8080'
+             	// return 'http://10.0.9.133:8085'
 			}
 		}
 
