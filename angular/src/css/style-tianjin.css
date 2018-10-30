@@ -2094,9 +2094,12 @@ body .c-ffffff a {
     line-height: 26px;
 }
 .anchaanfang .bootstrap-select{
-	width: 180px;
+	width: 160px !important;
 	float: left;
-	display: inline-block;
+	display: inline-block !important;
+}
+.anchaanfang .filter-option{
+	margin-top: 1px !important;
 }
 
 .vjs-control-bar{

@@ -89,6 +89,13 @@
 						})
 						routeService.route('3-3-2', false);
 	                }
+
+                    //重置搜索条件
+                    $scope.reset = function () {
+                        $scope.searchTime = '';
+                        $scope.type = '';
+                        $scope.createuser = '';
+                    }
 	                
 	                //修改 污水报告
 	                $scope.edit = function (id) {

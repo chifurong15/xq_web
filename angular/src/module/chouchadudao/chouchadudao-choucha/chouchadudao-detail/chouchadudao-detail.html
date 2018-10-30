@@ -19,62 +19,31 @@
 							<form class="form-inline" style="padding-left: 25%;">
 								<div class="form-item" >
 			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
-			                        <input type="text" class="form-control input-short" ng-model="title">
+			                        <input type="text" class="form-control input-short" ng-model="detail.title" readonly>
 			                    </div>
-			                    <div class="input-group form-item">
+			                    <div class="form-item" style="margin-left: 5px;">
 			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查区域</font></font></label>
-			        				<select ng-model="type" class="form-control select-short" style="width: 160px;">
-			                        	<option value="">请选择</option>
-			                        	<option value="0">和平区</option>
-			                        	<option value="1">河北区</option>
-			                        	<option value="2">滨海新区</option>
-			                        	<option value="3">河东区</option>
-			                        	<option value="4">河西区</option>
-			                        	<option value="5">南开区</option>
-			                        	<option value="6">红桥区</option>
-			                        	<option value="7">东丽区</option>
-			                        	<option value="8">西青区</option>
-			                        	<option value="9">津南区</option>
-			                        	<option value="10">北辰区</option>
-			                        	<option value="11">武清区</option>
-			                        	<option value="12">宝坻区</option>
-			                        	<option value="13">静海区</option>
-			                        	<option value="14">宁河区</option>
-			                        	<option value="15">蓟州区</option>
-			                        </select>
+									<!--<input type="text" class="form-control input-short" ng-model="detail.regionName" readonly>-->
+									<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="detail.regionName" style="width: 160px;max-width: 160px;" readonly></textarea>
 				                </div>
 				                <br />
-				                <div class="input-group date date_picker form-item" id="J-searchTime">
+				                <div class="form-item">
 			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查日期</font></font></label>
-			        				<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime">
-			                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+									<input type="text" class="form-control input-short" ng-model="detail.checkDate" readonly>
 				                </div>
-			                    <div class="input-group form-item" style="position: relative;left: 5px;">
+			                    <div class="form-item" style="position: relative;left: 5px;">
 			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查河道</font></font></label>
-			        				<select ng-model="type" class="form-control select-short" style="width: 160px;">
-			                        	<option value="">请选择</option>
-			                        	<option value="0">河道一</option>
-			                        	<option value="1">河道二</option>
-			                        	<option value="2">河道三</option>
-			                        </select>
-				                </div>
+									<!--<input type="text" class="form-control input-short" ng-model="detail.checkRiver" readonly>-->
+									<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="detail.checkRiver" style="width: 160px;max-width: 160px;" readonly></textarea>
+								</div>
 				                <br />
-				                <div class="input-group form-item">
+				                <div class="form-item">
 			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">任务类型</font></font></label>
-			        				<select  class="form-control select-short" style="width: 160px;">
-			                        	<option value="">请选择</option>
-			                        	<option value="0">临时任务</option>
-			                        	<option value="1">常规任务</option>
-			                        </select>
+									<input type="text" class="form-control input-short" ng-model="taskType" readonly>
 				                </div>
-				                <div class="input-group form-item" style="position: relative;left: 5px;">
+				                <div class="form-item" style="position: relative;left: 5px;">
 			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发人员</font></font></label>
-			        				<select  class="form-control select-short" style="width: 160px;">
-			                        	<option value="">请选择</option>
-			                        	<option value="0">人员一</option>
-			                        	<option value="1">人员二</option>
-			                        	<option value="2">人员三</option>
-			                        </select>
+									<input type="text" class="form-control input-short" ng-model="detail.sendPerson" readonly>
 				                </div>			                           			                 
 							</form>				
 			    		</div>
@@ -86,80 +55,45 @@
         						<form class="form-inline" style="float:left;padding-left: 15%;">
 	        						<div class="form-item" >
 				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>检查时间</font></label>
-				                        <input type="text" class="form-control input-short" >
+				                        <input type="text" class="form-control input-short" readonly ng-model="checkTime">
 				                    </div>
+									<div class="form-item" >
+										<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上报人</font></label>
+										<input type="text" class="form-control input-short" readonly ng-model="checkPerson">
+									</div>
 				                    <br />
-				                    <div class="form-item">
-				                    	<div style="height: 34px; position: relative;left: -95px;">
-				                    		<label>问题1</label>
-					                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上报问题类型</font></label>
-					                        <input type="text" class="form-control input-short" >
-				                    	</div>			                    	
-				                        <br />
-				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上报问题描述</font></label>
-	                        			<textarea class="form-control" id="deblock_udid" name="deblock_udid"  rows="3" style="width: 160px;max-width: 160px;"></textarea>
-				                    </div>
-				                    <br />
-				                    <div class="form-item">
-				                    	<div style="height: 34px; position: relative;left: -95px;">
-				                    		<label>问题2</label>
-					                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上报问题类型</font></label>
-					                        <input type="text" class="form-control input-short" >
-				                    	</div>
-				                    	
-				                        <br />
-				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上报问题描述</font></label>
-	                        			<textarea class="form-control" id="deblock_udid" name="deblock_udid"  rows="3" style="width: 160px;max-width: 160px;"></textarea>
-				                    </div>
-				                    <br />
-				                    <div class="form-item">
-				                    	<div style="height: 34px; position: relative;left: -95px;">
-				                    		<label>问题2</label>
-					                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上报问题类型</font></label>
-					                        <input type="text" class="form-control input-short" >
-				                    	</div>
-				                    	
-				                        <br />
-				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上报问题描述</font></label>
-	                        			<textarea class="form-control" id="deblock_udid" name="deblock_udid"  rows="3" style="width: 160px;max-width: 160px;"></textarea>
-				                    </div>
-	        					</form>
-		        					
-		        				<form class="form-inline" style="float:left;">
-	        						<div class="form-item" >
-				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上报人</font></label>
-				                        <input type="text" class="form-control input-short" >
-				                    </div>
-				                    <br />
-				                    <div class="form-item">
-				                    	<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>扣分</font></label>
-				                    	<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>22分</font></label>
-				                    	<br />
-				                    	<label style="position: relative;left: -195px;top: 25px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上传照片</font></label>
-				                    	<div style="display: inline-block;margin-left: 95px;">
-				                        	<img src="https://ss1.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=0fd5d24f9f45d688bc02b4a494c27dab/4b90f603738da977f53a9d57bd51f8198618e3b1.jpg" alt="" style="width: 100px;height: 100px;"/>
-				                        	<img src="https://ss1.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=0fd5d24f9f45d688bc02b4a494c27dab/4b90f603738da977f53a9d57bd51f8198618e3b1.jpg" alt="" style="width: 100px;height: 100px" />
-											<button type="button" class="btn btn-primary" style="margin-top: 65px;">预览</button>
-				                    	</div>
-				                    	
-				                    </div>
-				                    <br />
-				                    <div class="form-item">
-				                    	<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>扣分</font></label>
-				                    	<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>22分</font></label>
-				                    	<br />
-				                    	<label style="position: relative;left: -195px;top: 25px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上传照片</font></label>
-				                    	<div style="display: inline-block;margin-left: 95px;">
-				                        	<img src="https://ss1.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=0fd5d24f9f45d688bc02b4a494c27dab/4b90f603738da977f53a9d57bd51f8198618e3b1.jpg" alt="" style="width: 100px;height: 100px;"/>
-				                        	<img src="https://ss1.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=0fd5d24f9f45d688bc02b4a494c27dab/4b90f603738da977f53a9d57bd51f8198618e3b1.jpg" alt="" style="width: 100px;height: 100px" />
-											<button type="button" class="btn btn-primary" style="margin-top: 65px;">预览</button>
+									<div ng-repeat="item in checkList">
+										<div class="form-item">
+											<div style="height: 34px; position: relative;left: -95px;">
+												<label>问题{{$index + 1}}</label>
+												<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上报问题类型</font></label>
+												<input type="text" class="form-control input-short" readonly ng-model="item.problemTypeName">
+											</div>
 										</div>
-				                    </div>
+										<div class="form-item" style="position: relative;left: -95px;">
+											<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>扣分</font></label>
+											<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>{{item.problemDeduction}}分</font></label>
+										</div>
+										<br>
+										<div class="form-item">
+											<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上报问题描述</font></label>
+											<textarea class="form-control" id="deblock_udid" name="deblock_udid" readonly rows="3" style="width: 160px;max-width: 160px;" ng-model="item.problemDesc"></textarea>
+										</div>
+										<div class="form-item">
+											<label style=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上传照片</font></label>
+											<div style="display: inline-block;">
+												<img src="https://ss1.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=0fd5d24f9f45d688bc02b4a494c27dab/4b90f603738da977f53a9d57bd51f8198618e3b1.jpg" alt="" style="width: 100px;height: 100px;"/>
+												<img src="https://ss1.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=0fd5d24f9f45d688bc02b4a494c27dab/4b90f603738da977f53a9d57bd51f8198618e3b1.jpg" alt="" style="width: 100px;height: 100px" />
+												<button type="button" class="btn btn-primary" style="margin-top: 65px;">预览</button>
+											</div>
+										</div>
+									</div>
+
 	        					</form>
     						</div>
         					
         					<div style="text-align: center;margin: 35px 0;">
-				                <button type="button" class="btn btn-primary" style="margin: 0 50px;" ng-click="submit()" >查看事件</button>
+								<button type="button" class="btn btn-primary" style="margin-right: 30px;" >查看事件</button>
 			                </div>
         				</div>
         			</div>

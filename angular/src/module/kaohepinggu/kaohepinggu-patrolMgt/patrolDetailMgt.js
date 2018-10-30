@@ -22,7 +22,9 @@
 			'$ajaxhttp',
 			'moduleService',
             function patrolDetailMgtCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http, $ajaxhttp, moduleService) {
-				
+
+        		var apiPrefix = moduleService.getServiceUrl() + '/patrol';
+
 				/**
 				 * ==============================================
 				 * @name  patrolDetailMgtCtrl
@@ -36,6 +38,7 @@
 					/**
 					 * 获取详情
 					 */
+					// localStorage.getItem('id');
 					getDetalList();
 				}
 				
@@ -43,17 +46,16 @@
 				 * 获取详情
 				 */
 				function getDetalList(){
-					$scope.problemList = 
-						{
-							'reachName':'海河河西区段',
-							'partrolRegion':'天津市河西区',
-							'partrolProblem':'堤岸水面环境日常保洁情况',
-							'partrolType':' 固定分值',
-							'partrolScore':'2',
-							'patrolPerson':'张三',
-							'patrolDate':'2018-10-24 15:30',
-							'patrolAdress':'河西区马场街道XX桥200米处'
-						}
+                    $ajaxhttp.myhttp({
+                        url: apiPrefix + '/v1/ExeAssPatrol/detail',
+                        method: 'get',
+                        params: {
+                            id: localStorage.getItem('id')
+                        },
+                        callBack: function (res) {
+                              $scope.problemList = res.data;
+                        }
+                    })
 				}
 				
 				/**

@@ -22,7 +22,8 @@
 			'$ajaxhttp',
 			'moduleService',
             function patrolMgtCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http, $ajaxhttp, moduleService) {
-				
+
+        		var apiPrefix = moduleService.getServiceUrl() + '/patrol';
 				/**
 				 * ==============================================
 				 * @name  patrolMgtCtrl
@@ -181,37 +182,42 @@
 			    datepicker2.on('dp.change', function (e) {
 			        datepicker1.data('DateTimePicker').maxDate(e.date);
 			    });
+
+			    //搜索
+			    $scope.getMdSearch = function () {
+                    getModuleList();
+                }
 				
+                //重置
+				$scope.getReSet = function () {
+					$scope.reachName = '';
+					$scope.patrolperson = '';
+					$scope.regionName = '';
+					$scope.beginTime = '';
+					$scope.endTime = '';
+                }
 				/**
 				 * 列表数据
 				 */
 				function getModuleList(){
-					$scope.moduleList = [
-						{
-							'id':1,
-							'date':'2018-10-23',
-							'reach':'海河和平区段',
-							'peoblem':'口门排水',
-							'patrolPerson':'张三',
-							'score':2,
-						},
-						{
-							'id':2,
-							'date':'2018-10-23',
-							'reach':'海河河西区段',
-							'peoblem':'河岸垃圾',
-							'patrolPerson':'李四',
-							'score':1,
-						},
-						{
-							'id':3,
-							'date':'2018-10-21',
-							'reach':'永定河西区马场街道段段',
-							'peoblem':'口门排水',
-							'patrolPerson':'博弈',
-							'score':1,
-						}
-					]
+                    $ajaxhttp.myhttp({
+                        url: apiPrefix + '/v1/ExeAssPatrol/selectList',
+                        method: 'get',
+                        params: {
+                            pageNumber: $scope.paginationConf.currentPage,
+                            pageSize: $scope.paginationConf.itemsPerPage,
+							riverName: $scope.reachName,
+                            patorPerson:$scope.patrolperson,
+                            region:$scope.regionName,
+                            patrolDateStart:$scope.beginTime,
+                            patrolDateEnd:$scope.endTime
+
+                        },
+                        callBack: function (res) {
+                            $scope.moduleList = res.data.list;
+                            $scope.paginationConf.totalItems = res.data.total;
+                        }
+                    })
 				}
 				
 				/**
@@ -234,6 +240,7 @@
 				 * 查看当前列表详情
 				 */
 				$scope.getHydrologicDetail = function(id){
+					localStorage.setItem('id',id);
 					routeService.route('3-6-1', false);
 				};
 				
@@ -247,10 +254,36 @@
 	                      btn: ['确定', '取消']
 	                      // 按钮
 	                  }, function () {
-							layer.msg("删除成功！",{time:2000});
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/ExeAssPatrol/delete',
+                            method: 'DELETE',
+                            params: {
+								id: id
+                            },
+                            callBack: function (res) {
+                            	if(res.resCode == 1){
+                                    layer.msg("删除成功！",{time:2000});
+                                    getModuleList();
+                            	}
+                            }
+                        })
 	                 }, function () {});
 				}
-				
+
+
+                // 配置分页基本参数
+                $scope.paginationConf = {
+                    currentPage: $location.search().currentPage ? $location.search().currentPage : 1,
+                    itemsPerPage: 10,
+                    pagesLength: 10,
+                    perPageOptions: [1, 2, 3, 4, 5, 10],
+                    onChange: function () {
+                        //console.log($scope.paginationConf.currentPage);
+                        $location.search('currentPage', $scope.paginationConf.currentPage);
+                    }
+                };
+                // 当他们一变化的时候，重新获取数据条目
+                $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', getModuleList);
 				
 				
             }

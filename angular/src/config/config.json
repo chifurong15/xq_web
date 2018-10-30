@@ -837,6 +837,19 @@
       "description": "抽查督导-日常抽查-详情"
     },
     {
+      "seqId": "2-2-3",
+      "parentId": "2",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "日常抽查-检查",
+      "icon": "menu-icon-6",
+      "url": "module/chouchadudao/chouchadudao-choucha/chouchadudao-check/chouchadudao-check.html",
+      "requireJS": [
+        "module/chouchadudao/chouchadudao-choucha/chouchadudao-check/chouchadudao-check.js"
+      ],
+      "description": "抽查督导-日常抽查-检查"
+    },
+    {
       "seqId": "2-3-1",
       "parentId": "2",
       "isLeaf": true,
