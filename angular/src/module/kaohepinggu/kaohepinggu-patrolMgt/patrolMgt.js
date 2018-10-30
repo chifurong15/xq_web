@@ -194,7 +194,9 @@
 					$scope.patrolperson = '';
 					$scope.regionName = '';
 					$scope.beginTime = '';
-					$scope.endTime = '';
+                    $scope.endTime = '';
+                    $scope.problem = '';
+                    $scope.region = '';
                 }
 				/**
 				 * 列表数据
@@ -207,6 +209,7 @@
                             pageNumber: $scope.paginationConf.currentPage,
                             pageSize: $scope.paginationConf.itemsPerPage,
 							riverName: $scope.reachName,
+                            gradeWay:$scope.problem,
                             patorPerson:$scope.patrolperson,
                             region:$scope.regionName,
                             patrolDateStart:$scope.beginTime,
@@ -224,16 +227,15 @@
 				 * 获取问题类型
 				 */
 				function getProblemList(){
-					$scope.problemList = [
-						{
-							'id':1,
-							'name':'口门排水'
-						},
-						{
-							'id':2,
-							'name':'河岸垃圾'
+					//alert(1)
+					$ajaxhttp.myhttp({
+						url: apiPrefix + '/v1/ExeAssPatrol/selectGradeDedetailed',
+						method: 'get',
+						callBack: function (res) {
+							$scope.problemList = res.data;
+							//alert(2)
 						}
-					]
+					})
 				}
 				
 				/**

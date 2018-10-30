@@ -12,8 +12,9 @@
 					</div>
 					<div class="form-item">
                         <label>问题类型</label>
-                        <select ng-model="problem.id" ng-options="pl.id as pl.name for pl in problemList" ng-change="getProblemChange()" class="form-control select-short">
+                        <select ng-model="problem" class="form-control select-short">
                         	<option value="">请选择</option>
+							<option value="{{item}}" ng-repeat="item in problemList">{{item}}</option>
                         </select>
                     </div>
                     <div class="form-item">
