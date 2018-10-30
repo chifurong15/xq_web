@@ -811,6 +811,19 @@
       "description": "抽查督导-上报"
     },
     {
+      "seqId": "2-1-4",
+      "parentId": "2",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "暗查暗访-任务",
+      "icon": "menu-icon-6",
+      "url": "module/chouchadudao/chouchadudao-task/chouchadudao-task.html",
+      "requireJS": [
+        "module/chouchadudao/chouchadudao-task/chouchadudao-task.js"
+      ],
+      "description": "抽查督导-暗查暗访-任务"
+    },
+    {
       "seqId": "2-2-1",
       "parentId": "2",
       "isLeaf": true,
