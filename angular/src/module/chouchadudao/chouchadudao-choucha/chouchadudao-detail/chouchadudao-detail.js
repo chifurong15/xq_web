@@ -23,8 +23,8 @@
 				
 					var apiPrefix = moduleService.getServiceUrl() + '/spotcheck';
 					
-					
 					$scope.init = function () {
+                        $scope.eventImgUrl = 'http://10.0.0.196/api/download' ;
 						var bulletin = globalParam.getter().bulletin || {};
 						$scope.id = bulletin.id;
 
@@ -41,9 +41,6 @@
 						})
 
 						getData($scope.id);
-						// var selectedId = localStorage.getItem('selectedId');
-						// $('.js-tab').find('li').eq(selectedId).addClass('tab-active').siblings().removeClass('tab-active');
-						// $(".js-con").find('.con').hide().eq(selectedId).show();
 						
 					}
 					
@@ -51,7 +48,6 @@
 					$scope.goBack = function(){
 						history.back(-1);
 					}
-
 
 					// 数据详情
 					function getData (id) {
@@ -65,6 +61,12 @@
                             	$scope.checkTime = res.data.checkDate;
                             	$scope.checkPerson = res.data.sendPerson;
                                 $scope.checkList = res.data.problemList;
+                                $scope.checkList.map(function(item,index){
+                                    if(item.attach){
+                                        item.attach = item.attach.split(',');
+                                    }
+                                })
+								console.log($scope.checkList[1].attach)
                             }
                         })
 					}
@@ -72,7 +74,6 @@
 					//tab栏切换					
 					$('.js-tab li').on("click",function (){
 						var index = $(this).index();
-						console.log(index)
 						$(this).addClass('tab-active').siblings().removeClass('tab-active');
 						$(".js-con").find('.con').hide().eq(index).show();						
 					});

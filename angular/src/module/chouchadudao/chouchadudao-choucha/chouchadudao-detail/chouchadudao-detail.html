@@ -50,8 +50,9 @@
         			</div>
         			
 					<div class="check-con con tab-show">
-        				<div class="panel-body"> 
-        					<div style="overflow: hidden">
+        				<div class="panel-body">
+							<div ng-if="checkList.length == 0">暂无检查结果</div>
+        					<div style="overflow: hidden" ng-if="checkList.length != 0">
         						<form class="form-inline" style="float:left;padding-left: 15%;">
 	        						<div class="form-item" >
 				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>检查时间</font></label>
@@ -81,20 +82,17 @@
 										</div>
 										<div class="form-item">
 											<label style=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上传照片</font></label>
-											<div style="display: inline-block;">
-												<img src="https://ss1.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=0fd5d24f9f45d688bc02b4a494c27dab/4b90f603738da977f53a9d57bd51f8198618e3b1.jpg" alt="" style="width: 100px;height: 100px;"/>
-												<img src="https://ss1.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=0fd5d24f9f45d688bc02b4a494c27dab/4b90f603738da977f53a9d57bd51f8198618e3b1.jpg" alt="" style="width: 100px;height: 100px" />
-												<button type="button" class="btn btn-primary" style="margin-top: 65px;">预览</button>
+											<div style="display: inline-block;" id="layer-photos-check">
+												<img style="margin: 0 5px;"  ng-repeat="items in item.attach" layer-pid="" layer-src="{{eventImgUrl}}{{items}}" src="{{eventImgUrl}}{{items}}" alt="问题照片" width="100px" height="100px" key="{{$index}}">
 											</div>
 										</div>
 									</div>
 
 	        					</form>
     						</div>
-        					
-        					<div style="text-align: center;margin: 35px 0;">
-								<button type="button" class="btn btn-primary" style="margin-right: 30px;" >查看事件</button>
-			                </div>
+        					<!--<div style="text-align: center;margin: 35px 0;">-->
+								<!--<button type="button" class="btn btn-primary" style="margin-right: 30px;" >查看事件</button>-->
+			                <!--</div>-->
         				</div>
         			</div>
         			
@@ -104,3 +102,12 @@
        	</div>
     </div>
 </div>
+<script>
+    //调用示例
+    layui.use('layer', function() {
+        layer.photos({
+            photos: '#layer-photos-check',
+			anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+        });
+    });
+</script>

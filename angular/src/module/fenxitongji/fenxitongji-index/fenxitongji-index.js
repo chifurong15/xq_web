@@ -204,7 +204,7 @@
 	                	var params = {
                             pageNumber: $scope.paginationConf.currentPage,
                             pageSize: $scope.paginationConf.itemsPerPage,
-                            // regionId: $scope.regionId
+                            regionId: $scope.regionId
 	                	};
 	                	if (isSearch) {
 	                		params.startTime = $scope.startTime;

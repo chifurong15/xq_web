@@ -91,6 +91,11 @@
 						localStorage.setItem('selectedId',id);
 						routeService.route('2-1-2', false);
 	                }
+
+	                //点击通报名称
+					$scope.viewReport = function () {
+                        routeService.route('2-1-4', false);
+					}
 	                
 	                 // 上报
 	                $scope.report = function (id) {
