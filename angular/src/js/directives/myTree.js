@@ -1,10 +1,10 @@
 angular.module('app')
-  .directive('myTree', ['$http','$localStorage', 'moduleService', function($http,$localStorage, moduleService) {
+  .directive('myTree', ['$http','$localStorage','moduleService', function($http,$localStorage,moduleService) {
   	function initTree ($scope,ele){
 			//行政区划树初始化
 	    var regionTree;
 	    var treeNode_find;
-	    var regionTreeUrl = moduleService.getServiceUrl() + "/information/v1/administrativeRegion/regionTree?parentCode=0";
+	    var regionTreeUrl = $localStorage.gwUrl + "/information/v1/administrativeRegion/regionTree?parentCode=0";
 	    //行政区划树数据
 	    var setting = {
 	        view:{
@@ -25,9 +25,11 @@ angular.module('app')
 	    function zTreeOnClick(event,treeId,treeNode){
 	        $http({
 	            method: "GET",
-	            url: moduleService.getServiceUrl()  + '/information/v1/administrativeRegion/regionTree?parentCode=' + treeNode.id
+	            url: $localStorage.gwUrl + '/information/v1/administrativeRegion/regionTree?parentCode=' + treeNode.id
 	        }).success(function(resp) {
-	            treeNode_find = treeNode.id;
+	            $scope.eventRegion = treeNode.name;
+	            $scope.regionId = treeNode.id;
+	            $scope.regionInfo = treeNode;
 	        })
 	    };
 
@@ -39,7 +41,7 @@ angular.module('app')
 
 	        $http({
 	            method: "GET",
-	            url: moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree?parentCode=' + treeNode.id
+	            url: $localStorage.gwUrl + '/information/v1/administrativeRegion/regionTree?parentCode=' + treeNode.id
 	        }).success(function(res) {
                 regionTree.addNodes(treeNode,res.data,true);
 	        });

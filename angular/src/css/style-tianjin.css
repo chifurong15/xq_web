@@ -2101,7 +2101,46 @@ body .c-ffffff a {
 .anchaanfang .filter-option{
 	margin-top: 1px !important;
 }
-
+/*事件地图工具*/
+.proMgr-map-tool{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 1;
+    border: 1px solid #4c4949;
+    border-radius: 6px;
+    background-color: #fff;
+    overflow: hidden;
+}
+.proMgr-map-tool .drawTool{
+    margin: 0;
+    padding: 0;
+}
+.proMgr-map-tool .drawTool li{
+    list-style: none;
+    float: left;
+    /*border: 1px solid #4c4949;*/
+}
+.proMgr-map-tool .drawTool li:hover{
+    background-color: #e3e3e3;
+}
+.proMgr-map-tool .drawTool li:active{
+    background-color: #dedede;
+}
+.proMgr-map-tool .drawTool li:first-child{
+    border-right: 1px solid #b9b7b7;
+}
+.proMgr-map-tool .drawTool li:nth-child(2){
+    border-right: 1px solid #b9b7b7;
+}
+.proMgr-map-tool .drawTool li a{
+    padding: 5px;
+    width: 40px;
+    height: 35px;
+    line-height: 24px;
+    text-align: center;
+    display: inline-block;
+}
 .vjs-control-bar{
     display: none !important;
 }
