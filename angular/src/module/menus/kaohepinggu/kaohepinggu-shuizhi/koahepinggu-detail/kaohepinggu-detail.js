@@ -20,8 +20,8 @@
 					$location, $log, $q, $rootScope, $window,
 					routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
-					// var apiPrefix = $localStorage.gwUrl + '/template';
-                    var apiPrefix = 'http://10.0.9.133:8080/template';
+					 var apiPrefix = $localStorage.gwUrl + '/template';
+                   // var apiPrefix = 'http://10.0.9.133:8080/template';
 					$scope.init = function() {
 						$scope.type = 2;
 						$scope.time = CurentTime();

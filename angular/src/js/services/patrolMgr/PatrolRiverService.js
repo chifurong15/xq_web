@@ -20,7 +20,7 @@ angular.module('app')
             this._isShowRainValue = false;
             this._dataSource = null;
             //var _serviceUrl = $localStorage.integratedServer;
-            var _serviceUrl = "http://10.0.9.149:8080";
+            var _serviceUrl = $localStorage.serviceUrl_patrolMgr;
             //http://10.0.9.149:8080/charimanPatrol/v1/getLocusDetailById
 
             var _patrolEventGraphicArray = [];

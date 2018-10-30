@@ -22,8 +22,8 @@
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
 					
-					// var apiPrefix = $localStorage.gwUrl + '/template';
-                    var apiPrefix = 'http://10.0.9.133:8082/template';
+					var apiPrefix = $localStorage.gwUrl + '/template';
+                    // var apiPrefix = 'http://10.0.9.133:8082/template';
 					
 					$scope.init = function () {
 						var bulletin = globalParam.getter().bulletin || {};
