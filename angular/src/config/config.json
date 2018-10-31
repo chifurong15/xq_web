@@ -401,25 +401,13 @@
       "isRoot": true,
       "name": "问题处理",
       "icon": "fa fa-question-circle",
-      "url": "module/menus/treatment/event-add.html",
+      "url": "module/menus/treatment/event-backlog.html",
       "requireJS": [
-        "module/js/treatment/event-add.js"
+        "module/js/treatment/event-backlog.js"
       ],
       "description": "一级菜单-问题处置"
     },
-    {
-      "seqId": "62",
-      "parentId": "61",
-      "isLeaf": true,
-      "isRoot": false,
-      "name": "新建问题",
-      "icon": "fa fa-chevron-right",
-      "url": "module/menus/treatment/event-add.html",
-      "requireJS": [
-        "module/js/treatment/event-add.js"
-      ],
-      "description": "三级菜单-问题处置-待办问题"
-    },
+
     {
       "seqId": "64",
       "parentId": "61",
