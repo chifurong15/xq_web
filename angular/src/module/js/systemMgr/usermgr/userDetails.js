@@ -33,6 +33,7 @@
 							$scope.userName = res.data.userName;
 							$scope.cellphone = res.data.cellphone;
 							$scope.password = res.data.password;
+                            $scope.regionName = res.data.regionName;
 							if (res.data.gender == 1){
 								$scope.gender = '男';
 							}else{
@@ -59,6 +60,7 @@
 	            params: {userId:$scope.id}
 	    		}).success(
 					function (res) {
+					    console.log(res)
 						if (res.resCode == 1) {
 							$scope.roleNames = res.data[0].name;
 						} else {

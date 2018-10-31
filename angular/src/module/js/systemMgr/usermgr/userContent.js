@@ -28,12 +28,13 @@
 	            params: {id:$scope.id}
 	    		}).success(
 					function (res) {
+					    console.log(res)
 						if (res.resCode == 1) {
 							$scope.name = res.data.name;
 							$scope.userName = res.data.userName;
 							$scope.userName1 = res.data.userName;
 							$scope.cellphone = res.data.cellphone;
-							$scope.cellphone1 = res.data.cellphone;
+							$scope.regionName = res.data.regionName;
 							if (res.data.gender == 1){
 								$scope.gender = '男';
 							}else{
