@@ -122,8 +122,21 @@
       "description": "抽查督导"
     },
     {
-      "seqId": "2-1",
+      "seqId": "2-0",
       "parentId": "2",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "暗查暗访",
+      "icon": "",
+      "url": "",
+      "requireJS": [
+        ""
+      ],
+      "description": "暗查暗访"
+    },
+    {
+      "seqId": "2-1",
+      "parentId": "2-0",
       "isLeaf": true,
       "isRoot": false,
       "name": "暗查暗访",
@@ -132,7 +145,20 @@
       "requireJS": [
         "module/chouchadudao/chouchadudao-index/chouchadudao-index.js"
       ],
-      "description": "二级菜单-抽查督导-首页-暗查暗访"
+      "description": "三级菜单-抽查督导-暗查暗访首页"
+    },
+    {
+      "seqId": "2-6",
+      "parentId": "2-0",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "通报管理",
+      "icon": "menu-icon-6",
+      "url": "module/chouchadudao/chouchadudao-reportMag/chouchadudao-reportMag.html",
+      "requireJS": [
+        "module/chouchadudao/chouchadudao-reportMag/chouchadudao-reportMag.js"
+      ],
+      "description": "三级菜单-抽查督导-暗查暗访-通报管理"
     },
     {
       "seqId": "2-2",
@@ -810,6 +836,45 @@
         "module/chouchadudao/chouchadudao-task/chouchadudao-task.js"
       ],
       "description": "抽查督导-暗查暗访-任务"
+    },
+    {
+      "seqId": "2-1-5",
+      "parentId": "2",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "暗查暗访-计划-新增",
+      "icon": "menu-icon-6",
+      "url": "module/chouchadudao/chouchadudao-schemeadd/chouchadudao-schemeadd.html",
+      "requireJS": [
+        "module/chouchadudao/chouchadudao-schemeadd/chouchadudao-schemeadd.js"
+      ],
+      "description": "抽查督导-暗查暗访-计划-新增"
+    },
+    {
+      "seqId": "2-6-1",
+      "parentId": "2-0",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "通报管理-添加台账",
+      "icon": "menu-icon-6",
+      "url": "module/chouchadudao/chouchadudao-ledgeradd/chouchadudao-ledgeradd.html",
+      "requireJS": [
+        "module/chouchadudao/chouchadudao-ledgeradd/chouchadudao-ledgeradd.js"
+      ],
+      "description": "三级菜单-抽查督导-暗查暗访-通报管理-添加台账"
+    },
+    {
+      "seqId": "2-6-2",
+      "parentId": "2-0",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "通报管理-详情",
+      "icon": "menu-icon-6",
+      "url": "module/chouchadudao/chouchadudao-reportdetail/chouchadudao-reportdetail.html",
+      "requireJS": [
+        "module/chouchadudao/chouchadudao-reportdetail/chouchadudao-reportdetail.js"
+      ],
+      "description": "三级菜单-抽查督导-暗查暗访-通报管理-详情"
     },
     {
       "seqId": "2-2-1",

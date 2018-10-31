@@ -9,25 +9,25 @@
 					<div class="patrolDetailContent">
 						<div class="form-item">
 							<label>期号：</label>
-							<span ng-bind="superviseList.num"></span>
+							<span ng-bind="superviseList.termNumber"></span>
 						</div>
 						<div class="form-item">
 	                        <label>行政区域：</label>
-							<span ng-bind="superviseList.region"></span>
+							<span ng-bind="superviseList.regionName"></span>
 	                    </div>
 						<br />
                       	<div class="form-item">
 							<label>河段名称：</label>
-							<span ng-bind="superviseList.reach"></span>
+							<span ng-bind="superviseList.riverName"></span>
 						</div>
 						<div class="form-item">
 							<label>监督人员：</label>
-							<span ng-bind="superviseList.supervise"></span>
+							<span ng-bind="superviseList.supervisor"></span>
 						</div>
 						<br />	
 						<div class="form-item">
 							<label>不满意原因：</label>
-							<span ng-bind="superviseList.reason"></span>
+							<span ng-bind="superviseList.dissatisfiedReason"></span>
 						</div>
 						<div class="form-item">
 							<label>其他原因：</label>
@@ -36,18 +36,18 @@
 						<br />
                         <div class="form-item">
 							<label>问题位置：</label>
-							<span ng-bind="superviseList.patrolAdress"></span>
+							<span ng-bind="superviseList.problemPosition"></span>
 						</div>
 						<div class="form-item">
 							<label>评价日期：</label>
-							<span ng-bind="superviseList.date"></span>
+							<span ng-bind="superviseList.evaluationDate"></span>
 						</div>
 						<br />
 						<div class="form-item">
 							<label>问题照片：</label>
-		                	<div id="layer-photos-before" class="layer-photos-demo" style="margin-left: 30px;">
-							  	<img style="margin: 0 5px;" layer-pid="" layer-src="/src/img/bg.jpg" src="/src/img/bg.jpg" alt="问题照片" width="60px" height="60px">
-							  	<img style="margin: 0 5px;" layer-pid="" layer-src="/src/img/bg.jpg" src="/src/img/bg.jpg" alt="问题照片" width="60px" height="60px">
+		                	<div id="layer-photos-before" class="layer-photos-demo" style="margin-left: 30px;display: inline-block;">
+								<img style="margin: 0 5px;" ng-repeat="item in imgList" layer-pid="" layer-src="{{eventImgUrl}}{{item}}" src="{{eventImgUrl}}{{item}}" alt="问题照片" width="60px" height="60px">
+								<!--<img style="margin: 0 5px;" layer-pid="" layer-src="/src/img/bg.jpg" src="/src/img/bg.jpg" alt="问题照片" width="60px" height="60px">-->
 							</div>
 						</div>
 					</div>

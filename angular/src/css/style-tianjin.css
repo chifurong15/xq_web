@@ -2069,9 +2069,25 @@ body .c-ffffff a {
     overflow: auto;
     margin-top: 5px;
 }
+#accordion1 .panel-heading ,#accordion2 .panel-heading{
+    width: 80%;
+    border: 2px solid #efefef;
+}
+#accordion1 .panel-default ,#accordion2 .panel-default{
+    border: 0;
+}
+#accordion1  .panel-heading i,#accordion2 .panel-heading i {
+    color: #9cbbda;
+    font-size: 15px;
+}
+#accordion1  .panel-heading a:hover,#accordion2 .panel-heading a:hover {
+    color: #006edd;
+}
+.panel-active{
+    color: #006edd;
+}
 #accordion1 h4 ,#accordion2 h4{
    font-size: 13px;
-   font-weight: 600;
 }
 #accordion1 h4 a,#accordion2 h4 a{
     display: block;

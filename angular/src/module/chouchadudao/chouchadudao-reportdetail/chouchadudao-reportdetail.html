@@ -1,0 +1,130 @@
+<div class="anchaanfang" ng-controller="anchaanfangReportViewCtrl" ng-init="init()">
+    <div class="wrapper-md ">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">暗查暗访</span><span class="tag-right"></span><span class="tag-right tag-left"></span><span class="tag tag1">通报详情</span><span class="tag-right"></span>
+                <div style="overflow: hidden;"><button type="button" class="btn btn-primary" ng-click="goBack()" style="position: absolute;right: 20px;bottom: 20px;">返回</button></div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <ul class="js-tab">
+                    <li class="basis tab-active" >基础资料</li>
+                    <li class="reported">约谈台账</li>
+                    <li class="deal">处理反馈</li>
+                </ul>
+                <div class="panel-body js-con">
+                    <!--基础资料-->
+                    <div class="basis-con con">
+                        <div class="panel-body">
+                            <h4>暗查暗访当月任务统计</h4>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tableStatistics">
+                                    <div class="table-responsive" style="margin-top: 20px;">
+                                        <table class="table table-bordered table-hover">
+                                            <tbody>
+                                            <tr class='tHeader'>
+                                                <th width="5%">序号</th>
+                                                <th width="15%">标题</th>
+                                                <th width="10%">检查日期</th>
+                                                <th width="10%">检查区域</th>
+                                                <th width="15%">检查河道</th>
+                                                <th width="10%">状态</th>
+                                                <th width="20%">操作</th>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>我是标题</td>
+                                                <td>2018-10</td>
+                                                <td>河东区</td>
+                                                <td>河道</td>
+                                                <td>
+                                                    <span class="label label-danger">已下发</span>
+                                                </td>
+                                                <td style="text-align: left;">
+                                                    <button type="button" class="btn btn-success" ng-click="view(0)">查看</button>
+                                                    <!--<button type="button" class="btn btn-danger" ng-click="report()">上报</button>	                                    	-->
+                                                    <button type="button" class="btn btn-warning" ng-click="edit()">修改</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>我是标题</td>
+                                                <td>2018-10</td>
+                                                <td>河东区</td>
+                                                <td>河道</td>
+                                                <td>
+                                                    <span class="label label-info">检查中</span>
+                                                </td>
+                                                <td style="text-align: left;">
+                                                    <button type="button" class="btn btn-success" ng-click="view(0)">查看</button>
+                                                    <!--<button type="button" class="btn btn-danger" ng-click="report()">上报</button>	                                    	-->
+                                                    <!--<button type="button" class="btn btn-info" ng-click="view(2)">通报</button>	                                    	-->
+                                                    <button type="button" class="btn btn-warning" ng-click="edit()">修改</button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="chartStatistics">
+                                    <div id="patrolChart" class="tj-chart-con"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--约谈台账-->
+                    <div class="reported-con con tab-show">
+                        <div class="panel-body">
+                            <form class="form-inline" style="padding-left: 25%;">
+                                <div class="input-group date date_picker form-item" id="J-searchTime">
+                                    <label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">约谈时间</font></font></label>
+                                    <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                                <div class="form-item" >
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">约谈附件</font></font></label>
+                                    <input type="text" class="form-control input-short" >
+                                    <button type="button" class="btn btn-primary" style="position: relative;top: -10px;">预览</button>
+                                </div>
+                                <br />
+                                <div class="form-item" style="margin-top: -2px;">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">约谈内容</font></font></label>
+                                    <textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="issuer" rows="3" style="margin-left: -20px!important;"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!--处理反馈-->
+                    <div class="deal-con con tab-show">
+                        <div class="panel-body">
+                            <form class="form-inline" style="padding-left: 25%;">
+                                <div class="input-group date date_picker form-item" id="J-searchTime1">
+                                    <label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理日期</font></font></label>
+                                    <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime1">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                                <div class="form-item" >
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理附件</font></font></label>
+                                    <input type="text" class="form-control input-short" >
+                                    <button type="button" class="btn btn-primary" style="position: relative;top: -10px;">预览</button>
+                                </div>
+                                <br />
+                                <div class="form-item" style="margin-top: -2px;">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理内容</font></font></label>
+                                    <textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="issuer" rows="3" style="margin-left: -20px;"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

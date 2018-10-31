@@ -22,7 +22,9 @@
 			'$ajaxhttp',
 			'moduleService',
             function superviseReportAddMgtCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http, $ajaxhttp, moduleService) {
-				
+
+        	    var apiPrefix = moduleService.getServiceUrl() + '/supervise';
+
 				/**
 				 * ==============================================
 				 * @name  superviseReportAddMgtCtrl
@@ -143,13 +145,13 @@
 				/*举报问题*/
                 $scope.countNum = 512;
 			    $scope.checkRemark = function () {
-			    	$scope.countNum = 512 - $scope.riverRemark.length;
-			        if ($scope.riverRemark.length >= 512) {
+			    	$scope.countNum = 512 - $scope.reportProblem.length;
+			        if ($scope.reportProblem.length >= 512) {
 			        	layui.use('layer', function(){
 						  	var layer = layui.layer //获得layer模块
 							    layer.msg("你好，描述字数控制在255字以内！",{time:2000});
 						});      
-			            $scope.riverRemark = $scope.riverRemark.substr(0, 512);
+			            $scope.reportProblem = $scope.reportProblem.substr(0, 512);
 			            $scope.countNum = 0;
 			        }
 			    };
@@ -166,10 +168,10 @@
 				 * 时间选择
 				 */
                 var datepicker1 = $('#beginTime').datetimepicker({
-			        format: 'YYYY-MM-DD',
+			        format: 'YYYY-MM-DD hh:mm',
 			        locale: moment.locale('zh-cn')
 			    }).on('dp.change', function (e) {
-			        var result = new moment(e.date).format('YYYY-MM-DD');
+			        var result = new moment(e.date).format('YYYY-MM-DD hh:mm');
 			        $scope.beginTime = result;
 			        $scope.$apply();
     			});
@@ -179,22 +181,26 @@
 				 */
 				function getStatusList(){
 					$scope.statusList = [
-						{
-							'id':1,
-							'name':'未处理'
-						},
-						{
-							'id':2,
-							'name':'已处理'
-						},
-						{
-							'id':3,
-							'name':'处理中'
-						},
-						{
-							'id':4,
-							'name':'二次处理'
-						}
+                        {
+                            'id':1,
+                            'name':'未处理'
+                        },
+                        {
+                            'id':2,
+                            'name':'处理完成'
+                        },
+                        {
+                            'id':3,
+                            'name':'处理中'
+                        },
+                        {
+                            'id':4,
+                            'name':'二次处理'
+                        },
+                        {
+                            'id':5,
+                            'name':'多次处理中'
+                        },
 					]
 				}
 				
@@ -217,23 +223,85 @@
 				/**
 				 * 上传附件
 				 */
-				$scope.getUploadFile = function(){
-					$('#coverModal').modal('show');
+				$scope.getUploadFile = function(id){
+					if( id == 1 ){
+                        $('#coverModal1').modal('show');
+                    }else if( id == 2 ) {
+                        $('#coverModal2').modal('show');
+					}else if ( id == 3 ) {
+                        $('#coverModal3').modal('show');
+					}
 				}
 				
 				/**
 				 * 关闭上传附件
 				 */
-				$scope.getUpload = function(){
-					$('#coverModal').modal('hide');
-				}
+				$scope.getUpload = function(id){
+                    if( id == 1 ){
+                        $('#coverModal1').modal('hide');
+                    }else if( id == 2 ) {
+                        $('#coverModal2').modal('hide');
+                    }else if ( id == 3 ) {
+                        $('#coverModal3').modal('hide');
+                    }
+                    var formFile = new FormData();
+                    var fileObj = document.querySelector('input[type=file]').files[0];
+
+                    formFile.append("file", fileObj); //加入文件对象
+                    $http({
+                            method: 'post',
+                            url: apiPrefix + '/v1/socialReport/upload',
+                            data:formFile,
+                            headers: {'Content-Type': undefined},
+                            transformRequest: angular.identity
+                        }
+                    ).success(function (res) {
+                        if (res.resCode == 1) {
+                            //console.log(res);
+                            if(id == 1){
+                                $scope.problemAttant = res.data.virtualPath;
+							}else if(id == 2) {
+                                $scope.proposedTreatment = res.data.virtualPath;
+                            }else if (id == 3){
+                                $scope.processingResults = res.data.virtualPath;
+                            }
+                        } else {
+                            layer.msg("服务器异常，请稍后再试");
+                        }
+                    }).error(function (res) {
+                        layer.msg('服务器异常，请稍后再试');
+                    });
+                }
 				
 				/**
 				 * 新增
 				 */
 				$scope.getSubmit = function(){
-					layer.msg("数据新增成功！",{time:2000});
-					routeService.route('3-8', true);
+					var params = {
+                            reportDate: $scope.beginTime,
+                        	regionName: $scope.regionName,
+                        	riverName: $scope.riverName,
+							reportor: $scope.reportor,
+							contactType: $scope.contactType,
+							problemPosition: $scope.problemPosition,
+							reportProblem: $scope.reportProblem,
+                        	processingStatus: $scope.status.name,
+							reportEvaluate:$scope.assess,
+                        	problemAttant:$scope.problemAttant,
+                        	proposedTreatment:$scope.proposedTreatment,
+                            processingResults: $scope.processingResults
+					}
+                    $ajaxhttp.myhttp({
+                        url: apiPrefix + '/v1/socialReport/addReport',
+                        method: 'POST',
+                        params: params,
+                        callBack: function (res) {
+                            if(res.resCode == 1){
+                                layer.msg("新增成功！",{time:2000});
+                                routeService.route('3-8', true);
+                            }
+                        }
+                    })
 				}
 				
 				

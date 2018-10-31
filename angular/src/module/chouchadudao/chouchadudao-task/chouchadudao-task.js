@@ -21,41 +21,35 @@
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
-					var apiPrefix = moduleService.getServiceUrl() + '/template';
+					var apiPrefix = moduleService.getServiceUrl() + '/ancha';
 					
 					$scope.init = function () {
+                        getList();
 //						$ajaxhttp.myhttp({
 //							url: apiPrefix + '/v1/SurfaceWater/userinfo',
 //							method: 'get',					
 //							callBack: function (res) {
 //								$scope.num = res.data;
-//								getList();
+//
 //							}
 //						})
 					}
 					
 					// 获取数据列表
 					function getList () {
-												
-						let month=new moment($scope.searchTime).format('M')<10 ? '0'+ new moment($scope.searchTime).format('M') : new moment($scope.searchTime).format('M');
-						$scope.date=new moment($scope.searchTime).format('YYYY') + '-' + month;
+						$ajaxhttp.myhttp({
+							url: apiPrefix + '/v1/AnzhaInvestigations/list',
+							method: 'get',
+							params: {
+								pageNumber: $scope.paginationConf.currentPage,
+								pageSize: $scope.paginationConf.itemsPerPage,
 
-//						$ajaxhttp.myhttp({
-//							url: apiPrefix + '/v1/SurfaceWater/list',
-//							method: 'get',
-//							params: {
-//								pageNumber: $scope.paginationConf.currentPage,
-//								pageSize: $scope.paginationConf.itemsPerPage,
-//								issue: $scope.searchTime && $scope.date,
-//								status: $scope.type,
-//								num: $scope.num,
-//								createUser:$scope.createuser
-//							},
-//							callBack: function (res) {
-//								$scope.surfaceWaterList = res.data.list;
-//                  			$scope.paginationConf.totalItems = res.data.total;
-//							}
-//						})
+							},
+							callBack: function (res) {
+								$scope.taskList = res.data.list;
+                 				$scope.paginationConf.totalItems = res.data.total;
+							}
+						})
 					}
 					
 					$('#J-searchTime').datetimepicker({

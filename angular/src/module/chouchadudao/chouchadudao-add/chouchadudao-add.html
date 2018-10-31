@@ -59,46 +59,15 @@
                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">带队领导</font></font></label>
                         <input type="text" class="form-control input-short">
                         <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
-                    </div>                    
-	                <div class="form-item" >
-                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">问题点坐标</font></font></label>
-                        <input type="text" class="form-control input-short" >
-                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
                     </div>
-                    <br />
-                    <div class="form-item" >
-                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查内容</font></font></label>
-                        <div class="checkbox">
-							<label><input type="checkbox" value="1">1</label>
-							<label><input type="checkbox" value="2">2</label>
-							<label><input type="checkbox" value="3">3</label>
-							<label><input type="checkbox" value="4">4</label>
-							<label><input type="checkbox" value="5">5</label>
-							<br />
-							<label><input type="checkbox" value="6">6</label>
-							<label><input type="checkbox" value="7">7</label>
-							<label><input type="checkbox" value="8">8</label>
-							<label><input type="checkbox" value="9">9</label>
-							<label><input type="checkbox" value="10">10</label>
-						</div>
-                    </div> 
-                    <div class="form-item" style="margin-left: 10px;">
-                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">问题点描述</font></font></label>
-						<textarea class="form-control" id="deblock_udid" name="deblock_udid"  rows="3" style="width: 160px;max-width: 160px;"></textarea>
-                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
-                    </div>
-                    <br />                 
-                    <div class="form-item">
-                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">内容描述</font></font></label>
-						<textarea class="form-control" id="deblock_udid" name="deblock_udid"  rows="3" style="width: 160px;max-width: 160px;"></textarea>
-                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
-                    </div>  
-        			<div class="form-item" >
-                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">方案附件</font></font></label>
-                        <input type="text" class="form-control input-short" >
-                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
-	                    <button type="button" class="btn btn-primary" style="position: relative;top: -10px;">预览</button>
-                    </div>                    
+					<div class="input-group form-item">
+						<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发人员</font></font></label>
+						<select  class="form-control"  style="width: 160px;" ng-model="sendPerson">
+							<option value="">请选择</option>
+							<!--<option value="{{item}}" ng-repeat="item in personList">{{item}}</option>-->
+						</select>
+						<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+					</div>
 				</form>
 				<div style="text-align: center;margin: 35px 0;">
 	                <button type="button" class="btn btn-primary" style="margin: 0 50px;" ng-click="submit()" >创建并下发</button>

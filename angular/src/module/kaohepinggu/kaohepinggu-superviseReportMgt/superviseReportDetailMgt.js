@@ -22,8 +22,10 @@
 			'$ajaxhttp',
 			'moduleService',
             function superviseReportDetailMgtCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http, $ajaxhttp, moduleService) {
-				
-				/**
+
+        		var apiPrefix = moduleService.getServiceUrl() + '/supervise';
+
+                /**
 				 * ==============================================
 				 * @name  superviseReportDetailMgtCtrl
 				 * @author  | 2018/10/25
@@ -43,6 +45,18 @@
 				 * 获取详情
 				 */
 				function getDetalList(){
+                    $ajaxhttp.myhttp({
+                        url: apiPrefix + '/v1/socialReport/detailReport',
+                        method: 'get',
+                        params: {
+                            id: localStorage.getItem('id')
+                        },
+                        callBack: function (res) {
+                            $scope.reportList = res.data;
+                            //console.log($scope.imgList)
+                        }
+                    })
+
 					$scope.reportList = 
 						{
 							'date':'2018-10-24 15:35',

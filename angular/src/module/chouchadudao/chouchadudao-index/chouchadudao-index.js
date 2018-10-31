@@ -21,41 +21,35 @@
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
-					var apiPrefix = moduleService.getServiceUrl() + '/template';
+					var apiPrefix = moduleService.getServiceUrl() + '/ancha';
 					
 					$scope.init = function () {
+                        getList();
+
 //						$ajaxhttp.myhttp({
 //							url: apiPrefix + '/v1/SurfaceWater/userinfo',
 //							method: 'get',					
 //							callBack: function (res) {
 //								$scope.num = res.data;
-//								getList();
 //							}
 //						})
 					}
 					
 					// 获取数据列表
 					function getList () {
-												
-						let month=new moment($scope.searchTime).format('M')<10 ? '0'+ new moment($scope.searchTime).format('M') : new moment($scope.searchTime).format('M');
-						$scope.date=new moment($scope.searchTime).format('YYYY') + '-' + month;
 
-//						$ajaxhttp.myhttp({
-//							url: apiPrefix + '/v1/SurfaceWater/list',
-//							method: 'get',
-//							params: {
-//								pageNumber: $scope.paginationConf.currentPage,
-//								pageSize: $scope.paginationConf.itemsPerPage,
-//								issue: $scope.searchTime && $scope.date,
-//								status: $scope.type,
-//								num: $scope.num,
-//								createUser:$scope.createuser
-//							},
-//							callBack: function (res) {
-//								$scope.surfaceWaterList = res.data.list;
-//                  			$scope.paginationConf.totalItems = res.data.total;
-//							}
-//						})
+						$ajaxhttp.myhttp({
+							url: apiPrefix + '/v1/AnzhaScheme/list',
+							method: 'get',
+							params: {
+								pageNumber: $scope.paginationConf.currentPage,
+								pageSize: $scope.paginationConf.itemsPerPage,
+							},
+							callBack: function (res) {
+								$scope.schemeList = res.data.list;
+                 				$scope.paginationConf.totalItems = res.data.total;
+							}
+						})
 					}
 					
 					$('#J-searchTime').datetimepicker({
@@ -77,24 +71,23 @@
 						globalParam.setter({
 							bulletin: {}
 						})
-						routeService.route('2-1-1', false);
+						routeService.route('2-1-5', false);
 	                }
 	                
 	                //修改 评分报告
 	                $scope.edit = function (id) {
-	                						
 						routeService.route('2-1-1', false);
 	                }
 	                
 	                 // 查看    通报     处理
-	                $scope.view = function (id) {
-						localStorage.setItem('selectedId',id);
-						routeService.route('2-1-2', false);
+	                $scope.view = function () {
+						//localStorage.setItem('selectedId',id);
+						routeService.route('2-1-4', false);
 	                }
 
 	                //点击通报名称
 					$scope.viewReport = function () {
-                        routeService.route('2-1-4', false);
+                        routeService.route('2-6', true);
 					}
 	                
 	                 // 上报

@@ -21,20 +21,20 @@
 				</div>
 				<div class="form-item">
 					<label>河段名称</label>
-					<input type="text" class="form-control input-short" ng-model="startLongitude" lay-verify="required" />
+					<input type="text" class="form-control input-short" ng-model="riverName" lay-verify="required" />
 				</div>
 				<br/>
 				<div class="form-item">
 					<label>举报人员</label>
-					<input type="text" class="form-control input-short" ng-model="startLongitude" lay-verify="required" />
+					<input type="text" class="form-control input-short" ng-model="reportor" lay-verify="required" />
 				</div>
 				<div class="form-item">
 					<label>联系电话</label>
-					<input type="text" class="form-control input-short" ng-model="startLongitude" lay-verify="required" />
+					<input type="text" class="form-control input-short" ng-model="contactType" lay-verify="required" />
 				</div>
 				<div class="form-item">
 					<label>举报位置</label>
-					<input type="text" class="form-control input-short" ng-model="startLongitude" lay-verify="required" />
+					<input type="text" class="form-control input-short" ng-model="problemPosition" lay-verify="required" />
 				</div>
 				<br/>
 				<div class="form-item remarkInfo">
@@ -42,35 +42,35 @@
 						<label>举报问题</label>
 					</div>
 					<div class="p-l-0 wid-100">
-						<textarea class="form-control textareaH" ng-model="riverRemark" ng-change="checkRemark()" rows="8" maxlength="512"></textarea>
+						<textarea class="form-control textareaH" ng-model="reportProblem" ng-change="checkRemark()" rows="8" maxlength="512"></textarea>
 						<p class="m-t-10">还可输入{{countNum}}个字</p>
 					</div>
 				</div>
 				<br />
 				<div class="form-item">
 					<label>问题附件：</label>
-					<button class="btn btn-info" ng-click="getUploadFile()"><i class="fa fa-css3"></i>查看附件</button>
+					<button class="btn btn-info" ng-click="getUploadFile(1)"><i class="fa fa-css3"></i>查看附件</button>
 				</div>
 				<br />
 				<div class="form-item">
 					<label>处理意见：</label>
-					<button class="btn btn-primary" ng-click="getUploadFile()"><i class="fa fa-css3"></i>查看附件</button>
+					<button class="btn btn-primary" ng-click="getUploadFile(2)"><i class="fa fa-css3"></i>查看附件</button>
 				</div>
 				<br />
 				<div class="form-item">
 					<label>处理结果：</label>
-					<button class="btn btn-success" ng-click="getUploadFile()"><i class="fa fa-css3"></i>查看附件</button>
+					<button class="btn btn-success" ng-click="getUploadFile(3)"><i class="fa fa-css3"></i>查看附件</button>
 				</div>
 				<br />
 				<div class="form-item">
 					<label>处理状态</label>
-					<select ng-model="status.id" ng-options="st.id as st.name for st in statusList" ng-change="getStatusChange(status.id)" class="form-control select-short">
+					<select ng-model="status" ng-options="st as st.name for st in statusList" ng-change="getStatusChange(status.id)" class="form-control select-short">
 						<option value="">请选择</option>
 					</select>
 				</div>
 				<div class="form-item">
 					<label>举报人评价</label>
-					<select ng-model="assess.id" ng-options="se.id as se.name for se in assessList" ng-change="getAssessChange(assess.id)" class="form-control select-short">
+					<select ng-model="assess" ng-options="se.id as se.name for se in assessList" ng-change="getAssessChange(assess.id)" class="form-control select-short">
 						<option value="">请选择</option>
 					</select>
 				</div>
@@ -114,7 +114,7 @@
 		</div>
 	</div>
 	<!--描述：附件-->
-	<div class="modal fade" id="coverModal" data-backdrop="static">
+	<div class="modal fade" id="coverModal1" data-backdrop="static">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -126,13 +126,75 @@
 					<form class="form-horizontal">
 						<div class="form-group">
 							<div class="wid-100 announcementCoverPanel">
-								<input id="uploadfile" type="file" name="file">
+								<input class="uploadfile" type="file" name="file">
 							</div>
 						</div>
 					</form>
-				</div>
+				</div>.
 				<div class="modal-footer">
-					<a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload()">
+					<a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload(1)">
+						<i class="fa fa-check"></i>
+						<span>确定</span>
+					</a>
+					<a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
+						<i class="fa fa-reply"></i>
+						<span>取消</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--描述：附件-->
+	<div class="modal fade" id="coverModal2" data-backdrop="static">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						<li class="fa fa-remove"></li>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal">
+						<div class="form-group">
+							<div class="wid-100 announcementCoverPanel">
+								<input class="uploadfile" type="file" name="file">
+							</div>
+						</div>
+					</form>
+				</div>.
+				<div class="modal-footer">
+					<a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload(2)">
+						<i class="fa fa-check"></i>
+						<span>确定</span>
+					</a>
+					<a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
+						<i class="fa fa-reply"></i>
+						<span>取消</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--描述：附件-->
+	<div class="modal fade" id="coverModal3" data-backdrop="static">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						<li class="fa fa-remove"></li>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal">
+						<div class="form-group">
+							<div class="wid-100 announcementCoverPanel">
+								<input class="uploadfile" type="file" name="file">
+							</div>
+						</div>
+					</form>
+				</div>.
+				<div class="modal-footer">
+					<a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload(3)">
 						<i class="fa fa-check"></i>
 						<span>确定</span>
 					</a>
@@ -146,7 +208,7 @@
 	</div>
 </div>
 <script>
-	$("#uploadfile").fileinput({
+	$(".uploadfile").fileinput({
 		allowedFileExtensions: ['jpg', 'png', 'gif'],
 		uploadAsync: true, //默认异步上传
 		showRemove: true, //显示移除按钮

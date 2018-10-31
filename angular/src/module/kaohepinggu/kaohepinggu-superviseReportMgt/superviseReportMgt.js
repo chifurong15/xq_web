@@ -22,8 +22,11 @@
 			'$ajaxhttp',
 			'moduleService',
             function superviseReportMgtCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http, $ajaxhttp, moduleService) {
-				
-				/**
+
+                var apiPrefix = moduleService.getServiceUrl() + '/supervise';
+
+
+                /**
 				 * ==============================================
 				 * @name  superviseReportMgtCtrl
 				 * @author  | 2018/10/25
@@ -181,40 +184,42 @@
 			    datepicker2.on('dp.change', function (e) {
 			        datepicker1.data('DateTimePicker').maxDate(e.date);
 			    });
-				
+			    
+			    //搜索
+				$scope.getMdSearch = function () {
+					getModuleList();
+                }
+
+                //重置
+				$scope.getReSet = function () {
+                    $scope.reachName = '';
+                    $scope.regionName = '';
+                    $scope.deal = '';
+                    $scope.beginTime = '';
+                    $scope.endTime = '';
+				}
 				/**
 				 * 列表数据
 				 */
 				function getModuleList(){
-					$scope.moduleList = [
-						{
-							'id':1,
-							'region':'河西区',
-							'resource':'88908890',
-							'peoblemReach':'永定河河西区段',
-							'reportPerson':'张三',
-							'contact':'13732288520',
-							'reportDate':'2018-10-11'
-						},
-						{
-							'id':2,
-							'region':'河西区',
-							'resource':'市河长办监督电话',
-							'peoblemReach':'海河河西区段',
-							'reportPerson':'张三',
-							'contact':'13732288888',
-							'reportDate':'2018-10-18'
-						},
-						{
-							'id':3,
-							'region':'和平区',
-							'resource':'电子邮件',
-							'peoblemReach':'海河和平区段',
-							'reportPerson':'李四',
-							'contact':'13732280001',
-							'reportDate':'2018-10-20'
-						}
-					]
+                    $ajaxhttp.myhttp({
+                        url: apiPrefix + '/v1/socialReport/listReport',
+                        method: 'get',
+                        params: {
+                            pageNumber: $scope.paginationConf.currentPage,
+                            pageSize: $scope.paginationConf.itemsPerPage,
+                            contactType: $scope.reachName,
+                            regionName:$scope.regionName,
+                            processingStatus:$scope.deal,
+                            startTime:$scope.beginTime,
+                            endTime:$scope.endTime
+                        },
+                        callBack: function (res) {
+                            $scope.moduleList = res.data.list;
+                            $scope.paginationConf.totalItems = res.data.total;
+                        }
+                    })
+
 				}
 				
 				/**
@@ -228,12 +233,20 @@
 						},
 						{
 							'id':2,
-							'name':'已处理'
+							'name':'处理完成'
 						},
 						{
 							'id':3,
 							'name':'处理中'
-						}
+						},
+                        {
+                            'id':4,
+                            'name':'二次处理'
+                        },
+                        {
+                            'id':5,
+                            'name':'多次处理中'
+                        },
 					]
 				}
 				
@@ -248,6 +261,7 @@
 				 * 查看当前列表详情
 				 */
 				$scope.getHydrologicDetail = function(id){
+					localStorage.setItem('id',id);
 					routeService.route('3-6-4', false);
 				};
 				
@@ -261,12 +275,37 @@
 	                      btn: ['确定', '取消']
 	                      // 按钮
 	                  }, function () {
-							layer.msg("删除成功！",{time:2000});
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/socialReport/deleteReport',
+                            method: 'DELETE',
+                            params: {
+                                id: id
+                            },
+                            callBack: function (res) {
+                                if(res.resCode == 1){
+                                    layer.msg("删除成功！",{time:2000});
+                                    getModuleList();
+                                }
+                            }
+                        })
 	                 }, function () {});
 				}
-				
-				
-				
+
+                // 配置分页基本参数
+                $scope.paginationConf = {
+                    currentPage: $location.search().currentPage ? $location.search().currentPage : 1,
+                    itemsPerPage: 10,
+                    pagesLength: 10,
+                    perPageOptions: [1, 2, 3, 4, 5, 10],
+                    onChange: function () {
+                        //console.log($scope.paginationConf.currentPage);
+                        $location.search('currentPage', $scope.paginationConf.currentPage);
+                    }
+                };
+                // 当他们一变化的时候，重新获取数据条目
+                $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', getModuleList);
+
+
             }
         ]);
 
