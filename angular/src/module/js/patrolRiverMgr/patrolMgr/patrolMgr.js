@@ -478,7 +478,7 @@
                         url: $localStorage.serviceUrl_chiefOnline + '/worklog/v1/listLogWorklogByCondition'
                     }).success(function (resp) {
                         $scope.logWorkDetail = resp.data;
-                        console.log($scope.patrolDetail);
+                        console.log($scope.logWorkDetail);
                     }).error(function (error) {
                         console.error(error);
                     });

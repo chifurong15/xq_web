@@ -185,82 +185,62 @@
                     <!--<img src="img/logwork.png" style="width: 100%; height: 100%" />-->
                     <table class="table table-bordered log-table">
                         <tr>
-                            <th rowspan="4" width="10%">河长级别</th>
-                            <td rowspan="4" width="10%">镇级</td>
-                            <th colspan="2" width="20%">天津市</th>
-                            <th rowspan="4" width="10%">河长姓名</th>
-                            <td rowspan="4" width="10%">程国顺</td>
-                            <th rowspan="4" width="10%">联系方式</th>
-                            <td rowspan="4" width="10%">13012239501</td>
-                            <th rowspan="4" width="10%">河长职位</th>
-                            <td rowspan="4" width="10%">街办事处副主任</td>
-                        </tr>
-                        <tr>
                             <th width="10%">行政区域</th>
-                            <td>河西区</td>
+                            <td width="10%">{{patrolDetail.regionName}}</td>
+                            <th width="10%">河长姓名</th>
+                            <td width="10%">{{patrolDetail.userName}}</td>
+                            <th width="10%">河长角色</th>
+                            <td width="10%">河长</td>
                         </tr>
+
                         <tr>
-                            <th>镇(街)名</th>
-                            <td>马场</td>
-                        </tr>
-                        <tr>
-                            <th>村名</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>河长角色</th>
-                            <td>河长</td>
                             <th>巡河日期</th>
-                            <td>2018-08-09</td>
+                            <td>{{patrolDetail.createtime}}</td>
                             <th>巡河时长(分钟)</th>
-                            <td>12</td>
+                            <td>{{patrolDetail.duration}}</td>
                             <th>巡河距离(米)</th>
-                            <td>874</td>
-                            <th>巡河轨迹</th>
-                            <td></td>
+                            <td>{{patrolDetail.distance}}</td>
                         </tr>
                         <tr>
                             <th>巡河纪要</th>
-                            <td colspan="5"></td>
+                            <td colspan="3">{{patrolDetail.ehEvents[0].content}}</td>
                             <th>巡河照片</th>
-                            <td colspan="3"></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <th rowspan="3">巡河内容</th>
                             <th>河湖水质</th>
-                            <td colspan="2">正常</td>
-                            <td colspan="2">呵护水体水质感官异常</td>
-                            <td colspan="4">合乎口门排水异常</td>
+                            <td>正常</td>
+                            <th>呵护水体水质感官异常</th>
+                            <td colspan="2"></td>
                         </tr>
                         <tr>
                             <th>河湖堤岸水面环境卫生</th>
-                            <td colspan="2">正常</td>
-                            <td colspan="2">堤岸水面环境日常保洁异常</td>
-                            <td colspan="2">甬路、台阶、护栏、绿化带等沿岸设施维护异常</td>
-                            <td colspan="2">护坡杂草清理、垃圾收集清运异常</td>
+                            <td>正常</td>
+                            <th>堤岸水面环境日常保洁异常</th>
+                            <td colspan="2"></td>
                         </tr>
                         <tr>
                             <th>河湖岸线管理</th>
-                            <td colspan="2">正常</td>
-                            <td colspan="2">违反河湖规定</td>
-                            <td colspan="2">违反规划控制线和生态红线的建设</td>
-                            <td colspan="2">历史侵占、占压的违章行为清退治理</td>
+                            <td>正常</td>
+                            <th>违反河湖规定</th>
+                            <td colspan="2"></td>
                         </tr>
                         <tr>
-                            <th rowspan="3">河湖名称</th>
-                            <td rowspan="3">津河</td>
+                            <th rowspan="3">河道段编码</th>
+                            <td rowspan="3">{{patrolDetail.reachid}}</td>
                             <th rowspan="3">河道段名称</th>
-                            <td rowspan="3">卫津河八里台桥桥中-丁家桥段</td>
-                            <th colspan="2">发现问题</th>
-                            <td colspan="4">色度异常</td>
+                            <td rowspan="3">{{patrolDetail.reachName}}</td>
+                            <th>发现问题</th>
+                            <td></td>
                         </tr>
                         <tr>
-                            <th colspan="2">问题处置</th>
-                            <td colspan="4">处理中</td>
+                            <th>问题处置</th>
+                            <td></td>
                         </tr>
                         <tr>
-                            <th colspan="2">问题跟踪</th>
-                            <td colspan="4">区级河长处理中</td>
+                            <th>问题跟踪</th>
+                            <td></td>
                         </tr>
                     </table>
                 </div>
