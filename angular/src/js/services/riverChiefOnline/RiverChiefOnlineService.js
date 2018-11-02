@@ -455,7 +455,7 @@ angular.module('app')
                 var item,coords,point,iconObject,picMarkerSymbol,graphic;
                 for(var i=0;i<len;i++){
                     item = data[i];
-                    console.log("河长在线["+ i +"]坐标: " + item.longitude + ", " + item.latitude);
+                    // console.log("河长在线["+ i +"]坐标: " + item.longitude + ", " + item.latitude);
                     if(item["status"] == 0){
                         continue;
                     }
