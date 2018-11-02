@@ -1,0 +1,37 @@
+.patrolStepContentBox{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+}
+/*#patrolStep{
+	height: 500px;
+	overflow-y: scroll;
+}*/
+.patrolStepContentBox .patrol_left_content{
+	width: calc(100% - 339px);
+	float: left;
+}
+.patrolStepContentBox .patrol_right_content{
+	float: right;
+	width: 330px;
+}
+.left_top_content{
+	height: 50px;
+}
+.left_top_content section{
+	font-size: 12px;
+	color:rgba(50,60,71,1);
+	border:1px solid rgba(229,237,243,1);
+	box-shadow:0px 1px 2px rgba(0,62,100,0.04);
+	padding: 0 5px !important;
+}
+.left_top_content section span{
+	line-height: 34px;
+}
+.left_top_content section .left{
+	float: left;
+}
+.left_top_content section .right{
+	float: right;
+	font-size: 14px;
+}

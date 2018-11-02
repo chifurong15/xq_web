@@ -1,20 +1,24 @@
 /**
  * @description:  Symbol符号类
- * @author: HuangSF
- * @date: 2018-7-17 10:38
+ * @author: hsf
+ * @date: 2018-9-3 16:33
  */
 angular.module('app')
-    .factory('SymbolUtil', ['wish', function(wish){
-        var that = this;
+    .factory('SymbolUtil', ['wish', 'UtilityTool', function(wish, UtilityTool){
         var w = wish.get();
-        that.map = null;
+        var _map = null;
+        var _self = this;
         //初始化
         var _init = function(map){
-            that.map = map;
+            _map = map;
         };
         //返回点符号
         var _getMarkerSymbol = function(color, size, outline, style){
             var symbol = new w.SimpleMarkerSymbol();
+            if(arguments.length == 0){
+                return symbol;
+            }
+
             if(color){
                 symbol.setColor(color);
             }
@@ -53,7 +57,7 @@ angular.module('app')
             var symbol = new w.SimpleLineSymbol();
             if(style) symbol.setStyle(style);
             if(color){
-                if(Object.prototype.toString.call(color) === '[object Array]'){
+                if(UtilityTool.isArray(color)){
                     color = this.getColorByArray(color);
                     symbol.setColor(color);
                 }else{
@@ -65,26 +69,31 @@ angular.module('app')
             return symbol;
         };
         //返回面符号
-        var _getFillSymbol = function(color, outline, style){
+        var _getFillSymbol = function(style, outstyle, outcolor, outsize, fillcolor){
             var symbol = new w.SimpleFillSymbol();
-            if(color){
-                if(Object.prototype.toString.call(color) === '[object Array]'){
-                    color = this.getColorByArray(color);
-                }
-                symbol.setColor(color);
+            var outline = new w.SimpleLineSymbol();
+            if(style){
+                symbol.setStyle(style);
             }
-            if(outline) symbol.setOutline(outline);
-            symbol.setStyle(style || "solid");
+            if(outstyle && outcolor && outsize){
+                outline.setStyle(outstyle);
+                outline.setColor(outcolor);
+                outline.setWidth(outsize);
+                symbol.setOutline(outline);
+            }
+            if(fillcolor){
+                symbol.setColor(fillcolor);
+            }
 
             return symbol;
         };
         //根据RGB格式获取颜色：[255,0,0]
         var _getColorByArray = function(colorArray){
-            return esri.Color.fromArray(colorArray);
+            return w.Color.fromArray(colorArray);
         };
         //根据十六进制格式获取颜色: #ff0000
         var _getColorByHex = function(hex){
-            return esri.Color.fromHex(hex);
+            return w.Color.fromHex(hex);
         };
         //字体
         var _getFont = function(size, weight, family, style){

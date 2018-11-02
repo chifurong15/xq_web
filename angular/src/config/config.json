@@ -1,3 +1,4 @@
+
 {
   "moduleId": "44d7bde1ba2e11e7a0e6ac1f6b182e9e",
   "moduleName": "angular",
@@ -630,45 +631,6 @@
         "module/js/patrolRiverMgr/riverChiefOnline/riverChiefOnline.js"
       ],
       "description": "一级菜单-巡河管理"
-    },
-    {
-      "seqId": "101",
-      "parentId": "10",
-      "isLeaf": true,
-      "isRoot": false,
-      "name": "河长在线",
-      "icon": "menu-icon-2",
-      "url": "module/menus/patrolRiverMgr/riverChiefOnline/riverChiefOnline.html",
-      "requireJS": [
-        "module/js/patrolRiverMgr/riverChiefOnline/riverChiefOnline.js"
-      ],
-      "description": "一级菜单-河长在线"
-    },
-    {
-      "seqId": "102",
-      "parentId": "10",
-      "isLeaf": true,
-      "isRoot": false,
-      "name": "巡河管理",
-      "icon": "menu-icon-3",
-      "url": "module/menus/patrolRiverMgr/patrolMgr/patrolMgr.html",
-      "requireJS": [
-        "module/js/patrolRiverMgr/patrolMgr/patrolMgr.js"
-      ],
-      "description": "一级菜单-巡河管理"
-    },
-    {
-      "seqId": "103",
-      "parentId": "10",
-      "isLeaf": true,
-      "isRoot": false,
-      "name": "问题管理",
-      "icon": "menu-icon-4",
-      "url": "module/menus/patrolRiverMgr/eventMgr/eventMgr.html",
-      "requireJS": [
-        "module/js/patrolRiverMgr/eventMgr/eventMgr.js"
-      ],
-      "description": "一级菜单-问题管理"
     }
 
   ],

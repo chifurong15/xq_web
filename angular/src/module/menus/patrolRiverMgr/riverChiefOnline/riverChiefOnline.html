@@ -1,5 +1,5 @@
 <div ng-controller="riverChiefOnlineCtrl" ng-init="init()">
-    
+
     <aside class="aside-info" id="onlineChiefAside">
         <div class="tree-body">
             <div class="content-tj-top">
@@ -128,18 +128,18 @@
             </div>
             <form class="form-horizontal info-tj-form">
                 <div class="form-group">
-                	<form class="form-horizontal info-tj-form">
+                    <form class="form-horizontal info-tj-form">
                         <div class="form-group">
                             <label class="col-sm-2">河段</label>
-		                    <div class="col-sm-10" style="padding:0">
-		                        <input type="text" class="form-control input-sm" ng-model="riverReachName" placeholder="请输入河段">
-		                    </div>
+                            <div class="col-sm-10" style="padding:0">
+                                <input type="text" class="form-control input-sm" ng-model="riverReachName" placeholder="请输入河段">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2">姓名</label>
-		                    <div class="col-sm-7" style="padding:0">
-		                        <input type="text" class="form-control input-sm" ng-model="riverChiefName" placeholder="请输入名称">
-		                    </div>
+                            <div class="col-sm-7" style="padding:0">
+                                <input type="text" class="form-control input-sm" ng-model="riverChiefName" placeholder="请输入名称">
+                            </div>
                             <div class="col-sm-2" style="float: right;">
                                 <button type="submit" class="btn btn-primary btn-sm" ng-click="searchRiverChief()"><i class="fa fa-search"></i>搜索
                                 </button>
@@ -176,7 +176,7 @@
                     </tr>
                 </table>
             </div>
-           
+
 
             <div class="row row-tj">
                 <div class="col-md-4">
@@ -207,53 +207,53 @@
                 </ul>
                 <div class="tab-content tab-content-tj" style="padding: 0;position: static;overflow: visible;">
                     <div class="tab-pane" id="riverChiefDetail">
-                    	<p ng-show="!detailReachName" style="text-align: center;line-height: 100px;">请先选择河长</p>
-                    	<div ng-show="detailReachName">
-                    		<ul style="list-style: none;padding: 0 5px;margin: 0;border: 1px solid #F1F1F3;">
-                    			<li style="height: 50px;border-bottom: 1px solid #F1F1F3;line-height: 50px;">
-                    				<section class="col-md-4" style="color: #43425D;font-weight: bold;">
-                    					<i style="float: left;margin-top: 10px;margin-right: 5px;width: 30px;height: 30px;background-image: url(img/icon/Icon1.png);background-position: center;background-repeat: no-repeat;background-size: 100%;"></i>河长
-                    				</section>
-                    				<section class="col-md-8" style="text-align: left;color: #4D4F5C;">{{riverChiefDetail.name}}</section>
-                    			</li>
-                    			<li style="height: 50px;border-bottom: 1px solid #F1F1F3;line-height: 50px;">
-                    				<section class="col-md-4" style="color: #43425D;font-weight: bold;">
-                    					<i style="float: left;margin-top: 10px;margin-right: 5px;width: 30px;height: 30px;background-image: url(img/icon/Icon2.png);background-position: center;background-repeat: no-repeat;background-size: 100%;"></i>区域
-                    				</section>
-                    				<section class="col-md-8" style="text-align: left;color: #4D4F5C;">{{riverChiefDetail.regionName}}</section>
-                    			</li>
-                    			<li style="height: 50px;border-bottom: 1px solid #F1F1F3;line-height: 50px;">
-                    				<section class="col-md-4" style="color: #43425D;font-weight: bold;">
-                    					<i style="float: left;margin-top: 10px;margin-right: 5px;width: 30px;height: 30px;background-image: url(img/icon/Icon3.png);background-position: center;background-repeat: no-repeat;background-size: 100%;"></i>级别
-                    				</section>
-                    				<section class="col-md-8" style="text-align: left;color: #4D4F5C;">{{riverChiefLevelData}}</section>
-                    			</li>
-                    			<li style="height: 50px;border-bottom: 1px solid #F1F1F3;line-height: 50px;">
-                    				<section class="col-md-4" style="color: #43425D;font-weight: bold;">
-                    					<i style="float: left;margin-top: 10px;margin-right: 5px;width: 30px;height: 30px;background-image: url(img/icon/Icon4.png);background-position: center;background-repeat: no-repeat;background-size: 100%;"></i>角色
-                    				</section>
-                    				<section class="col-md-8" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #4D4F5C;">{{detailRiverChiefName}}</section>
-                    			</li>
-                    			<li style="min-height: 50px;border-bottom: 1px solid #F1F1F3;">
-                    				<section class="col-md-4" style="color: #43425D;font-weight: bold;margin-top: 10px">
-                    					<i style="float: left;margin-right: 5px;width: 30px;height: 30px;background-image: url(img/icon/Icon5.png);background-position: center;background-repeat: no-repeat;background-size: 100%;"></i>职务
-                    				</section>
-                    				<section class="col-md-8" style="text-align: left;color: #4D4F5C;">{{riverChiefDetail.position}}</section>
-                    			</li>
-                    			<li style="min-height: 50px;border-bottom: 1px solid #F1F1F3;overflow: hidden;">
-                    				<section class="col-md-4" style="color: #43425D;font-weight: bold;margin-top: 10px">
-                    					<i style="float: left;margin-right: 5px;width: 30px;height: 30px;background-image: url(img/icon/Icon6.png);background-position: center;background-repeat: no-repeat;background-size: 100%;"></i>河段
-                    				</section>
-                    				<section class="col-md-8" style="margin-top: 10px" ng-bind-html="detailReachName"></section>
-                    			</li>
-                    			<li style="height: 50px;line-height: 50px;">
-                    				<section class="col-md-4" style="color: #43425D;font-weight: bold;">
-                    					<i style="float: left;margin-top: 10px;margin-right: 5px;width: 30px;height: 30px;background-image: url(img/icon/iconCellPhone.png);background-position: center;background-repeat: no-repeat;background-size: 100%;"></i>电话
-                    				</section>
-                    				<section class="col-md-8" style="text-align: left;color: #4D4F5C;">{{riverChiefDetail.cellphone}}</section>
-                    			</li>
-                    		</ul>
-                    	</div>
+                        <p ng-show="!detailReachName" style="text-align: center;line-height: 100px;">请先选择河长</p>
+                        <div ng-show="detailReachName">
+                            <ul style="list-style: none;padding: 0 5px;margin: 0;border: 1px solid #F1F1F3;">
+                                <li style="height: 50px;border-bottom: 1px solid #F1F1F3;line-height: 50px;">
+                                    <section class="col-md-4" style="color: #43425D;font-weight: bold;">
+                                        <i style="float: left;margin-top: 10px;margin-right: 5px;width: 30px;height: 30px;background-image: url(img/icon/Icon1.png);background-position: center;background-repeat: no-repeat;background-size: 100%;"></i>河长
+                                    </section>
+                                    <section class="col-md-8" style="text-align: left;color: #4D4F5C;">{{riverChiefDetail.name}}</section>
+                                </li>
+                                <li style="height: 50px;border-bottom: 1px solid #F1F1F3;line-height: 50px;">
+                                    <section class="col-md-4" style="color: #43425D;font-weight: bold;">
+                                        <i style="float: left;margin-top: 10px;margin-right: 5px;width: 30px;height: 30px;background-image: url(img/icon/Icon2.png);background-position: center;background-repeat: no-repeat;background-size: 100%;"></i>区域
+                                    </section>
+                                    <section class="col-md-8" style="text-align: left;color: #4D4F5C;">{{riverChiefDetail.regionName}}</section>
+                                </li>
+                                <li style="height: 50px;border-bottom: 1px solid #F1F1F3;line-height: 50px;">
+                                    <section class="col-md-4" style="color: #43425D;font-weight: bold;">
+                                        <i style="float: left;margin-top: 10px;margin-right: 5px;width: 30px;height: 30px;background-image: url(img/icon/Icon3.png);background-position: center;background-repeat: no-repeat;background-size: 100%;"></i>级别
+                                    </section>
+                                    <section class="col-md-8" style="text-align: left;color: #4D4F5C;">{{riverChiefLevelData}}</section>
+                                </li>
+                                <li style="height: 50px;border-bottom: 1px solid #F1F1F3;line-height: 50px;">
+                                    <section class="col-md-4" style="color: #43425D;font-weight: bold;">
+                                        <i style="float: left;margin-top: 10px;margin-right: 5px;width: 30px;height: 30px;background-image: url(img/icon/Icon4.png);background-position: center;background-repeat: no-repeat;background-size: 100%;"></i>角色
+                                    </section>
+                                    <section class="col-md-8" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #4D4F5C;">{{detailRiverChiefName}}</section>
+                                </li>
+                                <li style="min-height: 50px;border-bottom: 1px solid #F1F1F3;">
+                                    <section class="col-md-4" style="color: #43425D;font-weight: bold;margin-top: 10px">
+                                        <i style="float: left;margin-right: 5px;width: 30px;height: 30px;background-image: url(img/icon/Icon5.png);background-position: center;background-repeat: no-repeat;background-size: 100%;"></i>职务
+                                    </section>
+                                    <section class="col-md-8" style="text-align: left;color: #4D4F5C;">{{riverChiefDetail.position}}</section>
+                                </li>
+                                <li style="min-height: 50px;border-bottom: 1px solid #F1F1F3;overflow: hidden;">
+                                    <section class="col-md-4" style="color: #43425D;font-weight: bold;margin-top: 10px">
+                                        <i style="float: left;margin-right: 5px;width: 30px;height: 30px;background-image: url(img/icon/Icon6.png);background-position: center;background-repeat: no-repeat;background-size: 100%;"></i>河段
+                                    </section>
+                                    <section class="col-md-8" style="margin-top: 10px" ng-bind-html="detailReachName"></section>
+                                </li>
+                                <li style="height: 50px;line-height: 50px;">
+                                    <section class="col-md-4" style="color: #43425D;font-weight: bold;">
+                                        <i style="float: left;margin-top: 10px;margin-right: 5px;width: 30px;height: 30px;background-image: url(img/icon/iconCellPhone.png);background-position: center;background-repeat: no-repeat;background-size: 100%;"></i>电话
+                                    </section>
+                                    <section class="col-md-8" style="text-align: left;color: #4D4F5C;">{{riverChiefDetail.cellphone}}</section>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="tab-pane active" id="riverChiefPatrol">
                         <form class="form-horizontal info-tj-form">
@@ -302,7 +302,7 @@
                         </table>
                     </div>
                     <div class="tab-pane" id="riverChiefEvent">
-                    	<form class="form-horizontal info-tj-form">
+                        <form class="form-horizontal info-tj-form">
                             <div class="form-group">
                                 <label class="col-sm-2">开始时间</label>
                                 <div class="col-sm-7 input-group date date_picker" id="beginTimeEve">
@@ -325,8 +325,8 @@
                                     </button>
                                 </div>
                             </div>
-                       	</form>
-						<table class="table table-bordered table-hover table-tj" style="margin-top: 10px">
+                        </form>
+                        <table class="table table-bordered table-hover table-tj" style="margin-top: 10px">
                             <tr>
                                 <th>选择</th>
                                 <th>上报时间</th>
@@ -354,23 +354,23 @@
 
         </div>
     </div>
-	<div class="modal fade" id="checkCircle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span style="color: #fff;" aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">轨迹信息</h4>
-				</div>
-				<div class="modal-body" style="padding: 0">
+    <div class="modal fade" id="checkCircle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span style="color: #fff;" aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">轨迹信息</h4>
+                </div>
+                <div class="modal-body" style="padding: 0">
                     <div id="patrolmap" style="height:400px; overflow:auto;padding: 0;margin: 0"></div>
-				</div>
-				<div class="modal-footer">
-					<!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
                     <button type="button" class="btn btn-default" ng-click="closeCheckModal();">关闭</button>
-				</div>
-			</div>
-		</div>
-	</div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--问题详情模态框-->
     <div class="modal fade" id="eventDetailModal" tabindex="-1">
         <div id="remarkPanel" class="modal-dialog evetModal" role="document">
@@ -411,20 +411,20 @@
                                     <span ng-if='evtDetails.eventresource == "F"' class="eveDetail-value">曝光台</span>
                                     <span ng-hide='evtDetails.eventresource' class="eveDetail-value"></span>
                                 </div>
-                                <div class="form-inline">
-                                    <label class="eveDetail-label">受理人员:</label>
-                                    <span class="eveDetail-value">{{evtDetails.acceptperson}}</span>
-                                </div>
+                                <!-- <div class="form-inline">
+                                     <label class="eveDetail-label">受理人员:</label>
+                                     <span class="eveDetail-value">{{evtDetails.acceptperson}}</span>
+                                 </div>-->
                                 <div class="form-inline">
                                     <label class="eveDetail-label">受理时间:</label>
                                     <span class="eveDetail-value">{{evtDetails.reporttime}}</span>
                                 </div>
                             </form>
                             <form class="bs-example form-horizontal eveDetail-panel">
-                                <div class="form-inline">
-                                    <label class="eveDetail-label">水系名称:</label>
-                                    <span class="eveDetail-value">{{evtDetails.eventbasinname}}</span>
-                                </div>
+                                <!-- <div class="form-inline">
+                                     <label class="eveDetail-label">水系名称:</label>
+                                     <span class="eveDetail-value">{{evtDetails.eventbasinname}}</span>
+                                 </div>-->
                                 <div class="form-inline">
                                     <label class="eveDetail-label">河道名称:</label>
                                     <span class="eveDetail-value">{{evtDetails.eventrivername}}</span>
@@ -481,7 +481,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- 巡河历史轨迹详情 -->
     <div class="modal fade" id="historyDetailModal" tabindex="-1">
         <div class="modal-dialog" id="historyDetailModalContent" role="document" style="margin-top: 5%;">
@@ -512,48 +512,76 @@
                                             <div style="width: calc(100% / 3);margin-top: 0;line-height: 30px;display: inline-block;white-space: nowrap;" ng-attr-title="{{event.content}}">
                                                 <i style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #297FCA;margin-right: 10px;"></i> 河道段名称&#x3000;{{item.reachName}}
                                             </div><div style="width: calc(100% / 3);margin-top: 0;line-height: 30px;display: inline-block;">
-                                                <i style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #297FCA;margin-right: 10px;"></i> 巡河时间&#x3000;{{item.createtime}}
-                                            </div><div style="width: calc(100% / 3);margin-top: 0;line-height: 30px;display: inline-block;">
-                                                <i style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #297FCA;margin-right: 10px;"></i>巡河距离&#x3000;{{item.distance}}
-                                            </div>
+                                            <i style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #297FCA;margin-right: 10px;"></i> 巡河时间&#x3000;{{item.createtime}}
+                                        </div><div style="width: calc(100% / 3);margin-top: 0;line-height: 30px;display: inline-block;">
+                                            <i style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #297FCA;margin-right: 10px;"></i>巡河距离&#x3000;{{item.distance}}
+                                        </div>
                                         </div>
                                     </div>
                                     <div>
-                                      <div>
                                         <div>
-                                          <table class="table table-hover" style="margin: 0px;">
-                                            <thead>
-                                              <tr style="background-color: #E5EDF3;font-size: 12px;font-weight: normal;">
-                                                <th style="padding: 8px 0px;text-align: center;min-width: 36px;">序号</th>
-                                                <th style="padding: 8px 10px;text-align: center;">问题时间</th>
-                                                <th style="padding: 8px 10px;text-align: center;">问题地点</th>
-                                                <th style="padding: 8px 10px;text-align: center;">问题类型</th>
-                                                <th style="padding: 8px 10px;text-align: center;">问题描述</th>
-                                                <th style="padding: 8px 10px;text-align: center;">问题跟踪</th>
-                                                <th style="padding: 8px 10px;text-align: center;">照片</th>
-                                                <th style="padding: 8px 10px;text-align: center;">录音头像</th>
-                                              </tr>
-                                            </thead>
-                                            <tbody>
-                                              <tr ng-repeat="(ind,event) in item.eventList">
-                                                <td>{{ind + 1}}</td>
-                                                <td>{{event.reporttime}}</td>
-                                                <td>{{event.address}}</td>
-                                                <td style="max-width: 120px;overflow: hidden;" ng-attr-title="{{event.content}}">{{event.typename}}</td>
-                                                <td style="max-width: 150px;overflow: hidden;" ng-attr-title="{{event.content}}">{{event.content}}</td>
-                                                <td>{{statusEvent(event.status)}}</td>
-                                                <td ng-click="goEventDetail(event)" style="cursor: pointer;"><span style="padding: 5px 7px;font-size: 12px;color: #FFAB2B;background-color: #FFF6E8;border-radius: 3px;">查看</span></td>
-                                                <td ng-click="goEventDetail(event)" style="cursor: pointer;">
-                                                    <span style="padding: 5px 7px;font-size: 12px; color: #6DD230;background-color: #EFFAE9;border-radius: 3px;">查看</span>
-                                                </td>
-                                              </tr>
-                                            </tbody>
-                                          </table>
-                                        </div>
-                                        <tm-pagination conf="paginationConf"></tm-pagination>
+                                            <div>
+                                                <table class="table table-hover" style="margin: 0px;">
+                                                    <thead>
+                                                    <tr style="background-color: #E5EDF3;font-size: 12px;font-weight: normal;">
+                                                        <th style="padding: 8px 0px;text-align: center;min-width: 36px;">序号</th>
+                                                        <th style="padding: 8px 10px;text-align: center;">问题时间</th>
+                                                        <th style="padding: 8px 10px;text-align: center;">问题地点</th>
+                                                        <th style="padding: 8px 10px;text-align: center;">问题类型</th>
+                                                        <th style="padding: 8px 10px;text-align: center;">问题描述</th>
+                                                        <th style="padding: 8px 10px;text-align: center;">问题跟踪</th>
+                                                        <th style="padding: 8px 10px;text-align: center;">操作</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr ng-repeat="(ind,event) in item.eventList">
+                                                        <td>{{ind + 1}}</td>
+                                                        <td>{{event.reporttime}}</td>
+                                                        <td>{{event.address}}</td>
+                                                        <td style="max-width: 120px;overflow: hidden;" ng-attr-title="{{event.content}}">{{event.typename}}</td>
+                                                        <td style="max-width: 150px;overflow: hidden;" ng-attr-title="{{event.content}}">{{event.content}}</td>
+                                                        <td>{{statusEvent(event.status)}}</td>
+                                                        <td ng-click="goEventDetail(event)" style="cursor: pointer;"><span style="padding: 5px 7px;font-size: 12px;color: #FFAB2B;background-color: #FFF6E8;border-radius: 3px;">查看</span></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <tm-pagination conf="paginationConf"></tm-pagination>
                                         </div>
                                     </div>
                                 </div>
+
+                                <ul class="list-group" style="margin: 20px 0;">
+                                    <li class="list-group-item" style="border-color:#CBE0F2;font-weight: bold;font-size: 14px;">巡河日志</li>
+                                    <li class="list-group-item" style="border-color:#CBE0F2;font-size: 12px;">
+                                        <span><i style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #297FCA;margin-right: 10px;"></i>日志内容</span><span style="margin-left: 15px;">{{chiefLogDetail.content}}</span>
+                                    </li>
+                                    <li class="list-group-item" style="border-color:#CBE0F2;font-size: 12px;">
+                                        <form class="bs-example form-horizontal eveDetail-panel" style="margin-top: 5px;">
+                                            <div style="margin: 0;">
+                                                <label style="vertical-align: top;"><i style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #297FCA;margin-right: 10px;"></i>巡河照片</label>
+                                                <div style="display: inline-block;" id="layer-photos-potralMgr" class="layer-photos-demo" style="margin-left: 10px;">
+                                                    <img style="margin: 0 5px;" ng-repeat="item in logImgArr" layer-pid="" layer-src="{{eventImgUrl}}{{item}}" src="{{eventImgUrl}}{{item}}" alt="巡河照片" width="60px" height="60px">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </li>
+                                    <li class="list-group-item" style="border-color:#CBE0F2;font-size: 12px;">
+                                        <form class="bs-example form-horizontal eveDetail-panel" style="margin-top: 5px;">
+                                            <div style="margin: 0;">
+                                                <label style="vertical-align: top;"><i style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #297FCA;margin-right: 10px;"></i>巡河音像</label>
+                                                <div style="display: inline-block;" class="layer-photos-demo" style="margin-left: 10px;">
+                                                    <div style="display: inline-block;" ng-repeat="item in mediaArr">
+                                                        <img ng-show="item.accessorytype == 3" style="margin: 0 5px;width:60px; height:60px;" src="img/music_img.png" ng-click="playAudio(item)" alt="巡河音像">
+                                                        <img ng-show="item.accessorytype == 4" style="margin: 0 5px;width:60px; height:60px;" src="img/audio_img.png" alt="巡河音像" ng-click="playVideo(item)">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </li>
+                                </ul>
+
                             </div>
                             <div class="patrol_right_content">
                                 <ul class="list-group" style="font-size: 12px;">
@@ -576,36 +604,7 @@
                                         <span>村名&#x3000;&#x3000;{{riverChiefDetail.villageName}}</span>
                                     </li>
                                 </ul>
-                                <ul class="list-group">
-                                    <li class="list-group-item" style="border-color:#CBE0F2;font-weight: bold;font-size: 14px;">巡河日志</li>
-                                    <li class="list-group-item" style="border-color:#CBE0F2;font-size: 12px;">
-                                        <span><i style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #297FCA;margin-right: 10px;"></i>日志内容</span><span style="margin-left: 15px;">{{chiefLogDetail.content}}</span>
-                                    </li>
-                                    <li class="list-group-item" style="border-color:#CBE0F2;font-size: 12px;">
-                                        <form class="bs-example form-horizontal eveDetail-panel" style="margin-top: 5px;">
-                                            <div style="margin: 0;">
-                                                <label style="vertical-align: top;"><i style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #297FCA;margin-right: 10px;"></i>巡河照片</label>
-                                                <div style="display: inline-block;" id="layer-photos-patrolMgr" class="layer-photos-demo" style="margin-left: 10px;">
-                                                    <img style="margin: 0 5px;" ng-repeat="item in logImgArr" layer-pid="" layer-src="{{eventImgUrl}}{{item}}" src="{{eventImgUrl}}{{item}}" alt="巡河照片" width="60px" height="60px">
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </li>
-                                    <li class="list-group-item" style="border-color:#CBE0F2;font-size: 12px;">
-                                        <form class="bs-example form-horizontal eveDetail-panel" style="margin-top: 5px;">
-                                            <div style="margin: 0;">
-                                                <label style="vertical-align: top;"><i style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #297FCA;margin-right: 10px;"></i>巡河音像</label>
-                                                <div style="display: inline-block;" class="layer-photos-demo" style="margin-left: 10px;">
-                                                    <div style="display: inline-block;" ng-repeat="item in mediaArr">
-                                                        <img ng-show="item.accessorytype == 3" style="margin: 0 5px;width:60px; height:60px;" src="img/music_img.png" alt="巡河音像">
-                                                        <img ng-show="item.accessorytype == 4" style="margin: 0 5px;width:60px; height:60px;" src="img/audio_img.png" alt="巡河音像">
-                                                    </div>
-                                                    
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </li>
-                                </ul>
+
                             </div>
                         </div>
                     </div>
@@ -616,39 +615,45 @@
             </div>
         </div>
     </div>
-    <div class="m" id="videoPlayerBox" style="position: absolute;z-index: 999;left: 30%;top: 30%;display: none;">
-        <video
-            id="my-player"
-            class="video-js"
-            controls
-            preload="auto"
-            poster="//vjs.zencdn.net/v/oceans.png"
-            data-setup='{}'>
-          <source ng-src="{{videoUrl}}" type="video/mp4"></source>
-        </video>
+    <div id="videoBox" style="position: absolute!important;;z-index: 99998!important;;left: 30%;top: 30%;display: none;background-color: #333;padding: 30px;">
+        <span style="position: absolute;z-index: 9991;top: 10px;right: 10px;color: #fff;padding: 2px 8px;cursor: pointer;" ng-click="closePlayer()">关闭</span>
+        <div id="videoPlayerBox">
+            <video
+                    id="my-player"
+                    class="video-js"
+                    controls
+                    preload="auto"
+                    data-setup='{}'>
+                <source class="source" src="" type="video/mp4"></source>
+            </video>
+        </div>
+        <div id="audioPlayer">
+            <audio controls src="" autoplay="true"></audio>
+        </div>
     </div>
+
     <div id="mapTips" style="z-index: 1000"></div>
 </div>
 <script>
-	//调用示例
-	layui.use('layer', function() {
-		layer.photos({
-		  photos: '#layer-photos-before'
-		  ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
-		}); 
-	}); 
-	layui.use('layer', function() {
-	
-		layer.photos({
-		  photos: '#layer-photos-later'
-		  ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
-		}); 
-	});
+    //调用示例
     layui.use('layer', function() {
-
         layer.photos({
-            photos: '#layer-photos-patrolMgr'
+            photos: '#layer-photos-before'
             ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
         });
     });
+    layui.use('layer', function() {
+
+        layer.photos({
+            photos: '#layer-photos-later'
+            ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+        });
+    });
+    layui.use('layer', function() {
+
+        layer.photos({
+            photos: '#layer-photos-potralMgr'
+            ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+        });
+    })
 </script>

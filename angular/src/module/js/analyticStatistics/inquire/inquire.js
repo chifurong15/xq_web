@@ -313,12 +313,12 @@
                     currentPage: $location.search().currentPage ? $location.search().currentPage : 1,
                     itemsPerPage: 10,
                     pagesLength: 10,
+                    perPageOptions: [1, 2, 3, 4, 5, 10],
                     onChange: function () {
                         //console.log($scope.paginationConf.currentPage);
                         $location.search('currentPage', $scope.paginationConf.currentPage);
                     }
                 };
-
                 // 当他们一变化的时候，重新获取数据条目
                 $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', reGetProducts);
 
