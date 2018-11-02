@@ -37,6 +37,8 @@ angular.module('app')
             this._curHzId = null; //当前的河长
             this._patrolRefreshTime = 10000;
 
+            this._markSymbolLayer = null;//点符号图层
+
             this._patrolSymbolGraphic = null; //巡查轨迹图标
             this._endPointGraphic = null; //终点图标
             this._patrolLine = null; //轨迹线
@@ -74,7 +76,8 @@ angular.module('app')
                 this._highlightLayer = new _w.GraphicsLayer({id: "highlightLayer"});
                 this._arrowLayer = new _w.GraphicsLayer({id: "arrowLayer"});
                 this._eventLayer = new _w.GraphicsLayer({id: "eventLayer"});
-                this._map.addLayers([this._annoLayer, this._patrolLayer, this._historyPatrolLayer, this._highlightLayer, this._eventLayer, this._layer]);
+                this._markSymbolLayer = new _w.GraphicsLayer({id:"markSymbolLayer"});
+                this._map.addLayers([this._annoLayer, this._patrolLayer, this._historyPatrolLayer, this._highlightLayer, this._eventLayer, this._layer,this._markSymbolLayer]);
                 this.createMiniMap();
                 //this._miniMap.addLayers([this._reachLayer, this._patrolLayer, this._arrowLayer]);
                 dojo.connect(this._layer, "onMouseOver", dojo.hitch(this, this.showName));
@@ -367,6 +370,7 @@ angular.module('app')
                                 for(var j = 0; j < tmpC.length; j++){
                                     if(tmpC[j].x == coords[i].x && tmpC[j].y == coords[i].y ){
                                         has = 1;
+                                        this._markSymbolLayer.clear();
                                     }
                                 }
                                 if(has == -1){
@@ -992,6 +996,7 @@ angular.module('app')
             };
             this.addOneDayHistoryPatrolByTableSelect = function (patrolArr) {
                 console.log(patrolArr);
+                debugger;
                 if(patrolArr.length !== 0){
                     var len = patrolArr.length;
                     var coords = [];
@@ -1027,8 +1032,10 @@ angular.module('app')
                                     continue;
                                 }
                                 if(j === 0){
+                                    debugger;
                                     lineExtent = this.addGraphicToMap(coords, item);
                                 }else {
+                                    debugger;
                                     lineExtent = lineExtent.union(this.addGraphicToMap(coords, item));
                                 }
                                 historyPatrolArray.push(coords);
@@ -1061,7 +1068,6 @@ angular.module('app')
                             }
                         }).success(function (data) {
                             debugger;
-                            console.log(data);
                             if(data.data && data.data.length > 0){
                                 //_that.addCurrentHistoryPatrolEvents(data.data);
                                 _that.addCurrentOneDayHistoryPatrolEvents(data.data);
@@ -1112,11 +1118,32 @@ angular.module('app')
 
                 }
 
+                startImgPath = "img/esri-icon/patrol/start.png";
+                var arrowImgPath = "img/esri-icon/patrol/arrow.png";
+                endImgPath = "img/esri-icon/patrol/end.png";
+
+                if (parseFloat(coordsArr[0].x) != parseFloat(coordsArr[coordsArr.length-1].x)
+                    && parseFloat(coordsArr[0].y) != parseFloat(coordsArr[coordsArr.length-1].y)){
+                    var startPoint = new _w.Point(parseFloat(coordsArr[0].x),parseFloat(coordsArr[0].y),this._map.spatialReference);
+                    var endPoint = new _w.Point(parseFloat(coordsArr[coordsArr.length-1].x),parseFloat(coordsArr[coordsArr.length-1].y),this._map.spatialReference);
+                    var startSymbol = new _w.PictureMarkerSymbol(startImgPath,25,36).setOffset(0, 18);
+                    var endSymbol = new _w.PictureMarkerSymbol(endImgPath,25,36).setOffset(0, 18);
+                    debugger;
+                    console.log(13/2);
+
+                    var g1 = new _w.Graphic(startPoint, startSymbol);
+                    var g2 = new _w.Graphic(endPoint, endSymbol);
+                    g1.attributes = item;
+                    g2.attributes = item;
+                    this._markSymbolLayer.add(g1);
+                    this._markSymbolLayer.add(g2);
+                }
+
                 var polyline = new _w.Polyline().addPath(coordsArr);
                 var line = new _w.Graphic(polyline,lineSymbol);
                 line.attributes = item;
                 this._historyPatrolLayer.add(line);
-
+                debugger;
                 var extent = polyline.getExtent();
                 return extent;
 
@@ -1161,6 +1188,7 @@ angular.module('app')
                     item = data[i];
                     eventList = data[i].eventList;
                     if(eventList && eventList.length > 0){
+                        debugger;
                         for(var j = 0;j<eventList.length;j++){
                             if(MapUtil.isCoordValid(eventList[j].longitude, eventList[j].latitude)){
                                 PatrolRiverService.addPatrolEventPoint(eventList[j]);
@@ -1175,6 +1203,8 @@ angular.module('app')
                 }
 
                 if(PatrolRiverService.patrolEventGraphicArray != null && PatrolRiverService.patrolEventGraphicArray.length > 0){
+                    console.log(PatrolRiverService.patrolEventGraphicArray);
+                    debugger;
                     for(var i = 0;i<PatrolRiverService.patrolEventGraphicArray.length;i++){
                         this._eventLayer.add(PatrolRiverService.patrolEventGraphicArray[i]);
                     }
@@ -1769,6 +1799,7 @@ angular.module('app')
             this.clearOneDayHistoryPatrolLayerBySelect = function(item){
                 this.clearGraphicByCancelSelect(this._historyPatrolLayer, "id", item["id"]);
                 this.clearGraphicByCancelSelect(this._eventLayer, "reportpersonid", item["userid"]);
+                this.clearGraphicByCancelSelect(this._markSymbolLayer, "id", item["id"]);
             };
             this.clearGraphicByCancelSelect = function (layer, key, val) {
                 var graphics = layer.graphics;
