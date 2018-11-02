@@ -1080,11 +1080,33 @@
                     };
 
                 };
+
                 // 音视频播放
-                // $scope.play = function(item){
-                //     $('#videoPlayerBox').show();
-                //     $scope.videoUrl = $scope.eventImgUrl + item.url;
-                // }
+                $scope.playVideo = function(item){
+                    $('#videoBox').show();
+                    $('#audioPlayer').css('display','none');
+                    $("#videoPlayerBox").css('display','block');
+                    $scope.videoUrl = $scope.eventImgUrl + item.accessoryurl;
+                    $("#videoPlayerBox source").attr("src", $scope.videoUrl);
+                    var myPlayer = videojs("videoPlayerBox")
+                    myPlayer.ready(function () {
+                        myPlayer.play()
+                    });
+                };
+                $scope.playAudio = function(item){
+                    $('#videoBox').show();
+                    $('#audioPlayer').css('display','block');
+                    $("#videoPlayerBox").css('display','none');
+                    $scope.videoUrl = $scope.eventImgUrl + item.accessoryurl;
+                    console.log($("#audioPlayer"))
+                    $("#audioPlayer audio").attr("src", $scope.videoUrl);
+                    // var myPlayer = $("#audioPlayer");
+                    // myPlayer.play()
+                }
+                // 停止并关闭视频、
+                $scope.closePlayer = function(){
+                    $('#videoBox').hide();
+                };
 
             }
         ]);
