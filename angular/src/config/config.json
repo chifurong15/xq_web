@@ -344,6 +344,19 @@
       "description": "考核评分-社会监督举报"
     },
     {
+      "seqId": "3-9",
+      "parentId": "3",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "考核排名",
+      "icon": "menu-icon-6",
+      "url": "module/kaohepinggu/kaohepinggu-result/kaohepinggu-result.html",
+      "requireJS": [
+        "module/kaohepinggu/kaohepinggu-result/kaohepinggu-result.js"
+      ],
+      "description": "考核评分-考核排名"
+    },
+    {
       "seqId": "4",
       "parentId": "0",
       "isLeaf": false,

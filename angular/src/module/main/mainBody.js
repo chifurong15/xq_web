@@ -144,14 +144,18 @@
                 $scope.isShow3 = true;
                 $scope.isShow4 = true;
                 $scope.isShow5 = true;
+                //$scope.isSelected = false;
                 $scope.tab1 = function () {
                     $scope.isShow1 = !$scope.isShow1 ;
+                    //$scope.isSelected = true;
+                    $('#accordion1 .panel-heading').find('h4').addClass('panel-active').parent().parent().siblings().find('h4').removeClass('panel-active')
                 }
                 $scope.tab2 = function () {
                     $scope.isShow2 = !$scope.isShow2 ;
                 }
                 $scope.tab3 = function () {
                     $scope.isShow3 = !$scope.isShow3 ;
+                    $('#accordion2 .panel-heading').find('h4').addClass('panel-active').parent().parent().siblings().find('h4').removeClass('panel-active')
                 }
                 $scope.tab4 = function () {
                     $scope.isShow4 = !$scope.isShow4 ;

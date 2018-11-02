@@ -42,7 +42,7 @@
 						<div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingOne">
-									<h4 class="panel-title" ng-click="tab1()">
+									<h4 class="panel-title panel-active" ng-click="tab1()">
 										<a role="button" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 											工作动态
 											<i class="fa fa-caret-down" aria-hidden="true" ng-show="!isShow1"></i>
@@ -95,7 +95,7 @@
 						<div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
 							<div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingThree">
-									<h4 class="panel-title"  ng-click="tab3()">
+									<h4 class="panel-title panel-active"  ng-click="tab3()">
 										<a role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
 											暗查暗访
 											<i class="fa fa-caret-down" aria-hidden="true" ng-show="!isShow3"></i>
@@ -245,40 +245,6 @@
 			</div>
 		</div>
 		<div class="right-panel col-xs-3 p-all-0">
-
-			<!--<div id="patrol-num" class="panel panel-default m-all-0" style="overflow: hidden;">-->
-				<!--<div class="panel-body">-->
-					<!--<div class="mainbody-tips">-->
-						<!--<span>-->
-	        				<!--当前巡河人数-->
-	        			<!--</span>-->
-					<!--</div>-->
-					<!--<table class="table table-hover mainbody-Table">-->
-						<!--<thead>-->
-							<!--<tr>-->
-								<!--<th>排名</th>-->
-								<!--<th>区域名称</th>-->
-								<!--<th>总巡河人数</th>-->
-								<!--<th>区级河长人数</th>-->
-								<!--<th>街镇级河长人数</th>-->
-								<!--<th>村级河长人数</th>-->
-							<!--</tr>-->
-						<!--</thead>-->
-						<!--<tbody>-->
-							<!--<tr ng-repeat="item in itemlist" ng-init="$index = $index + 1 ">-->
-								<!--<td>{{$index}}</td>-->
-								<!--<td>{{item.regionName}}</td>-->
-								<!--<td>{{item.countAll}}</td>-->
-								<!--<td>{{item.countyCount}}</td>-->
-								<!--<td>{{item.townCount}}</td>-->
-								<!--<td>{{item.villageCount}}</td>-->
-							<!--</tr>-->
-						<!--</tbody>-->
-					<!--</table>-->
-				<!--</div>-->
-			<!--</div>-->
-			<!---->
-
 			<div id="cityRank" class="panel panel-default m-all-0">				
 				<div class="panel-body">
 					<div class="mainbody-tips">
@@ -308,26 +274,34 @@
 							河湖问题汇总
 						</span>
 					</div>
-					<table class="table table-hover mainbody-Table">
-						<thead>
-							<tr>
-								<th>序号</th>
-								<th>所在区域</th>
-								<th>河段名称</th>
-								<th>河长</th>
-								<th>问题类型</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="lst in problemList">
-								<td>{{$index+1}}</td>
-								<td>{{lst.regionName}}</td>
-								<td>{{lst.riverName}}</td>
-								<td>{{lst.chairmanName}}</td>
-								<td>{{lst.problemType}}</td>
-							</tr>
-						</tbody>
-					</table>
+					<div class="tab-content">
+						<div class="tab-pane active" id="tableStatistics">
+							<div class="table-responsive">
+								<table class="table table-bordered table-hover" style="margin-top: 2px;">
+									<tbody>
+										<th width="5%">序号</th>
+										<th width="10%">所在区域</th>
+										<th width="15%">河段名称</th>
+										<th width="10%">河长</th>
+										<th width="15%">问题类型</th>
+
+										<tr ng-repeat="lst in problemList">
+											<td>{{$index+1}}</td>
+											<td>{{lst.regionName}}</td>
+											<td>{{lst.riverName}}</td>
+											<td>{{lst.chairmanName}}</td>
+											<td>{{lst.problemType}}</td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="tab-pane" id="chartStatistics">
+							<div id="patrolChart" class="tj-chart-con"></div>
+						</div>
+					</div>
+
 				</div>
 			</div>
 

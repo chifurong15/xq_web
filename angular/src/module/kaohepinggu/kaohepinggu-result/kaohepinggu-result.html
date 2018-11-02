@@ -1,0 +1,117 @@
+<div class="anchaanfang" ng-controller="kaoheResultCtrl" ng-init="init()">
+    <div class="wrapper-md ">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">考核结果</span><span class="tag-right"></span>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <ul class="js-tab">
+                    <li class="basis tab-active" >区考核排名</li>
+                    <li class="reported">河湖水生态环境质量排名</li>
+                </ul>
+                <div class="panel-body js-con">
+                    <!--区考核排名-->
+                    <div class="basis-con con">
+                        <div class="panel-body">
+                            <form class="form-inline clearfix">
+                                <div class="input-group date date_picker form-item" id="J-searchTime1">
+                                    <label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">月份</font></font></label>
+                                    <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime1">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                                <div class="input-group">
+                                    <button class="btn btn-primary" ng-click="search1()">
+                                        <i class="fa fa-search"></i>搜索
+                                    </button>
+                                </div>
+                            </form>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tableStatistics1">
+                                    <div class="table-responsive" style="margin-top: 20px;">
+                                        <table class="table table-bordered table-hover">
+                                            <tbody>
+                                                <tr class='tHeader'>
+                                                    <th width="5%">排名</th>
+                                                    <th width="10%">区</th>
+                                                    <th width="20%">区域地表水环境质量考核成绩(45%)</th>
+                                                    <th width="20%">河湖水生态环境质量考核成绩(45%)</th>
+                                                    <th width="20%">社会监督评价考核成绩(45%)</th>
+                                                    <th width="20%">月度考核总成绩(45%)</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>1</td>
+                                                    <td>1</td>
+                                                    <td>1</td>
+                                                    <td>1</td>
+                                                    <td>1</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="chartStatistics1">
+                                    <div id="patrolChart1" class="tj-chart-con"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--河湖水生态环境质量排名-->
+                    <div class="reported-con con tab-show">
+                        <div class="panel-body">
+                            <form class="form-inline clearfix">
+                                <div class="input-group date date_picker form-item" id="J-searchTime2">
+                                    <label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">月份</font></font></label>
+                                    <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime2">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                                <div class="input-group">
+                                    <button class="btn btn-primary" ng-click="search2()">
+                                        <i class="fa fa-search"></i>搜索
+                                    </button>
+                                </div>
+                            </form>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tableStatistics2">
+                                    <div class="table-responsive" style="margin-top: 20px;">
+                                        <table class="table table-bordered table-hover">
+                                            <tbody>
+                                            <tr class='tHeader'>
+                                                <th width="5%">排名</th>
+                                                <th width="10%">区</th>
+                                                <th width="10%">河湖水质(70%)</th>
+                                                <th width="15%">河湖堤岸水面环境卫生(15%)</th>
+                                                <th width="15%">河湖岸线管理(15%)</th>
+                                                <th width="15%">河长巡河扣分成绩</th>
+                                                <th width="15%">月度考核成绩</th>
+                                            </tr>
+                                            <tr ng-repeat="item in envirSortList">
+                                                <td>{{$index+1}}</td>
+                                                <td>{{item.regionName}}</td>
+                                                <td>{{item.riverScore}}</td>
+                                                <td>{{item.hygieneScore}}</td>
+                                                <td>{{item.shorelineScore}}</td>
+                                                <td>{{item.deductionScore}}</td>
+                                                <td>{{item.resultScore}}</td>
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="chartStatistics2">
+                                    <div id="patrolChart2" class="tj-chart-con"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

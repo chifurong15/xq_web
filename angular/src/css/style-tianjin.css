@@ -22,6 +22,9 @@ body {
     display: table-cell;
     vertical-align: middle;
 }
+#mainBody .table td{
+
+}
 #news-l , #check-active{
     height: 50%;
 }
