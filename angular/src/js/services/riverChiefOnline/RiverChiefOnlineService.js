@@ -1060,6 +1060,8 @@ angular.module('app')
                                 endTime: item.endTime
                             }
                         }).success(function (data) {
+                            debugger;
+                            console.log(data);
                             if(data.data && data.data.length > 0){
                                 //_that.addCurrentHistoryPatrolEvents(data.data);
                                 _that.addCurrentOneDayHistoryPatrolEvents(data.data);
