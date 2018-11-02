@@ -44,11 +44,12 @@
                     </div>
 				</form>
 			
-				<div style="text-align: right;">
-	                <button type="button" class="btn btn-primary" ng-click="showModal()">新增条目</button>
+				<div style="text-align: right;height: 34px;">
+	                <button type="button" class="btn btn-primary" ng-click="showModal()" ng-if="num == 1 ">新增条目</button>
 	                <input type="file" class="hidden" id="J-attandUploader" ng-model="attandUrl" onchange="angular.element(this).scope().uploadFile(this)"/>
-					<button class="btn btn-default" onclick="document.getElementById('J-attandUploader').click()">导入(.xls)</button>
-	           </div>           
+					<button class="btn btn-default" onclick="document.getElementById('J-attandUploader').click()" ng-if="num ==1 ">导入(.xls)</button>
+					<a class="btn btn-info" ng-if="num == 1" ng-href="http://10.0.0.196/api/download/uhope/infomation/20181102150143087_污水处理厂.xlsx" target="_blank"  class="downOrLook">下载导入模板</a>
+				</div>
 				<div class="tab-content">
                     <div class="tab-pane active" id="tableStatistics">
                         <div class="table-responsive" style="margin-top: 20px;">

@@ -144,21 +144,41 @@
                         }
                         if(!$scope.id){//新增报告
                             $ajaxhttp.myhttp({
-                                url: apiPrefix + '/v1/SurfaceWater/add',
-                                method: 'POST',
-                                params: params,
-                                callBack: function (res) {
-                                    if(res.resCode == 1){
-                                        $scope.newid = res.data.id;
-                                        $scope.pid = res.data.id;
-                                        layer.msg('新建成功', {time:2000});
-                                        clear();//创建成功后清空
-                                        $('#myModal').modal('hide');
-                                    }else{
-                                        layer.msg(res.resMsg, {time:2000});
-                                    }
-                                }
-                            })
+								url: apiPrefix + '/v1/SurfaceWater/selectHave',
+								method: 'get',
+								params: {
+                                    issue: $scope.searchTime1
+								},
+								callBack: function (res) {
+									if(res.resCode == 1){
+										if(res.data == '没有'){
+                                            $ajaxhttp.myhttp({
+                                                url: apiPrefix + '/v1/SurfaceWater/add',
+                                                method: 'POST',
+                                                params: params,
+                                                callBack: function (res) {
+                                                    if(res.resCode == 1){
+                                                        $scope.newid = res.data.id;
+                                                        $scope.pid = res.data.id;
+                                                        layer.msg('新建成功', {time:2000});
+                                                        getList ();
+                                                        clear();//创建成功后清空
+                                                        $('#myModal').modal('hide');
+                                                    }else{
+                                                        layer.msg(res.resMsg, {time:2000});
+                                                    }
+                                                }
+                                            })
+										}else{
+                                            layer.msg('一个月只能新增一个报告');
+										}
+									}else{
+										layer.msg(res.resMsg, {time:2000});
+									}
+								}
+							})
+
+
 						}else{//修改报告
                             $ajaxhttp.myhttp({
                                 url: apiPrefix + '/v1/SurfaceWater/updatelist',

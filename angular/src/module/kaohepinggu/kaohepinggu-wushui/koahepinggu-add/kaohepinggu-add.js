@@ -32,6 +32,17 @@
 						$scope.id = bulletin.id;
 						$scope.pid = bulletin.id;
 
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/SewageDispose/userinfo1',
+                            method: 'get',
+                            params:{
+                                id: $scope.userInfo.id
+                            },
+                            callBack: function (res) {
+                                $scope.num = res.data;
+                            }
+                        })
+
 						// 编辑时获取原数据
 						if (bulletin.id) {
 							$location.search('id', bulletin.id);
@@ -167,21 +178,40 @@
 								remark: $scope.issuer
 						}
 						if (!$scope.id) {
-							$ajaxhttp.myhttp({
-								url: apiPrefix + '/v1/SewageDispose/add',
-								method: 'POST',
-								params: params,
-								callBack: function (res) {
-									if(res.resCode == 1){
-										$scope.newid = res.data.id;
-										$scope.pid = res.data.id;
-										layer.msg('新建成功', {time:2000});
-	                                	clear();//创建成功后清空
-									}else{
-	                                	layer.msg(res.resMsg, {time:2000});										
-									}
-								}
-							})							
+                            $ajaxhttp.myhttp({
+                                url: apiPrefix + '/v1/SewageDispose/selectHave',
+                                method: 'get',
+                                params: {
+                                    issue: $scope.searchTime
+								},
+                                callBack: function (res) {
+                                    if(res.resCode == 1){
+                                       if(res.data == '没有'){
+                                           $ajaxhttp.myhttp({
+                                               url: apiPrefix + '/v1/SewageDispose/add',
+                                               method: 'POST',
+                                               params: params,
+                                               callBack: function (res) {
+                                                   if(res.resCode == 1){
+                                                       $scope.newid = res.data.id;
+                                                       $scope.pid = res.data.id;
+                                                       layer.msg('新建成功', {time:2000});
+                                                       clear();//创建成功后清空
+                                                       routeService.route('3-3', true);
+                                                   }else{
+                                                       layer.msg(res.resMsg, {time:2000});
+                                                   }
+                                               }
+                                           })
+                                       }else{
+                                           layer.msg('一个月只能新增一个报告');
+									   }
+                                    }else{
+                                        layer.msg(res.resMsg, {time:2000});
+                                    }
+                                }
+                            })
+
 						}else{//修改污水报告
 							$ajaxhttp.myhttp({
 								url: apiPrefix + '/v1/SewageDispose/updatelist',
@@ -198,6 +228,7 @@
 									if(res.resCode == 1){
 										layer.msg('修改成功', {time:2000});
 	                                	clear();//创建成功后清空
+                                        routeService.route('3-3', true);
 									}else{
 	                                	layer.msg(res.resMsg, {time:2000});										
 									}
@@ -349,7 +380,7 @@
 					
 					//取消
 					$scope.back = function () {
-						routeService.route(3, true);
+                        routeService.route('3-3', true);
 					}
 					
 					
