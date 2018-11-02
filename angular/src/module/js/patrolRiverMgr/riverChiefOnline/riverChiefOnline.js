@@ -40,6 +40,8 @@
 
                 // 初始化
                 $scope.init = function () {
+                    $('.aside-main').hide();
+                    $('.app-content-body').css('left','0px');
                     //gis模块初始化
                     queryAdminregion.init($scope.map);
                     MapTool.init($scope.map);
@@ -694,7 +696,8 @@
                     // if(RiverChiefOnlineService.refreshDataTimer != null){
                     //     clearInterval(RiverChiefOnlineService.refreshDataTimer);
                     // }
-
+                    $('.aside-main').show();
+                    $('.app-content-body').css('left','172px');
                     clearInterval(timer);
                 });
                 $scope.eventImgUrl = $localStorage.serviceUrl_fileService;
