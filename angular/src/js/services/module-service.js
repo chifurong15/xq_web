@@ -62,6 +62,7 @@ angular.module('app')
             htmlAndJs: '',
             serviceUrl: '',
             htmlUrl: '',
+            fileUrl: '',
             getConfig: function () {
                 var _this = this;
                 if (!_this.htmlUrl) {
@@ -142,7 +143,32 @@ angular.module('app')
                 }
                 _this.getIpConfig();
                 return _this.serviceUrl;
+            },
+            getFileUrl: function (fileUri) {
+                fileUri = fileUri ? fileUri : "";
+                var _this = this;
+                if (_this.fileUrl) {
+                    return _this.fileUrl + fileUri;
+                }
+                if (!_this.serviceUrl) {
+                    _this.getIpConfig();
+                }
+                var _fileUrl = "";
+                $.ajax({
+                    type: "get",
+                    url: (_this.getServiceUrl().lastIndexOf('uip') >= 0 ? _this.getServiceUrl() : (_this.getServiceUrl() + '/uip')) + "/common/getFileUrl",
+                    async: false
+                }).done(function (data) {
+                    if (data.resCode == 1) {
+                        _fileUrl = data.data;
+                    }
+                }).error(function (errorData) {
+
+                });
+                this.fileUrl = _fileUrl;
+                return this.fileUrl + fileUri;
             }
         }
+
 
     }]);

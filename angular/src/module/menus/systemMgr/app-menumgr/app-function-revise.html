@@ -1,0 +1,133 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">修改菜单</h1>
+</div>
+<div class="wrapper-md" ng-controller="appFunctionOperateController" ng-init="appInit()">
+    <div class="panel panel-default pmcontainer">
+        <div class="panel-body">
+            <div class="search-form">
+                <form class="form-inline" method="get">
+                    <div class="form-item">
+                        <label>菜单名称</label>
+                        <input class='form-control inputbox' type="text" placeholder="" ng-model='name'/>
+                        <i class="star">*</i>
+                    </div>
+                </form>
+                <form class="form-inline" method="get">
+                    <div class="form-item">
+                        <label>父节点</label>
+                        <input class='form-control inputbox' disabled="disabled" type="text" placeholder=""
+                               ng-model='parentsName'/>
+                    </div>
+                </form>
+                <form class="form-inline" method="get">
+                    <div class="form-item">
+                        <label>功能类别</label>
+                        <input type="radio" class="form-control" name="functionType" value="M"
+                               ng-model="functionType"/>菜单
+                        <input type="radio" class="form-control" name="functionType" value="B"
+                               ng-model="functionType"/>按钮
+                    </div>
+                </form>
+                <form class="form-inline" method="get">
+                    <div class="form-item">
+                        <label>图标样式</label>
+                        <!-- <input class='form-control inputbox' type="text" placeholder="" ng-model='imageUrl'/>-->
+                        <button type="button" ng-show="!imageUrl" class="btn btn-primary btn-xs" ng-click="imgUpload()">
+                            <i class="fa fa-cloud-upload"></i>上传照片
+                        </button>
+                        <div id="layer-photos-demo" ng-show="imageUrl">
+                            <button type="button" ng-click="removeImage()" class="btn btn-primary btn-xs"
+                                    style="width: 40px;height: 20px;">删除
+                            </button>
+                            <img id="image" layer-pid="" layer-src="{{imageUrl ? getImageUrl(imageUrl) : ''}}"
+                                 src="{{imageUrl ? getImageUrl(imageUrl) : ''}}" alt="上传照片"
+                                 style="width:100px;height:80px">
+                        </div>
+
+                    </div>
+                </form>
+                <form class="form-inline" method="get">
+                    <div class="form-item">
+                        <label>功能路径</label>
+                        <input class='form-control inputbox' style="width:400px;" type="text" placeholder=""
+                               ng-model='funcUrl'/>
+                    </div>
+                </form>
+                <form class="form-inline" method="get">
+                    <div class="form-item">
+                        <label>ios功能路径</label>
+                        <input class='form-control inputbox' style="width:400px;" type="text" placeholder=""
+                               ng-model='iosFuncUrl'/>
+                    </div>
+                </form>
+                <form class="form-inline" method="get">
+                    <div class="form-item">
+                        <label>备注</label>
+            <textarea class="form-control textarea-long" ng-model='remark' placeholder="" rows="4">
+            </textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="btn-box">
+                <button type="submit" class="btn btn-primary" ng-click="operateFunction()">
+                    <i></i>确定
+                </button>
+                <button type="submit" class="btn btn-primary" ng-click="back()">
+                    <i class="fa fa-reply"></i>返回
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!--描述：文件上传-->
+    <div class="modal fade" id="imgBox" role="dialog_region" data-backdrop="static">
+        <div class="modal-dialog water_dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">功能图片</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="wid-100">
+                        <form id="fileFrom" ng-model="filefrom" enctype="multipart/form-data">
+                            <div class="wid-100 dis-flex">
+                                <label style="height: 34px;line-height: 34px;margin-right: 20px;">上传照片</label>
+                                <div class="wid-30">
+                                    <input ng-init="initFile()" id="input-file" type="file" class="file"
+                                           file-model="myFile" data-show-preview="true" name="fileExcel"
+                                           placeholder="请选择相关文件"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-primary btn-o" ng-click="fileInput()">
+                        <i class="fa fa-check"></i>
+                        <span>上传</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#input-file").fileinput({
+        uploadAsync: true, //异步上传
+        language: "zh", //设置语言
+        showUpload: false,
+        showPreview: true, //是否显示预览
+        allowedFileExtensions: ["JPG", "JPEG", 'PNG', 'BMP', 'GIF'] //接收的文件后缀
+    });
+
+
+    layer.photos({
+        photos: '#layer-photos-demo'
+        , anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+    });
+
+</script>
+
+
