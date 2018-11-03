@@ -26,15 +26,19 @@
         </a>
     </div>-->
     <!-- nabar right -->
-    
-    <ul class="nav navbar-nav navbar-right">
 
-        <li ng-repeat="menu in appConfig" class="btn-navbar" >
-            <a href="" ng-click="getSecondMenu(menu.seqId);" ui-sref="app.index({param:'1_'+menu.seqId})">
+    <ul class="nav navbar-nav navbar-right" ng-init="initMenu()">
+
+        <li ng-repeat="menu in userMenus" class="btn-navbar" ng-if="menu.funcUrl && !menu.children" >
+            <a  id="menu_{{menu.id}}" ui-sref=app.index({param:menu.moduleId+'_1_00000'}) ng-click="clickRootNode(this)" >
                 <i class="{{menu.icon}}" aria-hidden="true"></i> <label>{{menu.name}}</label>
             </a>
         </li>
-
+        <li ng-repeat="menu in userMenus" class="btn-navbar" ng-if="menu.children" >
+            <a  id="menu_{{menu.id}}" href="" ng-click="getSecondMenu(menu);" >
+                <i class="{{menu.icon}}" aria-hidden="true"></i> <label>{{menu.name}}</label>
+            </a>
+        </li>
         <li ng-init="initUserInfo()">
             <span class="hidden-sm hidden-md  pull-right">你好，{{userInfo.name}}！</span>
             <label class="thumb-sm avatar">

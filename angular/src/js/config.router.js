@@ -26,13 +26,13 @@ angular.module('app')
 					})
 					.state('app.dashboard-v1', {
 						url: '/dashboard-v1',
-		                    templateUrl: 'module/main/mainBody.html',
-		                    resolve: {
-		                    deps: ['$ocLazyLoad',
-		                        function( $ocLazyLoad ){
-		                        return $ocLazyLoad.load(['js/controllers/chart.js','module/main/mainBody.js']);
-		                    }]
-		                }
+						templateUrl: 'module/main/mainBody.html',
+						resolve: {
+							deps: ['$ocLazyLoad',
+								function( $ocLazyLoad ){
+									return $ocLazyLoad.load(['js/controllers/chart.js','module/main/mainBody.js']);
+								}]
+						}
 					})
 					.state('app.dashboard-v2', {
 						url: '/dashboard-v2',
@@ -554,56 +554,42 @@ angular.module('app')
 						url: '/playlist/{fold}',
 						templateUrl: 'tpl/music.playlist.html'
 					}).state('app.index', {
-						url: '/index/:param',
-						//params : {"param" : null},
-						templateProvider: ['$stateParams', '$templateRequest', '$rootScope', 'menuConfig', '$localStorage',
-							function($stateParams, $templateRequest, $rootScope, menuConfig, $localStorage) {
-
-								//拆分路由标识
-								var args = $stateParams.param.split('_');
-								if(args.length >= 2) {
-									if($localStorage.platformRouterConfig) {
-										$localStorage.platformRouterConfig['type'] = args[0];
-									} else {
-										$localStorage.platformRouterConfig = {};
-										$localStorage.platformRouterConfig['type'] = args[0];
-									}
-								}
-								$localStorage.platformRouterConfig['serviceUrl'] = menuConfig.getServiceURL();
-
+					url: '/index/:param',
+					//params : {"param" : null},
+					templateProvider: ['$stateParams', '$templateRequest', '$rootScope', 'menuConfig', '$localStorage',
+						function ($stateParams, $templateRequest, $rootScope, menuConfig, $localStorage) {
+							//args[0]:moduleId, args[1]:type(菜单类型:1:菜单，2：组件，3:页面), args[2]:seqId(页面标识)
+							var args = $stateParams.param.split('_');
+							//
+							if (args.length >= 3 && args[2].length != 10) {
 								return $templateRequest(menuConfig.targetHTML($stateParams.param));
+								//return $templateRequest( serviceUrl + targetHtml );
 							}
-						],
+							return $templateRequest("tpl/iframe.html");
+						}],
 
-						resolve: {
-							deps: ['$stateParams', '$ocLazyLoad', 'uiLoad', 'menuConfig', '$rootScope', '$localStorage',
-								function($stateParams, $ocLazyLoad, uiLoad, menuConfig, $rootScope, $localStorage) {
+					resolve: {
+						deps: ['$stateParams', '$ocLazyLoad', 'uiLoad', 'menuConfig', '$rootScope', '$localStorage',
+							function ($stateParams, $ocLazyLoad, uiLoad, menuConfig, $rootScope, $localStorage) {
+								//$rootScope.targetHTML = menuConfig.targetHTML($stateParams.param);
 
-									$rootScope.targetHTML = menuConfig.targetHTML($stateParams.param);
-
-									return $ocLazyLoad.load('ui.select').then(
-										function() {
-											return $ocLazyLoad.load('js/controllers/select.js').then(
-												function() {
-													return $ocLazyLoad.load('angularBootstrapNavTree').then(
-														function() {
-															return uiLoad.load(menuConfig.targetJS($stateParams.param)).then(
-																function() {
-																	return $ocLazyLoad.load('ui.calendar');
-																}
-															)
-
-														}
-													)
+								return $ocLazyLoad.load('ui.select').then(
+									function () {
+										return $ocLazyLoad.load('js/controllers/select.js').then(
+											function () {
+												var jsUrl = menuConfig.targetJS($stateParams.param);
+												if (jsUrl) {
+													return $ocLazyLoad.load(menuConfig.targetJS($stateParams.param));
 												}
-											)
-										}
-									)
+											}
+										)
+									}
+								)
 
-								}
-							]
-						}
-					});
+							}]
+					}
+				});
+
 			}
 		]
 	);
