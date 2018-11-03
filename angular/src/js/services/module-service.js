@@ -112,29 +112,36 @@ angular.module('app')
                     return _this.htmlAndJs;
                 }
 
-                $http({
+                $.ajax({
                     method: 'GET',
                     url: (_this.getServiceUrl().lastIndexOf('uip') >= 0 ? _this.getServiceUrl() : (_this.getServiceUrl() + '/uip')) + '/moduleManage/querySmModuleAndFunctions',
-                }).then(function successCallback(resp) {
+                    async: false
+                }).done(function (resp) {
                     // 请求成功执行代码
-                    if (resp.data.resCode == 1) {
-                        //$scope.allModuleList = resp.data.data;
+                    if (resp.resCode == 1) {
                         //这里保存当前App挂载的用户角色 模块和功能列表
-                        _this.htmlAndJs = resp.data.data;
-                        //$scope.leftMenus = [];
-                        //$scope.selectMenus = [];
-                        //$scope.getLeftMenusAndSelectMenus(response.data.data, $scope.leftMenus, $scope.selectMenus);
+                        _this.htmlAndJs = resp.data;
                     }
-                }, function errorCallback(response) {
-                    // 请求失败执行代码
+                }).error(function (errorData) {
+
                 });
                 return _this.htmlAndJs;
             },
             getHtmlUrl: function () {
-                return this.htmlUrl;
+                var _this = this;
+                if (_this.htmlUrl) {
+                    return _this.htmlUrl;
+                }
+                _this.getIpConfig();
+                return _this.htmlUrl;
             },
             getServiceUrl: function () {
-                return this.serviceUrl;
+                var _this = this;
+                if (_this.serviceUrl) {
+                    return _this.serviceUrl;
+                }
+                _this.getIpConfig();
+                return _this.serviceUrl;
             }
         }
 

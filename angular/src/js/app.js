@@ -16,5 +16,6 @@ angular.module('app', [
     'oc.lazyLoad',
     'pascalprecht.translate',
     'menu.config',
-    'tm.pagination'
+    'tm.pagination',
+    'uip.ztree'
 ]);

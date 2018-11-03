@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" data-ng-app="app">
-	<head>
-		<meta charset="utf-8" />
-		<title>天津市河长制管理信息系统</title>
-    	<link href="img/favicon.ico" rel="icon" type="image/x-icon">
-		<meta name="description" content="app, web app, responsive, responsive layout, admin, admin panel, admin dashboard, flat, flat ui, ui kit, AngularJS, ui route, charts, widgets, components" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-		<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+<head>
+    <meta charset="utf-8"/>
+    <title>天津市河长制管理信息系统</title>
+    <link href="img/favicon.ico" rel="icon" type="image/x-icon">
+    <meta name="description"
+          content="app, web app, responsive, responsive layout, admin, admin panel, admin dashboard, flat, flat ui, ui kit, AngularJS, ui route, charts, widgets, components"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css"/>
 
 		<link rel="stylesheet" href="css/bootstrap-select.css" type="text/css" />
 		<link href="https://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/css/bootstrap-select.min.css" rel="stylesheet">
@@ -35,16 +36,18 @@
         <!-- 视频播放样式 -->
         <link rel="stylesheet" type="text/css" href="css/video-js.min.css">
 
-	</head>
+</head>
 
-	<body ng-controller="AppCtrl">
-		<div class="app" id="app" ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}" ui-view></div>
+<body ng-controller="AppCtrl">
+<div class="app" id="app"
+     ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}"
+     ui-view></div>
 
-		<!-- jQuery -->
-		<script src="vendor/jquery/jquery.min.js"></script>
+<!-- jQuery -->
+<script src="vendor/jquery/jquery.min.js"></script>
 
-		<!-- Angular -->
-		<script src="vendor/angular/angular.js"></script>
+<!-- Angular -->
+<script src="vendor/angular/angular.js"></script>
 
 		<script src="vendor/angular/angular-animate/angular-animate.js"></script>
 		<script src="vendor/angular/angular-cookies/angular-cookies.js"></script>
@@ -84,15 +87,16 @@
 		<!-- layer JS -->
 		<script src="vendor/layer/layer.js"></script>
 
-		<!-- zTree JS -->
-		<script src="vendor/zTree_v3/js/jquery.ztree.all.js"></script>
-		<!-- lazyload -->
-		<script src="vendor/angular/oclazyload/ocLazyLoad.js"></script>
-		<!-- translate -->
-		<script src="vendor/angular/angular-translate/angular-translate.js"></script>
-		<script src="vendor/angular/angular-translate/loader-static-files.js"></script>
-		<script src="vendor/angular/angular-translate/storage-cookie.js"></script>
-		<script src="vendor/angular/angular-translate/storage-local.js"></script>
+<!-- zTree JS -->
+<script src="vendor/zTree_v3/js/jquery.ztree.all.js"></script>
+<script src="vendor/zTree_v3/js/jquery.ztree.exhide.js"></script>
+<!-- lazyload -->
+<script src="vendor/angular/oclazyload/ocLazyLoad.js"></script>
+<!-- translate -->
+<script src="vendor/angular/angular-translate/angular-translate.js"></script>
+<script src="vendor/angular/angular-translate/loader-static-files.js"></script>
+<script src="vendor/angular/angular-translate/storage-cookie.js"></script>
+<script src="vendor/angular/angular-translate/storage-local.js"></script>
 
 		<!-- App -->
 		
@@ -123,12 +127,12 @@
 		<script src="js/directives/ui-toggleclass.js"></script>
 		<script src="js/directives/ui-validate.js"></script>
 
-		<script src="js/controllers/bootstrap.js"></script>
-		<!-- Lazy loading -->
-		<script src="js/directives/navView/navView.js"></script>
-		<!--<script src="js/services/module-service.js"></script>-->
-		<script src="js/directives/pagination/tm.pagination.js"></script>
-        <script src="js/directives/myTree.js"></script>
+<script src="js/controllers/bootstrap.js"></script>
+<!-- Lazy loading -->
+<script src="js/directives/navView/navView.js"></script>
+<!--<script src="js/services/module-service.js"></script>-->
+<script src="js/directives/pagination/tm.pagination.js"></script>
+<script src="js/directives/myTree.js"></script>
 
 		<!-- mock.js -->
 		<script src="http://mockjs.com/dist/mock-min.js"></script>
@@ -146,42 +150,45 @@
 		<!--globalparam-->
 		<script src="js/globalparam.js" type="text/javascript" charset="utf-8"></script>
 
-		<!--globaltree-->
-		<script src="js/globaltree.js" type="text/javascript" charset="utf-8"></script>
-		<script src="vendor/layui/layui.js"></script>
-		<script src="js/angular-http.js"></script>
-		<script src="js/localStorage.js"></script>
-		
-		<!-- load Esri JSAPI -->
-		<script src="vendor/arcgis/esriapi/init.js"></script>
-		<script src="js/services/common/esriService.js"></script>
-		
-		<!-- load gisTerraformer -->
-		<script src="vendor/arcgis/terraformer/terraformer.min.js"></script>
-		<script src="vendor/arcgis/terraformer/terraformer-arcgis-parser.js"></script>
-		<script src="vendor/arcgis/terraformer/terraformer-wkt-parser.js"></script>
-		
-		<!-- load gisFactory -->
-		<script src="js/factory/esriApiDeps.js"></script>
-		<script src="js/factory/tianditu-factory.js"></script>
-		<script src="js/factory/SymbolUtil.js"></script>
-		<script src="js/factory/MapTool.js"></script>
-		<script src="js/factory/MapUtil.js"></script>
-		<script src="js/factory/ComponentTool.js"></script>
-		<script src="js/factory/GeometryUtil.js"></script>
-		<script src="js/factory/UtilityTool.js"></script>
-		
-		<!-- load gisService -->
-		<script src="js/services/patrolMgr/PatrolRiverService.js"></script>
-		<script src="js/services/riverChiefOnline/RiverChiefOnlineService.js"></script>
-		<script src="js/services/eventMgr/EventService.js"></script>
-		<script src="js/services/workbench/WorkbenchService.js"></script>
-		<script src="js/services/common/queryAdminregion.js"></script>
-		<script src="js/services/ComponentToolService.js"></script>
-		<script src="js/services/common/ReachService.js"></script>
-        <script src="js/services/component/ComponentManagerService.js"></script>
-		<script src="js/httpInterceptor.js"></script>
-		
-	</body>
+<!--globaltree-->
+<script src="js/globaltree.js" type="text/javascript" charset="utf-8"></script>
+<script src="vendor/layui/layui.js"></script>
+<script src="js/angular-http.js"></script>
+<script src="js/localStorage.js"></script>
+
+<!-- load Esri JSAPI -->
+<script src="vendor/arcgis/esriapi/init.js"></script>
+<script src="js/services/common/esriService.js"></script>
+
+<!-- load gisTerraformer -->
+<script src="vendor/arcgis/terraformer/terraformer.min.js"></script>
+<script src="vendor/arcgis/terraformer/terraformer-arcgis-parser.js"></script>
+<script src="vendor/arcgis/terraformer/terraformer-wkt-parser.js"></script>
+
+<!-- load gisFactory -->
+<script src="js/factory/esriApiDeps.js"></script>
+<script src="js/factory/tianditu-factory.js"></script>
+<script src="js/factory/SymbolUtil.js"></script>
+<script src="js/factory/MapTool.js"></script>
+<script src="js/factory/MapUtil.js"></script>
+<script src="js/factory/ComponentTool.js"></script>
+<script src="js/factory/GeometryUtil.js"></script>
+<script src="js/factory/UtilityTool.js"></script>
+
+<!-- load gisService -->
+<script src="js/services/patrolMgr/PatrolRiverService.js"></script>
+<script src="js/services/riverChiefOnline/RiverChiefOnlineService.js"></script>
+<script src="js/services/eventMgr/EventService.js"></script>
+<script src="js/services/workbench/WorkbenchService.js"></script>
+<script src="js/services/common/queryAdminregion.js"></script>
+<script src="js/services/ComponentToolService.js"></script>
+<script src="js/services/common/ReachService.js"></script>
+<script src="js/services/component/ComponentManagerService.js"></script>
+<script src="js/httpInterceptor.js"></script>
+<!--<script src="vendor/layui/layui.js"></script>
+<script src="vendor/layer/layer.js"></script>-->
+
+<script src="module/js/systemMgr/menumgr/tree-directive.js"></script>
+</body>
 
 </html>

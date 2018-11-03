@@ -49,6 +49,8 @@ app.controller('SigninFormController', ['$scope', '$http', '$state','$localStora
                 $localStorage.userLoginInfo.userInfo = resp.data.data.userDTO;
                 $localStorage.userLoginInfo.roleInfo = resp.data.data.smRoleDTO;
                 $state.go('app.dashboard-v1');
+                //重新加載用戶權限
+                moduleService.getConfig();
             }
         }, function errorCallback(response) {
             // 请求失败执行代码

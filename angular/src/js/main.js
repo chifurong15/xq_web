@@ -9,7 +9,7 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
         isSmartDevice($window) && angular.element($window.document.body).addClass('smart');
 
         //UIP基础平台接口，包括系统管理等
-        $localStorage.gwUrl = "http://117.8.229.5:9000";
+        $localStorage.gwUrl = moduleService.getServiceUrl();
         $localStorage.serviceUrl = $localStorage.gwUrl + "/uip";
         $localStorage.serviceUrl_chiefOnline = $localStorage.gwUrl + "/patrolMgr";
         $localStorage.serviceUrl_patrolMgr = $localStorage.gwUrl + "/patrolMgr";
@@ -18,6 +18,7 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
         $localStorage.serviceUrl_fileService = $localStorage.gwUrl + '/';
         // logo显示隐藏
         $scope.noblock = false;
+        moduleService.getConfig();
         // config
         $scope.app = {
             name: '天津市河长制管理信息系统',
@@ -167,7 +168,26 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
             if (!menu) {
                 return;
             }
-            if (menu.funcUrl && (!menu.children || menu.children.length == 0)) {
+            //有子节点，就点击第一个子节点
+            var menuId =  '#menu_' + (menu.children ?  menu.children[0].id : menu.id);
+            $timeout(function () {
+                angular.element(menuId).click();
+            }, 0, false);
+            if(menu.children){
+                clickFirst(menu.children[0]);
+            }
+            /*if(menu.children){
+                $timeout(function () {
+                    angular.element("#menu_" + menu.children[0].id).click();
+                }, 0, false);
+            }else{
+                $timeout(function () {
+                    angular.element("#menu_" + menu.id).click();
+                    // $state.go('app.index', {param: menu.moduleId + '_1_' + menu.seqId});
+                }, 0, false);
+            }*/
+
+           /* if (menu.funcUrl && (!menu.children || menu.children.length == 0)) {
                 $timeout(function () {
                     angular.element("#menu_" + menu.id).click();
                     // $state.go('app.index', {param: menu.moduleId + '_1_' + menu.seqId});
@@ -183,7 +203,7 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
                     angular.element("#menu_" + menu.children[0].id).click();
                 }, 0, false);
             }
-            clickFirst(menu.children[0]);
+            clickFirst(menu.children[0]);*/
 
         }
         //解决刷新二级菜单丢失问题

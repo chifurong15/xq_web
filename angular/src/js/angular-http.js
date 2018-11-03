@@ -116,7 +116,7 @@ angular.module('app')
                 };
             }).error(function(res){
                 console.log(res);
-                alert('服务器异常，请稍后再试');
+                //alert('服务器异常，请稍后再试');
             });
         }
     }
