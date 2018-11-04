@@ -2,7 +2,7 @@
 
 /* Controllers */
 // signin controller
-app.controller('SigninFormController', ['$scope', '$http', '$state','$localStorage', 'globalParam','$location', function($scope, $http, $state,$localStorage, globalParam,$location) {
+app.controller('SigninFormController', ['$scope', '$http', '$state','$localStorage', 'globalParam','$location','moduleService', function($scope, $http, $state,$localStorage, globalParam,$location,moduleService) {
     $scope.user = {};
     $scope.authError = null;
     $scope.user.username = null;

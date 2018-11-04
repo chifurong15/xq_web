@@ -225,7 +225,7 @@
 
 						<div class="city-select form-group">
 							<label class="label-tittle">区域选择</label>
-							<select class="selectpicker form-control" ng-model="region" ng-options="region as region.name for region in regionlist" ng-change="regionChange(region)">
+							<select class="form-control" ng-model="region" ng-options="region as region.name for region in regionlist" ng-change="regionChange(region)">
 								<option value="">--请选择--</option>
 							</select>
 						</div>
@@ -275,7 +275,7 @@
 						</span>
 					</div>
 					<div class="tab-content">
-						<div class="tab-pane active" id="tableStatistics">
+						<div class="tab-pane active" id="tableStatistics" style="height: 300px; overflow-x: hidden; overflow-y: auto">
 							<div class="table-responsive">
 								<table class="table table-bordered table-hover" style="margin-top: 2px;">
 									<tbody>
