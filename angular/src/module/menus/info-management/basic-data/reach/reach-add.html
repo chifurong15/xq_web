@@ -1,482 +1,446 @@
 <div ng-controller="imReachAdd" ng-init="init()">
-	<div class="wrapper-md">
-		<div class="panel panel-default m-n">
-
-			<div class="panel-body">
-				<div class="search-form" style="padding-right: 340px;">
-					<form id="arrForm" class="form-inline" method="post" action="hzz/test">
-						<div class="form-item">
-							<label>河湖库名称</label>
-							<input ng-model="reachFName" ng-change="name_change()" type="text" class="form-control input-short" ng-blur="isRepeat()"/>
-		                    <span id="val"></span>
-							<span class="required">*</span>
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3">新增河湖库段信息</h1>
+    </div>
+    <div id="wrapperMd" class="wrapper-md">
+        <div class="panel panel-default m-all-0">
+            <div class="panel-body pos-rlt">
+                <form id="arrForm" class="form-inline" method="post" action="hzz/test">
+                    <div id="left" class="wid-70 dis-i-blc">
+                        <div class="form-item">
+                            <label>河湖库名称</label>
+                            <input ng-model="reachFName" ng-change="name_change()" type="text" class="form-control input-short" ng-blur="isRepeat()"/>
+                            <span id="val"></span>
+                            <span class="required">*</span>
                             <b>命名规则：XXX河段、XXX湖段、XXX库段</b>
-						</div>
-						<br/>
-
-						<div class="form-item">
-							<label>河湖库别名</label>
-							<input ng-model="alias" type="text" class="form-control input-short"/>
-							<span class="required">*</span>
-						</div>
-						<div class="form-item">
-							<label>水质等级</label>
-							<select ng-init="waterQuality()" ng-model="water_quality" ng-options="wq.dictName for wq in waterQualitys"
+                        </div>
+                        <div class="form-item">
+                            <label>河湖库别名</label>
+                            <input ng-model="alias" type="text" class="form-control input-short"/>
+                            <span class="required">*</span>
+                        </div>
+                        <div class="form-item">
+                            <label>水质等级</label>
+                            <select ng-init="waterQuality()" ng-model="water_quality" ng-options="wq.typeName for wq in waterQualitys"
                                     ng-change="quality_Change(water_quality)" class="form-control select-short">
                                 <option  value="">请选择</option>
                             </select>
                             <span class="required">*</span>
-						</div>
-						<br/>
-						<div class="form-item">
-							<label>淤积情况</label>
-							<select ng-init="deposit()" ng-model="deposit_status" ng-options="ds.dictName for ds in deposits"
+                        </div>
+                        </br>
+                        <div class="form-item">
+                            <label>淤积情况</label>
+                            <select ng-init="deposit()" ng-model="deposit_status" ng-options="ds.typeName for ds in deposits"
                                     ng-change="deposit_Change(deposit_status)" class="form-control select-short">
                                 <option  value="">请选择</option>
                             </select>
                             <span class="required">*</span>
-						</div>
-					    <div id="riverBox" class="dis-none">
-							<div class="form-item">
-								<label>河段岸别</label>
-								<select ng-init="riveShore()" ng-model="river_shore" ng-options="rs.dictName for rs in riveShores"
-                                        ng-change="rs_Change(river_shore)" class="form-control select-short">
-                                    <option  value="">请选择</option>
-                                </select>
-                                <span class="required">*</span>
-							</div>
-					    	<div class="form-item">
-								<label>所属区域</label>
-								<input ng-model="region" type="text" class="form-control input-short-o"  ng-click="regionShow()">
-								<a class="input-group-addon" ng-click="regionShow()"><i class="fa fa-search"></i></a>
-                                <span class="required">*</span>
-							</div>
-							<br/>	
-							<div class="form-item">
-								<label>所属水系</label>
-								<input ng-model="water_ztree" type="text" class="form-control input-short-o"  ng-click="waterShow()">
-								<a class="input-group-addon" ng-click="waterShow()"><i class="fa fa-search"></i></a>
-                                <span class="required">*</span>
-							</div>
-							<div class="form-item">
-								<label>所属河流</label>
-								<input ng-model="river_ztree" type="text" class="form-control input-short-o"  ng-click="riverShow()">
-								<a class="input-group-addon" ng-click="riverShow()"><i class="fa fa-search"></i></a>
-                                <span class="required">*</span>
-							</div>
-					    </div>
-					    <div id="lakesBox" class="dis-none">
-							<div class="form-item">
-								<label>湖段岸别</label>
-								<select ng-init="lakesShore()" ng-model="lakes_shore" ng-options="ls.dictName for ls in lakesShores"
-                                        ng-change="ls_Change(lakes_shore)" class="form-control select-short">
-                                    <option  value="">请选择</option>
-                                </select>
-                                <span class="required">*</span>
-							</div>
-					    	<div class="form-item">
-								<label>所属区域</label>
-								<input ng-model="region" type="text" class="form-control input-short-o"  ng-click="regionShow()">
-								<a class="input-group-addon" ng-click="regionShow()"><i class="fa fa-search"></i></a>
-                                <span class="required">*</span>
-							</div>
-							<br/>	
-							<div class="form-item">
-								<label>所属水系</label>
-								<input ng-model="water_ztree" type="text" class="form-control input-short-o"  ng-click="waterShow()">
-								<a class="input-group-addon" ng-click="waterShow()"><i class="fa fa-search"></i></a>
-                                <span class="required">*</span>
-							</div>
-							<div class="form-item">
-								<label>所属湖泊</label>
-								<input ng-model="lakes_ztree" type="text" class="form-control input-short-o"  ng-click="lakesShow()">
-								<a class="input-group-addon" ng-click="lakesShow()"><i class="fa fa-search"></i></a>
-                                <span class="required">*</span>
-							</div>
-					    </div>
-					    <div id="reservoirBox" class="dis-none">
-							<div class="form-item">
-								<label>库段岸别</label>
-								<select ng-init="reservoirShore()" ng-model="reservoir_shore" ng-options="rs.dictName for rs in reservoirShores" ng-change="res_Change(reservoir_shore)" class="form-control select-short"></select>
-                                <span class="required">*</span>
-							</div>
-					    	<div class="form-item">
-								<label>所属区域</label>
-								<input ng-model="region" type="text" class="form-control input-short-o"  ng-click="regionShow()">
-								<a class="input-group-addon" ng-click="regionShow()"><i class="fa fa-search"></i></a>
-                                <span class="required">*</span>
-							</div>
-							<br/>
-							<div class="form-item">
-								<label>所属水系</label>
-								<input ng-model="water_ztree" type="text" class="form-control input-short-o"  ng-click="waterShow()">
-								<a class="input-group-addon" ng-click="waterShow()"><i class="fa fa-search"></i></a>
-                                <span class="required">*</span>
-							</div>
-							<div class="form-item">
-								<label>所属水库</label>
-								<input ng-model="reservoir_ztree" type="text" class="form-control input-short-o"  ng-click="reservoirShow()">
-								<a class="input-group-addon" ng-click="reservoirShow()"><i class="fa fa-search"></i></a>
-                                <span class="required">*</span>
-							</div>
-
-					    </div>
-					    <div class="form-item">
-							<label>河湖库级别</label>
-							<select ng-model="river_part.dictValue" ng-options="rp.dictValue as rp.dictName for rp in riveParts"
-                                    ng-change="rp_Change(river_part.dictValue)" class="form-control select-short">
-                                <option  value="">请选择</option>
-                            </select>
-                            <span class="required">*</span>
-						</div>
+                        </div>
                         <div class="form-item">
-                            <label>上级河段</label>
-                            <select ng-model="parentReach" ng-options="pr.reachName for pr in parentReachs"
-                                    ng-change="parentReach_Change(parentReach)" class="form-control select-short">
+                            <label>所属区域</label>
+                            <input ng-model="region" type="text" class="form-control input-short-o"  ng-click="regionShow()">
+                            <a class="input-group-addon" ng-click="regionShow()"><i class="fa fa-search"></i></a>
+                            <span class="required">*</span>
+                        </div>
+                        <div class="form-item">
+                            <label>所属水系</label>
+                            <input ng-model="water_ztree" type="text" class="form-control input-short-o"  ng-click="waterShow()">
+                            <a class="input-group-addon" ng-click="waterShow()"><i class="fa fa-search"></i></a>
+                            <span class="required">*</span>
+                        </div>
+                        <div class="form-item">
+                            <label>河湖库级别</label>
+                            <select ng-model="river_part.typeValue" ng-options="rp.typeValue as rp.typeName for rp in riveParts"
+                                    ng-change="rp_Change(river_part.typeValue)" class="form-control select-short">
                                 <option  value="">请选择</option>
-
                             </select>
                             <span class="required">*</span>
                         </div>
-					    <br/>
-						<div class="form-item">
-							<label>起点</label>
-							<input type="text" class="form-control input-short" ng-model="startPoint" />
-
-						</div>
-						<div class="form-item">
-							<label>终点</label>
-							<input type="text" class="form-control input-short" ng-model="endPoint" />
-						</div>
-						<br/>
-						<div class="form-item">
-							<label>是否位于山区</label>
-							<select ng-init="mountain()" ng-model="whether_mountain" ng-options="wm.dictName for wm in mountains"
+                        </br>
+                        <div class="form-item">
+                            <label>起点</label>
+                            <input type="text" class="form-control input-short" ng-model="startPoint" />
+                        </div>
+                        <div class="form-item">
+                            <label>终点</label>
+                            <input type="text" class="form-control input-short" ng-model="endPoint" />
+                        </div>
+                        <div class="form-item">
+                            <label>是否位于山区</label>
+                            <select ng-init="mountain()" ng-model="whether_mountain" ng-options="wm.typeName for wm in mountains"
                                     ng-change="wm_Change(whether_mountain)" class="form-control select-short">
                                 <option  value="">请选择</option>
                             </select>
                             <span class="required">*</span>
-						</div>
-						<div class="form-item">
-							<label>是否虚拟</label>
-							<select ng-init="virtual()" ng-model="whether_virtual" ng-options="wv.dictName for wv in virtuals"
+                        </div>
+                        <div class="form-item">
+                            <label>是否虚拟</label>
+                            <select ng-init="virtual()" ng-model="whether_virtual" ng-options="wv.typeName for wv in virtuals"
                                     ng-change="wv_Change(whether_virtual)" class="form-control select-short">
                                 <option  value="">请选择</option>
                             </select>
                             <span class="required">*</span>
-						</div>
-						<br/>
-						<div class="form-item">
-							<label>长度</label>
-							<input ng-model="length" type="text" class="form-control input-short-o" maxlength="10">
-							<span class="input-group-addon"><i>km</i></span>
-						</div>
-						<div class="form-item">
-							<label>宽度</label>
-							<input ng-model="width" type="text" class="form-control input-short-o" maxlength="10">
-							<span class="input-group-addon"><i>km</i></span>
-						</div>
-						<br/>
-						<div class="form-item">
-							<label>流经区域</label>
-							<input type="text" class="form-control input-long" ng-model="throughArea" />
-						</div>
-						<br/>
-						<div class="form-item">
-							<label>概述</label>
-						</div>
-                        <div id="editor">
                         </div>
-					</form>
+                        </br>
+                        <div class="form-item">
+                            <label>长度</label>
+                            <input ng-model="length" type="text" class="form-control input-short-o" maxlength="10">
+                            <span class="input-group-addon"><i>km</i></span>
+                        </div>
+                        <div class="form-item">
+                            <label>宽度</label>
+                            <input ng-model="width" type="text" class="form-control input-short-o" maxlength="10">
+                            <span class="input-group-addon"><i>km</i></span>
+                        </div>
+                        <div class="form-item">
+                            <label>流经区域</label>
+                            <input type="text" class="form-control input-long" ng-model="throughArea" />
+                        </div>
+                        <div id="riverBox" class="dis-none">
+                            <div class="form-item">
+                                <label>上级河段</label>
+                                <select ng-model="parentReach" ng-options="pr.reachName for pr in parentReachs"
+                                        ng-change="parentReach_Change(parentReach)" class="form-control select-short">
+                                    <option  value="">请选择</option>
+                                </select>
+                                <span class="required">*</span>
+                            </div>
+                            <div class="form-item">
+                                <label>河段岸别</label>
+                                <select ng-init="riveShore()" ng-model="river_shore" ng-options="rs.typeName for rs in riveShores"
+                                        ng-change="rs_Change(river_shore)" class="form-control select-short">
+                                    <option  value="">请选择</option>
+                                </select>
+                                <span class="required">*</span>
+                            </div>
+                            <div class="form-item">
+                                <label>所属河流</label>
+                                <input ng-model="river_ztree" type="text" class="form-control input-short-o"  ng-click="riverShow()">
+                                <a class="input-group-addon" ng-click="riverShow()"><i class="fa fa-search"></i></a>
+                            </div>
+                        </div>
+                        <div id="lakesBox" class="dis-none">
+                            <div class="form-item">
+                                <label>上级湖段</label>
+                                <select ng-model="parentReach" ng-options="pr.reachName for pr in parentReachs"
+                                        ng-change="parentReach_Change(parentReach)" class="form-control select-short">
+                                    <option  value="">请选择</option>
+                                </select>
+                                <span class="required">*</span>
+                            </div>
+                            <div class="form-item">
+                                <label>湖段岸别</label>
+                                <select ng-init="lakesShore()" ng-model="lakes_shore" ng-options="ls.typeName for ls in lakesShores"
+                                        ng-change="ls_Change(lakes_shore)" class="form-control select-short">
+                                    <option  value="">请选择</option>
+                                </select>
+                                <span class="required">*</span>
+                            </div>
+                            <div class="form-item">
+                                <label>所属湖泊</label>
+                                <input ng-model="lakes_ztree" type="text" class="form-control input-short-o"  ng-click="lakesShow()">
+                                <a class="input-group-addon" ng-click="lakesShow()"><i class="fa fa-search"></i></a>
+                            </div>
+                        </div>
+                        <div id="reservoirBox" class="dis-none">
+                            <div class="form-item">
+                                <label>上级库段</label>
+                                <select ng-model="parentReach" ng-options="pr.reachName for pr in parentReachs"
+                                        ng-change="parentReach_Change(parentReach)" class="form-control select-short">
+                                    <option  value="">请选择</option>
+                                </select>
+                                <span class="required">*</span>
+                            </div>
+                            <div class="form-item">
+                                <label>库段岸别</label>
+                                <select ng-init="reservoirShore()" ng-model="reservoir_shore" ng-options="rs.typeName for rs in reservoirShores" ng-change="res_Change(reservoir_shore)" class="form-control select-short"></select>
+                                <span class="required">*</span>
+                            </div>
+                            <div class="form-item">
+                                <label>所属水库</label>
+                                <input ng-model="reservoir_ztree" type="text" class="form-control input-short-o"  ng-click="reservoirShow()">
+                                <a class="input-group-addon" ng-click="reservoirShow()"><i class="fa fa-search"></i></a>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="editorPanel m-t-20">
+                            <label class="editorLabel">概述内容</label>
+                            <div class="editorContent">
+                                <div id="editor"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- map -->
+                    <div class="right-panel wid-25 dis-i-blc" ng-class="{true : 'expandMap',false : 'compressMap' }[switchMapIcon]">
+                        <div class="basicMap" id="mapContainer">
+                            <div class="proMgr-map-tool">
+                                <ul class="drawTool">
+                                    <li ng-click="doDraw();">
+                                        <a id="doDraw" href="javascript:void(0);" title="定位面"><i class="fa fa-pencil"></i></a>
+                                    </li>
+                                    <li ng-click="clearDraw();">
+                                        <a id="clearDraw" href="javascript:void(0);" title="清除"><i class="fa fa-ban"></i></a>
+                                    </li>
+                                    <li ng-click="mapExpand();">
+                                        <a id="mapExpand"  href="javascript:void(0);" title="缩放"><i class="fa" ng-class="{true : 'fa-expand',false : 'fa-compress' }[switchMapIcon]"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="getgeo"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-					<div class="basin_map"></div>
-
-				</div>
-
-			</div>
-		</div>
-
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<ul class="tabs-list" id="tabs">
-					<li class="select">
-						<a href="">管理人员</a>
-					</li>
-					<!--<li><a href="">河道日志</a></li>
-                    <li><a href="">河道全景</a></li>
-                    <li><a href="">附件</a></li>-->
-				</ul>
-				<div class="tab-content" id="tabs-con">
-					<div class="tab-con" style="display: block">
-						<form method="get">
-							<div class="form-inline" ng-repeat="reach in reachadmins">
-								<div class="form-item">
-									<label>履职人员</label>
-									<input type="text" class="form-control input-short-o" ng-model="chairmanName"  ng-click="adminTree()"/>
-									<a href="javascript:void(0);" ng-click="adminTree()" class="input-group-addon">
-										<i class="fa fa-search"></i>
-									</a>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <ul class="tabs-list" id="tabs">
+                    <li class="select">
+                        <a href="">管理人员</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="tabs-con">
+                    <div class="tab-con" style="display: block">
+                        <form method="get">
+                            <div class="form-inline" ng-repeat="reach in reachadmins">
+                                <div class="form-item">
+                                    <label>履职人员</label>
+                                    <input type="text" class="form-control input-short-o" ng-model="chairmanName"  ng-click="adminTree()"/>
+                                    <a href="javascript:void(0);" ng-click="adminTree()" class="input-group-addon">
+                                        <i class="fa fa-search"></i>
+                                    </a>
                                     <span class="required">*</span>
-								</div>
-								<div class="form-item">
-									<label>履职级别</label>
-									<select ng-model="dutyLevels.dictValue"
-											ng-options="wm.dictName for wm in dutyLevels"
-											ng-change="level_Change(d_Level)"
-											class="form-control select-short">
+                                </div>
+                                <div class="form-item">
+                                    <label>履职级别</label>
+                                    <select ng-model="dutyLevels.typeValue"
+                                            ng-options="wm.typeName for wm in dutyLevels"
+                                            ng-change="level_Change(d_Level)"
+                                            class="form-control select-short">
                                         <option  value="">请选择</option>
                                     </select>
                                     <span class="required">*</span>
-								</div>
-								<div class="form-item">
-									<label>履职类型</label>
-									<select ng-init="dutyType()" ng-model="dutyTypes.dictValue"
-											ng-options="wv.dictName for wv in dutyTypes"
-											ng-change="dutyType_Change(d_Type)"
-											class="form-control select-short">
+                                </div>
+                                <div class="form-item">
+                                    <label>履职类型</label>
+                                    <select ng-init="dutyType()" ng-model="dutyTypes.typeValue"
+                                            ng-options="wv.typeName for wv in dutyTypes"
+                                            ng-change="dutyType_Change(d_Type)"
+                                            class="form-control select-short">
                                         <option  value="">请选择</option>
                                     </select>
                                     <span class="required">*</span>
-									</ui-select>
-								</div>
-								<div class="form-item">
-									<label>管理岸面</label>
-									<select ng-model="bankSides.dictValue"
-											ng-options="wn.dictName for wn in bankSides"
-											ng-change="side_Change(d_Side)"
-											class="form-control select-short">
+                                    </ui-select>
+                                </div>
+                                <div class="form-item">
+                                    <label>管理岸面</label>
+                                    <select ng-model="bankSides.typeValue"
+                                            ng-options="wn.typeName for wn in bankSides"
+                                            ng-change="side_Change(d_Side)"
+                                            class="form-control select-short">
                                         <option  value="">请选择</option>
                                     </select>
                                     <span class="required">*</span>
-								</div>
-								<div class="form-item">
-									<div class="checkbox">
-										<label class="i-checks">
-											<input type="checkbox" ng-model="chiefCheck" ng-click="chiefCheckBtn($event)"/>
-	                                        <i></i>参与考核
-	                                    </label>
-									</div>
-								</div>
-								<!--<button type="submit" class="btn btn-primary btn-xs" ng-click="save()">
-                                    <i class="fa fa-save"></i> 保存
-                                </button>-->
-								<button type="submit" class="btn btn-danger btn-xs" ng-click="delReachadmin($index)">
+                                </div>
+                                <div class="form-item">
+                                    <div class="checkbox">
+                                        <label class="i-checks">
+                                            <input type="checkbox" ng-model="chiefCheck" ng-click="chiefCheckBtn($event)"/>
+                                            <i></i>参与考核
+                                        </label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-danger btn-xs" ng-click="delReachadmin($index)">
                                     <i class="fa fa-trash-o"></i> 删除
                                 </button>
-								<div class="line line-dashed b-b line-lg pull-in"></div>
-							</div>
+                                <div class="line line-dashed b-b line-lg pull-in"></div>
+                            </div>
 
-							<button type="button" class="btn btn-primary btn-xs" ng-click="addReachadmin($index)">
+                            <button type="button" class="btn btn-primary btn-xs" ng-click="addReachadmin($index)">
                                 <i class="fa fa-plus"></i>添加
                             </button>
 
-						</form>
+                        </form>
 
-					</div>
-					<!--<div class="tab-con">2</div>
-                    <div class="tab-con">3</div>
-                    <div class="tab-con">4</div>-->
-				</div>
-				<script type="text/javascript">
-					$('#tabs li').click(function() {
-						var i = $(this).index();
-						$(this).addClass('select').siblings().removeClass('select');
-						$('#tabs-con .tab-con').eq(i).show().siblings().hide();
-					});
-				</script>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $('#tabs li').click(function() {
+                        var i = $(this).index();
+                        $(this).addClass('select').siblings().removeClass('select');
+                        $('#tabs-con .tab-con').eq(i).show().siblings().hide();
+                    });
+                </script>
 
-				<div class="btn-box">
-					<button type="submit" class="btn btn-primary" ng-click="add()">
-                        <i class="fa fa-plus"></i>新增
+                <div class="btn-box">
+                    <button type="submit" class="btn btn-primary" ng-click="add()">
+                        <i class="fa fa-check"></i>新增
                     </button>
-					<button type="submit" class="btn btn-default" ng-click="back()">
+                    <button type="submit" class="btn btn-default" ng-click="back()">
                         <i class="fa fa-reply"></i>返回
                     </button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--描述：所属区域树-->
-	<div class="modal fade" id="region_ztree"  role="dialog_region" ng-init="init_region()" data-backdrop="static">
-		<div class="modal-dialog water_dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">选择区域</h4>
-				</div>
-				<div class="modal-body">
-				<div class="input-group">
-			        <input type="text" ng-model="areaName" class="form-control" placeholder="请输入区域名称">
-			        <span class="input-group-btn">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--描述：所属区域树-->
+    <div class="modal fade" id="region_ztree"  role="dialog_region" ng-init="init_region()" data-backdrop="static">
+        <div class="modal-dialog river-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">选择区域</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <input type="text" ng-model="areaName" class="form-control" placeholder="请输入区域名称">
+                        <span class="input-group-btn">
 			        	<button class="btn btn-default" type="button" ng-click="select_region()">查询</button>
 			        </span>
-			    </div>
-					<ul id="regionTree" class="ztree ztree_box_modal"></ul>
-				</div>
-				<div class="modal-footer">
-					<a href="javascript:;" class="btn btn-primary btn-o" ng-click="region_modalOk()">
-						<i class="fa fa-check"></i>
-						<span>确 定</span>
-					</a>
-					<!--<a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
-						<i class="fa fa-reply"></i>
-						<span>关闭</span>
-					</a>-->
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--描述：所属水系树-->
-	<div class="modal fade" id="water_ztree"  role="dialog_water" data-backdrop="static">
-		<div class="modal-dialog water_dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">选择水系</h4>
-				</div>
-				<div class="modal-body">
-				<div class="input-group">
-			        <input type="text" ng-model="waterName" class="form-control" placeholder="请输入水系名称">
-			        <span class="input-group-btn">
+                    </div>
+                    <ul id="regionTree" class="ztree ztree_box_modal"></ul>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-primary btn-o" ng-click="region_modalOk()">
+                        <i class="fa fa-check"></i>
+                        <span>确 定</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--描述：所属水系树-->
+    <div class="modal fade" id="water_ztree"  role="dialog_water" data-backdrop="static">
+        <div class="modal-dialog river-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">选择水系</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <input type="text" ng-model="waterName" class="form-control" placeholder="请输入水系名称">
+                        <span class="input-group-btn">
 			        <button class="btn btn-default" type="button" ng-click="select_water()">查询</button>
 			        </span>
-			    </div>
-					<ul id="waterZtree" class="ztree ztree_box_modal"></ul>
-				</div>
-				<div class="modal-footer">
-					<a href="javascript:;" class="btn btn-primary btn-o" ng-click="water_modalOk()">
-						<i class="fa fa-check"></i>
-						<span>确 定</span>
-					</a>
-					<!--<a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
-						<i class="fa fa-reply"></i>
-						<span>关闭</span>
-					</a>-->
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--描述：所属河流树-->
-	<div class="modal fade" id="river_ztree"  role="dialog_river" data-backdrop="static">
-		<div class="modal-dialog water_dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">选择河流</h4>
-				</div>
-				<div class="modal-body">
-				<div class="input-group">
-			        <input type="text" ng-model="riverName" class="form-control" placeholder="请输入河流名称">
-			        <span class="input-group-btn">
+                    </div>
+                    <ul id="waterZtree" class="ztree ztree_box_modal"></ul>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-primary btn-o" ng-click="water_modalOk()">
+                        <i class="fa fa-check"></i>
+                        <span>确 定</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--描述：所属河流树-->
+    <div class="modal fade" id="river_ztree"  role="dialog_river" data-backdrop="static">
+        <div class="modal-dialog river-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">选择河流</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <input type="text" ng-model="riverName" class="form-control" placeholder="请输入河流名称">
+                        <span class="input-group-btn">
 			        <button class="btn btn-default" type="button" ng-click="select_river()">查询</button>
 			        </span>
-			    </div>
-					<ul id="riverZtree" class="ztree ztree_box_modal"></ul>
-				</div>
-				<div class="modal-footer">
-					<a href="javascript:;" class="btn btn-primary btn-o" ng-click="river_modalOk()">
-						<i class="fa fa-check"></i>
-						<span>确 定</span>
-					</a>
-					<!--<a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
-						<i class="fa fa-reply"></i>
-						<span>关闭</span>
-					</a>-->
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--描述：所属湖泊树-->
-	<div class="modal fade" id="lakes_ztree"  role="dialog_river" data-backdrop="static">
-		<div class="modal-dialog water_dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">选择湖泊</h4>
-				</div>
-				<div class="modal-body">
-				<div class="input-group">
-			        <input type="text" ng-model="lakesName" class="form-control" placeholder="请输入河流名称">
-			        <span class="input-group-btn">
+                    </div>
+                    <ul id="riverZtree" class="ztree ztree_box_modal"></ul>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-primary btn-o" ng-click="river_modalOk()">
+                        <i class="fa fa-check"></i>
+                        <span>确 定</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--描述：所属湖泊树-->
+    <div class="modal fade" id="lakes_ztree"  role="dialog_river" data-backdrop="static">
+        <div class="modal-dialog river-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">选择湖泊</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <input type="text" ng-model="lakesName" class="form-control" placeholder="请输入河流名称">
+                        <span class="input-group-btn">
 			        <button class="btn btn-default" type="button" ng-click="select_lakes()">查询</button>
 			        </span>
-			    </div>
-					<ul id="lakesZtree" class="ztree ztree_box_modal"></ul>
-				</div>
-				<div class="modal-footer">
-					<a href="javascript:;" class="btn btn-primary btn-o" ng-click="lakes_modalOk()">
-						<i class="fa fa-check"></i>
-						<span>确 定</span>
-					</a>
-					<!--<a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
-						<i class="fa fa-reply"></i>
-						<span>关闭</span>
-					</a>-->
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--描述：所属水库树-->
-	<div class="modal fade" id="reservoir_ztree"  role="dialog_river" data-backdrop="static">
-		<div class="modal-dialog water_dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">选择水库</h4>
-				</div>
-				<div class="modal-body">
-				<div class="input-group">
-			        <input type="text" ng-model="reservoirName" class="form-control" placeholder="请输入河流名称">
-			        <span class="input-group-btn">
+                    </div>
+                    <ul id="lakesZtree" class="ztree ztree_box_modal"></ul>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-primary btn-o" ng-click="lakes_modalOk()">
+                        <i class="fa fa-check"></i>
+                        <span>确 定</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--描述：所属水库树-->
+    <div class="modal fade" id="reservoir_ztree"  role="dialog_river" data-backdrop="static">
+        <div class="modal-dialog river-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">选择水库</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <input type="text" ng-model="reservoirName" class="form-control" placeholder="请输入河流名称">
+                        <span class="input-group-btn">
 			        <button class="btn btn-default" type="button" ng-click="select_reservoir()">查询</button>
 			        </span>
-			    </div>
-					<ul id="reservoirZtree" class="ztree ztree_box_modal"></ul>
-				</div>
-				<div class="modal-footer">
-					<a href="javascript:;" class="btn btn-primary btn-o" ng-click="reservoir_modalOk()">
-						<i class="fa fa-check"></i>
-						<span>确 定</span>
-					</a>
-					<!--<a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
-						<i class="fa fa-reply"></i>
-						<span>关闭</span>
-					</a>-->
-				</div>
-			</div>
-		</div>
-	</div>
+                    </div>
+                    <ul id="reservoirZtree" class="ztree ztree_box_modal"></ul>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-primary btn-o" ng-click="reservoir_modalOk()">
+                        <i class="fa fa-check"></i>
+                        <span>确 定</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<!--树-->
-	<div class="modal fade" id="myModal_ztree_one"  role="dialog" data-backdrop="static">
-		<div class="modal-dialog water_dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">选择人员</h4>
-				</div>
-				<div class="modal-body">
-					<div class="input-group">
-						<input type="text" ng-model="waterName_one" class="form-control" placeholder="请输入人员名称">
-						<span class="input-group-btn">
+    <!--树-->
+    <div class="modal fade" id="myModal_ztree_one"  role="dialog" data-backdrop="static">
+        <div class="modal-dialog river-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">选择人员</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <input type="text" ng-model="waterName_one" class="form-control" placeholder="请输入人员名称">
+                        <span class="input-group-btn">
 				        	<button class="btn btn-default" type="button" ng-click="select_one()">查询</button>
 				        </span>
-					</div>
-					<ul id="regionTrees" class="ztree ztree_box_modal"></ul>
-				</div>
-				<div class="modal-footer text-l">
-					<a href="javascript:;" class="btn btn-primary btn-o" ng-click="modalOk_one()">
-						<i class="fa fa-check"></i>
-						<span>确 定</span>
-					</a>
-					<!--<a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
-						<i class="fa fa-reply"></i>
-						<span>关闭</span>
-					</a>-->
-				</div>
-			</div>
-		</div>
-	</div>
+                    </div>
+                    <ul id="regionTrees" class="ztree ztree_box_modal"></ul>
+                </div>
+                <div class="modal-footer text-l">
+                    <a href="javascript:;" class="btn btn-primary btn-o" ng-click="modalOk_one()">
+                        <i class="fa fa-check"></i>
+                        <span>确 定</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script type="text/javascript">
     var ue =  CKEDITOR.replace( 'editor' );

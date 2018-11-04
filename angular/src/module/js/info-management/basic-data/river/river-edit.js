@@ -65,7 +65,7 @@ var dictionaryUrl = "/dictionary/v1";
                                     }
                                     $http({
                                         method:'get',
-                                        url:$localStorage.serviceUrl_watersource +riverUrl + "/isRepeat",
+                                        url:$localStorage.gwUrl +riverUrl + "/isRepeat",
                                         params:{
                                             name:$scope.riverName
                                         }
@@ -89,7 +89,7 @@ var dictionaryUrl = "/dictionary/v1";
 								function zTreeOnClick(event, treeId, treeNode) {
 									$http({
 										method: "GET",
-										url: $localStorage.serviceUrl_watersource +basicUrl + "/findByAreaCode",
+										url: $localStorage.gwUrl +basicUrl + "/findByAreaCode",
 										params: {
 											areaCode: treeNode.id,
 										},
@@ -100,7 +100,7 @@ var dictionaryUrl = "/dictionary/v1";
 											console.log(treeNode_find );
 											$http({
 												method: "get",
-												url: $localStorage.serviceUrl_watersource +basicUrl + "/tree",
+												url: $localStorage.gwUrl +basicUrl + "/tree",
 												params: {
 													areaCode:treeNode_find
 												},
@@ -119,7 +119,7 @@ var dictionaryUrl = "/dictionary/v1";
 								};
 
                                 var regionTree;
-                                var regionTreeUrl = $localStorage.serviceUrl_watersource +basicUrl + "/tree";
+                                var regionTreeUrl = $localStorage.gwUrl +basicUrl + "/tree";
                                 var setting = {
                                     view: {
                                         selectedMulti: true,
@@ -177,7 +177,7 @@ var dictionaryUrl = "/dictionary/v1";
 									}else{
 										$http({
 											method: "GET",
-											url: $localStorage.serviceUrl_watersource +basicUrl + "/fingByRegionName",
+											url: $localStorage.gwUrl +basicUrl + "/fingByRegionName",
 											params: {
 												regionName: $scope.areaName
 											},
@@ -208,7 +208,7 @@ var dictionaryUrl = "/dictionary/v1";
 									//初始化水系树
 									$http({
 										method: "get",
-										url: $localStorage.serviceUrl_watersource +waterUrl + "/belongWater",
+										url: $localStorage.gwUrl +waterUrl + "/belongWater",
 										params: {
 											areaCode:_treeNode_find
 										},
@@ -237,7 +237,7 @@ var dictionaryUrl = "/dictionary/v1";
 									function zTreeOnClick_water(event, treeId, treeNode) {
 										$http({
 											method: "GET",
-											url: $localStorage.serviceUrl_watersource +waterUrl + "/findByWaterCode",
+											url: $localStorage.gwUrl +waterUrl + "/findByWaterCode",
 											params: {
 												waterCode: treeNode.id
 											},
@@ -262,7 +262,7 @@ var dictionaryUrl = "/dictionary/v1";
 									$scope.select_water = function() {
 										$http({
 											method: "GET",
-											url: $localStorage.serviceUrl_watersource +waterUrl + "/belongWater",
+											url: $localStorage.gwUrl +waterUrl + "/belongWater",
 											params: {
 												waterName: $scope.waterName
 											},
@@ -300,7 +300,7 @@ var dictionaryUrl = "/dictionary/v1";
 								$scope.riverType = function () {
 							    	$http({
 							            method: "get",
-										url: $localStorage.serviceUrl_watersource +dictionaryUrl + "/findDictionary",
+										url: $localStorage.gwUrl +dictionaryUrl + "/findDictionary",
 										params: {
 											type: 9
 										},
@@ -331,7 +331,7 @@ var dictionaryUrl = "/dictionary/v1";
 								$scope.riverGrade = function () {
 							    	$http({
 							            method: "get",
-										url: $localStorage.serviceUrl_watersource +dictionaryUrl + "/findDictionary",
+										url: $localStorage.gwUrl +dictionaryUrl + "/findDictionary",
 										params: {
 											type: 1
 										},
@@ -390,7 +390,7 @@ var dictionaryUrl = "/dictionary/v1";
                                         });
                                     } else {
                                         $http({
-                                            url: $localStorage.serviceUrl_watersource +riverUrl + "/update",
+                                            url: $localStorage.gwUrl +riverUrl + "/update",
                                             method: "post",
                                             params: {
                                                 id: $scope.editId,

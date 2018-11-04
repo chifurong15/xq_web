@@ -22,49 +22,49 @@ var dictionaryUrl = "/dictionary/v1";
             'routeService',
             '$http',
             function imReachEdit($localStorage, $scope, $location, $log,$q, $rootScope, globalParam,$window, routeService, $http) {
-				$scope.editId = globalParam.getter().data.id;
+				$scope.editId = $localStorage.reachEditData.data.id;
 				console.log($scope.editId);
 				//河湖库详情
-				$scope.sort=globalParam.getter().data.classify;
+                $scope.sort=$localStorage.reachEditData.data.classify;
 				console.log($scope.sort);
-				$scope.reachFName = globalParam.getter().data.reachName;
-				$scope.alias = globalParam.getter().data.alias;
-				$scope.water_quality = globalParam.getter().data.waterGradeName;
-				$scope.deposit_status = globalParam.getter().data.siltyName;
-				$scope.river_part = globalParam.getter().data.greadName;
-				$scope.river_shore = globalParam.getter().data.shoreName;
+				$scope.reachFName = $localStorage.reachEditData.data.reachName;
+				$scope.alias = $localStorage.reachEditData.data.alias;
+				$scope.water_quality = $localStorage.reachEditData.data.waterGradeName;
+				$scope.deposit_status = $localStorage.reachEditData.data.siltyName;
+				$scope.river_part = $localStorage.reachEditData.data.greadName;
+				$scope.river_shore = $localStorage.reachEditData.data.shoreName;
 				if($scope.sort === 'A'){
 					$scope.riverBox = true;
 					$scope.val='河段';
 					console.log('Hello'+$scope.sort);
-					$scope.region = globalParam.getter().data.regionName;
-					$scope.water_ztree = globalParam.getter().data.waterName;
-					$scope.river_ztree = globalParam.getter().data.pName;
-					$scope.res_Change_value = globalParam.getter().data.greadName;
+					$scope.region = $localStorage.reachEditData.data.regionName;
+					$scope.water_ztree = $localStorage.reachEditData.data.waterName;
+					$scope.river_ztree = $localStorage.reachEditData.data.pName;
+					$scope.res_Change_value = $localStorage.reachEditData.data.greadName;
 					
 				}else if($scope.sort === 'B'){
 					$scope.lakesBox = true;
 					$scope.val='湖段';
 					console.log('Hello'+$scope.sort);
-					$scope.region = globalParam.getter().data.regionName;
-					$scope.water_ztree = globalParam.getter().data.waterName;
-					$scope.lakes_ztree = globalParam.getter().data.pName;
+					$scope.region = $localStorage.reachEditData.data.regionName;
+					$scope.water_ztree = $localStorage.reachEditData.data.waterName;
+					$scope.lakes_ztree = $localStorage.reachEditData.data.pName;
 				}else if($scope.sort === 'C'){
 					$scope.reservoirBox = true;
 					$scope.val='库段';
 					console.log('Hello'+$scope.sort);
-					$scope.region = globalParam.getter().data.regionName;
-					$scope.water_ztree = globalParam.getter().data.waterName;
-					$scope.reservoir_ztree = globalParam.getter().data.pName;
+					$scope.region = $localStorage.reachEditData.data.regionName;
+					$scope.water_ztree = $localStorage.reachEditData.data.waterName;
+					$scope.reservoir_ztree = $localStorage.reachEditData.data.pName;
 				}else{}	
-				$scope.startPoint = globalParam.getter().data.startPoint;
-				$scope.endPoint = globalParam.getter().data.endPoint;
-				$scope.whether_mountain = globalParam.getter().data.whetherName;
-				$scope.whether_virtual = globalParam.getter().data.isVirtualName;
-				$scope.length = globalParam.getter().data.length;
-				$scope.width = globalParam.getter().data.width;
-				$scope.throughArea = globalParam.getter().data.throughArea;
-				$scope.overView = globalParam.getter().data.overView;
+				$scope.startPoint = $localStorage.reachEditData.data.startPoint;
+				$scope.endPoint = $localStorage.reachEditData.data.endPoint;
+				$scope.whether_mountain = $localStorage.reachEditData.data.whetherName;
+				$scope.whether_virtual = $localStorage.reachEditData.data.isVirtualName;
+				$scope.length = $localStorage.reachEditData.data.length;
+				$scope.width = $localStorage.reachEditData.data.width;
+				$scope.throughArea = $localStorage.reachEditData.data.throughArea;
+				$scope.overView = $localStorage.reachEditData.data.overView;
                 CKEDITOR.instances.editor.setData($scope.overView);
 
 				
@@ -136,13 +136,13 @@ var dictionaryUrl = "/dictionary/v1";
                 //判断名称是否重复
                 $scope.isRepeat = function(){
                     var oldName = $scope.reachFName;
-                    var newName = globalParam.getter().data.reachName;
+                    var newName = $localStorage.reachEditData.data.reachName;
                     if(oldName.toUpperCase() === newName.toUpperCase()){
                         return;
                     }
                     $http({
                         method:'get',
-                        url:$localStorage.serviceUrl_watersource +reachUrl + "/isRepeat",
+                        url:$localStorage.gwUrl +reachUrl + "/isRepeat",
                         params:{
                             name:$scope.reachFName
                         }
@@ -162,12 +162,12 @@ var dictionaryUrl = "/dictionary/v1";
                 }
 				
 				//水质等级
-				$scope.waterQualityGrade = globalParam.getter().data.waterGrade;
+				$scope.waterQualityGrade = $localStorage.reachEditData.data.waterGrade;
             	console.log($scope.waterQualityGrade);  //取出当前数据 mainClassId
 				$scope.waterQuality = function() {
 					$http({
 						method: "get",
-						url: $localStorage.serviceUrl_watersource +dictionaryUrl + "/findDictionary",
+						url: $localStorage.gwUrl +dictionaryUrl + "/findDictionary",
 						params: {
 							type: 7
 						},
@@ -194,12 +194,12 @@ var dictionaryUrl = "/dictionary/v1";
 			    }
                 
 				//淤积情况
-				$scope.depositCase = globalParam.getter().data.silty;
+				$scope.depositCase = $localStorage.reachEditData.data.silty;
             	console.log($scope.depositCase);  //取出当前数据 silty
 				$scope.deposit = function() {
 					$http({
 						method: "get",
-						url: $localStorage.serviceUrl_watersource +dictionaryUrl + "/findDictionary",
+						url: $localStorage.gwUrl +dictionaryUrl + "/findDictionary",
 						params: {
 							type: 8
 						},
@@ -227,12 +227,12 @@ var dictionaryUrl = "/dictionary/v1";
 			    }
 				
 				//河湖库级别
-				$scope.rivePartLevel = globalParam.getter().data.grade;
+				$scope.rivePartLevel = $localStorage.reachEditData.data.grade;
             	console.log($scope.rivePartLevel);  //取出当前数据grade
 				$scope.rivePart = function() {
 					$http({
 						method: "get",
-						url: $localStorage.serviceUrl_watersource +dictionaryUrl + "/findDictionary",
+						url: $localStorage.gwUrl +dictionaryUrl + "/findDictionary",
 						params: {
 						type: 1
 						},
@@ -262,12 +262,12 @@ var dictionaryUrl = "/dictionary/v1";
                 
 				
 				//是否位于山区
-				$scope.isMountain = globalParam.getter().data.whether;
+				$scope.isMountain = $localStorage.reachEditData.data.whether;
             	console.log($scope.isMountain);  //取出当前数据
 				$scope.mountain = function() {
 					$http({
 						method: "get",
-						url: $localStorage.serviceUrl_watersource +dictionaryUrl + "/findDictionary",
+						url: $localStorage.gwUrl +dictionaryUrl + "/findDictionary",
 						params: {
 						type: 6
 						},
@@ -295,12 +295,12 @@ var dictionaryUrl = "/dictionary/v1";
 				}
 				
 				//是否虚拟
-				$scope.isVirtual = globalParam.getter().data.isVirtual;
+				$scope.isVirtual = $localStorage.reachEditData.data.isVirtual;
             	console.log($scope.isVirtual);  //取出当前数据
 				$scope.virtual = function() {
 					$http({
 						method: "get",
-						url: $localStorage.serviceUrl_watersource +dictionaryUrl + "/findDictionary",
+						url: $localStorage.gwUrl +dictionaryUrl + "/findDictionary",
 						params: {
 						type: 6
 						},
@@ -328,12 +328,12 @@ var dictionaryUrl = "/dictionary/v1";
 				}
 				
 				//河段岸别
-				$scope.rivePartShore = globalParam.getter().data.shore;
+				$scope.rivePartShore = $localStorage.reachEditData.data.shore;
             	console.log($scope.rivePartShore);  //取出当前数据shore
 				$scope.riveShore = function() {
 					$http({
 						method: "get",
-						url: $localStorage.serviceUrl_watersource +dictionaryUrl + "/findDictionary",
+						url: $localStorage.gwUrl +dictionaryUrl + "/findDictionary",
 						params: {
 						    type:4
 						},
@@ -362,12 +362,12 @@ var dictionaryUrl = "/dictionary/v1";
 				}
 				
 				//湖段岸别
-				$scope.lakesPartShore = globalParam.getter().data.shore;
+				$scope.lakesPartShore = $localStorage.reachEditData.data.shore;
             	console.log($scope.lakesPartShore);  //取出当前数据shore
 				$scope.lakesShore = function() {
 					$http({
 						method: "get",
-						url: $localStorage.serviceUrl_watersource +dictionaryUrl + "/findDictionary",
+						url: $localStorage.gwUrl +dictionaryUrl + "/findDictionary",
 						params: {
 						type:2
 						},
@@ -396,12 +396,12 @@ var dictionaryUrl = "/dictionary/v1";
                 }
 
 				//库段岸别
-				$scope.reservoirPartShore = globalParam.getter().data.shore;
+				$scope.reservoirPartShore = $localStorage.reachEditData.data.shore;
             	console.log($scope.reservoirPartShore);  //取出当前数据shore
 				$scope.reservoirShore = function() {
 					$http({
 						method: "get",
-						url: $localStorage.serviceUrl_watersource +dictionaryUrl + "/findDictionary",
+						url: $localStorage.gwUrl +dictionaryUrl + "/findDictionary",
 						params: {
 						type:3
 						},
@@ -463,7 +463,7 @@ var dictionaryUrl = "/dictionary/v1";
                     console.log('===========zTreeOnClick===========')
                     $http({
                         method: "GET",
-                        url: $localStorage.serviceUrl_watersource +basicUrl + "/tree",
+                        url: $localStorage.gwUrl +basicUrl + "/tree",
                         params: {
                             parentCode: treeNode.id,
                         },
@@ -501,7 +501,7 @@ var dictionaryUrl = "/dictionary/v1";
                     }
                     $http({
                         method: "GET",
-                        url: $localStorage.serviceUrl_watersource +basicUrl + "/tree",
+                        url: $localStorage.gwUrl +basicUrl + "/tree",
                         params: {
                             parentCode:treeNode.id
                         },
@@ -517,7 +517,7 @@ var dictionaryUrl = "/dictionary/v1";
                     console.log(regionTreeUrl)
                     $http({
                         method: "GET",
-                        url: $localStorage.serviceUrl_watersource +basicUrl + "/tree",
+                        url: $localStorage.gwUrl +basicUrl + "/tree",
                         dataType:'json'
                     }).success(
                         function(data) {
@@ -533,7 +533,7 @@ var dictionaryUrl = "/dictionary/v1";
 					}else{
 						$http({
 							method: "GET",
-							url: $localStorage.serviceUrl_watersource +basicUrl + "/fingByRegionName",
+							url: $localStorage.gwUrl +basicUrl + "/fingByRegionName",
 							params: {
 								regionName: $scope.areaName
 							},
@@ -563,7 +563,7 @@ var dictionaryUrl = "/dictionary/v1";
 					//初始化水系树
 					$http({
 						method: "get",
-						url: $localStorage.serviceUrl_watersource +waterUrl + "/belongWater",
+						url: $localStorage.gwUrl +waterUrl + "/belongWater",
 						params: {
 							areaCode:treeNode_find
 						},
@@ -592,7 +592,7 @@ var dictionaryUrl = "/dictionary/v1";
 					function zTreeOnClick_water(event, treeId, treeNode) {
 						$http({
 							method: "GET",
-							url: $localStorage.serviceUrl_watersource +waterUrl + "/findByWaterCode",
+							url: $localStorage.gwUrl +waterUrl + "/findByWaterCode",
 							params: {
 								waterCode: treeNode.id
 							},
@@ -618,7 +618,7 @@ var dictionaryUrl = "/dictionary/v1";
 					$scope.select_water = function() {
 						$http({
 							method: "GET",
-							url: $localStorage.serviceUrl_watersource +waterUrl + "/belongWater",
+							url: $localStorage.gwUrl +waterUrl + "/belongWater",
 							params: {
 								waterName: $scope.waterName,
 								areaCode:treeNode_find
@@ -660,7 +660,7 @@ var dictionaryUrl = "/dictionary/v1";
 					//生成河流树
 					$http({
 						method: "get",
-						url: $localStorage.serviceUrl_watersource +waterUrl + "/riverLakesReservoir",
+						url: $localStorage.gwUrl +waterUrl + "/riverLakesReservoir",
 						params: {
 							areaCode:treeNode_find,
 							waterCode:water_ztree_node,
@@ -691,7 +691,7 @@ var dictionaryUrl = "/dictionary/v1";
 					function zTreeOnClick_water(event, treeId, treeNode) {
 						$http({
 							method: "GET",
-							url: $localStorage.serviceUrl_watersource +waterUrl + "/findByCode",
+							url: $localStorage.gwUrl +waterUrl + "/findByCode",
 							params: {
 								code: treeNode.id,
 								type:"A"
@@ -718,7 +718,7 @@ var dictionaryUrl = "/dictionary/v1";
 					$scope.select_river = function() {
 						$http({
 							method: "GET",
-							url: $localStorage.serviceUrl_watersource +waterUrl + "/riverLakesReservoir",
+							url: $localStorage.gwUrl +waterUrl + "/riverLakesReservoir",
 							params: {
 								areaCode:treeNode_find,
 								waterCode:water_ztree_node,
@@ -764,7 +764,7 @@ var dictionaryUrl = "/dictionary/v1";
 					//生成湖泊树
 					$http({
 						method: "get",
-						url: $localStorage.serviceUrl_watersource +waterUrl + "/riverLakesReservoir",
+						url: $localStorage.gwUrl +waterUrl + "/riverLakesReservoir",
 						params: {
 							areaCode:treeNode_find,
 							waterCode:water_ztree_node,
@@ -795,7 +795,7 @@ var dictionaryUrl = "/dictionary/v1";
 					function zTreeOnClick_lakes(event, treeId, treeNode) {
 						$http({
 							method: "GET",
-							url: $localStorage.serviceUrl_watersource +waterUrl + "/findByCode",
+							url: $localStorage.gwUrl +waterUrl + "/findByCode",
 							params: {
 								code: treeNode.id,
 								type:"B"
@@ -822,7 +822,7 @@ var dictionaryUrl = "/dictionary/v1";
 					$scope.select_lakes = function() {
 						$http({
 							method: "GET",
-							url: $localStorage.serviceUrl_watersource +waterUrl + "/riverLakesReservoir",
+							url: $localStorage.gwUrl +waterUrl + "/riverLakesReservoir",
 							params: {
 								areaCode:treeNode_find,
 								waterCode:water_ztree_node,
@@ -867,7 +867,7 @@ var dictionaryUrl = "/dictionary/v1";
 					//生成水库树
 					$http({
 						method: "get",
-						url: $localStorage.serviceUrl_watersource +waterUrl + "/riverLakesReservoir",
+						url: $localStorage.gwUrl +waterUrl + "/riverLakesReservoir",
 						params: {
 							areaCode:treeNode_find,
 							waterCode:water_ztree_node,
@@ -898,7 +898,7 @@ var dictionaryUrl = "/dictionary/v1";
 					function zTreeOnClick_reservoir(event, treeId, treeNode) {
 						$http({
 							method: "GET",
-							url: $localStorage.serviceUrl_watersource +waterUrl + "/findByCode",
+							url: $localStorage.gwUrl +waterUrl + "/findByCode",
 							params: {
 								code: treeNode.id,
 								type:"C"
@@ -925,7 +925,7 @@ var dictionaryUrl = "/dictionary/v1";
 					$scope.select_reservoir = function() {
 						$http({
 							method: "GET",
-							url: $localStorage.serviceUrl_watersource +waterUrl + "/riverLakesReservoir",
+							url: $localStorage.gwUrl +waterUrl + "/riverLakesReservoir",
 							params: {
 								areaCode:treeNode_find,
 								waterCode:water_ztree_node,
@@ -1055,7 +1055,7 @@ var dictionaryUrl = "/dictionary/v1";
                         } else {
                             $http({
                                 method: "post",
-                                url: $localStorage.serviceUrl_watersource +reachUrl + "/update",
+                                url: $localStorage.gwUrl +reachUrl + "/update",
                                 params: {
                                     id: $scope.editId,
                                     reachName: $scope.reachFName,
@@ -1137,7 +1137,7 @@ var dictionaryUrl = "/dictionary/v1";
 
                             $http({
                                 method: "post",
-                                url: $localStorage.serviceUrl_watersource +reachUrl + "/update",
+                                url: $localStorage.gwUrl +reachUrl + "/update",
                                 params: {
                                     id: $scope.editId,
                                     reachName: $scope.reachFName,
@@ -1220,7 +1220,7 @@ var dictionaryUrl = "/dictionary/v1";
 
                             $http({
                                 method: "post",
-                                url: $localStorage.serviceUrl_watersource +reachUrl + "/update",
+                                url: $localStorage.gwUrl +reachUrl + "/update",
                                 params: {
                                     id: $scope.editId,
                                     reachName: $scope.reachFName,
@@ -1269,7 +1269,7 @@ var dictionaryUrl = "/dictionary/v1";
 
                 $scope.back = function() {
                     // 跳转到菜单页面
-                    routeService.route(56, true);
+                    routeService.route(12, true);
                 }
 
 
@@ -1277,7 +1277,7 @@ var dictionaryUrl = "/dictionary/v1";
                 $scope.adminTree = function () {
                     $("#myModal_ztree_one").modal('show');
                     //行政区划树初始化
-                    var regionAndUserTreeUrl = $localStorage.serviceUrl_watersource +basicUrl + "/regionAndUserTree";
+                    var regionAndUserTreeUrl = $localStorage.gwUrl +basicUrl + "/regionAndUserTree";
                     $scope.treeLists(regionAndUserTreeUrl);
                 }
 
@@ -1285,7 +1285,7 @@ var dictionaryUrl = "/dictionary/v1";
                 $scope.find = function () {
                     $http({
                         method: "GET",
-                        url: $localStorage.serviceUrl_watersource +basicUrl + "/findByUser",
+                        url: $localStorage.gwUrl +basicUrl + "/findByUser",
                         params: {
                             fullName: $scope.pAreaName,
                             areaName: $scope.areaName,
@@ -1337,7 +1337,7 @@ var dictionaryUrl = "/dictionary/v1";
                     }
                     $http({
                         method: "GET",
-                        url: $localStorage.serviceUrl_watersource +basicUrl + "/regionAndUserTree",
+                        url: $localStorage.gwUrl +basicUrl + "/regionAndUserTree",
                         params: {
                             code: treeNode.id,
                             chairmanLevel: treeNode.regionLevel + 1
@@ -1369,7 +1369,7 @@ var dictionaryUrl = "/dictionary/v1";
                 $scope.dutyType = function () {
                     $http({
                         method: "get",
-                        url: $localStorage.serviceUrl_watersource +reachUrl + "/chairmanType"
+                        url: $localStorage.gwUrl +reachUrl + "/chairmanType"
                     }).success(
                         function (res) {
                             console.log(res);
