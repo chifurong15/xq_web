@@ -2074,7 +2074,7 @@ body .c-ffffff a {
     margin-top: 5px;
 }
 #accordion1 .panel-heading ,#accordion2 .panel-heading{
-    width: 80%;
+    width: 100%;
     border: 2px solid #efefef;
 }
 #accordion1 .panel-default ,#accordion2 .panel-default{

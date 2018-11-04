@@ -9,16 +9,17 @@
                     </div>
                     <div class="form-item">
                         <label>河流类型</label>
-						<select ng-init="riverType()" ng-model="river_type" ng-options="rv.dictName for rv in riverTypes"
-                                ng-change="river_Change(river_type)" class="form-control select-short">
-                            <option  value="">请选择</option>
+                        <select class="form-control select-short" ng-model="typeName"
+                                ng-init="riverChange(typeName,0);">
+                            <option value="">--请选择--</option>
+                            <option value="{{x.typeName}}" ng-repeat="x in riverTypes">{{x.typeName}}</option>
                         </select>
                     </div>
-                    <div class="form-item">
+                    <!--<div class="form-item">
                         <label>所属水系</label>
                         <input ng-model="water_ztree_name" type="text" class="form-control input-short-o"  ng-click="show()">
 						<a class="input-group-addon" ng-click="show()"><i class="fa fa-search"></i></a>
-                    </div>
+                    </div>-->
                     <button type="button" class="btn btn-primary" ng-click="find()">
                         <i class="fa fa-search"></i>搜索
                     </button>
@@ -43,7 +44,7 @@
                             <th class="wid-10">河流长度</th>
                             <th class="wid-10">所属水系</th>
                             <th class="wid-10">所属行政区划</th>
-                            <th class="wid-10">概述</th>
+                            <!--<th class="wid-10">概述</th>-->
                             <th class="wid-10">备注</th>
                             <th class="wid-20">操作</th>
                         </tr>
@@ -55,7 +56,7 @@
                             <td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{module.length}}</td>
                             <td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{module.waterName}}</td>
                             <td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{module.regionName}}</td>
-                            <td ng-class-odd="'active'" ng-class-even="'bg-FFF'"><a ng-click="overView(module.id)">查看详情</a></td>
+                            <!--<td ng-class-odd="'active'" ng-class-even="'bg-FFF'"><a ng-click="overView(module.id)">查看详情</a></td>-->
                             <td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{module.remark}}</td>
                             <td ng-class-odd="'active'" ng-class-even="'bg-FFF'" class="td-tool">
                             	<a class="btn btn-primary btn-xs" ng-click="moveUp(module.id)" ng-if="moveIcon"><i class="fa fa-chevron-up" title="上移"></i></a>

@@ -46,13 +46,13 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                     /*默认显示第一页*/
                     $scope.paginationConf.currentPage = 1;
                     /*河流类型*/
-                    riverTypeItem();
+                    // riverTypeItem();
                     /*水系树*/
                     riverTreeList();
                 };
 
                 /*河流类型*/
-                function riverTypeItem() {
+                $scope.riverChange = function() {
                     $http({
                         method: "get",
                         url: $localStorage.gwUrl + riverUrl + "/riverType",
@@ -71,19 +71,6 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                     });
 
                 }
-
-                /*河流类型切换*/
-                $scope.riverChange = function(r) {
-                    if (r == null){
-                        $scope.riverChangeName = null;
-                        $scope.riverChangeId = null;
-                    } else {
-                        $scope.riverChangeName = r.typeName;
-                        $scope.riverChangeId = r.typeValue;
-                        console.log($scope.riverChangeName);
-                        console.log($scope.riverChangeId);
-                    }
-                };
 
                 /*水系选择模态框*/
                 $scope.waterTreeShow = function() {
