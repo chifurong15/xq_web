@@ -15,7 +15,7 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
         $localStorage.serviceUrl_patrolMgr = $localStorage.gwUrl + "/patrolMgr";
         $localStorage.serviceUrl_reachTree = $localStorage.gwUrl + "/watersource";
         $localStorage.serviceUrl_eventMgr = $localStorage.gwUrl + "/eventMgr/";
-        $localStorage.serviceUrl_fileService = $localStorage.gwUrl + '/';
+        $localStorage.serviceUrl_fileService = $localStorage.gwUrl + '/fm';
         // logo显示隐藏
         $scope.noblock = false;
         moduleService.getConfig();
