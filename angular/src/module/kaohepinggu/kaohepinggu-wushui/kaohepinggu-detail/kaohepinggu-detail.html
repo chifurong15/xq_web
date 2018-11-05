@@ -9,10 +9,18 @@
         
     	<div class="panel panel-default">
         	<div class="panel-body">
-        		<div>
-        			<h3 style="display: inline-block;font-size: 16px;font-weight:700;">{{title}}</h3>
-        			<b style="margin: 0 30px;">{{issue}}</b>
-        		</div>
+				<div style="display: flex;justify-content: space-between">
+					<div>
+						<h3 style="display: inline-block;font-size: 16px;font-weight:700;">{{title}}</h3>
+						<b style="margin: 0 30px;">{{issue}}</b>
+					</div>
+					<div style="display: inline-block;float: right;">
+						<button type="button" class="btn btn-info" ng-click="add()" ng-if="num == 1">新增</button>
+						<input type="file" class="hidden" id="J-attandUploader" ng-model="attandUrl" onchange="angular.element(this).scope().uploadFile(this)"/>
+						<button class="btn btn-success" onclick="document.getElementById('J-attandUploader').click()" ng-if="num == 1">导入(.xls)</button>
+						<a class="btn btn-info" ng-if="num == 1" ng-href="http://10.0.0.196/api/download/uhope/infomation/20181102150143087_污水处理厂.xlsx" target="_blank"  class="downOrLook">下载导入模板</a>
+					</div>
+				</div>
                 <div class="tab-content">
                     <div class="tab-pane active" id="tableStatistics">
                         <div class="table-responsive" style="margin-top: 20px;">
@@ -24,15 +32,20 @@
 	                                    <th width="10%">所在行政区</th>
 	                                    <th width="20%">考核区</th>
 	                                    <th width="10%">是否达标</th>
-	                                    <th width="30%">不达标原因</th>
+	                                    <th width="15%">不达标原因</th>
+	                                    <th width="15%" ng-if="num == 1">操作</th>
 	                                </tr>
                                 	<tr ng-repeat="item in dataList">
 	                                    <td>{{item.code}}</td>
 	                                    <td>{{item.name}}</td>
 	                                    <td>{{item.region}}</td>
 	                                    <td>{{item.assess}}</td>
-	                                    <td>{{item.status}}</td>
+	                                    <td>{{item.status == 0 ? '是' : '否'}}</td>
 	                                    <td>{{item.reason}}</td>
+										<td ng-if="num == 1">
+											<button type="button" class="btn btn-primary btn-sm" ng-click="edit(item)">修改</button>
+											<button type="button" class="btn btn-danger btn-sm" ng-click="delete(item.id)">删除</button>
+										</td>
 	                                </tr>	                               
                             	</tbody>
                             </table>
@@ -46,6 +59,69 @@
                 
         	</div>
         </div>
-    	
-    </div>
+
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" id="myModalLabel">
+							新增条目
+						</h4>
+					</div>
+					<div class="modal-body">
+						<form class="form-inline">
+							<div class="input-group form-item" >
+								<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">名称</font></font></label>
+								<select ng-model="name" class="form-control select-short" style="width: 160px!important;">
+									<option value="">请选择</option>
+									<option value="{{item}}" ng-repeat="item in dataLists">{{item}}</option>
+								</select>
+								<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+							</div>
+							<div class="input-group form-item" >
+								<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">所在行政区</font></font></label>
+								<select ng-model="region" class="form-control select-short" style="width: auto;">
+									<option value="">请选择</option>
+									<option value="{{item}}" ng-repeat="item in allArea">{{item}}</option>
+								</select>
+								<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+							</div>
+							<div class="input-group form-item" >
+								<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">考核区</font></font></label>
+								<select ng-model="assess" class="form-control select-short" style="width: auto;">
+									<option value="">请选择</option>
+									<option value="{{item}}" ng-repeat="item in allArea">{{item}}</option>
+								</select>
+								<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+							</div>
+							<div class="form-item">
+								<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否达标</font></font></label>
+								<select ng-model="status" class="form-control select-short">
+									<option value="">请选择</option>
+									<option value="0">是</option>
+									<option value="1">否</option>
+								</select>
+								<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+							</div>
+							<div class="form-item">
+								<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">原因</font></font></label>
+								<!--<input type="text"  class="form-control input-short" ng-model="reason">-->
+								<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="reason" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+								<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" ng-click="save()">保存</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
 </div>

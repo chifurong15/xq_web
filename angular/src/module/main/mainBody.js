@@ -209,9 +209,7 @@
                         url: $localStorage.serviceUrl_chiefOnline + '/chairmanOnline/v1/patrolCount',
                         method: 'get'
                     }).success(function (res) {
-                        console.log(res)
                         if (res.resCode == 1) {
-                            console.log(res)
                             $scope.itemlist = res.data;
                         }
                     }).error(function (res) {
@@ -227,9 +225,7 @@
                         url: $localStorage.serviceUrl_chiefOnline + '/chairmanOnline/v1/regionArea',
                         method: 'get'
                     }).success(function (res) {
-                        console.log(res)
                         if (res.resCode == 1) {
-                            console.log(res)
                             $scope.regionlist = res.data;
                             var regionID = $scope.regionlist[0].id;
                             rightStatusCount(regionID);
@@ -441,7 +437,6 @@
                         method: 'get'
                     }).success(function (res) {
                         $scope.problemList = res.data;
-                        console.log('222', $scope.problemList)
                     }).error(function (error) {
 
                     })

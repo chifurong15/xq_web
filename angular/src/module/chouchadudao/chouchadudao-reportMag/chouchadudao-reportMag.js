@@ -21,41 +21,43 @@
                                        $location, $log, $q, $rootScope, $window,
                                        routeService, $http, $ajaxhttp, moduleService , globalParam) {
 
-                    var apiPrefix = moduleService.getServiceUrl() + '/template';
+                    var apiPrefix = moduleService.getServiceUrl() + '/ancha';
 
                     $scope.init = function () {
-//						$ajaxhttp.myhttp({
-//							url: apiPrefix + '/v1/SurfaceWater/userinfo',
-//							method: 'get',
-//							callBack: function (res) {
-//								$scope.num = res.data;
-//								getList();
-//							}
-//						})
+                        getStatus ();
+                        //$scope.num = '0';
+						$ajaxhttp.myhttp({
+							url: apiPrefix + '/v1/AnzhaInvestigations/userinfo',
+							method: 'get',
+							callBack: function (res) {
+								$scope.num = res.data;
+								getList();
+							}
+						})
                     }
 
                     // 获取数据列表
                     function getList () {
-
-                        let month=new moment($scope.searchTime).format('M')<10 ? '0'+ new moment($scope.searchTime).format('M') : new moment($scope.searchTime).format('M');
-                        $scope.date=new moment($scope.searchTime).format('YYYY') + '-' + month;
-
-//						$ajaxhttp.myhttp({
-//							url: apiPrefix + '/v1/SurfaceWater/list',
-//							method: 'get',
-//							params: {
-//								pageNumber: $scope.paginationConf.currentPage,
-//								pageSize: $scope.paginationConf.itemsPerPage,
-//								issue: $scope.searchTime && $scope.date,
-//								status: $scope.type,
-//								num: $scope.num,
-//								createUser:$scope.createuser
-//							},
-//							callBack: function (res) {
-//								$scope.surfaceWaterList = res.data.list;
-//                  			$scope.paginationConf.totalItems = res.data.total;
-//							}
-//						})
+						$ajaxhttp.myhttp({
+							url: apiPrefix + '/v1/AnzhaBulletin/list',
+							method: 'get',
+							params: {
+								pageNumber: $scope.paginationConf.currentPage,
+								pageSize: $scope.paginationConf.itemsPerPage,
+								month: $scope.searchTime,
+								status: $scope.status,
+								num: $scope.num,
+								title:$scope.name
+							},
+							callBack: function (res) {
+							    if(res.resCode == 1){
+                                    $scope.reportList = res.data.list;
+                                    $scope.paginationConf.totalItems = res.data.total;
+                                }else{
+                                    layer.msg('服务器异常，请稍后再试');
+                                }
+							}
+						})
                     }
 
                     $('#J-searchTime').datetimepicker({
@@ -66,11 +68,39 @@
                         $scope.$apply();
                     });
 
+                    //获取通报状态
+                    function getStatus () {
+                        $scope.statusList = [
+                            {
+                                id: 0,
+                                status: '待通报'
+                            },
+                            {
+                                id: 1,
+                                status: '已下发'
+                            },
+                            {
+                                id: 2,
+                                status: '已反馈'
+                            },
+                            {
+                                id: 3,
+                                status: '未按期'
+                            }
+                        ]
+                    }
 
                     // 搜索
                     $scope.search = function () {
                         getList();
                     };
+
+                    //重置
+                    $scope.reset = function () {
+                        $scope.status = '';
+                        $scope.searchTime = '';
+                        $scope.name = '';
+                    }
 
                     // 新建
                     $scope.add = function () {
@@ -80,9 +110,10 @@
                         routeService.route('2-6-1', false);
                     }
 
-                    // 查看
-                    $scope.view = function () {
-                        //localStorage.setItem('selectedId',id);
+                    // 查看   反馈
+                    $scope.view = function (id , schemeid) {
+                        localStorage.setItem('id',id);
+                        localStorage.setItem('schemeid',schemeid);
                         routeService.route('2-6-2', false);
                     }
 
@@ -92,6 +123,25 @@
                         routeService.route('2-1', true);
                     }
 
+
+                    //下发并通报
+                    $scope.report = function (id){
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/AnzhaBulletin/update',
+                            method: 'put',
+                            params: {
+                                id: id
+                            },
+                            callBack: function (res) {
+                                if(res.resCode == 1){
+                                    layer.msg('下发成功');
+                                    getList();
+                                }else{
+                                    layer.msg('服务器异常，请稍后再试');
+                                }
+                            }
+                        })
+                    }
 
                     //返回
                     $scope.goBack=function(){

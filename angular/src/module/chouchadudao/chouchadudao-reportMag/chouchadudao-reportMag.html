@@ -17,17 +17,13 @@
                         </div>
                         <div class="form-item">
                             <label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通报名称</font></font></label>
-                            <input type="text" class="form-control input-short" ng-model="createuser">
+                            <input type="text" class="form-control input-short" ng-model="name">
                         </div>
                         <div class="input-group form-item">
                             <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">状态</font></font></label>
-                            <select ng-model="type" class="form-control select-short" style="width: auto;">
+                            <select ng-model="status" class="form-control select-short" style="width: auto;">
                                 <option value="">请选择</option>
-                                <option value="0">已下发</option>
-                                <option value="1">已反馈</option>
-                                <option value="2">已复查</option>
-                                <option value="3">已结束</option>
-                                <option value="4">待通报</option>
+                                <option value="{{item.id}}" ng-repeat="item in statusList">{{item.status}}</option>
                             </select>
                         </div>
                         <!--<div class="form-item">-->
@@ -38,15 +34,15 @@
                             <button class="btn btn-primary" ng-click="search()">
                                 <i class="fa fa-search"></i>搜索
                             </button>
-                            <button type="button" class="btn btn-primary" style="margin:0 10px ;" ng-click="reSet()">
+                            <button type="button" class="btn btn-primary" style="margin:0 10px ;" ng-click="reset()">
                                 <i class="fa fa-refresh"></i>重置
                             </button>
                         </div>
-                        <div class="input-group fr">
-                            <button type="button" class="btn btn-primary" ng-click="add()">
-                                <i class="fa fa-plus"></i> 添加台账
-                            </button>
-                        </div>
+                        <!--<div class="input-group fr">-->
+                            <!--<button type="button" class="btn btn-primary" ng-click="add()">-->
+                                <!--<i class="fa fa-plus"></i> 添加台账-->
+                            <!--</button>-->
+                        <!--</div>-->
                     </form>
                 </div>
                 <div class="tab-content">
@@ -57,78 +53,31 @@
                                 <tr class='tHeader'>
                                     <th width="5%">序号</th>
                                     <th width="15%">月份</th>
-                                    <th width="10%">通报名称</th>
+                                    <th width="15%">通报名称</th>
                                     <th width="15%">计划方案</th>
-                                    <th width="15%">状态</th>
+                                    <th width="10%">状态</th>
                                     <th width="10%">操作</th>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2018-10</td>
-                                    <td>污染物检查</td>
-                                    <td><a ng-click="viewReport()">计划方案</a></td>
+                                <tr ng-repeat="item in reportList">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{item.month}}</td>
+                                    <td>{{item.title}}</td>
+                                    <td><a ng-click="viewReport()">{{item.schemeName}}</a></td>
                                     <td>
-                                        <span class="label label-danger">已下发</span>
+                                        <span class="label label-info" ng-if="item.status == 0">待通报</span>
+                                        <span class="label label-success" ng-if="item.status == 1">已下发</span>
+                                        <span class="label label-warning" ng-if="item.status == 2">已反馈</span>
+                                        <span class="label label-danger" ng-if="item.status == 3">未按期</span>
                                     </td>
                                     <td style="text-align: left;">
-                                        <button type="button" class="btn btn-success" ng-click="view()">查看</button>
-                                        <button type="button" class="btn btn-warning" ng-click="">反馈</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2018-10</td>
-                                    <td>污染物检查</td>
-                                    <td><a ng-click="viewReport()">计划方案</a></td>
-                                    <td>
-                                        <span class="label label-info">已反馈</span>
-                                    </td>
-                                    <td style="text-align: left;">
-                                        <button type="button" class="btn btn-success" ng-click="view()">查看</button>
-                                        <button type="button" class="btn btn-success" >复查</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2018-10</td>
-                                    <td>污染物检查</td>
-                                    <td><a ng-click="viewReport()">计划方案</a></td>
-                                    <td>
-                                        <span class="label label-info">已复查</span>
-                                    </td>
-                                    <td style="text-align: left;">
-                                        <button type="button" class="btn btn-success" ng-click="view()">查看</button>
-                                        <button type="button" class="btn btn-success" >反馈</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2018-10</td>
-                                    <td>污染物检查</td>
-                                    <td><a ng-click="viewReport()">计划方案</a></td>
-                                    <td>
-                                        <span class="label label-info">已结束</span>
-                                    </td>
-                                    <td style="text-align: left;">
-                                        <button type="button" class="btn btn-success" ng-click="view()">查看</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2018-10</td>
-                                    <td>污染物检查</td>
-                                    <td><a ng-click="viewReport()">计划方案</a></td>
-                                    <td>
-                                        <span class="label label-info">待通报</span>
-                                    </td>
-                                    <td style="text-align: left;">
-                                        <button type="button" class="btn btn-success" ng-click="view()">查看</button>
-                                        <button type="button" class="btn btn-success" >下发通报</button>
+                                        <button type="button" class="btn btn-success" ng-click="view(item.id,item.schemeid)">查看</button>
+                                        <button type="button" class="btn btn-warning" ng-if="item.status == 0" ng-click="report(item.id)">下发并通报</button>
+                                        <button type="button" class="btn btn-info" ng-if="item.status == 1" ng-click="view(item.id)">反馈</button>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
-                            <!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+                            <tm-pagination conf="paginationConf"></tm-pagination>
                         </div>
                     </div>
                     <div class="tab-pane" id="chartStatistics">

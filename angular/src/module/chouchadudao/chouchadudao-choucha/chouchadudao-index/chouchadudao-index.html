@@ -20,7 +20,7 @@
 	                        <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查区域</font></font></label>
 	        				<select class="form-control select-short" style="width: auto;" ng-model="region">
 	                        	<option value="">请选择</option>
-	                        	<option value="{{item}}" ng-repeat="item in RegionList">{{item}}</option>
+	                        	<option value="{{item.regionName}}" ng-repeat="item in RegionList">{{item.regionName}}</option>
 	                        </select>
 	                    </div>
 	                    <div class="input-group form-item">

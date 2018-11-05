@@ -22,7 +22,8 @@
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
 					var apiPrefix = moduleService.getServiceUrl() + '/spotcheck';
-					
+					//var apiPrefix = "http://10.0.9.116:7022" + '/spotcheck';
+
 					$scope.init = function () {
                         getList();
                         getAllRegion();

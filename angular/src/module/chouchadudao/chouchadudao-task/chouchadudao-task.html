@@ -18,30 +18,11 @@
 	                    </div>
 	        			<div class="input-group form-item">
 	                        <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查区域</font></font></label>
-	        				<select ng-model="type" class="form-control select-short" style="width: auto;">
+	        				<select ng-model="region" class="form-control select-short" style="width: 160px;">
 	                        	<option value="">请选择</option>
-	                        	<option value="0">和平区</option>
-	                        	<option value="1">河北区</option>
-	                        	<option value="2">滨海新区</option>
-	                        	<option value="3">河东区</option>
-	                        	<option value="4">河西区</option>
-	                        	<option value="5">南开区</option>
-	                        	<option value="6">红桥区</option>
-	                        	<option value="7">东丽区</option>
-	                        	<option value="8">西青区</option>
-	                        	<option value="9">津南区</option>
-	                        	<option value="10">北辰区</option>
-	                        	<option value="11">武清区</option>
-	                        	<option value="12">宝坻区</option>
-	                        	<option value="13">静海区</option>
-	                        	<option value="14">宁河区</option>
-	                        	<option value="15">蓟州区</option>
+	                        	<option value="{{item.regionName}}" ng-repeat="item in regionList">{{item.regionName}}</option>
 	                        </select>
 	                    </div>
-	                    <div class="form-item">
-	                        <label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">创建人</font></font></label>
-	                        <input type="text" class="form-control input-short" ng-model="createuser">
-	                    </div>	                    
         				<div class="input-group">
 		                    <button class="btn btn-primary" ng-click="search()">
 		                    	<i class="fa fa-search"></i>搜索
@@ -68,46 +49,32 @@
 	                                    <th width="10%">检查日期</th>
 	                                    <th width="10%">检查区域</th>
 	                                    <th width="15%">检查河道</th>
-	                                    <th width="15%">检查内容</th>
+	                                    <th width="10%">带队领导</th>
+	                                    <th width="10%">下发人员</th>
 	                                    <th width="10%">状态</th>
 	                                    <th width="10%">操作</th>
 	                                </tr>
-	                                <tr>
-	                                    <td>1</td>
-	                                    <td>我是标题</td>
-	                                    <td>2018-10</td>
-										<td>河东区</td>
-	                                    <td>河道</td>
-	                                    <td>污染物检查</td>
+	                                <tr ng-repeat="item in taskList">
+	                                    <td>{{$index+1}}</td>
+	                                    <td>{{item.title}}</td>
+	                                    <td>{{item.date}}</td>
+										<td>{{item.regionname}}</td>
+	                                    <td>{{item.reachname}}</td>
+	                                    <td>{{item.leader}}</td>
+	                                    <td>{{item.personnel}}</td>
 	                                    <td>
-	                                    	<span class="label label-danger">已下发</span>
-	                                    </td>	                                   
+	                                    	<span class="label label-danger" ng-if="item.status == 0">已下发</span>
+	                                    	<span class="label label-info" ng-if="item.status == 1">检查中</span>
+	                                    </td>
 	                                    <td style="text-align: left;">
-	                                    	<button type="button" class="btn btn-success" ng-click="view(0)">查看</button>
-	                                    	<!--<button type="button" class="btn btn-danger" ng-click="report()">上报</button>	                                    	-->
-	                                    	<button type="button" class="btn btn-warning" ng-click="edit()">修改</button>	                                    	
+	                                    	<button type="button" class="btn btn-success" ng-click="view(item.id)">查看</button>
+	                                    	<button type="button" class="btn btn-warning" ng-click="edit(item.id)">修改</button>
 	                                    </td>
 	                                </tr>
-	                                <tr>
-	                                    <td>1</td>
-	                                    <td>我是标题</td>
-	                                    <td>2018-10</td>
-										<td>河东区</td>
-	                                    <td>河道</td>
-	                                    <td>污染物检查</td>
-	                                    <td>
-	                                    	<span class="label label-info">检查中</span>
-	                                    </td>	                                   
-	                                    <td style="text-align: left;">
-	                                    	<button type="button" class="btn btn-success" ng-click="view(0)">查看</button>
-	                                    	<!--<button type="button" class="btn btn-danger" ng-click="report()">上报</button>	                                    	-->
-	                                    	<!--<button type="button" class="btn btn-info" ng-click="view(2)">通报</button>	                                    	-->
-	                                    	<button type="button" class="btn btn-warning" ng-click="edit()">修改</button>	                                    	
-	                                    </td>
-	                                </tr>
+
                             	</tbody>
                             </table>
-                			<!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+                			<tm-pagination conf="paginationConf"></tm-pagination>
                         </div>
                     </div>
                     <div class="tab-pane" id="chartStatistics">

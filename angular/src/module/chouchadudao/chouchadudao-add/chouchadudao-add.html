@@ -2,7 +2,7 @@
     <div class="wrapper-md ">
     	<div class="panel panel-default m-n">
         	<div class="panel-body" style="position: relative;">
-        		<span class="tag">暗查暗访</span><span class="tag-right"></span><span class="tag-right tag-left"></span><span class="tag tag1">{{!id ? '新增' : '编辑'}}</span><span class="tag-right"></span>
+        		<span class="tag">暗查暗访</span><span class="tag-right"></span><span class="tag-right tag-left"></span><span class="tag tag1">{{!id ? '新增' : '编辑'}}任务</span><span class="tag-right"></span>
         		<div style="overflow: hidden;"><button type="button" class="btn btn-primary" ng-click="goBack()" style="position: absolute;right: 20px;bottom: 20px;">返回</button></div>
         	</div>
         </div>
@@ -11,60 +11,39 @@
 				<form class="form-inline" style="padding-left: 25%;">
 					<div class="form-item" >
                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
-                        <input type="text" class="form-control input-short" >
+                        <input type="text" class="form-control input-short" ng-model="title">
                         <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
                     </div>
                     <div class="input-group form-item">
                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查区域</font></font></label>
-        				<select ng-model="type" class="form-control select-short" style="width: 160px;">
-                        	<option value="">请选择</option>
-                        	<option value="0">和平区</option>
-                        	<option value="1">河北区</option>
-                        	<option value="2">滨海新区</option>
-                        	<option value="3">河东区</option>
-                        	<option value="4">河西区</option>
-                        	<option value="5">南开区</option>
-                        	<option value="6">红桥区</option>
-                        	<option value="7">东丽区</option>
-                        	<option value="8">西青区</option>
-                        	<option value="9">津南区</option>
-                        	<option value="10">北辰区</option>
-                        	<option value="11">武清区</option>
-                        	<option value="12">宝坻区</option>
-                        	<option value="13">静海区</option>
-                        	<option value="14">宁河区</option>
-                        	<option value="15">蓟州区</option>
+        				<select ng-model="region" id="slpk" class="form-control select-short selectpicker" multiple style="width: 160px;" ng-change="getChangeRegion()">
                         </select>
-	                </div>
+						<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+					</div>
 	                <br />
 	                <div class="input-group date date_picker form-item" id="J-searchTime">
                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查日期</font></font></label>
         				<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-	                </div>
-                    <div class="input-group form-item" style="position: relative;left: 5px;">
+						<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+					</div>
+                    <div class="input-group form-item">
                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查河道</font></font></label>
-        				<select ng-model="type" class="form-control select-short" style="width: 160px;">
-                        	<option value="">请选择</option>
-                        	<option value="0">河道1</option>
-                        	<option value="1">河道2</option>
-                        	<option value="2">河道3</option>
-                        	<option value="3">河道4</option>
-                        	<option value="4">河道5</option>
-                        	<option value="5">河道6</option>
+        				<select ng-model="reach" id="slpkRiver" class="form-control select-short selectpicker1" multiple style="width: 160px;">
                         </select>
-	                </div>
+						<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+					</div>
 	                <br />
 	                <div class="form-item" >
                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">带队领导</font></font></label>
-                        <input type="text" class="form-control input-short">
+                        <input type="text" class="form-control input-short" ng-model="leader">
                         <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
                     </div>
 					<div class="input-group form-item">
 						<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发人员</font></font></label>
-						<select  class="form-control"  style="width: 160px;" ng-model="sendPerson">
+						<select  class="form-control"  style="width: 160px;" ng-model="personnel">
 							<option value="">请选择</option>
-							<!--<option value="{{item}}" ng-repeat="item in personList">{{item}}</option>-->
+							<option value="{{item.userName}}" ng-repeat="item in personList">{{item.userName}}</option>
 						</select>
 						<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 					</div>

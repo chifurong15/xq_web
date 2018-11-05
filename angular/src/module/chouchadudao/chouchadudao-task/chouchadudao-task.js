@@ -25,6 +25,7 @@
 					
 					$scope.init = function () {
                         getList();
+                        getRegion();
 //						$ajaxhttp.myhttp({
 //							url: apiPrefix + '/v1/SurfaceWater/userinfo',
 //							method: 'get',					
@@ -43,7 +44,9 @@
 							params: {
 								pageNumber: $scope.paginationConf.currentPage,
 								pageSize: $scope.paginationConf.itemsPerPage,
-
+                                schemeid: localStorage.getItem('id'),
+								date:$scope.searchTime,
+                                region:$scope.region
 							},
 							callBack: function (res) {
 								$scope.taskList = res.data.list;
@@ -51,12 +54,23 @@
 							}
 						})
 					}
-					
+
+                    // 获取所有区
+					function getRegion() {
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/AnzhaInvestigations/districtlist',
+                            method: 'get',
+                            callBack: function (res) {
+                                $scope.regionList = res.data;
+                            }
+                        })
+					}
+
 					$('#J-searchTime').datetimepicker({
-	                    format: 'YYYY-MM',
+	                    format: 'YYYY-MM-DD',
 	                    locale: moment.locale('zh-cn')
 	                }).on('dp.change', function (c) {
-	                    $scope.searchTime = new moment(c.date).format('YYYY-MM');
+	                    $scope.searchTime = new moment(c.date).format('YYYY-MM-DD');
 	                    $scope.$apply();
 	                });
 					
@@ -65,6 +79,12 @@
 	                $scope.search = function () {
 	                    getList();
 	                };
+
+	                //重置
+	                $scope.reSet = function () {
+	                	$scope.searchTime = '';
+	                	$scope.region = '';
+					}
 					
 					// 新建
 	                $scope.add = function () {
@@ -74,23 +94,22 @@
 						routeService.route('2-1-1', false);
 	                }
 	                
-	                //修改 评分报告
+	                //修改任务
 	                $scope.edit = function (id) {
-	                						
+                        globalParam.setter({
+                            bulletin: {
+                            	id: id
+							}
+                        })
 						routeService.route('2-1-1', false);
 	                }
 	                
-	                 // 查看    通报     处理
+	                 // 查看
 	                $scope.view = function (id) {
-						localStorage.setItem('selectedId',id);
+						localStorage.setItem('id',id);
 						routeService.route('2-1-2', false);
 	                }
-	                
-	                 // 上报
-	                $scope.report = function (id) {
-						routeService.route('2-1-3', false);						
-	                }
-	               	
+
 	               	//返回
 					$scope.goBack=function(){
 						history.back(-1);

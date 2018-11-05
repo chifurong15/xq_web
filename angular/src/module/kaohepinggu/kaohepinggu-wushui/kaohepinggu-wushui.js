@@ -23,7 +23,9 @@
 					
 
 					var apiPrefix = moduleService.getServiceUrl() + '/sewage';
-					$scope.userInfo = $localStorage.userLoginInfo.userInfo;					
+					//var apiPrefix = 'http://10.0.9.116:7005' + '/sewage';
+
+					$scope.userInfo = $localStorage.userLoginInfo.userInfo;
 
 					$scope.init = function () {
 						$ajaxhttp.myhttp({
@@ -37,6 +39,8 @@
 								getList();								
 							}
 						})
+
+                        getDate();
 					}
 					
 					//返回
@@ -75,6 +79,14 @@
 	                    $scope.searchTime = new moment(c.date).format('YYYY-MM');
 	                    $scope.$apply();
 	                });
+
+                    $('#J-searchTime1').datetimepicker({
+                        format: 'YYYY-MM',
+                        locale: moment.locale('zh-cn')
+                    }).on('dp.change', function (c) {
+                        $scope.searchTime1 = new moment(c.date).format('YYYY-MM');
+                        $scope.$apply();
+                    });
 					
 					
 					// 搜索
@@ -84,10 +96,8 @@
 					
 					// 新建
 	                $scope.add = function () {
-						globalParam.setter({
-							bulletin: {}
-						})
-						routeService.route('3-3-2', false);
+                        $('#myModal').modal('show');
+						//routeService.route('3-3-2', false);
 	                }
 
                     //重置搜索条件
@@ -96,10 +106,118 @@
                         $scope.type = '';
                         $scope.createuser = '';
                     }
-	                
-	                //修改 污水报告
+
+                    // 保存
+                    $scope.submit = function() {
+
+                        if (!$scope.title) {
+                            layer.alert("请输入标题", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        } else if (!$scope.searchTime1) {
+                            layer.alert("请选择期号", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        } else if (!$scope.author) {
+                            layer.alert("请输入创建人", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        } else if (!$scope.issuer) {
+                            layer.alert("请输入备注", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        }
+
+                        // 新增评分管理
+                        var params = {
+                            title: $scope.title,
+                            createtime: $scope.currentdate,
+                            issue: $scope.searchTime1,
+                            createUser: $scope.author,
+                            remark: $scope.issuer
+                        }
+                        if (!$scope.id) {
+                            $ajaxhttp.myhttp({
+                                url: apiPrefix + '/v1/SewageDispose/selectHave',
+                                method: 'get',
+                                params: {
+                                    issue: $scope.searchTime1
+                                },
+                                callBack: function (res) {
+                                    if(res.resCode == 1){
+                                        if(res.data == '没有'){
+                                            $ajaxhttp.myhttp({
+                                                url: apiPrefix + '/v1/SewageDispose/add',
+                                                method: 'POST',
+                                                params: params,
+                                                callBack: function (res) {
+                                                    if(res.resCode == 1){
+                                                        $scope.newid = res.data.id;
+                                                        $scope.pid = res.data.id;
+                                                        layer.msg('新建成功', {time:2000});
+                                                        clear();//创建成功后清空
+                                                        getList ();
+                                                        $('#myModal').modal('hide');
+                                                        //routeService.route('3-3', true);
+                                                    }else{
+                                                        layer.msg(res.resMsg, {time:2000});
+                                                    }
+                                                }
+                                            })
+                                        }else{
+                                            layer.msg('一个月只能新增一个报告');
+                                        }
+                                    }else{
+                                        layer.msg(res.resMsg, {time:2000});
+                                    }
+                                }
+                            })
+
+                        }else{//修改污水报告
+                            $ajaxhttp.myhttp({
+                                url: apiPrefix + '/v1/SewageDispose/updatelist',
+                                method: 'PUT',
+                                params: {
+                                    id: $scope.id,
+                                    title: $scope.title,
+                                    createtime: $scope.currentdate,
+                                    issue: $scope.searchTime1,
+                                    createUser: $scope.author,
+                                    remark: $scope.issuer
+                                },
+                                callBack: function (res) {
+                                    if(res.resCode == 1){
+                                        layer.msg('修改成功', {time:2000});
+                                        clear();//创建成功后清空
+                                        getList ();
+                                        $('#myModal').modal('hide');
+                                        //routeService.route('3-3', true);
+                                    }else{
+                                        layer.msg(res.resMsg, {time:2000});
+                                    }
+                                }
+                            })
+
+                        }
+                    }
+
+                    $scope.cancel = function () {
+                        $('#myModal').modal('hide');
+                        clear();
+                    }
+
+                    //修改 污水报告
 	                $scope.edit = function (id) {
-	                	localStorage.setItem('id',id);
+                        $('#myModal').modal('show');
+                        $scope.id = id ;
 						$ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/SewageDispose/detail',
 							method: 'get',
@@ -107,12 +225,12 @@
 								id: id
 							},
 							callBack: function (res) {
-								globalParam.setter({
-									bulletin: res.data
-								})
+                                $scope.title = res.data.title;
+                                $scope.searchTime1 = res.data.issue;
+                                $scope.issuer = res.data.remark;
+                                $scope.author = res.data.createuser;
 							}
 						})						
-						routeService.route('3-3-2', false);
 	                }
 	                
 	                 // 查看
@@ -156,6 +274,33 @@
 							}
 						})
 	                }
+                    //清空表单
+                    var clear = function () {
+                        $scope.title = '';
+                        $scope.issuer = '';
+                        $scope.searchTime1 = '';
+                        $scope.author = '';
+                    }
+
+                    //获取当前时间
+                    function getDate () {
+                        setInterval(function () {
+                            var date = new Date(),
+                                year = date.getFullYear(),
+                                month = date.getMonth() + 1,
+                                day = date.getDate(),
+                                hour = date.getHours(),
+                                min = date.getMinutes(),
+                                second = date.getSeconds();
+
+                            $scope.$apply(function () {
+                                $scope.currentdate=year + '-' + month  + '-' + day + ' ' +
+                                    (hour < 10 ? '0' + hour : hour) + ':' +
+                                    (min < 10 ? '0' + min : min) + ':' +
+                                    (second < 10 ? '0' + second : second) ;
+                            })
+                        }, 1000);
+                    }
 					
 					// 配置分页基本参数
 	                $scope.paginationConf = {

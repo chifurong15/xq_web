@@ -20,9 +20,9 @@
 				function anchaListCtrl($localStorage, $scope,
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
-					
+
 					var apiPrefix = moduleService.getServiceUrl() + '/ancha';
-					
+
 					$scope.init = function () {
                         getList();
 
@@ -37,13 +37,14 @@
 					
 					// 获取数据列表
 					function getList () {
-
 						$ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/AnzhaScheme/list',
 							method: 'get',
 							params: {
 								pageNumber: $scope.paginationConf.currentPage,
 								pageSize: $scope.paginationConf.itemsPerPage,
+								title: $scope.title,
+								issue:$scope.searchTime
 							},
 							callBack: function (res) {
 								$scope.schemeList = res.data.list;
@@ -65,23 +66,20 @@
 	                $scope.search = function () {
 	                    getList();
 	                };
-					
+
+                    $scope.reset = function () {
+                    	$scope.title = '';
+                    	$scope.searchTime = '';
+					}
+
 					// 新建
 	                $scope.add = function () {
-						globalParam.setter({
-							bulletin: {}
-						})
 						routeService.route('2-1-5', false);
 	                }
-	                
-	                //修改 评分报告
-	                $scope.edit = function (id) {
-						routeService.route('2-1-1', false);
-	                }
-	                
-	                 // 查看    通报     处理
-	                $scope.view = function () {
-						//localStorage.setItem('selectedId',id);
+
+	                 // 查看
+	                $scope.view = function (id) {
+						localStorage.setItem('id',id);
 						routeService.route('2-1-4', false);
 	                }
 
@@ -89,12 +87,7 @@
 					$scope.viewReport = function () {
                         routeService.route('2-6', true);
 					}
-	                
-	                 // 上报
-	                $scope.report = function (id) {
-						routeService.route('2-1-3', false);						
-	                }
-	               	
+
 	               	//返回
 					$scope.goBack=function(){
 						history.back(-1);

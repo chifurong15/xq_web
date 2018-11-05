@@ -21,22 +21,22 @@
                                              $location, $log, $q, $rootScope, $window,
                                              routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
-                    var apiPrefix = moduleService.getServiceUrl() + '/template';
+                    var apiPrefix = moduleService.getServiceUrl() + '/ancha';
 
 
                     $scope.init = function () {
                         var bulletin = globalParam.getter().bulletin || {};
-                        if (!!getQueryString('id')) {
-                            bulletin.id = getQueryString('id');
-                        }
 
-                        // 编辑时获取原数据
-                        if (bulletin.id) {
-                            $location.search('id', bulletin.id);
-                        }
-                        getData(bulletin.id);
+                        //获取台账列表
+                        getData();
 
-                        var selectedId = localStorage.getItem('selectedId');
+                        //获取任务列表
+                        getTaskList ();
+
+                        //获取反馈信息
+                        getFeedback();
+
+                        var selectedId = localStorage.getItem('0');
                         $('.js-tab').find('li').eq(selectedId).addClass('tab-active').siblings().removeClass('tab-active');
                         $(".js-con").find('.con').hide().eq(selectedId).show();
 
@@ -47,16 +47,84 @@
                         history.back(-1);
                     }
 
+                    // 新建台账
+                    $scope.addBook = function () {
+                        globalParam.setter({
+                            bulletin: {}
+                        })
+                        routeService.route('2-6-1', false);
+                    }
+                    // 修改台账
+                    $scope.editBook = function (id) {
+                        globalParam.setter({
+                            bulletin: {
+                                id:id
+                            }
+                        })
+                        routeService.route('2-6-1', false);
+                    }
+                    // 获取任务列表
+                    function getTaskList () {
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/AnzhaInvestigations/list',
+                            method: 'get',
+                            params: {
+                                schemeid:localStorage.getItem('schemeid')
+                            },
+                            callBack: function (res) {
+                                if(res.resCode == 1){
+                                    $scope.whether = res.data.whether;
+                                    $scope.feedbackTime = res.data.feedbackTime;
+                                    $scope.describe = res.data.describe;
+                                    $scope.assessory = res.data.assessory;
 
-                    // 数据详情
-                    function getData (id) {
+                                }else{
+                                    layer.msg('服务器异常，请稍后再试');
+                                }
+                            }
+                        })
+                    }
 
+                    //获取反馈结果
+                    function getFeedback(){
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/AnzhaFeedback/detail',
+                            method: 'get',
+                            params: {
+                                bulletinid:localStorage.getItem('id')
+                            },
+                            callBack: function (res) {
+                                if(res.resCode == 1){
+
+                                }else{
+                                    layer.msg('服务器异常，请稍后再试');
+                                }
+                            }
+                        })
+                    }
+
+                    // 获取台账列表
+                    function getData () {
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/AnzhaStandingBook/list',
+                            method: 'get',
+                            params: {
+                                bulletinid:localStorage.getItem('id')
+                            },
+                            callBack: function (res) {
+                                if(res.resCode == 1){
+                                    $scope.bookList = res.data;
+                                    //$scope.paginationConf.totalItems = res.data.total;
+                                }else{
+                                    layer.msg('服务器异常，请稍后再试');
+                                }
+                            }
+                        })
                     }
 
                     //tab栏切换
                     $('.js-tab li').on("click",function (){
                         var index = $(this).index();
-                        console.log(index)
                         $(this).addClass('tab-active').siblings().removeClass('tab-active');
                         $(".js-con").find('.con').hide().eq(index).show();
                     });
