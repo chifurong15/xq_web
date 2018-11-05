@@ -492,7 +492,7 @@
                             rightStatusCount();
                             //根据列表在地图中显示河长
                             if(res.data && res.data.length > 0){
-                                console.log(res.data);
+                                // console.log(res.data);
                                 //刷新轨迹
                                 if(RiverChiefOnlineService.getClickPatrolId() !== null){
                                     RiverChiefOnlineService.getRefreshPatrol();
@@ -1086,7 +1086,7 @@
                     $('#videoBox').show();
                     $('#audioPlayer').css('display','none');
                     $("#videoPlayerBox").css('display','block');
-                    $scope.videoUrl = $scope.eventImgUrl + item.accessoryurl;
+                    $scope.videoUrl = $scope.eventImgUrl + '/' + item.accessoryurl;
                     $("#videoPlayerBox source").attr("src", $scope.videoUrl);
                     var myPlayer = videojs("videoPlayerBox")
                     myPlayer.ready(function () {
@@ -1097,7 +1097,7 @@
                     $('#videoBox').show();
                     $('#audioPlayer').css('display','block');
                     $("#videoPlayerBox").css('display','none');
-                    $scope.videoUrl = $scope.eventImgUrl + item.accessoryurl;
+                    $scope.videoUrl = $scope.eventImgUrl + '/' + item.accessoryurl;
                     console.log($("#audioPlayer"))
                     $("#audioPlayer audio").attr("src", $scope.videoUrl);
                     // var myPlayer = $("#audioPlayer");
