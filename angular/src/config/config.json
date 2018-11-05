@@ -1202,6 +1202,16 @@
         "module/js/info-management/policy-doc/policy-doc-edit.js"
       ],
       "description": "修改政策文件"
+    },
+    {
+      "seqId": "549",
+      "name": "一河一策",
+      "url": "module/menus/info-management/basic-data/reach/reach-doc.html",
+      "requireJS": [
+        "module/js/info-management/basic-data/reach/reach-doc.js"
+      ],
+      "description": "河段管理-一河一策"
     }
+
   ]
 }
