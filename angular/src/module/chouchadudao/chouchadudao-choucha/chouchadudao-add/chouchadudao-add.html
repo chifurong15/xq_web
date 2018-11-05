@@ -47,7 +47,7 @@
                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发人员</font></font></label>
         				<select  class="form-control"  style="width: 160px;" ng-model="sendPerson">
                         	<option value="">请选择</option>
-                        	<option value="{{item}}" ng-repeat="item in personList">{{item}}</option>
+                        	<option value="{{item.name}}" ng-repeat="item in personList">{{item.name}}</option>
                         </select>
 						<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 	                </div>
