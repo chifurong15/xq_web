@@ -492,14 +492,14 @@ angular.module('app')
             this.getIconPathByAngle = function (angle) {
                 if(angle && angle !== null) {
                     var _path;
-                    if(angle>=337.5 && angle<22.5){ //东
+                    if(angle>=337.5 || angle<22.5 ){ //东
                         _path = "img/esri-icon/patrol/walkE.gif";
                     }else if(angle>=22.5 && angle<67.5){ //东南
                         _path = "img/esri-icon/patrol/walkSE.gif";
                     }else if(angle>=67.5 && angle<112.5){ //南
                         _path = "img/esri-icon/patrol/walkS.gif";
                     }else if(angle>=112.5 && angle<157.5){ //西南
-                        _path = "img/esri-icon/patrol/walkSE.gif";
+                        _path = "img/esri-icon/patrol/walkSW.gif";
                     }else if(angle>=157.5 && angle<202.5){ //西
                         _path = "img/esri-icon/patrol/walkW.gif";
                     }else if(angle>=202.5 && angle<247.5){ //西北
@@ -1119,22 +1119,61 @@ angular.module('app')
                 }
 
                 startImgPath = "img/esri-icon/patrol/start.png";
-                var arrowImgPath = "img/esri-icon/patrol/arrow.png";
+                var walkImgPath = "img/esri-icon/patrol/arrow.png";
                 endImgPath = "img/esri-icon/patrol/end.png";
+
+                var pt1 = new Array();
+                var pt2 = new Array();
+                var angle = null;
+                var pt = null;
+
+                var iconObject = {};
 
                 if (parseFloat(coordsArr[0].x) != parseFloat(coordsArr[coordsArr.length-1].x)
                     && parseFloat(coordsArr[0].y) != parseFloat(coordsArr[coordsArr.length-1].y)){
                     var startPoint = new _w.Point(parseFloat(coordsArr[0].x),parseFloat(coordsArr[0].y),this._map.spatialReference);
                     var endPoint = new _w.Point(parseFloat(coordsArr[coordsArr.length-1].x),parseFloat(coordsArr[coordsArr.length-1].y),this._map.spatialReference);
-                    var startSymbol = new _w.PictureMarkerSymbol(startImgPath,18,26).setOffset(0, 18);
-                    var endSymbol = new _w.PictureMarkerSymbol(endImgPath,18,26).setOffset(0, 18);
+                    var startSymbol = new _w.PictureMarkerSymbol(startImgPath,25,36).setOffset(0, 18);
+                    var endSymbol = new _w.PictureMarkerSymbol(endImgPath,25,36).setOffset(0, 18);
+                    debugger;
+                    var arrLength = coordsArr.length;
+                    // if (arrLength % 2 == 0){
+                    //     pt1[0] = parseFloat(coordsArr[arrLength / 2].x);
+                    //     pt1[1] = parseFloat(coordsArr[arrLength / 2].y);
+                    //     pt2[0] = parseFloat(coordsArr[(arrLength / 2) + 1].x);
+                    //     pt2[1] = parseFloat(coordsArr[(arrLength / 2) + 1].y);
+                    //     pt = new _w.Point(parseFloat(coordsArr[arrLength / 2].x),parseFloat(coordsArr[arrLength / 2].y),this._map.spatialReference);
+                    // }else {
+                    //     pt1[0] = parseFloat(coordsArr[Math.floor(arrLength / 2)].x);
+                    //     pt1[1] = parseFloat(coordsArr[Math.floor(arrLength / 2)].y);
+                    //     pt2[0] = parseFloat(coordsArr[Math.ceil(arrLength / 2)].x);
+                    //     pt2[1] = parseFloat(coordsArr[Math.ceil(arrLength / 2)].y);
+                    //     pt = new _w.Point(parseFloat(coordsArr[Math.ceil(arrLength / 2)].x),parseFloat(coordsArr[Math.ceil(arrLength / 2)].y),this._map.spatialReference);
+                    // }
+
+                    pt1[0] = parseFloat(coordsArr[0].x);
+                    pt1[1] = parseFloat(coordsArr[0].y);
+                    pt2[0] = parseFloat(coordsArr[1].x);
+                    pt2[1] = parseFloat(coordsArr[1].y);
+                    pt = new _w.Point(parseFloat(coordsArr[0].x),parseFloat(coordsArr[0].y),this._map.spatialReference);
+
+                    angle = MapTool.getAngle(pt1,pt2);
+                    walkImgPath = this.getIconPathByAngle(angle);
+
+                    // var picMarkerSymbol = SymbolUtil.getPictureMarkerSymbol(walkImgPath,iconObject.sizeX,iconObject.sizeY);
+                    var picMarkerSymbol = new _w.PictureMarkerSymbol(walkImgPath,24,24).setOffset(0, 5);
 
                     var g1 = new _w.Graphic(startPoint, startSymbol);
                     var g2 = new _w.Graphic(endPoint, endSymbol);
+                    var g3 = new _w.Graphic(pt,picMarkerSymbol);
+
                     g1.attributes = item;
                     g2.attributes = item;
+                    g3.attributes = item;
+
                     this._markSymbolLayer.add(g1);
                     this._markSymbolLayer.add(g2);
+                    this._markSymbolLayer.add(g3);
                 }
 
                 var polyline = new _w.Polyline().addPath(coordsArr);
