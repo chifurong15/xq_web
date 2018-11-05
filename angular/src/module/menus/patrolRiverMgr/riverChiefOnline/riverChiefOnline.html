@@ -282,14 +282,14 @@
                         </form>
                         <table class="table table-bordered table-hover table-tj">
                             <tr>
-                                <th>选择</th>
-                                <th>开始时间</th>
-                                <th>结束时间</th>
-                                <th>河道段</th>
+                                <th width="10%">选择</th>
+                                <th width="25%">开始时间</th>
+                                <th width="25%">结束时间</th>
+                                <th width="45%">河道段</th>
                             </tr>
                             <tr ng-repeat="(ind,item) in patrolList">
                                 <td>
-                                    <div class="checkbox checkbox-tj" style="margin-bottom: 5px;" ng-click="patrolCheck(ind)">
+                                    <div class="checkbox" style="margin-bottom: 5px;" ng-click="patrolCheck(ind)">
                                         <label class="i-checks">
                                             <input type="checkbox" ng-model="item.isCheck"><i></i>
                                         </label>
@@ -328,15 +328,15 @@
                         </form>
                         <table class="table table-bordered table-hover table-tj" style="margin-top: 10px">
                             <tr>
-                                <th>选择</th>
-                                <th>上报时间</th>
-                                <th>河道段</th>
-                                <th>姓名</th>
-                                <th>状态</th>
+                                <th width="10%">选择</th>
+                                <th width="25%">上报时间</th>
+                                <th width="35%">河道段</th>
+                                <th width="15%">姓名</th>
+                                <th width="15%">状态</th>
                             </tr>
                             <tr ng-repeat="(ind,item) in riverChiefEveList" ng-click="eventClick(item)">
                                 <td>
-                                    <div class="checkbox checkbox-tj" style="margin-bottom: 5px;" ng-click="eventTableCheck(ind)">
+                                    <div class="checkbox" style="margin-bottom: 5px;" ng-click="eventTableCheck(ind)">
                                         <label class="i-checks">
                                             <input type="checkbox" ng-model="item.isCheck"><i></i>
                                         </label>

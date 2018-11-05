@@ -195,12 +195,20 @@ angular.module('app')
 
                 var Graphic = e.graphic;
                 var pInfoWindow = this._map.infoWindow;
+                var eventresource = {
+                    A: "河长APP",
+                    B: "电话上报",
+                    C: "公众APP",
+                    D: "微信号",
+                    F: "曝光台"
+                }
                 //pInfoWindow.setTitle(Graphic.attributes["name"]);
                 pInfoWindow.setTitle("事件详情");
                 var pHtml = "<div><table class='form_custom'><tr><th width='40%'>内容:</th><td>" + Graphic.attributes["content"] + "</td></tr>"
-                    + "<tr><th>上报人：</th><td>" + Graphic.attributes["reportperson"] + "</td></tr>"
-                    + "<tr><th>河道:</th><td>" + (Graphic.attributes["eventreachname"] == null ? "--" : (Graphic.attributes["eventreachname"] ))
+                    + "<tr><th>上报人：</th><td>" + Graphic.attributes["reportperson"] + Graphic.attributes["eventbelongcounty"] + Graphic.attributes["eventbelongtown"] + Graphic.attributes["eventbelongvillage"] + '河长' + "</td></tr>"
+                    + "<tr><th>河段名称：</th><td>" + (Graphic.attributes["eventreachname"] == null ? "--" : (Graphic.attributes["eventreachname"] ))
                     + "</td></tr><tr><th>状态：</th><td>" + Graphic.attributes["eventStatus"] + "</td></tr>"
+                    + "<tr><th>问题来源：</th><td>" + Graphic.attributes["eventresource"] + "</td></tr>"
                     + "<tr><th>上报时间：</th><td>" + Graphic.attributes["reporttime"] + "</td></tr></table></div>"
                     + "<div style='margin: 10px;' id='eventDetail1Eve'><input type='button' value='查看详情' class='btn btn-primary btn-sm'></div>";
                 pInfoWindow.resize(250, 290);
