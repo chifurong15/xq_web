@@ -184,6 +184,25 @@ angular.module('app')
              * 详细信息
              * @param evt
              */
+            this.typeResource = function (type) {
+                var text = '';
+                switch (type) {
+                    case 'A':
+                        text = '河长APP';
+                        break;
+                    case 'B':
+                        text = '电话上报';
+                        break;case 'C':
+                    text = '公众APP';
+                    break;case 'D':
+                    text = '微信号';
+                    break;
+                    case 'F':
+                        text = '曝光台';
+                        break;
+                };
+                return text;
+            }
             this.showInfoWindow = function(e){
                /* if(this.isGraphicClick){
                     this._map.infoWindow.hide();
@@ -208,7 +227,7 @@ angular.module('app')
                     + "<tr><th>上报人：</th><td>" + Graphic.attributes["reportperson"] + Graphic.attributes["eventbelongcounty"] + Graphic.attributes["eventbelongtown"] + Graphic.attributes["eventbelongvillage"] + '河长' + "</td></tr>"
                     + "<tr><th>河段名称：</th><td>" + (Graphic.attributes["eventreachname"] == null ? "--" : (Graphic.attributes["eventreachname"] ))
                     + "</td></tr><tr><th>状态：</th><td>" + Graphic.attributes["eventStatus"] + "</td></tr>"
-                    + "<tr><th>问题来源：</th><td>" + Graphic.attributes["eventresource"] + "</td></tr>"
+                    + "<tr><th>问题来源：</th><td>" + this.typeResource(Graphic.attributes["eventresource"]) + "</td></tr>"
                     + "<tr><th>上报时间：</th><td>" + Graphic.attributes["reporttime"] + "</td></tr></table></div>"
                     + "<div style='margin: 10px;' id='eventDetail1Eve'><input type='button' value='查看详情' class='btn btn-primary btn-sm'></div>";
                 pInfoWindow.resize(250, 290);
@@ -234,7 +253,7 @@ angular.module('app')
 	                }).error(function(){
 	                    console.error("data query error");
 	                });
-	                
+
 	                //显示事件流转
 	                $http({
 	                    method: "GET",
@@ -250,7 +269,7 @@ angular.module('app')
 	                }).error(function(){
 	                    console.error("data query error");
 	                });
-	                
+
 	                //显示领导批示
 	                $http({
 	                    method: "GET",
@@ -266,7 +285,7 @@ angular.module('app')
 	                }).error(function(){
 	                    console.error("data query error");
 	                });
-	                
+
                 	$('#eventDetailModal').modal('show');
 				    $('#eventDetailModal').on('hide.bs.modal', function () {
 				    });
