@@ -244,5 +244,70 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
             return (/iPhone|iPod|iPad|Silk|Android|BlackBerry|Opera Mini|IEMobile/).test(ua);
         }
 
+        //个人信息弹窗
+        $scope.editUserInfoModal = function(){
+            $scope.editUserInfo = Object.assign({},$localStorage.userLoginInfo.userInfo);
+            $scope.authError = '';
+            $("#editUserInfo_modal").modal('show');
+            //个人信息弹窗-生日选择  /*此处实例化
+            $('#birthdaypicker').datetimepicker({
+                format: 'YYYY-MM-DD',
+                locale: moment.locale('zh-cn')
+            }).on('dp.change', function (e) {
+                var result = new moment(e.date).format('YYYY-MM-DD');
+            }).on('hide', function(event) {event.preventDefault();event.stopPropagation();});
+        }
+
+        //个人信息弹窗-提交
+        $scope.userInfoSubmit = function(){
+            $http({
+                method: 'POST',
+                url: $localStorage.serviceUrl + "/smUser/updateById",
+                params: {
+                    id: $scope.editUserInfo.id,
+                    name: $scope.editUserInfo.name,
+                    cellphone: $scope.editUserInfo.cellphone,
+                    gender: $scope.editUserInfo.gender,
+                    email: $scope.editUserInfo.email,
+                    birthday: $scope.editUserInfo.birthday,
+                    weixin: $scope.editUserInfo.weixin,
+                    qq: $scope.editUserInfo.qq,
+                    position: $scope.editUserInfo.position,
+                    department: $scope.editUserInfo.department
+                }
+            }).then(function successCallback(resp) {
+                if(resp.data.resCode == 1){
+                    getUserInfo();
+                    $scope.authError = resp.data.resMsg;
+                    setTimeout(function(){
+                        $("#editUserInfo_modal").modal('hide');
+                    }, 3000)
+                }else{
+                    $scope.authError = resp.data.resMsg;
+                }
+            }, function errorCallback(response) {
+                // 请求失败执行代码
+                $scope.authError = '服务器异常！';
+            });
+        }
+
+        //获取个人信息
+        var getUserInfo = function(){
+            $http({
+                method: 'GET',
+                url: $localStorage.serviceUrl + "/smUser/getById",
+                params: {
+                    id: $scope.editUserInfo.id,
+                }
+            }).then(function successCallback(resp) {
+                if(resp.data.resCode == 1){
+                    console.log($localStorage.userLoginInfo.userInfo)
+                    $localStorage.userLoginInfo.userInfo = resp.data.data;
+                    console.log($localStorage.userLoginInfo.userInfo)
+                }
+            }, function errorCallback(response) {
+            });
+        }
+
     }
 ]);

@@ -39,19 +39,92 @@
                 <i class="{{menu.icon}}" aria-hidden="true"></i> <label>{{menu.name}}</label>
             </a>
         </li>
-        <li ng-init="initUserInfo()">
-            <span class="hidden-sm hidden-md  pull-right">你好，{{userInfo.name}}！</span>
-            <label class="thumb-sm avatar">
-                <img src="img/a0.jpg" alt="..."/>
-            </label>
-        </li>
-        <li>
-            <a ng-click="logout()">【退出】</a>
+        <li class="dropdown" dropdown ng-init="initUserInfo()">
+            <a href class="dropdown-toggle clear" dropdown-toggle>
+              <span class="thumb avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
+                <img src="img/a0.jpg" alt="...">
+                <i class="on md b-white bottom"></i>
+              </span>
+                <span class="hidden-sm hidden-md">{{userInfo.userName}}</span> <b class="caret"></b>
+            </a>
+            <!-- dropdown -->
+            <ul class="dropdown-menu animated w">
+                <li>
+                    <a href="javascript:void(0);" ng-click="editUserInfoModal()">个人信息</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a ng-click="logout()">安全退出</a>
+                </li>
+            </ul>
         </li>
     </ul>
-
 </div>
 
-	
-	
-	
+ <!--描述：个人信息弹出框-->
+<div class="modal fade" id="editUserInfo_modal" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document" style="width: 640px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">个人信息</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-inline" method="get" name="editUserInfo_form">
+                    <div class="text-danger wrapper text-center" ng-show="authError">{{authError}}</div>
+                    <div class="form-item">
+                        <label>用户名</label>
+                        <input class='form-control input-short' type="text" ng-model='editUserInfo.userName' disabled>
+                    </div>
+                    <div class="form-item">
+                        <label>真实姓名</label>
+                        <input class='form-control input-short' type="text" ng-model='editUserInfo.name'>
+                    </div>
+                    <div class="form-item">
+                        <label>性别</label>
+                        <select class="form-control select-short" ng-model='editUserInfo.gender'>
+                            <option value="1">男</option>
+                            <option value="2">女</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <label>移动电话</label>
+                        <input class='form-control input-short' type="text" ng-model='editUserInfo.cellphone'>
+                    </div>
+                    <div class="form-item">
+                        <label>生日</label>
+                        <div class='input-group date date_picker' datetimepicker id='birthdaypicker'>
+                            <input type='text' class="form-control input-short-o" ng-model="editUserInfo.birthday">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>邮箱地址</label>
+                        <input class='form-control input-short' type="text" ng-model="editUserInfo.email">
+                    </div>
+                    <div class="form-item">
+                        <label>微信账号</label>
+                        <input class='form-control input-short' type="text" ng-model="editUserInfo.weixin">
+                    </div>
+                    <div class="form-item">
+                        <label>QQ号</label>
+                        <input class='form-control input-short' type="text" ng-model="editUserInfo.qq">
+                    </div>
+                    <div class="form-item">
+                        <label>部门信息</label>
+                        <input class='form-control input-short' type="text" ng-model="editUserInfo.department">
+                    </div>
+                    <div class="form-item">
+                        <label>用户职位</label>
+                        <input class='form-control input-short' type="text" ng-model="editUserInfo.position">
+                    </div>
+                    <button type="submit" class="btn btn-lg btn-primary btn-block" style="width: 120px; margin: 15px auto 0;" ng-click="userInfoSubmit()">修 改</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
