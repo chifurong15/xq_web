@@ -1126,10 +1126,8 @@ angular.module('app')
                     && parseFloat(coordsArr[0].y) != parseFloat(coordsArr[coordsArr.length-1].y)){
                     var startPoint = new _w.Point(parseFloat(coordsArr[0].x),parseFloat(coordsArr[0].y),this._map.spatialReference);
                     var endPoint = new _w.Point(parseFloat(coordsArr[coordsArr.length-1].x),parseFloat(coordsArr[coordsArr.length-1].y),this._map.spatialReference);
-                    var startSymbol = new _w.PictureMarkerSymbol(startImgPath,25,36).setOffset(0, 18);
-                    var endSymbol = new _w.PictureMarkerSymbol(endImgPath,25,36).setOffset(0, 18);
-                    debugger;
-                    console.log(13/2);
+                    var startSymbol = new _w.PictureMarkerSymbol(startImgPath,18,26).setOffset(0, 18);
+                    var endSymbol = new _w.PictureMarkerSymbol(endImgPath,18,26).setOffset(0, 18);
 
                     var g1 = new _w.Graphic(startPoint, startSymbol);
                     var g2 = new _w.Graphic(endPoint, endSymbol);
@@ -1143,7 +1141,6 @@ angular.module('app')
                 var line = new _w.Graphic(polyline,lineSymbol);
                 line.attributes = item;
                 this._historyPatrolLayer.add(line);
-                debugger;
                 var extent = polyline.getExtent();
                 return extent;
 
