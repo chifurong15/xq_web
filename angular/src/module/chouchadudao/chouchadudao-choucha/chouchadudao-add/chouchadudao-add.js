@@ -40,8 +40,8 @@
                                 $scope.RegionList = res.data;
                                 var select = $("#slpk");
                                 for (var i = 0; i < res.data.length; i++) {
-                                    select.append("<option value='"+res.data[i]+"'>"
-                                        + res.data[i] + "</option>");
+                                    select.append("<option value='"+res.data[i].regionName+"'>"
+                                        + res.data[i].regionName + "</option>");
                                 }
                                 $('.selectpicker').selectpicker('val', '');
                                 $('.selectpicker').selectpicker('refresh');
@@ -55,7 +55,7 @@
                             url: apiPrefix + '/v1/spotcheck/listSendPerson',
                             method: 'get',
                             callBack: function (res) {
-                                $scope.personList = res.data;
+                                $scope.personList = res.data.records;
                             }
                         })
                     }
