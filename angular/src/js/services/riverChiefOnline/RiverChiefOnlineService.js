@@ -1152,8 +1152,8 @@ angular.module('app')
                     // }
 
                     pt1[0] = parseFloat(coordsArr[0].x);
-                    pt1[1] = parseFloat(coordsArr[0].y);
-                    pt2[0] = parseFloat(coordsArr[1].x);
+                    pt1[0] = parseFloat(coordsArr[0].y);
+                    pt2[1] = parseFloat(coordsArr[1].x);
                     pt2[1] = parseFloat(coordsArr[1].y);
                     pt = new _w.Point(parseFloat(coordsArr[0].x),parseFloat(coordsArr[0].y),this._map.spatialReference);
 
