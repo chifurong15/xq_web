@@ -1127,16 +1127,13 @@ angular.module('app')
                 var angle = null;
                 var pt = null;
 
-                var iconObject = {};
-
                 if (parseFloat(coordsArr[0].x) != parseFloat(coordsArr[coordsArr.length-1].x)
                     && parseFloat(coordsArr[0].y) != parseFloat(coordsArr[coordsArr.length-1].y)){
                     var startPoint = new _w.Point(parseFloat(coordsArr[0].x),parseFloat(coordsArr[0].y),this._map.spatialReference);
                     var endPoint = new _w.Point(parseFloat(coordsArr[coordsArr.length-1].x),parseFloat(coordsArr[coordsArr.length-1].y),this._map.spatialReference);
                     var startSymbol = new _w.PictureMarkerSymbol(startImgPath,25,36).setOffset(0, 18);
                     var endSymbol = new _w.PictureMarkerSymbol(endImgPath,25,36).setOffset(0, 18);
-                    debugger;
-                    var arrLength = coordsArr.length;
+                    // var arrLength = coordsArr.length;
                     // if (arrLength % 2 == 0){
                     //     pt1[0] = parseFloat(coordsArr[arrLength / 2].x);
                     //     pt1[1] = parseFloat(coordsArr[arrLength / 2].y);
@@ -1150,10 +1147,9 @@ angular.module('app')
                     //     pt2[1] = parseFloat(coordsArr[Math.ceil(arrLength / 2)].y);
                     //     pt = new _w.Point(parseFloat(coordsArr[Math.ceil(arrLength / 2)].x),parseFloat(coordsArr[Math.ceil(arrLength / 2)].y),this._map.spatialReference);
                     // }
-
                     pt1[0] = parseFloat(coordsArr[0].x);
-                    pt1[0] = parseFloat(coordsArr[0].y);
-                    pt2[1] = parseFloat(coordsArr[1].x);
+                    pt1[1] = parseFloat(coordsArr[0].y);
+                    pt2[0] = parseFloat(coordsArr[1].x);
                     pt2[1] = parseFloat(coordsArr[1].y);
                     pt = new _w.Point(parseFloat(coordsArr[0].x),parseFloat(coordsArr[0].y),this._map.spatialReference);
 
