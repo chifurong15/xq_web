@@ -11,7 +11,7 @@ angular.module('app')
         '$localStorage',
         'SymbolUtil',
         'MapUtil',
-        function($rootScope,wish, $http, $localStorage, SymbolUtil, MapUtil){
+        function ($rootScope, wish, $http, $localStorage, SymbolUtil, MapUtil) {
             var _w = wish.get();
             this._map = null;
             this._layer = null;
@@ -43,32 +43,32 @@ angular.module('app')
              * 获取数据
              */
             this.getDataList = function () {
-                if(this._dataSource && this._dataSource.length > 0){
+                if (this._dataSource && this._dataSource.length > 0) {
                     _that.addGraphic(this._dataSource);
                     return;
                 }
                 $http({
                     method: "GET",
                     url: _serviceUrl + 'event/v1/queryEventByReachOrRegion',
-                    params:{
-                        regionId:$scope.regionId,
-                        regionLevel:$scope.regionGrade,
-                        reachId:'',
-                        reachLevel:'',
-                        reportPersonId:'',
-                        type:$scope.types_change,
-                        status:$scope.status_change,
-                        startTime:$scope.beginTime,
-                        endTime:$scope.endTime
+                    params: {
+                        regionId: $scope.regionId,
+                        regionLevel: $scope.regionGrade,
+                        reachId: '',
+                        reachLevel: '',
+                        reportPersonId: '',
+                        type: $scope.types_change,
+                        status: $scope.status_change,
+                        startTime: $scope.beginTime,
+                        endTime: $scope.endTime
                     }
                 }).success(function (data) {
-                    if(data.data && data.data.length > 0){
+                    if (data.data && data.data.length > 0) {
                         _that._dataSource = data.data;
                         _that.addGraphic(data.data);
-                    }else{
+                    } else {
                         console.warn("data is null");
                     }
-                }).error(function(){
+                }).error(function () {
                     console.error("data query error");
                 });
 
@@ -100,22 +100,22 @@ angular.module('app')
 
                 _that.addGraphic(data1.data);*/
             };
-            this.addGraphic = function(data){
+            this.addGraphic = function (data) {
                 this.clear();
                 var len = data.length;
-                var item,point,iconObject,picMarkerSymbol,graphic;
-                for(var i=0;i<len;i++){
-                    if(i==0){ //返回数据的经纬是在浙江，暂时使用位置在天津的测试数据点
+                var item, point, iconObject, picMarkerSymbol, graphic;
+                for (var i = 0; i < len; i++) {
+                    if (i == 0) { //返回数据的经纬是在浙江，暂时使用位置在天津的测试数据点
                         //data[i].longitude = 117.38323361855753;
                         //data[i].latitude = 39.02436528014918;
                         //data[i].status = "县级联络员派单"
-                    }else if(i==1){
+                    } else if (i == 1) {
                         //data[i].longitude = 116.7721191166044;
                         //data[i].latitude = 38.96394047546168;
                         //data[i].status = "县级联络员派单"
                     }
                     item = data[i];
-                    if(MapUtil.isCoordValid(item.longitude, item.latitude)){ //数字类型
+                    if (MapUtil.isCoordValid(item.longitude, item.latitude)) { //数字类型
                         this.createLayerAnno(item);
                         point = new _w.Point(item.longitude, item.latitude, this._map.spatialReference);
                         iconObject = this.getIconPath(item["eventStatus"]);
@@ -126,7 +126,7 @@ angular.module('app')
                         item.type = "事件";
                         graphic.attributes = item;
                         this._layer.add(graphic);
-                    }else{
+                    } else {
                         console.info("无效坐标!");
                         //return;
                     }
@@ -141,14 +141,14 @@ angular.module('app')
                 textGraphic.attributes = item;
                 this._annoLayer.add(textGraphic);
             };
-            this.setTextSymbol = function (type ,name) {
+            this.setTextSymbol = function (type, name) {
                 var font, textSymbol;
-                if(type == "事件") {
+                if (type == "事件") {
                     font = new _w.Font("12px", _w.Font.STYLE_NORMAL, _w.Font.VARIANT_NORMAL, _w.Font.WEIGHT_LIGHTER, "微软雅黑").setDecoration("none");
                     textSymbol = new _w.TextSymbol(name, font, new _w.Color([0, 0, 0]))
                         .setAlign(_w.TextSymbol.ALIGN_START)
                         .setOffset(12, 0).setHaloColor(new _w.Color([255, 255, 255])).setHaloSize(1);
-                }else {
+                } else {
                     font = new _w.Font("12px", _w.Font.STYLE_NORMAL, _w.Font.VARIANT_NORMAL, _w.Font.WEIGHT_LIGHTER, "微软雅黑").setDecoration("none");
                     textSymbol = new _w.TextSymbol(name, font, new _w.Color([0, 0, 0]))
                         .setAlign(_w.TextSymbol.ALIGN_START)
@@ -160,15 +160,15 @@ angular.module('app')
             /**
              * 获取图标路径
              */
-            this.getIconPath = function(status){
+            this.getIconPath = function (status) {
                 var iconObject = {};
                 iconObject.sizeX = 24;
                 iconObject.sizeY = 24;
-                if(status == "处理中"){
+                if (status == "处理中") {
                     iconObject.path = "img/esri-icon/event/event-CLZ.png";
-                }else if(status == "待办") {
+                } else if (status == "待办") {
                     iconObject.path = "img/esri-icon/event/event-DB.png";
-                }else {
+                } else {
                     iconObject.path = "img/esri-icon/event/event-JA.png";
                 }
                 return iconObject;
@@ -192,25 +192,28 @@ angular.module('app')
                         break;
                     case 'B':
                         text = '电话上报';
-                        break;case 'C':
-                    text = '公众APP';
-                    break;case 'D':
-                    text = '微信号';
-                    break;
+                        break;
+                    case 'C':
+                        text = '公众APP';
+                        break;
+                    case 'D':
+                        text = '微信号';
+                        break;
                     case 'F':
                         text = '曝光台';
                         break;
-                };
+                }
+                ;
                 return text;
             }
-            this.showInfoWindow = function(e){
-               /* if(this.isGraphicClick){
-                    this._map.infoWindow.hide();
-                    this.isGraphicClick = false;
-                }else {
-                    this._map.infoWindow.show();
-                    this.isGraphicClick = true;
-                }*/
+            this.showInfoWindow = function (e) {
+                /* if(this.isGraphicClick){
+                     this._map.infoWindow.hide();
+                     this.isGraphicClick = false;
+                 }else {
+                     this._map.infoWindow.show();
+                     this.isGraphicClick = true;
+                 }*/
 
                 var Graphic = e.graphic;
                 var pInfoWindow = this._map.infoWindow;
@@ -225,7 +228,7 @@ angular.module('app')
                 pInfoWindow.setTitle("事件详情");
                 var pHtml = "<div><table class='form_custom'><tr><th width='40%'>内容:</th><td>" + Graphic.attributes["content"] + "</td></tr>"
                     + "<tr><th>上报人：</th><td>" + Graphic.attributes["reportperson"] + Graphic.attributes["eventbelongcounty"] + Graphic.attributes["eventbelongtown"] + Graphic.attributes["eventbelongvillage"] + '河长' + "</td></tr>"
-                    + "<tr><th>河段名称：</th><td>" + (Graphic.attributes["eventreachname"] == null ? "--" : (Graphic.attributes["eventreachname"] ))
+                    + "<tr><th>河段名称：</th><td>" + (Graphic.attributes["eventreachname"] == null ? "--" : (Graphic.attributes["eventreachname"]))
                     + "</td></tr><tr><th>状态：</th><td>" + Graphic.attributes["eventStatus"] + "</td></tr>"
                     + "<tr><th>问题来源：</th><td>" + this.typeResource(Graphic.attributes["eventresource"]) + "</td></tr>"
                     + "<tr><th>上报时间：</th><td>" + Graphic.attributes["reporttime"] + "</td></tr></table></div>"
@@ -235,60 +238,59 @@ angular.module('app')
                 pInfoWindow.show(this._map.toScreen(Graphic.geometry));
                 var evtDetail1 = e.graphic;
                 var evtId1 = Graphic.attributes.id;
-                $rootScope.$emit("evtDetail1",evtDetail1);
-                document.getElementById('eventDetail1Eve').addEventListener('click',function(){
-                    console.log(1)
+                $rootScope.$emit("evtDetail1", evtDetail1);
+                document.getElementById('eventDetail1Eve').addEventListener('click', function () {
                     //显示图片
                     $http({
-	                    method: "GET",
-	                    url: $localStorage.serviceUrl_eventMgr + 'event/v1/findAccessoryList',
-	                    params:{
-	                        eventId:evtId1
+                        method: "GET",
+                        url: $localStorage.serviceUrl_eventMgr + 'event/v1/findAccessoryList',
+                        params: {
+                            eventId: evtId1
 //	                        eventId:'0ac034c4658e4f23b8d921bda0792d8f'
-	                    }
-	                }).success(function (data) {
-	                	console.log(data)
-	                	var eventUrl1 = data;
-                		$rootScope.$emit("eventUrl1",eventUrl1);
-	                }).error(function(){
-	                    console.error("data query error");
-	                });
+                        }
+                    }).success(function (data) {
+                        console.log(data)
+                        var eventUrl1 = data;
+                        $rootScope.$emit("eventUrl1", eventUrl1);
+                    }).error(function () {
+                        console.error("data query error");
+                    });
 
-	                //显示事件流转
-	                $http({
-	                    method: "GET",
-	                    url: $localStorage.serviceUrl_eventMgr + 'event/v1/findTacheList',
-	                    params:{
-	                        eventId:evtId1
+                    //显示事件流转
+                    $http({
+                        method: "GET",
+                        url: $localStorage.serviceUrl_eventMgr + 'event/v1/findTacheList',
+                        params: {
+                            eventId: evtId1
 //	                        eventId:'15b70492a1ea11e8b494f01fafcf3a37'
-	                    }
-	                }).success(function (data) {
-	                	console.log(data)
-	                	var evtItem1 = data;
-	                	$rootScope.$emit("evtItem1",evtItem1);
-	                }).error(function(){
-	                    console.error("data query error");
-	                });
+                        }
+                    }).success(function (data) {
+                        console.log(data)
+                        var evtItem1 = data;
+                        $rootScope.$emit("evtItem1", evtItem1);
+                    }).error(function () {
+                        console.error("data query error");
+                    });
 
-	                //显示领导批示
-	                $http({
-	                    method: "GET",
-	                    url: $localStorage.serviceUrl_eventMgr + 'event/v1/findInstructionList',
-	                    params:{
-	                        eventId:evtId1
+                    //显示领导批示
+                    $http({
+                        method: "GET",
+                        url: $localStorage.serviceUrl_eventMgr + 'event/v1/findInstructionList',
+                        params: {
+                            eventId: evtId1
 //	                        eventId:'hlhlj'
-	                    }
-	                }).success(function (data) {
-	                	console.log(data)
-	                	var comment1 = data;
-	                	$rootScope.$emit("comment1",comment1);
-	                }).error(function(){
-	                    console.error("data query error");
-	                });
+                        }
+                    }).success(function (data) {
+                        console.log(data)
+                        var comment1 = data;
+                        $rootScope.$emit("comment1", comment1);
+                    }).error(function () {
+                        console.error("data query error");
+                    });
 
-                	$('#eventDetailModal').modal('show');
-				    $('#eventDetailModal').on('hide.bs.modal', function () {
-				    });
+                    $('#eventDetailModal').modal('show');
+                    $('#eventDetailModal').on('hide.bs.modal', function () {
+                    });
                 });
             };
             this.showInfoWindowByTableClick = function (Graphic) {
@@ -301,7 +303,7 @@ angular.module('app')
                 pInfoWindow.setTitle(Graphic.attributes["事件详情"]);
                 var pHtml = "<div><table class='form_custom'><tr><th width='40%'>内容:</th><td>" + Graphic.attributes["content"] + "</td></tr>"
                     + "<tr><th>上报人：</th><td>" + Graphic.attributes["reportperson"] + "</td></tr>"
-                    + "<tr><th>河道:</th><td>" + (Graphic.attributes["eventreachname"] == null ? "--" : (Graphic.attributes["eventreachname"] ))
+                    + "<tr><th>河道:</th><td>" + (Graphic.attributes["eventreachname"] == null ? "--" : (Graphic.attributes["eventreachname"]))
                     + "</td></tr><tr><th>状态：</th><td>" + Graphic.attributes["eventStatus"] + "</td></tr>"
                     + "<tr><th>上报时间：</th><td>" + Graphic.attributes["reporttime"] + "</td></tr></table></div>"
                     + "<div style='margin: 10px;' id='eventDetail2Eve'><input type='button' value='查看详情' class='btn btn-primary btn-sm'></div>";
@@ -310,72 +312,72 @@ angular.module('app')
                 pInfoWindow.show(Graphic.geometry);
                 var evtDetail2 = Graphic;
                 var evtId2 = Graphic.attributes.id;
-                $rootScope.$emit("evtDetail2",evtDetail2);
-                document.getElementById('eventDetail2Eve').addEventListener('click',function(){
-                	
-                	//显示图片
-                	$http({
-	                    method: "GET",
-	                    url: $localStorage.serviceUrl_eventMgr + 'event/v1/findAccessoryList',
-	                    params:{
-	                        eventId:evtId2
+                $rootScope.$emit("evtDetail2", evtDetail2);
+                document.getElementById('eventDetail2Eve').addEventListener('click', function () {
+
+                    //显示图片
+                    $http({
+                        method: "GET",
+                        url: $localStorage.serviceUrl_eventMgr + 'event/v1/findAccessoryList',
+                        params: {
+                            eventId: evtId2
 //	                        eventId:'0ac034c4658e4f23b8d921bda0792d8f'
-	                    }
-	                }).success(function (data) {
-	                	console.log(data)
-	                	var eventUrl2 = data;
-	                	$rootScope.$emit("eventUrl2",eventUrl2);
-	                }).error(function(){
-	                    console.error("data query error");
-	                });
-	                
-                	//显示事件流转
-                	$http({
-	                    method: "GET",
-	                    url: $localStorage.serviceUrl_eventMgr + 'event/v1/findTacheList',
-	                    params:{
-	                        eventId:evtId2
+                        }
+                    }).success(function (data) {
+                        console.log(data)
+                        var eventUrl2 = data;
+                        $rootScope.$emit("eventUrl2", eventUrl2);
+                    }).error(function () {
+                        console.error("data query error");
+                    });
+
+                    //显示事件流转
+                    $http({
+                        method: "GET",
+                        url: $localStorage.serviceUrl_eventMgr + 'event/v1/findTacheList',
+                        params: {
+                            eventId: evtId2
 //	                        eventId:'15b70492a1ea11e8b494f01fafcf3a37'
-	                    }
-	                }).success(function (data) {
-	                	console.log(data)
-	                	var evtItem2 = data;
-	                	$rootScope.$emit("evtItem2",evtItem2);
-	                }).error(function(){
-	                    console.error("data query error");
-	                });
-                	
-                	//显示领导批示
-	                $http({
-	                    method: "GET",
-	                    url: $localStorage.serviceUrl_eventMgr + 'event/v1/findInstructionList',
-	                    params:{
-	                        eventId:evtId2
+                        }
+                    }).success(function (data) {
+                        console.log(data)
+                        var evtItem2 = data;
+                        $rootScope.$emit("evtItem2", evtItem2);
+                    }).error(function () {
+                        console.error("data query error");
+                    });
+
+                    //显示领导批示
+                    $http({
+                        method: "GET",
+                        url: $localStorage.serviceUrl_eventMgr + 'event/v1/findInstructionList',
+                        params: {
+                            eventId: evtId2
 //	                        eventId:'hlhlj'
-	                    }
-	                }).success(function (data) {
-	                	console.log(data)
-	                	var comment2 = data;
-	                	$rootScope.$emit("comment2",comment2);
-	                }).error(function(){
-	                    console.error("data query error");
-	                });
-                	$('#eventDetailModal').modal('show');
-				    $('#eventDetailModal').on('hide.bs.modal', function () {
-				    });
+                        }
+                    }).success(function (data) {
+                        console.log(data)
+                        var comment2 = data;
+                        $rootScope.$emit("comment2", comment2);
+                    }).error(function () {
+                        console.error("data query error");
+                    });
+                    $('#eventDetailModal').modal('show');
+                    $('#eventDetailModal').on('hide.bs.modal', function () {
+                    });
                 });
             };
             /**
              * 获取图层
              * @returns {*}
              */
-            this.getLayer = function(){
+            this.getLayer = function () {
                 return this._layer;
             };
             /**
              * 图层显隐
              */
-            this.setLayerVisible = function(isVisible){
+            this.setLayerVisible = function (isVisible) {
                 this._layer.setVisibility(isVisible);
                 this._annoLayer.setVisibility(isVisible);
             };
@@ -441,8 +443,8 @@ angular.module('app')
             /**
              * 清除图层
              */
-            this.clear = function(){
-                if(this._layer != null){
+            this.clear = function () {
+                if (this._layer != null) {
                     this._layer.clear();
                 }
             };
@@ -450,7 +452,7 @@ angular.module('app')
              * 移除图层
              */
             this.removeLayer = function () {
-                if(this._layer != null){
+                if (this._layer != null) {
                     this._map.removeLayer(this._layer);
                 }
             }

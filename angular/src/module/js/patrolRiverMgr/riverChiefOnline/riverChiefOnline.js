@@ -500,7 +500,7 @@
                                 RiverChiefOnlineService.addGraphic(res.data);
                             }else{
                                 RiverChiefOnlineService.clear();
-                                console.error("chiefOnline data is null");
+                                console.log("chiefOnline data is null");
                             }
 
                         }else{
@@ -700,7 +700,8 @@
                     $('.app-content-body').css('left','172px');
                     clearInterval(timer);
                 });
-                $scope.eventImgUrl = $localStorage.serviceUrl_fileService;
+                // $scope.eventImgUrl = $localStorage.serviceUrl_fileService;
+                $scope.eventImgUrl = $localStorage.gwUrl;
                 //问题点击函数
                 $scope.eventClick = function(data){
                     $scope.map.infoWindow.hide();
