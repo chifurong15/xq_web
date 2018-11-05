@@ -244,7 +244,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
             $scope.reachDocument = function(id) {
                 $localStorage.reachId= id;
                 console.log($localStorage.reachId)
-                routeService.route(1024, false);
+                routeService.route(549, false);
             };
 
 

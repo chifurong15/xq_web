@@ -1,0 +1,152 @@
+<div ng-controller="reachDocCtrl" ng-init="init()">
+	<div class="bg-light lter b-b wrapper-md">
+		<h1 class="m-n font-thin h3">一河一策（档）</h1>
+	</div>
+	<div class="wrapper-md">
+		<div class="panel panel-default">
+			<div class="panel panel-default p-l-15 p-r-15 p-t-15 p-b-15">
+				<div class="panel-body">
+					<div class="table-responsive">
+						<div class="table-bar">
+							<button type="button" class="btn btn-primary" ng-click="reachUploadDoc()">
+	                            <i class="fa fa-plus"></i>上传文档
+	                        </button>
+						</div>
+						<table class="table table-bordered table-hover">
+							<tr>
+								<th class="wid-5">序号</th>
+								<th class="wid-25">文件名称</th>
+								<th class="wid-30">创建人</th>
+								<th class="wid-20">文档类别</th>
+								<th class="wid-25">创建时间</th>
+								<th class="wid-25">状态</th>
+								<th class="wid-20">操作</th>
+							</tr>
+							<tr ng-repeat="reachDoc in reachDocList" ng-init="index=$index+1">
+								<td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{index + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
+								<td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{reachDoc.filename}}</td>
+								<td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{reachDoc.userName}}</td>
+								<td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{reachDoc.typeName}}</td>
+								<td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{reachDoc.createdate}}</td>
+								<td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{reachDoc.statusName}}</td>
+								<td ng-class-odd="'active'" ng-class-even="'bg-FFF'" class="td-tool">
+									<a class="btn btn-primary btn-xs" ng-click="reachDocDelete(reachDoc.id,reachDoc.name);"><i class="fa fa-trash-o" title="删除"></i></a>
+									<a class="btn btn-primary btn-xs" ng-click="reachDocEdit(reachDoc.id,reachDoc.name)"><i class="fa fa-edit" title="编辑"></i></a>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<tm-pagination conf="paginationConf"></tm-pagination>
+				</div>
+			</div>
+			<div class="panel-footer m-b-10">
+				<div class="btn-box">
+					<button type="submit" class="btn btn-default" ng-click="back()">
+                        <i class="fa fa-reply"></i>返回
+                    </button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--描述：一河一策（档）模态框-->
+	<div class="modal fade" id="reachDocModal" data-backdrop="static">
+		<div class="modal-dialog river-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					        <li class="fa fa-remove"></li>
+					    </button>
+					<h5 class="modal-title">请选择DOC、DOCX、PDF文件</h5>
+				</div>
+				<div class="modal-body">
+					<div class="form-item">
+						<select ng-model="fileType" ng-options="file.uid as file.name for file in fileData" ng-change="fileChange(fileType)" class="form-control select-short">
+							<option value="">请选择</option>
+						</select>
+					</div>
+					<form class="form-horizontal" method="post" enctype="multipart/form-data">
+						<div class="form-group">
+							<div class="wid-100 reachUploadDocPanel">
+								<input id="uploadfile" type="file" name="file">
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<a href="javascript:;" class="btn btn-primary btn-o" ng-click="submit()">
+						<i class="fa fa-check"></i>
+						<span>确定</span>
+					</a>
+					<a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
+						<i class="fa fa-reply"></i>
+						<span>取消</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--描述：修改数据模态框-->
+	<div class="modal fade" id="editReachDocModal" data-backdrop="static">
+		<div class="modal-dialog river-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					        <li class="fa fa-remove"></li>
+					    </button>
+					<h5 class="modal-title">数据修改</h5>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" method="post" enctype="multipart/form-data">
+						<div class="form-group">
+							<label class="col-sm-2">开始时间</label>
+							<div class="col-sm-6 input-group date date_picker" id="beginTime">
+								<input type="text" class="form-control input-sm" ng-model="beginTime" />
+								<span class="input-group-addon">
+			                            <i class="fa fa-calendar"></i>
+			                        </span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2">文件状态</label>
+							<div class="col-sm-6">
+								<select ng-model="fileStatus" ng-options="fileStaus.num as fileStaus.name for fileStaus in fileStatusData" ng-change="fileStatusChange(fileStatus)" class="form-control select-short">
+									<option value="">请选择</option>
+								</select>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<a href="javascript:;" class="btn btn-primary btn-o" ng-click="editReachDocSubmit()">
+						<i class="fa fa-check"></i>
+						<span>确定</span>
+					</a>
+					<a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
+						<i class="fa fa-reply"></i>
+						<span>取消</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$("#uploadfile").fileinput({
+		allowedFileExtensions: ['doc', 'docx', 'pdf'],
+		uploadAsync: true, //默认异步上传
+		showRemove: true, //显示移除按钮
+		maxFileCount: 1, //表示允许同时上传的最大文件个数
+		language: 'zh', //设置语言
+		uploadUrl: '#', //上传的地址
+		showUpload: false, //显示批量上传按钮
+		showCaption: true, //是否显示标题
+		browseClass: "btn btn-primary", //按钮样式 
+		showPreview: true, //是否显示预览
+		dropZoneEnabled: true, //是否显示拖拽区域
+		validateInitialCount: true,
+		slugCallback: function(filename) {
+			return filename.replace('(', '_').replace(']', '_');
+		}
+	});
+</script>
