@@ -31,7 +31,11 @@
 							url: apiPrefix + '/v1/AnzhaInvestigations/userinfo',
 							method: 'get',
 							callBack: function (res) {
-								$scope.num = res.data;
+								if(res.data == 5){
+                                    $scope.num = 0;
+                                }else {
+								    $scope.num = '';
+                                }
 								getList();
 							}
 						})
