@@ -21,8 +21,8 @@
                                        $location, $log, $q, $rootScope, $window,
                                        routeService, $http, $ajaxhttp, moduleService , globalParam) {
 
-                    //var apiPrefix = moduleService.getServiceUrl() + '/ancha';
-                    var apiPrefix = 'http://10.0.9.116:7021' + '/ancha';
+                    var apiPrefix = moduleService.getServiceUrl() + '/ancha';
+                    //var apiPrefix = 'http://10.0.9.116:7021' + '/ancha';
 
                     $scope.init = function () {
                         getStatus ();
