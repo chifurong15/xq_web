@@ -21,7 +21,8 @@
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
-					var apiPrefix = moduleService.getServiceUrl() + '/quality';
+					// var apiPrefix = moduleService.getServiceUrl() + '/quality';
+                    var apiPrefix = "http://10.0.9.116:7004" + '/quality';
 
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
 					$scope.init = function () {	
@@ -414,8 +415,8 @@
 						//$scope.riverName = $scope.riverOption[$scope.section].riverName ;
 						$scope.sectionType = $scope.nameOption[id].name ;
 						$scope.riverName = $scope.riverOption[id].riverName ;
-						console.log('断面---',$scope.nameOption[id].name );
-						console.log('河流---',$scope.riverOption[id].riverName );
+						// console.log('断面---',$scope.nameOption[id].name );
+						//console.log('河流---',$scope.riverOption[id].riverName );
 					}	
 					
 					//取消
@@ -424,7 +425,7 @@
 					}					
 					
 					//清空表单
-					var clear = function () {
+					function clear () {
 						$scope.title = '';
 						$scope.issuer = '';
 						$scope.searchTime = '';

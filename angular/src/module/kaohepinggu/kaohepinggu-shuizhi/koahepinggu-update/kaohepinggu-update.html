@@ -11,13 +11,15 @@
     			<form class="form-inline clearfix">
         			<div class="input-group form-item" >
                         <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">断面</font></font></label>
-						<select ng-model="section"  ng-change="getSectionChange()" class="form-control select-short" style="width: 160px;">
+						<select ng-model="section1"  ng-change="getSectionChange()" class="form-control select-short" style="width: 160px;z-index: 0;">
+							<option value="">请选择</option>
 							<option value="{{item.name}}" ng-repeat="item in nameOption">{{item.name}}</option>
 						</select>
                     </div>
                     <div class="input-group form-item" >
                         <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">河流</font></font></label>
-        				<select ng-model="riverName" ng-change="getRiverChange()" class="form-control select-short" style="width: 160px;">
+        				<select ng-model="riverName1" ng-change="getRiverChange()" class="form-control select-short" style="width: 160px;z-index: 0;">
+							<option value="">请选择</option>
 							<option value="{{item.riverName}}" ng-repeat="item in riverOption">{{item.riverName}}</option>
 						</select>						
                     </div>                    
@@ -25,7 +27,15 @@
 	                    <button class="btn btn-primary" ng-click="search()">
 	                    	<i class="fa fa-search"></i>搜索
 	                    </button>
-                   </div>                   
+                   </div>
+					<div class="form-item" style="float: right;: right;height: 34px;">
+						<button type="button" class="btn btn-primary" ng-click="add()" ng-if="num == 1">新增条目</button>
+						<input type="file" class="hidden" id="J-attandUploader" ng-model="attandUrl" onchange="angular.element(this).scope().uploadFile(this)"/>
+						<button class="btn btn-default" onclick="document.getElementById('J-attandUploader').click()" ng-if="num == 1">导入(.xls)</button>
+						<a class="btn btn-info" ng-if="num == 1" ng-href="http://10.0.0.196/api/download/uhope/infomation/20181102150016350_水质.xlsx" target="_blank"  class="downOrLook">下载导入模板</a>
+					</div>
+
+
                 </form>
 				<div class="tab-content">
 	                    <div class="tab-pane active" id="tableStatistics">
@@ -35,14 +45,15 @@
 	                                	<tr class='tHeader'>
 		                                    <th width="5%">分析编号</th>
 		                                    <th width="5%">断面序号</th>
-		                                    <th width="15%">断面名称</th>	                                    
-		                                    <th width="15%">河流</th>	                                    
-		                                    <th width="10%">采样日期</th>	                                    
+		                                    <th width="10%">断面名称</th>
+		                                    <th width="10%">河流</th>
+		                                    <th width="10%">采样日期</th>
 		                                    <th width="10%">水温（℃）</th>	                                    
 		                                    <th width="10%">总磷（mg/L）</th>	                                    
 		                                    <th width="10%">氨氮（mg/L）</th>	                                    
 		                                    <th width="10%">高锰酸盐指数（mg/L）</th>	                                    
 		                                    <th width="10%">溶解氧（mg/L）</th>		                                    
+		                                    <th width="15%" ng-if="num == 1">操作</th>
 		                                </tr>
 	                                	<tr ng-repeat="item in detailList">		                                   
 		                                    <td>{{$index+1}}</td>
@@ -54,7 +65,11 @@
 		                                    <td>{{item.total_phosphorus}}</td>
 		                                    <td>{{item.ammonia_nitrogen}}</td>
 		                                    <td>{{item.permanganate_index}}</td>
-		                                    <td>{{item.DO}}</td>		                                    
+		                                    <td>{{item.dO}}</td>
+											<td ng-if="num == 1">
+												<button type="button" class="btn btn-primary btn-sm" ng-click="edit(item)">修改</button>
+												<button type="button" class="btn btn-danger btn-sm" ng-click="delete(item.id)">删除</button>
+											</td>
 		                                </tr>		                                
 	                            	</tbody>
 	                            </table>
@@ -70,8 +85,7 @@
     	</div>
 
     </div>
-    
-    <!-- 模态框（Modal） -->
+	<!-- 模态框（Modal） -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -80,36 +94,73 @@
 						&times;
 					</button>
 					<h4 class="modal-title" id="myModalLabel">
-						新增条目
+						{{type == 1 ? "修改" : "新增"}}条目
 					</h4>
 				</div>
 				<div class="modal-body">
 					<form class="form-inline">
-						<div class="input-group form-item" >
-	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">行政区域</font></font></label>
-	        				<select ng-model="area" class="form-control select-short" style="width: auto;">
-	                        	<option value=""></option>
-	                        	<option value="0">已上报</option>
-	                        	<option value="1">已退回</option>
-	                        	<option value="2">未上报</option>
-	                        </select>
-	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
-		                </div>
+
+						<div class="input-group form-item" ng-if="type == 2">
+							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">断面名称</font></font></label>
+							<select ng-model="section" ng-options="s.id as s.name for s in nameOption" ng-change="getSectionChange(section)" class="form-control select-short" style="width: 160px;">
+								<option value="">请选择</option>
+							</select>
+							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+						</div>
+
+						<div class="form-item" ng-if="type == 2">
+							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">河流</font></font></label>
+							<input type="text" class="form-control input-short" ng-model="riverName" readonly="">
+							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+						</div>
+
+						<div class="form-item" style="margin-left: 107px;">
+							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">采样日期</font></font></label>
+							<div class="input-group date date_picker" id="samplingTime">
+								<input type="text" class="form-control input-short-o" ng-model="samplingTime">
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							</div>
+						</div>
+
 						<div class="form-item">
-	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">考核分数</font></font></label>
-	                        <input type="number" min="0" max="100" class="form-control input-short" ng-model="score">
-	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
-	                    </div>
+							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">水温(℃)</font></font></label>
+							<input name="number" min="0" max="100" class="form-control input-short" ng-model="water_temperature">
+							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+						</div>
+
+						<div class="form-item">
+							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">总磷(mg/L)</font></font></label>
+							<input name="number" min="0" max="100" class="form-control input-short" ng-model="total_phosphorus">
+							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+						</div>
+
+						<div class="form-item">
+							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">氨氮(mg/L)</font></font></label>
+							<input name="number" min="0" max="100" class="form-control input-short" ng-model="ammonia_nitrogen">
+							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+						</div>
+
+						<div class="form-item">
+							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">高锰酸盐指数(mg/L)</font></font></label>
+							<input name="number" min="0" max="100" class="form-control input-short" ng-model="permanganate_index">
+							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+						</div>
+
+						<div class="form-item">
+							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">溶解氧(mg/L)</font></font></label>
+							<input name="number" min="0" max="100" class="form-control input-short" ng-model="DO">
+							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" ng-click="save()">保存</button>
-		            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
 				</div>
 			</div>
 		</div>
 	</div>
-    
-    
+
+
 </div>
 

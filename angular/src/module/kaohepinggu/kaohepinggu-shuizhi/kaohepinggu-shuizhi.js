@@ -22,10 +22,12 @@
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
 
+					//var apiPrefix = "http://10.0.9.116:7004" + '/quality';
 					var apiPrefix = moduleService.getServiceUrl() + '/quality';
 					$scope.userInfo = $localStorage.userLoginInfo.userInfo;
 					
 					$scope.init = function () {
+                        getDate ();
 						$ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/WaterQuality/userinfo1',
 							method: 'get',
@@ -65,12 +67,20 @@
 					}
 					
 					$('#J-searchTime').datetimepicker({
-	                    format: 'YYYY-MM',
-	                    locale: moment.locale('zh-cn')
-	                }).on('dp.change', function (c) {
-	                    $scope.searchTime = new moment(c.date).format('YYYY-MM');
-	                    $scope.$apply();
-	                });
+                        format: 'YYYY-MM',
+                        locale: moment.locale('zh-cn')
+                    }).on('dp.change', function (c) {
+                        $scope.searchTime = new moment(c.date).format('YYYY-MM');
+                        $scope.$apply();
+                    });
+
+                    $('#J-searchTime1').datetimepicker({
+                        format: 'YYYY-MM',
+                        locale: moment.locale('zh-cn')
+                    }).on('dp.change', function (c) {
+                        $scope.searchTime1 = new moment(c.date).format('YYYY-MM');
+                        $scope.$apply();
+                    });
 					
 					//返回
 					$scope.goBack=function(){
@@ -91,34 +101,130 @@
 
 					// 新建
 	                $scope.add = function () {
-						globalParam.setter({
-							bulletin: {}
-						})
-						routeService.route('3-2-2', false);
+                        $('#myModal').modal('show');
+						//routeService.route('3-2-2', false);
 	                }
+
+                    // 保存
+                    $scope.save = function() {
+
+                        if (!$scope.title) {
+                            layer.alert("请输入标题", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        } else if (!$scope.searchTime) {
+                            layer.alert("请选择期号", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        } else if (!$scope.author) {
+                            layer.alert("请输入创建人", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        } else if (!$scope.issuer) {
+                            layer.alert("请输入备注", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        }
+
+                        // 新增水质管理
+                        var params = {
+                            title: $scope.title,
+                            createtime: $scope.currentdate,
+                            issue: $scope.searchTime1,
+                            createUser: $scope.author,
+                            remark: $scope.issuer
+                        }
+                        if (!$scope.id) {
+                            $ajaxhttp.myhttp({
+                                url: apiPrefix + '/v1/WaterQuality/selectHave',
+                                method: 'get',
+                                params: {
+                                    issue: $scope.searchTime1
+                                },
+                                callBack: function (res) {
+                                    if(res.resCode == 1){
+                                        if(res.data == '没有'){
+                                            $ajaxhttp.myhttp({
+                                                url: apiPrefix + '/v1/WaterQuality/add',
+                                                method: 'POST',
+                                                params: params,
+                                                callBack: function (res) {
+                                                    if(res.resCode == 1){
+                                                        $scope.newid = res.data.id;
+                                                        $scope.pid = res.data.id;
+                                                        layer.msg('新建成功', {time:2000});
+                                                        clear();//创建成功后清空
+														getList();
+														$('#myModal').modal('hide');
+                                                    }else{
+                                                        layer.msg(res.resMsg, {time:2000});
+                                                    }
+                                                }
+                                            })
+                                        }else{
+                                            layer.msg('一个月只能新增一个报告');
+                                        }
+                                    }else{
+                                        layer.msg(res.resMsg, {time:2000});
+                                    }
+                                }
+                            })
+
+                        }else{//修改水质报告
+                            $ajaxhttp.myhttp({
+                                url: apiPrefix + '/v1/WaterQuality/updatelist',
+                                method: 'PUT',
+                                params: {
+                                    id: $scope.id,
+                                    title: $scope.title,
+                                    createtime: $scope.currentdate,
+                                    issue: $scope.searchTime1,
+                                    createUser: $scope.author,
+                                    remark: $scope.issuer
+                                },
+                                callBack: function (res) {
+                                    if(res.resCode == 1){
+                                        layer.msg('修改成功', {time:2000});
+                                        clear();//创建成功后清空
+                                        $('#myModal').modal('hide');
+                                        getList();
+                                    }else{
+                                        layer.msg(res.resMsg, {time:2000});
+                                    }
+                                }
+                            })
+
+                        }
+                    }
 	                
 	                // 编辑
 	                $scope.edit = function (id) {
-						localStorage.setItem('id',id);					
+                        $('#myModal').modal('show');
+                        $scope.id = id ;
 						$ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/WaterQuality/detail?id=' + id,
 							method: 'get',							
 							callBack: function (res) {
-								globalParam.setter({
-									bulletin: res.data
-								})
+                                $scope.title = res.data.title;
+                                $scope.searchTime1 = res.data.issue;
+                                $scope.issuer = res.data.remark;
+                                $scope.author = res.data.createuser;
 							}
 						})
-						routeService.route('3-2-2', false);
+						//routeService.route('3-2-2', false);
 	                }
 	                
 	                 // 查看
 	                $scope.view = function (id) {
-						globalParam.setter({
-							bulletin: {
-								id: id
-							}
-						})
+						localStorage.setItem('id',id)
 						routeService.route('3-2-3', false);
 	                }
 	                
@@ -171,7 +277,38 @@
 								}
 							}
 						})
-	                }	                
+	                }
+                    $scope.cancel = function () {
+                        $('#myModal').modal('hide');
+                        clear();
+                    }
+
+					//清空表单
+                    var clear = function () {
+                        $scope.title = '';
+                        $scope.issuer = '';
+                        $scope.searchTime1 = '';
+                        $scope.author = '';
+                    }
+                    //获取当前时间
+                    function getDate () {
+                        setInterval(function () {
+                            var date = new Date(),
+                                year = date.getFullYear(),
+                                month = date.getMonth() + 1,
+                                day = date.getDate(),
+                                hour = date.getHours(),
+                                min = date.getMinutes(),
+                                second = date.getSeconds();
+
+                            $scope.$apply(function () {
+                                $scope.currentdate=year + '-' + month  + '-' + day + ' ' +
+                                    (hour < 10 ? '0' + hour : hour) + ':' +
+                                    (min < 10 ? '0' + min : min) + ':' +
+                                    (second < 10 ? '0' + second : second) ;
+                            })
+                        }, 1000);
+                    }
 	                
 					// 配置分页基本参数
 	                $scope.paginationConf = {
