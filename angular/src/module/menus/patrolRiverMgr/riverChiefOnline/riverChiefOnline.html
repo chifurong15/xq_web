@@ -459,8 +459,12 @@
                             <form class="bs-example form-horizontal eveDetail-panel" style="margin-top: 5px;">
                                 <div class="form-inline">
                                     <label>处理前:</label>
-                                    <div id="layer-photos-before" class="layer-photos-demo" style="margin-left: 30px;" ng-show="before">
-                                        <img style="margin: 0 5px;" ng-repeat="item in before" layer-pid="" layer-src="{{eventImgUrl}}{{item.accessoryurl}}" src="{{eventImgUrl}}{{item.accessoryurl}}" alt="处理前图片" width="60px" height="60px">
+                                    <div class="layer-photos-demo" style="margin-left: 30px;" ng-show="before">
+                                        <div ng-repeat="item in before" style="float: left">
+                                            <img class="event-photos-before" style="margin: 0 5px;" ng-show="item.accessorytype == 1||item.accessorytype == 2" layer-pid="" layer-src="{{eventImgUrl}}{{item.accessoryurl}}" src="{{eventImgUrl}}{{item.accessoryurl}}" alt="处理前图片" width="60px" height="60px">
+                                            <img ng-show="item.accessorytype == 3" style=" float: left; margin: 0 5px;width:60px; height:60px;" src="img/music_img.png" ng-click="playAudio(item)" alt="巡河音像">
+                                            <img ng-show="item.accessorytype == 4" style="float: left;margin: 0 5px;width:60px; height:60px;" src="img/audio_img.png" alt="巡河音像" ng-click="playVideo(item)">
+                                        </div>
                                     </div>
                                 </div>
                             </form>
@@ -468,7 +472,7 @@
                                 <div class="form-inline">
                                     <label>处理后:</label>
                                     <div id="layer-photos-later" class="layer-photos-demo" style="margin-left: 30px;" ng-show="after">
-                                        <img style="margin: 0 5px;" ng-repeat="item in after" layer-pid="" layer-src="{{eventImgUrl}}{{item.afterAccessory}}" src="{{eventImgUrl}}{{item.afterAccessory}}" alt="处理后图片" width="60px" height="60px">
+                                        <img style="margin: 0 5px;" ng-repeat="item in after" layer-pid="" layer-src="{{eventImgUrl}}/{{item.afterAccessory}}" src="{{eventImgUrl}}/{{item.afterAccessory}}" alt="处理后图片" width="60px" height="60px">
                                     </div>
                                 </div>
                             </form>
@@ -561,7 +565,7 @@
                                             <div style="margin: 0;">
                                                 <label style="vertical-align: top;"><i style="display: inline-block;width: 10px;height: 10px;border-radius: 50%;background-color: #297FCA;margin-right: 10px;"></i>巡河照片</label>
                                                 <div style="display: inline-block;" id="layer-photos-potralMgr" class="layer-photos-demo" style="margin-left: 10px;">
-                                                    <img style="margin: 0 5px;" ng-repeat="item in logImgArr" layer-pid="" layer-src="{{eventImgUrl}}/{{item}}" src="{{eventImgUrl}}/{{item}}" alt="巡河照片" width="60px" height="60px">
+                                                    <img style="margin: 0 5px;" ng-repeat="item in logImgArr" layer-pid="" layer-src="{{eventImgUrl}}{{item}}" src="{{eventImgUrl}}{{item}}" alt="巡河照片" width="60px" height="60px">
                                                 </div>
                                             </div>
                                         </form>
@@ -639,6 +643,12 @@
     layui.use('layer', function() {
         layer.photos({
             photos: '#layer-photos-before'
+            ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+        });
+    });
+    layui.use('layer', function() {
+        layer.photos({
+            photos: '.event-photos-before'
             ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
         });
     });
