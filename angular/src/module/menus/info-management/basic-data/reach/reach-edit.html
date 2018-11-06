@@ -2,7 +2,7 @@
 	<div class="wrapper-md">
 		<div class="panel panel-default m-n">
 
-			<div class="panel-body">
+			<div class="panel-body" style="position: relative;">
 				<div class="search-form" style="padding-right: 340px;">
 					<form id="arrForm" class="form-inline" method="post" action="hzz/test">
 						<div class="form-item">
@@ -18,14 +18,14 @@
 							<input ng-model="alias" type="text" class="form-control input-short"/>
 							<span class="required">*</span>
 						</div>
-						<div class="form-item">
-							<label>水质等级</label>
-							<select ng-init="waterQuality()" ng-model="water_quality.dictValue" ng-options="wq.dictValue as wq.dictName for wq in waterQualitys"
-                                    ng-change="quality_Change(water_quality.dictValue)" class="form-control select-short">
+                        <div class="form-item">
+                            <label>水质等级</label>
+                            <select ng-init="waterQuality()" ng-model="water_quality" ng-options="wq.typeName for wq in waterQualitys"
+                                    ng-change="quality_Change(water_quality)" class="form-control select-short">
                                 <option  value="">请选择</option>
                             </select>
                             <span class="required">*</span>
-						</div>
+                        </div>
 						<br/>
 						<div class="form-item">
 							<label>淤积情况</label>
@@ -73,7 +73,7 @@
                                 <span class="required">*</span>
 							</div>
 					    </div>
-					    <div id="lakesBox" class="dis-none">
+					    <!--<div id="lakesBox" class="dis-none">
 							<div class="form-item">
 								<label>湖段岸别</label>
 								<select ng-init="lakesShore()" ng-model="lakes_shore.dictValue" ng-options="ls.dictValue as ls.dictName for ls in lakesShores"
@@ -130,7 +130,7 @@
 								<a class="input-group-addon" ng-click="reservoirShow()"><i class="fa fa-search"></i></a>
                                 <span class="required">*</span>
 							</div>
-					    </div>
+					    </div>-->
 					    <br/>
 						<div class="form-item">
 							<label>起点</label>
@@ -181,7 +181,25 @@
                         </div>
 					</form>
 
-					<div class="basin_map"></div>
+                    <!-- map -->
+                    <div class="right-panel wid-25 dis-i-blc" ng-class="{true : 'expandMap',false : 'compressMap' }[switchMapIcon]">
+                        <div class="basicMap" id="mapContainer">
+                            <div class="proMgr-map-tool">
+                                <ul class="drawTool">
+                                    <li ng-click="doDraw();">
+                                        <a id="doDraw" href="javascript:void(0);" title="定位面"><i class="fa fa-pencil"></i></a>
+                                    </li>
+                                    <li ng-click="clearDraw();">
+                                        <a id="clearDraw" href="javascript:void(0);" title="清除"><i class="fa fa-ban"></i></a>
+                                    </li>
+                                    <li ng-click="mapExpand();">
+                                        <a id="mapExpand"  href="javascript:void(0);" title="缩放"><i class="fa" ng-class="{true : 'fa-expand',false : 'fa-compress' }[switchMapIcon]"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="getgeo"></div>
+                        </div>
+                    </div>
 
 				</div>
 
