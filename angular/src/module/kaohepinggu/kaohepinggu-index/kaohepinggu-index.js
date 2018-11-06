@@ -195,6 +195,7 @@
                                     if(res.resCode == 1){
                                         layer.msg('修改成功', {time:2000});
                                         clear();//创建成功后清空
+                                        $('#myModal').modal('hide');
                                     }else{
                                         layer.msg(res.resMsg, {time:2000});
                                     }

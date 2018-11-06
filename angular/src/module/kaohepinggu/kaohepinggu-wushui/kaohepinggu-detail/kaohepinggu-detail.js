@@ -230,12 +230,12 @@
                             $scope.attandName = file.name;
                             form.append('file', file);
                             form.append('fileName', file.name);
-                            form.append('parentid', $scope.id ? $scope.id : $scope.pid);
+                            form.append('parentid', $scope.id );
                             $ajaxhttp.myhttp({
                                 url: apiPrefix + '/v1/SewageDisposeReport/deletelist',
                                 method: 'DELETE',
                                 params: {
-                                    parentid: $scope.id ? $scope.id : $scope.pid
+                                    parentid: $scope.id
                                 },
                                 callBack: function (res) {
                                     if(res.resCode == 1){
@@ -247,7 +247,7 @@
                                             transformRequest: angular.identity
                                         }).success(function (data) {
                                             if(data.resCode == 1){
-                                                getData()
+                                                getData($scope.id)
                                             }
                                         }).error(function (data) {
                                             console.log('upload fail');

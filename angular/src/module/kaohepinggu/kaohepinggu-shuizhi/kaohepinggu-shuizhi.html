@@ -17,8 +17,8 @@
 						</div>
 						<div class="input-group form-item">
 							<label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">状态</font></font></label>
-							<select ng-model="type" class="form-control select-short" style="width: auto;">
-								<option value=""></option>
+							<select ng-model="type" class="form-control select-short" style="width: auto;z-index: 0;">
+								<option value="">请选择</option>
 								<option value="0">已上报</option>
 								<option value="1">已退回</option>
 								<option value="2">未上报</option>
@@ -36,7 +36,7 @@
 								<i class="fa fa-refresh"></i>重置
 							</button>
 						</div>
-						<div class="input-group fr">
+						<div class="input-group fr" ng-if="num == 1">
 							<button type="button" class="btn btn-primary" ng-click="add()">
 		                        <i class="fa fa-plus"></i> 新增
 		                    </button>
@@ -91,8 +91,8 @@
 										<td>{{item.remark}}</td>
 										<td style="text-align: left;">
 											<button type="button" class="btn btn-success" ng-click="view(item.id)">查看</button>
-											<button ng-if="item.status==1" type="button" class="btn btn-warning" ng-click="edit(item.id)">修改</button>
-											<button ng-if="item.status==2" type="button" class="btn btn-danger" ng-click="report(item.id)">上报</button>
+											<button ng-if=" num== 1 && item.status==1" type="button" class="btn btn-warning" ng-click="edit(item.id)">修改</button>
+											<button ng-if=" num== 1 && item.status==2" type="button" class="btn btn-danger" ng-click="report(item.id)">上报</button>
 										</td>
 									</tr>
 								</tbody>
@@ -107,6 +107,59 @@
 
 			</div>
 		</div>
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" id="myModalLabel">
+							{{id ? '修改' : '新增'}}水质数据评分报告
+						</h4>
+					</div>
+					<div class="modal-body">
+						<form class="form-inline" style="padding-left: 25%;">
+							<div class="form-item" >
+								<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
+								<input type="text" class="form-control input-short" ng-model="title">
+								<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+							</div>
+							<div class="form-item">
+								<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">创建时间</font></font></label>
+								<input type="text" class="form-control input-short" ng-model="currentdate"  readonly="readonly">
+								<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+							</div>
+							<br />
+							<div class="input-group date date_picker form-item" id="J-searchTime1">
+								<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">期号</font></font></label>
+								<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="$parent.searchTime1">
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							</div>
+							<div class="form-item">
+								<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">创建人</font></font></label>
+								<input type="text" class="form-control input-short" ng-model="author">
+								<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+							</div>
+							<br />
+							<div class="form-item">
+								<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">备注</font></font></label>
+								<!--<input type="text" class="form-control input-short" ng-model="issuer">-->
+								<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="issuer" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+								<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+							</div>
+						</form>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" ng-click="save()">保存</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 
 	</div>
 </div>
