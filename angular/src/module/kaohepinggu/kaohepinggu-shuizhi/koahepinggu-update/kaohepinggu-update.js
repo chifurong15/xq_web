@@ -29,7 +29,9 @@
                         $scope.userInfo = $localStorage.userLoginInfo.userInfo;
 
                         $scope.id = localStorage.getItem('id');
-						getData(getQueryString('id'));
+                        $scope.status = localStorage.getItem('status');
+
+                        getData(getQueryString('id'));
 						getDate ();
 						getAllName();
                         //$scope.num = 1;

@@ -67,8 +67,8 @@
 		                                    <td>{{item.permanganate_index}}</td>
 		                                    <td>{{item.dO}}</td>
 											<td ng-if="num == 1">
-												<button type="button" class="btn btn-primary btn-sm" ng-click="edit(item)">修改</button>
-												<button type="button" class="btn btn-danger btn-sm" ng-click="delete(item.id)">删除</button>
+												<button type="button" class="btn btn-primary btn-sm" ng-if="status !=0" ng-click="edit(item)">修改</button>
+												<button type="button" class="btn btn-danger btn-sm"  ng-if="status !=0" ng-click="delete(item.id)">删除</button>
 											</td>
 		                                </tr>		                                
 	                            	</tbody>

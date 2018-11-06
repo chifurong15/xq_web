@@ -43,7 +43,8 @@
 						$scope.id = localStorage.getItem('id');
 						$scope.title = localStorage.getItem('title');
 						$scope.issue = localStorage.getItem('issue');
-						
+						$scope.status = localStorage.getItem('status');
+
 						getData();
                         getAllArea();
                         getAllName ();

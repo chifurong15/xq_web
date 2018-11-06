@@ -223,8 +223,9 @@
 	                }
 	                
 	                 // 查看
-	                $scope.view = function (id) {
+	                $scope.view = function (id,status) {
 						localStorage.setItem('id',id)
+						localStorage.setItem('status',status)
 						routeService.route('3-2-3', false);
 	                }
 	                
