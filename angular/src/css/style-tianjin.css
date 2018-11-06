@@ -1656,6 +1656,13 @@ body {
     width: auto;
     margin: 0;
     padding: 0;
+    overflow: hidden;
+    overflow-y: auto;
+    background: #fff;
+}
+
+.inquire-model-body {
+    height: auto;
 }
 
 .inquire-dialog .modal-content {
@@ -2171,4 +2178,18 @@ body .c-ffffff a {
 }
 .vjs-error-display.vjs-modal-dialog.vjs-hidden{
     display: none !important;
+}
+
+.basicMap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 360px;
+    height: 280px;
+    border: 1px solid #ccc;
+}
+
+.dis-i-blc {
+    width: 100%;
+    padding-right: 360px;
 }

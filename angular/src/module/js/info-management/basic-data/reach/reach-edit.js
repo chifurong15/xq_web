@@ -1,10 +1,11 @@
-var basicUrl = "/drainageBasin/v1";
-var waterUrl = "/waterSystem/v1";
-var riverUrl = "/river/v1";
-var lakesUrl = "/lakes/v1";
-var reservoirUrl = "/reservoir/v1";
-var reachUrl = "/reach/v1";
-var dictionaryUrl = "/dictionary/v1";
+var modulePrefix = "/watersource";
+var basicUrl = modulePrefix + "/v1/drainageBasin";
+var waterUrl = modulePrefix + "/v1/waterSystem";
+var riverUrl = modulePrefix + "/v1/river";
+var lakesUrl = modulePrefix + "/v1/lakes";
+var reservoirUrl = modulePrefix + "/v1/reservoir";
+var reachUrl = modulePrefix + "/v1/reach";
+var dictionaryUrl = modulePrefix + "/v1/dictionary";
 (function(window, angular) {
     'use strict';
 
@@ -1285,32 +1286,41 @@ var dictionaryUrl = "/dictionary/v1";
                 $scope.adminTree = function () {
                     $("#myModal_ztree_one").modal('show');
                     //行政区划树初始化
-                    var regionAndUserTreeUrl = $localStorage.gwUrl +basicUrl + "/regionAndUserTree";
+                    var regionAndUserTreeUrl = $localStorage.gwUrl +reachUrl + "/regionAndUserTree";
                     $scope.treeLists(regionAndUserTreeUrl);
                 }
 
-                //搜索
-                $scope.find = function () {
+                //河长搜索
+                $scope.select_one = function () {
                     $http({
                         method: "GET",
-                        url: $localStorage.gwUrl +basicUrl + "/findByUser",
+                        url: $localStorage.gwUrl + reachUrl + "/findByUser",
                         params: {
-                            fullName: $scope.pAreaName,
-                            areaName: $scope.areaName,
-                            page: $scope.paginationConf.currentPage,
-                            size: $scope.paginationConf.itemsPerPage,
-                            status: -1
+                            userName: $scope.waterName_one,
                         },
                     }).success(
                         function (resp) {
-                            $scope.moveStatus = false;
+                            console.log($scope.waterName_one);
                             console.log(resp);
-                            $scope.paginationConf.totalItems = resp.data.total;
-                            $scope.moduleList = resp.data.list;
+                            var setting = {
+                                view: {
+                                    selectedMulti: true,
+                                    showLine: true,
+                                    showIcon: true
+                                },
+                                data: {
+                                    simpleData: {enable: true},
+                                    keep: {parent: true}
+                                },
+                                callback: {
+                                    beforeExpand: zTreeOnExpand,
+                                    onClick: zTreeOnClick
+                                }
+                            };
+                            regionTree = $.fn.zTree.init($("#regionTrees"), setting, resp.data);
                         })
                 }
 
-                //行政区划树数据
                 var setting = {
                     view: {
                         selectedMulti: true,
@@ -1327,28 +1337,38 @@ var dictionaryUrl = "/dictionary/v1";
                     }
                 };
 
-                function zTreeOnCheck(event, treeId, treeNode) {
-                };
-
                 function zTreeOnClick(event, treeId, treeNode) {
                     console.log(treeNode)
-                    console.log(treeNode.regionLevel)
-                    console.log('===========zTreeOnClick===========')
-
+                    $http({
+                        method: "GET",
+                        url: $localStorage.gwUrl + reachUrl + "/findByUser",
+                        params: {
+                            userId: treeNode.id,
+                        },
+                    }).success(
+                        function(res) {
+                            console.log(res);
+                            if(res.resCode == 1){
+                                $scope.chairmanName = res.data.name;
+                                console.log($scope.chairmanName)
+                                $scope.chairmanId = res.data.id;
+                                console.log($scope.chairmanId)
+                            }
+                        }
+                    );
                 };
 
                 function zTreeOnExpand(treeId, treeNode) {
-                    console.log('===========zTreeOnExpand===========')
+                    $scope.chiefNodeId = treeNode.id;
                     var cnodes = treeNode.children;
                     if (cnodes !=null && cnodes.length > 0){
                         return;
                     }
                     $http({
                         method: "GET",
-                        url: $localStorage.gwUrl +basicUrl + "/regionAndUserTree",
+                        url: $localStorage.gwUrl + reachUrl + "/regionAndUserTree",
                         params: {
-                            code: treeNode.id,
-                            chairmanLevel: treeNode.regionLevel + 1
+                            parentCode: treeNode.id
                         },
                     }).success(
                         function (res) {
@@ -1358,7 +1378,6 @@ var dictionaryUrl = "/dictionary/v1";
                 }
 
                 $scope.treeLists = function (regionAndUserTreeUrl) {
-                    console.log(regionAndUserTreeUrl);
                     $http({
                         method: "GET",
                         url: regionAndUserTreeUrl,
@@ -1372,6 +1391,11 @@ var dictionaryUrl = "/dictionary/v1";
                     ).error(function () {
                     });
                 }
+
+                //关闭模态框【确定按钮】
+                $scope.modalOk_one = function () {
+                    $("#myModal_ztree_one").modal('hide');
+                };
 
                 //履职类型
                 $scope.dutyType = function () {
