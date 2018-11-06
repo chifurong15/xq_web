@@ -27,7 +27,8 @@
 					
 					$scope.init = function () {
 						var bulletin = globalParam.getter().bulletin || {};
-						$scope.id = bulletin.id;
+						$scope.id = localStorage.getItem('id');
+						$scope.status = localStorage.getItem('status');
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/SurfaceWater/userinfo1',
                             method: 'get',

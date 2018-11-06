@@ -234,10 +234,11 @@
 	                }
 	                
 	                 // 查看
-	                $scope.view = function (id , title , issue) {
+	                $scope.view = function (id , title , issue ,status) {
 	                	localStorage.setItem('id',id);
 	                	localStorage.setItem('title',title);
 	                	localStorage.setItem('issue',issue);						
+	                	localStorage.setItem('status',status);
 						routeService.route('3-3-3', false);
 	                }
 	                
