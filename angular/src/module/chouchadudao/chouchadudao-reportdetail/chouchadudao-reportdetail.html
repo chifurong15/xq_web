@@ -58,7 +58,7 @@
                     <!--约谈台账-->
                     <div class="reported-con con tab-show">
                         <div class="panel-body">
-                            <div class="input-group fr">
+                            <div class="input-group fr" ng-if="num == 2">
                                 <button type="button" class="btn btn-primary" ng-click="addBook()">
                                     <i class="fa fa-plus"></i> 添加台账
                                 </button>
@@ -89,7 +89,7 @@
                                                     <td>{{item.accountabilitytype}}</td>
                                                     <td>{{item.remark}}</td>
                                                     <td style="text-align: center;">
-                                                        <button type="button" class="btn btn-warning" ng-click="editBook(item.id)">修改</button>
+                                                        <button type="button" class="btn btn-warning" ng-click="editBook(item.id)" ng-if="num ==2">修改</button>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -101,10 +101,6 @@
                                     <div id="patrolChart2" class="tj-chart-con"></div>
                                 </div>
                             </div>
-
-
-
-
 
                         </div>
                     </div>

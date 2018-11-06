@@ -197,8 +197,7 @@
 								date: $scope.searchTime,
                                 reachname: $scope.reach ? $scope.reach.join(',') : '',
                             	leader: $scope.leader,
-                                personnel:'124'
-                                // personnel:$scope.personnel
+                                personnel:$scope.personnel
 						}
 						console.log(params)
 						if (!$scope.id) {
@@ -228,8 +227,9 @@
                                     date: $scope.searchTime,
                                     reachname: $scope.reach ? $scope.reach.join(',') : '',
                                     leader: $scope.leader,
-                                    personnel:'124'
-								},
+                                    personnel:$scope.personnel
+
+                                },
                                 callBack: function (res) {
                                     if(res.resCode == 1){
                                         layer.msg('修改成功', {time:2000});

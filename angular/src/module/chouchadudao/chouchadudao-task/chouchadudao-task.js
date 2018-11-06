@@ -24,16 +24,16 @@
 					var apiPrefix = moduleService.getServiceUrl() + '/ancha';
 					
 					$scope.init = function () {
-                        getList();
                         getRegion();
-//						$ajaxhttp.myhttp({
-//							url: apiPrefix + '/v1/SurfaceWater/userinfo',
-//							method: 'get',					
-//							callBack: function (res) {
-//								$scope.num = res.data;
-//
-//							}
-//						})
+//						// 05区河长办  02市河长办
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/AnzhaInvestigations/userinfo',
+                            method: 'get',
+                            callBack: function (res) {
+                                $scope.num = res.data;
+                                getList();
+                            }
+                        })
 					}
 					
 					// 获取数据列表

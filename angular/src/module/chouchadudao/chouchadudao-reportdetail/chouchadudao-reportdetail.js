@@ -27,8 +27,17 @@
                     $scope.init = function () {
                         var bulletin = globalParam.getter().bulletin || {};
 
-                        //获取台账列表
-                        getData();
+                        // 05区河长办  02市河长办
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/AnzhaInvestigations/userinfo',
+                            method: 'get',
+                            callBack: function (res) {
+                                $scope.num = res.data;
+                                //获取台账列表
+                                getData();
+                            }
+                        })
+
 
                         //获取任务列表
                         getTaskList ();

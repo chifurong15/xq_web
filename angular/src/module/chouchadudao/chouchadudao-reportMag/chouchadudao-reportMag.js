@@ -26,7 +26,7 @@
 
                     $scope.init = function () {
                         getStatus ();
-                        //$scope.num = '0';
+                        //$scope.num = '2'; // 05区河长办  02市河长办
 						$ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/AnzhaInvestigations/userinfo',
 							method: 'get',
