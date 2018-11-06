@@ -73,7 +73,7 @@
 										<td>{{item.remark}}</td>
 										<td style="text-align: left;">
 											<button type="button" class="btn btn-success" ng-click="view(item.id)">查看</button>
-											<button type="button" class="btn btn-primary" ng-click="sendBack(item.id)">退回</button>
+											<button type="button" class="btn btn-primary" ng-if="item.status==0" ng-click="sendBack(item.id)">退回</button>
 										</td>
 									</tr>
 									<tr ng-repeat="item in waterQualityList" ng-if="num != 2">
