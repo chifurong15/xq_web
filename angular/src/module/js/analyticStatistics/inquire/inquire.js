@@ -33,9 +33,8 @@
 
                 $scope.init = function () {
                     PatrolRiverService.init($scope.map, "patrolRiverLayer");
-
                     $scope.regionId = $localStorage.userLoginInfo.userInfo.regionId;
-                    reGetProducts();
+                    getLoginUserInfo();
                     regionTreeList();
                     clearList();
                 };
@@ -272,7 +271,7 @@
 
                 // 搜索
                 $scope.search = function () {
-                    reGetProducts();
+                    getLoginUserInfo();
                     clearList();
                     $scope.userName = '';
                 };
@@ -282,30 +281,49 @@
                     $scope.regionCode = '';
                 };
 
-                // 分页
-                var patrolChart;
-                var reGetProducts = function () {
+
+                function getLoginUserInfo(){
                     $http({
-                        url: $localStorage.serviceUrl_chiefOnline + '/charimanPatrol/v1/listChairManPatrolNumList',
+                        url: $localStorage.gwUrl + '/information/v1/administrativeRegion/list',
                         method: 'get',
                         params: {
-                            regionCode: $scope.regionId,
-                            reachId: $scope.reachId,
-                            queryStartTime: $scope.startTime,
-                            queryEndTime: $scope.endTime,
-                            userName: $scope.userName,
-                            grade: $scope.grade,
-                            needExtInfo: '1',
-                            pageSize: $scope.paginationConf.itemsPerPage,
-                            pageNumber: $scope.paginationConf.currentPage
+                            areaCode: $scope.regionId,
+                            pageSize: '-1',
+                            pageNumber: '-1'
                         }
-                    }).success(function (resp) {
-                        console.log(resp);
-                        $scope.paginationConf.totalItems = resp.data.total;
-                        $scope.riverChiefList = resp.data.list;
-                    }).error(function (error) {
+                    }).success( function(res) {
+                        $scope.grade = res.data.list[0].grade;
+                        console.log($scope.grade);
+                        $http({
+                            url: $localStorage.serviceUrl_chiefOnline + '/charimanPatrol/v1/listChairManPatrolNumList',
+                            method: 'get',
+                            params: {
+                                regionCode: $scope.regionId,
+                                reachId: $scope.reachId,
+                                queryStartTime: $scope.startTime,
+                                queryEndTime: $scope.endTime,
+                                userName: $scope.userName,
+                                grade: $scope.grade,
+                                needExtInfo: '1',
+                                pageSize: $scope.paginationConf.itemsPerPage,
+                                pageNumber: $scope.paginationConf.currentPage
+                            }
+                        }).success(function (resp) {
+                            console.log(resp);
+                            $scope.paginationConf.totalItems = resp.data.total;
+                            $scope.riverChiefList = resp.data.list;
+                        }).error(function (error) {
 
-                    })
+                        })
+                    }).error(function(res) {
+                    });
+                }
+
+                // 分页
+                var patrolChart;
+
+                var reGetProducts = function () {
+                    getLoginUserInfo
                 };
 
                 // 配置分页基本参数
@@ -365,7 +383,7 @@
                     $http({
                         method: 'GET',
                         params: {
-                            userId: id,
+                            reportPersonId: id,
                             startTime: '',
                             endTime: ''
                         },
@@ -387,7 +405,7 @@
                 //查看图片详情
                 $rootScope.$on("eventUrl1", function (evt, eventUrl1) {
                     console.log(eventUrl1)
-					$scope.before = eventUrl1.data.beforeAccessory;
+                    $scope.before = eventUrl1.data.beforeAccessory;
                     $scope.after = eventUrl1.data.afterAccessory;
                     console.log($scope.before)
                     $scope.$apply();

@@ -23,6 +23,8 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
         '$http',
         function imReach($localStorage, $scope, $location, $log, $q, $rootScope, globalParam,$window, routeService, moduleService,$http) {
 
+            $scope.regionId = $localStorage.userLoginInfo.userInfo.regionId;
+
             //所属区域树模态框【show】
             $scope.regionShow = function() {
                 $scope.areaName = '';
@@ -146,7 +148,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                     method: 'GET',
                     params: {
                         reachName: $scope.reachName,
-                        regionCode: treeNode_find,
+                        regionCode: $scope.regionId,
                         page: $scope.paginationConf.currentPage,
                         size: $scope.paginationConf.itemsPerPage,
                         isNext: true

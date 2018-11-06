@@ -1068,9 +1068,6 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                     }
                 };
 
-                function zTreeOnCheck(event, treeId, treeNode) {
-                };
-
                 function zTreeOnClick(event, treeId, treeNode) {
                     console.log(treeNode)
                     $http({
