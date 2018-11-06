@@ -82,11 +82,7 @@
                             },
                             callBack: function (res) {
                                 if(res.resCode == 1){
-                                    $scope.whether = res.data.whether;
-                                    $scope.feedbackTime = res.data.feedbackTime;
-                                    $scope.describe = res.data.describe;
-                                    $scope.assessory = res.data.assessory;
-
+                                    $scope.taskList = res.data.list;
                                 }else{
                                     layer.msg('服务器异常，请稍后再试');
                                 }
@@ -104,7 +100,10 @@
                             },
                             callBack: function (res) {
                                 if(res.resCode == 1){
-
+                                    $scope.whether = res.data.whether;
+                                    $scope.feedbackTime = res.data.feedbackTime;
+                                    $scope.describe = res.data.describe;
+                                    $scope.assessory = res.data.assessory;
                                 }else{
                                     layer.msg('服务器异常，请稍后再试');
                                 }
