@@ -33,6 +33,8 @@
 							callBack: function (res) {
 								if(res.data == 5){
                                     $scope.num = 0;
+                                }else if(res.data == 2){
+								    $scope.permission = 2;
                                 }else {
 								    $scope.num = '';
                                 }

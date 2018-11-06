@@ -72,7 +72,7 @@
                                     <td style="text-align: left;">
                                         <button type="button" class="btn btn-success" ng-click="view(item.id,item.schemeid)">查看</button>
                                         <button type="button" class="btn btn-warning" ng-if="item.status == 0" ng-click="report(item.id)">下发并通报</button>
-                                        <button type="button" class="btn btn-info" ng-if="num == 0 && item.status == 1" ng-click="view(item.id)">反馈</button>
+                                        <button type="button" class="btn btn-info" ng-if="permission !=2 && item.status == 1" ng-click="view(item.id)">反馈</button>
                                     </td>
                                 </tr>
                                 </tbody>
