@@ -201,41 +201,51 @@
 							<div class="form-inline" ng-repeat="reach in reachadmins">
                                 <div class="form-item">
                                     <label>履职人员</label>
-                                    <input type="text" class="form-control input-short-o" ng-model="reach.chairman" />
+                                    <input type="text" class="form-control input-short-o" ng-model="chairmanName"  ng-click="adminTree()"/>
                                     <a href="javascript:void(0);" ng-click="adminTree()" class="input-group-addon">
                                         <i class="fa fa-search"></i>
                                     </a>
+                                    <span class="required">*</span>
                                 </div>
-								<div class="form-item">
-									<label>履职级别</label>
-                                    <select ng-model="d_Level"
-                                            ng-options="wm.dictName for wm in dutyLevels"
-                                            ng-change="drainege_Change(d_Level)"
-                                            class="form-control select-short"> </select>
-								</div>
-								<div class="form-item">
-									<label>履职类型</label>
-                                    <select ng-init="dutyType()" ng-model="d_Type"
-                                            ng-options="wv.dictName for wv in dutyTypes"
-                                            ng-change="drainege_Change(d_Type)"
-                                            class="form-control select-short"> </select>
-									</ui-select>
-								</div>
-								<div class="form-item">
-									<label>管理岸面</label>
-                                    <select ng-model="d_Side"
-                                            ng-options="wn.dictName for wn in bankSides"
-                                            ng-change="drainege_Change(d_Side)"
-                                            class="form-control select-short"> </select>
-									</ui-select>
-								</div>
-								<div class="form-item">
-									<div class="checkbox">
-										<label class="i-checks">
-                                        <input type="checkbox" name="iCheck" ng-model="reach.check"><i></i>参与考核
-                                    </label>
-									</div>
-								</div>
+                                <div class="form-item">
+                                    <label>履职级别</label>
+                                    <select ng-model="dutyLevels.typeValue"
+                                            ng-options="wm.typeName for wm in dutyLevels"
+                                            ng-change="level_Change(d_Level)"
+                                            class="form-control select-short">
+                                        <option  value="">请选择</option>
+                                    </select>
+                                    <span class="required">*</span>
+                                </div>
+                                <div class="form-item">
+                                    <label>履职类型</label>
+                                    <select ng-init="dutyType()" ng-model="dutyTypes.typeValue"
+                                            ng-options="wv.typeName for wv in dutyTypes"
+                                            ng-change="dutyType_Change(d_Type)"
+                                            class="form-control select-short">
+                                        <option  value="">请选择</option>
+                                    </select>
+                                    <span class="required">*</span>
+                                    </ui-select>
+                                </div>
+                                <div class="form-item">
+                                    <label>管理岸面</label>
+                                    <select ng-model="bankSides.typeValue"
+                                            ng-options="wn.typeName for wn in bankSides"
+                                            ng-change="side_Change(d_Side)"
+                                            class="form-control select-short">
+                                        <option  value="">请选择</option>
+                                    </select>
+                                    <span class="required">*</span>
+                                </div>
+                                <div class="form-item">
+                                    <div class="checkbox">
+                                        <label class="i-checks">
+                                            <input type="checkbox" ng-model="chiefCheck" ng-click="chiefCheckBtn($event)"/>
+                                            <i></i>参与考核
+                                        </label>
+                                    </div>
+                                </div>
 								<button type="submit" class="btn btn-primary btn-xs" ng-click="save()">
                                     <i class="fa fa-save"></i> 保存
                                 </button>

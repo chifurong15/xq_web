@@ -624,7 +624,7 @@
                     };
                     $http({
                         method: 'GET',
-                        url: $localStorage.serviceUrl_eventMgr + '/v1/event/queryEventByReachOrRegion',
+                        url: $localStorage.serviceUrl_eventMgr + 'v1/event/queryEventByReachOrRegion',
                         params: params
                     }).success(function(res){
                         if(res.resCode == 1){
@@ -700,8 +700,8 @@
                     $('.app-content-body').css('left','172px');
                     clearInterval(timer);
                 });
-                // $scope.eventImgUrl = $localStorage.serviceUrl_fileService;
-                $scope.eventImgUrl = $localStorage.gwUrl;
+                $scope.eventImgUrl = $localStorage.serviceUrl_fileService;
+                // $scope.eventImgUrl = $localStorage.gwUrl;
                 //问题点击函数
                 $scope.eventClick = function(data){
                     $scope.map.infoWindow.hide();
@@ -1087,7 +1087,7 @@
                     $('#videoBox').show();
                     $('#audioPlayer').css('display','none');
                     $("#videoPlayerBox").css('display','block');
-                    $scope.videoUrl = $scope.eventImgUrl + '/' + item.accessoryurl;
+                    $scope.videoUrl = $scope.eventImgUrl +  item.accessoryurl;
                     $("#videoPlayerBox source").attr("src", $scope.videoUrl);
                     var myPlayer = videojs("videoPlayerBox")
                     myPlayer.ready(function () {
@@ -1098,7 +1098,7 @@
                     $('#videoBox').show();
                     $('#audioPlayer').css('display','block');
                     $("#videoPlayerBox").css('display','none');
-                    $scope.videoUrl = $scope.eventImgUrl + '/' + item.accessoryurl;
+                    $scope.videoUrl = $scope.eventImgUrl + item.accessoryurl;
                     console.log($("#audioPlayer"))
                     $("#audioPlayer audio").attr("src", $scope.videoUrl);
                     // var myPlayer = $("#audioPlayer");
