@@ -27,13 +27,13 @@
 	                                    <th width="10%">序号</th>
 	                                    <th width="30%">行政区域</th>
 	                                    <th width="30%">考核得分</th>
-	                                    <th width="15%">操作</th>
+	                                    <th width="15%" ng-if="num == 1">操作</th>
 	                                </tr>
                                 	<tr ng-repeat="item in detailList">
 	                                    <td>{{$index+1}}</td>
 	                                    <td>{{item.popedom}}</td>
 	                                    <td>{{item.grade}}</td>
-										<td>
+										<td ng-if="num == 1">
 											<button type="button" class="btn btn-primary btn-sm" ng-click="edit(item)">修改</button>
 											<button type="button" class="btn btn-danger btn-sm" ng-click="delete(item.id)">删除</button>
 										</td>
