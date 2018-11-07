@@ -27,32 +27,32 @@
                             <span class="required">*</span>
                         </div>
 						<br/>
-						<div class="form-item">
-							<label>淤积情况</label>
-							<select ng-init="deposit()" ng-model="deposit_status.dictValue" ng-options="ds.dictValue as ds.dictName for ds in deposits"
-                                    ng-change="deposit_Change(deposit_status.dictValue)" class="form-control select-short">
+                        <div class="form-item">
+                            <label>淤积情况</label>
+                            <select ng-init="deposit()" ng-model="deposit_status" ng-options="ds.typeName for ds in deposits"
+                                    ng-change="deposit_Change(deposit_status)" class="form-control select-short">
                                 <option  value="">请选择</option>
                             </select>
                             <span class="required">*</span>
-						</div>
-						<div class="form-item">
-							<label>河湖库级别</label>
-							<select ng-init="rivePart()" ng-model="river_part.dictValue" ng-options="rp.dictValue as rp.dictName for rp in riveParts"
-                                    ng-change="rp_Change(river_part.dictValue)" class="form-control select-short">
+                        </div>
+                        <!--<div class="form-item">
+                            <label>河湖库级别</label>
+                            <select ng-model="river_part" ng-options="rp.typeValue as rp.typeName for rp in riveParts"
+                                    ng-change="rp_Change(river_part.typeValue)" class="form-control select-short">
                                 <option  value="">请选择</option>
                             </select>
                             <span class="required">*</span>
-						</div>
+                        </div>-->
 					    <div id="riverBox" class="dis-none">
-					    	
-							<div class="form-item">
-								<label>河段岸别</label>
-								<select ng-init="riveShore()" ng-model="river_shore.dictValue" ng-options="rs.dictValue as rs.dictName for rs in riveShores"
-                                        ng-change="rs_Change(river_shore.dictValue)" class="form-control select-short">
+
+                            <div class="form-item">
+                                <label>河段岸别</label>
+                                <select ng-init="riveShore()" ng-model="river_shore" ng-options="rs.typeName for rs in riveShores"
+                                        ng-change="rs_Change(river_shore)" class="form-control select-short">
                                     <option  value="">请选择</option>
                                 </select>
                                 <span class="required">*</span>
-							</div>
+                            </div>
 					    	<div class="form-item">
 								<label>所属区域</label>
 								<input ng-model="region" type="text" class="form-control input-short-o"  ng-click="regionShow()">
@@ -66,12 +66,11 @@
 								<a class="input-group-addon" ng-click="waterShow()"><i class="fa fa-search"></i></a>
                                 <span class="required">*</span>
 							</div>
-							<div class="form-item">
-								<label>所属河流</label>
-								<input ng-model="river_ztree" type="text" class="form-control input-short-o"  ng-click="riverShow()">
-								<a class="input-group-addon" ng-click="riverShow()"><i class="fa fa-search"></i></a>
-                                <span class="required">*</span>
-							</div>
+                           <!-- <div class="form-item">
+                                <label>所属河流</label>
+                                <input ng-model="river_ztree" type="text" class="form-control input-short-o"  ng-click="riverShow()">
+                                <a class="input-group-addon" ng-click="riverShow()"><i class="fa fa-search"></i></a>
+                            </div>-->
 					    </div>
 					    <!--<div id="lakesBox" class="dis-none">
 							<div class="form-item">
@@ -141,22 +140,22 @@
 							<input type="text" class="form-control input-short" ng-model="endPoint" />
 						</div>
 						<br/>
-						<div class="form-item">
-							<label>是否位于山区</label>
-							<select ng-init="mountain()" ng-model="whether_mountain.dictValue" ng-options="wm.dictValue as wm.dictName for wm in mountains"
-                                    ng-change="wm_Change(whether_mountain.dictValue)" class="form-control select-short">
+                        <div class="form-item">
+                            <label>是否位于山区</label>
+                            <select ng-init="mountain()" ng-model="whether_mountain" ng-options="wm.typeName for wm in mountains"
+                                    ng-change="wm_Change(whether_mountain)" class="form-control select-short">
                                 <option  value="">请选择</option>
                             </select>
                             <span class="required">*</span>
-						</div>
-						<div class="form-item">
-							<label>是否虚拟</label>
-							<select ng-init="virtual()" ng-model="whether_virtual.dictValue" ng-options="wv.dictValue as wv.dictName for wv in virtuals"
-                                    ng-change="wv_Change(whether_virtual.dictValue)" class="form-control select-short">
+                        </div>
+                        <div class="form-item">
+                            <label>是否虚拟</label>
+                            <select ng-init="virtual()" ng-model="whether_virtual" ng-options="wv.typeName for wv in virtuals"
+                                    ng-change="wv_Change(whether_virtual)" class="form-control select-short">
                                 <option  value="">请选择</option>
                             </select>
                             <span class="required">*</span>
-						</div>
+                        </div>
 						<br/>
 						<div class="form-item">
 							<label>长度</label>

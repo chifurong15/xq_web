@@ -2193,3 +2193,14 @@ body .c-ffffff a {
     width: 100%;
     padding-right: 360px;
 }
+
+.reachDetailContent .form-item {
+    min-width: 300px;
+}
+
+.form-item span.form-span {
+    float: left;
+    margin: 0 20px;
+    padding: 5px;
+    line-height: 24px;
+}

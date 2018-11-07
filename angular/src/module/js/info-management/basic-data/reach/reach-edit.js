@@ -761,7 +761,8 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                                 children: res.data
                             }];
                             $.fn.zTree.init($("#riverZtree"), setting1, zNodes1);
-                            $scope.tree = res.data
+                            $scope.tree = res.data;
+                            $scope.name = res.data.name;
                         }
                     );
 
@@ -783,7 +784,6 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                                     console.log(river_ztree_name);
                                     river_ztree_code = res.data.id;
                                     console.log(river_ztree_code);
-
                                     console.log($scope.river_ztree);
                                 }else{
                                     $scope.river_ztree= '';
@@ -1093,19 +1093,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                                 closeBtn: 1,
                                 anim: 3
                             });
-                        } else if (!$scope.river_ztree) {
-                            layer.alert("请完善所属河流", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        } else if (!$scope.river_part.typeValue) {
-                            layer.alert("请完善河湖库级别", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        }  else if (!$scope.whether_mountain.typeValue){
+                        } else if (!$scope.whether_mountain.typeValue){
                             layer.alert("请完善山区信息", {
                                 skin: 'my-skin',
                                 closeBtn: 1,
@@ -1156,7 +1144,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                             }).success(
                                 function () {
                                     layer.msg('修改成功！', {time: 2000});
-                                    routeService.route(107, true);
+                                    routeService.route(12, true);
                                 })
                         }
                     }else if(_status == 2){//新增湖泊

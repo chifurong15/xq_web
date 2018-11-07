@@ -1,138 +1,132 @@
 <div ng-controller="imReachDetail" ng-init="init()">
-	<div class="wrapper-md">
-		<div class="panel panel-default m-n">
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3">查看详情</h1>
+    </div>
+    <div class="wrapper-md">
+        <div class="panel panel-default m-all-0">
+            <div class="panel-body pos-rlt panel-map" style="padding-right: 340px;">
 
-			<div class="panel-body">
-				<div class="search-form" style="padding-right: 340px;">
-					<form class="form-inline" method="get">
-						<div class="form-item">
-							<label>河湖库别名</label>
-							<input ng-model="alias" type="text" class="form-control input-short"  readonly="readonly"/>
-							<span class="required">*</span>
-						</div>
-						<div class="form-item">
-							<label>水质等级</label>
-							<input ng-model="water_quality" type="text" class="form-control input-short"  readonly="readonly"/>
-						</div>
-						<div class="form-item">
-							<label>河湖库名称</label>
-							<input ng-model="reachFName" type="text" class="form-control input-short" readonly="readonly" />
-							<span class="required">*</span>
-						</div>
-						<div ng-if="riverBox" class="dis-i-blc">
-							<div class="form-item">
-								<label>河段岸别</label>
-								<input ng-model="river_shore" type="text" class="form-control input-short"  readonly="readonly"/>
-							</div>
-							<div class="form-item">
-								<label>所属区域</label>
-								<input ng-model="region" type="text" class="form-control input-short" disabled="disabled" readonly="readonly">
-							</div>
-							<div class="form-item">
-								<label>所属河流</label>
-								<input ng-model="river_ztree" type="text" class="form-control input-short" disabled="disabled" readonly="readonly">
-							</div>
-						</div>
-						<div ng-if="lakesBox" class="dis-i-blc">
-							<div class="form-item">
-								<label>湖段岸别</label>
-								<input ng-model="lakes_shore" type="text" class="form-control input-short"  readonly="readonly"/>
-							</div>
-							<div class="form-item">
-								<label>所属区域</label>
-								<input ng-model="region" type="text" class="form-control input-short" disabled="disabled" readonly="readonly">
-							</div>
-							<div class="form-item">
-								<label>所属湖泊</label>
-								<input ng-model="lakes_ztree" type="text" class="form-control input-short" disabled="disabled" readonly="readonly">
-							</div>
-						</div>
-						<div ng-if="reservoirBox" class="dis-i-blc">
-							<div class="form-item">
-								<label>库段岸别</label>
-								<input ng-model="reservoir_shore" type="text" class="form-control input-short"  readonly="readonly"/>
-							</div>
-							<div class="form-item">
-								<label>所属区域</label>
-								<input ng-model="region" type="text" class="form-control input-short" disabled="disabled" readonly="readonly">
-							</div>
-							<div class="form-item">
-								<label>所属水库</label>
-								<input ng-model="reservoir_ztree" type="text" class="form-control input-short" disabled="disabled" readonly="readonly">
-							</div>
-						</div>
-						<br/>
-						<div class="form-item">
-							<label>河湖库级别</label>
-							<input ng-model="river_part" type="text" class="form-control input-short"  readonly="readonly"/>
-						</div>
-						<div class="form-item">
-							<label>淤积情况</label>
-							<input ng-model="deposit_status" type="text" class="form-control input-short"  readonly="readonly"/>
-						</div>
-						<div class="form-item">
-							<label>起点</label>
-							<input type="text" class="form-control input-short" ng-model="startPoint"  readonly="readonly"/>
-						</div>
-						<br/>
-						<div class="form-item">
-							<label>终点</label>
-							<input type="text" class="form-control input-short" ng-model="endPoint"  readonly="readonly"/>
-						</div>
-						<div class="form-item">
-							<label>是否位于山区</label>
-							<input ng-model="whether_mountain" type="text" class="form-control input-short" readonly="readonly"/>
-						</div>
-						<div class="form-item">
-							<label>是否虚拟</label>
-							<input ng-model="whether_virtual" type="text" class="form-control input-short" readonly="readonly"/>
-						</div>
-						<br/>
-						<div class="form-item">
-							<label>长度</label>
-							<input ng-model="length" type="text" class="form-control input-short-o" readonly="readonly">
-							<span class="input-group-addon"><i>km</i></span>
-						</div>
-						<div class="form-item">
-							<label>宽度</label>
-							<input ng-model="width" type="text" class="form-control input-short-o" readonly="readonly">
-							<span class="input-group-addon"><i>km</i></span>
-						</div>
-						<div class="form-item">
-							<label>河湖库编码</label>
-							<input id="codeView" ng-model="reachCode" type="text" class="form-control input-long" readonly="readonly">
-							<a class="input-group-addon code-ico-box"><i class="fa fa-code"></i></a>
-						</div>
-						<br/>
-						<div class="form-item">
-							<label>流经区域</label>
-							<input type="text" class="form-control input-long" ng-model="throughArea" readonly="readonly"/>
-						</div>
-						<br/>
+                <div class="reachDetailContent m-t-20">
+                    <div class="form-item">
+                        <label>河湖库名称：</label>
+                        <span ng-bind="reachFName" class="form-span">河湖库名称</span>
+                    </div>
+                    <div class="form-item">
+                        <label>河湖库别名：</label>
+                        <span ng-bind="alias" class="form-span">河湖库别名</span>
+                    </div>
+                    <div class="form-item">
+                        <label>水质等级：</label>
+                        <span ng-bind="water_quality" class="form-span">水质等级</span>
+                    </div>
+                    <br/>
+                    <div class="form-item">
+                        <label>淤积情况：</label>
+                        <span ng-bind="deposit_status" class="form-span">淤积情况</span>
+                    </div>
+                    <div class="form-item">
+                        <label>河湖库级别：</label>
+                        <span ng-bind="river_part" class="form-span">河湖库级别</span>
+                    </div>
+                    <div class="form-item">
+                        <label>起点：</label>
+                        <span ng-bind="startPoint" class="form-span">起点</span>
+                    </div>
+                    <div class="form-item">
+                        <label>终点：</label>
+                        <span ng-bind="endPoint" class="form-span">起点</span>
+                    </div>
+                    <br/>
+                    <div class="form-item">
+                        <label>河湖库编码：</label>
+                        <span ng-bind="reachCode" class="form-span">河湖库编码</span>
+                    </div>
+                    <div class="form-item">
+                        <label>是否虚拟：</label>
+                        <span ng-bind="whether_virtual" class="form-span">是否虚拟</span>
+                    </div>
+                    <div class="form-item">
+                        <label>长度：</label>
+                        <span ng-bind="length" class="form-span">长度km</span>
+                    </div>
+                    <div class="form-item">
+                        <label>宽度：</label>
+                        <span ng-bind="width" class="form-span">宽度km</span>
+                    </div>
+                    <br/>
+                    <div class="form-item">
+                        <label>流经区域：</label>
+                        <span ng-bind="throughArea" class="form-span">流经区域</span>
+                    </div>
+                    <div ng-if="riverBox" class="dis-i-blc">
                         <div class="form-item">
-                            <label>河流概述</label>
+                            <label>河段岸别：</label>
+                            <span ng-bind="river_shore" class="form-span">河段岸别</span>
                         </div>
-                        <div id="editor" readonly="readonly">
+                        <div class="form-item">
+                            <label>所属区域：</label>
+                            <span ng-bind="region" class="form-span">所属区域</span>
                         </div>
-						<!--<div class="form-item">
-							<label style="width: auto">说明:选择行政区域后再选负责人</label>
-						</div>-->
-						<div class="basin_map"></div>
+                        <div class="form-item">
+                            <label>所属河流：</label>
+                            <span ng-bind="river_ztree" class="form-span">所属河流</span>
+                        </div>
+                    </div>
+                    <div ng-if="lakesBox" class="dis-i-blc">
+                        <div class="form-item">
+                            <label>湖段岸别：</label>
+                            <span ng-bind="lakes_shore" class="form-span">湖段岸别</span>
+                        </div>
+                        <div class="form-item">
+                            <label>所属区域：</label>
+                            <span ng-bind="region" class="form-span">所属区域</span>
+                        </div>
+                        <div class="form-item">
+                            <label>所属湖泊：</label>
+                            <span ng-bind="lakes_ztree" class="form-span">所属湖泊</span>
+                        </div>
+                    </div>
+                    <div ng-if="reservoirBox" class="dis-i-blc">
+                        <div class="form-item">
+                            <label>库段岸别：</label>
+                            <span ng-bind="reservoir_shore" class="form-span">库段岸别</span>
+                        </div>
+                        <div class="form-item">
+                            <label>所属区域：</label>
+                            <span ng-bind="region" class="form-span">所属区域</span>
+                        </div>
+                        <div class="form-item">
+                            <label>所属水库：</label>
+                            <span ng-bind="reservoir_ztree" class="form-span">所属水库</span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>是否位于山区：</label>
+                        <span ng-bind="whether_mountain" class="form-span">是否位于山区</span>
+                    </div>
+                    <div class="editorPanel">
+                        <label class="editorLabel">概述内容</label>
+                        <div class="editorContent" ng-bind-html="drainageOverview|trustHtml" style="padding: 8px 12px;">
+                        </div>
+                    </div>
+                </div>
 
-				</div>
+                <!-- map -->
+                <div class="right-panel wid-25 dis-i-blc">
+                    <div class="basicMap" id="mapContainer">
+                        <div id="getgeo"></div>
+                    </div>
+                </div>
 
-				<div class="line line-dashed b-b line-lg pull-in"></div>
-
-				<div class="btn-box">
-					<button type="submit" class="btn btn-default" ng-click="back()">
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="panel-footer m-b-10">
+                <div class="btn-box">
+                    <button type="submit" class="btn btn-default" ng-click="back()">
                         <i class="fa fa-reply"></i>返回
                     </button>
-				</div>
-
-			</div>
-		</div>
-	</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<script type="text/javascript">
-    var ue =  CKEDITOR.replace( 'editor' );
-</script>
