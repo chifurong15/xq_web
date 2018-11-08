@@ -21,48 +21,77 @@
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
-					var apiPrefix = moduleService.getServiceUrl() + '/template';
-					
+					//var apiPrefix = moduleService.getServiceUrl() + '/template';
+					var apiPrefix = 'http://10.0.9.133:8080' + '/duban';
+
 					$scope.init = function () {
+                        getList();
+                        getStatus ();
+                        $scope.num = 5; //02 市河长办  05 区
+
 //						$ajaxhttp.myhttp({
-//							url: apiPrefix + '/v1/SurfaceWater/userinfo',
+//							url: apiPrefix + '/v1/DubanSupervision/userinfo',
 //							method: 'get',					
 //							callBack: function (res) {
 //								$scope.num = res.data;
-//								getList();
 //							}
 //						})
 					}
 					
 					// 获取数据列表
 					function getList () {
-												
-						let month=new moment($scope.searchTime).format('M')<10 ? '0'+ new moment($scope.searchTime).format('M') : new moment($scope.searchTime).format('M');
-						$scope.date=new moment($scope.searchTime).format('YYYY') + '-' + month;
+						$ajaxhttp.myhttp({
+							url: apiPrefix + '/v1/DubanSupervision/list',
+							method: 'get',
+							params: {
+								pageNumber: $scope.paginationConf.currentPage,
+								pageSize: $scope.paginationConf.itemsPerPage,
+								objectname:$scope.objectname,
+								issuedtime:$scope.searchTime,
+								status:$scope.status
+							},
+							callBack: function (res) {
+								$scope.moduleList = res.data.list;
+                 				$scope.paginationConf.totalItems = res.data.total;
+							}
+						})
+					}
 
-//						$ajaxhttp.myhttp({
-//							url: apiPrefix + '/v1/SurfaceWater/list',
-//							method: 'get',
-//							params: {
-//								pageNumber: $scope.paginationConf.currentPage,
-//								pageSize: $scope.paginationConf.itemsPerPage,
-//								issue: $scope.searchTime && $scope.date,
-//								status: $scope.type,
-//								num: $scope.num,
-//								createUser:$scope.createuser
-//							},
-//							callBack: function (res) {
-//								$scope.surfaceWaterList = res.data.list;
-//                  			$scope.paginationConf.totalItems = res.data.total;
-//							}
-//						})
+					//获取状态
+					function getStatus (){
+						$scope.statusList = [
+							{
+								id:0,
+								status:'已下发'
+							},
+                            {
+                                id:1,
+                                status:'已回复'
+                            },
+                            {
+                                id:2,
+                                status:'已处理'
+                            },
+                            {
+                                id:3,
+                                status:'未按期'
+                            },
+                            {
+                                id:4,
+                                status:'已完结'
+                            },
+                            {
+                                id:5,
+                                status:'已退回'
+                            },
+						]
 					}
 					
 					$('#J-searchTime').datetimepicker({
-	                    format: 'YYYY-MM',
+	                    format: 'YYYY-MM-DD',
 	                    locale: moment.locale('zh-cn')
 	                }).on('dp.change', function (c) {
-	                    $scope.searchTime = new moment(c.date).format('YYYY-MM');
+	                    $scope.searchTime = new moment(c.date).format('YYYY-MM-DD');
 	                    $scope.$apply();
 	                });
 					
@@ -71,6 +100,15 @@
 	                $scope.search = function () {
 	                    getList();
 	                };
+
+                    //重置搜索条件
+                    $scope.reset = function () {
+                        $scope.searchTime = '';
+                        $scope.status = '';
+                        $scope.objectname = '';
+                    }
+
+
 					
 					// 新建
 	                $scope.add = function () {
@@ -81,14 +119,21 @@
 	                }
 	                	               
 	                 // 查看    检查
-	                $scope.view = function (id , op) {
-						localStorage.setItem('selectedId',id);
-													
-						localStorage.setItem('no-ops',op);
-						
-						
+	                $scope.view = function (id , status) {
+						localStorage.setItem('id',id);
+						localStorage.setItem('status',status);
 						routeService.route('2-4-2', false);
 	                }
+                    // 回复 处理
+                    $scope.oprate = function (id ,tag , status) {
+                        localStorage.setItem('id',id);
+                        localStorage.setItem('tag',tag);
+                        localStorage.setItem('status',status);
+                        routeService.route('2-4-3', false);
+                    }
+	                $scope.report = function (){
+                        routeService.route('2-4-3', false);
+                    }
 	                //返回
 					$scope.goBack=function(){
 						history.back(-1);
