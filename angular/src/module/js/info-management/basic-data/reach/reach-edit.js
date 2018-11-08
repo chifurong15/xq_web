@@ -38,6 +38,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
 
                 $scope.init = function(){
                     loadGisModuls();
+                    $scope.userList();
                 }
 
                 /*地图放大缩小切换*/
@@ -94,7 +95,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
 
 
                 $scope.editId = $localStorage.reachEditData.data.id;
-                console.log($scope.editId);
+                console.log($localStorage.reachEditData);
                 //河湖库详情
                 $scope.sort=$localStorage.reachEditData.data.classify;
                 console.log($scope.sort);
@@ -201,7 +202,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
 
 
                 //判断名称是否重复
-                $scope.isRepeat = function(){
+                /*$scope.isRepeat = function(){
                     $http({
                         method:'get',
                         url:$localStorage.gwUrl +reachUrl + "/isRepeat",
@@ -215,7 +216,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                                 clear();
                             }
                         }).error();
-                };
+                };*/
 
                 //清空表单
                 var clear = function() {
@@ -596,7 +597,6 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                     if (x == null){
                         $scope.rp_Change_value = null;
                     } else {
-
                         $scope.rp_Change_value = x;
                         console.log($scope.rp_Change_value);
                     }
@@ -1319,160 +1319,147 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
 
                 }
 
+                $scope.userList = function () {
+                    $scope.reachadmins = $localStorage.reachEditData.data.userList;
+                    console.log($localStorage.reachEditData.data.userList);
+                    for(var i = 0;i<$scope.reachadmins.length;i++){
+                        $scope.reachadmins[i].userName = $scope.reachadmins[i].userName
+                    };
+                    //增加管理人员
+                    $scope.addReachadmin = function($index){
+                        $scope.reachadmins.splice($index + 1, 0, {userName: "",dutyLevel:"",dutyType:"",bankSide:"",check:""});
+                    }
 
-                //增加管理人员
-                $scope.reachadmins = [{chairman: "",dutyLevel:"",dutyType:"",bankSide:"",check:""}];
-                $scope.addReachadmin = function($index){
-                    $scope.reachadmins.splice($index + 1, 0, {chairman: "",dutyLevel:"",dutyType:"",bankSide:"",check:""});
-                }
+                    //删除管理人员
+                    $scope.delReachadmin = function($index){
+                        $scope.reachadmins.splice($index, 1);
+                    }
 
-                //删除管理人员
-                $scope.delReachadmin = function($index){
-                    $scope.reachadmins.splice($index, 1);
-                }
+                    //管理人员树
+                    var regionTree;
+                    $scope.adminTree = function (ind) {
+                        $("#myModal_ztree_one").modal('show');
+                        $scope.reachUserName = ind;
+                        var regionAndUserTreeUrl = $localStorage.gwUrl + reachUrl + "/regionAndUserTree";
+                        $scope.treeLists(regionAndUserTreeUrl);
+                    }
 
-//                      $scope.add = function() {
-//							routeService.route(56, true);
-//						}
+                    //河长搜索
+                    $scope.select_one = function () {
+                        $http({
+                            method: "GET",
+                            url: $localStorage.gwUrl + reachUrl + "/findByUser",
+                            params: {
+                                userName: $scope.waterName_one
+                            },
+                        }).success(
+                            function (resp) {
+                                console.log($scope.waterName_one);
+                                console.log(resp);
+                                var setting = {
+                                    view: {
+                                        selectedMulti: true,
+                                        showLine: true,
+                                        showIcon: true
+                                    },
+                                    data: {
+                                        simpleData: {enable: true},
+                                        keep: {parent: true}
+                                    },
+                                    callback: {
+                                        beforeExpand: zTreeOnExpand,
+                                        onClick: zTreeOnClick
+                                    }
+                                };
+                                regionTree = $.fn.zTree.init($("#regionTrees"), setting, resp.data);
+                            })
+                    }
 
-                $scope.back = function() {
-                    // 跳转到菜单页面
-                    routeService.route(12, true);
-                }
-
-                //管理人员树
-                var regionTree;
-                $scope.adminTree = function () {
-                    $("#myModal_ztree_one").modal('show');
-                    var regionAndUserTreeUrl = $localStorage.gwUrl + reachUrl + "/regionAndUserTree";
-                    $scope.treeLists(regionAndUserTreeUrl);
-                }
-
-                //河长搜索
-                $scope.select_one = function () {
-                    $http({
-                        method: "GET",
-                        url: $localStorage.gwUrl + reachUrl + "/findByUser",
-                        params: {
-                            userName: $scope.waterName_one,
+                    var setting = {
+                        view: {
+                            selectedMulti: true,
+                            showLine: true,
+                            showIcon: true
                         },
-                    }).success(
-                        function (resp) {
-                            console.log($scope.waterName_one);
-                            console.log(resp);
-                            var setting = {
-                                view: {
-                                    selectedMulti: true,
-                                    showLine: true,
-                                    showIcon: true
-                                },
-                                data: {
-                                    simpleData: {enable: true},
-                                    keep: {parent: true}
-                                },
-                                callback: {
-                                    beforeExpand: zTreeOnExpand,
-                                    onClick: zTreeOnClick
+                        data: {
+                            simpleData: {enable: true},
+                            keep: {parent: true}
+                        },
+                        callback: {
+                            beforeExpand: zTreeOnExpand,
+                            onClick: zTreeOnClick
+                        }
+                    };
+
+                    function zTreeOnClick(event, treeId, treeNode) {
+                        console.log(treeNode)
+                        $http({
+                            method: "GET",
+                            url: $localStorage.gwUrl + reachUrl + "/findByUser",
+                            params: {
+                                userId: treeNode.id
+                            },
+                        }).success(
+                            function(res) {
+                                console.log(res);
+                                if(res.resCode == 1){
+                                    $scope.userName = res.data.name;
+                                    $scope.reachadmins[$scope.reachUserName].userName = $scope.userName
+                                    console.log($scope.reachadmins)
+                                    // console.log($scope.userName)
+                                    $scope.chairmanId = res.data.id;
+                                    console.log($scope.chairmanId)
                                 }
-                            };
-                            regionTree = $.fn.zTree.init($("#regionTrees"), setting, resp.data);
-                        })
-                }
-
-                var setting = {
-                    view: {
-                        selectedMulti: true,
-                        showLine: true,
-                        showIcon: true
-                    },
-                    data: {
-                        simpleData: {enable: true},
-                        keep: {parent: true}
-                    },
-                    callback: {
-                        beforeExpand: zTreeOnExpand,
-                        onClick: zTreeOnClick
-                    }
-                };
-
-                function zTreeOnClick(event, treeId, treeNode) {
-                    console.log(treeNode)
-                    $http({
-                        method: "GET",
-                        url: $localStorage.gwUrl + reachUrl + "/findByUser",
-                        params: {
-                            userId: treeNode.id,
-                        },
-                    }).success(
-                        function(res) {
-                            console.log(res);
-                            if(res.resCode == 1){
-                                $scope.chairmanName = res.data.name;
-                                console.log($scope.chairmanName)
-                                $scope.chairmanId = res.data.id;
-                                console.log($scope.chairmanId)
                             }
+                        );
+                    };
+
+                    function zTreeOnExpand(treeId, treeNode) {
+                        $scope.chiefNodeId = treeNode.id;
+                        var cnodes = treeNode.children;
+                        if (cnodes !=null && cnodes.length > 0){
+                            return;
                         }
-                    );
+                        $http({
+                            method: "GET",
+                            url: $localStorage.gwUrl + reachUrl + "/regionAndUserTree",
+                            params: {
+                                parentCode: treeNode.id
+                            },
+                        }).success(
+                            function (res) {
+                                regionTree.addNodes(treeNode, res.data, true);
+                            }
+                        );
+                    }
+
+                    $scope.treeLists = function (regionAndUserTreeUrl) {
+                        console.log(regionAndUserTreeUrl);
+                        $http({
+                            method: "GET",
+                            url: regionAndUserTreeUrl,
+                            dataType: 'json'
+                        }).success(
+                            function (data) {
+                                console.log(data.data)
+                                regionTree = $.fn.zTree.init($("#regionTrees"), setting, data.data);
+                                console.log(regionTree)
+                            }
+                        ).error(function () {
+                        });
+                    }
                 };
 
-                function zTreeOnExpand(treeId, treeNode) {
-                    $scope.chiefNodeId = treeNode.id;
-                    var cnodes = treeNode.children;
-                    if (cnodes !=null && cnodes.length > 0){
-                        return;
-                    }
-                    $http({
-                        method: "GET",
-                        url: $localStorage.gwUrl + reachUrl + "/regionAndUserTree",
-                        params: {
-                            parentCode: treeNode.id
-                        },
-                    }).success(
-                        function (res) {
-                            regionTree.addNodes(treeNode, res.data, true);
-                        }
-                    );
-                }
-
-                $scope.treeLists = function (regionAndUserTreeUrl) {
-                    console.log(regionAndUserTreeUrl);
-                    $http({
-                        method: "GET",
-                        url: regionAndUserTreeUrl,
-                        dataType: 'json'
-                    }).success(
-                        function (data) {
-                            console.log(data.data)
-                            regionTree = $.fn.zTree.init($("#regionTrees"), setting, data.data);
-                            console.log(regionTree)
-                        }
-                    ).error(function () {
-                    });
-                }
 
                 //关闭模态框【确定按钮】
                 $scope.modalOk_one = function () {
                     $("#myModal_ztree_one").modal('hide');
                 };
-                // };
 
-                //履职级别
-                // $scope.dutyLevel = function () {
-                //    $http({
-                //        method: "get",
-                //        url: $localStorage.gwUrl +watersourceServiceUrl + "/smDictionary/riverType",
-                //        params: {
-                //            type: 1
-                //        }
-                //    }).success(
-                //        function (res) {
-                //            console.log(res);
-                //            $scope.dutyLevels = res.data;
-                //            console.log($scope.dutyLevels);
-                //        }
-                //    );
-                // }
+                $scope.back = function() {
+                    // 跳转到菜单页面
+                    routeService.route(12, true);
+                }
 
                 //履职类型
                 $scope.dutyType = function () {

@@ -7,8 +7,7 @@
 					<form id="arrForm" class="form-inline" method="post" action="hzz/test">
 						<div class="form-item">
 							<label>河湖库名称</label>
-							<input ng-init="reachName()" ng-model="reachFName" ng-change="name_change()" type="text" class="form-control input-short"
-                                   ng-blur="isRepeat()"/>
+							<input ng-init="reachName()" ng-model="reachFName" ng-change="name_change()" type="text" class="form-control input-short"/>
 		                    <span id="val"></span>
 							<span class="required">*</span>
 						</div>
@@ -18,6 +17,24 @@
 							<input ng-model="alias" type="text" class="form-control input-short"/>
 							<span class="required">*</span>
 						</div>
+                        <div class="form-item">
+                            <label>所属区域</label>
+                            <input ng-model="region" type="text" class="form-control input-short-o"  ng-click="regionShow()">
+                            <a class="input-group-addon" ng-click="regionShow()"><i class="fa fa-search"></i></a>
+                            <span class="required">*</span>
+                        </div>
+                        <br/>
+                        <div class="form-item">
+                            <label>所属水系</label>
+                            <input ng-model="water_ztree" type="text" class="form-control input-short-o"  ng-click="waterShow()">
+                            <a class="input-group-addon" ng-click="waterShow()"><i class="fa fa-search"></i></a>
+                            <span class="required">*</span>
+                        </div>
+                        <!-- <div class="form-item">
+                             <label>所属河流</label>
+                             <input ng-model="river_ztree" type="text" class="form-control input-short-o"  ng-click="riverShow()">
+                             <a class="input-group-addon" ng-click="riverShow()"><i class="fa fa-search"></i></a>
+                         </div>-->
                         <div class="form-item">
                             <label>水质等级</label>
                             <select ng-init="waterQuality()" ng-model="water_quality" ng-options="wq.typeName for wq in waterQualitys"
@@ -35,14 +52,14 @@
                             </select>
                             <span class="required">*</span>
                         </div>
-                        <!--<div class="form-item">
+                        <div class="form-item">
                             <label>河湖库级别</label>
                             <select ng-model="river_part" ng-options="rp.typeValue as rp.typeName for rp in riveParts"
                                     ng-change="rp_Change(river_part.typeValue)" class="form-control select-short">
                                 <option  value="">请选择</option>
                             </select>
                             <span class="required">*</span>
-                        </div>-->
+                        </div>
 					    <div id="riverBox" class="dis-none">
 
                             <div class="form-item">
@@ -53,24 +70,7 @@
                                 </select>
                                 <span class="required">*</span>
                             </div>
-					    	<div class="form-item">
-								<label>所属区域</label>
-								<input ng-model="region" type="text" class="form-control input-short-o"  ng-click="regionShow()">
-								<a class="input-group-addon" ng-click="regionShow()"><i class="fa fa-search"></i></a>
-                                <span class="required">*</span>
-							</div>
-							<br/>	
-							<div class="form-item">
-								<label>所属水系</label>
-								<input ng-model="water_ztree" type="text" class="form-control input-short-o"  ng-click="waterShow()">
-								<a class="input-group-addon" ng-click="waterShow()"><i class="fa fa-search"></i></a>
-                                <span class="required">*</span>
-							</div>
-                           <!-- <div class="form-item">
-                                <label>所属河流</label>
-                                <input ng-model="river_ztree" type="text" class="form-control input-short-o"  ng-click="riverShow()">
-                                <a class="input-group-addon" ng-click="riverShow()"><i class="fa fa-search"></i></a>
-                            </div>-->
+
 					    </div>
 					    <!--<div id="lakesBox" class="dis-none">
 							<div class="form-item">
@@ -218,15 +218,15 @@
 							<div class="form-inline" ng-repeat="reach in reachadmins">
                                 <div class="form-item">
                                     <label>履职人员</label>
-                                    <input type="text" class="form-control input-short-o" ng-model="chairmanName"  ng-click="adminTree()"/>
-                                    <a href="javascript:void(0);" ng-click="adminTree()" class="input-group-addon">
+                                    <input type="text" class="form-control input-short-o" ng-model="reach.userName"/>
+                                    <a href="javascript:void(0);" ng-click="adminTree($index)" class="input-group-addon">
                                         <i class="fa fa-search"></i>
                                     </a>
                                     <span class="required">*</span>
                                 </div>
                                 <div class="form-item">
                                     <label>履职级别</label>
-                                    <select ng-model="dutyLevels.typeValue"
+                                    <select ng-model="reach.gradeName"
                                             ng-options="wm.typeName for wm in dutyLevels"
                                             ng-change="level_Change(d_Level)"
                                             class="form-control select-short">
