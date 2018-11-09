@@ -70,19 +70,19 @@
                         url: $localStorage.serviceUrl_eventMgr + '/v1/event/findAccessoryList?eventId=' + $scope.detailId,
                         method: 'get',
                         callBack: function(res){
-                            var afterAccessory = res.data.afterAccessory;
-                            var beforeAccessory = res.data.beforeAccessory;
-                            for(let i = 0; i<afterAccessory.length;i++){
-                                if(afterAccessory[i].accessorytype == 2){
-                                    $scope.afterAccessory.push(afterAccessory[i])
-                                };
-                            };
-                            for(let i = 0; i<beforeAccessory.length;i++){
-                                if(beforeAccessory[i].accessorytype == 2){
-                                    $scope.beforeAccessory.push(beforeAccessory[i])
-                                };
-                            };
-                            $scope.$apply();
+                            $scope.afterAccessory = res.data.afterAccessory;
+                            $scope.beforeAccessory = res.data.beforeAccessory;
+                            // for(let i = 0; i<afterAccessory.length;i++){
+                            //     if(afterAccessory[i].accessorytype == 2){
+                            //         $scope.afterAccessory.push(afterAccessory[i])
+                            //     };
+                            // };
+                            // for(let i = 0; i<beforeAccessory.length;i++){
+                            //     if(beforeAccessory[i].accessorytype == 2){
+                            //         $scope.beforeAccessory.push(beforeAccessory[i])
+                            //     };
+                            // };
+                            // $scope.$apply();
                         }
                         
                     });
@@ -499,7 +499,32 @@
                         return grade;
                     };
 
-
+                    // 音视频播放
+                    $scope.playVideo = function(item){
+                        $('#videoBox').show();
+                        $('#audioPlayer').css('display','none');
+                        $("#videoPlayerBox").css('display','block');
+                        $scope.videoUrl = $scope.eventImgUrl +  item.accessoryurl;
+                        $("#videoPlayerBox source").attr("src", $scope.videoUrl);
+                        var myPlayer = videojs("videoPlayerBox")
+                        myPlayer.ready(function () {
+                            myPlayer.play()
+                        });
+                    };
+                    $scope.playAudio = function(item){
+                        $('#videoBox').show();
+                        $('#audioPlayer').css('display','block');
+                        $("#videoPlayerBox").css('display','none');
+                        $scope.videoUrl = $scope.eventImgUrl + item.accessoryurl;
+                        console.log($("#audioPlayer"))
+                        $("#audioPlayer audio").attr("src", $scope.videoUrl);
+                        // var myPlayer = $("#audioPlayer");
+                        // myPlayer.play()
+                    }
+                    // 停止并关闭视频、
+                    $scope.closePlayer = function(){
+                        $('#videoBox').hide();
+                    };
 
 
     }]);
