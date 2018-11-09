@@ -52,7 +52,11 @@
 							},
 							callBack: function (res) {
 								$scope.moduleList = res.data.list;
-                 				$scope.paginationConf.totalItems = res.data.total;
+								if($scope.num == 2 || $scope.num == 5){
+                                    $scope.paginationConf.totalItems = res.data.total;
+								}else{
+                                    $scope.paginationConf.totalItems = 0;
+                                }
 							}
 						})
 					}
