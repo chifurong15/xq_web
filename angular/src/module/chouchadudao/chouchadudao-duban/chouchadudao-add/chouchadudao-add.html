@@ -8,7 +8,7 @@
         </div>
     	<div class="panel panel-default">
     		<div class="panel-body">
-    			<div style="overflow: hidden">
+    			<div class="clearfix">
     				<form class="form-inline" style="float:left;padding-left: 25%;">
 						<div class="form-item" >
 	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
@@ -47,7 +47,8 @@
 	                        	<option value="">请选择</option>
 	                        	<option value="{{item.id}}" ng-repeat="item in personList">{{item.name}}</option>
 	                        </select>
-		                </div>
+							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+						</div>
 	                    <br />
 	                   <div class="form-item" >
 	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">方案附件</font></font></label>

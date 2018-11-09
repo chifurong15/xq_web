@@ -21,8 +21,8 @@
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
-					// var apiPrefix = moduleService.getServiceUrl() + '/template';
-                    var apiPrefix = 'http://10.0.9.133:8080' + '/duban';
+					var apiPrefix = moduleService.getServiceUrl() + '/duban';
+                    //var apiPrefix = 'http://10.0.9.133:8080' + '/duban';
 
                     $scope.init = function () {
 						
@@ -152,9 +152,9 @@
 								project:$scope.project,
                             	objectid:$scope.objectid,
                             	assessory:$scope.assessory,
-                            reason: $scope.reason,
+                            	reason: $scope.reason
 						}
-                        console.log(params);
+                        //console.log(params);
 						$ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/DubanSupervision/add',
 							method: 'post',

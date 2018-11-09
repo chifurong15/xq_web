@@ -21,21 +21,21 @@
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
-					//var apiPrefix = moduleService.getServiceUrl() + '/template';
-					var apiPrefix = 'http://10.0.9.133:8080' + '/duban';
+					var apiPrefix = moduleService.getServiceUrl() + '/duban';
+					//var apiPrefix = 'http://10.0.9.133:8080' + '/duban';
 
 					$scope.init = function () {
                         getList();
                         getStatus ();
-                        $scope.num = 5; //02 市河长办  05 区
+                        //$scope.num = 2; //02 市河长办  05 区
 
-//						$ajaxhttp.myhttp({
-//							url: apiPrefix + '/v1/DubanSupervision/userinfo',
-//							method: 'get',					
-//							callBack: function (res) {
-//								$scope.num = res.data;
-//							}
-//						})
+						$ajaxhttp.myhttp({
+							url: apiPrefix + '/v1/DubanSupervision/userinfo',
+							method: 'get',
+							callBack: function (res) {
+								$scope.num = res.data;
+							}
+						})
 					}
 					
 					// 获取数据列表

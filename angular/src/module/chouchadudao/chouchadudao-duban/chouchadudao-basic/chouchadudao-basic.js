@@ -21,8 +21,8 @@
                                        $location, $log, $q, $rootScope, $window,
                                        routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
-                    // var apiPrefix = moduleService.getServiceUrl() + '/template';
-                    var apiPrefix = 'http://10.0.9.133:8080' + '/duban';
+                    var apiPrefix = moduleService.getServiceUrl() + '/duban';
+                    //var apiPrefix = 'http://10.0.9.133:8080' + '/duban';
 
 
                     $scope.init = function () {
@@ -40,8 +40,15 @@
                             getDeal ();
                         }
                         getBasic ();
+                        $ajaxhttp.myhttp({
+							url: apiPrefix + '/v1/DubanSupervision/userinfo',
+							method: 'get',
+							callBack: function (res) {
+								$scope.num = res.data;
+							}
+						})
+                        //$scope.num = 5; //02 市河长办  05 区
 
-                        $scope.num = 5; //02 市河长办  05 区
                         if($scope.num == 5 && $scope.status ==5){
                             getResult ();
                         }
@@ -53,14 +60,6 @@
                         if($scope.num == 2 && $scope.status ==2){
                             getAnswer ();
                         }
-
-//						$ajaxhttp.myhttp({
-//							url: apiPrefix + '/v1/DubanSupervision/userinfo',
-//							method: 'get',
-//							callBack: function (res) {
-//								$scope.num = res.data;
-//							}
-//						})
 
                     }
 

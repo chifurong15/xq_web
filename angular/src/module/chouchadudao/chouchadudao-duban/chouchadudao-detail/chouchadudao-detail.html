@@ -3,7 +3,7 @@
     	<div class="panel panel-default m-n">
         	<div class="panel-body" style="position: relative;">
         		<span class="tag">督办</span><span class="tag-right"></span><span class="tag-right tag-left"></span><span class="tag tag1">详情</span><span class="tag-right"></span>
-        		<div style="overflow: hidden;"><button type="button" class="btn btn-primary" ng-click="goBack()" style="position: absolute;right: 20px;bottom: 20px;">返回</button></div>
+        		<div class="clearfix"><button type="button" class="btn btn-primary" ng-click="goBack()" style="position: absolute;right: 20px;bottom: 20px;">返回</button></div>
         	</div>
 		</div>
         
@@ -11,15 +11,15 @@
 			<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
 				<ul class="layui-tab-title">
 					<li class="layui-this">基础资料</li>
-					<li>回复反馈</li>
-					<li>处理反馈</li>
-					<li>核查结果</li>
+					<li ng-if="status !=0">回复反馈</li>
+					<li ng-if="status !=0 && status !=1">处理反馈</li>
+					<li  ng-if="status !=0 && status !=1 && status !=2  && status !=3">核查结果</li>
 				</ul>
 				<div class="layui-tab-content">
 					<!--基础资料-->
 					<div class="layui-tab-item layui-show">
 						<div class="panel-body">
-							<div style="overflow: hidden">
+							<div class="clearfix">
 								<form class="form-inline" style="float:left;padding-left: 25%;">
 									<div class="form-item" >
 										<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
@@ -63,7 +63,7 @@
 						</div>
 					</div>
 					<!--回复反馈-->
-					<div class="layui-tab-item">
+					<div  ng-if="status !=0" class="layui-tab-item">
 						<div class="panel-body">
 							<div style="display: flex;">
 								<form class="form-inline" style="float:left;padding-left: 25%;">
@@ -83,9 +83,9 @@
 						</div>
 					</div>
 					<!--处理反馈-->
-					<div class="layui-tab-item">
+					<div  ng-if="status !=0 && status !=1" class="layui-tab-item">
 						<div class="panel-body">
-							<div style="overflow: hidden">
+							<div class="clearfix">
 								<form class="form-inline" style="float:left;padding-left: 25%;">
 									<div class="form-item" >
 										<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否完成</font></font></label>
@@ -114,9 +114,9 @@
 						</div>
 					</div>
 					<!--核查结果-->
-					<div class="layui-tab-item">
+					<div  ng-if="status !=0 && status !=1 && status !=2 && status !=3" class="layui-tab-item">
 						<div class="panel-body">
-							<div style="overflow: hidden">
+							<div class="clearfix">
 								<form class="form-inline" style="float:left;padding-left: 25%;">
 									<div class="form-item" >
 										<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">结果状态</font></font></label>
