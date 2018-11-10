@@ -22,7 +22,7 @@
                                        routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl() + '/duban';
-                    //var apiPrefix = 'http://10.0.9.133:8080' + '/duban';
+                    //var apiPrefix = 'http://10.0.9.133:7026' + '/duban';
 
 
                     $scope.init = function () {
@@ -47,7 +47,7 @@
 								$scope.num = res.data;
 							}
 						})
-                        //$scope.num = 5; //02 市河长办  05 区
+                        //$scope.num = 2; //02 市河长办  05 区
 
                         if($scope.num == 5 && $scope.status ==5){
                             getResult ();
@@ -62,6 +62,40 @@
                         }
 
                     }
+
+                    layui.use('laydate', function(){
+                        var laydate = layui.laydate;
+                        laydate.render({
+                            elem: '#test11',
+                            type: 'datetime',
+                            format: 'yyyy-MM-dd HH:mm:ss',
+                            done:(value) =>{
+                                $scope.searchTime4 = value ;
+                            }
+                        });
+                    })
+                    layui.use('laydate', function(){
+                        var laydate = layui.laydate;
+                        laydate.render({
+                            elem: '#test13',
+                            type: 'datetime',
+                            format: 'yyyy-MM-dd HH:mm:ss',
+                            done:(value) =>{
+                                $scope.searchTime3 = value ;
+                            }
+                        });
+                    })
+                    layui.use('laydate', function(){
+                        var laydate = layui.laydate;
+                        laydate.render({
+                            elem: '#test14',
+                            type: 'datetime',
+                            format: 'yyyy-MM-dd HH:mm:ss',
+                            done:(value) =>{
+                                $scope.searchTime = value ;
+                            }
+                        });
+                    })
 
                     // 单选按钮组
                     $scope.typeList = [
@@ -209,6 +243,68 @@
                                 }
                             }
                         })
+                    }
+
+                    /**
+                     * 上传附件
+                     */
+                    $scope.getUploadFile = function(id){
+                        if( id == 1 ){
+                            $('#coverModal1').modal('show');
+                        }else if( id == 2 ) {
+                            $('#coverModal2').modal('show');
+                        }else if ( id == 3 ) {
+                            $('#coverModal3').modal('show');
+                        }
+                    }
+
+
+                    /**
+                     * 关闭上传附件
+                     */
+                    $scope.getUpload = function(id){
+                        if( id == 1 ){
+                            $('#coverModal1').modal('hide');
+                        }else if( id == 2 ) {
+                            $('#coverModal2').modal('hide');
+                        }else if ( id == 3 ) {
+                            $('#coverModal3').modal('hide');
+                        }
+                        var formFile = new FormData();
+                        if(id == 1){
+                            var fileObj1 = document.querySelector('input[type=file]').files[0];
+                            formFile.append("files", fileObj1); //加入文件对象
+                        }else if (id == 2){
+                            var fileObj2 = document.querySelector('#problemFile').files[0];
+                            formFile.append("files", fileObj2); //加入文件对象
+                        }else if (id == 3){
+                            var fileObj3 = document.querySelector('#oneregion').files[0];
+                            formFile.append("files", fileObj3); //加入文件对象
+                        }
+
+                        $http({
+                                method: 'post',
+                                url: apiPrefix + '/v1/DubanSupervision/upload',
+                                data:formFile,
+                                headers: {'Content-Type': undefined},
+                                transformRequest: angular.identity
+                            }
+                        ).success(function (res) {
+                            if (res.resCode == 1) {
+                                //console.log(res);
+                                if(id == 1){
+                                    $scope.assessory = res.data[0];
+                                }else if(id == 2) {
+                                    $scope.assessory = res.data[0];
+                                }else if (id == 3){
+                                    $scope.assessory = res.data[0];
+                                }
+                            } else {
+                                layer.msg("服务器异常，请稍后再试");
+                            }
+                        }).error(function (res) {
+                            layer.msg('服务器异常，请稍后再试');
+                        });
                     }
 
                     //处理

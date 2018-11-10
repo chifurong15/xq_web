@@ -1,6 +1,6 @@
 {
   "htmlUrl":"http://127.0.0.1:8080/src",
-  "serviceUrl": "http://117.8.229.5:9000",
+  "serviceUrl": "http://10.0.9.105",
   "enabledDebug": true,
   "type": "1",
   "description": "1.htmlUrl表示前端服务地址; 2.serviceUrl表示后台服务URL; 3.enabledDebug为false时,htmlUrl会从数据库中读取,反之,则从ip.json里面读取"

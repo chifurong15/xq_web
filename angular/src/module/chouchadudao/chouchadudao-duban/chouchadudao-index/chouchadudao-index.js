@@ -21,10 +21,11 @@
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
-					var apiPrefix = moduleService.getServiceUrl() + '/duban';
-					//var apiPrefix = 'http://10.0.9.133:8080' + '/duban';
+					//var apiPrefix = moduleService.getServiceUrl() + '/duban';
+					var apiPrefix = 'http://10.0.9.133:7026' + '/duban';
+                    $scope.userInfo = $localStorage.userLoginInfo.userInfo;
 
-					$scope.init = function () {
+                    $scope.init = function () {
                         getList();
                         getStatus ();
                         //$scope.num = 2; //02 市河长办  05 区
@@ -48,7 +49,8 @@
 								pageSize: $scope.paginationConf.itemsPerPage,
 								objectname:$scope.objectname,
 								issuedtime:$scope.searchTime,
-								status:$scope.status
+								status:$scope.status,
+                                objectid: $scope.num == 5 ? $scope.userInfo.id : ''
 							},
 							callBack: function (res) {
 								$scope.moduleList = res.data.list;
@@ -111,8 +113,6 @@
                         $scope.status = '';
                         $scope.objectname = '';
                     }
-
-
 					
 					// 新建
 	                $scope.add = function () {
