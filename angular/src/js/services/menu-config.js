@@ -4,7 +4,7 @@ angular.module('menu.config', [])
 
         this.targetHTML = function (param) {
             var args = param.split('_');
-            console.log(args)
+            //console.log(args)
             if (args.length >= 3 && args[2].length != 10) {
                 if ($localStorage.platformRouterConfig) {
                     $localStorage.platformRouterConfig['moduleId'] = args[0];

@@ -18,7 +18,7 @@ angular.module('app')
             if (!menus) {
                 return;
             }
-            console.log(menus)
+            //console.log(menus)
             var root = findRoot(menus);
             loadMenuTree(root, menus);
             return root;
@@ -73,7 +73,6 @@ angular.module('app')
                     //window.location.href = "#/access/signin";
                     return;
                 }
-                console.log($)
                 $.ajax({
                     type: "Get",
                     url: (_this.getServiceUrl().lastIndexOf('uip') >= 0 ? _this.getServiceUrl() : (_this.getServiceUrl() + '/uip')) + "/smAuthority/queryUserAuthorizedMenuTree?userId=" + $localStorage.userLoginInfo.userInfo.id,
@@ -81,7 +80,7 @@ angular.module('app')
                 }).done(function (data) {
                     _this.menus = data.data;
                 }).error(function (errordata) {
-                    console.log(errordata);
+                    //console.log(errordata);
                 });
             },
             getIpConfig: function () {

@@ -103,7 +103,7 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
             if ($rootScope.appConfig && $rootScope.appConfig.children) {
                 $scope.userMenus = $rootScope.appConfig.children;
                 //$scope.$apply();
-                console.info($scope.userMenus);
+                //console.info($scope.userMenus);
             }
         }
 
