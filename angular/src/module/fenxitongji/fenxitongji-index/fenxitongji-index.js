@@ -419,7 +419,7 @@
 	                function chartContainer () {
 	                    var chartWidth = $('.tab-content').width();
 	                    var chartHeight = $(window).height() - 240;
-	                    console.log($('.tj-chart-con'))
+	                    //console.log($('.tj-chart-con'))
 	                    $('.tj-chart-con').css({
 	                    	width: chartWidth,
 	                    	height: chartHeight
