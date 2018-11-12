@@ -27,20 +27,20 @@
 					
 					$scope.init = function () {
 
-                        $scope.num = "2";
-                        getList();
+                        // $scope.num = "2";
+                        // getList();
 
-                        // $ajaxhttp.myhttp({
-							// url: apiPrefix + '/v1/assessment/userinfo1',
-							// method: 'get',
-							// params:{
-							// 	id: $scope.userInfo.id
-							// },
-							// callBack: function (res) {
-							// 	$scope.num = res.data;
-							// 	getList();
-							// }
-                        // })
+                        $ajaxhttp.myhttp({
+							url: apiPrefix + '/v1/assessment/userinfo1',
+							method: 'get',
+							params:{
+								id: $scope.userInfo.id
+							},
+							callBack: function (res) {
+								$scope.num = res.data;
+								getList();
+							}
+                        })
 					}					
 					
 					

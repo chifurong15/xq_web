@@ -21,26 +21,26 @@
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
-					//var apiPrefix = moduleService.getServiceUrl() + '/assessment';
+					var apiPrefix = moduleService.getServiceUrl() + '/assessment';
                     //var apiPrefix = 'http://10.0.9.116:7003' + '/assessment';
 
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
 					
 					$scope.init = function () {
-						$scope.num = "2";
-                        		getList();
+                        // $scope.num = "2";
+                        // getList();
 
-                        // $ajaxhttp.myhttp({
-						// 	url: apiPrefix + '/v1/assessment/userinfo1',
-						// 	method: 'get',
-						// 	params:{
-						// 		id: $scope.userInfo.id
-						// 	},
-						// 	callBack: function (res) {
-						// 		$scope.num = res.data;
-						// 		getList();
-						// 	}
-						// })
+                        $ajaxhttp.myhttp({
+							url: apiPrefix + '/v1/assessment/userinfo1',
+							method: 'get',
+							params:{
+								id: $scope.userInfo.id
+							},
+							callBack: function (res) {
+								$scope.num = res.data;
+								getList();
+							}
+						})
 					}	
 					
 					// 获取数据列表
