@@ -33,7 +33,7 @@
 	height: 350px;
 }
 .remarkInfo {
-    display: flex;
+    /*display: flex;*/
 }
 .remarkInfo .textareaH{
 	min-width: 440px;

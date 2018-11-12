@@ -23,8 +23,8 @@
 			'moduleService',
             function superviseReportAddMgtCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http, $ajaxhttp, moduleService) {
 
-        	    // var apiPrefix = moduleService.getServiceUrl() + '/supervise';
-                var apiPrefix = 'http://10.0.9.116:7023' + '/supervise';
+        	    var apiPrefix = moduleService.getServiceUrl() + '/supervise';
+                //var apiPrefix = 'http://10.0.9.116:7023' + '/supervise';
 
 				/**
 				 * ==============================================
@@ -176,6 +176,14 @@
 			        $scope.beginTime = result;
 			        $scope.$apply();
     			});
+                var datepicker1 = $('#overtime').datetimepicker({
+                    format: 'YYYY-MM-DD hh:mm',
+                    locale: moment.locale('zh-cn')
+                }).on('dp.change', function (e) {
+                    var result = new moment(e.date).format('YYYY-MM-DD hh:mm');
+                    $scope.overtime = result;
+                    $scope.$apply();
+                });
 				
 				/**
 				 * 处理状态
@@ -290,7 +298,10 @@
 							reportEvaluate:$scope.assess,
                         	problemAttant:$scope.problemAttant,
                         	proposedTreatment:$scope.proposedTreatment,
-                            processingResults: $scope.processingResults
+                            processingResults: $scope.processingResults,
+                        	reportSource: $scope.source,
+							overTime: $scope.overtime
+
 					}
                     $ajaxhttp.myhttp({
                         url: apiPrefix + '/v1/socialReport/addReport',
@@ -319,6 +330,8 @@
                     $scope.problemAttant = '';
                     $scope.proposedTreatment = '';
                     $scope.processingResults = '';
+                    $scope.source = '';
+                    $scope.overtime = '';
                 }
 				
 				

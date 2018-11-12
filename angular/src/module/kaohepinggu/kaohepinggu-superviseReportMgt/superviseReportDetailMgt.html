@@ -38,6 +38,10 @@
 							<label>问题位置：</label>
 							<span ng-bind="reportList.problemPosition"></span>
 						</div>
+						<div class="form-item">
+							<label>限制日期：</label>
+							<span ng-bind="reportList.overTime"></span>
+						</div>
 						<br />	
 						<div class="form-item">
 							<label>问题附件：</label>
@@ -61,6 +65,10 @@
 						<div class="form-item">
 							<label>举报人评价：</label>
 							<span>{{reportList.reportEvaluate == 1 ? '满意' : '不满意'}}</span>
+						</div>
+						<div class="form-item">
+							<label>举报来源：</label>
+							<span ng-bind="reportList.reportSource"></span>
 						</div>
 					</div>
 				</div>
