@@ -22,7 +22,9 @@
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
 					var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
-					$scope.getServiceUrl= moduleService.getServiceUrl();	
+                    //var apiPrefix = 'http://10.0.9.133:8080' + '/bulletin';
+
+                    $scope.getServiceUrl= moduleService.getServiceUrl();
 					$scope.init = function () {
 						var bulletin = globalParam.getter().bulletin || {};
 						if (!!getQueryString('id')) {
@@ -39,8 +41,8 @@
 					//返回
 					$scope.goBack=function(){
 						history.back(-1);
-					}	
-					
+					}
+
 					//附件预览
 					$scope.lookLine = function () {
 						//$('#myModal').modal('show');
@@ -68,9 +70,9 @@
 								id: id
 							},
 							callBack: function (res) {
-								var attandNamePart = res.data.attandUrl.split('_');
+								//var attandNamePart = res.data.attandUrl.split('_');
 								$scope.bulletin = res.data;
-								$scope.attandName = attandNamePart.splice(1, attandNamePart.length - 1).join('');
+								//$scope.attandName = attandNamePart.splice(1, attandNamePart.length - 1).join('');
 							}
 						})
 					}

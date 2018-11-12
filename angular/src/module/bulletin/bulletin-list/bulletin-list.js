@@ -22,7 +22,8 @@
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
 					var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
-							
+					//var apiPrefix = 'http://10.0.9.133:8080' + '/bulletin';
+
 					$scope.init = function () {
 						getList();
 					}
@@ -34,8 +35,7 @@
 							params: {
 								pageNumber: $scope.paginationConf.currentPage,
 								pageSize: $scope.paginationConf.itemsPerPage,
-								year: $scope.searchTime && new moment($scope.searchTime).format('YYYY'),
-								month: $scope.searchTime && new moment($scope.searchTime).format('M'),
+                                post_time: $scope.searchTime,
 								type: $scope.type
 							},
 							callBack: function (res) {
@@ -62,6 +62,13 @@
 	                $scope.search = function () {
 	                    getList();
 	                };
+
+					//重置搜索条件
+					$scope.reset = function () {
+						$scope.searchTime = '';
+                        $scope.type = '';
+					}
+
 	                // 新建
 	                $scope.add = function () {
 						globalParam.setter({

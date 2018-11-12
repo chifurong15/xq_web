@@ -22,7 +22,8 @@
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
 					var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
-					
+					//var apiPrefix = 'http://10.0.9.133:8080' + '/bulletin';
+
 					$scope.init = function () {
 						var bulletin = globalParam.getter().bulletin || {};
 						console.log(bulletin);
@@ -47,15 +48,14 @@
 					
 					// 还原编辑数据
 					function setData (data) {
-						var attandNamePart = data.attandUrl.split('_');
+						//var attandNamePart = data.attandUrl.split('_');
 						$scope.id = data.id;
 						$scope.title = data.title;
 						$scope.issuer = data.issuer;
-						$scope.postTime = data.postTime;
-						$scope.month = data.year + '-' + data.month;
-						$scope.attandUrl = data.attandUrl;
+						$scope.postTime = data.post_time;
+						$scope.attandUrl = data.attand_url;
 						$scope.type = data.type;
-						$scope.attandName = attandNamePart.splice(1, attandNamePart.length - 1).join('');
+						//$scope.attandName = attandNamePart.splice(1, attandNamePart.length - 1).join('');
 						CKEDITOR.instances.editor.setData(data.detail || ' ');
 						
 					}
@@ -85,12 +85,6 @@
                             });
 						} else if (!$scope.postTime) {
                             layer.alert("请选择上传日期", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-						} else if (!$scope.month) {
-                            layer.alert("请选择月份", {
                                 skin: 'my-skin',
                                 closeBtn: 1,
                                 anim: 3
@@ -126,11 +120,8 @@
 								data: {
 									title: $scope.title,
 									issuer: $scope.issuer,
-									postTime: $scope.postTime,
-									year: new moment($scope.month).format('YYYY'),
-									month: new moment($scope.month).format('MM'),
-//									attandUrl: $scope.attandUrl && $scope.attandUrl.slice(0, $scope.attandUrl.length - 1),
-									attandUrl: $scope.attandUrl,
+                                    post_time: $scope.postTime,
+                                    attand_url: $scope.attandUrl,
 									detail: data,
 									type: $scope.type
 								}
@@ -138,6 +129,7 @@
 							    if (res.resCode === 1) {
                                     layer.msg('新建成功', {time:2000});
                                     clear();//创建成功后清空
+                                    routeService.route('1', true);
                                 } else {
                                     layer.msg(res.resMsg, {time:2000});
                                     clear();
@@ -161,17 +153,15 @@
 									id: $scope.id,
 									title: $scope.title,
 									issuer: $scope.issuer,
-									postTime: $scope.postTime,
-									year: new moment($scope.month).format('YYYY'),
-									month: new moment($scope.month).format('MM'),
-//									attandUrl: $scope.attandUrl.slice(0, $scope.attandUrl.length - 1),
-									attandUrl: $scope.attandUrl,
+									post_time: $scope.postTime,
+                                    attand_url: $scope.attandUrl,
 									detail: data,
 									type: $scope.type
 								}
 							}).success( function(res) {
 							    if (res.resCode === 1) {
                                     layer.msg('操作成功', {time:2000});
+                                    routeService.route('1', true);
                                 }else {
                                     layer.msg(res.resMsg, {time:2000});
                                 }
@@ -186,32 +176,15 @@
 	                    $scope.postTime = new moment(c.date).format('YYYY-MM-DD');
 	                    $scope.$apply();
 	                });
-					
-//					$('#J-year').datetimepicker({
-//	                    format: 'YYYY',
-//	                    locale: moment.locale('zh-cn')
-//	                }).on('dp.change', function (c) {
-//	                    $scope.year = new moment(c.date).format('YYYY');
-//	                    $scope.$apply();
-//	                });
-					
-					$('#J-month').datetimepicker({
-	                    format: 'YYYY-MM',
-	                    locale: moment.locale('zh-cn')
-	                }).on('dp.change', function (c) {
-	                    $scope.month = new moment(c.date).format('YYYY-MM');
-	                    $scope.$apply();
-	                });
+
 					// 上传文件
 					$scope.uploadFile = function (e) {
 						
 						for (var i = 0; i < e.files.length; i++) {
 	            			var form = new FormData();
 							var file = e.files[i];
-//							if (!$scope.attandName) $scope.attandName = '';
-//							$scope.attandName += file.name + ';';
 							$scope.attandName = file.name;
-				            form.append('file', file);
+				            form.append('files', file);
 				            form.append('fileName', file.name);
 				            $http({
 				                method: 'POST',
@@ -220,9 +193,7 @@
 				                headers: {'Content-Type': undefined},
 				                transformRequest: angular.identity
 				            }).success(function (res) {
-//								if (!$scope.attandUrl) $scope.attandUrl = '';
-//			                	$scope.attandUrl += res.data.url + ';';
-			                	$scope.attandUrl = res.data.virtualPath;
+			                	$scope.attandUrl = res.data[0];
 				            }).error(function (data) {
 				                 console.log('upload fail');
 				            })
