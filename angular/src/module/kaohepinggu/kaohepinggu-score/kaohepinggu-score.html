@@ -1,169 +1,211 @@
 <div class="anchaanfang" ng-controller="scoreListCtrl" ng-init="init()">
     <div class="wrapper-md ">
-    	<div class="panel panel-default m-n">
-        	<div class="panel-body" style="position: relative;">
-        		<span class="tag">考核评分类型管理</span><span class="tag-right"></span>
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">考核评分类型管理</span><span class="tag-right"></span>
 
-        	</div>
+            </div>
         </div>
-    	<div class="panel panel-default">
-        	<div class="panel-body">  
-        		
-        		<div class="table-bar">
-        			<form class="form-inline clearfix">
-	                    <div class="input-group fr" ng-if="num == 2">
-		                    <button type="button" class="btn btn-primary" ng-click="showModal(1)">
-		                        <i class="fa fa-plus"></i> 新增考核评分
-		                    </button>
-	                    </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <div class="table-bar">
+                    <form class="form-inline clearfix">
+                        <div class="input-group fr" ng-if="num == 2">
+                            <button type="button" class="btn btn-primary" ng-click="showModal(1)">
+                                <i class="fa fa-plus"></i> 新增考核评分
+                            </button>
+                        </div>
                     </form>
                 </div>
-        		
-        		<ul class="scoreTitle">
-        			<li style="width: 20%;border-left: 0;">评分类型</li>
-        			<li style="width: 20%;">权重</li>
-        			<li style="width: 20%;">总分</li>
-        			<li style="width: 20%;">排序</li>
-        			<li style="width: 20%;">操作</li>
-        		</ul>
-        		<ul class="scoreOne">
-        			<li ng-repeat="item in scoreList">
+
+                <ul class="scoreTitle">
+                    <li style="width: 20%;border-left: 0;">评分类型</li>
+                    <li style="width: 20%;">权重</li>
+                    <li style="width: 20%;">总分</li>
+                    <li style="width: 20%;">排序</li>
+                    <li style="width: 20%;">操作</li>
+                </ul>
+                <ul class="scoreOne">
+                    <li ng-repeat="item in scoreList">
         				<span style="text-indent: 0px;">
-        					<i class="fa fa-sort-desc" aria-hidden="true" ng-if="item.gradetype && item.children.length != 0"></i>
-        					<i class="fa fa-sort-desc" aria-hidden="true" ng-if="item.gradetype && item.children.length == 0" style="color: #fff;"></i>
+        					<i class="fa fa-sort-desc" aria-hidden="true"
+                               ng-if="item.gradetype && item.children.length != 0"></i>
+        					<i class="fa fa-sort-desc" aria-hidden="true"
+                               ng-if="item.gradetype && item.children.length == 0" style="color: #fff;"></i>
         					{{item.gradetype}}
         				</span>
                         <span>{{item.weight}}</span>
-                        <span>{{item.totalpoints}}</span>	                                    
+                        <span>{{item.totalpoints}}</span>
                         <span>{{item.sort}}</span>
-        				<span style="display: inline-block;padding: 3px 0;border-right: 1px solid #ccc;">
+                        <span style="display: inline-block;padding: 3px 0;border-right: 1px solid #ccc;">
         					<button type="button" class="btn btn-success" ng-click="showModal(1,item)" ng-if="num == 2">增加子项目</button>
 	                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,item)" ng-if="num == 2">修改</button>
-	                        <button type="button" class="btn btn-danger" ng-click="delete(item.id)" ng-if="num == 2 && item.children.length == 0">删除</button>
+	                        <button type="button" class="btn btn-danger" ng-click="delete(item.id)"
+                                    ng-if="num == 2 && item.children.length == 0">删除</button>
         					<span ng-if="num !=2 ">暂无</span>
         				</span>
-        				<ul class="scoreTwo">
-        					<li ng-repeat="items in item.children" >
+                        <ul class="scoreTwo">
+                            <li ng-repeat="items in item.children">
         						<span style="text-indent:10px;">
-        							<i class="fa fa-sort-desc" aria-hidden="true" ng-if="items.gradetype && items.children.length != 0"></i>
-        							<i class="fa fa-sort-desc" aria-hidden="true" ng-if="items.gradetype && items.children.length == 0" style="color: #fff;"></i>
+        							<i class="fa fa-sort-desc" aria-hidden="true"
+                                       ng-if="items.gradetype && items.children.length != 0"></i>
+        							<i class="fa fa-sort-desc" aria-hidden="true"
+                                       ng-if="items.gradetype && items.children.length == 0" style="color: #fff;"></i>
         							{{items.gradetype}}
         						</span>
-		                        <span>{{items.weight}}</span>
-		                        <span>{{items.totalpoints}}</span>	                                    
-		                        <span>{{items.sort}}</span>
-		        				<span style="display: inline-block;padding: 3px 0;border-right: 1px solid #ccc;">
-		        					<button type="button" class="btn btn-success" ng-click="showModal(1,items)" ng-if="num == 2">增加子项目</button>
-			                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,items)" ng-if="num == 2">修改</button>
-			                    	<button type="button" class="btn btn-danger" ng-click="delete(items.id)" ng-if="num == 2 && items.children.length == 0">删除</button>
+                                <span>{{items.weight}}</span>
+                                <span>{{items.totalpoints}}</span>
+                                <span>{{items.sort}}</span>
+                                <span style="display: inline-block;padding: 3px 0;border-right: 1px solid #ccc;">
+		        					<button type="button" class="btn btn-success" ng-click="showModal(1,items)"
+                                            ng-if="num == 2">增加子项目</button>
+			                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,items)"
+                                            ng-if="num == 2">修改</button>
+			                    	<button type="button" class="btn btn-danger" ng-click="delete(items.id)"
+                                            ng-if="num == 2 && items.children.length == 0">删除</button>
 		        					<span ng-if="num !=2 ">暂无</span>
 		        				</span>
-		        				<ul class="scoreThree">
-		        					<li ng-repeat="itemss in items.children" ng-if="items.children">
+                                <ul class="scoreThree">
+                                    <li ng-repeat="itemss in items.children" ng-if="items.children">
 		        						<span style="text-indent: 20px;">
-		        							<i class="fa fa-sort-desc" aria-hidden="true" ng-if="itemss.gradetype && itemss.children.length != 0"></i>
-		        							<i class="fa fa-sort-desc" aria-hidden="true" ng-if="itemss.gradetype && itemss.children.length == 0" style="#fff"></i>
+		        							<i class="fa fa-sort-desc" aria-hidden="true"
+                                               ng-if="itemss.gradetype && itemss.children.length != 0"></i>
+		        							<i class="fa fa-sort-desc" aria-hidden="true"
+                                               ng-if="itemss.gradetype && itemss.children.length == 0" style="color: #fff;"></i>
 		        							{{itemss.gradetype}}
 		        						</span>
-				                        <span>{{itemss.weight}}</span>
-				                        <span>{{itemss.totalpoints}}</span>	                                    
-				                        <span>{{itemss.sort}}</span>
-				        				<span style="display: inline-block;padding: 3px 0;border-right: 1px solid #ccc;">
-				        					<button type="button" class="btn btn-success" ng-click="showModal(1,itemss)" ng-if="num == 2">增加子项目</button>
-					                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,itemss)" ng-if="num == 2">修改</button>
-					                    	<button type="button" class="btn btn-danger" ng-click="delete(itemss.id)" ng-if="num == 2 && itemss.children.length == 0">删除</button>
+                                        <span>{{itemss.weight}}</span>
+                                        <span>{{itemss.totalpoints}}</span>
+                                        <span>{{itemss.sort}}</span>
+                                        <span style="display: inline-block;padding: 3px 0;border-right: 1px solid #ccc;">
+				        					<button type="button" class="btn btn-success" ng-click="showModal(1,itemss)"
+                                                    ng-if="num == 2">增加子项目</button>
+					                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,itemss)"
+                                                    ng-if="num == 2">修改</button>
+					                    	<button type="button" class="btn btn-danger" ng-click="delete(itemss.id)"
+                                                    ng-if="num == 2 && itemss.children.length == 0">删除</button>
 				        					<span ng-if="num !=2 ">暂无</span>
 				        				</span>
-				        				<ul class="scoreFour">
-			        						<li ng-repeat="item4 in itemss.children" ng-if="itemss.children">
+                                        <ul class="scoreFour">
+                                            <li ng-repeat="item4 in itemss.children" ng-if="itemss.children">
 			        							<span style="text-indent:35px;">
-			        								<i class="fa fa-sort-desc" aria-hidden="true" ng-if="item4.gradetype && item4.children.length != 0"></i>
-			        								<i class="fa fa-sort-desc" aria-hidden="true" ng-if="item4.gradetype && item4.children.length == 0" style="color: #fff;"></i>
+			        								<i class="fa fa-sort-desc" aria-hidden="true"
+                                                       ng-if="item4.gradetype && item4.children.length != 0"></i>
+			        								<i class="fa fa-sort-desc" aria-hidden="true"
+                                                       ng-if="item4.gradetype && item4.children.length == 0"
+                                                       style="color: #fff;"></i>
 			        								{{item4.gradetype}}
 			        							</span>
-						                        <span>{{item4.weight}}</span>
-						                        <span>{{item4.totalpoints}}</span>	                                    
-						                        <span>{{item4.sort}}</span>
-						        				<span style="display: inline-block;padding: 3px 0;border-right: 1px solid #ccc;">
-						        					<button type="button" class="btn btn-success" ng-click="showModal(1,item4)" ng-if="num == 2">增加子项目</button>
-							                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,item4)" ng-if="num == 2">修改</button>
-							                    	<button type="button" class="btn btn-danger" ng-click="delete(item4.id)" ng-if="num == 2 && item4.children.length == 0">删除</button>
+                                                <span>{{item4.weight}}</span>
+                                                <span>{{item4.totalpoints}}</span>
+                                                <span>{{item4.sort}}</span>
+                                                <span style="display: inline-block;padding: 3px 0;border-right: 1px solid #ccc;">
+						        					<button type="button" class="btn btn-success"
+                                                            ng-click="showModal(1,item4)"
+                                                            ng-if="num == 2">增加子项目</button>
+							                    	<button type="button" class="btn btn-warning"
+                                                            ng-click="showModal(2,item4)" ng-if="num == 2">修改</button>
+							                    	<button type="button" class="btn btn-danger"
+                                                            ng-click="delete(item4.id)"
+                                                            ng-if="num == 2 && item4.children.length == 0">删除</button>
 						        					<span ng-if="num !=2 ">暂无</span>
 						        				</span>
-						        				<ul class="scoreFour">
-					        						<li ng-repeat="item5 in item4.children" ng-if="item4.children">
+                                                <ul class="scoreFour">
+                                                    <li ng-repeat="item5 in item4.children" ng-if="item4.children">
 					        							<span style="text-indent:55px;">
-					        								<i class="fa fa-sort-desc" aria-hidden="true" ng-if="item5.gradetype && item5.children.length != 0"></i>
-					        								<i class="fa fa-sort-desc" aria-hidden="true" ng-if="item5.gradetype && item5.children.length == 0" style="color: #fff;"></i>
+					        								<i class="fa fa-sort-desc" aria-hidden="true"
+                                                               ng-if="item5.gradetype && item5.children.length != 0"></i>
+					        								<i class="fa fa-sort-desc" aria-hidden="true"
+                                                               ng-if="item5.gradetype && item5.children.length == 0"
+                                                               style="color: #fff;"></i>
 					        								{{item5.gradetype}}
 					        							</span>
-								                        <span>{{item5.weight}}</span>
-								                        <span>{{item5.totalpoints}}</span>	                                    
-								                        <span>{{item5.sort}}</span>
-								        				<span style="display: inline-block;padding: 3px 0;border-right: 1px solid #ccc;">
-								        					<button type="button" class="btn btn-success" ng-click="showModal(1,item5)" ng-if="num == 2">增加子项目</button>
-									                    	<button type="button" class="btn btn-warning" ng-click="showModal(2,item5)" ng-if="num == 2">修改</button>
-									                    	<button type="button" class="btn btn-danger" ng-click="delete(item5.id)" ng-if="num == 2 && item5.children.length == 0">删除</button>
+                                                        <span>{{item5.weight}}</span>
+                                                        <span>{{item5.totalpoints}}</span>
+                                                        <span>{{item5.sort}}</span>
+                                                        <span style="display: inline-block;padding: 3px 0;border-right: 1px solid #ccc;">
+								        					<button type="button" class="btn btn-success"
+                                                                    ng-click="showModal(1,item5)"
+                                                                    ng-if="num == 2">增加子项目</button>
+									                    	<button type="button" class="btn btn-warning"
+                                                                    ng-click="showModal(2,item5)"
+                                                                    ng-if="num == 2">修改</button>
+									                    	<button type="button" class="btn btn-danger"
+                                                                    ng-click="delete(item5.id)"
+                                                                    ng-if="num == 2 && item5.children.length == 0">删除</button>
 								        					<span ng-if="num !=2 ">暂无</span>
 								        				</span>
-					        						</li>
-					        					</ul>
-			        						</li>
-			        					</ul>
-		        					</li>	        					
-		        					
-		        				</ul>
-        					</li>        					
-        				</ul>
-        			</li>        			
-        		</ul>
-                
-        	</div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
         </div>
-    	
+
     </div>
 
-<!-- 模态框（Modal） -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content" style="width: 450px;position: absolute;left: 50%;margin-left: -230px">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						{{type == 1 ? "修改" : "新增"}}考核评分类型
-					</h4>
-				</div>
-				<div class="modal-body" style="text-align: center;">
-					<form class="form-inline">						
-						<div class="form-item">
-	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">评分类型</font></font></label>
-	                        <input type="text"  class="form-control input-short" ng-model="gradetype">
-	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
-	                    </div>
-	                    <div class="form-item">
-	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">权重</font></font></label>
-	                        <input name="number" min="0" max="100"  step="1" class="form-control input-short" ng-model="weight">
-	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
-	                    </div>
-	                    <div class="form-item">
-	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">总分</font></font></label>
-	                        <input name="number" min="0" max="100"  step="1" class="form-control input-short" ng-model="totalpoints">
-	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
-	                    </div>
-	                    <div class="form-item">
-	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">排序</font></font></label>
-	                        <input name="number" min="0" max="100"  step="1" class="form-control input-short" ng-model="sort">
-	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
-	                    </div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" ng-click="save()">保存</button>
-		            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
-				</div>
-			</div>
-		</div>
-	</div>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: 450px;position: absolute;left: 50%;margin-left: -230px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        {{type == 1 ? "修改" : "新增"}}考核评分类型
+                    </h4>
+                </div>
+                <div class="modal-body" style="text-align: center;">
+                    <form class="form-inline">
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">评分类型</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="gradetype">
+                            <span class="required"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">*</font></font></span>
+                        </div>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">权重</font></font></label>
+                            <input name="number" min="0" max="100" step="0.01" class="form-control input-short"
+                                   ng-model="weight">
+                            <span class="required"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">*</font></font></span>
+                        </div>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">总分</font></font></label>
+                            <input name="number" min="0" max="100" step="1" class="form-control input-short"
+                                   ng-model="totalpoints">
+                            <span class="required"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">*</font></font></span>
+                        </div>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">排序</font></font></label>
+                            <input name="number" min="0" max="100" step="1" class="form-control input-short"
+                                   ng-model="sort">
+                            <span class="required"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">*</font></font></span>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="save()">保存</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

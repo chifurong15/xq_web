@@ -1,173 +1,210 @@
 <div class="anchaanfang" ng-controller="rulesListCtrl" ng-init="init()">
     <div class="wrapper-md ">
-    	<div class="panel panel-default m-n">
-        	<div class="panel-body" style="position: relative;">
-        		<span class="tag">违规细则管理</span><span class="tag-right"></span>
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">违规细则管理</span><span class="tag-right"></span>
 
-        	</div>
+            </div>
         </div>
-    	<div class="panel panel-default">
-        	<div class="panel-body">
-        		<div class="table-bar">
-        			<form class="form-inline clearfix">
-	                    <div class="input-group fr" ng-if="num == 2">
-		                    <button type="button" class="btn btn-primary" ng-click="showModal(1)">
-		                        <i class="fa fa-plus"></i> 新增评分规则
-		                    </button>
-	                    </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-bar">
+                    <form class="form-inline clearfix">
+                        <div class="input-group fr" ng-if="num == 2">
+                            <button type="button" class="btn btn-primary" ng-click="showModal(1)">
+                                <i class="fa fa-plus"></i> 新增评分规则
+                            </button>
+                        </div>
                     </form>
                 </div>
-                
+
                 <ul class="scoreTitle">
-        			<li style="width: 10%;border-left: 0;">评分规则</li>
-        			<li style="width: 10%;">评分类型</li>
-        			<li style="width: 20%;">评分细则</li>
-        			<li style="width: 15%;">评分方式</li>
-        			<li style="width: 15%;">扣分</li>
-        			<li style="width: 15%;">处理时限</li>
-        			<li style="width: 15%;">操作</li>
-        		</ul>
-                
+                    <li style="width: 10%;border-left: 0;">评分规则</li>
+                    <li style="width: 10%;">评分类型</li>
+                    <li style="width: 20%;">评分细则</li>
+                    <li style="width: 15%;">评分方式</li>
+                    <li style="width: 15%;">扣分</li>
+                    <li style="width: 15%;">处理时限</li>
+                    <li style="width: 15%;">操作</li>
+                </ul>
+
                 <ul class="scoreOne">
-        			<li ng-repeat="item in rulesList">
-        				<span style="width: 10%;padding: 10px 0;"><i class="fa fa-sort-desc" aria-hidden="true" ng-if="item.gradeillegal && item.childList.length != 0"></i>{{item.gradeillegal}}</span>
+                    <li ng-repeat="item in rulesList">
+                        <span style="width: 10%;padding: 10px 0;"><i class="fa fa-sort-desc" aria-hidden="true"
+                                                                     ng-if="item.gradeillegal && item.childList.length != 0"></i>{{item.gradeillegal}}</span>
                         <span style="width: 10%;padding: 10px 0;">{{item.gradetype}}</span>
-                        <span style="width: 20%;padding: 10px 0;">{{item.gradedetailed}}</span>	                                    
+                        <span style="width: 20%;padding: 10px 0;">{{item.gradedetailed}}</span>
                         <span style="width: 15%;padding: 10px 0;">{{item.gradeway}}</span>
                         <span style="width: 15%;padding: 10px 0;">{{item.deductMarks}}</span>
                         <span style="width: 15%;padding: 10px 0;">{{item.processLimitted}}</span>
-        				<span style="display: inline-block;width: 15%;padding: 3px;border-right: 1px solid #ccc;">
-        					<button type="button" class="btn btn-success" ng-click="showModal(3,item)" ng-if="num == 2 && item.level == 2">新增违规细则</button>
-	                        <button type="button" class="btn btn-success" ng-click="showModal(2, item.id)" ng-if="num == 2 && item.level == 1">新增评分类型</button> 
-	                        <button type="button" class="btn btn-warning" ng-click="showModal(4,item.id,item)" ng-if="num == 2 && item.level == 3">修改</button>                        	
-	                      	<button type="button" class="btn btn-danger" ng-click="delete(item.id)" ng-if="num == 2 && item.level == 3">删除</button>
+                        <span style="display: inline-block;width: 15%;padding: 3px;border-right: 1px solid #ccc;">
+        					<button type="button" class="btn btn-success" ng-click="showModal(3,item)"
+                                    ng-if="num == 2 && item.level == 2">新增违规细则</button>
+	                        <button type="button" class="btn btn-success" ng-click="showModal(2, item.id)"
+                                    ng-if="num == 2 && item.level == 1">新增评分类型</button>
+	                        <button type="button" class="btn btn-warning" ng-click="showModal(4,item.id,item)"
+                                    ng-if="num == 2 && item.level == 3">修改</button>
+	                      	<button type="button" class="btn btn-danger" ng-click="delete(item.id)"
+                                    ng-if="num == 2 && item.level == 3">删除</button>
 	                      	<span ng-if="num !=2 ">暂无</span>
         				</span>
-        				<ul class="scoreTwo">
-        					<li ng-repeat="items in item.childList" >
-        						<span style="width: 10%;position: relative;"><i class="fa fa-sort-desc" aria-hidden="true" ng-if="items.childList.length != 0" style="margin-left: 50px;"></i>{{items.gradeillegal}}</span>
-		                        <span style="width: 10%;">{{items.gradetype}}</span>
-		                        <span style="width: 20%;">{{items.gradedetailed}}</span>	                                    
-		                        <span style="width: 15%;">{{items.gradeway}}</span>
-		                        <span style="width: 15%;">{{items.deductMarks}}</span>
-		                        <span style="width: 15%;">{{items.processLimitted}}</span>
-		        				<span style="display: inline-block;width: 15%;padding: 3px;border-right: 1px solid #ccc;">		        				
-		        					<button type="button" class="btn btn-success" ng-click="showModal(3,item.id ,item)" ng-if="num == 2 && items.level == 2">新增违规细则</button>
-			                        <button type="button" class="btn btn-success" ng-click="showModal(2 ,item.id)" ng-if="num == 2 && items.level == 1">新增评分类型</button> 
-			                        <button type="button" class="btn btn-warning" ng-click="showModal(4 ,item.id ,item)" ng-if="num == 2 && items.level == 3">修改</button>                        	
-			                      	<button type="button" class="btn btn-danger" ng-click="delete(items.id)" ng-if="num == 2 && items.level == 3">删除</button>
+                        <ul class="scoreTwo">
+                            <li ng-repeat="items in item.childList">
+                                <span style="width: 10%;position: relative;"><i class="fa fa-sort-desc"
+                                                                                aria-hidden="true"
+                                                                                ng-if="items.childList.length != 0"
+                                                                                style="margin-left: 50px;"></i>{{items.gradeillegal}}</span>
+                                <span style="width: 10%;">{{items.gradetype}}</span>
+                                <span style="width: 20%;">{{items.gradedetailed}}</span>
+                                <span style="width: 15%;">{{items.gradeway}}</span>
+                                <span style="width: 15%;">{{items.deductMarks}}</span>
+                                <span style="width: 15%;">{{items.processLimitted}}</span>
+                                <span style="display: inline-block;width: 15%;padding: 3px;border-right: 1px solid #ccc;">
+		        					<button type="button" class="btn btn-success" ng-click="showModal(3,items.id ,item)"
+                                            ng-if="num == 2 && items.level == 2">新增违规细则</button>
+			                        <button type="button" class="btn btn-success" ng-click="showModal(2 ,item.id)"
+                                            ng-if="num == 2 && items.level == 1">新增评分类型</button>
+			                        <button type="button" class="btn btn-warning" ng-click="showModal(4 ,item.id ,item)"
+                                            ng-if="num == 2 && items.level == 3">修改</button>
+			                      	<button type="button" class="btn btn-danger" ng-click="delete(items.id)"
+                                            ng-if="num == 2 && items.level == 3">删除</button>
 	                      			<span ng-if="num !=2 ">暂无</span>		        					
 		        				</span>
-		        				<ul class="scoreThree">
-		        					<li ng-repeat="itemss in items.childList" ng-if="items.childList">
-		        						<span style="width: 10%;position: relative;">{{itemss.gradeillegal}}</span>
-				                        <span style="width: 10%;">{{itemss.gradetype}}</span>
-				                        <span style="width: 20%;">{{itemss.gradedetailed}}</span>	                                    
-				                        <span style="width: 15%;">{{itemss.gradeway}}</span>
-				                        <span style="width: 15%;">{{itemss.deductMarks}}</span>
-				                        <span style="width: 15%;">{{itemss.processLimitted}}</span>
-				        				<span style="display: inline-block;width: 15%;padding: 3px;border-right: 1px solid #ccc;">
-				        					<button type="button" class="btn btn-success" ng-click="showModal(3,item.id ,item)" ng-if="num == 2 &&  itemss.level == 2">新增违规细则</button>
-					                        <button type="button" class="btn btn-success" ng-click="showModal(2,item.id)" ng-if="num == 2 && itemss.level == 1">新增评分类型</button> 
-					                        <button type="button" class="btn btn-warning" ng-click="showModal(4,item.id,item)" ng-if="num == 2 && itemss.level == 3">修改</button>                        	
-					                      	<button type="button" class="btn btn-danger" ng-click="delete(itemss.id)" ng-if="num == 2 && itemss.level == 3">删除</button>
+                                <ul class="scoreThree">
+                                    <li ng-repeat="itemss in items.childList" ng-if="items.childList">
+                                        <span style="width: 10%;position: relative;">{{itemss.gradeillegal}}</span>
+                                        <span style="width: 10%;">{{itemss.gradetype}}</span>
+                                        <span style="width: 20%;">{{itemss.gradedetailed}}</span>
+                                        <span style="width: 15%;">{{itemss.gradeway}}</span>
+                                        <span style="width: 15%;">{{itemss.deductMarks}}</span>
+                                        <span style="width: 15%;">{{itemss.processLimitted}}</span>
+                                        <span style="display: inline-block;width: 15%;padding: 3px;border-right: 1px solid #ccc;">
+				        					<button type="button" class="btn btn-success"
+                                                    ng-click="showModal(3,itemss.id ,item)"
+                                                    ng-if="num == 2 &&  itemss.level == 2">新增违规细则</button>
+					                        <button type="button" class="btn btn-success"
+                                                    ng-click="showModal(2,item.id)"
+                                                    ng-if="num == 2 && itemss.level == 1">新增评分类型</button>
+					                        <button type="button" class="btn btn-warning"
+                                                    ng-click="showModal(4,itemss.id,item)"
+                                                    ng-if="num == 2 && itemss.level == 3">修改</button>
+					                      	<button type="button" class="btn btn-danger" ng-click="delete(itemss.id)"
+                                                    ng-if="num == 2 && itemss.level == 3">删除</button>
 											<span ng-if="num !=2 ">暂无</span>
-				        				</span>	
-		        					</li>
-		        				</ul>
-        					</li>        					
-        				</ul>
-        			</li>        			
-        		</ul>                
-                
-        	</div>
+				        				</span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
         </div>
-    	
+
     </div>
 
-	<!-- 模态框（Modal） -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content" style="width: 450px;position: absolute;left: 50%;margin-left: -230px">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="myModalLabel" ng-if="id ==1 ">
-						新增评分规则
-					</h4>
-					<h4 class="modal-title" id="myModalLabel" ng-if="id ==2 ">
-						新增评分类型
-					</h4>
-					<h4 class="modal-title" id="myModalLabel" ng-if="id ==3 ">
-						新增违规细则
-					</h4>
-					<h4 class="modal-title" id="myModalLabel" ng-if="id ==4 ">
-						修改评分细则
-					</h4>
-				</div>
-				<div class="modal-body" style="text-align: center;">
-					
-					<form class="form-inline" ng-if="id == 1">						
-						<div class="form-item">
-	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">评分规则名称</font></font></label>
-	                        <input type="text"  class="form-control input-short" ng-model="$parent.gradeIllegal">
-	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
-	                    </div>	                   
-					</form>
-					
-					<form class="form-inline" ng-if="id == 2">						
-						<div class="form-item">
-	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">评分类型</font></font></label>
-	                        <input type="text"  class="form-control input-short" ng-model="$parent.gradetype">
-	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
-	                    </div>	                   
-					</form>
-					
-					<form class="form-inline" ng-if="id == 3 || id == 4">
-						<div class="form-item">
-	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">考核评分规则</font></font></label>
-	                        <input type="text"  class="form-control input-short" ng-model="$parent.gradeIllegal1" readonly="readonly">
-	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
-	                    </div>
-						<div class="form-item">
-	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">评分类型</font></font></label>
-	                        <input type="text"  class="form-control input-short" ng-model="$parent.gradetype1" readonly="readonly">
-	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
-	                    </div>
-	                    <div class="form-item">
-	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">违规细则名称</font></font></label>
-	                        <input type="text"  class="form-control input-short" ng-model="$parent.gradedetailed">
-	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
-	                    </div>
-	                    <div class="input-group form-item">
-	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">评分方式</font></font></label>
-	        				<select ng-model="$parent.gradeway" class="form-control select-short" style="width: 160px;">
-	                        	<option value=""></option>
-	                        	<option value="固定">固定</option>
-	                        	<option value="录入扣分">录入扣分</option>
-	                        	<option value="公式计算">公式计算</option>
-	                        </select>
-	                    </div>
-	                    <div class="form-item">
-	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">扣分</font></font></label>
-	                        <input type="text"  class="form-control input-short" ng-model="$parent.deductMarks">
-	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
-	                    </div>
-	                    <div class="form-item">
-	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理时限</font></font></label>
-	                        <input type="text"  class="form-control input-short" ng-model="$parent.processLimitted">
-	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
-	                    </div>	                    
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" ng-click="save()">保存</button>
-		            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
-				</div>
-			</div>
-		</div>
-		
-	</div>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: 450px;position: absolute;left: 50%;margin-left: -230px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel" ng-if="id ==1 ">
+                        新增评分规则
+                    </h4>
+                    <h4 class="modal-title" id="myModalLabel" ng-if="id ==2 ">
+                        新增评分类型
+                    </h4>
+                    <h4 class="modal-title" id="myModalLabel" ng-if="id ==3 ">
+                        新增违规细则
+                    </h4>
+                    <h4 class="modal-title" id="myModalLabel" ng-if="id ==4 ">
+                        修改评分细则
+                    </h4>
+                </div>
+                <div class="modal-body" style="text-align: center;">
+
+                    <form class="form-inline" ng-if="id == 1">
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">评分规则名称</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="$parent.gradeIllegal">
+                            <span class="required"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">*</font></font></span>
+                        </div>
+                    </form>
+
+                    <form class="form-inline" ng-if="id == 2">
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">评分类型</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="$parent.gradetype">
+                            <span class="required"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">*</font></font></span>
+                        </div>
+                    </form>
+
+                    <form class="form-inline" ng-if="id == 3 || id == 4">
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">考核评分规则</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="$parent.gradeIllegal1"
+                                   readonly="readonly">
+                            <span class="required"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">*</font></font></span>
+                        </div>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">评分类型</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="$parent.gradetype1"
+                                   readonly="readonly">
+                            <span class="required"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">*</font></font></span>
+                        </div>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">违规细则名称</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="$parent.gradedetailed">
+                            <span class="required"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">*</font></font></span>
+                        </div>
+                        <div class="input-group form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">评分方式</font></font></label>
+                            <select ng-model="$parent.gradeway" class="form-control select-short" style="width: 160px;">
+                                <option value="">请选择</option>
+                                <option value="固定">固定</option>
+                                <option value="录入扣分">录入扣分</option>
+                                <option value="公式计算">公式计算</option>
+                            </select>
+                        </div>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">扣分</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="$parent.deductMarks">
+                            <span class="required"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">*</font></font></span>
+                        </div>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">处理时限</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="$parent.processLimitted">
+                            <span class="required"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">*</font></font></span>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="save()">保存</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 </div>

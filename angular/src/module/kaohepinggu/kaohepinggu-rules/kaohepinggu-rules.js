@@ -22,21 +22,25 @@
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
 					var apiPrefix = moduleService.getServiceUrl() + '/assessment';
+					//var apiPrefix = 'http://10.0.9.116:7003' + '/assessment';
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
 					
 					$scope.init = function () {
-						//$scope.num = "";
-						$ajaxhttp.myhttp({
-							url: apiPrefix + '/v1/assessment/userinfo1',
-							method: 'get',
-							params:{
-								id: $scope.userInfo.id
-							},
-							callBack: function (res) {
-								$scope.num = res.data;
-								getList();
-							}
-						})
+
+                        $scope.num = "2";
+                        getList();
+
+                        // $ajaxhttp.myhttp({
+							// url: apiPrefix + '/v1/assessment/userinfo1',
+							// method: 'get',
+							// params:{
+							// 	id: $scope.userInfo.id
+							// },
+							// callBack: function (res) {
+							// 	$scope.num = res.data;
+							// 	getList();
+							// }
+                        // })
 					}					
 					
 					
@@ -72,18 +76,32 @@
 						}else if(id == 4){
 							console.log(item)
 							$scope.id = 4;//修改评分细则
-							$scope.index2 = index;
-							$scope.gradeIllegal1 = item.gradeillegal;
-							$scope.gradetype1 = item.childList[0].gradetype;							
-							$scope.gradedetailed = item.gradedetailed;
-							$scope.gradeway = item.gradeway;
-							$scope.deductMarks = item.deductMarks;
-							$scope.processLimitted = item.processLimitted;
+                            $scope.index2 = index;
+                            $ajaxhttp.myhttp({
+                                url: apiPrefix + '/v1/IllegalXize/detail',
+                                method: 'get',
+                                params:{
+                                    id: index
+                                },
+                                callBack: function (res) {
+                                    if(res.resCode == 1){
+                                        //console.log(res)
+                                        $scope.gradeIllegal1 = res.data.gradeillegal;
+                                        $scope.gradetype1 = res.data.gradetype;
+                                        $scope.gradedetailed = res.data.gradedetailed;
+                                        $scope.gradeway = res.data.gradeway;
+                                        $scope.deductMarks = res.data.deductMarks;
+                                        $scope.processLimitted = res.data.processLimitted;
+                                    }else{
+                                        layer.msg(res.resMsg, {time:2000});
+                                    }
+                                }
+                            })
 						
 						}
 						
 					}
-					
+
 					$scope.cancel = function () {
 						$('#myModal').modal('hide');
 						clear();

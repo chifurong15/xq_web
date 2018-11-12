@@ -21,23 +21,26 @@
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
-					var apiPrefix = moduleService.getServiceUrl() + '/assessment';
-                    
-					$scope.userInfo = $localStorage.userLoginInfo.userInfo;
+					//var apiPrefix = moduleService.getServiceUrl() + '/assessment';
+                    //var apiPrefix = 'http://10.0.9.116:7003' + '/assessment';
+
+                    $scope.userInfo = $localStorage.userLoginInfo.userInfo;
 					
 					$scope.init = function () {
-						//$scope.num = "2";
-						$ajaxhttp.myhttp({
-							url: apiPrefix + '/v1/assessment/userinfo1',
-							method: 'get',
-							params:{
-								id: $scope.userInfo.id
-							},
-							callBack: function (res) {
-								$scope.num = res.data;
-								getList();
-							}
-						})
+						$scope.num = "2";
+                        		getList();
+
+                        // $ajaxhttp.myhttp({
+						// 	url: apiPrefix + '/v1/assessment/userinfo1',
+						// 	method: 'get',
+						// 	params:{
+						// 		id: $scope.userInfo.id
+						// 	},
+						// 	callBack: function (res) {
+						// 		$scope.num = res.data;
+						// 		getList();
+						// 	}
+						// })
 					}	
 					
 					// 获取数据列表
@@ -91,7 +94,7 @@
 						} 
 						
 						var params = {
-							id: $scope.id,
+							//id: $scope.id,
 							gradetype: $scope.gradetype,
 							weight: $scope.weight,
 							totalpoints: $scope.totalpoints,
@@ -140,6 +143,7 @@
 					
 					//新增  修改  显示模态框
 					$scope.showModal = function (id,item) {
+                        clear ();
 						$('#myModal').modal('show');						
 						if(id == 2){
 							$scope.type=1;//修改

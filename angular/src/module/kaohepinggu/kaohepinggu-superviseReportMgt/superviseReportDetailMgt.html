@@ -41,17 +41,17 @@
 						<br />	
 						<div class="form-item">
 							<label>问题附件：</label>
-							<button class="btn btn-info" ng-click="getFile()"><i class="fa fa-css3"></i>查看附件</button>
+							<button class="btn btn-info" ng-click="getFile(1)"><i class="fa fa-css3"></i>查看附件</button>
 						</div>
 						<br />
                         <div class="form-item">
 							<label>批处理意见：</label>
-							<button class="btn btn-primary" ng-click="getFile()"><i class="fa fa-css3"></i>查看附件</button>
+							<button class="btn btn-primary" ng-click="getFile(2)"><i class="fa fa-css3"></i>查看附件</button>
 						</div>
 						<br />
 						<div class="form-item">
 							<label>处理结果：</label>
-							<button class="btn btn-success" ng-click="getFile()"><i class="fa fa-css3"></i>查看附件</button>
+							<button class="btn btn-success" ng-click="getFile(3)"><i class="fa fa-css3"></i>查看附件</button>
 						</div>
 						<br />
 						<div class="form-item">
@@ -60,7 +60,7 @@
 						</div>
 						<div class="form-item">
 							<label>举报人评价：</label>
-							<span ng-bind="reportList.reportEvaluate"></span>
+							<span>{{reportList.reportEvaluate == 1 ? '满意' : '不满意'}}</span>
 						</div>
 					</div>
 				</div>
@@ -84,7 +84,6 @@
 				</div>
 				<div class="modal-body">
 					<div id="problemFile"></div>
-					<script>PDFObject.embed("module/kaohepinggu/kaohepinggu-superviseReportMgt/test.pdf", "#problemFile");</script>
 				</div>
 				<div class="modal-footer">
 					<a href="javascript:;" class="btn btn-primary btn-o" ng-click="getModalOk()">
@@ -96,3 +95,7 @@
 		</div>
 	</div>
 </div>
+<script src="vendor/PDFObject/pdfobject.js"></script>
+<script>
+	PDFObject.embed("{{problemAttant}}","#problemFile");
+</script>

@@ -23,7 +23,8 @@
 			'moduleService',
             function superviseReportMgtCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http, $ajaxhttp, moduleService) {
 
-                var apiPrefix = moduleService.getServiceUrl() + '/supervise';
+                //var apiPrefix = moduleService.getServiceUrl() + '/supervise';
+                var apiPrefix = 'http://10.0.9.116:7023' + '/supervise';
 
 
                 /**

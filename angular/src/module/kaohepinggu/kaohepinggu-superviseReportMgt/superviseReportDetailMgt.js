@@ -23,7 +23,8 @@
 			'moduleService',
             function superviseReportDetailMgtCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http, $ajaxhttp, moduleService) {
 
-        		var apiPrefix = moduleService.getServiceUrl() + '/supervise';
+        		// var apiPrefix = moduleService.getServiceUrl() + '/supervise';
+                var apiPrefix = 'http://10.0.9.116:7023' + '/supervise';
 
                 /**
 				 * ==============================================
@@ -34,7 +35,7 @@
 				 * ==============================================
 				 */
 				$scope.init = function(){
-					
+                    $scope.eventImgUrl = 'http://10.0.0.196/api/download' ;
 					/**
 					 * 获取详情
 					 */
@@ -56,35 +57,31 @@
                             //console.log($scope.imgList)
                         }
                     })
-
-					$scope.reportList = 
-						{
-							'date':'2018-10-24 15:35',
-							'region':'天津市河西区',
-							'reach':'海河河西区段',
-							'reportPerson':'李四',
-							'contact':'13732288520',
-							'reportProblem':'暂无',
-							'problemAdress':'河西区马场街道XX桥200米处',
-							'suggestion':'河西区马场街道XX桥200米处',
-							'deal':'河西区马场街道XX桥200米处',
-							'status':'二次处理',
-							'reportAssess':'满意'
-						}
 				}
 				
 				/**
 				 * 查看附件
 				 */
-				$scope.getFile = function(){
-					$('#fileModal').modal('show');
+				$scope.getFile = function(id){
+					//alert($localStorage.serviceUrl)
+                 	$('#fileModal').modal('show');
+                 	if(id == 1){
+						$scope.problemAttant =  $scope.reportList.problemAttant;
+					}else if( id == 2){
+                        $scope.problemAttant =  "http://10.0.0.196/files" + $scope.reportList.proposedTreatment;
+					}else if( id == 3){
+                        $scope.problemAttant =  "http://10.0.0.196/files" + $scope.reportList.processingResults;
+					}
+
 				}
 				
 				/**
 				 * 关闭模态框
 				 */
 				$scope.getModalOk = function(){
-                	$('#fileModal').modal('hide');
+
+                  $('#fileModal').modal('hide');
+
 				}
 				
 				/**

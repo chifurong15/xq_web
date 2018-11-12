@@ -23,7 +23,8 @@
 			'moduleService',
             function superviseReportAddMgtCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http, $ajaxhttp, moduleService) {
 
-        	    var apiPrefix = moduleService.getServiceUrl() + '/supervise';
+        	    // var apiPrefix = moduleService.getServiceUrl() + '/supervise';
+                var apiPrefix = 'http://10.0.9.116:7023' + '/supervise';
 
 				/**
 				 * ==============================================
@@ -298,6 +299,7 @@
                         callBack: function (res) {
                             if(res.resCode == 1){
                                 layer.msg("新增成功！",{time:2000});
+                                clear();
                                 routeService.route('3-8', true);
                             }
                         }
@@ -309,9 +311,15 @@
 				 * 返回
 				 */
 				$scope.getBack = function(){
+                    clear();
 					routeService.route('3-8', true);
 				}
-				
+
+				function clear() {
+                    $scope.problemAttant = '';
+                    $scope.proposedTreatment = '';
+                    $scope.processingResults = '';
+                }
 				
 				
             }
