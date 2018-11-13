@@ -17,8 +17,7 @@ angular.module('app')
             this._layer = null;
             this._layerId = null;
             this._regionLayer = null;
-            // var _serviceUrl = $localStorage.serviceUrl_chiefOnline;
-            var _serviceUrl = "http://117.8.229.5:9000" + "/chiefOnline";
+            var _serviceUrl = $localStorage.serviceUrl_chiefOnline;
             var timeout = null;
             this.refreshDataTimer = null;
             var _refreshTime = 30000;

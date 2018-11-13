@@ -201,7 +201,7 @@
                 function patrolCount() {
 
                     $http({
-                        url: "http://117.8.229.5:9000/chairmanOnline/v1/patrolCount",
+                        url: $localStorage.serviceUrl_chiefOnline + "/chairmanOnline/v1/patrolCount",
                         method: 'get'
                     }).success(function (res) {
                         console.log(res)
@@ -218,7 +218,7 @@
                 /*行政区划*/
                 function regionList() {
                     $http({
-                        url: "http://117.8.229.5:9000/chairmanOnline/v1/regionArea",
+                        url: $localStorage.serviceUrl_chiefOnline + "/chairmanOnline/v1/regionArea",
                         method: 'get'
                     }).success(function (res) {
                         console.log(res)
@@ -381,7 +381,7 @@
                 function getCountHZOnline() {
 
                     $ajaxhttp.myhttp({
-                        url: 'http://117.8.229.5:9000/chairmanOnline/v1/countHZOnline',
+                        url: $localStorage.serviceUrl_chiefOnline + '/chairmanOnline/v1/countHZOnline',
                         method: 'get',
                         callBack: function (res) {
                             if (res.resCode == 1) {

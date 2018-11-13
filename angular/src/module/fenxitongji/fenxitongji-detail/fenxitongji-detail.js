@@ -43,7 +43,7 @@
 	                
 	                
 	                
-	                var regionTreeUrl = 'http://117.8.229.5:9000/information/v1/administrativeRegion/regionTree';
+	                var regionTreeUrl = $localStorage.gwUrl + '/information/v1/administrativeRegion/regionTree';
 	                
 	                
 	                //返回

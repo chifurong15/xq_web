@@ -42,7 +42,7 @@
 //	                var regionTreeUrl = 'http://117.8.229.5:9000/information/v1/administrativeRegion/regionTree';
 
 
-                    var regionTreeUrl = 'http://117.8.229.5:9000/information/v1/administrativeRegion/regionTree';
+                    var regionTreeUrl = $localStorage.gwUrl + '/information/v1/administrativeRegion/regionTree';
 
                     $scope.selecOption = [
                         {"id": 1, "option": "通报"},
