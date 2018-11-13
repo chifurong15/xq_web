@@ -24,7 +24,7 @@
             function superviseReportDetailMgtCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http, $ajaxhttp, moduleService) {
 
         		var apiPrefix = moduleService.getServiceUrl() + '/supervise';
-                //var apiPrefix = 'http://10.0.9.116:7023' + '/supervise';
+                var apiPrefix = 'http://10.0.9.116:7023' + '/supervise';
 
                 /**
 				 * ==============================================
@@ -66,11 +66,11 @@
 					//alert($localStorage.serviceUrl)
                  	$('#fileModal').modal('show');
                  	if(id == 1){
-						$scope.problemAttant =  $scope.reportList.problemAttant;
+						$scope.problemAttant =  $localStorage.serviceUrl + '/fm' + $scope.reportList.problemAttant;
 					}else if( id == 2){
-                        $scope.problemAttant =  "http://10.0.0.196/files" + $scope.reportList.proposedTreatment;
+                        $scope.problemAttant = $localStorage.serviceUrl + '/fm' + $scope.reportList.proposedTreatment;
 					}else if( id == 3){
-                        $scope.problemAttant =  "http://10.0.0.196/files" + $scope.reportList.processingResults;
+                        $scope.problemAttant =  $localStorage.serviceUrl + '/fm' + $scope.reportList.processingResults;
 					}
 
 				}
