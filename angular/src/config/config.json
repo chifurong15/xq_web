@@ -579,7 +579,19 @@
       ],
       "description": "系统管理-用户管理-用户列表"
     },
-
+    {
+      "seqId": "75",
+      "parentId": "7",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "微信管理后台",
+      "icon": "fa fa-users",
+      "url": "module/menus/systemMgr/weChatMag/weChatMag.html",
+      "requireJS": [
+        "module/js/systemMgr/weChatMag/weChatMag.js"
+      ],
+      "description": "系统管理-微信管理后台"
+    },
     {
       "seqId": "80",
       "parentId": "0",

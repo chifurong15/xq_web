@@ -9,7 +9,7 @@
     	<div class="panel panel-default">
         	<div class="panel-body">
         		<div class="table-bar">
-        			<form class="form-inline clearfix">        					                    
+        			<form class="form-inline clearfix">
 	        			<div class="input-group date date_picker form-item" id="J-searchTime">
 	                        <label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">期号</font></font></label>
 	        				<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime">
@@ -27,7 +27,7 @@
 	                    <div class="form-item">
 	                        <label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">创建人</font></font></label>
 	                        <input type="text" class="form-control input-short" ng-model="createuser">
-	                    </div>	                    
+	                    </div>
         				<div class="input-group">
 		                    <button class="btn btn-primary" ng-click="search()">
 		                    	<i class="fa fa-search"></i>搜索
@@ -72,8 +72,8 @@
 	                                    <td>{{item.remark}}</td>
 	                                    <td style="text-align: left;">
 	                                    	<button type="button" class="btn btn-success" ng-click="view(item.id)">查看</button>
-	                                    	<button ng-if="item.status==1" type="button" class="btn btn-warning" ng-click="edit(item.id)">修改</button>	                                    	
-	                                    	<button ng-if="item.status==2" type="button" class="btn btn-danger" ng-click="report(item.id)">上报</button>	                                    	
+	                                    	<button ng-if="item.status==1" type="button" class="btn btn-warning" ng-click="edit(item.id)">修改</button>
+	                                    	<button ng-if="item.status==2" type="button" class="btn btn-danger" ng-click="report(item.id)">上报</button>
 	                                    </td>
 	                                </tr>
                                 	<tr ng-repeat="item in surfaceWaterList" ng-if="num == 2">
@@ -90,7 +90,7 @@
 	                                    <td style="text-align: left;">
 	                                    	<button type="button" class="btn btn-success" ng-click="view(item.id)">查看</button>
 	                                    	<button ng-if="item.status==0" type="button" class="btn btn-primary" ng-click="sendBack(item.id)">退回</button>
-	                                    	<button ng-if="item.status==2" type="button" class="btn btn-danger" ng-click="report(item.id)">上报</button>	                                    	
+	                                    	<button ng-if="item.status==2" type="button" class="btn btn-danger" ng-click="report(item.id)">上报</button>
 	                                    </td>
 	                                </tr>
                             	</tbody>
@@ -102,10 +102,10 @@
                         <div id="patrolChart" class="tj-chart-con"></div>
                     </div>
                 </div>
-        	
+
         	</div>
         </div>
-    	
+
     </div>
 	<!-- 模态框（Modal） -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
