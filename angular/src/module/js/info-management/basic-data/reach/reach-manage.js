@@ -145,21 +145,18 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
             var reGetProducts = function() {
                 $http({
                     url: $localStorage.gwUrl +reachUrl + "/list",
+                    // url: "http://10.0.9.217:8085/watersource/v1/reach/list",
                     method: 'GET',
                     params: {
                         reachName: $scope.reachName,
-                        regionCode: $scope.regionId,
+                        // regionCode: $scope.regionId,
                         page: $scope.paginationConf.currentPage,
                         size: $scope.paginationConf.itemsPerPage,
                         isNext: true
                     },
                 }).success(
                     function(resp) {
-                        console.log(resp);
-                        console.log($scope.paginationConf.currentPage);
-                        console.log($scope.paginationConf.itemsPerPage);
                         $scope.paginationConf.totalItems = resp.data.total;
-                        console.log($scope.paginationConf.totalItems);
                         $scope.moduleList = resp.data.list;
                         console.log($scope.moduleList);
                     }).error(function(error) {});
@@ -230,6 +227,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
             $scope.reachEdit = function(id) {
                 $http({
                     url: $localStorage.gwUrl +reachUrl + "/detail",
+                    // url: "http://10.0.9.217:8085/watersource/v1/reach/detail",
                     method: "get",
                     params: {
                         id: id

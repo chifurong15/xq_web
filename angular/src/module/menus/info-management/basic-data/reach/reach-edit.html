@@ -30,11 +30,6 @@
                             <a class="input-group-addon" ng-click="waterShow()"><i class="fa fa-search"></i></a>
                             <span class="required">*</span>
                         </div>
-                        <!-- <div class="form-item">
-                             <label>所属河流</label>
-                             <input ng-model="river_ztree" type="text" class="form-control input-short-o"  ng-click="riverShow()">
-                             <a class="input-group-addon" ng-click="riverShow()"><i class="fa fa-search"></i></a>
-                         </div>-->
                         <div class="form-item">
                             <label>水质等级</label>
                             <select ng-init="waterQuality()" ng-model="water_quality" ng-options="wq.typeName for wq in waterQualitys"
@@ -54,8 +49,8 @@
                         </div>
                         <div class="form-item">
                             <label>河湖库级别</label>
-                            <select ng-model="river_part" ng-options="rp.typeValue as rp.typeName for rp in riveParts"
-                                    ng-change="rp_Change(river_part.typeValue)" class="form-control select-short">
+                            <select ng-init="rivePart()" ng-model="river_part" ng-options="rp.typeName for rp in riveParts"
+                                    ng-change="rp_Change(river_part)" class="form-control select-short">
                                 <option  value="">请选择</option>
                             </select>
                             <span class="required">*</span>
@@ -70,66 +65,7 @@
                                 </select>
                                 <span class="required">*</span>
                             </div>
-
 					    </div>
-					    <!--<div id="lakesBox" class="dis-none">
-							<div class="form-item">
-								<label>湖段岸别</label>
-								<select ng-init="lakesShore()" ng-model="lakes_shore.dictValue" ng-options="ls.dictValue as ls.dictName for ls in lakesShores"
-                                        ng-change="ls_Change(lakes_shore.dictValue)" class="form-control select-short">
-                                    <option  value="">请选择</option>
-                                </select>
-                                <span class="required">*</span>
-							</div>
-					    	<div class="form-item">
-								<label>所属区域</label>
-								<input ng-model="region" type="text" class="form-control input-short-o"  ng-click="regionShow()">
-								<a class="input-group-addon" ng-click="regionShow()"><i class="fa fa-search"></i></a>
-                                <span class="required">*</span>
-							</div>
-							<br/>	
-							<div class="form-item">
-								<label>所属水系</label>
-								<input ng-model="water_ztree" type="text" class="form-control input-short-o"  ng-click="waterShow()">
-								<a class="input-group-addon" ng-click="waterShow()"><i class="fa fa-search"></i></a>
-                                <span class="required">*</span>
-							</div>
-							<div class="form-item">
-								<label>所属湖泊</label>
-								<input ng-model="lakes_ztree" type="text" class="form-control input-short-o"  ng-click="lakesShow()">
-								<a class="input-group-addon" ng-click="lakesShow()"><i class="fa fa-search"></i></a>
-                                <span class="required">*</span>
-							</div>
-					    </div>
-					    <div id="reservoirBox" class="dis-none">
-							<div class="form-item">
-								<label>库段岸别</label>
-								<select ng-init="reservoirShore()" ng-model="reservoir_shore.dictValue" ng-options="rs.dictValue as rs.dictName for rs in reservoirShores"
-                                        ng-change="res_Change(reservoir_shore.dictValue)" class="form-control select-short">
-                                    <option  value="">请选择</option>
-                                </select>
-                                <span class="required">*</span>
-							</div>
-					    	<div class="form-item">
-								<label>所属区域</label>
-								<input ng-model="region" type="text" class="form-control input-short-o"  ng-click="regionShow()">
-								<a class="input-group-addon" ng-click="regionShow()"><i class="fa fa-search"></i></a>
-                                <span class="required">*</span>
-							</div>
-							<br/>
-							<div class="form-item">
-								<label>所属水系</label>
-								<input ng-model="water_ztree" type="text" class="form-control input-short-o"  ng-click="waterShow()">
-								<a class="input-group-addon" ng-click="waterShow()"><i class="fa fa-search"></i></a>
-                                <span class="required">*</span>
-							</div>
-							<div class="form-item">
-								<label>所属水库</label>
-								<input ng-model="reservoir_ztree" type="text" class="form-control input-short-o"  ng-click="reservoirShow()">
-								<a class="input-group-addon" ng-click="reservoirShow()"><i class="fa fa-search"></i></a>
-                                <span class="required">*</span>
-							</div>
-					    </div>-->
 					    <br/>
 						<div class="form-item">
 							<label>起点</label>
@@ -216,6 +152,7 @@
 					<div class="tab-con" style="display: block">
 						<form method="get">
 							<div class="form-inline" ng-repeat="reach in reachadmins">
+                                <input class="form-control input-short-o" ng-model="reach.reachChairManId" type="hidden"/>
                                 <div class="form-item">
                                     <label>履职人员</label>
                                     <input type="text" class="form-control input-short-o" ng-model="reach.userName"/>
@@ -226,20 +163,17 @@
                                 </div>
                                 <div class="form-item">
                                     <label>履职级别</label>
-                                    <select ng-model="reach.gradeName"
-                                            ng-options="wm.typeName for wm in dutyLevels"
-                                            ng-change="level_Change(d_Level)"
-                                            class="form-control select-short">
+                                    <select ng-init="rivePart()" ng-model="reach.gradeName" ng-options="wm.typeName for wm in dutyLevels"
+                                            ng-change="level_Change(reach.gradeName)" class="form-control select-short">
                                         <option  value="">请选择</option>
                                     </select>
+
                                     <span class="required">*</span>
                                 </div>
                                 <div class="form-item">
                                     <label>履职类型</label>
-                                    <select ng-init="dutyType()" ng-model="dutyTypes.typeValue"
-                                            ng-options="wv.typeName for wv in dutyTypes"
-                                            ng-change="dutyType_Change(d_Type)"
-                                            class="form-control select-short">
+                                    <select ng-init="dutyType()" ng-model="reach.chairmanRole" ng-options="wv.typeName for wv in dutyTypes"
+                                            ng-change="dutyType_Change(reach.chairmanRole)" class="form-control select-short">
                                         <option  value="">请选择</option>
                                     </select>
                                     <span class="required">*</span>
@@ -247,10 +181,8 @@
                                 </div>
                                 <div class="form-item">
                                     <label>管理岸面</label>
-                                    <select ng-model="bankSides.typeValue"
-                                            ng-options="wn.typeName for wn in bankSides"
-                                            ng-change="side_Change(d_Side)"
-                                            class="form-control select-short">
+                                    <select ng-init="riveShore()" ng-model="river_shore" ng-options="rs.typeName for rs in riveShores"
+                                            ng-change="rs_Change(river_shore)" class="form-control select-short">
                                         <option  value="">请选择</option>
                                     </select>
                                     <span class="required">*</span>
