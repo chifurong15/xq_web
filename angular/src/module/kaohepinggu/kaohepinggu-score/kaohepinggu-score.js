@@ -27,20 +27,20 @@
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
 					
 					$scope.init = function () {
-                        $scope.num = "2";
-                        getList();
+                        // $scope.num = "2";
+                        // getList();
 
-                        // $ajaxhttp.myhttp({
-						// 	url: apiPrefix + '/v1/assessment/userinfo1',
-						// 	method: 'get',
-						// 	params:{
-						// 		id: $scope.userInfo.id
-						// 	},
-						// 	callBack: function (res) {
-						// 		$scope.num = res.data;
-						// 		getList();
-						// 	}
-						// })
+                        $ajaxhttp.myhttp({
+							url: apiPrefix + '/v1/assessment/userinfo1',
+							method: 'get',
+							params:{
+								id: $scope.userInfo.id
+							},
+							callBack: function (res) {
+								$scope.num = res.data;
+								getList();
+							}
+						})
 					}	
 					
 					// 获取数据列表
@@ -142,20 +142,24 @@
 					}
 					
 					//新增  修改  显示模态框
-					$scope.showModal = function (id,item) {
-                        clear ();
-						$('#myModal').modal('show');						
-						if(id == 2){
-							$scope.type=1;//修改
-							$scope.id = item.id;
-							$scope.gradetype = item.gradetype;
-							$scope.weight = item.weight;
-							$scope.totalpoints = item.totalpoints;
-							$scope.sort = item.sort;
+					$scope.showModal = function (id,item ,count) {
+						if (count == 7) {
+							return ;
 						}else{
-							$scope.type=2;//新增
-							$scope.parentid = item.id;
-							$scope.gradelevel = item.gradelevel;
+                            clear ();
+                            $('#myModal').modal('show');
+                            if(id == 2){
+                                $scope.type=1;//修改
+                                $scope.id = item.id;
+                                $scope.gradetype = item.gradetype;
+                                $scope.weight = item.weight;
+                                $scope.totalpoints = item.totalpoints;
+                                $scope.sort = item.sort;
+                            }else{
+                                $scope.type=2;//新增
+                                $scope.parentid = item.id;
+                                $scope.gradelevel = item.gradelevel;
+                            }
 						}
 					}
 					

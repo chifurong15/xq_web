@@ -1984,9 +1984,12 @@ body .c-ffffff a {
 .anchaanfang .scoreOne > li > span,
 .anchaanfang .scoreTwo > li > span,
 .anchaanfang .scoreThree > li > span,
-.anchaanfang .scoreFour > li > span {
+.anchaanfang .scoreFour > li > span,
+.anchaanfang .scoreFive > li > span ,
+.anchaanfang .scoreSix > li > span ,
+.anchaanfang .scoreSeven > li > span {
     display: inline-block;
-    width: 20%;
+    /*width: 20%;*/
     float: left;
     padding: 10px 0;
     height: 55px;
