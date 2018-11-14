@@ -144,7 +144,8 @@
 					//新增  修改  显示模态框
 					$scope.showModal = function (id,item ,count) {
 						if (count == 7) {
-							return ;
+                            layer.msg('最多只能增到七级');
+                            return ;
 						}else{
                             clear ();
                             $('#myModal').modal('show');
