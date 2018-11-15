@@ -34,6 +34,18 @@
 				 * @desc  社会监督举报详情
 				 * ==============================================
 				 */
+
+                var options = {
+                    pdfOpenParams: {
+                        pagemode: "thumbs",
+                        navpanes: 0,
+                        toolbar: 0,
+                        statusbar: 0,
+                        view: "FitV"
+                    }
+                };
+
+
 				$scope.init = function(){
                     $scope.eventImgUrl = 'http://10.0.0.196/api/download' ;
 					/**
@@ -53,8 +65,11 @@
                             id: localStorage.getItem('id')
                         },
                         callBack: function (res) {
-                            $scope.reportList = res.data;
-                            //console.log($scope.imgList)
+                        	if(res.data){
+                                $scope.reportList = res.data;
+                                //console.log($scope.imgList)
+							}
+
                         }
                     })
 				}
@@ -62,27 +77,21 @@
 				/**
 				 * 查看附件
 				 */
-				$scope.getFile = function(id){
-					//alert($localStorage.serviceUrl)
-                 	$('#fileModal').modal('show');
-                 	if(id == 1){
-						$scope.problemAttant =  $localStorage.serviceUrl + '/fm' + $scope.reportList.problemAttant;
-					}else if( id == 2){
-                        $scope.problemAttant = $localStorage.serviceUrl + '/fm' + $scope.reportList.proposedTreatment;
-					}else if( id == 3){
-                        $scope.problemAttant =  $localStorage.serviceUrl + '/fm' + $scope.reportList.processingResults;
-					}
-
+				$scope.viewFile = function(id){
+                 	$('#myModal').modal('show');
+                 	if(id ==1){
+                        PDFObject.embed($scope.reportList.problemAttant, "#file", options);
+                    }else if(id ==2){
+                        PDFObject.embed($scope.reportList.proposedTreatment, "#file", options);
+                    }else if(id ==3){
+                        PDFObject.embed($scope.reportList.processingResults, "#file", options);
+                    }
 				}
-				
-				/**
-				 * 关闭模态框
-				 */
-				$scope.getModalOk = function(){
 
-                  $('#fileModal').modal('hide');
-
-				}
+                //取消查看
+                $scope.cancel = function () {
+                    $('#myModal').modal('hide');
+                }
 				
 				/**
 				 * 返回
