@@ -171,6 +171,7 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
             if (!menu) {
                 return;
             }
+
             //有子节点，就点击第一个子节点
             var menuId =  '#menu_' + (menu.children ?  menu.children[0].id : menu.id);
 
@@ -180,6 +181,7 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
             if(menu.children){
                 clickFirst(menu.children[0]);
             }
+
             /*if(menu.children){
                 $timeout(function () {
                     angular.element("#menu_" + menu.children[0].id).click();

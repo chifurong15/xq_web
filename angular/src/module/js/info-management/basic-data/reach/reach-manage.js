@@ -149,7 +149,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                     method: 'GET',
                     params: {
                         reachName: $scope.reachName,
-                        // regionCode: $scope.regionId,
+                        regionCode: $scope.regionId,
                         page: $scope.paginationConf.currentPage,
                         size: $scope.paginationConf.itemsPerPage,
                         isNext: true

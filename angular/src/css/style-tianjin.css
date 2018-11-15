@@ -202,6 +202,10 @@ body .align-left .cross-simple-icon, body .align-left .cross-text{
     cursor: pointer;
 }
 
+.navbar-nav li.active {
+    background-color: #3071a9;
+}
+
 .navbar-nav .btn-navbar a {
     display: block;
     width: 100%;
