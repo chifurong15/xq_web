@@ -22,17 +22,14 @@
                     <h1 class="bulletin-view-title">{{bulletin.title}}</h1>
                     <div class="bulletin-view-content" ng-bind-html="bulletin.detail"></div>
                     <p ng-if="!!bulletin.attand_url">
-                        附件:<span>{{attandName}}</span>
-                        <a href="http://10.0.0.196/api/download/{{bulletin.attand_url}}" target="_blank"
-                           style="color: #3189e1;">下载</a>
-                        <!--<a href="{{getServiceUrl}}/fm{{bulletin.attand_url}}" target="_blank"-->
-                           <!--style="color: #3189e1;">预览</a>-->
-                        <!--<a ng-href="http://10.0.9.196:8888/bulletin/v1/bulletin/download?attandUrl={{bulletin.attand_url}}"-->
-                        <!--target="_blank" class="downOrLook">下载</a>-->
-                        <a ng-href="{{getServiceUrl}}/bulletin/v1/bulletin/lookload?attand_url={{bulletin.attand_url}}"
-                        target="_blank" class="downOrLook">预览</a>
+                        附件:<span>{{bulletin.ren}}</span>
+                        <a href="{{bulletin.downurl}}" target="_blank"
+                           style="color: #3189e1;margin-left: 10px;">下载</a>
+                        <!--<a ng-href="{{getServiceUrl}}/bulletin/v1/bulletin/lookload?attand_url={{bulletin.attand_url}}"-->
+                        <!--target="_blank" class="downOrLook">预览</a>-->
                     </p>
                 </div>
+                <div id="pdfOb" style="margin: 20px 0;height: 500px;"></div>
             </div>
         </div>
 

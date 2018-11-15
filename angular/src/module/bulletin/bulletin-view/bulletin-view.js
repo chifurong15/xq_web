@@ -22,7 +22,7 @@
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
 					var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
-                    //var apiPrefix = 'http://10.0.9.133:8080' + '/bulletin';
+                    //var apiPrefix = 'http://10.0.9.133:6008' + '/bulletin';
 
                     $scope.getServiceUrl= moduleService.getServiceUrl();
 					$scope.init = function () {
@@ -42,25 +42,6 @@
 					$scope.goBack=function(){
 						history.back(-1);
 					}
-
-					//附件预览
-					$scope.lookLine = function () {
-						//$('#myModal').modal('show');
-						var params={
-							attandUrl:$scope.bulletin.attandUrl
-						}
-	                	$http({
-	                        url: apiPrefix + '/v1/bulletin/lookload',
-	                        method: 'get',
-	                        params:params
-	                   }).success(function (res) {	                    	
-	                    		//$scope.lookLineContent=res;
-	                        
-	                    }).error(function (error) {
-	
-	                    })
-	                }
-					
 					// 数据详情
 					function getData (id) {
 						$ajaxhttp.myhttp({
@@ -70,10 +51,19 @@
 								id: id
 							},
 							callBack: function (res) {
-								//var attandNamePart = res.data.attandUrl.split('_');
 								$scope.bulletin = res.data;
-                                console.log($scope.bulletin);
-                                $scope.attandName = localStorage.getItem('attandName');
+                                var index = $scope.bulletin.attand_url.lastIndexOf("\/");
+                                $scope.attandName = $scope.bulletin.attand_url.substring(index+1);
+                                var options = {
+                                    pdfOpenParams: {
+                                        pagemode: "thumbs",
+                                        navpanes: 0,
+                                        toolbar: 0,
+                                        statusbar: 0,
+                                        view: "FitV"
+                                    }
+                                };
+                                PDFObject.embed($scope.bulletin.attand_url, "#pdfOb", options);
 							}
 						})
 					}

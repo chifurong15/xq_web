@@ -21,8 +21,8 @@
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
-					var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
-					//var apiPrefix = 'http://10.0.9.133:8080' + '/bulletin';
+					//var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
+					var apiPrefix = 'http://10.0.9.133:8080' + '/bulletin';
 
 					$scope.init = function () {
 						var bulletin = globalParam.getter().bulletin || {};
@@ -184,7 +184,6 @@
 	            			var form = new FormData();
 							var file = e.files[i];
 							$scope.attandName = file.name;
-							localStorage.setItem('attandName',file.name)
 				            form.append('files', file);
 				            form.append('fileName', file.name);
 				            $http({
