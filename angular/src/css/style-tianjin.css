@@ -10,6 +10,9 @@
 body {
     overflow: hidden;
 }
+body .align-left .cross-simple-icon, body .align-left .cross-text{
+    float: none !important;
+}
 
 #mainBody {
     height: 100%;
@@ -17,7 +20,9 @@ body {
     justify-content: space-between;
     padding-bottom: 62px;
 }
-
+/*#mainBody #wea-dl{*/
+    /*margin-left: 30px;*/
+/*}*/
 #mainBody .table th {
     display: table-cell;
     vertical-align: middle;
@@ -180,6 +185,9 @@ body {
     background-color: #3071a9;
     border-color: #285e8e;
 }
+.navbar-nav li.active{
+    background-color: #3071a9;
+}
 
 .navbar-nav .btn-navbar {
     background-color: #3189e1;
@@ -187,6 +195,11 @@ body {
     line-height: 30px;
     color: #fff;
     font-size: 12px;
+    cursor: pointer;
+}
+
+.navbar-nav .btn-navbar label{
+    cursor: pointer;
 }
 
 .navbar-nav li.active {
@@ -1988,9 +2001,12 @@ body .c-ffffff a {
 .anchaanfang .scoreOne > li > span,
 .anchaanfang .scoreTwo > li > span,
 .anchaanfang .scoreThree > li > span,
-.anchaanfang .scoreFour > li > span {
+.anchaanfang .scoreFour > li > span,
+.anchaanfang .scoreFive > li > span ,
+.anchaanfang .scoreSix > li > span ,
+.anchaanfang .scoreSeven > li > span {
     display: inline-block;
-    width: 20%;
+    /*width: 20%;*/
     float: left;
     padding: 10px 0;
     height: 55px;

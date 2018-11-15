@@ -174,6 +174,7 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
 
             //有子节点，就点击第一个子节点
             var menuId =  '#menu_' + (menu.children ?  menu.children[0].id : menu.id);
+
             $timeout(function () {
                 angular.element(menuId).click();
             }, 0, false);
@@ -313,6 +314,5 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
             }, function errorCallback(response) {
             });
         }
-
     }
 ]);
