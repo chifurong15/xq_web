@@ -194,7 +194,12 @@
 				                headers: {'Content-Type': undefined},
 				                transformRequest: angular.identity
 				            }).success(function (res) {
-			                	$scope.attandUrl = res.data[0];
+				                if(res.resCode == 1){
+                                    $scope.attandUrl = res.data[0];
+                                }else{
+				                    layer.msg('服务器异常，请稍后再试')
+                                }
+
 				            }).error(function (data) {
 				                 console.log('upload fail');
 				            })
