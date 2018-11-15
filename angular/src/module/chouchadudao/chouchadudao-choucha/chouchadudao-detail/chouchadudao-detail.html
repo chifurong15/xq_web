@@ -1,113 +1,146 @@
 <div class="anchaanfang" ng-controller="chouchaViewCtrl" ng-init="init()">
     <div class="wrapper-md ">
-    	<div class="panel panel-default m-n">
-        	<div class="panel-body" style="position: relative;">
-        		<span class="tag">抽查</span><span class="tag-right"></span><span class="tag-right tag-left"></span><span class="tag tag1">详情</span><span class="tag-right"></span>
-        		<div style="overflow: hidden;"><button type="button" class="btn btn-primary" ng-click="goBack()" style="position: absolute;right: 20px;bottom: 20px;">返回</button></div>
-        	</div>
-		</div>
-        
-    	<div class="panel panel-default">
-        	<div class="panel-body">
-        		<ul class="js-tab">
-        			<li class="basis tab-active" >基础资料</li>        			
-        			<li class="check">检查结果</li>
-        		</ul>
-        		<div class="panel-body js-con">
-        			<div class="basis-con con">        				
-			    		<div class="panel-body">
-							<form class="form-inline" style="padding-left: 25%;">
-								<div class="form-item" >
-			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
-			                        <input type="text" class="form-control input-short" ng-model="detail.title" readonly>
-			                    </div>
-			                    <div class="form-item" style="margin-left: 5px;">
-			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查区域</font></font></label>
-									<!--<input type="text" class="form-control input-short" ng-model="detail.regionName" readonly>-->
-									<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="detail.regionName" style="width: 160px;max-width: 160px;" readonly></textarea>
-				                </div>
-				                <br />
-				                <div class="form-item">
-			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查日期</font></font></label>
-									<input type="text" class="form-control input-short" ng-model="detail.checkDate" readonly>
-				                </div>
-			                    <div class="form-item" style="position: relative;left: 5px;">
-			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查河道</font></font></label>
-									<!--<input type="text" class="form-control input-short" ng-model="detail.checkRiver" readonly>-->
-									<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="detail.checkRiver" style="width: 160px;max-width: 160px;" readonly></textarea>
-								</div>
-				                <br />
-				                <div class="form-item">
-			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">任务类型</font></font></label>
-									<input type="text" class="form-control input-short" ng-model="taskType" readonly>
-				                </div>
-				                <div class="form-item" style="position: relative;left: 5px;">
-			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发人员</font></font></label>
-									<input type="text" class="form-control input-short" ng-model="detail.sendPerson" readonly>
-				                </div>			                           			                 
-							</form>				
-			    		</div>
-        			</div>
-        			
-					<div class="check-con con tab-show">
-        				<div class="panel-body">
-							<div ng-if="checkList.length == 0">暂无检查结果</div>
-        					<div style="overflow: hidden" ng-if="checkList.length != 0">
-        						<form class="form-inline" style="float:left;padding-left: 15%;">
-	        						<div class="form-item" >
-				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>检查时间</font></label>
-				                        <input type="text" class="form-control input-short" readonly ng-model="checkTime">
-				                    </div>
-									<div class="form-item" >
-										<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上报人</font></label>
-										<input type="text" class="form-control input-short" readonly ng-model="checkPerson">
-									</div>
-				                    <br />
-									<div ng-repeat="item in checkList">
-										<div class="form-item">
-											<div style="height: 34px; position: relative;left: -95px;">
-												<label>问题{{$index + 1}}</label>
-												<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上报问题类型</font></label>
-												<input type="text" class="form-control input-short" readonly ng-model="item.problemTypeName">
-											</div>
-										</div>
-										<div class="form-item" style="position: relative;left: -95px;">
-											<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>扣分</font></label>
-											<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>{{item.problemDeduction}}分</font></label>
-										</div>
-										<br>
-										<div class="form-item">
-											<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上报问题描述</font></label>
-											<textarea class="form-control" id="deblock_udid" name="deblock_udid" readonly rows="3" style="width: 160px;max-width: 160px;" ng-model="item.problemDesc"></textarea>
-										</div>
-										<div class="form-item">
-											<label style=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上传照片</font></label>
-											<div style="display: inline-block;" id="layer-photos-check">
-												<img style="margin: 0 5px;"  ng-repeat="items in item.attach" layer-pid="" layer-src="{{eventImgUrl}}{{items}}" src="{{eventImgUrl}}{{items}}" alt="问题照片" width="100px" height="100px" key="{{$index}}">
-											</div>
-										</div>
-									</div>
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">抽查</span><span class="tag-right"></span><span class="tag-right tag-left"></span><span
+                    class="tag tag1">详情</span><span class="tag-right"></span>
+                <div style="overflow: hidden;">
+                    <button type="button" class="btn btn-primary" ng-click="goBack()"
+                            style="position: absolute;right: 20px;bottom: 20px;">返回
+                    </button>
+                </div>
+            </div>
+        </div>
 
-	        					</form>
-    						</div>
-        					<!--<div style="text-align: center;margin: 35px 0;">-->
-								<!--<button type="button" class="btn btn-primary" style="margin-right: 30px;" >查看事件</button>-->
-			                <!--</div>-->
-        				</div>
-        			</div>
-        			
-        		</div> 
-        		
-        	</div>
-       	</div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <ul class="js-tab">
+                    <li class="basis tab-active">基础资料</li>
+                    <li class="check">检查结果</li>
+                </ul>
+                <div class="panel-body js-con">
+                    <div class="basis-con con">
+                        <div class="panel-body">
+                            <form class="form-inline" style="padding-left: 25%;">
+                                <div class="form-item">
+                                    <label><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">标题</font></font></label>
+                                    <input type="text" class="form-control input-short" ng-model="detail.title"
+                                           readonly>
+                                </div>
+                                <div class="form-item" style="margin-left: 5px;">
+                                    <label><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">检查区域</font></font></label>
+                                    <!--<input type="text" class="form-control input-short" ng-model="detail.regionName" readonly>-->
+                                    <textarea class="form-control" id="deblock_udid" name="deblock_udid"
+                                              ng-model="detail.regionName" style="width: 160px;max-width: 160px;"
+                                              readonly></textarea>
+                                </div>
+                                <br/>
+                                <div class="form-item">
+                                    <label><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">检查日期</font></font></label>
+                                    <input type="text" class="form-control input-short" ng-model="detail.checkDate"
+                                           readonly>
+                                </div>
+                                <div class="form-item" style="position: relative;left: 5px;">
+                                    <label><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">检查河道</font></font></label>
+                                    <!--<input type="text" class="form-control input-short" ng-model="detail.checkRiver" readonly>-->
+                                    <textarea class="form-control" id="deblock_udid" name="deblock_udid"
+                                              ng-model="detail.checkRiver" style="width: 160px;max-width: 160px;"
+                                              readonly></textarea>
+                                </div>
+                                <br/>
+                                <div class="form-item">
+                                    <label><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">任务类型</font></font></label>
+                                    <input type="text" class="form-control input-short" ng-model="taskType" readonly>
+                                </div>
+                                <div class="form-item" style="position: relative;left: 5px;">
+                                    <label><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">下发人员</font></font></label>
+                                    <input type="text" class="form-control input-short" ng-model="detail.sendPerson"
+                                           readonly>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="check-con con tab-show">
+                        <div class="panel-body">
+                            <div ng-if="checkList.length == 0">暂无检查结果</div>
+                            <div style="overflow: hidden" ng-if="checkList.length != 0">
+                                <form class="form-inline" style="float:left;padding-left: 15%;">
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;"></font>检查时间</font></label>
+                                        <input type="text" class="form-control input-short" readonly
+                                               ng-model="checkTime">
+                                    </div>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;"></font>上报人</font></label>
+                                        <input type="text" class="form-control input-short" readonly
+                                               ng-model="checkPerson">
+                                    </div>
+                                    <br/>
+                                    <div ng-repeat="item in checkList">
+                                        <div class="form-item">
+                                            <div style="height: 34px; position: relative;left: -95px;">
+                                                <label>问题{{$index + 1}}</label>
+                                                <label><font style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;"></font>上报问题类型</font></label>
+                                                <input type="text" class="form-control input-short" readonly
+                                                       ng-model="item.problemTypeName">
+                                            </div>
+                                        </div>
+                                        <div class="form-item" style="position: relative;left: -95px;">
+                                            <label><font style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;"></font>扣分</font></label>
+                                            <label><font style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;"></font>{{item.problemDeduction}}分</font></label>
+                                        </div>
+                                        <br>
+                                        <div class="form-item">
+                                            <label><font style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;"></font>上报问题描述</font></label>
+                                            <textarea class="form-control" id="deblock_udid" name="deblock_udid"
+                                                      readonly rows="3" style="width: 160px;max-width: 160px;"
+                                                      ng-model="item.problemDesc"></textarea>
+                                        </div>
+                                        <div class="form-item">
+                                            <label style=""><font style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;"></font>上传照片</font></label>
+                                            <div style="display: inline-block;" id="layer-photos-check">
+                                                <img style="margin: 0 5px;" ng-repeat="items in item.attach"
+                                                     layer-pid="" layer-src="{{eventImgUrl}}{{items}}"
+                                                     src="{{eventImgUrl}}{{items}}" alt="问题照片" width="100px"
+                                                     height="100px" key="{{$index}}">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <!--<div style="text-align: center;margin: 35px 0;">-->
+                            <!--<button type="button" class="btn btn-primary" style="margin-right: 30px;" >查看事件</button>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>
 <script>
     //调用示例
-    layui.use('layer', function() {
+    layui.use('layer', function () {
         layer.photos({
             photos: '#layer-photos-check',
-			anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+            anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
         });
     });
 </script>
