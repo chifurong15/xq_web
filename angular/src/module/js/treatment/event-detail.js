@@ -72,6 +72,8 @@
                         callBack: function(res){
                             $scope.afterAccessory = res.data.afterAccessory;
                             $scope.beforeAccessory = res.data.beforeAccessory;
+                            console.log($scope.beforeAccessory)
+                            console.log($scope.afterAccessory)
                             // for(let i = 0; i<afterAccessory.length;i++){
                             //     if(afterAccessory[i].accessorytype == 2){
                             //         $scope.afterAccessory.push(afterAccessory[i])
@@ -499,6 +501,19 @@
                         return grade;
                     };
 
+                    $scope.openImg = function (item) {
+                        console.log(item)
+                        $('#openImg').show();
+                        $('#imgShade').show();
+                        $scope.imgUrl = $scope.eventImgUrl +  item.accessoryurl;
+                        $("#openImg img").attr("src", $scope.imgUrl);
+                    }
+                    
+                    $scope.closeImg = function () {
+                        $('#openImg').hide();
+                        $('#imgShade').hide();
+                    }
+                    
                     // 音视频播放
                     $scope.playVideo = function(item){
                         $('#videoBox').show();

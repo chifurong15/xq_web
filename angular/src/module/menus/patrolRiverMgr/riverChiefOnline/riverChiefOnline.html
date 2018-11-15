@@ -471,8 +471,12 @@
                             <form class="bs-example form-horizontal eveDetail-panel" style="margin-top: 5px;">
                                 <div class="form-inline">
                                     <label>处理后:</label>
-                                    <div id="layer-photos-later" class="layer-photos-demo" style="margin-left: 30px;" ng-show="after">
-                                        <img style="margin: 0 5px;" ng-repeat="item in after" layer-pid="" layer-src="{{eventImgUrl}}/{{item.afterAccessory}}" src="{{eventImgUrl}}/{{item.afterAccessory}}" alt="处理后图片" width="60px" height="60px">
+                                    <div class="layer-photos-demo" style="margin-left: 30px;" ng-show="after">
+                                        <div ng-repeat="item in after" style="float: left">
+                                            <img class="event-photos-after" style="margin: 0 5px;" ng-show="item.accessorytype == 1||item.accessorytype == 2" layer-pid="" layer-src="{{eventImgUrl}}{{item.accessoryurl}}" src="{{eventImgUrl}}{{item.accessoryurl}}" alt="处理后图片" width="60px" height="60px">
+                                            <img ng-show="item.accessorytype == 3" style=" float: left; margin: 0 5px;width:60px; height:60px;" src="img/music_img.png" ng-click="playAudio(item)" alt="巡河音像">
+                                            <img ng-show="item.accessorytype == 4" style="float: left;margin: 0 5px;width:60px; height:60px;" src="img/audio_img.png" alt="巡河音像" ng-click="playVideo(item)">
+                                        </div>
                                     </div>
                                 </div>
                             </form>
@@ -644,6 +648,12 @@
     layui.use('layer', function() {
         layer.photos({
             photos: '.event-photos-before'
+            ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+        });
+    });
+    layui.use('layer', function() {
+        layer.photos({
+            photos: '.event-photos-after'
             ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
         });
     });

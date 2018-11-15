@@ -9,11 +9,13 @@
                     <form class="form-inline" method="get">
                         <div class="form-item">
                             <label>问题编号</label>
-                            <input type="text" class="form-control input-short" ng-model="detailData.serialno" readonly/>
+                            <input type="text" class="form-control input-short" ng-model="detailData.serialno"
+                                   readonly/>
                         </div>
                         <div class="form-item">
                             <label>问题类型</label>
-                            <input type="text" class="form-control input-short" ng-model="detailData.typename" readonly/>
+                            <input type="text" class="form-control input-short" ng-model="detailData.typename"
+                                   readonly/>
                         </div>
                         <div class="form-item">
                             <label>问题等级</label>
@@ -45,7 +47,8 @@
                         </div>
                         <div class="form-item">
                             <label>上报人</label>
-                            <input type="text" class="form-control input-short" ng-model="detailData.reportperson" value="detailData.reportperson"
+                            <input type="text" class="form-control input-short" ng-model="detailData.reportperson"
+                                   value="detailData.reportperson"
                                    readonly/>
                         </div>
                         <div class="form-item">
@@ -55,7 +58,8 @@
                         </div>
                         <div class="form-item">
                             <label>联系方式</label>
-                            <input type="text" class="form-control input-short" ng-model="detailData.reportphone" value=""/>
+                            <input type="text" class="form-control input-short" ng-model="detailData.reportphone"
+                                   value=""/>
                             <!--<span class="required">*</span>-->
                         </div>
                         <!-- <div class="form-item">
@@ -78,37 +82,47 @@
                     <div class="form-inline">
                         <div class="form-item" style="min-width: 350px;">
                             <label>处理前</label>
-                            <div class="layer-photos-demo" style="margin-left: 30px;" ng-show="beforeAccessory">
-                                <div ng-repeat="item in beforeAccessory" style="float: left">
-                                    <img class="event-photos-before" style="margin: 0 5px;" ng-show="item.accessorytype == 1||item.accessorytype == 2" layer-pid="" layer-src="{{eventImgUrl}}{{item.accessoryurl}}" src="{{eventImgUrl}}{{item.accessoryurl}}" alt="处理前图片" width="60px" height="60px">
-                                    <img ng-show="item.accessorytype == 3" style=" float: left; margin: 0 5px;width:60px; height:60px;}" src="img/music_img.png" ng-click="playAudio(item)" alt="巡河音像">
-                                    <img ng-show="item.accessorytype == 4" style="float: left;margin: 0 5px;width:60px; height:60px;}" src="img/audio_img.png" alt="巡河音像" ng-click="playVideo(item)">
+                            <div ng-repeat="item in beforeAccessory">
+                                <div id="layer-photos-before" style="float: left">
+                                    <img style="margin: 0 5px;"
+                                         ng-show="item.accessorytype == 1||item.accessorytype == 2"
+                                         layer-src="{{eventImgUrl}}{{item.accessoryurl}}"
+                                         src="{{eventImgUrl}}{{item.accessoryurl}}" alt="处理前图片" width="60px"
+                                         height="60px" ng-click="openImg(item)">
                                 </div>
+                                <img ng-show="item.accessorytype == 3"
+                                     style=" float: left; margin: 0 5px;width:60px; height:60px;}"
+                                     src="img/music_img.png" ng-click="playAudio(item)" alt="巡河录音">
+                                <img ng-show="item.accessorytype == 4"
+                                     style="float: left;margin: 0 5px;width:60px; height:60px;}" src="img/audio_img.png"
+                                     ng-click="playVideo(item)" alt="巡河视频">
                             </div>
-                            <!--<div id="layer-photos-before" class="layer-photos-demo" style="margin-left: 30px;max-width: 600px;" ng-show="beforeAccessory">-->
-                                <!--<img style="margin: 0 5px;" ng-repeat="item in beforeAccessory" layer-pid="" layer-src="{{eventImgUrl}}{{item.accessoryurl}}" src="{{eventImgUrl}}{{item.accessoryurl}}" alt="处理前图片" width="60px" height="60px">-->
-                            <!--</div>-->
                         </div>
                     </div>
                     <div class="form-inline">
                         <div class="form-item" style="min-width: 350px;">
                             <label>处理后</label>
-                            <div class="layer-photos-demo" style="margin-left: 30px;" ng-show="afterAccessory">
-                                <div ng-repeat="item in afterAccessory" style="float: left">
-                                    <img class="event-photos-after" style="margin: 0 5px;" ng-show="item.accessorytype == 1||item.accessorytype == 2" layer-pid="" layer-src="{{eventImgUrl}}{{item.accessoryurl}}" src="{{eventImgUrl}}{{item.accessoryurl}}" alt="处理前图片" width="60px" height="60px">
-                                    <img ng-show="item.accessorytype == 3" style=" float: left; margin: 0 5px;width:60px; height:60px;display: block !important;" src="img/music_img.png" ng-click="playAudio(item)" alt="巡河音像">
-                                    <img ng-show="item.accessorytype == 4" style="float: left;margin: 0 5px;width:60px; height:60px;display: block !important;" src="img/audio_img.png" alt="巡河音像" ng-click="playVideo(item)">
+                            <div ng-repeat="item in afterAccessory">
+                                <div id="layer-photos-after" style="float: left">
+                                    <img style="margin: 0 5px;"
+                                         ng-show="item.accessorytype == 1||item.accessorytype == 2"
+                                         layer-src="{{eventImgUrl}}{{item.accessoryurl}}"
+                                         src="{{eventImgUrl}}{{item.accessoryurl}}" alt="处理后图片" width="60px"
+                                         height="60px" ng-click="openImg(item)">
                                 </div>
+                                <img ng-show="item.accessorytype == 3"
+                                     style=" float: left; margin: 0 5px;width:60px; height:60px;}"
+                                     src="img/music_img.png" ng-click="playAudio(item)" alt="巡河录音">
+                                <img ng-show="item.accessorytype == 4"
+                                     style="float: left;margin: 0 5px;width:60px; height:60px;}" src="img/audio_img.png"
+                                     ng-click="playVideo(item)" alt="巡河视频">
                             </div>
-                            <!--<div id="layer-photos-later" class="layer-photos-demo" style="margin-left: 30px;max-width: 600px;" ng-show="afterAccessory">-->
-                                <!--<img style="margin: 0 5px;" ng-repeat="item in afterAccessory" layer-pid="" layer-src="{{eventImgUrl}}{{item.afterAccessory}}" src="{{eventImgUrl}}{{item.accessoryurl}}" alt="处理后图片" width="60px" height="60px">-->
-                            <!--</div>-->
                         </div>
                     </div>
                     <div class="form-item">
                         <label style="width: auto">说明:上报电话请填写手机号码或者座机号码，联系方式无限制</label>
                     </div>
-                    <div class="basin_map" id="mapContainer" style="position: absolute;top: 100px;right: 30px;width: 320px;height: 240px;
+                    <div class="basin_map" id="mapContainer" style="position: absolute;top: 30px;right: 30px;width: 320px;height: 240px;
                     border: 1px solid #cfdadd;
                     background: #eee;
                     z-index: 0;">
@@ -160,7 +174,8 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <ul class="tabs-list" id="tabs">
-                        <li ng-repeat="(ind,item) in workTypeList" ng-class="ind == 0? 'select': ''" ng-click="btnClick(item,ind)"><a>{{workTypeTurn(item)}}</a></li>
+                        <li ng-repeat="(ind,item) in workTypeList" ng-class="ind == 0? 'select': ''"
+                            ng-click="btnClick(item,ind)"><a>{{workTypeTurn(item)}}</a></li>
                     </ul>
                     <div class="tab-content" id="tabs-con">
                         <div class="tab-con" style="display: block">
@@ -171,22 +186,27 @@
                                     <input type="radio" name="iCheck" ng-click="selectSenderType(2)"><span>根据河道派单</span>
                                 </div>
                             </form> -->
-                            <form class="form-inline" method="get" ng-show="typeModule == 'sendOrder' || typeModule == 'delegate'">
+                            <form class="form-inline" method="get"
+                                  ng-show="typeModule == 'sendOrder' || typeModule == 'delegate'">
                                 <div class="form-item" ng-if="commendName == '委办'">
                                     <label>选择区域</label>
-                                    <select  ng-model="choseRegion" class="form-control select-short" ng-change="selectRegion(choseRegion, '')">
+                                    <select ng-model="choseRegion" class="form-control select-short"
+                                            ng-change="selectRegion(choseRegion, '')">
                                         <option value="0" ng-show="areaWb">上级委办</option>
                                         <option value="1">本级委办</option>
                                     </select>
                                 </div>
                                 <div class="form-item" ng-if="commendName == '派单'">
                                     <label>选择区域</label>
-                                    <select  ng-model="senderRegion" ng-options="item.name for item in regionList" class="form-control select-short" ng-change="selectRegion('',senderRegion)">
+                                    <select ng-model="senderRegion" ng-options="item.name for item in regionList"
+                                            class="form-control select-short" ng-change="selectRegion('',senderRegion)">
                                     </select>
                                 </div>
                                 <div class="form-item">
                                     <label>选择人员</label>
-                                    <select  ng-model="chosePerson" ng-options="item.name for item in personList" class="form-control select-short" ng-change="selectPerson(chosePerson.id)"></select>
+                                    <select ng-model="chosePerson" ng-options="item.name for item in personList"
+                                            class="form-control select-short"
+                                            ng-change="selectPerson(chosePerson.id)"></select>
                                     <span class="required">*</span>
                                 </div>
                             </form>
@@ -198,7 +218,8 @@
                                 </div>
                             </form>
                             <div class="btn-box">
-                                <button type="submit" class="btn btn-primary" ng-show="moudleLength>0" ng-click="certainClick()"><i
+                                <button type="submit" class="btn btn-primary" ng-show="moudleLength>0"
+                                        ng-click="certainClick()"><i
                                         class="fa fa-plus"></i>确认
                                 </button>
                                 <button type="submit" class="btn btn-default" ng-click="back()"><i
@@ -221,7 +242,8 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title" id="myModalLabel">选择区域</h4>
                         </div>
                         <div class="modal-body">
@@ -234,8 +256,10 @@
                 </div>
             </div>
         </div>
-        <div id="videoBox" style="position: absolute!important;;z-index: 99998!important;;left: 30%;top: 30%;display: none;background-color: #333;padding: 30px;">
-            <span style="position: absolute;z-index: 9991;top: 10px;right: 10px;color: #fff;padding: 2px 8px;cursor: pointer;" ng-click="closePlayer()">关闭</span>
+        <div id="videoBox"
+             style="position: absolute!important;;z-index: 99998!important;;left: 30%;top: 30%;display: none;background-color: #333;padding: 30px;">
+            <span style="position: absolute;z-index: 9991;top: 10px;right: 10px;color: #fff;padding: 2px 8px;cursor: pointer;"
+                  ng-click="closePlayer()">关闭</span>
             <div id="videoPlayerBox">
                 <video id="my-player" class="video-js" controls preload="auto" data-setup='{}'>
                     <source class="source" src="" type="video/mp4"></source>
@@ -245,20 +269,29 @@
                 <audio controls src="" autoplay="true"></audio>
             </div>
         </div>
+
+        <div id="openImg"
+             style="position: absolute!important;;z-index: 99998!important;display: none;top: 0;left: 0;width: 100%;height: 100%;">
+            <img src="" style="height: 50%;left: 30%;position: absolute;top: 20%; z-index: 100000">
+            <a ng-click="closeImg()" style="position: absolute; top: 15px; right: 15px; width: 30px; height: 30px; color: #fff; font-size: 20px;
+    z-index: 100000; text-align: center; line-height: 30px;"><i class="fa fa-close"></i></a>
+            <div id="imgShade" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;background: #000; opacity: 0.9"></div>
+
+        </div>
     </div>
 </div>
 <script>
-    layui.use('layer', function() {
-        layer.photos({
-            photos: '.event-photos-before'
-            ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
-        });
-    });
-    layui.use('layer', function() {
-        layer.photos({
-            photos: '.event-photos-after'
-            ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
-        });
-    });
 
+    layui.use('layer', function () {
+        layer.photos({
+            photos: '#layer-photos-before'
+            , anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+        });
+    });
+    layui.use('layer', function () {
+        layer.photos({
+            photos: '#layer-photos-after'
+            , anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+        });
+    });
 </script>
