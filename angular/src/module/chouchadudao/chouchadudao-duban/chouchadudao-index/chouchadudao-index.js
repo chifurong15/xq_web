@@ -21,9 +21,9 @@
                                        $location, $log, $q, $rootScope, $window,
                                        routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
-                    var apiPrefix = moduleService.getServiceUrl() + '/duban';
+                    //var apiPrefix = moduleService.getServiceUrl() + '/duban';
+                    var apiPrefix = 'http://10.0.9.133:7026' + '/duban';
 
-                    //var apiPrefix = 'http://10.0.9.133:7026' + '/duban';
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
 
                     $scope.init = function () {
