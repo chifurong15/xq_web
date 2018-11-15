@@ -25,12 +25,12 @@
                         附件:<span>{{attandName}}</span>
                         <a href="http://10.0.0.196/api/download/{{bulletin.attand_url}}" target="_blank"
                            style="color: #3189e1;">下载</a>
-                        <a href="{{getServiceUrl}}/fm{{bulletin.attand_url}}" target="_blank"
-                           style="color: #3189e1;">预览</a>
+                        <!--<a href="{{getServiceUrl}}/fm{{bulletin.attand_url}}" target="_blank"-->
+                           <!--style="color: #3189e1;">预览</a>-->
                         <!--<a ng-href="http://10.0.9.196:8888/bulletin/v1/bulletin/download?attandUrl={{bulletin.attand_url}}"-->
                         <!--target="_blank" class="downOrLook">下载</a>-->
-                        <!--<a ng-href="{{getServiceUrl}}/bulletin/v1/bulletin/lookload?attandUrl={{bulletin.attand_url}}"-->
-                        <!--target="_blank" class="downOrLook">预览</a>-->
+                        <a ng-href="{{getServiceUrl}}/bulletin/v1/bulletin/lookload?attand_url={{bulletin.attand_url}}"
+                        target="_blank" class="downOrLook">预览</a>
                     </p>
                 </div>
             </div>

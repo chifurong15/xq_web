@@ -184,6 +184,7 @@
 	            			var form = new FormData();
 							var file = e.files[i];
 							$scope.attandName = file.name;
+							localStorage.setItem('attandName',file.name)
 				            form.append('files', file);
 				            form.append('fileName', file.name);
 				            $http({

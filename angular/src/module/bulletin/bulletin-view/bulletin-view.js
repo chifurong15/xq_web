@@ -72,7 +72,8 @@
 							callBack: function (res) {
 								//var attandNamePart = res.data.attandUrl.split('_');
 								$scope.bulletin = res.data;
-								//$scope.attandName = attandNamePart.splice(1, attandNamePart.length - 1).join('');
+                                console.log($scope.bulletin);
+                                $scope.attandName = localStorage.getItem('attandName');
 							}
 						})
 					}
