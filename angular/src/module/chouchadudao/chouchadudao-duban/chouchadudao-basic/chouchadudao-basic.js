@@ -66,7 +66,7 @@
                             getAnswer();
                         }
 
-                        if ($scope.num == 2 && $scope.status == 2) {
+                        if ($scope.num == 2) {
                             getAnswer();
                         }
 
