@@ -157,6 +157,9 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
             if (!menu) {
                 return;
             }
+            var eleId = '#menu_' + menu.id;
+            $(eleId).parent().addClass('active');
+            $(eleId).parent().siblings().removeClass('active');
             var childernList = menu.children;
             showLeft();
             //设置二级菜单：menuObj在页面指令中被引用
@@ -170,6 +173,7 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
             }
             //有子节点，就点击第一个子节点
             var menuId =  '#menu_' + (menu.children ?  menu.children[0].id : menu.id);
+
             $timeout(function () {
                 angular.element(menuId).click();
             }, 0, false);
@@ -308,6 +312,5 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
             }, function errorCallback(response) {
             });
         }
-
     }
 ]);
