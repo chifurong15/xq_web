@@ -22,7 +22,18 @@
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
 					var apiPrefix = moduleService.getServiceUrl() + '/inspection';
-					//var apiPrefix = 'http://10.0.9.203:8081' + '/inspection';
+                    //var apiPrefix = 'http://10.0.9.116:7025' + '/inspection';
+
+                    var options = {
+                        pdfOpenParams: {
+                            pagemode: "thumbs",
+                            navpanes: 0,
+                            toolbar: 0,
+                            statusbar: 0,
+                            view: "FitV"
+                        }
+                    };
+
 					$scope.id = localStorage.getItem('id');
 					$scope.state = localStorage.getItem('state');
 					$scope.oneregion = localStorage.getItem('oneregion');
@@ -47,6 +58,16 @@
                         getResult ();
                     }
 
+                    //查看附件
+                    $scope.viewFile = function () {
+                        $('#myModal').modal('show');
+                    }
+                    //取消查看
+                    $scope.cancel = function () {
+                        $('#myModal').modal('hide');
+                    }
+
+
                     // 获取基础资料
                     function getBasic () {
                         $ajaxhttp.myhttp({
@@ -56,7 +77,10 @@
                                 id:$scope.id
                             },
                             callBack: function (res) {
-                                $scope.resBasic = res.data;
+                                if(res.data){
+                                    $scope.resBasic = res.data;
+                                    PDFObject.embed(res.data.accessory, "#file", options);
+                                }
                             }
                         })
                     }
@@ -77,7 +101,7 @@
                     //获取督导组列表
                     function getGroupList () {
                         $ajaxhttp.myhttp({
-                            url: apiPrefix + '/v1/Supervise/list',
+                            url: apiPrefix + '/v1/Supervise/selectList',
                             method: 'get',
                             params:{
                                 inspectionid:$scope.id
@@ -97,7 +121,11 @@
                                 inspectionId: $scope.id
                             },
                             callBack: function (res) {
-                                $scope.resReport = res.data;
+                                if(res.data){
+                                    $scope.resReport = res.data;
+                                    PDFObject.embed(res.data.accessory, "#file", options);
+                                }
+
                             }
                         })
                     }
@@ -110,7 +138,10 @@
                                 inspectionId: $scope.id
                             },
                             callBack: function (res) {
-                                $scope.resDealDetail = res.data;
+                                if(res.data){
+                                    $scope.resDealDetail = res.data;
+                                    PDFObject.embed(res.data.accessory, "#file", options);
+                                }
                             }
                         })
 
@@ -125,11 +156,18 @@
                                 inspectionId: $scope.id
                             },
                             callBack: function (res) {
-                                $scope.resResult = res.data;
-                                if($scope.resResult.whether && $scope.resResult.whether == 1){
-                                    $scope.whether = '已处理'
-								}else{
-                                    $scope.whether = '未处理'
+                                if(res.resCode == 1){
+                                    if(res.data){
+                                        $scope.resResult = res.data;
+                                        PDFObject.embed(res.data.accessory, "#file", options);
+                                        if($scope.resResult.whether && $scope.resResult.whether == 1){
+                                            $scope.whether = '已处理'
+                                        }else{
+                                            $scope.whether = '未处理'
+                                        }
+                                    }
+                                }else{
+                                    layer.msg('服务器异常，请稍后再试')
                                 }
                             }
                         })

@@ -52,7 +52,7 @@
 									<br />
 									<div class="form-item" >
 										<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">方案附件</font></font></label>
-										<button class="btn btn-info"><i class="fa fa-css3"></i>查看附件</button>
+										<button class="btn btn-info" ng-click="viewFile()"><i class="fa fa-css3"></i>查看附件</button>
 									</div>
 									<br />
 									<div class="form-item" >
@@ -167,7 +167,7 @@
 									<br />
 									<div class="form-item" >
 										<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通报附件</font></font></label>
-										<button class="btn btn-info"><i class="fa fa-css3"></i>查看附件</button>
+										<button class="btn btn-info" ng-click="viewFile()"><i class="fa fa-css3"></i>查看附件</button>
 									</div>
 								</form>
 							</div>
@@ -199,7 +199,7 @@
 									<br />
 									<div class="form-item" >
 										<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通报附件</font></font></label>
-										<button class="btn btn-info"><i class="fa fa-css3"></i>查看附件</button>
+										<button class="btn btn-info" ng-click="viewFile()"><i class="fa fa-css3"></i>查看附件</button>
 									</div>
 								</form>
 							</div>
@@ -217,7 +217,7 @@
 									<br />
 									<div class="form-item" >
 										<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">附件</font></font></label>
-										<button class="btn btn-info" ><i class="fa fa-css3"></i>查看附件</button>
+										<button class="btn btn-info" ng-click="viewFile()"><i class="fa fa-css3"></i>查看附件</button>
 									</div>
 								</form>
 								<form class="form-inline" style="float:left;">
@@ -244,7 +244,7 @@
 									<br />
 									<div class="form-item" >
 										<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">附件</font></font></label>
-										<button class="btn btn-info" ><i class="fa fa-css3"></i>查看附件</button>
+										<button class="btn btn-info" ng-click="viewFile()"><i class="fa fa-css3"></i>查看附件</button>
 									</div>
 								</form>
 								<form class="form-inline" style="float:left;">
@@ -258,151 +258,32 @@
 					</div>
 				</div>
 			</div>
-			<!--<div class="panel-body">-->
-        		<!--<div class="panel-body js-con">        		-->
-        			<!--&lt;!&ndash;通报&ndash;&gt;        			-->
-        			<!--<div class="bulletin-con con tab-show">-->
-        				<!--<div class="panel-body">-->
-							<!--<div style="overflow: hidden">-->
-								<!--<form class="form-inline" style="float:left;padding-left: 25%;">									-->
-				                    <!--<div class="input-group date date_picker form-item" id="J-searchTime">-->
-				                        <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通报日期</font></font></label>-->
-				        				<!--<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime">-->
-				                        <!--<span class="input-group-addon"><i class="fa fa-calendar"></i></span>-->
-					               <!--</div>        -->
-				                    <!--<br />   -->
-				                    <!--<div class="form-item">-->
-				                        <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通报内容</font></font></label>-->
-										<!--<textarea class="form-control" id="deblock_udid" name="deblock_udid"  rows="3" style="width: 160px;max-width: 160px;"></textarea>-->
-				                        <!--<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>-->
-				                    <!--</div>        -->
-								<!--</form>-->
-								<!--<form class="form-inline" style="float:left;">									-->
-				                    <!--<div class="form-item">-->
-				                        <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一区一单</font></font></label>-->
-				        				<!--<label class="radio-inline i-checks" ng-repeat="type in typeList" style="margin-left: 15px;">-->
-					                        <!--<input type="radio" name="type" ng-model="isSelected" ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>-->
-					                        <!--{{type.typeName}}-->
-					                  	<!--</label>				        				-->
-					                <!--</div>        -->
-				                    <!--<br />   -->
-				                    <!--<div class="form-item" >-->
-				                        <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通报附件</font></font></label>-->
-				                        <!--<input type="text" class="form-control input-short" ng-model="title">-->
-				                        <!--<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>-->
-					                    <!--<button type="button" class="btn btn-primary" style="position: relative;top: -10px;">预览</button>-->
-				                    <!--</div>       -->
-								<!--</form>-->
-							<!---->
-							<!--</div>-->
-							<!--<div style="text-align: center;margin: 35px 0;" ng-if="noOps ==1">-->
-				                <!--<button type="button" class="btn btn-primary" style="margin: 0 50px;" ng-click="submit()" >确定并下发</button>-->
-			                    <!--<button type="button" class="btn btn-default" ng-click="back()">取消</button>-->
-			                <!--</div>-->
-						<!--</div>-->
-        			<!--</div>-->
-        			<!---->
-        			<!--&lt;!&ndash;问题处理&ndash;&gt;-->
-        			<!--<div class="troubleshooting-con con tab-show">-->
-        				<!--<div class="panel-body">-->
-        					<!--<div style="overflow: hidden">-->
-        						<!--<form class="form-inline" style="float:left;padding-left: 15%;">	        						-->
-				                    <!--<div class="form-item" >-->
-				                        <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>处理日期</font></label>-->
-				                        <!--<input type="text" class="form-control input-short" >-->
-				                    <!--</div>-->
-				                    <!--<br />-->
-				                    <!--<div class="form-item" >-->
-				                        <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">附件</font></font></label>-->
-				                        <!--<input type="text" class="form-control input-short" >-->
-				                        <!--<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>-->
-					                    <!--<button type="button" class="btn btn-primary" style="position: relative;top: -10px;">预览</button>-->
-				                    <!--</div>-->
-	        					<!--</form>-->
-		        					<!---->
-		        				<!--<form class="form-inline" style="float:left;">-->
-	        						<!--<div class="form-item">-->
-				                        <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否处理</font></font></label>-->
-				        				<!--<label class="radio-inline i-checks" ng-repeat="type in typeList" style="margin-left: 15px;">-->
-					                        <!--<input type="radio" name="type" ng-model="isSelected" ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>-->
-					                        <!--{{type.typeName}}-->
-					                  	<!--</label>				        				-->
-					                <!--</div>				                    -->
-	        					<!--</form>-->
-    						<!--</div>-->
-        					<!--<div style="text-align: center;margin: 35px 0;" ng-if="noOps ==1 ">-->
-				                <!--<button type="button" class="btn btn-primary" style="margin: 0 50px;" ng-click="submit()" >处理并上报</button>-->
-			                    <!--<button type="button" class="btn btn-default" ng-click="back()">取消</button>-->
-			                <!--</div>-->
-        				<!--</div> -->
-        			<!--</div> -->
-        			<!---->
-        			<!--&lt;!&ndash;结果反馈&ndash;&gt;-->
-        			<!--<div class="liaisonMan-con con tab-show">-->
-        				<!--<div class="panel-body">-->
-        					<!--<div style="overflow: hidden">-->
-        						<!--<form class="form-inline" style="float:left;padding-left: 15%;">-->
-        							<!--<div class="form-item" >-->
-				                        <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理结果</font></font></label>-->
-				                        <!--<input type="text" class="form-control input-short">-->
-				                    <!--</div>-->
-				                    <!--<br />-->
-				                    <!--<div class="form-item" >-->
-				                        <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>处理日期</font></label>-->
-				                        <!--<input type="text" class="form-control input-short">-->
-				                    <!--</div>-->
-	        					<!--</form>-->
-		        					<!---->
-		        				<!--<form class="form-inline" style="float:left;">	        						-->
-				                    <!--<div class="form-item" >-->
-				                        <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">结果附件</font></font></label>-->
-				                        <!--<input type="text" class="form-control input-short" >-->
-					                    <!--<button type="button" class="btn btn-primary">预览</button>-->
-				                    <!--</div>				                    -->
-	        					<!--</form>-->
-    						<!--</div>-->
-        					<!---->
-        				<!--</div>-->
-        			<!---->
-        			<!--</div>-->
-        			<!---->
-        			<!--&lt;!&ndash;一区一单&ndash;&gt;-->
-        			<!--<div class="AsingleArea-con con tab-show">-->
-        				<!--<div class="panel-body">-->
-        					<!--<div style="overflow: hidden">-->
-        						<!--<form class="form-inline" style="float:left;padding-left: 15%;">	        						-->
-				                    <!--<div class="form-item" >-->
-				                        <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>一区一单处理日期</font></label>-->
-				                        <!--<input type="text" class="form-control input-short" >-->
-				                    <!--</div>-->
-				                    <!--<br />-->
-				                    <!--<div class="form-item" >-->
-				                        <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理附件</font></font></label>-->
-				                        <!--<input type="text" class="form-control input-short" >-->
-				                        <!--<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>-->
-					                    <!--<button type="button" class="btn btn-primary" style="position: relative;top: -10px;">预览</button>-->
-				                    <!--</div>-->
-	        					<!--</form>-->
-		        					<!---->
-		        				<!--<form class="form-inline" style="float:left;">-->
-	        						<!--<div class="form-item">-->
-				                        <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否处理</font></font></label>-->
-				        				<!--<label class="radio-inline i-checks" ng-repeat="type in typeList" style="margin-left: 15px;">-->
-					                        <!--<input type="radio" name="type" ng-model="isSelected" ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>-->
-					                        <!--{{type.typeName}}-->
-					                  	<!--</label>				        				-->
-					                <!--</div>				                    -->
-	        					<!--</form>-->
-    						<!--</div>-->
-        					<!---->
-        				<!--</div>-->
-        			<!---->
-        			<!--</div>-->
-        			<!---->
-        		<!--</div> -->
-        		<!---->
-        	<!--</div>-->
+
        	</div>
+
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+			 data-backdrop="static" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" id="myModalLabel">
+							查看附件
+						</h4>
+					</div>
+					<div class="modal-body">
+						<div id="file" style="height: 400px;"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
     </div>
 </div>
 

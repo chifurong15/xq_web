@@ -22,8 +22,17 @@
                                          routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl() + '/inspection';
-                    //var apiPrefix = 'http://10.0.9.203:8081' + '/inspection';
+                    //var apiPrefix = 'http://10.0.9.116:7025' + '/inspection';
 
+                    var options = {
+                        pdfOpenParams: {
+                            pagemode: "thumbs",
+                            navpanes: 0,
+                            toolbar: 0,
+                            statusbar: 0,
+                            view: "FitV"
+                        }
+                    };
 
                     $scope.init = function () {
                         $('.selectpicker').selectpicker({
@@ -97,6 +106,15 @@
                         });
                     })
 
+
+                    //查看附件
+                    $scope.viewFile = function () {
+                        $('#myModal2').modal('show');
+                    }
+                    //取消查看
+                    $scope.cancel = function () {
+                        $('#myModal2').modal('hide');
+                    }
 
                     // 单选按钮组
                     $scope.typeList = [
@@ -446,6 +464,7 @@
                             },
                             callBack: function (res) {
                                 $scope.resBasic = res.data;
+                                PDFObject.embed(res.data.accessory, "#file", options);
                             }
                         })
                     }
@@ -467,7 +486,7 @@
                     //获取督导组列表
                     function getGroupList () {
                         $ajaxhttp.myhttp({
-                            url: apiPrefix + '/v1/Supervise/list',
+                            url: apiPrefix + '/v1/Supervise/selectList',
                             method: 'get',
                             params:{
                                 inspectionid:$scope.id
@@ -506,6 +525,7 @@
                             },
                             callBack: function (res) {
                                 $scope.resReport = res.data;
+                                PDFObject.embed(res.data.accessory, "#file", options);
                             }
                         })
 
