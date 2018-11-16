@@ -212,7 +212,7 @@
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font
                                                 style="vertical-align: inherit;">通报内容</font></font></label>
-                                        <textarea class="form-control" id="deblock_udid1" name="deblock_udid"
+                                        <textarea class="form-control" id="deblock_udid" name="deblock_udid"
                                                   ng-model="trafficContent" rows="3"
                                                   style="width: 160px;max-width: 160px;"></textarea>
                                     </div>
@@ -305,12 +305,10 @@
                                     <br/>
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font
-                                                style="vertical-align: inherit;">附件</font></font></label>
-                                        <button class="btn btn-info" ng-if="state == 2" ng-click="getUploadFile(3)"><i
-                                                class="fa fa-css3"></i>上传附件
-                                        </button>
-                                        <button class="btn btn-info" ng-if="state != 2"><i class="fa fa-css3"></i>查看附件
-                                        </button>
+                                                style="vertical-align: inherit;">通报内容</font></font></label>
+                                        <textarea class="form-control" name="deblock_udid"
+                                                  ng-model="resReport.trafficContent" readonly rows="3"
+                                                  style="width: 160px;max-width: 160px;"></textarea>
                                     </div>
                                 </form>
                                 <form class="form-inline" style="float:left;">
@@ -319,10 +317,20 @@
                                                 style="vertical-align: inherit;">是否处理</font></font></label>
                                         <label class="radio-inline i-checks" ng-repeat="type in typeList"
                                                style="margin-left: 15px;">
-                                            <input type="radio" name="type" ng-model="isSelected"
+                                            <input type="radio" name="type" ng-model="isSelected" ng-model="resReport.oneregion" disabled
                                                    ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>
                                             {{type.typeName}}
                                         </label>
+                                    </div>
+                                    <br>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">附件</font></font></label>
+                                        <button class="btn btn-info" ng-if="state == 2" ng-click="getUploadFile(3)"><i
+                                                class="fa fa-css3"></i>上传附件
+                                        </button>
+                                        <button class="btn btn-info" ng-if="state != 2"><i class="fa fa-css3"></i>查看附件
+                                        </button>
                                     </div>
                                 </form>
                             </div>

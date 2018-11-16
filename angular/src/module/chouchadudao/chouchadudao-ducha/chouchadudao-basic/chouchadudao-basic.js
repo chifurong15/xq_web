@@ -352,9 +352,10 @@
                             trafficDate: $scope.trafficDate,
                             accessory: $scope.accessory,
                             inspectionId: $scope.id,
-                            trafficContent: $scope.trafficContent,
+                            trafficContent: $('#deblock_udid').val(),
                             oneregion: $scope.types
                         }
+                        //console.log(params);
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/TrafficList/add',
                             method: 'post',
@@ -524,8 +525,12 @@
                                 inspectionId: $scope.id
                             },
                             callBack: function (res) {
-                                $scope.resReport = res.data;
-                                PDFObject.embed(res.data.accessory, "#file", options);
+                                if(res.data){
+                                    $scope.resReport = res.data;
+                                    $scope.searchTime3 = $scope.resReport.trafficDate;
+
+                                    PDFObject.embed(res.data.accessory, "#file", options);
+                                }
                             }
                         })
 
