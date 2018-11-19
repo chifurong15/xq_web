@@ -58,11 +58,11 @@
 											type: 1,
 										}
 									}).success(function(res) {
-										console.log(res);
+										//console.log(res);
 										if(res.resCode == 1){
-											console.log(res);
+											//console.log(res);
 											fileTypeId = res.data;
-											console.log(fileTypeId)
+											//console.log(fileTypeId)
 											reGetProducts();
 										}else{
 					            			layer.msg("服务器异常，请稍后再试");
@@ -99,7 +99,7 @@
 				                 * @param {Object} treeNode
 				                 */
 				                function regionTreeOnClick(event, treeId, treeNode) {
-				                    console.log(treeNode);
+				                    //console.log(treeNode);
 				                    regionName = treeNode.name;
 				                    regionCode = treeNode.id;
 				                }
@@ -110,7 +110,7 @@
 				                 * @param {Object} treeNode
 				                 */
 				                function regionTreeOnExpand(treeId, treeNode) {
-				                    console.log(treeNode);
+				                    //console.log(treeNode);
 				                    var cnodes = treeNode.children;
 				                    if (cnodes != null && cnodes.length > 0) {
 				                        return;
@@ -123,7 +123,7 @@
 				                        },
 				                    }).success(
 				                        function (res) {
-				                            console.log(res);
+				                            //console.log(res);
 				                            regionTree.addNodes(treeNode, res.data, true);
 				                        }
 				                    );
@@ -140,7 +140,7 @@
 				                            regionCode: regionCode
 				                        }
 				                    }).success(function (res) {
-				                        console.log(res)
+				                        //console.log(res)
 				                        if(res.resCode == 1){
 				                        	regionTree = $.fn.zTree.init($("#regionTreeContainer"), regionTreeSetting, res.data);
 				                        }else{
@@ -190,7 +190,7 @@
 										}
 										).success(function(res) {
 											if(res.resCode == 1){
-												console.log(res);
+												//console.log(res);
 												$scope.fileData = res.data;
 //												layer.close(loadTips);//关闭加载Loading
 //						            			layer.msg("文件上传成功!");
@@ -223,7 +223,7 @@
 										}
 									}).success(
 										function(resp) {
-											console.log(resp);
+											//console.log(resp);
 											$scope.paginationConf.totalItems = resp.data.total;
 											$scope.docList = resp.data.list;
 										}).error(function(error) {});
@@ -290,7 +290,7 @@
                                     {"id": 'month', "typeName": "按月"}
                                 ];
                                 $scope.radioBtn = function(type){
-                                    console.log(type);
+                                    //console.log(type);
                                     $scope.type = type;
                                 }
 								
@@ -315,13 +315,13 @@
                                  * 文档详情
                                  */
                                 $scope.docDetail = function (doc) {
-                                    console.log(doc);
+                                    //console.log(doc);
                                     globalParam.setter(doc);
                                     routeService.route(849, false);
                                 }
 
                                 $scope.docDownload = function (filepath) {
-                                    console.log(filepath);
+                                    //console.log(filepath);
                                     window.open(filepath);
                                 }
 
