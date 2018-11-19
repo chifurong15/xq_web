@@ -62,7 +62,7 @@
 							<th>上传时间</th>
 							<th>行政区域</th>
 							<th>操作</th>
-							<!--<th>浏览总量</th>-->
+							<th>浏览总量</th>
 						</tr>
 						<tr ng-repeat="doc in docList" ng-init="index=$index+1">
 							<td>{{index + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
@@ -70,6 +70,7 @@
 							<td>{{doc.typeName}}</td>
 							<td>{{doc.createdate}}</td>
 							<td>{{doc.regionName}}</td>
+                            <td>{{doc.count}}</td>
 							<td class="td-tool">
 								<a class="btn btn-primary btn-xs" ng-click="docDownload(doc.filepath)">
 									<i class="fa fa-download" title="下载"></i>
