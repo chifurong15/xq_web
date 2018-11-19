@@ -193,7 +193,13 @@
 				                headers: {'Content-Type': undefined},
 				                transformRequest: angular.identity
 				            }).success(function (res) {
-			                	$scope.attandUrl = res.data[0];
+				                if(res.resCode == 1){
+                                    layer.msg('上传成功',{times:2000})
+                                    $scope.attandUrl = res.data[0];
+                                }else{
+                                    layer.msg('上传失败',{times:2000})
+                                }
+
 				            }).error(function (data) {
 				                 console.log('upload fail');
 				            })

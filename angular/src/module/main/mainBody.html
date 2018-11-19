@@ -1,20 +1,16 @@
 <div ng-controller="mainBodyCtrl" ng-init="init()">
 
     <div id="mainBody" class="mainBody row m-all-0">
-        <!--<a href="javascript:void(0)" ng-click="mainBodyBtn()" class="mainBody-btn"></a>-->
-        <!--<img src="img/main-bg2.png" id="mainBody2" />-->
-        <!--<img src="img/main-bg.png" id="mainBody" />-->
         <div class="left-panel col-xs-3 p-all-0">
             <div id="weather" class="panel panel-default weather-default m-all-0">
                 <div class="panel-body weather-panel">
-                    <!--<iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=79&color=%23FFFFFF&bgc=%23&icon=1&num=1&site=12"></iframe>-->
                     <div class="mainbody-tips">
 						<span>
 	        				天气情况
 	        			</span>
                     </div>
                     <div class="clearfix">
-                        <div class="weather-iframe" style="margin-left: -20px;">
+                        <div class="weather-iframe">
                             <iframe allowtransparency="true" frameborder="0" width="180" height="36" scrolling="no"
                                     src="//tianqi.eastday.com/plugin/widget_v1.html?sc=3&z=2&t=1&v=0&d=3&bd=0&k=&f=ffffff&q=1&a=1&c=54511&w=180&h=36&align=left"></iframe>
                         </div>
@@ -297,7 +293,7 @@
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tableStatistics"
-                             style="height: 300px; overflow-x: hidden; overflow-y: auto">
+                             style="height: 250px; overflow-x: hidden; overflow-y: auto">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover" style="margin-top: 2px;">
                                     <tbody>
@@ -345,14 +341,14 @@
             {
                 orient: 'vertical',
                 x: '60%',
-                y: '45%',
+                y: '35%',
                 bottom: '13%',
                 data: ['Ⅰ类', 'Ⅱ类', 'Ⅲ类']
             },
             {
                 orient: 'vertical',
                 x: '78%',
-                y: '45%',
+                y: '35%',
                 bottom: '13%',
                 data: ['Ⅳ类', 'Ⅴ类', 'VI类']
             }
@@ -361,7 +357,7 @@
             name: '水质情况',
             type: 'pie',
             radius: ['30%', '50%'],
-            center: ['26%', '45%'],
+            center: ['28%', '45%'],
             data: [{
                 value: 335,
                 name: 'Ⅰ类'
@@ -439,7 +435,7 @@
         }],
         yAxis: {
             type: 'category',
-            data: ['蓟州区','静海区', '宁河区', '滨海新区', '宝坻区', '武清区','北辰区', '津南区', '西青区', '东丽区', '红桥区','河北区', '南开区', '河西区', '河东区', '和平区'],
+            data: ['蓟州区', '静海区', '宁河区', '滨海新区', '宝坻区', '武清区', '北辰区', '津南区', '西青区', '东丽区', '红桥区', '河北区', '南开区', '河西区', '河东区', '和平区'],
             nameLocation: 'start',
             nameTextStyle: {
                 fontSize: 10
@@ -448,13 +444,13 @@
         series: [{
             name: '',
             type: 'bar',
-            data: [60, 88, 118, 90, 160,103, 134, 70,94, 175,120, 70, 99, 100, 220,88],
+            data: [60, 88, 118, 90, 160, 103, 134, 70, 94, 175, 120, 70, 99, 100, 220, 88],
             barWidth: '30%',
             barGap: '1%',
             itemStyle: {   //配置样式，设置每个柱子的颜色
                 normal: {
                     color: function (params) {
-                        var colorList = ['#60a6ec', '#0473e2', '#00ae4f', '#ffc000', '#de1414','#60a6ec', '#0473e2', '#00ae4f', '#ffc000', '#de1414','#60a6ec', '#0473e2', '#00ae4f', '#ffc000', '#de1414', '#00ae4f'];
+                        var colorList = ['#60a6ec', '#0473e2', '#00ae4f', '#ffc000', '#de1414', '#60a6ec', '#0473e2', '#00ae4f', '#ffc000', '#de1414', '#60a6ec', '#0473e2', '#00ae4f', '#ffc000', '#de1414', '#00ae4f'];
                         return colorList[params.dataIndex];
                     }
                 }

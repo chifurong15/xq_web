@@ -2,8 +2,13 @@
     <div class="wrapper-md ">
         <div class="panel panel-default m-n">
             <div class="panel-body" style="position: relative;">
-                <span class="tag">督办</span><span class="tag-right"></span><span class="tag-right tag-left"></span><span class="tag tag1">{{tags}}</span><span class="tag-right"></span>
-                <div class="clearfix"><button type="button" class="btn btn-primary" ng-click="goBack()" style="position: absolute;right: 20px;bottom: 20px;">返回</button></div>
+                <span class="tag">督办</span><span class="tag-right"></span><span class="tag-right tag-left"></span><span
+                    class="tag tag1">{{tags}}</span><span class="tag-right"></span>
+                <div class="clearfix">
+                    <button type="button" class="btn btn-primary" ng-click="goBack()"
+                            style="position: absolute;right: 20px;bottom: 20px;">返回
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -21,40 +26,58 @@
                         <div class="panel-body">
                             <div class="clearfix">
                                 <form class="form-inline" style="float:left;padding-left: 25%;">
-                                    <div class="form-item" >
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
-                                        <input type="text" class="form-control input-short" ng-model="res.title" readonly>
-                                    </div>
-                                    <br />
-                                    <div class="input-group date date_picker form-item" id="J-searchTime1">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发日期</font></font></label>
-                                        <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" ng-model="res.issuedtime" readonly placeholder="请选择日期" style="width: 160px;">
-                                    </div>
-                                    <br />
                                     <div class="form-item">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办原因</font></font></label>
-                                        <textarea class="form-control" id="deblock_udid1" name="deblock_udid"  rows="3" style="width: 160px;max-width: 160px;" readonly ng-model="res.reason"></textarea>
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">标题</font></font></label>
+                                        <input type="text" class="form-control input-short" ng-model="res.title"
+                                               readonly>
+                                    </div>
+                                    <br/>
+                                    <div class="input-group date date_picker form-item" id="J-searchTime1">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">下发日期</font></font></label>
+                                        <input type="text"
+                                               class="form-control input-short-o ng-pristine ng-valid ng-touched"
+                                               ng-model="res.issuedtime" readonly placeholder="请选择日期"
+                                               style="width: 160px;">
+                                    </div>
+                                    <br/>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">督办原因</font></font></label>
+                                        <textarea class="form-control" id="deblock_udid1" name="deblock_udid" rows="3"
+                                                  style="width: 160px;max-width: 160px;" readonly
+                                                  ng-model="res.reason"></textarea>
                                     </div>
                                 </form>
                                 <form class="form-inline" style="float:left;">
-                                    <div class="form-item" >
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办项目</font></font></label>
-                                        <input type="text" class="form-control input-short" readonly ng-model="res.project">
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">督办项目</font></font></label>
+                                        <input type="text" class="form-control input-short" readonly
+                                               ng-model="res.project">
                                     </div>
-                                    <br />
+                                    <br/>
                                     <div class="input-group date date_picker form-item" id="J-searchTime2">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">期限时间</font></font></label>
-                                        <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" ng-model="res.deadlinedate" readonly placeholder="请选择日期" style="width: 160px;">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">期限时间</font></font></label>
+                                        <input type="text"
+                                               class="form-control input-short-o ng-pristine ng-valid ng-touched"
+                                               ng-model="res.deadlinedate" readonly placeholder="请选择日期"
+                                               style="width: 160px;">
                                     </div>
-                                    <br />
-                                    <div class="form-item" >
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办对象</font></font></label>
-                                        <input type="text" class="form-control input-short" ng-model="res.objectname" readonly>
+                                    <br/>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">督办对象</font></font></label>
+                                        <input type="text" class="form-control input-short" ng-model="res.objectname"
+                                               readonly>
                                     </div>
-                                    <br />
-                                    <div class="form-item" >
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">附件</font></font></label>
-                                        <button class="btn btn-info"><i class="fa fa-css3"></i>查看附件</button>
+                                    <br/>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">附件</font></font></label>
+                                        <button class="btn btn-info" ng-click="viewFile()"><i class="fa fa-css3"></i>查看附件</button>
                                     </div>
                                 </form>
                             </div>
@@ -66,17 +89,25 @@
                             <div style="min-height: 90px;">
                                 <form class="form-inline layui-form" style="float:left;width: 100%;padding-left: 25%;">
                                     <div class="layui-form-item" style="float: left; margin: 8px 10px;">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回复日期</font></font></label>
-                                        <input type="text" class="layui-input" id="test13" ng-model="searchTime3" placeholder="请选择日期" style="width: 160px;height: 34px;margin-left: 25px;display: inline-block;">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">回复日期</font></font></label>
+                                        <input type="text" class="layui-input" id="test13" ng-model="searchTime3"
+                                               placeholder="请选择日期"
+                                               style="width: 160px;height: 34px;margin-left: 25px;display: inline-block;">
                                     </div>
                                     <div class="form-item" style="float:left;">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回复描述</font></font></label>
-                                        <textarea class="form-control" id="deblock_udid3" name="deblock_udid" ng-model="description" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">回复描述</font></font></label>
+                                        <textarea class="form-control" id="deblock_udid3" name="deblock_udid"
+                                                  ng-model="description" rows="3"
+                                                  style="width: 160px;max-width: 160px;"></textarea>
                                     </div>
                                 </form>
                             </div>
-                            <div style="text-align: center;margin: 35px 0;" >
-                                <button type="button" class="btn btn-primary" style="margin: 0 50px;" ng-click="answer()" >确认回复</button>
+                            <div style="text-align: center;margin: 35px 0;">
+                                <button type="button" class="btn btn-primary" style="margin: 0 50px;"
+                                        ng-click="answer()">确认回复
+                                </button>
                                 <button type="button" class="btn btn-default" ng-click="back()">取消</button>
                             </div>
                         </div>
@@ -84,12 +115,19 @@
                             <div style="min-height: 200px;">
                                 <form class="form-inline" style="float:left;padding-left: 25%;">
                                     <div class="form-item" id="J-searchTime5">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回复日期</font></font></label>
-                                        <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" readonly ng-model="resAnswer.feedbacktime" placeholder="请选择日期" style="width: 160px;">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">回复日期</font></font></label>
+                                        <input type="text"
+                                               class="form-control input-short-o ng-pristine ng-valid ng-touched"
+                                               readonly ng-model="resAnswer.feedbacktime" placeholder="请选择日期"
+                                               style="width: 160px;">
                                     </div>
                                     <div class="form-item" style="top: 18px;">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回复描述</font></font></label>
-                                        <textarea class="form-control" id="deblock_udid5" readonly name="deblock_udid" ng-model="resAnswer.description" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">回复描述</font></font></label>
+                                        <textarea class="form-control" id="deblock_udid5" readonly name="deblock_udid"
+                                                  ng-model="resAnswer.description" rows="3"
+                                                  style="width: 160px;max-width: 160px;"></textarea>
                                     </div>
                                 </form>
                             </div>
@@ -101,32 +139,46 @@
                             <div class="clearfix">
                                 <form class="form-inline" style="float:left;padding-left: 25%;">
                                     <div class="form-item">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否完成</font></font></label>
-                                        <label class="radio-inline i-checks" ng-repeat="type in typeList" style="margin-left: 15px;">
-                                        <input type="radio" name="type" ng-model="isSelected" ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>
-                                        {{type.typeName}}
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">是否完成</font></font></label>
+                                        <label class="radio-inline i-checks" ng-repeat="type in typeList"
+                                               style="margin-left: 15px;">
+                                            <input type="radio" name="type" ng-model="isSelected"
+                                                   ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>
+                                            {{type.typeName}}
                                         </label>
                                     </div>
-                                    <br />
+                                    <br/>
                                     <div class="form-item">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理描述</font></font></label>
-                                        <textarea class="form-control" id="deblock_udid4" name="deblock_udid" ng-model="dealDescription" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">处理描述</font></font></label>
+                                        <textarea class="form-control" id="deblock_udid4" name="deblock_udid"
+                                                  ng-model="dealDescription" rows="3"
+                                                  style="width: 160px;max-width: 160px;"></textarea>
                                     </div>
                                 </form>
                                 <form class="form-inline layui-form" style="float:left;">
                                     <div class="layui-form-item" style="float: left; margin: 8px 10px;">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回复日期</font></font></label>
-                                        <input type="text" class="layui-input" id="test14" ng-model="searchTime" placeholder="请选择日期" style="width: 160px;height: 34px;margin-left: 25px;display: inline-block;">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">回复日期</font></font></label>
+                                        <input type="text" class="layui-input" id="test14" ng-model="searchTime"
+                                               placeholder="请选择日期"
+                                               style="width: 160px;height: 34px;margin-left: 25px;display: inline-block;">
                                     </div>
-                                    <br />
-                                    <div class="form-item" >
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理附件</font></font></label>
-                                        <button class="btn btn-info" ng-click="getUploadFile(2)"><i class="fa fa-css3"></i>上传附件</button>
+                                    <br/>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">处理附件</font></font></label>
+                                        <button class="btn btn-info" ng-click="getUploadFile(2)"><i
+                                                class="fa fa-css3"></i>上传附件
+                                        </button>
                                     </div>
                                 </form>
                             </div>
                             <div style="text-align: center;margin: 35px 0;">
-                                <button type="button" class="btn btn-primary" style="margin: 0 50px;" ng-click="deal()" >确认处理</button>
+                                <button type="button" class="btn btn-primary" style="margin: 0 50px;" ng-click="deal()">
+                                    确认处理
+                                </button>
                                 <button type="button" class="btn btn-default" ng-click="back()">取消</button>
                             </div>
                         </div>
@@ -136,63 +188,83 @@
                         <div class="panel-body" ng-if="status ==2">
                             <div class="clearfix">
                                 <form class="form-inline" style="float:left;padding-left: 25%;">
-                                    <div class="form-item" >
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否通过</font></font></label>
-                                        <label class="radio-inline i-checks" ng-repeat="type in typeList" style="margin-left: 15px;">
-                                        <input type="radio" name="type" ng-model="isSelected" ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>
-                                        {{type.typeName}}
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">是否通过</font></font></label>
+                                        <label class="radio-inline i-checks" ng-repeat="type in typeList"
+                                               style="margin-left: 15px;">
+                                            <input type="radio" name="type" ng-model="isSelected"
+                                                   ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>
+                                            {{type.typeName}}
                                         </label>
                                     </div>
-                                    <br />
+                                    <br/>
                                     <div class="form-item">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">信息描述</font></font></label>
-                                        <textarea class="form-control" id="deblock_udid6" name="deblock_udid" ng-model="infoDescription" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">信息描述</font></font></label>
+                                        <textarea class="form-control" id="deblock_udid6" name="deblock_udid"
+                                                  ng-model="infoDescription" rows="3"
+                                                  style="width: 160px;max-width: 160px;"></textarea>
                                     </div>
                                 </form>
                                 <form class="form-inline layui-form" style="float:left;">
                                     <div class="layui-form-item" style="margin: 8px 10px;">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">核查时间</font></font></label>
-                                        <input type="text" class="layui-input" id="test12" ng-model="searchTime4" placeholder="请选择日期" style="width: 160px;height: 34px;display: inline-block;">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">核查时间</font></font></label>
+                                        <input type="text" class="layui-input" id="test12" ng-model="searchTime4"
+                                               placeholder="请选择日期"
+                                               style="width: 160px;height: 34px;display: inline-block;">
                                     </div>
-                                    <br />
-                                    <div class="form-item" >
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">结果附件</font></font></label>
-                                        <button class="btn btn-info" ><i class="fa fa-css3"></i>上传附件</button>
+                                    <br/>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">结果附件</font></font></label>
+                                        <button class="btn btn-info" ng-click="viewFile()"><i class="fa fa-css3"></i>查看附件</button>
                                     </div>
                                 </form>
                             </div>
                             <div style="text-align: center;margin: 35px 0;" ng-if="num ==2">
-                                <button type="button" class="btn btn-primary" style="margin: 0 50px;" ng-click="verification()" >确认退回</button>
+                                <button type="button" class="btn btn-primary" style="margin: 0 50px;"
+                                        ng-click="verification()">确认退回
+                                </button>
                                 <button type="button" class="btn btn-default" ng-click="back()">取消</button>
                             </div>
                         </div>
                         <div class="panel-body" ng-if="status == 5">
                             <div class="clearfix">
                                 <form class="form-inline" style="float:left;padding-left: 25%;">
-                                    <div class="form-item" >
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否通过</font></font></label>
-                                        <label class="radio-inline i-checks" ng-repeat="type in typeList" style="margin-left: 15px;">
-                                            <input type="radio" disabled name="type" ng-model="isSelected" ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">是否通过</font></font></label>
+                                        <label class="radio-inline i-checks" ng-repeat="type in typeList"
+                                               style="margin-left: 15px;">
+                                            <input type="radio" disabled name="type" ng-model="isSelected"
+                                                   ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>
                                             {{type.typeName}}
                                         </label>
                                     </div>
-                                    <br />
+                                    <br/>
                                     <div class="form-item">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">信息描述</font></font></label>
-                                        <textarea class="form-control" id="deblock_udid" name="deblock_udid" readonly ng-model="resResult.description" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">信息描述</font></font></label>
+                                        <textarea class="form-control" id="deblock_udid" name="deblock_udid" readonly
+                                                  ng-model="resResult.description" rows="3"
+                                                  style="width: 160px;max-width: 160px;"></textarea>
                                     </div>
                                 </form>
                                 <form class="form-inline" style="float:left;">
                                     <div class="input-group date date_picker form-item" id="J-searchTime6">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">核查时间</font></font></label>
-                                        <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" readonly ng-model="resResult.feedbacktime" placeholder="请选择日期" >
-                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">核查时间</font></font></label>
+                                        <input type="text"
+                                               class="form-control input-short-o ng-pristine ng-valid ng-touched"
+                                               readonly ng-model="resResult.feedbacktime" placeholder="请选择日期" style="width: 160px;">
                                     </div>
-                                    <br />
-                                    <div class="form-item" >
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">结果附件</font></font></label>
-                                        <!--<input type="text" class="form-control input-short" ng-model="title">-->
-                                        <!--<button type="button" class="btn btn-primary">预览</button>-->
+                                    <br/>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">结果附件</font></font></label>
+                                        <button class="btn btn-info" ng-click="viewFile()"><i class="fa fa-css3"></i>查看附件</button>
                                     </div>
                                 </form>
                             </div>
@@ -216,40 +288,58 @@
                         <div class="panel-body">
                             <div class="clearfix">
                                 <form class="form-inline" style="float:left;padding-left: 25%;">
-                                    <div class="form-item" >
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
-                                        <input type="text" class="form-control input-short" ng-model="res.title" readonly>
-                                    </div>
-                                    <br />
-                                    <div class="input-group date date_picker form-item" id="J-searchTime0">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发日期</font></font></label>
-                                        <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" ng-model="res.issuedtime" readonly placeholder="请选择日期" style="width: 160px;">
-                                    </div>
-                                    <br />
                                     <div class="form-item">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办原因</font></font></label>
-                                        <textarea class="form-control" id="deblock_udid10" name="deblock_udid"  rows="3" style="width: 160px;max-width: 160px;" readonly ng-model="res.reason"></textarea>
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">标题</font></font></label>
+                                        <input type="text" class="form-control input-short" ng-model="res.title"
+                                               readonly>
+                                    </div>
+                                    <br/>
+                                    <div class="input-group date date_picker form-item" id="J-searchTime0">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">下发日期</font></font></label>
+                                        <input type="text"
+                                               class="form-control input-short-o ng-pristine ng-valid ng-touched"
+                                               ng-model="res.issuedtime" readonly placeholder="请选择日期"
+                                               style="width: 160px;">
+                                    </div>
+                                    <br/>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">督办原因</font></font></label>
+                                        <textarea class="form-control" id="deblock_udid10" name="deblock_udid" rows="3"
+                                                  style="width: 160px;max-width: 160px;" readonly
+                                                  ng-model="res.reason"></textarea>
                                     </div>
                                 </form>
                                 <form class="form-inline" style="float:left;">
-                                    <div class="form-item" >
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办项目</font></font></label>
-                                        <input type="text" class="form-control input-short" readonly ng-model="res.project">
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">督办项目</font></font></label>
+                                        <input type="text" class="form-control input-short" readonly
+                                               ng-model="res.project">
                                     </div>
-                                    <br />
+                                    <br/>
                                     <div class="input-group date date_picker form-item" id="J-searchTime10">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">期限时间</font></font></label>
-                                        <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" ng-model="res.deadlinedate" readonly placeholder="请选择日期" style="width: 160px;">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">期限时间</font></font></label>
+                                        <input type="text"
+                                               class="form-control input-short-o ng-pristine ng-valid ng-touched"
+                                               ng-model="res.deadlinedate" readonly placeholder="请选择日期"
+                                               style="width: 160px;">
                                     </div>
-                                    <br />
-                                    <div class="form-item" >
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办对象</font></font></label>
-                                        <input type="text" class="form-control input-short" ng-model="res.objectname" readonly>
+                                    <br/>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">督办对象</font></font></label>
+                                        <input type="text" class="form-control input-short" ng-model="res.objectname"
+                                               readonly>
                                     </div>
-                                    <br />
-                                    <div class="form-item" >
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">附件</font></font></label>
-                                        <button class="btn btn-info"><i class="fa fa-css3"></i>查看附件</button>
+                                    <br/>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">附件</font></font></label>
+                                        <button class="btn btn-info" ng-click="viewFile()"><i class="fa fa-css3"></i>查看附件</button>
                                     </div>
                                 </form>
                             </div>
@@ -261,12 +351,19 @@
                             <div style="min-height: 200px;">
                                 <form class="form-inline" style="float:left;padding-left: 25%;">
                                     <div class="input-group date date_picker form-item" id="J-searchTime50">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回复日期</font></font></label>
-                                        <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" readonly ng-model="resAnswer.feedbacktime" placeholder="请选择日期" style="width: 160px;">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">回复日期</font></font></label>
+                                        <input type="text"
+                                               class="form-control input-short-o ng-pristine ng-valid ng-touched"
+                                               readonly ng-model="resAnswer.feedbacktime" placeholder="请选择日期"
+                                               style="width: 160px;">
                                     </div>
                                     <div class="form-item" style="top: 18px;">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回复描述</font></font></label>
-                                        <textarea class="form-control" id="deblock_udid50" readonly name="deblock_udid" ng-model="resAnswer.description" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">回复描述</font></font></label>
+                                        <textarea class="form-control" id="deblock_udid50" readonly name="deblock_udid"
+                                                  ng-model="resAnswer.description" rows="3"
+                                                  style="width: 160px;max-width: 160px;"></textarea>
                                     </div>
                                 </form>
                             </div>
@@ -278,27 +375,38 @@
                             <div class="clearfix">
                                 <form class="form-inline" style="float:left;padding-left: 25%;">
                                     <div class="form-item">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否完成</font></font></label>
-                                        <label class="radio-inline i-checks" ng-repeat="type in typeList" style="margin-left: 15px;">
-                                            <input type="radio" name="type" disabled ng-model="isSelected" ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">是否完成</font></font></label>
+                                        <label class="radio-inline i-checks" ng-repeat="type in typeList"
+                                               style="margin-left: 15px;">
+                                            <input type="radio" name="type" disabled ng-model="isSelected"
+                                                   ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>
                                             {{type.typeName}}
                                         </label>
                                     </div>
-                                    <br />
+                                    <br/>
                                     <div class="form-item">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理描述</font></font></label>
-                                        <textarea class="form-control" id="deblock_udid40" readonly name="deblock_udid" ng-model="resDeal.description" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">处理描述</font></font></label>
+                                        <textarea class="form-control" id="deblock_udid40" readonly name="deblock_udid"
+                                                  ng-model="resDeal.description" rows="3"
+                                                  style="width: 160px;max-width: 160px;"></textarea>
                                     </div>
                                 </form>
                                 <form class="form-inline" style="float:left;">
                                     <div class="input-group date date_picker form-item" id="J-searchTime00">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">完成日期</font></font></label>
-                                        <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" readonly ng-model="resDeal.feedbacktime" placeholder="" style="width: 160px;">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">完成日期</font></font></label>
+                                        <input type="text"
+                                               class="form-control input-short-o ng-pristine ng-valid ng-touched"
+                                               readonly ng-model="resDeal.feedbacktime" placeholder=""
+                                               style="width: 160px;">
                                     </div>
-                                    <br />
-                                    <div class="form-item" >
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理附件</font></font></label>
-                                        <button class="btn btn-info"><i class="fa fa-css3"></i>查看附件</button>
+                                    <br/>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">处理附件</font></font></label>
+                                        <button class="btn btn-info" ng-click="viewFile()"><i class="fa fa-css3"></i>查看附件</button>
                                     </div>
                                 </form>
                             </div>
@@ -309,33 +417,47 @@
                         <div class="panel-body">
                             <div class="clearfix">
                                 <form class="form-inline" style="float:left;padding-left: 25%;">
-                                    <div class="form-item" >
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否通过</font></font></label>
-                                        <label class="radio-inline i-checks" ng-repeat="type in typeList" style="margin-left: 15px;">
-                                            <input type="radio" name="type" ng-model="isSelected" ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">是否通过</font></font></label>
+                                        <label class="radio-inline i-checks" ng-repeat="type in typeList"
+                                               style="margin-left: 15px;">
+                                            <input type="radio" name="type" ng-model="isSelected"
+                                                   ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>
                                             {{type.typeName}}
                                         </label>
                                     </div>
-                                    <br />
+                                    <br/>
                                     <div class="form-item">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">信息描述</font></font></label>
-                                        <textarea class="form-control" id="deblock_udid60" name="deblock_udid" ng-model="infoDescription" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">信息描述</font></font></label>
+                                        <textarea class="form-control" id="deblock_udid60" name="deblock_udid"
+                                                  ng-model="infoDescription" rows="3"
+                                                  style="width: 160px;max-width: 160px;"></textarea>
                                     </div>
                                 </form>
                                 <form class="form-inline layui-form" style="float:left;">
                                     <div class="layui-form-item" style="margin: 8px 10px;">
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">核查时间</font></font></label>
-                                        <input type="text" class="layui-input" id="test11" ng-model="searchTime4" placeholder="请选择日期" style="width: 160px;height: 34px;margin-left: 20px;display: inline-block;">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">核查时间</font></font></label>
+                                        <input type="text" class="layui-input" id="test11" ng-model="searchTime4"
+                                               placeholder="请选择日期"
+                                               style="width: 160px;height: 34px;margin-left: 20px;display: inline-block;">
                                     </div>
-                                    <br />
-                                    <div class="form-item" >
-                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">结果附件</font></font></label>
-                                        <button class="btn btn-info" ng-click="getUploadFile(1)"><i class="fa fa-css3"></i>上传附件</button>
+                                    <br/>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">结果附件</font></font></label>
+                                        <button class="btn btn-info" ng-click="getUploadFile(1)"><i
+                                                class="fa fa-css3"></i>上传附件
+                                        </button>
                                     </div>
                                 </form>
                             </div>
                             <div style="text-align: center;margin: 35px 0;">
-                                <button type="button" class="btn btn-primary" style="margin: 0 50px;" ng-click="verification()" >确认退回</button>
+                                <button type="button" class="btn btn-primary" style="margin: 0 50px;"
+                                        ng-click="verification()">确认退回
+                                </button>
                                 <button type="button" class="btn btn-default" ng-click="back()">取消</button>
                             </div>
                         </div>
@@ -344,6 +466,7 @@
             </div>
 
         </div>
+
         <!--描述：核查附件-->
         <div class="modal fade" id="coverModal1" data-backdrop="static">
             <div class="modal-dialog" role="document">
@@ -361,7 +484,8 @@
                                 </div>
                             </div>
                         </form>
-                    </div>.
+                    </div>
+                    .
                     <div class="modal-footer">
                         <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload(1)">
                             <i class="fa fa-check"></i>
@@ -392,7 +516,8 @@
                                 </div>
                             </div>
                         </form>
-                    </div>.
+                    </div>
+                    .
                     <div class="modal-footer">
                         <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload(2)">
                             <i class="fa fa-check"></i>
@@ -407,36 +532,60 @@
             </div>
         </div>
 
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            查看附件
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="file" style="height: 400px;"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </div>
 
 <script>
-    layui.use('element', function(){
+    layui.use('element', function () {
         var $ = layui.jquery
-            ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+            , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
 
         //触发事件
         var active = {
-            tabChange: function(){
+            tabChange: function () {
                 //切换到指定Tab项
                 element.tabChange('demo', '22'); //切换到：用户管理
             }
         };
 
-        $('.site-demo-active').on('click', function(){
+        $('.site-demo-active').on('click', function () {
             var othis = $(this), type = othis.data('type');
             active[type] ? active[type].call(this, othis) : '';
         });
 
-        element.on('tab(test)', function(elem){
-            location.hash = 'test='+ $(this).attr('lay-id');
+        element.on('tab(test)', function (elem) {
+            location.hash = 'test=' + $(this).attr('lay-id');
         });
 
     });
 
 
     $(".uploadfile").fileinput({
-        allowedFileExtensions: ['jpg', 'png', 'gif' ,'pdf'],
+        allowedFileExtensions: [],
         uploadAsync: true, //默认异步上传
         showRemove: true, //显示移除按钮
         maxFileCount: 1, //表示允许同时上传的最大文件个数
@@ -448,7 +597,7 @@
         showPreview: true, //是否显示预览
         dropZoneEnabled: true, //是否显示拖拽区域
         validateInitialCount: true,
-        slugCallback: function(filename) {
+        slugCallback: function (filename) {
             return filename.replace('(', '_').replace(']', '_');
         }
     });

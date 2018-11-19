@@ -44,20 +44,6 @@
 									<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发人员</font></font></label>
 									<input type="text" class="form-control input-short" readonly ng-model="personnel">
 								</div>
-				                <!--<div class="form-item" >-->
-			                        <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">问题点坐标</font></font></label>-->
-			                        <!--<input type="text" class="form-control input-short">-->
-			                    <!--</div>-->
-			                    <!--<br />-->
-			                    <!--<div class="form-item" >-->
-			                        <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查内容</font></font></label>-->
-			                        <!--<input type="text" class="form-control input-short">-->
-			                    <!--</div>-->
-			                    <!--<div class="form-item">-->
-			                        <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">问题点描述</font></font></label>-->
-									<!--<textarea class="form-control" id="deblock_udid" name="deblock_udid" rows="3" style="width: 160px;max-width: 160px;"></textarea>-->
-			                    <!--</div>-->
-
 
 							</form>				
 			    		</div>
@@ -66,7 +52,7 @@
 					<div class="reported-con con tab-show">
         				<div class="panel-body">
 							<h4 ng-if="reportList.length == 0">暂无上报问题</h4>
-        					<div style="height: 220px;border-bottom:1px solid #d8d8d8" ng-if="reportList.length != 0" ng-repeat="item in reportList">
+        					<div class="clearfix" style="height: auto;border-bottom:1px solid #d8d8d8" ng-if="reportList.length != 0" ng-repeat="item in reportList">
         						<form class="form-inline" style="padding-left: 25%;float: left;">
 									<div class="form-item">
 				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上报</font></font></label>			                       
@@ -96,8 +82,8 @@
 									<br>
 									<div class="input-group form-item" style="display: inline-block;">
 										<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上传照片</font></font></label>
-										<div style="display: inline-block;" id="layer-photos-check">
-											<img style="margin: 0 5px;"  ng-repeat="items in item.image" layer-pid="" layer-src="{{eventImgUrl}}{{items}}" src="{{eventImgUrl}}{{items}}" alt="问题照片" width="100px" height="100px" key="{{$index}}">
+										<div style="display: inline-block;width: 330px;" id="layer-photos-check">
+											<img style="margin: 5px;"  ng-repeat="items in item.image.split(',')" layer-pid="" layer-src="{{eventImgUrl}}{{items}}" src="{{eventImgUrl}}{{items}}" alt="问题照片" width="100px" height="100px" key="{{$index}}">
 
 										</div>
 									</div>

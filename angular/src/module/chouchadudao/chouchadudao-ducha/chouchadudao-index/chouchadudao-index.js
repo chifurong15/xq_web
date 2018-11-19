@@ -22,10 +22,11 @@
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
 					var apiPrefix = moduleService.getServiceUrl() + '/inspection';
-					//var apiPrefix = 'http://10.0.9.203:8081' + '/inspection';
+                    //var apiPrefix = 'http://10.0.9.116:7025' + '/inspection';
+
 					$scope.init = function () {
-                        //$scope.num = 2; //2市河长办 5区河长办
-                        //getList();
+                        // $scope.num = 2; //2市河长办 5区河长办
+                        // getList();
 
                         $ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/Inspection/userinfo',

@@ -268,11 +268,11 @@
                         if (res.resCode == 1) {
                             //console.log(res);
                             if(id == 1){
-                                $scope.problemAttant = res.data.virtualPath;
+                                $scope.problemAttant = res.data;
 							}else if(id == 2) {
-                                $scope.proposedTreatment = res.data.virtualPath;
+                                $scope.proposedTreatment = res.data;
                             }else if (id == 3){
-                                $scope.processingResults = res.data.virtualPath;
+                                $scope.processingResults = res.data;
                             }
                         } else {
                             layer.msg("服务器异常，请稍后再试");
@@ -303,6 +303,7 @@
 							overTime: $scope.overtime
 
 					}
+                    console.log(params);
                     $ajaxhttp.myhttp({
                         url: apiPrefix + '/v1/socialReport/addReport',
                         method: 'POST',

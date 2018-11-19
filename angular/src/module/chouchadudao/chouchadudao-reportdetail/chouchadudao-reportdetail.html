@@ -124,8 +124,7 @@
                                 </div>
                                 <div class="form-item" >
                                     <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理附件</font></font></label>
-                                    <input type="text" class="form-control input-short" readonly ng-model="assessory">
-                                    <button type="button" class="btn btn-primary">预览</button>
+                                    <button type="button" class="btn btn-info" ng-click="viewFile()">查看附件</button>
                                 </div>
                             </form>
                         </div>
@@ -135,5 +134,31 @@
 
             </div>
         </div>
+
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            查看附件
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="file" style="height: 400px;"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
 </div>

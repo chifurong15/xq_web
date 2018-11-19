@@ -22,6 +22,7 @@
                                            routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl() + '/ancha';
+                    //var apiPrefix = 'http://10.0.9.133:7021' + '/ancha';
 
                     $scope.init = function () {
                         getRegion();

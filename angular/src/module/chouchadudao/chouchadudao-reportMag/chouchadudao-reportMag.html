@@ -2,7 +2,8 @@
     <div class="wrapper-md ">
         <div class="panel panel-default m-n">
             <div class="panel-body" style="position: relative;">
-                <span class="tag">暗查暗访</span><span class="tag-right"></span><span class="tag-right tag-left"></span><span class="tag tag1">通报管理</span><span class="tag-right"></span>
+                <span class="tag">暗查暗访</span><span class="tag-right"></span><span
+                    class="tag-right tag-left"></span><span class="tag tag1">通报管理</span><span class="tag-right"></span>
             </div>
 
         </div>
@@ -11,16 +12,20 @@
                 <div class="table-bar">
                     <form class="form-inline clearfix">
                         <div class="input-group date date_picker form-item" id="J-searchTime">
-                            <label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">月份</font></font></label>
-                            <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime">
+                            <label class="near"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">月份</font></font></label>
+                            <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched"
+                                   placeholder="请选择日期" ng-model="searchTime">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         </div>
                         <div class="form-item">
-                            <label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通报名称</font></font></label>
+                            <label class="near"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">通报名称</font></font></label>
                             <input type="text" class="form-control input-short" ng-model="name">
                         </div>
                         <div class="input-group form-item">
-                            <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">状态</font></font></label>
+                            <label class="near n"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">状态</font></font></label>
                             <select ng-model="status" class="form-control select-short" style="width: auto;">
                                 <option value="">请选择</option>
                                 <option value="{{item.id}}" ng-repeat="item in statusList">{{item.status}}</option>
@@ -39,9 +44,9 @@
                             </button>
                         </div>
                         <!--<div class="input-group fr">-->
-                            <!--<button type="button" class="btn btn-primary" ng-click="add()">-->
-                                <!--<i class="fa fa-plus"></i> 添加台账-->
-                            <!--</button>-->
+                        <!--<button type="button" class="btn btn-primary" ng-click="add()">-->
+                        <!--<i class="fa fa-plus"></i> 添加台账-->
+                        <!--</button>-->
                         <!--</div>-->
                     </form>
                 </div>
@@ -70,9 +75,16 @@
                                         <span class="label label-danger" ng-if="item.status == 3">未按期</span>
                                     </td>
                                     <td style="text-align: left;">
-                                        <button type="button" class="btn btn-success" ng-click="view(item.id,item.schemeid)">查看</button>
-                                        <button type="button" class="btn btn-warning" ng-if="item.status == 0" ng-click="report(item.id)">下发并通报</button>
-                                        <button type="button" class="btn btn-info" ng-if="permission !=2 && item.status == 1" ng-click="view(item.id,item.schemeid)">反馈</button>
+                                        <button type="button" class="btn btn-success"
+                                                ng-click="view(item.id,item.schemeid)">查看
+                                        </button>
+                                        <button type="button" class="btn btn-warning" ng-if="item.status == 0"
+                                                ng-click="report(item.id)">下发并通报
+                                        </button>
+                                        <button type="button" class="btn btn-info"
+                                                ng-if="permission !=2 && item.status == 1"
+                                                ng-click="view(item.id,item.schemeid)">反馈
+                                        </button>
                                     </td>
                                 </tr>
                                 </tbody>

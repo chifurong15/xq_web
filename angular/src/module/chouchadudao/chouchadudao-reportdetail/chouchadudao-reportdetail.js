@@ -22,7 +22,15 @@
                                              routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl() + '/ancha';
-
+                    var options = {
+                        pdfOpenParams: {
+                            pagemode: "thumbs",
+                            navpanes: 0,
+                            toolbar: 0,
+                            statusbar: 0,
+                            view: "FitV"
+                        }
+                    };
 
                     $scope.init = function () {
                         var bulletin = globalParam.getter().bulletin || {};
@@ -72,6 +80,16 @@
                         })
                         routeService.route('2-6-1', false);
                     }
+
+                    //查看附件
+                    $scope.viewFile = function () {
+                        $('#myModal').modal('show');
+                    }
+                    //取消查看
+                    $scope.cancel = function () {
+                        $('#myModal').modal('hide');
+                    }
+
                     // 获取任务列表
                     function getTaskList () {
                         $ajaxhttp.myhttp({
@@ -100,10 +118,14 @@
                             },
                             callBack: function (res) {
                                 if(res.resCode == 1){
-                                    $scope.whether = res.data.whether;
-                                    $scope.feedbackTime = res.data.feedbackTime;
-                                    $scope.describe = res.data.describe;
-                                    $scope.assessory = res.data.assessory;
+                                    if(res.data){
+                                        $scope.whether = res.data.whether;
+                                        $scope.feedbackTime = res.data.feedbackTime;
+                                        $scope.describe = res.data.describe;
+                                        $scope.assessory = res.data.assessory;
+                                        PDFObject.embed(res.data.assessory, "#file", options);
+                                    }
+
                                 }else{
                                     layer.msg('服务器异常，请稍后再试');
                                 }

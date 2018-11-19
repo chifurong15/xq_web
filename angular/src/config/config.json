@@ -357,6 +357,32 @@
       "description": "考核评分-考核排名"
     },
     {
+      "seqId": "3-10",
+      "parentId": "3",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "河段考核配置",
+      "icon": "menu-icon-6",
+      "url": "module/kaohepinggu/kaohepinggu-riverRanking/kaohepinggu-riverRanking.html",
+      "requireJS": [
+        "module/kaohepinggu/kaohepinggu-riverRanking/kaohepinggu-riverRanking.js"
+      ],
+      "description": "考核评分-河段排名"
+    },
+    {
+      "seqId": "3-11",
+      "parentId": "3",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "评分规则配置",
+      "icon": "menu-icon-6",
+      "url": "module/kaohepinggu/kaohepinggu-ruleConfiguration/kaohepinggu-ruleConfiguration.html",
+      "requireJS": [
+        "module/kaohepinggu/kaohepinggu-ruleConfiguration/kaohepinggu-ruleConfiguration.js"
+      ],
+      "description": "考核评分-评分规则配置"
+    },
+    {
       "seqId": "4",
       "parentId": "0",
       "isLeaf": false,
@@ -588,7 +614,7 @@
       "icon": "fa fa-users",
       "url": "module/menus/systemMgr/weChatMag/weChatMag.html",
       "requireJS": [
-        "module/js/systemMgr/weChatMag/weChatMag.js"
+        "module/menus/systemMgr/weChatMag/weChatMag.js"
       ],
       "description": "系统管理-微信管理后台"
     },
@@ -771,6 +797,45 @@
         "module/kaohepinggu/kaohepinggu-wushui/kaohepinggu-detail/kaohepinggu-detail.js"
       ],
       "description": "污水处理厂-详情"
+    },
+    {
+      "seqId": "3-11-1",
+      "parentId": "3",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "水质评分规则新增",
+      "icon": "menu-icon-6",
+      "url": "module/kaohepinggu/kaohepinggu-addScoreRule/kaohepinggu-addScoreRule.html",
+      "requireJS": [
+        "module/kaohepinggu/kaohepinggu-addScoreRule/kaohepinggu-addScoreRule.js"
+      ],
+      "description": "考核评分-评分规则配置-水质评分规则新增"
+    },
+    {
+      "seqId": "3-11-2",
+      "parentId": "3",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "水质评分细则新增",
+      "icon": "menu-icon-6",
+      "url": "module/kaohepinggu/kaohepinggu-addScoreDetailRule/kaohepinggu-addScoreDetailRule.html",
+      "requireJS": [
+        "module/kaohepinggu/kaohepinggu-addScoreDetailRule/kaohepinggu-addScoreDetailRule.js"
+      ],
+      "description": "考核评分-评分规则配置-水质评分细则新增"
+    },
+    {
+      "seqId": "3-11-3",
+      "parentId": "3",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "水质评分变化细则新增",
+      "icon": "menu-icon-6",
+      "url": "module/kaohepinggu/kaohepinggu-addChangeDetailRule/kaohepinggu-addChangeDetailRule.html",
+      "requireJS": [
+        "module/kaohepinggu/kaohepinggu-addChangeDetailRule/kaohepinggu-addChangeDetailRule.js"
+      ],
+      "description": "考核评分-评分规则配置-水质评分变化细则新增"
     },
     {
       "seqId": "2-1-1",

@@ -22,10 +22,13 @@
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
 					var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
-                    //var apiPrefix = 'http://10.0.9.133:8080' + '/bulletin';
+                    //var apiPrefix = 'http://10.0.9.133:6008' + '/bulletin';
 
                     $scope.getServiceUrl= moduleService.getServiceUrl();
 					$scope.init = function () {
+
+                        $scope.showImg = false;
+
 						var bulletin = globalParam.getter().bulletin || {};
 						if (!!getQueryString('id')) {
 							bulletin.id = getQueryString('id');
@@ -42,25 +45,6 @@
 					$scope.goBack=function(){
 						history.back(-1);
 					}
-
-					//附件预览
-					$scope.lookLine = function () {
-						//$('#myModal').modal('show');
-						var params={
-							attandUrl:$scope.bulletin.attandUrl
-						}
-	                	$http({
-	                        url: apiPrefix + '/v1/bulletin/lookload',
-	                        method: 'get',
-	                        params:params
-	                   }).success(function (res) {	                    	
-	                    		//$scope.lookLineContent=res;
-	                        
-	                    }).error(function (error) {
-	
-	                    })
-	                }
-					
 					// 数据详情
 					function getData (id) {
 						$ajaxhttp.myhttp({
@@ -70,9 +54,29 @@
 								id: id
 							},
 							callBack: function (res) {
-								//var attandNamePart = res.data.attandUrl.split('_');
 								$scope.bulletin = res.data;
-								//$scope.attandName = attandNamePart.splice(1, attandNamePart.length - 1).join('');
+								if($scope.bulletin.ren){
+									var i = $scope.bulletin.ren.indexOf('.');
+									var str = $scope.bulletin.ren.slice(i+1);
+									// console.log(str)
+									if(str.toLowerCase() == 'jpg' || str.toLowerCase() == 'jpeg' || str.toLowerCase() == 'png'){
+										$scope.showImg = true;
+									}else{
+
+									}
+								}
+                                var index = $scope.bulletin.attand_url.lastIndexOf("\/");
+                                $scope.attandName = $scope.bulletin.attand_url.substring(index+1);
+                                var options = {
+                                    pdfOpenParams: {
+                                        pagemode: "thumbs",
+                                        navpanes: 0,
+                                        toolbar: 0,
+                                        statusbar: 0,
+                                        view: "FitV"
+                                    }
+                                };
+                                PDFObject.embed($scope.bulletin.attand_url, "#pdfOb", options);
 							}
 						})
 					}

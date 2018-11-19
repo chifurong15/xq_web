@@ -22,8 +22,8 @@
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
 					var apiPrefix = moduleService.getServiceUrl() + '/ancha';
-					
-					$scope.init = function () {	
+					//var apiPrefix = 'http://10.0.9.133:7021' + '/ancha';
+					$scope.init = function () {
 						
 						var bulletin = globalParam.getter().bulletin || {};
 						
@@ -96,7 +96,7 @@
                             callBack: function (res) {
                                 $scope.riverList = res.data;
                                 var select = $("#slpkRiver");
-                                for (var i = 0; i < res.data.length; i++) {
+                                for (var i = 0; i <res.data.length; i++) {
                                     select.append("<option value='"+res.data[i]+"'>"
                                         + res.data[i] + "</option>");
                                 }
@@ -133,9 +133,14 @@
 						$scope.title = data.title;
 						$scope.searchTime = data.date;
 						$scope.leader = data.leader;
-                        $scope.region = data.regionid;
-                        $scope.reach = data.reachname;
+                        $scope.region = data.regionid.split(',');
+                        $scope.reach = data.reachname.split(',');
+                        $("#slpk").selectpicker('val',$scope.region);
+                        getAllRiver();
+                        $("#slpkRiver").selectpicker('val',$scope.reach);
+                        $("#slpkRiver").selectpicker('refresh');
 						$scope.personnel = data.personnel;
+						$('#personnel').val(data.personnel)
                         console.log($scope.region);
                         console.log($scope.reach);
                         console.log($scope.personnel);

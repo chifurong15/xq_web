@@ -22,7 +22,7 @@
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
 					var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
-					//var apiPrefix = 'http://10.0.9.133:8080' + '/bulletin';
+                    //var apiPrefix = 'http://10.0.9.133:6008' + '/bulletin';
 
 					$scope.init = function () {
 						getList();
