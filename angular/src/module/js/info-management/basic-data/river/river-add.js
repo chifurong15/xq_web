@@ -1,10 +1,11 @@
-var basicUrl = "/drainageBasin/v1";
-var waterUrl = "/waterSystem/v1";
-var riverUrl = "/river/v1";
-var lakesUrl = "/lakes/v1";
-var reservoirUrl = "/reservoir/v1";
-var reachUrl = "/reach/v1";
-var dictionaryUrl = "/dictionary/v1";
+var modulePrefix = "/watersource";
+var basicUrl = modulePrefix + "/v1/drainageBasin";
+var waterUrl = modulePrefix + "/v1/waterSystem";
+var riverUrl = modulePrefix + "/v1/river";
+var lakesUrl = modulePrefix + "/v1/lakes";
+var reservoirUrl = modulePrefix + "/v1/reservoir";
+var reachUrl = modulePrefix + "/v1/reach";
+var dictionaryUrl = modulePrefix + "/v1/dictionary";
 (function(window, angular) {
 	'use strict';
 
@@ -245,9 +246,9 @@ var dictionaryUrl = "/dictionary/v1";
 						$scope.riverType = function () {
 					    	$http({
 					            method: "get",
-								url: $localStorage.gwUrl +dictionaryUrl + "/findDictionary",
+								url: $localStorage.gwUrl + riverUrl + "/riverType",
 								params: {
-									type: 9
+                                    type: '104'
 								},
 					    		}).success(
 									function (res) {
@@ -262,8 +263,8 @@ var dictionaryUrl = "/dictionary/v1";
                                 $scope.river_Change_name = null;
                                 $scope.river_Change_id = null;
                             } else {
-                                $scope.river_Change_name = river_type.dictName;
-                                $scope.river_Change_id = river_type.dictValue;
+                                $scope.river_Change_name = river_type.typeName;
+                                $scope.river_Change_id = river_type.typeValue;
                                 console.log($scope.river_Change_name);
                                 console.log($scope.river_Change_id);
                             }
