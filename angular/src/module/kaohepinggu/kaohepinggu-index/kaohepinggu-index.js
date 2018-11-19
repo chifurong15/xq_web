@@ -55,7 +55,7 @@
 								pageSize: $scope.paginationConf.itemsPerPage,
 								issue: $scope.searchTime && $scope.date,
 								status: $scope.type,
-								num: $scope.num,
+                                num: $scope.num == 2 ? 2 : '',
 								createUser:$scope.createuser
 							},
 							callBack: function (res) {

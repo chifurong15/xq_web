@@ -45,7 +45,7 @@
 							    };
 							    var treeList = function(){
 							    	$ajaxhttp.myhttp({
-										url: $localStorage.serviceUrl_eventMgr + 'v1/event/getEventTypes',
+										//url: $localStorage.serviceUrl_eventMgr + 'v1/event/getEventTypes',
 										method: 'GET',
 										callBack: function(res){
 											typeTree = $.fn.zTree.init($('#typeTree'), setting, res.data);
@@ -85,8 +85,8 @@
 								// 分页
 								var reGetProducts = function() {
 									$ajaxhttp.myhttp({
-										// url: 'http://10.0.9.248:20001/v1/event/toDoTasks',
-										url: $localStorage.serviceUrl_eventMgr + '/v1/event/toDoTasks',
+										url: 'http://10.0.9.203:20001/v1/event/toDoTasks',
+										//url: $localStorage.serviceUrl_eventMgr + '/v1/event/toDoTasks',
 										method: 'get',
 										params: {
 											userId: $localStorage.userLoginInfo.userInfo.id,
@@ -103,8 +103,8 @@
                     						pageSize: $scope.paginationConf.itemsPerPage
 										},
 										callBack: function(resp){
-											$scope.paginationConf.totalItems = 1;
-											// $scope.paginationConf.totalItems = resp.data.totalNum;
+											//$scope.paginationConf.totalItems = 1;
+											$scope.paginationConf.totalItems = resp.data.totalNum;
 											$scope.moduleList = resp.data;
 										}
 									});

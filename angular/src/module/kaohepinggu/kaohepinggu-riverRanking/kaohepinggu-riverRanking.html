@@ -1,0 +1,193 @@
+<div class="kaohepingfen" ng-controller="riverListCtrl" ng-init="init()">
+    <div class="wrapper-md ">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">河段排名</span><span class="tag-right"></span>
+
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-bar">
+                    <form class="form-inline clearfix">
+
+                        <div class="input-group form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">区县</font></font></label>
+                            <select ng-model="regionName" class="form-control select-short"
+                                    style="width: 160px;z-index: 0;">
+                                <option value="">全部</option>
+                                <option value="{{item}}" ng-repeat="item in regionList">{{item}}</option>
+                            </select>
+                        </div>
+                        <div class="input-group form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">含污水处理厂</font></font></label>
+                            <select ng-model="isSewageFactory
+" class="form-control select-short" style="width: 160px;z-index: 0;">
+                                <option value="">全部</option>
+                                <option value="0">否</option>
+                                <option value="1">是</option>
+                            </select>
+                        </div>
+                        <div class="input-group form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">水质检测补偿</font></font></label>
+                            <select ng-model="isCompensation" class="form-control select-short"
+                                    style="width: 160px;z-index: 0;">
+                                <option value="">全部</option>
+                                <option value="0">否</option>
+                                <option value="1">是</option>
+                            </select>
+                        </div>
+                        <div class="input-group form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">水质评分规则</font></font></label>
+                            <select ng-model="scoringRules" class="form-control select-short"
+                                    style="width: 160px;z-index: 0;">
+                                <option value="">全部</option>
+                                <option value="{{item}}" ng-repeat="item in ruleList">{{item}}</option>
+                            </select>
+                        </div>
+                        <div class="input-group form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">水质考核</font></font></label>
+                            <select ng-model="isWaterQualityAssess" class="form-control select-short"
+                                    style="width: 160px;z-index: 0;">
+                                <option value="">全部</option>
+                                <option value="0">不考核</option>
+                                <option value="1">考核</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <button class="btn btn-primary" ng-click="search()">
+                                <i class="fa fa-search"></i>搜索
+                            </button>
+                            <!--<button type="button" class="btn btn-primary" ng-click="reset()" style="margin: 0 5px;">-->
+                            <!--<i class="fa fa-refresh"></i>重置-->
+                            <!--</button>-->
+                        </div>
+                    </form>
+                </div>
+                <!--<div class="table-bar">-->
+                <!--<button type="buttontton" class="btn btn-primary" ng-click="getReachAdd()">-->
+                <!--<i class="fa fa-plus"></i>新增-->
+                <!--</button>-->
+                <!--</div>-->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                <tr class='tHeader'>
+                                    <th width="5%">编号</th>
+                                    <th width="5%">区县</th>
+                                    <th width="10%">河道</th>
+                                    <th width="10%">河段</th>
+                                    <th width="10%">入境断面</th>
+                                    <th width="10%">出境断面</th>
+                                    <th width="5%">目标水质类别</th>
+                                    <th width="5%">年度水质目标</th>
+                                    <th width="5%">含污水处理厂</th>
+                                    <th width="5%">水质监测补偿</th>
+                                    <th width="10%">水质评分规则</th>
+                                    <th width="5%">水质考核</th>
+                                    <th width="5%">操作</th>
+                                </tr>
+                                <tr ng-repeat="item in moduleList">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{item.regionName}}</td>
+
+                                    <td>{{item.riverName}}</td>
+
+                                    <td>{{item.reachName}}</td>
+
+                                    <td>{{item.inputSection}}</td>
+
+                                    <td>{{item.outputSection}}</td>
+
+                                    <td>{{item.targetWaterQuality}}</td>
+
+                                    <td>{{item.yearTargetWaterQuality}}</td>
+
+                                    <td>{{item.isSewageFactory == 0 ? '否' : '是'}}</td>
+
+                                    <td>{{item.isCompensation == 0 ? '否' : '是'}}</td>
+
+                                    <td>{{item.scoringRules}}</td>
+
+                                    <td>{{item.isWaterQualityAssess == 0 ? '不考核' : '考核'}}</td>
+
+                                    <td style="text-align: center;">
+                                        <button type="button" class="btn btn-warning"
+                                                ng-click="edit(item)">修改
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                            <tm-pagination conf="paginationConf"></tm-pagination>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="chartStatistics">
+                        <div id="patrolChart" class="tj-chart-con"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        修改河段考核配置
+                    </h4>
+                </div>
+                <div class="modal-body" style="height: 200px">
+                    <form class="form-inline" style="padding-left: 25%;">
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">入境断面</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="title">
+                        </div>
+                        <br>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">出境断面</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="title">
+                        </div>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">水质评分规则</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="author">
+                        </div>
+                        <!--<br/>-->
+                        <!--<div class="form-item">-->
+                            <!--<label><font style="vertical-align: inherit;"><font-->
+                                    <!--style="vertical-align: inherit;">备注</font></font></label>-->
+                            <!--<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="issuer"-->
+                                      <!--rows="3" style="width: 160px;max-width: 160px;"></textarea>-->
+                        <!--</div>-->
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="save()">保存</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
