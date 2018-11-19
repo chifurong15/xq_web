@@ -26,6 +26,9 @@
 
                     $scope.getServiceUrl= moduleService.getServiceUrl();
 					$scope.init = function () {
+
+                        $scope.showImg = false;
+
 						var bulletin = globalParam.getter().bulletin || {};
 						if (!!getQueryString('id')) {
 							bulletin.id = getQueryString('id');
@@ -52,6 +55,16 @@
 							},
 							callBack: function (res) {
 								$scope.bulletin = res.data;
+								if($scope.bulletin.ren){
+									var i = $scope.bulletin.ren.indexOf('.');
+									var str = $scope.bulletin.ren.slice(i+1);
+									// console.log(str)
+									if(str.toLowerCase() == 'jpg' || str.toLowerCase() == 'jpeg' || str.toLowerCase() == 'png'){
+										$scope.showImg = true;
+									}else{
+
+									}
+								}
                                 var index = $scope.bulletin.attand_url.lastIndexOf("\/");
                                 $scope.attandName = $scope.bulletin.attand_url.substring(index+1);
                                 var options = {

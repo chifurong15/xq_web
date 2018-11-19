@@ -29,7 +29,10 @@
                         <!--target="_blank" class="downOrLook">预览</a>-->
                     </p>
                 </div>
-                <div id="pdfOb" style="margin: 20px 0;height: 500px;"></div>
+                <div style="margin: 10px 0;">
+                    <img src="{{bulletin.downurl}}" alt="" ng-if="showImg" >
+                </div>
+                <div id="pdfOb" style="margin: 20px 0;height: 500px;" ng-if="!showImg"></div>
             </div>
         </div>
 
