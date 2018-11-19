@@ -17,7 +17,7 @@
 	                        </div>
 	                      	<div class="form-item">
 								<label>河流类型</label>
-								<select ng-init="riverType()" ng-model="river_type" ng-options="rv.dictName for rv in riverTypes"
+								<select ng-init="riverType()" ng-model="river_type" ng-options="rv.typeName for rv in riverTypes"
                                         ng-change="river_Change(river_type)" class="form-control select-short">
                                     <option  value="">请选择</option>
                                 </select>
