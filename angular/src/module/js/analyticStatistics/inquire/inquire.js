@@ -294,30 +294,48 @@
                     }).success( function(res) {
                         $scope.grade = res.data.list[0].grade;
                         console.log($scope.grade);
-                        $http({
-                            url: $localStorage.serviceUrl_chiefOnline + '/charimanPatrol/v1/listChairManPatrolNumList',
-                            method: 'get',
-                            params: {
-                                regionCode: $scope.regionId,
-                                reachId: $scope.reachId,
-                                queryStartTime: $scope.startTime,
-                                queryEndTime: $scope.endTime,
-                                userName: $scope.userName,
-                                grade: $scope.grade,
-                                needExtInfo: '1',
-                                pageSize: $scope.paginationConf.itemsPerPage,
-                                pageNumber: $scope.paginationConf.currentPage
-                            }
-                        }).success(function (resp) {
-                            console.log(resp);
-                            $scope.paginationConf.totalItems = resp.data.total;
-                            $scope.riverChiefList = resp.data.list;
-                        }).error(function (error) {
-
-                        })
+                        getList();
                     }).error(function(res) {
                     });
                 }
+                //获取列表数据
+                function getList(){
+                    $http({
+                        url: $localStorage.serviceUrl_chiefOnline + '/charimanPatrol/v1/listChairManPatrolNumList',
+                        method: 'get',
+                        params: {
+                            regionCode: $scope.regionId,
+                            reachId: $scope.reachId,
+                            queryStartTime: $scope.startTime,
+                            queryEndTime: $scope.endTime,
+                            userName: $scope.userName,
+                            grade: $scope.grade,
+                            needExtInfo: '1',
+                            pageSize: $scope.paginationConf1.itemsPerPage,
+                            pageNumber: $scope.paginationConf1.currentPage
+                        }
+                    }).success(function (resp) {
+                        console.log('11111',resp);
+                        $scope.paginationConf1.totalItems = resp.data.total;
+                        $scope.riverChiefList = resp.data.list;
+                    }).error(function (error) {
+
+                    })
+                }
+
+                // 配置分页基本参数
+                $scope.paginationConf1 = {
+                    currentPage: $location.search().currentPage ? $location.search().currentPage : 1,
+                    itemsPerPage: 10,
+                    pagesLength: 10,
+                    perPageOptions: [1, 2, 3, 4, 5, 10],
+                    onChange: function () {
+                        //console.log($scope.paginationConf.currentPage);
+                        $location.search('currentPage', $scope.paginationConf1.currentPage);
+                    }
+                };
+                // 当他们一变化的时候，重新获取数据条目
+                $scope.$watch('paginationConf1.currentPage + paginationConf1.itemsPerPage', getList);
 
                 // 分页
                 var patrolChart;
