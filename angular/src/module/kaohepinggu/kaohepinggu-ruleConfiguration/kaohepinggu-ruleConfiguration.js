@@ -35,6 +35,10 @@
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/waterQualityRule/listWaterRule',
                             method: 'get',
+                            params:{
+                                pageNumber: $scope.paginationConf.currentPage,
+                                pageSize: $scope.paginationConf.itemsPerPage
+                            },
                             callBack: function (res) {
                                 $scope.moduleList = res.data.list;
                                 $scope.paginationConf.totalItems = res.data.total;
@@ -45,6 +49,8 @@
                     //获取水质评分细则列表 -- F值
                     function getFRule () {
                         var params = {
+                            pageNumber: $scope.paginationConf1.currentPage,
+                            pageSize: $scope.paginationConf1.itemsPerPage,
                             paramType: $scope.paramType,
                             waterQualityType: $scope.waterQualityType,
                             waterQualityRule: $scope.waterQualityRule
@@ -64,8 +70,9 @@
                     //获取水质变化细则列表 -- K值
                     function getKRule (){
                         var params = {
+                            pageNumber: $scope.paginationConf2.currentPage,
+                            pageSize: $scope.paginationConf2.itemsPerPage,
                             paramType: $scope.paramType2,
-                            // waterQualityType: $scope.waterQualityType,
                             waterQualityRule: $scope.waterQualityRule1
                         }
                         $ajaxhttp.myhttp({
