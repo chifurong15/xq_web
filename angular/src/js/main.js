@@ -1,8 +1,8 @@
 'use strict';
 
 /* Controllers */
-angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$rootScope', 'globaltree', '$window', 'moduleService', '$http', '$timeout',
-    function ($scope, $translate, $localStorage, $rootScope, globaltree, $window, moduleService, $http, $timeout) {
+angular.module('app').controller('AppCtrl', ['$scope', '$location','$translate', '$localStorage', '$rootScope', 'globaltree', '$window', 'moduleService', '$http', '$timeout',
+    function ($scope,$location, $translate, $localStorage, $rootScope, globaltree, $window, moduleService, $http, $timeout) {
         // add 'ie' classes to html
         var isIE = !!navigator.userAgent.match(/MSIE/i);
         isIE && angular.element($window.document.body).addClass('ie');
@@ -153,13 +153,23 @@ angular.module('app').controller('AppCtrl', ['$scope', '$translate', '$localStor
         $scope.clickRootNode = function (event) {
             hideLeft();
         }
+        console.log($location.path());
+
+        //点击顶部logo时，菜单一级不选中
+        $scope.goHome = function (){
+            $('.navbar-right > li').removeClass('active');
+        }
+
         $scope.getSecondMenu = function (menu) {
             if (!menu) {
                 return;
             }
+
             var eleId = '#menu_' + menu.id;
             $(eleId).parent().addClass('active');
             $(eleId).parent().siblings().removeClass('active');
+
+
             var childernList = menu.children;
             showLeft();
             //设置二级菜单：menuObj在页面指令中被引用
