@@ -182,7 +182,11 @@
                                 {{bulletin.title}}
                             </h4>
                         </div>
-                        <div class="modal-body" ng-bind-html="bulletin.detail"></div>
+                        <div class="modal-body" >
+                            <p ng-bind-html="bulletin.detail"></p>
+                            <img src="{{bulletin.attand_url}}" alt="" ng-if="showImg">
+                            <div id="pdfOb" ng-if="!showImg" style="margin:10px 0;height: 300px;"></div>
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal">返回</button>
                         </div>

@@ -39,6 +39,7 @@
 
                 var promise = esriApiDeps.query();
                 var w = wish.get();
+                $scope.showImg = false;
                 // 初始化
                 $scope.eventImgUrl = $localStorage.serviceUrl_fileService;
                 $scope.init = function () {
@@ -424,9 +425,28 @@
                             id: id
                         },
                         callBack: function (res) {
-                            var attandNamePart = res.data.attandUrl.split('_');
                             $scope.bulletin = res.data;
-                            $scope.attandName = attandNamePart.splice(1, attandNamePart.length - 1).join('');
+                            //var attandNamePart = res.data.attandUrl.split('_');
+                            if($scope.bulletin.ren){
+                                var i = $scope.bulletin.ren.indexOf('.');
+                                var str = $scope.bulletin.ren.slice(i+1);
+                                // console.log(str)
+                                if(str.toLowerCase() == 'jpg' || str.toLowerCase() == 'jpeg' || str.toLowerCase() == 'png'){
+                                    $scope.showImg = true;
+                                }else{
+                                    $scope.showImg = false;
+                                    var options = {
+                                        pdfOpenParams: {
+                                            pagemode: "thumbs",
+                                            navpanes: 0,
+                                            toolbar: 0,
+                                            statusbar: 0,
+                                            view: "FitV"
+                                        }
+                                    };
+                                    PDFObject.embed($scope.bulletin.attand_url, "#pdfOb", options);
+                                }
+                            }
                         }
                     })
                 }
