@@ -273,7 +273,7 @@
                 $scope.search = function () {
                     getLoginUserInfo();
                     clearList();
-                    $scope.userName = '';
+                    //$scope.userName = '';
                 };
 
                 //清空列表

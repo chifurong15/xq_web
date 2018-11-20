@@ -153,7 +153,6 @@ angular.module('app').controller('AppCtrl', ['$scope', '$location','$translate',
         $scope.clickRootNode = function (event) {
             hideLeft();
         }
-        console.log($location.path());
 
         //点击顶部logo时，菜单一级不选中
         $scope.goHome = function (){
