@@ -303,7 +303,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
 							            method: "get",
                                         url: $localStorage.gwUrl + riverUrl + "/riverType",
 										params: {
-											type: 9
+                                            type: '104'
 										},
 							    		}).success(
 											function (res) {
