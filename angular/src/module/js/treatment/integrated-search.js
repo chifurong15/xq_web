@@ -47,7 +47,7 @@
 								// 分页
 								var reGetProducts = function() {
 									$ajaxhttp.myhttp({
-										// url: 'http://10.0.9.248:20001/v1/event/toDoTasks',
+										 //url: 'http://10.0.9.133:20001/v1/event/search',
 										url: $localStorage.serviceUrl_eventMgr + '/v1/event/search',
 										method: 'get',
 										params: {
@@ -65,10 +65,10 @@
                     						pageSize: $scope.paginationConf.itemsPerPage
 										},
 										callBack: function(resp){
-											console.log(resp)
-											$scope.paginationConf.totalItems = 1;
-											// $scope.paginationConf.totalItems = resp.data.totalNum;
-											$scope.moduleList = resp.data;
+											//console.log(resp.data.list)
+											$scope.paginationConf.totalItems = resp.data.total;
+											// $scope.paginationConf.totalItems = resp.data.total;
+											$scope.moduleList = resp.data.list;
 										}
 									});
 								};
@@ -197,7 +197,7 @@
 									pagesLength : 5,
 									perPageOptions : [ 1, 2, 3, 4, 5, 10 ],
 									onChange : function() {
-										console.log($scope.paginationConf.currentPage);
+										//console.log($scope.paginationConf.currentPage);
 										$location.search('currentPage',$scope.paginationConf.currentPage);
 									}
 								};
