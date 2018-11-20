@@ -103,7 +103,7 @@
                     						pageSize: $scope.paginationConf.itemsPerPage
 										},
 										callBack: function(resp){
-											//$scope.paginationConf.totalItems = 1;
+											$scope.paginationConf.totalItems = 1;
 											//$scope.paginationConf.totalItems = resp.data.totalNum;
 											$scope.moduleList = resp.data;
 										}
