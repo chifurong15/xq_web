@@ -85,8 +85,8 @@
 								// 分页
 								var reGetProducts = function() {
 									$ajaxhttp.myhttp({
-										url: 'http://10.0.9.203:20001/v1/event/toDoTasks',
-										//url: $localStorage.serviceUrl_eventMgr + '/v1/event/toDoTasks',
+										//url: 'http://10.0.9.203:20001/v1/event/toDoTasks',
+										url: $localStorage.serviceUrl_eventMgr + '/v1/event/toDoTasks',
 										method: 'get',
 										params: {
 											userId: $localStorage.userLoginInfo.userInfo.id,
@@ -104,7 +104,7 @@
 										},
 										callBack: function(resp){
 											//$scope.paginationConf.totalItems = 1;
-											$scope.paginationConf.totalItems = resp.data.totalNum;
+											//$scope.paginationConf.totalItems = resp.data.totalNum;
 											$scope.moduleList = resp.data;
 										}
 									});
