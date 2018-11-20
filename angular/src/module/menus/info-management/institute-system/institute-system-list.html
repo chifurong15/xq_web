@@ -3,7 +3,7 @@
 	<div class="wrapper-md">
 		<div class="panel panel-default m-n">
 			<div class="panel-body">
-				<form method="get" class="selectPanel">
+				<form method="get" class="form-inline">
 					<!--<div class="form-radio">
 						<label class="radio-inline i-checks" ng-repeat="type in typeList">
                             <input type="radio" name="type" ng-model="isSelected" ng-click="radioBtn(isSelected)"
@@ -11,25 +11,21 @@
                         			{{type.typeName}}
                         </label>
 					</div>-->
-					<div class="form-item datatimer">
-	                    <label>开始日期</label>
-	                    <div class="input-group date date_picker" id="beginTime" style="display: inline-flex;">
-	                        <input type="text" class="form-control input-sm" ng-model="beginTime" style="z-index: 0;"/>
-	                        <span class="input-group-addon">
-	                            <i class="fa fa-calendar"></i>
-	                        </span>
-	                    </div>
+                    <div class="form-item">
+                        <label>开始日期</label>
+                        <div class="input-group date date_picker" id="beginTime">
+                            <input type="text" class="form-control input-short-o" ng-model="beginTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
                     </div>
-                	<div class="form-item datatimer">
-	                    <label>结束日期</label>
-	                    <div class="input-group date date_picker" id="endTime" style="display: inline-flex;">
-	                        <input type="text" class="form-control input-sm" ng-model="endTime" style="z-index: 0;"/>
-	                        <span class="input-group-addon">
-	                            <i class="fa fa-calendar"></i>
-	                        </span>
-	                    </div>
-                	</div>
-					<div class="form-item" style="display: inline-flex;" >
+                    <div class="form-item">
+                        <label>结束日期</label>
+                        <div class="input-group date date_picker" id="endTime">
+                            <input type="text" class="form-control input-short-o" ng-model="endTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+					<div class="form-item">
 						<label>是否公有</label>
 						<select class="form-control select-short" ng-change="selectChange();" ng-model="doc.public" >
 							<option value="1">公有</option>
