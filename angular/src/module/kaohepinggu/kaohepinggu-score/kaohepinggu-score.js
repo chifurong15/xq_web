@@ -122,7 +122,7 @@
 							})
 							
 						}else if($scope.type == 1){ //修改
-                            params.parentid = $scope.parentid;
+                            //params.parentid = $scope.parentid;
                             params.id = $scope.id;
 							$ajaxhttp.myhttp({
 								url: apiPrefix + '/v1/assessment/update',
