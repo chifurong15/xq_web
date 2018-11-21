@@ -19,24 +19,24 @@
                 </div>
 
                 <ul class="scoreTitle">
-                    <li style="width: 10%;border-left: 0;">评分规则</li>
-                    <li style="width: 10%;">评分类型</li>
+                    <li style="width: 20%;border-left: 0;">评分规则</li>
+                    <li style="width: 15%;">评分类型</li>
                     <li style="width: 20%;">评分细则</li>
-                    <li style="width: 15%;">评分方式</li>
-                    <li style="width: 15%;">扣分</li>
-                    <li style="width: 15%;">处理时限</li>
+                    <li style="width: 10%;">评分方式</li>
+                    <li style="width: 10%;">扣分</li>
+                    <li style="width: 10%;">处理时限</li>
                     <li style="width: 15%;">操作</li>
                 </ul>
 
                 <ul class="scoreOne">
                     <li ng-repeat="item in rulesList">
-                        <span style="width: 10%;padding: 10px 0;"><i class="fa fa-sort-desc" aria-hidden="true"
+                        <span style="width: 20%;padding: 10px 0;"><i class="fa fa-sort-desc" aria-hidden="true"
                                                                      ng-if="item.gradeillegal && item.childList.length != 0"></i>{{item.gradeillegal}}</span>
-                        <span style="width: 10%;padding: 10px 0;">{{item.gradetype}}</span>
+                        <span style="width: 15%;padding: 10px 0;">{{item.gradetype}}</span>
                         <span style="width: 20%;padding: 10px 0;">{{item.gradedetailed}}</span>
-                        <span style="width: 15%;padding: 10px 0;">{{item.gradeway}}</span>
-                        <span style="width: 15%;padding: 10px 0;">{{item.deductMarks}}</span>
-                        <span style="width: 15%;padding: 10px 0;">{{item.processLimitted}}</span>
+                        <span style="width: 10%;padding: 10px 0;">{{item.gradeway}}</span>
+                        <span style="width: 10%;padding: 10px 0;">{{item.deductMarks}}</span>
+                        <span style="width: 10%;padding: 10px 0;">{{item.processLimitted}}</span>
                         <span style="display: inline-block;width: 15%;padding: 3px;border-right: 1px solid #ccc;">
         					<button type="button" class="btn btn-success" ng-click="showModal(3,item)"
                                     ng-if="num == 2 && item.level == 2">新增违规细则</button>
@@ -50,15 +50,15 @@
         				</span>
                         <ul class="scoreTwo">
                             <li ng-repeat="items in item.childList">
-                                <span style="width: 10%;position: relative;"><i class="fa fa-sort-desc"
+                                <span style="width: 20%;position: relative;"><i class="fa fa-sort-desc"
                                                                                 aria-hidden="true"
                                                                                 ng-if="items.childList.length != 0"
                                                                                 style="margin-left: 50px;"></i>{{items.gradeillegal}}</span>
-                                <span style="width: 10%;">{{items.gradetype}}</span>
+                                <span style="width: 15%;">{{items.gradetype}}</span>
                                 <span style="width: 20%;">{{items.gradedetailed}}</span>
-                                <span style="width: 15%;">{{items.gradeway}}</span>
-                                <span style="width: 15%;">{{items.deductMarks}}</span>
-                                <span style="width: 15%;">{{items.processLimitted}}</span>
+                                <span style="width: 10%;">{{items.gradeway}}</span>
+                                <span style="width: 10%;">{{items.deductMarks}}</span>
+                                <span style="width: 10%;">{{items.processLimitted}}</span>
                                 <span style="display: inline-block;width: 15%;padding: 3px;border-right: 1px solid #ccc;">
 		        					<button type="button" class="btn btn-success" ng-click="showModal(3,items.id ,item)"
                                             ng-if="num == 2 && items.level == 2">新增违规细则</button>
@@ -72,12 +72,12 @@
 		        				</span>
                                 <ul class="scoreThree">
                                     <li ng-repeat="itemss in items.childList" ng-if="items.childList">
-                                        <span style="width: 10%;position: relative;">{{itemss.gradeillegal}}</span>
-                                        <span style="width: 10%;">{{itemss.gradetype}}</span>
+                                        <span style="width: 20%;position: relative;">{{itemss.gradeillegal}}</span>
+                                        <span style="width: 15%;">{{itemss.gradetype}}</span>
                                         <span style="width: 20%;">{{itemss.gradedetailed}}</span>
-                                        <span style="width: 15%;">{{itemss.gradeway}}</span>
-                                        <span style="width: 15%;">{{itemss.deductMarks}}</span>
-                                        <span style="width: 15%;">{{itemss.processLimitted}}</span>
+                                        <span style="width: 10%;">{{itemss.gradeway}}</span>
+                                        <span style="width: 10%;">{{itemss.deductMarks}}</span>
+                                        <span style="width: 10%;">{{itemss.processLimitted}}</span>
                                         <span style="display: inline-block;width: 15%;padding: 3px;border-right: 1px solid #ccc;">
 				        					<button type="button" class="btn btn-success"
                                                     ng-click="showModal(3,itemss.id ,item)"
