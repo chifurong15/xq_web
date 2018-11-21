@@ -264,7 +264,7 @@ angular.module('app')
             return g;
 
         };
-        this.addRegionName = function (name, longitude, latitude) {debugger;
+        this.addRegionName = function (name, longitude, latitude) {
             var centerArea = ["红桥区","河北区","和平区","河东区","南开区","河西区"];
 
             var font = new w.Font().setSize("18px").setWeight(w.Font.WEIGHT_BOLD).setFamily("微软雅黑");
