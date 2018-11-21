@@ -149,6 +149,7 @@
 						}else{
                             clear ();
                             $('#myModal').modal('show');
+
                             if(id == 2){
                                 $scope.type=1;//修改
                                 $scope.id = item.id;
@@ -158,8 +159,10 @@
                                 $scope.sort = item.sort;
                             }else{
                                 $scope.type=2;//新增
-                                $scope.parentid = item.id;
-                                $scope.gradelevel = item.gradelevel;
+                                if(item){
+                                    $scope.parentid = item.id;
+                                    $scope.gradelevel = item.gradelevel;
+                                }
                             }
 						}
 					}
