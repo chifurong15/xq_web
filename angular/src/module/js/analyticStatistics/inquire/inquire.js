@@ -162,9 +162,9 @@
                             regionCode: $scope.regionId
                         }
                     }).success(function (data) {
-                        console.log(data)
+                        //console.log(data)
                         $scope.regionList = data.data;
-                        console.log($scope.regionList);
+                        //console.log($scope.regionList);
                         regionTree = $.fn.zTree.init($("#regionTreeContainer"), regionTreeSetting, $scope.regionList);
                     }).error(function () {
                     });
@@ -293,7 +293,7 @@
                         }
                     }).success( function(res) {
                         $scope.grade = res.data.list[0].grade;
-                        console.log($scope.grade);
+                        //console.log($scope.grade);
                         getList();
                     }).error(function(res) {
                     });
@@ -301,6 +301,7 @@
                 //获取列表数据
                 function getList(){
                     $http({
+                        //url: 'http://10.0.9.133:51000/charimanPatrol/v1/listChairManPatrolNumList',
                         url: $localStorage.serviceUrl_chiefOnline + '/charimanPatrol/v1/listChairManPatrolNumList',
                         method: 'get',
                         params: {
@@ -315,7 +316,7 @@
                             pageNumber: $scope.paginationConf1.currentPage
                         }
                     }).success(function (resp) {
-                        console.log('11111',resp);
+                        //console.log('11111',resp);
                         $scope.paginationConf1.totalItems = resp.data.total;
                         $scope.riverChiefList = resp.data.list;
                     }).error(function (error) {
@@ -369,7 +370,7 @@
                         },
                         url: $localStorage.serviceUrl_chiefOnline + '/charimanPatrol/v1/detail'
                     }).success(function (resp) {
-                        console.log(resp);
+                        //console.log(resp);
                         $scope.patrolList = resp.data;
                     }).error(function (error) {
                     });
@@ -387,7 +388,7 @@
                         url: $localStorage.serviceUrl_chiefOnline + '/charimanPatrol/v1/getLocusDetailById'
                     }).success(function (resp) {
                         $scope.patrolDetail = resp.data;
-                        console.log($scope.patrolDetail);
+                        //console.log($scope.patrolDetail);
                         PatrolRiverService.addGraphic(resp.data);
                     }).error(function (error) {
                         console.error(error);
@@ -407,7 +408,7 @@
                         },
                         url: $localStorage.serviceUrl_eventMgr + 'v1/event/queryEventByReachOrRegion'
                     }).success(function (resp) {
-                        console.log(resp);
+                       // console.log(resp);
                         $scope.eventList = resp.data;
                     }).error(function (error) {
                     });
@@ -415,26 +416,26 @@
 
                 // 点击问题记录查看详情
                 $scope.eventDetailShow = function (event) {
-                    console.log(event);
+                    //console.log(event);
                     $('#eventDetailShow').modal('show');
                     $scope.eventDetail = event;
                 };
 
                 //查看图片详情
                 $rootScope.$on("eventUrl1", function (evt, eventUrl1) {
-                    console.log(eventUrl1)
+                    //console.log(eventUrl1)
                     $scope.before = eventUrl1.data.beforeAccessory;
                     $scope.after = eventUrl1.data.afterAccessory;
-                    console.log($scope.before)
+                    //console.log($scope.before)
                     $scope.$apply();
                 });
 
                 //查看图片详情
                 $rootScope.$on("eventUrl2", function (evt, eventUrl2) {
-                    console.log(eventUrl2)
+                    //console.log(eventUrl2)
                     $scope.before = eventUrl2.data.beforeAccessory;
                     $scope.after = eventUrl2.data.afterAccessory;
-                    console.log($scope.before)
+                    //console.log($scope.before)
                     $scope.$apply();
                 });
             }
