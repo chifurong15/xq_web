@@ -99,11 +99,12 @@
 							weight: $scope.weight,
 							totalpoints: $scope.totalpoints,
 							sort: $scope.sort,
-							parentid: $scope.parentid,
-							gradelevel: $scope.gradelevel
+							//parentid: $scope.parentid,
+							//gradelevel: $scope.gradelevel
 						}
 						
-						if($scope.type == 2){ //新增							
+						if($scope.type == 2){ //新增
+							params.parentid = $scope.parentid;
 							$ajaxhttp.myhttp({
 								url: apiPrefix + '/v1/assessment/add',
 								method: 'POST',
@@ -121,7 +122,8 @@
 							})
 							
 						}else if($scope.type == 1){ //修改
-
+                            params.parentid = $scope.parentid;
+                            params.id = $scope.id;
 							$ajaxhttp.myhttp({
 								url: apiPrefix + '/v1/assessment/update',
 								method: 'PUT',
@@ -143,6 +145,8 @@
 					
 					//新增  修改  显示模态框
 					$scope.showModal = function (id,item ,count) {
+						// id 表示修改还是新增  item 表示修改的时候传过的原数据 count表示限制新增的等级
+
 						if (count == 7) {
                             layer.msg('最多只能增到七级');
                             return ;
@@ -153,6 +157,7 @@
                             if(id == 2){
                                 $scope.type=1;//修改
                                 $scope.id = item.id;
+                                //$scope.parentid = item.parentid;
                                 $scope.gradetype = item.gradetype;
                                 $scope.weight = item.weight;
                                 $scope.totalpoints = item.totalpoints;
@@ -162,7 +167,7 @@
                                 if(item){
                                     $scope.parentid = item.id;
                                     $scope.gradelevel = item.gradelevel;
-                                }
+                                 }
                             }
 						}
 					}
