@@ -10,6 +10,7 @@
 
     app.controller(
         'mainBodyCtrl', [
+            '$sce',
             '$localStorage',
             '$scope',
             '$location',
@@ -31,7 +32,7 @@
             'WorkbenchService',
             '$ajaxhttp',
             'moduleService',
-            function mainBodyCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http,
+            function mainBodyCtrl($sce,$localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http,
                                   wish, esriApiDeps, tiandituFactory, MapTool, MapUtil, SymbolUtil, queryAdminregion, UtilityTool, WorkbenchService, $ajaxhttp, moduleService) {
 
                 var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
@@ -427,6 +428,9 @@
                         callBack: function (res) {
                             $scope.bulletin = res.data;
                             //var attandNamePart = res.data.attandUrl.split('_');
+                            if($scope.bulletin.detail){
+                                $scope.bulletin.detail = $sce.trustAsHtml($scope.bulletin.detail)
+                            }
                             if($scope.bulletin.ren){
                                 var i = $scope.bulletin.ren.indexOf('.');
                                 var str = $scope.bulletin.ren.slice(i+1);

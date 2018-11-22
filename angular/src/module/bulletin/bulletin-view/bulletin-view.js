@@ -5,6 +5,7 @@
 		.controller(
 			'bulletinViewCtrl',
 			[
+				'$sce',
 				'$localStorage',
 				'$scope',
 				'$location',
@@ -17,7 +18,7 @@
 				'$ajaxhttp',
 				'moduleService',
 				'globalParam',
-				function bulletinViewCtrl($localStorage, $scope,
+				function bulletinViewCtrl($sce,$localStorage, $scope,
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
@@ -55,6 +56,9 @@
 							},
 							callBack: function (res) {
 								$scope.bulletin = res.data;
+                                if($scope.bulletin.detail){
+                                    $scope.bulletin.detail = $sce.trustAsHtml($scope.bulletin.detail)
+                                }
 								if($scope.bulletin.ren){
 									var i = $scope.bulletin.ren.indexOf('.');
 									var str = $scope.bulletin.ren.slice(i+1);
