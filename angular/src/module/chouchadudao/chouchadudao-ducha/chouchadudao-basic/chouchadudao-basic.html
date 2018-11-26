@@ -46,6 +46,14 @@
                                     <br/>
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">下发区域</font></font></label>
+                                        <textarea class="form-control" readonly name="deblock_udid"
+                                                  ng-model="resBasic.sentRegion" rows="2"
+                                                  style="width: 160px;max-width: 160px;"></textarea>
+                                    </div>
+                                    <br/>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
                                                 style="vertical-align: inherit;">检查内容</font></font></label>
                                         <textarea class="form-control" readonly name="deblock_udid"
                                                   ng-model="resBasic.content" rows="4"
@@ -65,6 +73,14 @@
                                                 style="vertical-align: inherit;">检查方式</font></font></label>
                                         <input type="text" class="form-control input-short" readonly
                                                ng-model="resBasic.inspectType">
+                                    </div>
+                                    <br/>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">下发单位</font></font></label>
+                                        <textarea class="form-control" readonly name="deblock_udid"
+                                                  ng-model="resBasic.sentUnit" rows="2"
+                                                  style="width: 160px;max-width: 160px;"></textarea>
                                     </div>
                                     <br/>
                                     <div class="form-item">
@@ -136,7 +152,7 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <tm-pagination conf="paginationConf"></tm-pagination>
+                                        <!--<tm-pagination conf="paginationConf"></tm-pagination>-->
                                     </div>
                                 </div>
                             </div>
@@ -165,12 +181,14 @@
                                             <tbody>
                                             <tr class='tHeader'>
                                                 <th width="5%">序号</th>
-                                                <th width="15%">分组</th>
-                                                <th width="15%">组长</th>
+                                                <th width="10%">分组</th>
+                                                <th width="10%">组长</th>
                                                 <th width="15%">督导区</th>
                                                 <th width="15%">组成部门</th>
-                                                <th width="15%">联络员</th>
+                                                <th width="10%">联络员</th>
                                                 <th width="15%">联系电话</th>
+                                                <th width="10%">督查组联络员</th>
+                                                <th width="15%">督查组联系电话</th>
                                             </tr>
                                             <tr ng-repeat="item in groupList">
                                                 <td>{{$index+1}}</td>
@@ -180,6 +198,8 @@
                                                 <td>{{item.department}}</td>
                                                 <td>{{item.contact}}</td>
                                                 <td>{{item.phone}}</td>
+                                                <td>{{item.supervisePerson}}</td>
+                                                <td>{{item.personPhone}}</td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -227,6 +247,14 @@
                                                    ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>
                                             {{type.typeName}}
                                         </label>
+                                    </div>
+                                    <br>
+                                    <div class="input-group form-item" ng-show="isOneUnit">
+                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发区域</font></font></label>
+                                        <select ng-model="sentRegion" id="sentRegion" class="form-control select-short" style="width: 160px;z-index:0;">
+                                        <option value="">请选择</option>
+                                        <option value="{{item}}" ng-repeat="item in RegionList">{{item}}</option>
+                                        </select>
                                     </div>
                                     <br/>
                                     <div class="form-item">
@@ -314,14 +342,21 @@
                                 <form class="form-inline" style="float:left;">
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font
-                                                style="vertical-align: inherit;">是否处理</font></font></label>
-                                        <label class="radio-inline i-checks" ng-repeat="type in typeList"
-                                               style="margin-left: 15px;">
-                                            <input type="radio" name="type" ng-model="isSelected" ng-model="resReport.oneregion" disabled
-                                                   ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>
-                                            {{type.typeName}}
-                                        </label>
+                                        style="vertical-align: inherit;">下发区域</font></font></label>
+                                        <textarea class="form-control" name="deblock_udid"
+                                                  ng-model="resReport.region" readonly rows="2"
+                                                  style="width: 160px;max-width: 160px;"></textarea>
                                     </div>
+                                    <!--<div class="form-item">-->
+                                        <!--<label><font style="vertical-align: inherit;"><font-->
+                                                <!--style="vertical-align: inherit;">是否处理</font></font></label>-->
+                                        <!--<label class="radio-inline i-checks" ng-repeat="type in typeList"-->
+                                               <!--style="margin-left: 15px;">-->
+                                            <!--<input type="radio" name="type" ng-model="isSelected" ng-model="resReport.oneregion" disabled-->
+                                                   <!--ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>-->
+                                            <!--{{type.typeName}}-->
+                                        <!--</label>-->
+                                    <!--</div>-->
                                     <br>
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font
@@ -412,10 +447,20 @@
                                 <span class="required"><font style="vertical-align: inherit;"><font
                                         style="vertical-align: inherit;">*</font></font></span>
                             </div>
-                            <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">职务</font></font></label>
-                                <input type="text" class="form-control input-short" ng-model="duty">
+                            <!--<div class="form-item">-->
+                                <!--<label><font style="vertical-align: inherit;"><font-->
+                                        <!--style="vertical-align: inherit;">职务</font></font></label>-->
+                                <!--<input type="text" class="form-control input-short" ng-model="duty">-->
+                                <!--<span class="required"><font style="vertical-align: inherit;"><font-->
+                                        <!--style="vertical-align: inherit;">*</font></font></span>-->
+                            <!--</div>-->
+                            <div class="input-group form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">职务</font></font></label>
+                                <select ng-model="duty" class="form-control select-short" ng-change="changDuty()" style="width: 160px;">
+                                    <option value="">请选择</option>
+                                    <option value="领导">领导</option>
+                                    <option value="普通职员">普通职员</option>
+                                </select>
                                 <span class="required"><font style="vertical-align: inherit;"><font
                                         style="vertical-align: inherit;">*</font></font></span>
                             </div>
@@ -423,7 +468,7 @@
                                 <label><font style="vertical-align: inherit;"><font
                                         style="vertical-align: inherit;">手机号</font></font></label>
                                 <input type="tel" name="tel1" class="form-control input-short" ng-model="phoneNum">
-                                <span class="required"><font style="vertical-align: inherit;"><font
+                                <span class="required" ng-show="show"><font style="vertical-align: inherit;"><font
                                         style="vertical-align: inherit;">*</font></font></span>
                             </div>
                         </form>
@@ -449,7 +494,7 @@
                             新增督导组
                         </h4>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body" style="height: 350px;">
                         <form class="form-inline" style="padding-left: 25%;">
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font
@@ -475,6 +520,19 @@
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">联系电话</font></font></label>
                                 <input type="tel" name="tel1" class="form-control input-short" ng-model="phone">
+                                <span class="required"><font style="vertical-align: inherit;"><font
+                                        style="vertical-align: inherit;">*</font></font></span>
+                            </div>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font
+                                        style="vertical-align: inherit;">督察组联络员</font></font></label>
+                                <input type="text" class="form-control input-short" ng-model="supervisePerson">
+                                <span class="required"><font style="vertical-align: inherit;"><font
+                                        style="vertical-align: inherit;">*</font></font></span>
+                            </div>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督察组联系电话</font></font></label>
+                                <input type="tel" name="tel1" class="form-control input-short" ng-model="personPhone">
                                 <span class="required"><font style="vertical-align: inherit;"><font
                                         style="vertical-align: inherit;">*</font></font></span>
                             </div>

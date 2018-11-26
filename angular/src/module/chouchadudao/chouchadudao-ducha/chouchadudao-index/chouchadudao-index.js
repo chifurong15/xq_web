@@ -23,10 +23,11 @@
 					
 					var apiPrefix = moduleService.getServiceUrl() + '/inspection';
                     //var apiPrefix = 'http://10.0.9.116:7025' + '/inspection';
+                    //var apiPrefix = 'http://10.0.9.203:8081' + '/inspection';
 
 					$scope.init = function () {
-                        // $scope.num = 2; //2市河长办 5区河长办
-                        // getList();
+                         // $scope.num = 5; //2市河长办 5区河长办
+                         // getList();
 
                         $ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/Inspection/userinfo',
@@ -49,7 +50,8 @@
 								pageSize: $scope.paginationConf.itemsPerPage,
 								renumber: $scope.renumber,
 								state: $scope.state,
-								printDate: $scope.searchTime
+								printDate: $scope.searchTime,
+								title:$scope.title
 							},
 							callBack: function (res) {
 								$scope.moduleList = res.data.list;

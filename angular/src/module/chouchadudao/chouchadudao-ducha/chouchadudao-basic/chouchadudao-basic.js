@@ -23,6 +23,7 @@
 
                     var apiPrefix = moduleService.getServiceUrl() + '/inspection';
                     //var apiPrefix = 'http://10.0.9.116:7025' + '/inspection';
+                    //var apiPrefix = 'http://10.0.9.203:8081' + '/inspection';
 
                     var options = {
                         pdfOpenParams: {
@@ -40,6 +41,8 @@
                         });
                         $scope.isShow1 = true; //显示通报tab栏
                         $scope.isShow2 = false; //隐藏一区一单tab栏
+
+                        $scope.isOneUnit = false;
 
                         $scope.tag = localStorage.getItem('tag');
                         $scope.id = localStorage.getItem('id');
@@ -66,10 +69,19 @@
                         }
 
                         getBasic ();
-                        getConcatList ();
-                        getGroupList ();
+                        if($scope.state !=1){
+                            getConcatList ();
+                        }
+                        if($scope.state !=0 || $scope.state !=1){
+                            getGroupList ();
+                        }
+
+                        if($scope.state == 3 || $scope.state == 4){
+                            getReport ();
+                        }
+
                         getAllRegion ();
-                        getReport ();
+                        // getReport ();
 
                     }
 
@@ -123,6 +135,11 @@
                     ];
                     $scope.radioBtn = function(type){
                         $scope.types = type;
+                        if(type == 1){
+                            $scope.isOneUnit = true;
+                        }else{
+                            $scope.isOneUnit = false;
+                        }
                     }
 
                     //返回
@@ -139,6 +156,7 @@
                     $scope.add = function (id){
                         if(id == 1){//联络员
                             $scope.type = 1;
+                            $scope.show = true;
                             $('#myModal').modal('show')
                         }else if (id == 2){//督导组
                             $scope.type = 3;
@@ -179,33 +197,57 @@
                         }, function () {});
                     }
 
+                    $scope.changDuty = function (){
+                        if($scope.duty == '领导'){
+                            $scope.show = false;
+                        }else{
+                            $scope.show = true;
+                        }
+                    }
+
                     //新增联络员
                     $scope.save = function () {
-
-                        if (!$scope.username) {
-                            layer.alert("请输入姓名", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        } else if (!$scope.duty) {
-                            layer.alert("请输入职务", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        } else if (!$scope.phoneNum) {
-                            layer.alert("请输入手机号码", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
+                        if(!$scope.show){
+                            if (!$scope.username) {
+                                layer.alert("请输入姓名", {
+                                    skin: 'my-skin',
+                                    closeBtn: 1,
+                                    anim: 3
+                                });
+                            } else if (!$scope.duty) {
+                                layer.alert("请选择职务", {
+                                    skin: 'my-skin',
+                                    closeBtn: 1,
+                                    anim: 3
+                                });
+                            }
+                        }else{
+                            if (!$scope.username) {
+                                layer.alert("请输入姓名", {
+                                    skin: 'my-skin',
+                                    closeBtn: 1,
+                                    anim: 3
+                                });
+                            } else if (!$scope.duty) {
+                                layer.alert("请选择职务", {
+                                    skin: 'my-skin',
+                                    closeBtn: 1,
+                                    anim: 3
+                                });
+                            } else if (!$scope.phoneNum) {
+                                layer.alert("请输入手机号码", {
+                                    skin: 'my-skin',
+                                    closeBtn: 1,
+                                    anim: 3
+                                });
+                            }
                         }
+
                         var params = {
                             inspectionid:$scope.id,
                             name:$scope.username,
                             duty:$scope.duty,
-                            phone:$scope.phoneNum
+                            phone:$scope.phoneNum ? $scope.phoneNum : ''
                         }
                         if($scope.type == 1){
                             $ajaxhttp.myhttp({
@@ -306,6 +348,18 @@
                                 closeBtn: 1,
                                 anim: 3
                             });
+                        }else if (!$scope.supervisePerson) {
+                            layer.alert("请输入督察组联络员名称", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        } else if (!$scope.personPhone) {
+                            layer.alert("请输入督察组联系电话", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
                         } else if (!$scope.area) {
                             layer.alert("请选择督导区", {
                                 skin: 'my-skin',
@@ -326,7 +380,9 @@
                             grouping: $scope.grouping,
                             contact: $scope.contact,
                             phone: $scope.phone,
-                            area: $scope.area,
+                            supervisePerson:$scope.supervisePerson,
+                            personPhone:$scope.personPhone,
+                            area: $scope.area.join(','),
                             department: $scope.department
                         }
                         $ajaxhttp.myhttp({
@@ -353,7 +409,9 @@
                             accessory: $scope.accessory,
                             inspectionId: $scope.id,
                             trafficContent: $('#deblock_udid').val(),
-                            oneregion: $scope.types
+                            oneregion: $scope.types,
+                            //region:$scope.sentRegion ? $scope.sentRegion : ''
+                            region:$('#sentRegion').val() ? $('#sentRegion').val() : ''
                         }
                         //console.log(params);
                         $ajaxhttp.myhttp({
@@ -476,10 +534,13 @@
                             url: apiPrefix + '/v1/ComtactPerson/selectList',
                             method: 'get',
                             params:{
-                                inspectionid:$scope.id
+                                inspectionid:$scope.id,
+                                //pageNumber: $scope.paginationConf.currentPage,
+                                //pageSize: $scope.paginationConf.itemsPerPage,
                             },
                             callBack: function (res) {
                                 $scope.contactList = res.data.list;
+                                //$scope.paginationConf.totalItems = res.data.total;
                             }
                         })
                     }
@@ -598,19 +659,19 @@
                         });
                     }
 
-                    // 配置分页基本参数
-                    $scope.paginationConf = {
-                        currentPage: $location.search().currentPage ? $location.search().currentPage : 1,
-                        itemsPerPage: 10,
-                        pagesLength: 10,
-                        perPageOptions: [1, 2, 3, 4, 5, 10],
-                        onChange: function () {
-                            //console.log($scope.paginationConf.currentPage);
-                            $location.search('currentPage', $scope.paginationConf.currentPage);
-                        }
-                    };
-                    // 当他们一变化的时候，重新获取数据条目
-                    $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', getConcatList);
+                    // // 配置分页基本参数
+                    // $scope.paginationConf = {
+                    //     currentPage: $location.search().currentPage ? $location.search().currentPage : 1,
+                    //     itemsPerPage: 10,
+                    //     pagesLength: 10,
+                    //     perPageOptions: [1, 2, 3, 4, 5, 10],
+                    //     onChange: function () {
+                    //         //console.log($scope.paginationConf.currentPage);
+                    //         $location.search('currentPage', $scope.paginationConf.currentPage);
+                    //     }
+                    // };
+                    // // 当他们一变化的时候，重新获取数据条目
+                    // $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', getConcatList);
 
                 } ]);
 })(window, angular);

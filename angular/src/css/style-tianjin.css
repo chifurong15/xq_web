@@ -13,7 +13,9 @@ body {
 body .align-left .cross-simple-icon, body .align-left .cross-text{
     float: none !important;
 }
-
+.bootstrap-select{
+    z-index: 0!important;
+}
 #mainBody {
     height: 100%;
     display: flex;

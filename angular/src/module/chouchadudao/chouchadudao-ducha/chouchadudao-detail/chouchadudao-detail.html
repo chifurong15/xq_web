@@ -47,6 +47,14 @@
                                     <br/>
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">下发区域</font></font></label>
+                                        <textarea class="form-control" readonly name="deblock_udid"
+                                                  ng-model="resBasic.sentRegion" rows="2"
+                                                  style="width: 160px;max-width: 160px;"></textarea>
+                                    </div>
+                                    <br>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
                                                 style="vertical-align: inherit;">检查内容</font></font></label>
                                         <textarea class="form-control" readonly name="deblock_udid"
                                                   ng-model="resBasic.content" rows="4"
@@ -66,6 +74,14 @@
                                                 style="vertical-align: inherit;">检查方式</font></font></label>
                                         <input type="text" class="form-control input-short" readonly
                                                ng-model="resBasic.inspectType">
+                                    </div>
+                                    <br/>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">下发单位</font></font></label>
+                                        <textarea class="form-control" readonly name="deblock_udid"
+                                                  ng-model="resBasic.sentUnit" rows="2"
+                                                  style="width: 160px;max-width: 160px;"></textarea>
                                     </div>
                                     <br/>
                                     <div class="form-item">
@@ -128,7 +144,7 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <tm-pagination conf="paginationConf"></tm-pagination>
+                                        <!--<tm-pagination conf="paginationConf"></tm-pagination>-->
                                     </div>
                                 </div>
                             </div>
@@ -233,15 +249,22 @@
                                     </div>
                                 </form>
                                 <form class="form-inline" style="float:left;">
+                                    <!--<div class="form-item">-->
+                                        <!--<label><font style="vertical-align: inherit;"><font-->
+                                                <!--style="vertical-align: inherit;">一区一单</font></font></label>-->
+                                        <!--<label class="radio-inline i-checks" ng-repeat="type in typeList"-->
+                                               <!--style="margin-left: 15px;">-->
+                                            <!--<input type="radio" name="type" ng-model="resReport.oneregion" disabled-->
+                                                   <!--ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>-->
+                                            <!--{{type.typeName}}-->
+                                        <!--</label>-->
+                                    <!--</div>-->
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font
-                                                style="vertical-align: inherit;">一区一单</font></font></label>
-                                        <label class="radio-inline i-checks" ng-repeat="type in typeList"
-                                               style="margin-left: 15px;">
-                                            <input type="radio" name="type" ng-model="resReport.oneregion" disabled
-                                                   ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>
-                                            {{type.typeName}}
-                                        </label>
+                                                style="vertical-align: inherit;">下发区域</font></font></label>
+                                        <textarea class="form-control" name="deblock_udid"
+                                                  ng-model="resReport.region" readonly rows="2"
+                                                  style="width: 160px;max-width: 160px;"></textarea>
                                     </div>
                                     <br/>
                                     <div class="form-item">
@@ -289,38 +312,6 @@
                             </div>
                         </div>
                     </div>
-                    <!--&lt;!&ndash;结果反馈&ndash;&gt;-->
-                    <!--<div class="layui-tab-item" ng-if="state != 1 && state != 0 && state != 2 && state != 3">-->
-                        <!--<div class="panel-body">-->
-                            <!--<div class="clearfix">-->
-                                <!--<form class="form-inline" style="float:left;padding-left: 15%;">-->
-                                    <!--<div class="form-item">-->
-                                        <!--<label><font style="vertical-align: inherit;"><font-->
-                                                <!--style="vertical-align: inherit;">处理日期</font></font></label>-->
-                                        <!--<input type="text"-->
-                                               <!--class="form-control input-short-o ng-pristine ng-valid ng-touched"-->
-                                               <!--readonly ng-model="resResult.handleDate">-->
-                                    <!--</div>-->
-                                    <!--<br/>-->
-                                    <!--<div class="form-item">-->
-                                        <!--<label><font style="vertical-align: inherit;"><font-->
-                                                <!--style="vertical-align: inherit;">附件</font></font></label>-->
-                                        <!--<button class="btn btn-info" ng-click="viewFile()"><i class="fa fa-css3"></i>查看附件-->
-                                        <!--</button>-->
-                                    <!--</div>-->
-                                <!--</form>-->
-                                <!--<form class="form-inline" style="float:left;">-->
-                                    <!--<div class="form-item">-->
-                                        <!--<label><font style="vertical-align: inherit;"><font-->
-                                                <!--style="vertical-align: inherit;">处理结果</font></font></label>-->
-                                        <!--<input type="text"-->
-                                               <!--class="form-control input-short-o ng-pristine ng-valid ng-touched"-->
-                                               <!--readonly ng-model="whether">-->
-                                    <!--</div>-->
-                                <!--</form>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
                 </div>
             </div>
 

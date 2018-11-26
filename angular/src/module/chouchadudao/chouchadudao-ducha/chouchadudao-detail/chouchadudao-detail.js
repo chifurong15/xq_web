@@ -23,6 +23,7 @@
 				
 					var apiPrefix = moduleService.getServiceUrl() + '/inspection';
                     //var apiPrefix = 'http://10.0.9.116:7025' + '/inspection';
+                    //var apiPrefix = 'http://10.0.9.203:8081' + '/inspection';
 
                     var options = {
                         pdfOpenParams: {
@@ -51,11 +52,23 @@
 
 
                         getBasic ();
-                        getConcatList ();
-                        getGroupList ();
-                        getReport ();
-                        getDealDetail ();
-                        getResult ();
+                        if($scope.state != 1){
+                            getConcatList ();
+                        }
+
+                        if($scope.state != 1 || $scope.state != 0){
+                            getGroupList ();
+                        }
+
+                        if($scope.state ==3 || $scope.state == 4){
+                            getReport ();
+                        }
+                        if($scope.state == 4){
+                            getDealDetail ();
+                        }
+
+                        //getDealDetail ();
+                        //getResult ();
                     }
 
                     //查看附件
@@ -150,7 +163,7 @@
                     //获取结果反馈
                     function getResult () {
                         $ajaxhttp.myhttp({
-                            url: apiPrefix + '/v1/ResultFeedback/selectById',
+                            url: apiPrefix + 'v1/ProblemHandle/selectById',
                             method: 'get',
                             params:{
                                 inspectionId: $scope.id

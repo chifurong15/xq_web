@@ -23,10 +23,15 @@
 				
 					var apiPrefix = moduleService.getServiceUrl() + '/inspection';
                     //var apiPrefix = 'http://10.0.9.116:7025' + '/inspection';
+                    //var apiPrefix = 'http://10.0.9.203:8081' + '/inspection';
 
                     $scope.init = function () {
+                        $('.selectpicker').selectpicker({
+                            noneSelectedText : '请选择'
+                        });
                         getAllArea ();
                         getCheckType ();
+                        getUnit ();
 
 					}
 
@@ -118,15 +123,22 @@
                                 closeBtn: 1,
                                 anim: 3
                             });
+                        }else if (!$scope.sentUnit) {
+                            layer.alert("请选择下发单位", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
                         }
 						
-						// 新增评分管理					
+						// 新增督查方案
 						var params = {
 								title: $scope.title,
 								printDate:$scope.searchTime,
 								renumber: $scope.renumber,
 								inspectType: $scope.inspectType,
-								sentRegion: $scope.sentRegion,
+								sentRegion: $scope.sentRegion.join(','),
+								sentUnit: $scope.sentUnit.join(','),
                             	content:$scope.content,
 								accessory: $scope.accessory
 						}
@@ -195,10 +207,53 @@
                              url: apiPrefix + '/v1/Supervise/selectArea',
                              method: 'get',
                              callBack: function (res) {
-                             	$scope.regionList = res.data;
+                             	 $scope.regionList = res.data;
+                                 var select = $("#slpk");
+                                 for (var i = 0; i < res.data.length; i++) {
+                                     select.append("<option value='"+res.data[i]+"'>"
+                                         + res.data[i] + "</option>");
+                                 }
+                                 $('.selectpicker1').selectpicker('val', '');
+                                 $('.selectpicker1').selectpicker('refresh');
                              }
                          })
 					 }
 
+					 // 获取成员单位
+                    function getUnit () {
+                        $scope.unitList = [
+                            {
+                               id: 1,
+                               unit:'市环保局'
+                            },
+                            {
+                                id: 2,
+                                unit:'市市容园林委'
+                            },
+                            {
+                                id: 3,
+                                unit:'市农委'
+                            },
+                            {
+                                id: 4,
+                                unit:'市建委'
+                            },
+                            {
+                                id: 5,
+                                unit:'市国土房管局'
+                            },
+                            {
+                                id: 6,
+                                unit:'市财政局'
+                            }
+                        ];
+                        var select = $("#slpk1");
+                        for (var i = 0; i < $scope.unitList.length; i++) {
+                            select.append("<option value='"+ $scope.unitList[i].unit +"'>"
+                                + $scope.unitList[i].unit + "</option>");
+                        }
+                        $('.selectpicker').selectpicker('val', '');
+                        $('.selectpicker').selectpicker('refresh');
+                    }
 			} ]);
 })(window, angular);

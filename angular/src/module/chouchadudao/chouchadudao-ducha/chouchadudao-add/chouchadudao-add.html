@@ -24,9 +24,14 @@
 	                    <br />   
 	                    <div class="form-item">
 	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查内容</font></font></label>
-							<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="content" rows="4" style="width: 160px;max-width: 160px;"></textarea>
+							<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="content" rows="2" style="width: 160px;max-width: 160px;"></textarea>
 	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
-	                    </div>        
+	                    </div>
+						<br>
+						<div class="form-item" >
+							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">方案附件</font></font></label>
+							<button class="btn btn-info" ng-click="getUploadFile()"><i class="fa fa-css3"></i>上传附件</button>
+						</div>
 					</form>
 					<form class="form-inline" style="float:left;">
 						<div class="form-item" >
@@ -46,17 +51,27 @@
 	                    <br />
 	                    <div class="input-group form-item">
 	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发区域</font></font></label>
-	        				<select ng-model="sentRegion" class="form-control select-short" style="width: 160px;z-index:0;">
-	                        	<option value="">请选择</option>
-	                        	<option value="{{item}}" ng-repeat="item in regionList">{{item}}</option>
-	                        </select>
+	        				<!--<select ng-model="sentRegion" class="form-control select-short" style="width: 160px;z-index:0;">-->
+	                        	<!--<option value="">请选择</option>-->
+	                        	<!--<option value="{{item}}" ng-repeat="item in regionList">{{item}}</option>-->
+	                        <!--</select>-->
+							<select id="slpk" class="form-control selectpicker selectpicker1" multiple  style="width: 160px;z-index: 0;" ng-model="sentRegion">
+							</select>
 							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 						</div>
 		                <br />
-	                   <div class="form-item" >
-	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">方案附件</font></font></label>
-						    <button class="btn btn-info" ng-click="getUploadFile()"><i class="fa fa-css3"></i>上传附件</button>
-					   </div>
+						<div class="input-group form-item">
+							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发单位</font></font></label>
+							<!--<select ng-model="sentRegion" class="form-control select-short" style="width: 160px;z-index:0;">-->
+							<!--<option value="">请选择</option>-->
+							<!--<option value="{{item}}" ng-repeat="item in regionList">{{item}}</option>-->
+							<!--</select>-->
+							<select id="slpk1" class="form-control selectpicker" multiple  style="width: 160px;z-index: 0;" ng-model="sentUnit">
+							</select>
+							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+						</div>
+						<br>
+
 					</form>
 					
     			</div>
