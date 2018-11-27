@@ -163,10 +163,10 @@
                     $scope.$apply();
                 });
                 $('#J-searchTime1').datetimepicker({
-                    format: 'YYYY-MM-DD HH:mm:ss',
+                    format: 'YYYY-MM',
                     locale: moment.locale('zh-cn')
                 }).on('dp.change', function (c) {
-                    $scope.evaluationDate = new moment(c.date).format('YYYY-MM-DD HH:mm:ss');
+                    $scope.evaluationDate = new moment(c.date).format('YYYY-MM');
                     $scope.$apply();
                 });
 
