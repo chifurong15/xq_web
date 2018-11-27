@@ -27,15 +27,20 @@
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
 
                     $scope.init = function () {
-                        getList();
+                       // $scope.num = 2; //02 市河长办  05 区
+
+                        //getList();
                         getStatus();
-                        //$scope.num = 5; //02 市河长办  05 区
 
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/DubanSupervision/userinfo',
                             method: 'get',
+                            // params:{
+                            //     id:$scope.userInfo.id
+                            // },
                             callBack: function (res) {
-                                $scope.num = res.data;
+                                 $scope.num = res.data;
+                                 getList();
                             }
                         })
                     }
@@ -51,7 +56,7 @@
                                 objectname: $scope.objectname,
                                 issuedtime: $scope.searchTime,
                                 status: $scope.status,
-                                //objectid: $scope.num == 5 ? $scope.userInfo.id : ''
+                                objectid: $scope.num == 5 ? $scope.userInfo.id : ''
                             },
                             callBack: function (res) {
                                 $scope.moduleList = res.data.list;
@@ -68,13 +73,13 @@
                     function getStatus() {
                         $scope.statusList = [
                             {
-                                id: 0,
+                                id: 1,
                                 status: '已下发'
                             },
-                            {
-                                id: 1,
-                                status: '已回复'
-                            },
+                            // {
+                            //     id: 1,
+                            //     status: '已回复'
+                            // },
                             {
                                 id: 2,
                                 status: '已处理'
@@ -90,7 +95,7 @@
                             {
                                 id: 5,
                                 status: '已退回'
-                            },
+                            }
                         ]
                     }
 

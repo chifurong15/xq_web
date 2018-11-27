@@ -23,7 +23,7 @@
 		               </div> 
 		               <br />
 	                    <div class="input-group date date_picker form-item" id="J-searchTime2">
-	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">限期时间</font></font></label>
+	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回复时间</font></font></label>
 	        				<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="deadlinedate">
 	                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 		               </div> 
@@ -43,13 +43,26 @@
 	                    <br />
 	                    <div class="input-group form-item">
 	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办对象</font></font></label>
-	        				<select ng-model="objectid" class="form-control select-short" style="width: 160px;z-index: 0;">
-	                        	<option value="">请选择</option>
-	                        	<option value="{{item.id}}" ng-repeat="item in personList">{{item.name}}</option>
-	                        </select>
+							<select id="slpk" class="form-control selectpicker selectpicker1" multiple  style="width: 160px;z-index: 0;" ng-model="objectid">
+							</select>
+	        				<!--<select ng-model="objectid" class="form-control select-short" style="width: 160px;z-index: 0;">-->
+	                        	<!--<option value="">请选择</option>-->
+	                        	<!--<option value="{{item.id}}" ng-repeat="item in personList">{{item.name}}</option>-->
+	                        <!--</select>-->
 							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 						</div>
-	                    <br />
+						<br />
+						<div class="input-group form-item">
+							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办类型</font></font></label>
+							<select ng-model="type" class="form-control select-short" style="width: 160px;z-index: 0;">
+								<option value="">请选择</option>
+								<option value="1">普通督办</option>
+								<option value="2">现场督办</option>
+								<option value="3">挂牌督办</option>
+							</select>
+							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+						</div>
+						<br>
 	                   <div class="form-item" >
 	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">方案附件</font></font></label>
 						   	<button class="btn btn-info" ng-click="getUploadFile()"><i class="fa fa-css3"></i>上传附件</button>

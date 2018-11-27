@@ -64,9 +64,9 @@
                                     <td>{{item.issuedtime}}</td>
                                     <td>{{item.objectname}}</td>
                                     <td>
-                                        <span class="label label-danger" ng-if="item.status == 0">已下发</span>
-                                        <span class="label label-warning" ng-if="item.status == 1">已回复</span>
-                                        <span class="label label-danger" ng-if="item.status == 2">已处理</span>
+                                        <span class="label label-danger" ng-if="item.status == 1">已下发</span>
+                                        <!--<span class="label label-warning" ng-if="item.status == 1">已回复</span>-->
+                                        <span class="label label-warning" ng-if="item.status == 2">已处理</span>
                                         <span class="label label-primary" ng-if="item.status == 3">未按期</span>
                                         <span class="label label-success" ng-if="item.status == 4">已完结</span>
                                         <span class="label label-info" ng-if="item.status == 5">已退回</span>
@@ -76,16 +76,12 @@
                                         <button type="button" class="btn btn-success"
                                                 ng-click="view(item.id , item.status)">查看
                                         </button>
-                                        <button type="button" class="btn btn-danger" ng-if="item.status == 0"
-                                                ng-click="oprate(item.id ,1 ,item.status)">回复
-                                        </button>
+                                        <!--<button type="button" class="btn btn-danger" ng-if="item.status == 1"-->
+                                                <!--ng-click="oprate(item.id ,1 ,item.status)">回复-->
+                                        <!--</button>-->
                                         <button type="button" class="btn btn-dark"
                                                 ng-if="item.status == 1 || item.status == 3 || item.status == 5"
                                                 ng-click="oprate(item.id ,2,item.status)">处理
-                                        </button>
-                                        <button type="button" class="btn btn-warning"
-                                                ng-if="item.status == 2 && num ==2"
-                                                ng-click="oprate(item.id ,3 ,item.status)">核查
                                         </button>
                                     </td>
                                 </tr>
@@ -95,9 +91,9 @@
                                     <td>{{item.issuedtime}}</td>
                                     <td>{{item.objectname}}</td>
                                     <td>
-                                        <span class="label label-danger" ng-if="item.status == 0">已下发</span>
-                                        <span class="label label-warning" ng-if="item.status == 1">已回复</span>
-                                        <span class="label label-danger" ng-if="item.status == 2">已处理</span>
+                                        <span class="label label-danger" ng-if="item.status == 1">已下发</span>
+                                        <!--<span class="label label-warning" ng-if="item.status == 1">已回复</span>-->
+                                        <span class="label label-warning" ng-if="item.status == 2">已处理</span>
                                         <span class="label label-primary" ng-if="item.status == 3">未按期</span>
                                         <span class="label label-success" ng-if="item.status == 4">已完结</span>
                                         <span class="label label-info" ng-if="item.status == 5">已退回</span>

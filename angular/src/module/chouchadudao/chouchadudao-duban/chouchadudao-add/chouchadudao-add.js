@@ -26,7 +26,9 @@
 
 
                     $scope.init = function () {
-
+                        $('.selectpicker').selectpicker({
+                            noneSelectedText : '请选择'
+                        });
                         var bulletin = globalParam.getter().bulletin || {};
 
                         getSupervisionObject();
@@ -42,6 +44,13 @@
                                 res.data.map(function (item, index) {
                                     $scope.personList.push({id: item.id, name: item.name});
                                 })
+                                var select = $("#slpk");
+                                for (var i = 0; i < $scope.personList.length; i++) {
+                                    select.append("<option value='"+$scope.personList[i].name+"'>"
+                                        + $scope.personList[i].name + "</option>");
+                                }
+                                $('.selectpicker1').selectpicker('val', '');
+                                $('.selectpicker1').selectpicker('refresh');
 
                             }
                         })
@@ -125,14 +134,22 @@
                                 closeBtn: 1,
                                 anim: 3
                             });
-                        } else if (!$scope.objectid) {
+                        }
+                        else if (!$scope.objectid) {
                             layer.alert("请选择督办对象", {
                                 skin: 'my-skin',
                                 closeBtn: 1,
                                 anim: 3
                             });
-                        } else if (!$scope.deadlinedate) {
-                            layer.alert("请选择限期时间", {
+                        }
+                        else if (!$scope.deadlinedate) {
+                            layer.alert("请选择回复时间", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        }  else if (!$scope.type) {
+                            layer.alert("请选择督办类型", {
                                 skin: 'my-skin',
                                 closeBtn: 1,
                                 anim: 3
@@ -151,7 +168,8 @@
                             issuedtime: $scope.issuedtime,
                             deadlinedate: $scope.issuedtime,
                             project: $scope.project,
-                            objectid: $scope.objectid,
+                            type:$scope.type,
+                            objectid: $scope.objectid ? $scope.objectid.join(',') : '',
                             assessory: $scope.assessory,
                             reason: $scope.reason
                         }

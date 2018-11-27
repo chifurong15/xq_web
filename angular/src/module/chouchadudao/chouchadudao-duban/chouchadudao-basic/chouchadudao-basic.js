@@ -35,40 +35,39 @@
                     };
 
                     $scope.init = function () {
+                        $scope.userInfo = $localStorage.userLoginInfo.userInfo;
                         var bulletin = globalParam.getter().bulletin || {};
                         $scope.id = localStorage.getItem('id');
                         $scope.tag = localStorage.getItem('tag');
                         $scope.status = localStorage.getItem('status');
 
-                        if ($scope.tag == 1) {
-                            $scope.tags = '回复';
-                        } else if ($scope.tag == 2) {
+                        getDate ();
+
+                        if ($scope.tag == 2) {
                             $scope.tags = '处理';
                         } else if ($scope.tag == 3) {
                             $scope.tags = '核查';
-                            getDeal();
                         }
+                        //获取基础资料
                         getBasic();
+
+                        //获取处理反馈详情
+                        getDeal();
+
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/DubanSupervision/userinfo',
                             method: 'get',
+                            // params:{
+                            //     id:$scope.userInfo.id
+                            // },
                             callBack: function (res) {
                                 $scope.num = res.data;
+                                if ($scope.num == 5 && $scope.status == 5) {
+                                    getResult();
+                                }
                             }
                         })
-                        //$scope.num = 5; //02 市河长办  05 区
-
-                        if ($scope.num == 5 && $scope.status == 5) {
-                            getResult();
-                        }
-
-                        if ($scope.num == 5 && $scope.status != 0) {
-                            getAnswer();
-                        }
-
-                        if ($scope.num == 2) {
-                            getAnswer();
-                        }
+                        //$scope.num = 2; //02 市河长办  05 区
 
                     }
 
@@ -108,8 +107,9 @@
 
 
                     //查看附件
-                    $scope.viewFile = function () {
+                    $scope.viewFile = function (path) {
                         $('#myModal').modal('show');
+                        PDFObject.embed(path, "#file", options);
                     }
                     //取消查看
                     $scope.cancel = function () {
@@ -123,7 +123,6 @@
                     ];
                     $scope.radioBtn = function (type) {
                         $scope.type = type;
-//	                    getDataList();
                     }
 
                     //返回
@@ -140,26 +139,17 @@
                                 id: $scope.id
                             },
                             callBack: function (res) {
-                                $scope.res = res.data;
-                                PDFObject.embed(res.data.assessory, "#file", options);
-                            }
-                        })
-                    }
+                                if(res.data){
+                                    $scope.res = res.data;
 
-                    // 回复
-                    $scope.answer = function () {
-                        $ajaxhttp.myhttp({
-                            url: apiPrefix + '/v1/DubanSupervision/addFeedbackhf',
-                            method: 'post',
-                            params: {
-                                supervisionid: $scope.id,
-                                feedbacktime: $scope.feedbacktime3,
-                                description: $scope.description
-                            },
-                            callBack: function (res) {
-                                if (res.resCode == 1) {
-                                    layer.msg("回复成功！", {time: 2000});
-                                    routeService.route('2-4', true);
+                                    if(res.data.type == 1 ){
+                                        $scope.res.type = '普通督办'
+                                    }else if(res.data.type == 2 ){
+                                        $scope.res.type = '现场督办'
+                                    }else if(res.data.type == 3 ){
+                                        $scope.res.type = '挂牌督办'
+                                    }
+                                    PDFObject.embed(res.data.assessory, "#file", options);
                                 }
                             }
                         })
@@ -167,16 +157,19 @@
 
                     //处理
                     $scope.deal = function () {
-                        $ajaxhttp.myhttp({
-                            url: apiPrefix + '/v1/DubanSupervision/addFeedbackcl',
-                            method: 'post',
-                            params: {
-                                supervisionid: $scope.id,
-                                whether: $scope.type == 1 ? '是' : '否',
-                                feedbacktime: $scope.searchTime,
-                                description: $scope.dealDescription,
+                        var params = {
+                                id: $scope.detailId,
+                                whether: $scope.isFinish == 1 ? '是' : '否',
+                                feedbacktime: $scope.currentdate,
+                                //description: $scope.dealDescription,
+                                description:$('#deblock_udid4').val(),
                                 assessory: $scope.assessory
-                            },
+                        }
+                        //console.log(params);
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/DubanSupervision/updateFeedbackcl',
+                            method: 'put',
+                            params: params,
                             callBack: function (res) {
                                 if (res.resCode == 1) {
                                     layer.msg("处理成功！", {time: 2000});
@@ -185,18 +178,23 @@
                             }
                         })
                     }
+
                     //核查
                     $scope.verification = function () {
+                        var params = {
+                                supervisionid: $scope.id,
+                                objectid:$scope.userInfo.id,
+                                whetherlocale:$scope.type == 1 ? '是' : '否',
+                                whether: $scope.type1 == 1 ? '是' : '否',
+                                feedbacktime: $scope.currentdate,
+                                description: $('#deblock_udid60').val(),
+                                assessory: $scope.assessory
+                        };
+                        //console.log(params);
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/DubanSupervision/addFeedbackhc',
                             method: 'post',
-                            params: {
-                                supervisionid: $scope.id,
-                                whether: $scope.type == 1 ? '是' : '否',
-                                feedbacktime: $scope.searchTime4,
-                                description: $scope.infoDescription,
-                                assessory: $scope.assessory
-                            },
+                            params: params,
                             callBack: function (res) {
                                 if (res.resCode == 1) {
                                     layer.msg("核查成功！", {time: 2000});
@@ -211,41 +209,41 @@
                         routeService.route('2-4', true);
                     }
 
-                    //获取回复反馈
-                    function getAnswer() {
-                        $ajaxhttp.myhttp({
-                            url: apiPrefix + '/v1/DubanSupervision/detailFeedbackhf',
-                            method: 'get',
-                            params: {
-                                supervisionid: $scope.id
-                            },
-                            callBack: function (res) {
-                                $scope.resAnswer = res.data;
-                            }
-                        })
-                    }
 
-                    //获取处理反馈
+                    //获取处理反馈详情
                     function getDeal() {
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/DubanSupervision/detailFeedbackcl',
                             method: 'get',
                             params: {
-                                supervisionid: $scope.id
+                                supervisionid: $scope.id,
+                                objectid: $scope.num == 5 ? $scope.userInfo.id : ''
                             },
                             callBack: function (res) {
-                                $scope.resDeal = res.data;
-                                PDFObject.embed(res.data.assessory, "#file", options);
-                                if ($scope.resDeal.whether == '否') {
-                                    $scope.isSelected = '2';
-                                } else {
-                                    $scope.isSelected = '1';
+                                if(res.data){
+                                    $scope.clDetailList = res.data;
+
+                                        // $scope.resDeal = res.data;
+                                         $scope.detailId = res.data[0].id;
+                                         $scope.dealDescription = res.data[0].description;
+                                         $scope.isFinish = res.data[0].whether == '是' ? 1 : 0;
+                                        // layui.use('laydate', function () {
+                                        //     var laydate = layui.laydate;
+                                        //     laydate.render({
+                                        //         elem: '#test14'
+                                        //         ,value: res.data.feedbacktime
+                                        //         ,isInitValue: true //是否允许填充初始值，默认为 true
+                                        //         ,formate: 'yyyy-MM-dd HH:mm:ss'
+                                        //     });
+                                        // })
+                                        PDFObject.embed(res.data.assessory, "#problemFile", options);
                                 }
+
                             }
                         })
                     }
 
-                    //获取核查结果
+                    //获取核查结果详情
                     function getResult() {
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/DubanSupervision/detailFeedbackhc',
@@ -254,16 +252,33 @@
                                 supervisionid: $scope.id
                             },
                             callBack: function (res) {
-                                $scope.resResult = res.data;
-                                if ($scope.resResult.whether) {
-                                    if ($scope.resResult.whether == '否') {
-                                        $scope.isSelected = '2';
-                                    } else {
-                                        $scope.isSelected = '1';
-                                    }
+                                if(res.data){
+                                    $scope.resResult = res.data;
                                 }
+
                             }
                         })
+                    }
+
+
+                    //获取当前时间
+                    function getDate () {
+                        setInterval(function () {
+                            var date = new Date(),
+                                year = date.getFullYear(),
+                                month = date.getMonth() + 1,
+                                day = date.getDate(),
+                                hour = date.getHours(),
+                                min = date.getMinutes(),
+                                second = date.getSeconds();
+
+                            $scope.$apply(function () {
+                                $scope.currentdate=year + '-' + month  + '-' + day + ' ' +
+                                    (hour < 10 ? '0' + hour : hour) + ':' +
+                                    (min < 10 ? '0' + min : min) + ':' +
+                                    (second < 10 ? '0' + second : second) ;
+                            })
+                        }, 1000);
                     }
 
                     /**
