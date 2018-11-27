@@ -24,6 +24,7 @@
             function superviseEvaluateDetailMgtCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http, $ajaxhttp, moduleService) {
 
                 var apiPrefix = moduleService.getServiceUrl() + '/supervise';
+                //var apiPrefix = 'http://10.0.9.116:7023' + '/supervise';
 
 
                 /**
@@ -58,7 +59,9 @@
                         callBack: function (res) {
                             $scope.superviseList = res.data;
                             $scope.imgList = [];
-                            $scope.imgList = $scope.superviseList.problemPics.split(',');
+                            if($scope.superviseList.problemPics){
+                                $scope.imgList = $scope.superviseList.problemPics.split(',');
+                            }
                             //console.log($scope.imgList)
                         }
                     })

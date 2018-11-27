@@ -4,71 +4,89 @@
     </div>
     <div class="wrapper-md">
         <div class="panel panel-default m-all-0">
-			<div class="panel-body">
-				<div class="panel-content">
-					<div class="patrolDetailContent">
-						<div class="form-item">
-							<label>期号：</label>
-							<span ng-bind="superviseList.termNumber"></span>
-						</div>
-						<div class="form-item">
-	                        <label>行政区域：</label>
-							<span ng-bind="superviseList.regionName"></span>
-	                    </div>
-						<br />
-                      	<div class="form-item">
-							<label>河段名称：</label>
-							<span ng-bind="superviseList.riverName"></span>
-						</div>
-						<div class="form-item">
-							<label>监督人员：</label>
-							<span ng-bind="superviseList.supervisor"></span>
-						</div>
-						<br />	
-						<div class="form-item">
-							<label>不满意原因：</label>
-							<span ng-bind="superviseList.dissatisfiedReason"></span>
-						</div>
-						<div class="form-item">
-							<label>其他原因：</label>
-							<span ng-bind="superviseList.otherReason"></span>
-						</div>
-						<br />
+            <div class="panel-body">
+                <div class="panel-content">
+                    <div class="patrolDetailContent">
                         <div class="form-item">
-							<label>问题位置：</label>
-							<span ng-bind="superviseList.problemPosition"></span>
-						</div>
-						<div class="form-item">
-							<label>评价日期：</label>
-							<span ng-bind="superviseList.evaluationDate"></span>
-						</div>
-						<br />
-						<div class="form-item">
-							<label>问题照片：</label>
-		                	<div id="layer-photos-before" class="layer-photos-demo" style="margin-left: 30px;display: inline-block;">
-								<img style="margin: 0 5px;" ng-repeat="item in imgList" layer-pid="" layer-src="{{eventImgUrl}}{{item}}" src="{{eventImgUrl}}{{item}}" alt="问题照片" width="60px" height="60px">
-								<!--<img style="margin: 0 5px;" layer-pid="" layer-src="/src/img/bg.jpg" src="/src/img/bg.jpg" alt="问题照片" width="60px" height="60px">-->
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="panel-footer m-b-10">
-				<div class="btn-box">
-					<button type="submit" class="btn btn-default" ng-click="getBack()">
-						<i class="fa fa-reply"></i>返回
-					</button>
-				</div>
-			</div>
-		</div>
-	</div>
+                            <label>期号：</label>
+                            <span ng-bind="superviseList.termNumber"></span>
+                        </div>
+                        <div class="form-item">
+                            <label>行政区域：</label>
+                            <span ng-bind="superviseList.regionName"></span>
+                        </div>
+                        <br/>
+                        <div class="form-item">
+                            <label>评价时间：</label>
+                            <span ng-bind="superviseList.evaluationDate"></span>
+                        </div>
+                        <div class="form-item">
+                            <label>水域名称：</label>
+                            <span ng-bind="superviseList.riverName"></span>
+                        </div>
+                        <br>
+                        <div class="form-item">
+                            <label>具体位置：</label>
+                            <span ng-bind="superviseList.problemPosition"></span>
+                        </div>
+                        <div class="form-item">
+                            <label>区级河长：</label>
+                            <span ng-bind="superviseList.districtChairman"></span>
+                        </div>
+                        <br>
+                        <div class="form-item">
+                            <label>镇街级河长：</label>
+                            <span ng-bind="superviseList.townChairman"></span>
+                        </div>
+                        <div class="form-item">
+                            <label>监督员姓名：</label>
+                            <span ng-bind="superviseList.supervisor"></span>
+                        </div>
+                        <br/>
+                        <div class="form-item">
+                            <label>是否满意：</label>
+                            <span>{{superviseList.isSatisfied == 0 ? '不满意' : '满意'}}</span>
+                        </div>
+                        <div class="form-item">
+                            <label>不满意原因：</label>
+                            <span ng-bind="superviseList.dissatisfiedReason"></span>
+                        </div>
+                        <br>
+
+                        <div class="form-item">
+                            <label>其他说明：</label>
+                            <span ng-bind="superviseList.otherReason"></span>
+                        </div>
+                        <br/>
+                        <div class="form-item">
+                            <label>问题照片：</label>
+                            <div id="layer-photos-before" class="layer-photos-demo"
+                                 style="margin-left: 30px;display: inline-block;">
+                                <img style="margin: 0 5px;" ng-repeat="item in imgList" layer-pid=""
+                                     layer-src="{{eventImgUrl}}{{item}}" src="{{eventImgUrl}}{{item}}" alt="问题照片"
+                                     width="60px" height="60px">
+                                <!--<img style="margin: 0 5px;" layer-pid="" layer-src="/src/img/bg.jpg" src="/src/img/bg.jpg" alt="问题照片" width="60px" height="60px">-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer m-b-10">
+                <div class="btn-box">
+                    <button type="submit" class="btn btn-default" ng-click="getBack()">
+                        <i class="fa fa-reply"></i>返回
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
-	layui.use('layer', function() {
-		layer.photos({
-		  photos: '#layer-photos-before'
-		  ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
-		}); 
-	});
+    layui.use('layer', function () {
+        layer.photos({
+            photos: '#layer-photos-before'
+            , anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+        });
+    });
 
 </script>

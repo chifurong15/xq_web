@@ -1,117 +1,198 @@
 <div ng-controller="superviseEvaluateMgtCtrl" ng-init="init()">
     <div class="bg-light lter b-b wrapper-md">
-        <h1 class="m-n font-thin h3">监督评价</h1>
+        <h1 class="m-n font-thin h3">社会监督员满意度</h1>
     </div>
     <div class="wrapper-md">
         <div class="panel panel-default m-all-0">
-			<div class="panel-body">
-				<form class="form-patrolMgt form-inline" method="get">
-					<div class="input-group date date_picker form-item" id="J-searchTime">
-						<label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">期号</font></font></label>
-						<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime" style="margin-left: 35px;">
-						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-					</div>
-					<div class="form-item">
-						<label>行政区域</label>
-						<input ng-model="regionName" type="text" class="form-control input-short-o" readonly="readonly" ng-click="getRegionShow()">
-						<a class="input-group-addon" ng-click="getRegionShow()"><i class="fa fa-search"></i></a>
-					</div>
-					<div class="form-item">
-						<label>河段名称</label>
-						<input type="text" class="form-control input-short" ng-model="reachName" />
-					</div>
-					<div class="form-item">
+            <div class="panel-body">
+                <form class="form-patrolMgt form-inline" method="get">
+                    <div class="input-group date date_picker form-item" id="J-searchTime">
+                        <label class="near"><font style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">期号</font></font></label>
+                        <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched"
+                               placeholder="请选择日期" ng-model="searchTime" style="margin-left: 35px;">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                    <div class="form-item">
+                        <label>行政区域</label>
+                        <input ng-model="regionName" type="text" class="form-control input-short-o" readonly="readonly"
+                               ng-click="getRegionShow()">
+                        <a class="input-group-addon" ng-click="getRegionShow()"><i class="fa fa-search"></i></a>
+                    </div>
+                    <div class="form-item">
+                        <label>水域名称</label>
+                        <input type="text" class="form-control input-short" ng-model="reachName"/>
+                    </div>
+                    <div class="form-item">
                         <label>满意度</label>
-                        <select ng-model="assess" ng-options="ai.id as ai.name for ai in assessList" ng-change="getAssessChange()" class="form-control select-short">
-                        	<option value="">请选择</option>
+                        <select ng-model="assess" ng-options="ai.id as ai.name for ai in assessList"
+                                ng-change="getAssessChange()" class="form-control select-short">
+                            <option value="">请选择</option>
                         </select>
                     </div>
                     <div class="form-item">
-						<label>监督人员</label>
-						<input type="text" class="form-control input-short" ng-model="patrolperson" />
-					</div>
-					<button type="submit" class="btn btn-primary" ng-click="getMdSearch()">
+                        <label>监督人员</label>
+                        <input type="text" class="form-control input-short" ng-model="patrolperson"/>
+                    </div>
+                    <div class="form-item">
+                        <label>具体位置</label>
+                        <input type="text" class="form-control input-short" ng-model="problemPosition"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="getMdSearch()">
                         <i class="fa fa-search"></i>搜索
                     </button>
-					<button type="button" class="btn btn-primary m-l-15" ng-click="getReSet()">
+                    <button type="button" class="btn btn-primary m-l-15" ng-click="getReSet()">
                         <i class="fa fa-refresh"></i>重置
                     </button>
-				</form>
-			</div>
-		</div>
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<div class="table-responsive table-jm">
-					<!--<div class="table-bar">-->
-						<!--<button type="button" class="btn btn-primary" ng-click="getReachAdd()">-->
-                            <!--<i class="fa fa-plus"></i>新增-->
-                        <!--</button>-->
-					<!--</div>-->
-					<table class="table table-bordered table-hover table-patrolMgt" data-filter="#filter">
-						<thead>
-							<tr>
-								<th class="wid-5">序号</th>
-								<th class="wid-10">期号</th>
-								<th class="wid-10">区域</th>
-								<th class="wid-10">河段</th>
-								<th class="wid-10">监督员</th>
-								<th class="wid-25">评价日期</th>
-								<th class="wid-25">联系方式</th>
-								<th>操作</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="module in moduleList" ng-init="index=$index+1">
-								<td>{{index}}</td>
-								<td>{{module.termNumber}}</td>
-								<td>{{module.regionName}}</td>
-								<td>{{module.riverName}}</td>
-								<td>{{module.supervisor}}</td>
-								<td>{{module.evaluationDate}}</td>
-								<td>{{module.contactType}}</td>
-								<td class="td-tool">
-									<!--<a class="btn btn-primary btn-xs" ng-click="getAccessoryDetail(module)">
-										<i class="fa fa-pencil" title="修改"></i>
-									</a>-->
-									<a class="btn btn-primary btn-xs" ng-click="getHydrologicDetail(module.id)">
-										<i class="fa fa-info" title="查看"></i>
-									</a>
-									<a class="btn btn-primary btn-xs" ng-click="getHydrologicDelete(module.id,module.name)">
-										<i class="fa fa-trash-o" title="删除"></i>
-									</a>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<tm-pagination conf="paginationConf"></tm-pagination>
-			</div>
-		</div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-responsive table-jm">
+                    <!--<div class="table-bar">-->
+                    <!--<button type="button" class="btn btn-primary" ng-click="getReachAdd()">-->
+                    <!--<i class="fa fa-plus"></i>新增-->
+                    <!--</button>-->
+                    <!--</div>-->
+                    <table class="table table-bordered table-hover table-patrolMgt" data-filter="#filter">
+                        <thead>
+                        <tr>
+                            <th class="wid-5">序号</th>
+                            <th class="wid-10">期号</th>
+                            <th class="wid-10">区域</th>
+                            <th class="wid-10">水域名称</th>
+                            <th class="wid-10">满意度</th>
+                            <th class="wid-10">监督员</th>
+                            <th class="wid-20">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="module in moduleList" ng-init="index=$index+1">
+                            <td>{{index}}</td>
+                            <td>{{module.termNumber}}</td>
+                            <td>{{module.regionName}}</td>
+                            <td>{{module.riverName}}</td>
+                            <td>{{module.isSatisfied == 0 ? '不满意' : '满意'}}</td>
+                            <td>{{module.supervisor}}</td>
+                            <td class="td-tool">
+                                <a class="btn btn-primary btn-xs" ng-click="getHydrologicDetail(module.id)">
+                                    <i class="fa fa-info" title="查看"></i>
+                                </a>
+                                <a class="btn btn-primary btn-xs" ng-click="edit(module)">
+                                    <i class="fa fa-pencil" title="修改"></i>
+                                </a>
+                                <a class="btn btn-primary btn-xs" ng-click="getHydrologicDelete(module.id,module.name)">
+                                    <i class="fa fa-trash-o" title="删除"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+        </div>
     </div>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">
+                       修改社会监督员满意度
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-inline" style="padding-left: 25%;">
+                        <div class="input-group date date_picker form-item" id="J-searchTime1">
+                            <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">评价时间</font></font></label>
+                            <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="evaluationDate">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                        <br>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">水域名称</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="riverName1">
+                        </div>
+                        <br>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">具体位置</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="problemPosition1">
+                        </div>
+                        <br />
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">区级河长</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="districtChairman">
+                        </div>
+                        <br>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">镇街级河长</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="townChairman">
+                        </div>
+                        <br>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">监督员姓名</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="supervisor">
+                        </div>
+                        <br />
+                        <div class="form-item">
+                            <label>满意度</label>
+                            <select ng-model="assess1" ng-options="ai.id as ai.name for ai in assessList"
+                                    ng-change="getAssessChange(ai.id)" class="form-control select-short">
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
+                        <br>
+                        <!--<div class="form-item" ng-show="showInput">-->
+                            <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">不满意原因</font></font></label>-->
+                            <!--&lt;!&ndash;<input type="text" class="form-control input-short" ng-model="issuer">&ndash;&gt;-->
+                            <!--<textarea class="form-control" id="deblock_udid1" name="deblock_udid" ng-model="dissatisfiedReason" rows="3" style="width: 160px;max-width: 160px;"></textarea>-->
+                        <!--</div>-->
+                        <!--<br>-->
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">其它说明</font></font></label>
+                            <!--<input type="text" class="form-control input-short" ng-model="issuer">-->
+                            <textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="otherReason" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="submit()">保存</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--描述：所属区域树-->
-	<div class="modal fade" id="regionTreeModal" role="dialog_region" data-backdrop="static">
-		<div class="modal-dialog modal-jm " role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">选择区域</h4>
-				</div>
-				<div class="modal-body">
-					<div class="input-group">
-						<input type="text" ng-model="regionSearchName" class="form-control" placeholder="请输入区域名称">
-							<span class="input-group-btn">
+    <div class="modal fade" id="regionTreeModal" role="dialog_region" data-backdrop="static">
+        <div class="modal-dialog modal-jm " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">选择区域</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <input type="text" ng-model="regionSearchName" class="form-control" placeholder="请输入区域名称">
+                        <span class="input-group-btn">
 				        	<button class="btn btn-default" type="button" ng-click="getSelectRegion()">查询</button>
 				        </span>
-					</div>
-					<ul id="regionTreeContainer" class="ztree regionTreeContent"></ul>
-				</div>
-				<div class="modal-footer">
-					<a href="javascript:;" class="btn btn-primary btn-o" ng-click="getModalOk()">
-						<i class="fa fa-check"></i>
-						<span>确 定</span>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
+                    </div>
+                    <ul id="regionTreeContainer" class="ztree regionTreeContent"></ul>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getModalOk()">
+                        <i class="fa fa-check"></i>
+                        <span>确 定</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
