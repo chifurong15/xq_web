@@ -314,9 +314,12 @@
                         $scope.contact = '';
                         $scope.phone = '';
                         $scope.area = [];
+                        $scope.supervisePerson = '';
+                        $scope.personPhone = '';
                         $('.selectpicker').selectpicker({
                             noneSelectedText : '请选择'
                         });
+                        $('.selectpicker').selectpicker('val', '');
                         $('.selectpicker').selectpicker('refresh');
                         $scope.department = '';
                     }
