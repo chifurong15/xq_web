@@ -51,8 +51,7 @@
                         //获取基础资料
                         getBasic();
 
-                        //获取处理反馈详情
-                        getDeal();
+
 
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/DubanSupervision/userinfo',
@@ -62,6 +61,9 @@
                             // },
                             callBack: function (res) {
                                 $scope.num = res.data;
+                                //获取处理反馈详情
+                                getDeal();
+
                                 if ($scope.num == 5 && $scope.status == 5) {
                                     getResult();
                                 }
@@ -226,7 +228,7 @@
                                         // $scope.resDeal = res.data;
                                          $scope.detailId = res.data[0].id;
                                          $scope.dealDescription = res.data[0].description;
-                                         $scope.isFinish = res.data[0].whether == '是' ? 1 : 0;
+                                         $scope.isFinish = res.data[0].whether == '是' ? 1 : 2;
                                         // layui.use('laydate', function () {
                                         //     var laydate = layui.laydate;
                                         //     laydate.render({
