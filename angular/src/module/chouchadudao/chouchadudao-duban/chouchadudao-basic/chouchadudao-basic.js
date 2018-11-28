@@ -159,15 +159,16 @@
 
                     //处理
                     $scope.deal = function () {
+                       // alert($('#is').val())
                         var params = {
                                 id: $scope.detailId,
-                                whether: $scope.isFinish == 1 ? '是' : '否',
+                                whether: $('#is').val() == 1 ? '是' : '否',
                                 feedbacktime: $scope.currentdate,
                                 //description: $scope.dealDescription,
                                 description:$('#deblock_udid4').val(),
                                 assessory: $scope.assessory
                         }
-                        //console.log(params);
+                        // console.log(params);
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/DubanSupervision/updateFeedbackcl',
                             method: 'put',

@@ -1,8 +1,8 @@
 'use strict';
 
 /* Controllers */
-angular.module('app').controller('AppCtrl', ['$scope', '$location','$translate', '$localStorage', '$rootScope', 'globaltree', '$window', 'moduleService', '$http', '$timeout',
-    function ($scope,$location, $translate, $localStorage, $rootScope, globaltree, $window, moduleService, $http, $timeout) {
+angular.module('app').controller('AppCtrl', ['$scope','routeService' ,'$location', '$translate', '$localStorage', '$rootScope', 'globaltree', '$window', 'moduleService', '$http', '$timeout',
+    function ($scope,routeService, $location, $translate, $localStorage, $rootScope, globaltree, $window, moduleService, $http, $timeout) {
         // add 'ie' classes to html
         var isIE = !!navigator.userAgent.match(/MSIE/i);
         isIE && angular.element($window.document.body).addClass('ie');
@@ -155,7 +155,8 @@ angular.module('app').controller('AppCtrl', ['$scope', '$location','$translate',
         }
 
         //点击顶部logo时，菜单一级不选中
-        $scope.goHome = function (){
+        $scope.goHome = function () {
+            routeService.route('/app/dashboard-v1',false)
             $('.navbar-right > li').removeClass('active');
         }
 
@@ -182,12 +183,12 @@ angular.module('app').controller('AppCtrl', ['$scope', '$location','$translate',
             }
 
             //有子节点，就点击第一个子节点
-            var menuId =  '#menu_' + (menu.children ?  menu.children[0].id : menu.id);
+            var menuId = '#menu_' + (menu.children ? menu.children[0].id : menu.id);
 
             $timeout(function () {
                 angular.element(menuId).click();
             }, 0, false);
-            if(menu.children){
+            if (menu.children) {
                 clickFirst(menu.children[0]);
             }
 
@@ -202,23 +203,23 @@ angular.module('app').controller('AppCtrl', ['$scope', '$location','$translate',
                 }, 0, false);
             }*/
 
-           /* if (menu.funcUrl && (!menu.children || menu.children.length == 0)) {
-                $timeout(function () {
-                    angular.element("#menu_" + menu.id).click();
-                    // $state.go('app.index', {param: menu.moduleId + '_1_' + menu.seqId});
-                }, 0, false);
-                return;
-            }
+            /* if (menu.funcUrl && (!menu.children || menu.children.length == 0)) {
+                 $timeout(function () {
+                     angular.element("#menu_" + menu.id).click();
+                     // $state.go('app.index', {param: menu.moduleId + '_1_' + menu.seqId});
+                 }, 0, false);
+                 return;
+             }
 
-            if (!menu.children || menu.children.length == 0) {
-                return;
-            }
-            if (!menu.funcUrl && !menu.children[0].funcUrl) {
-                $timeout(function () {
-                    angular.element("#menu_" + menu.children[0].id).click();
-                }, 0, false);
-            }
-            clickFirst(menu.children[0]);*/
+             if (!menu.children || menu.children.length == 0) {
+                 return;
+             }
+             if (!menu.funcUrl && !menu.children[0].funcUrl) {
+                 $timeout(function () {
+                     angular.element("#menu_" + menu.children[0].id).click();
+                 }, 0, false);
+             }
+             clickFirst(menu.children[0]);*/
 
         }
         //解决刷新二级菜单丢失问题
@@ -260,8 +261,8 @@ angular.module('app').controller('AppCtrl', ['$scope', '$location','$translate',
         }
 
         //个人信息弹窗
-        $scope.editUserInfoModal = function(){
-            $scope.editUserInfo = Object.assign({},$localStorage.userLoginInfo.userInfo);
+        $scope.editUserInfoModal = function () {
+            $scope.editUserInfo = Object.assign({}, $localStorage.userLoginInfo.userInfo);
             $scope.authError = '';
             $("#editUserInfo_modal").modal('show');
             //个人信息弹窗-生日选择  /*此处实例化
@@ -270,11 +271,14 @@ angular.module('app').controller('AppCtrl', ['$scope', '$location','$translate',
                 locale: moment.locale('zh-cn')
             }).on('dp.change', function (e) {
                 var result = new moment(e.date).format('YYYY-MM-DD');
-            }).on('hide', function(event) {event.preventDefault();event.stopPropagation();});
+            }).on('hide', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            });
         }
 
         //个人信息弹窗-提交
-        $scope.userInfoSubmit = function(){
+        $scope.userInfoSubmit = function () {
             $http({
                 method: 'POST',
                 url: $localStorage.serviceUrl + "/smUser/updateById",
@@ -291,13 +295,13 @@ angular.module('app').controller('AppCtrl', ['$scope', '$location','$translate',
                     department: $scope.editUserInfo.department
                 }
             }).then(function successCallback(resp) {
-                if(resp.data.resCode == 1){
+                if (resp.data.resCode == 1) {
                     getUserInfo();
                     $scope.authError = resp.data.resMsg;
-                    setTimeout(function(){
+                    setTimeout(function () {
                         $("#editUserInfo_modal").modal('hide');
                     }, 3000)
-                }else{
+                } else {
                     $scope.authError = resp.data.resMsg;
                 }
             }, function errorCallback(response) {
@@ -307,7 +311,7 @@ angular.module('app').controller('AppCtrl', ['$scope', '$location','$translate',
         }
 
         //获取个人信息
-        var getUserInfo = function(){
+        var getUserInfo = function () {
             $http({
                 method: 'GET',
                 url: $localStorage.serviceUrl + "/smUser/getById",
@@ -315,7 +319,7 @@ angular.module('app').controller('AppCtrl', ['$scope', '$location','$translate',
                     id: $scope.editUserInfo.id,
                 }
             }).then(function successCallback(resp) {
-                if(resp.data.resCode == 1){
+                if (resp.data.resCode == 1) {
                     console.log($localStorage.userLoginInfo.userInfo)
                     $localStorage.userLoginInfo.userInfo = resp.data.data;
                     console.log($localStorage.userLoginInfo.userInfo)
