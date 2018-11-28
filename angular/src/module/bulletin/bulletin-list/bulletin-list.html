@@ -52,20 +52,20 @@
                                     <th width="20%">操作</th>
                                 </tr>
                                 <tr ng-repeat="list in bulletinList">
-                                    <th ng-if="list.type == 1">暗查暗访</th>
-                                    <th ng-if="list.type == 2">每周动态</th>
-                                    <th ng-if="list.type == 3">月度考核简报</th>
-                                    <th ng-if="list.type == 4">督导检查通报</th>
-                                    <th>{{list.title}}</th>
-                                    <th>{{list.post_time}}</th>
-                                    <th>{{list.issuer}}</th>
-                                    <th>
+                                    <td ng-if="list.type == 1">暗查暗访</td>
+                                    <td ng-if="list.type == 2">每周动态</td>
+                                    <td ng-if="list.type == 3">月度考核简报</td>
+                                    <td ng-if="list.type == 4">督导检查通报</td>
+                                    <td>{{list.title}}</td>
+                                    <td>{{list.post_time}}</td>
+                                    <td>{{list.issuer}}</td>
+                                    <td>
                                         <button type="button" class="btn btn-success" ng-click="view(list.id)">查看
                                         </button>
                                         <button type="button" class="btn btn-warning" ng-click="edit(list.id)">编辑
                                         </button>
                                         <button type="button" class="btn btn-danger" ng-click="del(list.id)">删除</button>
-                                    </th>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
