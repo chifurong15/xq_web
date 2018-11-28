@@ -16,6 +16,9 @@ body .align-left .cross-simple-icon, body .align-left .cross-text{
 .bootstrap-select{
     z-index: 0!important;
 }
+.dropdown-menu {
+    width: 160px;
+}
 #mainBody {
     height: 100%;
     display: flex;

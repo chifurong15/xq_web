@@ -41,9 +41,9 @@
 	                        <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 	                    </div>
 	                    <br />
-	                    <div class="input-group form-item">
+	                    <div class="input-group form-item" style="z-index: 10;">
 	                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办对象</font></font></label>
-							<select id="slpk" class="form-control selectpicker selectpicker1" multiple  style="width: 160px;z-index: 0;" ng-model="objectid">
+							<select id="slpk" class="form-control selectpicker selectpicker1" ng-change="getChange(objectid)" multiple  style="width: 160px;z-index: 0;" ng-model="objectid">
 							</select>
 	        				<!--<select ng-model="objectid" class="form-control select-short" style="width: 160px;z-index: 0;">-->
 	                        	<!--<option value="">请选择</option>-->

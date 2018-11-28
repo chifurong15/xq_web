@@ -27,7 +27,8 @@
 
                     $scope.init = function () {
                         $('.selectpicker').selectpicker({
-                            noneSelectedText : '请选择'
+                            noneSelectedText : '请选择',
+                            dropupAuto: false
                         });
                         var bulletin = globalParam.getter().bulletin || {};
 
@@ -54,6 +55,19 @@
 
                             }
                         })
+                    }
+
+                    $scope.getChange = function (objectid) {
+                        // console.log(objectid);
+                        $scope.objectname = [];
+                        objectid.map(function (item){
+                            $scope.personList.map(function(val,index){
+                                if(item == val.id){
+                                    $scope.objectname.push(val.name);
+                                }
+                            })
+                        })
+                        // console.log($scope.objectname);
                     }
 
                     $('#J-searchTime1').datetimepicker({
@@ -116,6 +130,7 @@
 
                     // 保存
                     $scope.submit = function () {
+
                         if (!$scope.title) {
                             layer.alert("请输入标题", {
                                 skin: 'my-skin',
@@ -161,34 +176,38 @@
                                 anim: 3
                             });
                         }
-
-                        // 新增评分管理
-                        var params = {
-                            title: $scope.title,
-                            issuedtime: $scope.issuedtime,
-                            deadlinedate: $scope.issuedtime,
-                            project: $scope.project,
-                            type:$scope.type,
-                            objectid: $scope.objectid ? $scope.objectid.join(',') : '',
-                            assessory: $scope.assessory,
-                            reason: $scope.reason
-                        }
-                        //console.log(params);
-                        $ajaxhttp.myhttp({
-                            url: apiPrefix + '/v1/DubanSupervision/add',
-                            method: 'post',
-                            params: params,
-                            callBack: function (res) {
-                                if (res.resCode == 1) {
-                                    clear();
-                                    routeService.route('2-4', true);
-                                    layer.msg("新增成功！", {time: 2000});
-                                } else {
-                                    layer.msg("服务器异常，请稍后再试");
-                                }
-
+                        if($scope.title && $scope.project && $scope.issuedtime && $scope.objectid && $scope.deadlinedate && $scope.type && $scope.reason){
+                            // 新增评分管理
+                            var params = {
+                                title: $scope.title,
+                                issuedtime: $scope.issuedtime,
+                                deadlinedate: $scope.issuedtime,
+                                project: $scope.project,
+                                type:$scope.type,
+                                objectid: $scope.objectid ? $scope.objectid.join(',') : '',
+                                objectname:$scope.objectname ? $scope.objectname.join(',') : '',
+                                assessory: $scope.assessory,
+                                reason: $scope.reason
                             }
-                        })
+                            //console.log(params);
+                            $ajaxhttp.myhttp({
+                                url: apiPrefix + '/v1/DubanSupervision/add',
+                                method: 'post',
+                                params: params,
+                                callBack: function (res) {
+                                    if (res.resCode == 1) {
+                                        clear();
+                                        routeService.route('2-4', true);
+                                        layer.msg("新增成功！", {time: 2000});
+                                    } else {
+                                        layer.msg("服务器异常，请稍后再试");
+                                    }
+
+                                }
+                            })
+
+                        }
+
                     }
 
 

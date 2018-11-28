@@ -2462,7 +2462,7 @@
           updateScroll = false,
           downOnTab = e.which === keyCodes.TAB && !isToggle && !that.options.selectOnTab,
           isArrowKey = REGEXP_ARROW.test(e.which) || downOnTab,
-          scrollTop = that.$menuInner[0].scrollTop,
+          //scrollTop = that.$menuInner[0].scrollTop,
           isVirtual = that.isVirtual(),
           position0 = isVirtual === true ? that.selectpicker.view.position0 : 0;
 
