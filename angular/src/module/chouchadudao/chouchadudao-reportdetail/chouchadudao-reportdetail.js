@@ -39,7 +39,7 @@
                     $scope.init = function () {
                         var bulletin = globalParam.getter().bulletin || {};
                         $scope.isView = localStorage.getItem('isView');
-c                        // 05区河长办  02市河长办
+                       // 05区河长办  02市河长办
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/AnzhaInvestigations/userinfo1',
                             method: 'get',
