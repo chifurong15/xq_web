@@ -22,6 +22,7 @@
                                             routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl() + '/ancha';
+                    //var apiPrefix = 'http://10.0.9.133:7021' + '/ancha';
 
                     $scope.init = function () {
 
@@ -93,15 +94,21 @@
                                 closeBtn: 1,
                                 anim: 3
                             });
+                        }else if (!$scope.content) {
+                            layer.alert("请输入内容", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
                         }
                         // 新增方案
                         var params = {
                             title: $scope.title,
                             issue: $scope.searchTime,
                             createuser: $scope.createuser,
-                            assessory: $scope.assessory
+                            assessory: $scope.assessory,
+                            content:$scope.content
                         }
-                        console.log(params);
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/AnzhaScheme/selectHave',
                             method: 'get',
@@ -149,6 +156,7 @@
                         $scope.searchTime = '';
                         $scope.createuser = '';
                         $scope.fileName='';
+                        $scope.content = ''
                     }
 
                 } ]);

@@ -3,7 +3,7 @@
         <div class="panel panel-default m-n">
             <div class="panel-body" style="position: relative;">
                 <span class="tag">暗查暗访</span><span class="tag-right"></span><span
-                    class="tag-right tag-left"></span><span class="tag tag1">通报管理</span><span class="tag-right"></span>
+                    class="tag-right tag-left"></span><span class="tag tag1">通报</span><span class="tag-right"></span>
             </div>
 
         </div>
@@ -26,7 +26,7 @@
                         <div class="input-group form-item">
                             <label class="near n"><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">状态</font></font></label>
-                            <select ng-model="status" class="form-control select-short" style="width: auto;">
+                            <select ng-model="status" class="form-control select-short" style="width: auto;z-index: 0;">
                                 <option value="">请选择</option>
                                 <option value="{{item.id}}" ng-repeat="item in statusList">{{item.status}}</option>
                             </select>
@@ -57,17 +57,26 @@
                                 <tbody>
                                 <tr class='tHeader'>
                                     <th width="5%">序号</th>
-                                    <th width="15%">月份</th>
+                                    <th width="5%">月份</th>
                                     <th width="15%">通报名称</th>
+                                    <th width="10%">下发时间</th>
+                                    <th width="10%">需反馈区数量</th>
+                                    <th width="10%">已反馈区数量</th>
                                     <th width="15%">计划方案</th>
                                     <th width="10%">状态</th>
-                                    <th width="10%">操作</th>
+                                    <th width="25%">操作</th>
                                 </tr>
                                 <tr ng-repeat="item in reportList">
                                     <td>{{$index+1}}</td>
                                     <td>{{item.month}}</td>
                                     <td>{{item.title}}</td>
-                                    <td><a ng-click="viewReport()">{{item.schemeName}}</a></td>
+                                    <td>{{item.issuetime}}</td>
+                                    <td>{{item.xunum}}</td>
+                                    <td>{{item.yinum}}</td>
+                                    <td>
+                                        <a ng-click="viewReport()" ng-if="qu == 2">{{item.schemeName}}</a>
+                                        <a ng-if="qu == 5" style="color: #666;cursor: auto">{{item.schemeName}}</a>
+                                    </td>
                                     <td>
                                         <span class="label label-info" ng-if="item.status == 0">待通报</span>
                                         <span class="label label-success" ng-if="item.status == 1">已下发</span>
@@ -76,14 +85,17 @@
                                     </td>
                                     <td style="text-align: left;">
                                         <button type="button" class="btn btn-success"
-                                                ng-click="view(item.id,item.schemeid)">查看
+                                                ng-click="view(item.id,item.schemeid ,1)">查看
                                         </button>
-                                        <button type="button" class="btn btn-warning" ng-if="item.status == 0"
+                                        <button type="button" class="btn btn-info" ng-if="item.status == 0"
                                                 ng-click="report(item.id)">下发并通报
                                         </button>
+                                        <button type="button" class="btn btn-warning" ng-if="item.status == 0"
+                                                ng-click="edit(item)">修改
+                                        </button>
                                         <button type="button" class="btn btn-info"
-                                                ng-if="permission !=2 && item.status == 1"
-                                                ng-click="view(item.id,item.schemeid)">反馈
+                                                ng-if="permission !=2 && item.status == 1 && item.or == '有'"
+                                                ng-click="view(item.id,item.schemeid ,2)">反馈
                                         </button>
                                     </td>
                                 </tr>
@@ -100,5 +112,107 @@
             </div>
         </div>
 
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            修改通报
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-inline" style="padding-left: 25%;">
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通报名称</font></font></label>
+                                <input type="text" class="form-control input-short" ng-model="title">
+                            </div>
+                            <br />
+                            <div class="input-group date date_picker form-item" id="J-searchTime1">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">需反馈时间</font></font></label>
+                                <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="deadlinetime">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                            <br>
+                            <div class="input-group form-item" style="z-index: 100;">
+                                <label><font style="vertical-align: inherit;"><font
+                                        style="vertical-align: inherit;">需反馈区域</font></font></label>
+                                <select ng-model="region" id="slpk" class="form-control select-short selectpicker" multiple style="width: 160px;" ng-change="getChangeRegion(region)">
+                                </select>
+                            </div>
+                            <br>
+                            <div class="input-group form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">内容</font></font></label>
+                                <textarea class="form-control" id="deblock_udid2" name="deblock_udid" rows="2" style="width: 160px;max-width: 160px;" ng-model="content"></textarea>
+                            </div>
+                            <br>
+                            <div class="form-item" >
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">方案附件</font></font></label>
+                                <button class="btn btn-info" ng-click="getUploadFile()"><i class="fa fa-css3"></i>上传附件</button>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="submit()">保存</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--描述：附件-->
+        <div class="modal fade" id="coverModal" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <li class="fa fa-remove"></li>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <div class="wid-100 announcementCoverPanel">
+                                    <input class="uploadfile" type="file" name="file">
+                                </div>
+                            </div>
+                        </form>
+                    </div>.
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload()">
+                            <i class="fa fa-check"></i>
+                            <span>确定</span>
+                        </a>
+                        <a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
+                            <i class="fa fa-reply"></i>
+                            <span>取消</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
+<script>
+    $(".uploadfile").fileinput({
+        allowedFileExtensions: [],
+        uploadAsync: true, //默认异步上传
+        showRemove: true, //显示移除按钮
+        maxFileCount: 1, //表示允许同时上传的最大文件个数
+        language: 'zh', //设置语言
+        uploadUrl: '#', //上传的地址
+        showUpload: false, //显示批量上传按钮
+        showCaption: true, //是否显示标题
+        browseClass: "btn btn-primary", //按钮样式
+        showPreview: true, //是否显示预览
+        dropZoneEnabled: true, //是否显示拖拽区域
+        validateInitialCount: true,
+        slugCallback: function(filename) {
+            return filename.replace('(', '_').replace(']', '_');
+        }
+    });
+</script>

@@ -46,7 +46,7 @@
                             callBack: function (res) {
                                 $scope.num = res.data;
                                 getDeal();
-                                if($scope.status !=1 && $scope.num == 5){
+                                if($scope.status !=1){
                                     getResult();
                                 }
                             }

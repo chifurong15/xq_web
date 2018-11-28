@@ -53,7 +53,10 @@
 	                                    <td>{{item.title}}</td>
 	                                    <td>{{item.issue}}</td>
 										<td>{{item.createuser}}</td>
-										<td><a ng-click="viewReport()">{{item.bulletinName}}</a></td>
+										<td>
+											<a ng-click="viewReport()" ng-if="num == 2">{{item.bulletinName}}</a>
+											<a ng-if="num == 5" style="color: #666;cursor: auto">{{item.bulletinName}}</a>
+										</td>
 	                                    <td style="text-align: center;">
 											<button type="button" class="btn btn-success" ng-click="view(item.id)">查看</button>
 	                                    </td>

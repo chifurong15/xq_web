@@ -22,9 +22,10 @@
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
 					var apiPrefix = moduleService.getServiceUrl() + '/ancha';
-					
-					
-					$scope.init = function () {
+                    //var apiPrefix = 'http://10.0.9.133:7021' + '/ancha';
+
+
+                    $scope.init = function () {
                         // $('.selectpicker').selectpicker({
                         //     noneSelectedText : '请选择'
                         // });
@@ -51,6 +52,7 @@
 					//返回
 					$scope.goBack = function(){
 						history.back(-1);
+						// routeService.route('2-1-4',false)
 					}
 
 					//获取上报列表

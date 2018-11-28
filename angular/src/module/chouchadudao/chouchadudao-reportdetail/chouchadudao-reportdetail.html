@@ -8,18 +8,47 @@
         </div>
 
         <div class="panel panel-default">
-            <div class="panel-body">
-                <ul class="js-tab">
-                    <li class="basis tab-active" >基础资料</li>
-                    <li class="reported">约谈台账</li>
-                    <li class="deal">反馈结果</li>
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">基础资料</li>
+                    <li>约谈台账</li>
+                    <li>反馈结果</li>
                 </ul>
-                <div class="panel-body js-con">
+                <div class="layui-tab-content">
                     <!--基础资料-->
-                    <div class="basis-con con">
+                    <div class="layui-tab-item layui-show">
                         <div class="panel-body">
-                            <h4>暗查暗访当月任务统计</h4>
-                            <div class="tab-content">
+                            <form class="form-inline" style="padding-left: 25%;">
+                                <div class="form-item">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通报名称</font></font></label>
+                                    <input type="text" class="form-control input-short" readonly ng-model="basicDetail.title">
+                                </div>
+                                <div class="input-group date date_picker form-item" id="J-searchTime1">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">需反馈时间</font></font></label>
+                                    <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="basicDetail.deadlinetime" style="width: 165px;" readonly>
+                                </div>
+                                <br>
+                                <div class="input-group form-item" style="z-index: 0;">
+                                    <label><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">需反馈河长办</font></font></label>
+                                    <textarea class="form-control" id="deblock_udid7" name="deblock_udid" rows="1"
+                                              style="width: 160px;max-width: 160px;" readonly ng-model="basicDetail.feedbackareaname"
+                                              ></textarea>
+                                </div>
+                                <div class="input-group form-item" style="z-index: 0;">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">内容</font></font></label>
+                                    <textarea class="form-control" id="deblock_udid2" name="deblock_udid" readonly rows="2" style="width: 160px;max-width: 160px;" ng-model="basicDetail.content"></textarea>
+                                </div>
+                                <br>
+                                <div class="form-item" >
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">方案附件</font></font></label>
+                                    <button class="btn btn-info" ng-click="viewFile(basicDetail.accessory)"><i class="fa fa-css3"></i>查看附件</button>
+                                </div>
+                            </form>
+
+
+                            <h4 ng-if="isShowTask">暗查暗访当月任务统计</h4>
+                            <div class="tab-content" ng-if="isShowTask">
                                 <div class="tab-pane active" id="tableStatistics1">
                                     <div class="table-responsive" style="margin-top: 20px;">
                                         <table class="table table-bordered table-hover">
@@ -56,7 +85,7 @@
                     </div>
 
                     <!--约谈台账-->
-                    <div class="reported-con con tab-show">
+                    <div class="layui-tab-item">
                         <div class="panel-body">
                             <div class="input-group fr" ng-if="num == 2">
                                 <button type="button" class="btn btn-primary" ng-click="addBook()">
@@ -68,30 +97,30 @@
                                     <div class="table-responsive" style="margin-top: 20px;">
                                         <table class="table table-bordered table-hover">
                                             <tbody>
-                                                <tr class='tHeader'>
-                                                    <th width="5%">序号</th>
-                                                    <th width="10%">添加人</th>
-                                                    <th width="10%">职务</th>
-                                                    <th width="10%">约谈时间</th>
-                                                    <th width="10%">约谈对象</th>
-                                                    <th width="15%">约谈内容</th>
-                                                    <th width="10%">问责类型</th>
-                                                    <th width="10%">备注</th>
-                                                    <th width="10%">操作</th>
-                                                </tr>
-                                                <tr ng-repeat="item in bookList">
-                                                    <td>{{$index+1}}</td>
-                                                    <td>{{item.name}}</td>
-                                                    <td>{{item.duty}}</td>
-                                                    <td>{{item.turnarounddate}}</td>
-                                                    <td>{{item.object}}</td>
-                                                    <td>{{item.content}}</td>
-                                                    <td>{{item.accountabilitytype}}</td>
-                                                    <td>{{item.remark}}</td>
-                                                    <td style="text-align: center;">
-                                                        <button type="button" class="btn btn-warning" ng-click="editBook(item.id)" ng-if="num ==2">修改</button>
-                                                    </td>
-                                                </tr>
+                                            <tr class='tHeader'>
+                                                <th width="5%">序号</th>
+                                                <th width="10%">添加人</th>
+                                                <th width="10%">职务</th>
+                                                <th width="10%">约谈时间</th>
+                                                <th width="10%">约谈对象</th>
+                                                <th width="15%">约谈内容</th>
+                                                <th width="10%">问责类型</th>
+                                                <th width="10%">备注</th>
+                                                <th width="10%">操作</th>
+                                            </tr>
+                                            <tr ng-repeat="item in bookList">
+                                                <td>{{$index+1}}</td>
+                                                <td>{{item.name}}</td>
+                                                <td>{{item.duty}}</td>
+                                                <td>{{item.turnarounddate}}</td>
+                                                <td>{{item.object}}</td>
+                                                <td>{{item.content}}</td>
+                                                <td>{{item.accountabilitytype}}</td>
+                                                <td>{{item.remark}}</td>
+                                                <td style="text-align: center;">
+                                                    <button type="button" class="btn btn-warning" ng-click="editBook(item.id)" ng-if="num ==2">修改</button>
+                                                </td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                         <!--<tm-pagination conf="paginationConf"></tm-pagination>-->
@@ -106,32 +135,98 @@
                     </div>
 
                     <!--反馈结果-->
-                    <div class="deal-con con tab-show">
-                        <div class="panel-body">
-                            <form class="form-inline" style="padding-left: 25%;">
+                    <div class="layui-tab-item">
+
+                        <div class="panel-body" ng-if="isView == 1">
+                            <form class="form-inline" style="padding-left: 25%;" ng-repeat="item in backList">
+
                                 <div class="form-item" >
                                     <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">完成</font></font></label>
-                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{whether}}</font></font></label>
+                                    <input type="text" class="form-control input-short" readonly ng-model="item.whether">
+                                    <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{whether}}</font></font></label>-->
                                 </div>
-                                <div class="form-item" style="margin-left: 90px;">
+                                <div class="form-item">
                                     <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">反馈时间</font></font></label>
-                                    <input type="text" class="form-control input-short" readonly ng-model="feedbackTime">
+                                    <input type="text" class="form-control input-short" readonly ng-model="item.feedbacktime" style="width: 165px;">
                                 </div>
                                 <br />
                                 <div class="form-item" style="margin-top: -2px;">
                                     <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">反馈描述</font></font></label>
-                                    <textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="describe" rows="3" readonly></textarea>
+                                    <textarea class="form-control" id="deblock_udid1" name="deblock_udid" ng-model="item.describe" rows="3" readonly style="width: 160px;" ></textarea>
                                 </div>
                                 <div class="form-item" >
                                     <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理附件</font></font></label>
-                                    <button type="button" class="btn btn-info" ng-click="viewFile()">查看附件</button>
+                                    <button type="button" class="btn btn-info" ng-click="viewFile(item.assessory)">查看附件</button>
                                 </div>
                             </form>
                         </div>
+
+                        <div class="panel-body" ng-if="isView == 2">
+                            <form class="form-inline" style="padding-left: 25%;">
+                                <div class="input-group form-item">
+                                    <label><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">是否完成</font></font></label>
+                                    <select ng-model="isFinish" ng-change="changeType1(type1)" class="form-control select-short" style="width: 160px;z-index: 0;">
+                                        <option value="">请选择</option>
+                                        <option value="1">是</option>
+                                        <option value="2">否</option>
+                                    </select>
+                                </div>
+                                <div class="form-item">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">反馈时间</font></font></label>
+                                    <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched"  ng-model="currentdate" style="width: 165px;">
+                                </div>
+                                <br />
+                                <div class="form-item" style="margin-top: -2px;">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">反馈描述</font></font></label>
+                                    <textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="describe" rows="3"  style="width: 160px;" ></textarea>
+                                </div>
+                                <div class="form-item" >
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理附件</font></font></label>
+                                    <button type="button" class="btn btn-info" ng-click="getUploadFile()">上传附件</button>
+                                </div>
+                            </form>
+                            <div style="text-align: center;margin: 35px 0;">
+                                <button type="button" class="btn btn-primary" style="margin: 0 50px;"
+                                        ng-click="goReport()">反馈
+                                </button>
+                                <button type="button" class="btn btn-default" ng-click="back()">取消</button>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
+            </div>
 
+        </div>
+        <!--描述：附件-->
+        <div class="modal fade" id="coverModal" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <li class="fa fa-remove"></li>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <div class="wid-100 announcementCoverPanel">
+                                    <input class="uploadfile" type="file" name="file">
+                                </div>
+                            </div>
+                        </form>
+                    </div>.
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload()">
+                            <i class="fa fa-check"></i>
+                            <span>确定</span>
+                        </a>
+                        <a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
+                            <i class="fa fa-reply"></i>
+                            <span>取消</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -157,8 +252,49 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
 </div>
+
+<script>
+    layui.use('element', function () {
+        var $ = layui.jquery
+            , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        //触发事件
+        var active = {
+            tabChange: function () {
+                //切换到指定Tab项
+                element.tabChange('demo', '22'); //切换到：用户管理
+            }
+        };
+
+        $('.site-demo-active').on('click', function () {
+            var othis = $(this), type = othis.data('type');
+            active[type] ? active[type].call(this, othis) : '';
+        });
+
+        element.on('tab(test)', function (elem) {
+            location.hash = 'test=' + $(this).attr('lay-id');
+        });
+
+    });
+
+    $(".uploadfile").fileinput({
+        allowedFileExtensions: [],
+        uploadAsync: true, //默认异步上传
+        showRemove: true, //显示移除按钮
+        maxFileCount: 1, //表示允许同时上传的最大文件个数
+        language: 'zh', //设置语言
+        uploadUrl: '#', //上传的地址
+        showUpload: false, //显示批量上传按钮
+        showCaption: true, //是否显示标题
+        browseClass: "btn btn-primary", //按钮样式
+        showPreview: true, //是否显示预览
+        dropZoneEnabled: true, //是否显示拖拽区域
+        validateInitialCount: true,
+        slugCallback: function(filename) {
+            return filename.replace('(', '_').replace(']', '_');
+        }
+    });
+
+</script>

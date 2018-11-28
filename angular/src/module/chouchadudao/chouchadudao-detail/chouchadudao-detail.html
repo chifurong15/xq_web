@@ -8,93 +8,96 @@
 		</div>
         
     	<div class="panel panel-default">
-        	<div class="panel-body">
-        		<ul class="js-tab">
-        			<li class="basis tab-active" >基础资料</li>
-        			<li class="reported">上报</li>
-        		</ul>
-        		<div class="panel-body js-con">
-					<!--基础资料-->
-        			<div class="basis-con con">        				
-			    		<div class="panel-body">
-							<form class="form-inline" style="padding-left: 25%;">
-								<div class="form-item" >
-			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
-			                        <input type="text" class="form-control input-short" ng-model="title" readonly>
-			                    </div>
-			                    <div class="input-group form-item">
-			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查区域</font></font></label>
-									<textarea class="form-control" id="deblock_udid1" name="deblock_udid" rows="2" style="width: 160px;max-width: 160px;" readonly ng-model="region"></textarea>
-								</div>
-				                <br />
-								<div class="form-item" >
-									<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查日期</font></font></label>
-									<input type="text" class="form-control input-short" ng-model="date" readonly>
-								</div>
-			                    <div class="input-group form-item">
-			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查河道</font></font></label>
-									<textarea class="form-control" id="deblock_udid2" name="deblock_udid" rows="2" style="width: 160px;max-width: 160px;" readonly ng-model="reach"></textarea>
-								</div>
-				                <br />
-				                <div class="form-item" >
-			                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">带队领导</font></font></label>
-			                        <input type="text" class="form-control input-short" readonly ng-model="leader">
-			                    </div>
-								<div class="form-item" >
-									<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发人员</font></font></label>
-									<input type="text" class="form-control input-short" readonly ng-model="personnel">
-								</div>
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">基础资料</li>
+                    <li>上报</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <!--基础资料-->
+                    <div class="layui-tab-item layui-show">
+                        <div class="panel-body">
+                            <form class="form-inline" style="padding-left: 25%;">
+                                <div class="form-item" >
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
+                                    <input type="text" class="form-control input-short" ng-model="title" readonly>
+                                </div>
+                                <div class="input-group form-item">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查区域</font></font></label>
+                                    <textarea class="form-control" id="deblock_udid1" name="deblock_udid" rows="2" style="width: 160px;max-width: 160px;" readonly ng-model="region"></textarea>
+                                </div>
+                                <br />
+                                <div class="form-item" >
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查日期</font></font></label>
+                                    <input type="text" class="form-control input-short" ng-model="date" readonly>
+                                </div>
+                                <div class="input-group form-item">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查河道</font></font></label>
+                                    <textarea class="form-control" id="deblock_udid2" name="deblock_udid" rows="2" style="width: 160px;max-width: 160px;" readonly ng-model="reach"></textarea>
+                                </div>
+                                <br />
+                                <!--<div class="form-item" >-->
+                                <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">坐标位置</font></font></label>-->
+                                <!--<input type="text" class="form-control input-short" readonly ng-model="leader">-->
+                                <!--</div>-->
+                                <div class="form-item" >
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发人员</font></font></label>
+                                    <input type="text" class="form-control input-short" readonly ng-model="personnel">
+                                </div>
 
-							</form>				
-			    		</div>
-        			</div>
-					<!--上报-->
-					<div class="reported-con con tab-show">
-        				<div class="panel-body">
-							<h4 ng-if="reportList.length == 0">暂无上报问题</h4>
-        					<div class="clearfix" style="height: auto;border-bottom:1px solid #d8d8d8" ng-if="reportList.length != 0" ng-repeat="item in reportList">
-        						<form class="form-inline" style="padding-left: 25%;float: left;">
-									<div class="form-item">
-				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上报</font></font></label>			                       
-				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">第{{$index+1}}次</font></font></label>
-				                    </div>
-									<br>
-									<div class="form-item">
-										<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上报人</font></font></label>
-										<input type="text" class="form-control input-short" readonly ng-model="item.issuer">
-									</div>
-				                    <br />
-				                    <div class="form-item" >
-				                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上报时间</font></font></label>
-				                        <input type="text" class="form-control input-short" readonly ng-model="item.date">
-				                    </div>
-									<br>
-									<div class="input-group form-item">
-										<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上报问题描述</font></font></label>
-										<textarea class="form-control" id="deblock_udid3" name="deblock_udid" rows="2" style="width: 160px;max-width: 160px;" readonly ng-model="item.peoblemDescription"></textarea>
-									</div>
-	        					</form>        					
-        						<form class="form-inline" style="float: left;">
-									<div class="input-group form-item">
-										<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上报问题类型</font></font></label>
-										<textarea class="form-control" id="deblock_udid4" name="deblock_udid" rows="2" style="width: 220px;max-width: 240px;" readonly ng-model="item.peoblemType"></textarea>
-									</div>
-									<br>
-									<div class="input-group form-item" style="display: inline-block;">
-										<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上传照片</font></font></label>
-										<div style="display: inline-block;width: 330px;" id="layer-photos-check">
-											<img style="margin: 5px;"  ng-repeat="items in item.image.split(',')" layer-pid="" layer-src="{{eventImgUrl}}{{items}}" src="{{eventImgUrl}}{{items}}" alt="问题照片" width="100px" height="100px" key="{{$index}}">
+                            </form>
+                        </div>
+                    </div>
 
-										</div>
-									</div>
-        						</form>
-        					</div>
-						</div>
-        			</div>
+                    <!--上报-->
+                    <div class="layui-tab-item">
+                        <div class="panel-body">
+                            <h4 ng-if="reportList.length == 0">暂无上报问题</h4>
+                            <div class="clearfix" style="height: auto;border-bottom:1px solid #d8d8d8" ng-if="reportList.length != 0" ng-repeat="item in reportList">
+                                <form class="form-inline" style="padding-left: 25%;float: left;">
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上报</font></font></label>
+                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">第{{$index+1}}次</font></font></label>
+                                    </div>
+                                    <br>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上报人</font></font></label>
+                                        <input type="text" class="form-control input-short" readonly ng-model="item.issuer">
+                                    </div>
+                                    <br />
+                                    <div class="form-item" >
+                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上报时间</font></font></label>
+                                        <input type="text" class="form-control input-short" readonly ng-model="item.date">
+                                    </div>
+                                    <br>
+                                    <div class="input-group form-item">
+                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上报问题描述</font></font></label>
+                                        <textarea class="form-control" id="deblock_udid3" name="deblock_udid" rows="2" style="width: 160px;max-width: 160px;" readonly ng-model="item.peoblemDescription"></textarea>
+                                    </div>
+                                </form>
+                                <form class="form-inline" style="float: left;">
+                                    <div class="input-group form-item">
+                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上报问题类型</font></font></label>
+                                        <textarea class="form-control" id="deblock_udid4" name="deblock_udid" rows="2" style="width: 220px;max-width: 240px;" readonly ng-model="item.peoblemType"></textarea>
+                                    </div>
+                                    <br>
+                                    <div class="input-group form-item" style="display: inline-block;">
+                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上传照片</font></font></label>
+                                        <div style="display: inline-block;width: 330px;" id="layer-photos-check">
+                                            <img style="margin: 5px;"  ng-repeat="items in item.image.split(',')" layer-pid="" ng-if="items" layer-src="{{eventImgUrl}}{{items}}" src="{{eventImgUrl}}{{items}}" alt="问题照片" width="100px" height="100px" key="{{$index}}">
+                                            <!--<video width="100" height="100" controls ng-repeat="items in item.image.split(',')" style="margin:5px;">-->
+                                                <!--<source src="{{eventImgUrl}}{{items}}"-->
+                                                        <!--type="video/mp4">-->
+                                            <!--</video>-->
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        		</div> 
-        		
-        	</div>
        	</div>
     </div>
 </div>
@@ -105,5 +108,27 @@
             photos: '#layer-photos-check',
             anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
         });
+    });
+    layui.use('element', function () {
+        var $ = layui.jquery
+            , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        //触发事件
+        var active = {
+            tabChange: function () {
+                //切换到指定Tab项
+                element.tabChange('demo', '22'); //切换到：用户管理
+            }
+        };
+
+        $('.site-demo-active').on('click', function () {
+            var othis = $(this), type = othis.data('type');
+            active[type] ? active[type].call(this, othis) : '';
+        });
+
+        element.on('tab(test)', function (elem) {
+            location.hash = 'test=' + $(this).attr('lay-id');
+        });
+
     });
 </script>

@@ -124,7 +124,7 @@
                         {"id": 2, "typeName": "否"}
                     ];
                     $scope.radioBtn = function (type) {
-                        $scope.type = type;
+                        //$scope.type = type;
                     }
 
                     //返回
@@ -181,8 +181,18 @@
                         })
                     }
 
+                    //是否现场核查
+                    $scope.changeType = function (type){
+                        $scope.type = type
+                    }
+                    //是否达标
+                    $scope.changeType1 = function (type){
+                        $scope.type1 = type
+                    }
+
                     //核查
                     $scope.verification = function () {
+                        console.log($scope.type);
                         var params = {
                                 supervisionid: $scope.id,
                                 objectid:$scope.userInfo.id,
@@ -192,7 +202,7 @@
                                 description: $('#deblock_udid60').val(),
                                 assessory: $scope.assessory
                         };
-                        //console.log(params);
+                        // console.log(params);
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/DubanSupervision/addFeedbackhc',
                             method: 'post',
@@ -229,6 +239,7 @@
                                          $scope.detailId = res.data[0].id;
                                          $scope.dealDescription = res.data[0].description;
                                          $scope.isFinish = res.data[0].whether == '是' ? 1 : 2;
+                                         $scope.currentdate = res.data[0].feedbacktime;
                                         // layui.use('laydate', function () {
                                         //     var laydate = layui.laydate;
                                         //     laydate.render({

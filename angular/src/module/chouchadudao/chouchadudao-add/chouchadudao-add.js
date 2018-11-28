@@ -28,12 +28,14 @@
 						var bulletin = globalParam.getter().bulletin || {};
 						
 						$scope.id = bulletin.id;
-
+                        console.log('000',$scope.id);
                         $('.selectpicker').selectpicker({
-                            noneSelectedText : '请选择'
+                            noneSelectedText : '请选择',
+                            dropupAuto: false
                         });
                         $('.selectpicker1').selectpicker({
-                            noneSelectedText : '请选择'
+                            noneSelectedText : '请选择',
+                            dropupAuto: false
                         });
 
 						// 编辑时获取原数据
@@ -50,8 +52,6 @@
                                     setData(res.data);
                                 }
                             })
-						}else{
-							layer.msg('服务器异常，请稍后再试');
 						}
 
                         getRegion();
@@ -132,7 +132,7 @@
 						$scope.selfid = data.id;
 						$scope.title = data.title;
 						$scope.searchTime = data.date;
-						$scope.leader = data.leader;
+						$scope.coordinate = data.coordinate;
                         $scope.region = data.regionid.split(',');
                         $scope.reach = data.reachname.split(',');
                         $("#slpk").selectpicker('val',$scope.region);
@@ -179,13 +179,14 @@
                                 closeBtn: 1,
                                 anim: 3
                             });
-                        } else if (!$scope.leader) {
-                         layer.alert("请输入带队领导", {
-                             skin: 'my-skin',
-                             closeBtn: 1,
-                             anim: 3
-                         });
-						}
+                        }
+                        // else if (!$scope.coordinate) {
+                         // layer.alert("请输入坐标位置", {
+                         //     skin: 'my-skin',
+                         //     closeBtn: 1,
+                         //     anim: 3
+                         // });
+						// }
 						// else if (!$scope.personnel) {
                          // layer.alert("请选择下发人员", {
                          //     skin: 'my-skin',
@@ -201,10 +202,10 @@
                                 regionid: $scope.region ? $scope.region.join(',') : '',
 								date: $scope.searchTime,
                                 reachname: $scope.reach ? $scope.reach.join(',') : '',
-                            	leader: $scope.leader,
+                                // coordinate: $scope.coordinate,
                                 personnel:$scope.personnel
 						}
-						console.log(params)
+						// console.log(params)
 						if (!$scope.id) {
                             $ajaxhttp.myhttp({
                                 url: apiPrefix + '/v1/AnzhaInvestigations/add',
@@ -261,7 +262,7 @@
 						$scope.region = '';
 						$scope.reach = '';
 						$scope.searchTime = '';
-						$scope.leader = '';
+						$scope.coordinate = '';
 						$scope.personnel = '';
 					}					
 

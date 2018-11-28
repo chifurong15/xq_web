@@ -24,12 +24,15 @@
                     var apiPrefix = moduleService.getServiceUrl() + '/ancha';
                     //var apiPrefix = 'http://10.0.9.133:7021' + '/ancha';
 
+                    $scope.userInfo = $localStorage.userLoginInfo.userInfo;
+
                     $scope.init = function () {
                         getRegion();
 //						// 05区河长办  02市河长办
                         $ajaxhttp.myhttp({
-                            url: apiPrefix + '/v1/AnzhaInvestigations/userinfo',
+                            url: apiPrefix + '/v1/AnzhaInvestigations/userinfo1',
                             method: 'get',
+                            params:{id:$scope.userInfo.id},
                             callBack: function (res) {
                                 $scope.num = res.data;
                                 getList();
@@ -46,6 +49,7 @@
                                 pageNumber: $scope.paginationConf.currentPage,
                                 pageSize: $scope.paginationConf.itemsPerPage,
                                 schemeid: localStorage.getItem('id'),
+                                objectid:$scope.userInfo.id,
                                 date: $scope.searchTime,
                                 region: $scope.region
                             },
