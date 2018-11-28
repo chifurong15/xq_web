@@ -1,6 +1,14 @@
 <!-- list -->
-<ul class="nav">
+<ul class="nav" id="aaaa">
   <!-- 二级菜单展示指令模板 -->
-  <cjhme-nav-view nav-data="menuObj"></cjhme-nav-view>
+  <cjhme-nav-view nav-data="menuObj" ></cjhme-nav-view>
 </ul>
 <!-- / list -->
+
+<script>
+    $('#aaaa').on('click','li',function (e){
+        $(this).addClass('active');
+        $(this).siblings().removeClass('active');
+        e.stopPropagation();
+    })
+</script>

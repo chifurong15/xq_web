@@ -1,8 +1,8 @@
 'use strict';
 
 /* Controllers */
-angular.module('app').controller('AppCtrl', ['$scope','routeService' ,'$location', '$translate', '$localStorage', '$rootScope', 'globaltree', '$window', 'moduleService', '$http', '$timeout',
-    function ($scope,routeService, $location, $translate, $localStorage, $rootScope, globaltree, $window, moduleService, $http, $timeout) {
+angular.module('app').controller('AppCtrl', ['$scope', 'routeService', '$location', '$translate', '$localStorage', '$rootScope', 'globaltree', '$window', 'moduleService', '$http', '$timeout',
+    function ($scope, routeService, $location, $translate, $localStorage, $rootScope, globaltree, $window, moduleService, $http, $timeout) {
         // add 'ie' classes to html
         var isIE = !!navigator.userAgent.match(/MSIE/i);
         isIE && angular.element($window.document.body).addClass('ie');
@@ -156,9 +156,10 @@ angular.module('app').controller('AppCtrl', ['$scope','routeService' ,'$location
 
         //点击顶部logo时，菜单一级不选中
         $scope.goHome = function () {
-            routeService.route('/app/dashboard-v1',false)
+            routeService.route('/app/dashboard-v1', false)
             $('.navbar-right > li').removeClass('active');
         }
+
 
         $scope.getSecondMenu = function (menu) {
             if (!menu) {
@@ -239,11 +240,17 @@ angular.module('app').controller('AppCtrl', ['$scope','routeService' ,'$location
         $scope.lang = {
             isopen: false
         };
-        $scope.langs = {
+        $scope.langs =
+        {
             en: 'English',
-            de_DE: 'German',
-            it_IT: 'Italian'
-        };
+                de_DE
+        :
+            'German',
+                it_IT
+        :
+            'Italian'
+        }
+        ;
         $scope.selectLang = $scope.langs[$translate.proposedLanguage()] || "English";
         $scope.setLang = function (langKey, $event) {
             // set the current lang
@@ -320,9 +327,9 @@ angular.module('app').controller('AppCtrl', ['$scope','routeService' ,'$location
                 }
             }).then(function successCallback(resp) {
                 if (resp.data.resCode == 1) {
-                    console.log($localStorage.userLoginInfo.userInfo)
+                    //console.log($localStorage.userLoginInfo.userInfo)
                     $localStorage.userLoginInfo.userInfo = resp.data.data;
-                    console.log($localStorage.userLoginInfo.userInfo)
+                    //($localStorage.userLoginInfo.userInfo)
                 }
             }, function errorCallback(response) {
             });

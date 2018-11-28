@@ -409,7 +409,7 @@ body .align-left .cross-simple-icon, body .align-left .cross-text{
     border-bottom: 1px solid #fff;
 }
 
-.aside-main .nav > li :hover, .aside-main .nav > li a.active {
+.aside-main .nav > li :active, .aside-main .nav > li a.active {
     background-color: #006edd;
 }
 
