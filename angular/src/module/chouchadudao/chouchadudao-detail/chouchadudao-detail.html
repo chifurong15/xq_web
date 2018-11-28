@@ -52,8 +52,23 @@
                     <!--上报-->
                     <div class="layui-tab-item">
                         <div class="panel-body">
-                            <h4 ng-if="reportList.length == 0">暂无上报问题</h4>
-                            <div class="clearfix" style="height: auto;border-bottom:1px solid #d8d8d8" ng-if="reportList.length != 0" ng-repeat="item in reportList">
+                            <form class="form-inline" style="padding-left: 25%;margin-bottom: 20px;">
+                                <div class="input-group form-item">
+                                    <label><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">有无问题</font></font></label>
+                                    <select ng-model="status" id="is" class="form-control select-short" style="width: 160px;z-index: 0;">
+                                        <option value="">请选择</option>
+                                        <option value="1">无</option>
+                                        <option value="0">有</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary" ng-click="search()">
+                                    <i class="fa fa-search"></i>搜索
+                                </button>
+                            </form>
+
+
+                            <div class="clearfix" style="height: auto;border-bottom:1px solid #d8d8d8" ng-repeat="item in reportList">
                                 <form class="form-inline" style="padding-left: 25%;float: left;">
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上报</font></font></label>

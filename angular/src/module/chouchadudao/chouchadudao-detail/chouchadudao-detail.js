@@ -46,8 +46,13 @@
 							}
 						})
                         getProblemType();
+
+                    }
+
+					$scope.search = function (){
                         getList();
-					}
+
+                    }
 					
 					//返回
 					$scope.goBack = function(){
@@ -61,7 +66,8 @@
                             url: apiPrefix + '/v1/AnzhaReport/list',
                             method: 'get',
                             params: {
-                                anzhaid: localStorage.getItem('id')
+                                anzhaid: localStorage.getItem('id'),
+								status:$scope.status
                             },
                             callBack: function (res) {
                                 if(res.resCode == 1){
