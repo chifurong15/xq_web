@@ -27,7 +27,8 @@
 
                     $scope.init = function () {
                         $('.selectpicker').selectpicker({
-                            noneSelectedText : '请选择'
+                            noneSelectedText : '请选择',
+                            dropupAuto: false
                         });
                         getAllArea ();
                         getCheckType ();

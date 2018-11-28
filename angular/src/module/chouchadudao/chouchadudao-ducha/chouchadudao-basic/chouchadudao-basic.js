@@ -37,7 +37,8 @@
 
                     $scope.init = function () {
                         $('.selectpicker').selectpicker({
-                            noneSelectedText : '请选择'
+                            noneSelectedText : '请选择',
+                            dropupAuto: false
                         });
                         $scope.isShow1 = true; //显示通报tab栏
                         $scope.isShow2 = false; //隐藏一区一单tab栏
@@ -317,7 +318,8 @@
                         $scope.supervisePerson = '';
                         $scope.personPhone = '';
                         $('.selectpicker').selectpicker({
-                            noneSelectedText : '请选择'
+                            noneSelectedText : '请选择',
+                            dropupAuto: false
                         });
                         $('.selectpicker').selectpicker('val', '');
                         $('.selectpicker').selectpicker('refresh');
