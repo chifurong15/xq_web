@@ -39,8 +39,7 @@
                     $scope.init = function () {
                         var bulletin = globalParam.getter().bulletin || {};
                         $scope.isView = localStorage.getItem('isView');
-                        $scope.isShowTask = false;
-                        // 05区河长办  02市河长办
+c                        // 05区河长办  02市河长办
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/AnzhaInvestigations/userinfo1',
                             method: 'get',
@@ -61,6 +60,8 @@
 
                                 if($scope.num == 5){
                                     isBack ();
+                                }else{
+                                    $scope.isShowTask = true;
                                 }
                             }
                         })
@@ -207,7 +208,7 @@
                     $scope.goReport = function () {
 
                         var params = {
-                            whether: $scope.isFinish == 1 ? '是': '否',
+                            whether: $('#is').val() == 1 ? '是': '否',
                             feedbackTime:$scope.currentdate,
                             describe:$scope.describe,
                             filePath:$scope.assessory,
