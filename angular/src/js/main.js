@@ -156,10 +156,9 @@ angular.module('app').controller('AppCtrl', ['$scope', 'routeService', '$locatio
 
         //点击顶部logo时，菜单一级不选中
         $scope.goHome = function () {
-            routeService.route('/app/dashboard-v1', false)
+            //routeService.route('/app/dashboard-v1', false)
             $('.navbar-right > li').removeClass('active');
         }
-
 
         $scope.getSecondMenu = function (menu) {
             if (!menu) {

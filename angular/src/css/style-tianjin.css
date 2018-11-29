@@ -11,6 +11,13 @@ body {
     overflow: hidden;
     font-family: "Microsoft Yahei", Verdana, Simsun, "Segoe UI Web Light", "Segoe UI Light", "Segoe UI Web Regular", "Segoe UI", "Segoe UI Symbol", "Helvetica Neue", Arial;
 }
+#logo:hover,#logo:active{
+    color: #fff;
+}
+
+.dk{
+    background: #3071a9 !important;
+}
 .navbar-brand:active{
     color: #fff;
 }
@@ -1590,7 +1597,7 @@ body .align-left .cross-simple-icon, body .align-left .cross-text{
 }
 
 .tag {
-    line-height: 35px;
+    line-height: 34px;
     display: inline-block;
     padding: 0px 15px;
     background: #f0f0f0;
@@ -1605,23 +1612,26 @@ body .align-left .cross-simple-icon, body .align-left .cross-text{
 
 .tag-right {
     display: inline-block;
-    width: 13px;
+    width: 14px;
     height: 35px;
     position: relative;
     line-height: 30px;
     background: url(../img/tag1.png) 0px -1px no-repeat;
-    top: 14px;
+    top: 13px;
+    left: -4px;
 }
 
 .tag-left {
     display: inline-block;
     width: 13px;
-    height: 38px;
+    height: 36px;
     position: relative;
     line-height: 30px;
     background: url(../img/tag2.png) 0px -1px no-repeat;
-    top: 14px;
-    right: -6px;
+    top: 13px;
+    left: 0;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
 }
 
 .form-radio .i-checks input:checked + i:before {

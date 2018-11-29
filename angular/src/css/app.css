@@ -1878,9 +1878,9 @@ html.bg {
     outline: 0 !important;
 }
 
-.btn-link {
-    color: #58666e;
-}
+/*.btn-link {*/
+    /*color: #58666e;*/
+/*}*/
 
 .btn-link.active {
     box-shadow: none;
