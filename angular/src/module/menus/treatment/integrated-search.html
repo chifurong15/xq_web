@@ -1,8 +1,10 @@
 <div ng-controller="integratedSearch">
-	<div class="bg-light lter b-b wrapper-md">
-		<h1 class="m-n font-thin h3">综合查询</h1>
-	</div>
 	<div class="wrapper-md">
+		<div class="panel panel-default m-n">
+			<div class="panel-body" style="position: relative;">
+				<span class="tag">综合查询</span><span class="tag-right"></span>
+			</div>
+		</div>
 		<div class="panel panel-default m-all-0">
 			<div class="panel-body">
 				<form method="get">
@@ -22,6 +24,7 @@
 						<div class="form-item">
 							<label>问题等级</label>
 							<select class="form-control select-short" ng-change="selectChange();" ng-model="eventLevel">
+								<option value="">请选择</option>
 								<option value="0">一般</option>
 								<option value="1">紧急</option>
 								<option value="2">特急</option>
@@ -32,7 +35,7 @@
 							<input type="text" class="form-control input-short-o" ng-model="eventTypeName"/>
 							<a href="javascript:void(0);" data-toggle="modal" data-target="#typeModal" class="input-group-addon"><i class="fa fa-search"></i></a>
 						</div>
-						<div class="form-group" style="min-width: 290px;margin: 5px 0;padding-right: 15px;">
+						<div class="form-group" style="min-width: 276px;margin: 5px 0;">
                             <label style="width: 90px;padding: 5px;">开始时间</label>
                             <div class="input-group date date_picker" id="beginTime">
                                 <input type="text" class="form-control input-short-o" ng-model="beginTime"/>
@@ -41,7 +44,7 @@
                                 </span>
                             </div>
                         </div>
-						<div class="form-group" style="min-width: 290px;margin: 5px 0;padding-right: 15px;">
+						<div class="form-group" style="min-width: 276px;margin: 5px 0;">
                             <label style="width: 90px;padding: 5px;">结束时间</label>
                             <div class="input-group date date_picker" id="endTime">
                                 <input type="text" class="form-control input-short-o" ng-model="endTime"/>
@@ -63,6 +66,7 @@
 						<div class="form-item">
 							<label>问题状态</label>
 							<select class="form-control select-short" ng-change="selectChange();" ng-model="status">
+								<option value="">请选择</option>
 								<option value="1">处理中</option>
 								<option value="2">已结案件</option>
 							</select>
