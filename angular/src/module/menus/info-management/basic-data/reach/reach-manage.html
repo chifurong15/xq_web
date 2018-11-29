@@ -1,7 +1,12 @@
 <div ng-controller="imReach" ng-init="init()">
     <div class="wrapper-md">
         <div class="panel panel-default m-n">
-            <div class="panel-body">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">河段管理</span><span class="tag-right"></span>
+            </div>
+        </div>
+        <div class="panel panel-default m-n">
+            <div class="panel-body"  style="padding: 15px;">
                 <form class="form-inline" method="get">
                     <div class="form-item">
                         <label>河湖库段名称</label>
@@ -15,17 +20,22 @@
                     <button type="submit" class="btn btn-primary" ng-click="find()">
                         <i class="fa fa-search"></i>搜索
                     </button>
+                    <div class="input-group fr">
+                        <button type="button" class="btn btn-primary" ng-click="reachAdd()">
+                            <i class="fa fa-plus"></i> 新建
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="table-responsive">
-                    <div class="table-bar">
-                        <button type="button" class="btn btn-primary btn-xs" ng-click="reachAdd()">
-                            <i class="fa fa-plus"></i> 新增
-                        </button>
-                    </div>
+                    <!--<div class="table-bar">-->
+                        <!--<button type="button" class="btn btn-primary btn-xs" ng-click="reachAdd()">-->
+                            <!--<i class="fa fa-plus"></i> 新增-->
+                        <!--</button>-->
+                    <!--</div>-->
                     <table class="table table-bordered table-hover" data-filter="#filter">
                         <tr>
                             <th>序号</th>

@@ -1,7 +1,12 @@
 <div ng-controller="imRiver" ng-init="init()" ng-init="init()">
     <div class="wrapper-md">
         <div class="panel panel-default m-n">
-            <div class="panel-body">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">河流管理</span><span class="tag-right"></span>
+            </div>
+        </div>
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="padding: 15px;">
                 <form class="form-inline" method="get">
                     <div class="form-item">
                         <label>河流名称</label>
@@ -11,7 +16,7 @@
                         <label>河流类型</label>
                         <select class="form-control select-short" ng-model="typeName"
                                 ng-init="riverChange(typeName,0);">
-                            <option value="">--请选择--</option>
+                            <option value="">请选择</option>
                             <option value="{{x.typeName}}" ng-repeat="x in riverTypes">{{x.typeName}}</option>
                         </select>
                     </div>
@@ -23,6 +28,11 @@
                     <button type="button" class="btn btn-primary" ng-click="find()">
                         <i class="fa fa-search"></i>搜索
                     </button>
+                    <div class="input-group fr">
+                        <button type="button" class="btn btn-primary" ng-click="riverAdd()">
+                            <i class="fa fa-plus"></i> 新增
+                        </button>
+                    </div>
 
                 </form>
             </div>
@@ -30,11 +40,6 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="table-responsive">
-                    <div class="table-bar">
-                        <button type="button" class="btn btn-primary btn-xs" ng-click="riverAdd()">
-                            <i class="fa fa-plus"></i> 新增
-                        </button>
-                    </div>
                     <table class="table table-bordered table-hover">
                         <tr>
                             <th class="wid-5">序号</th>

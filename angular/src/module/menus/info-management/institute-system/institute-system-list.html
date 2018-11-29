@@ -2,7 +2,12 @@
 <div ng-controller="instituteSystemListCtrl" ng-init="init()">
 	<div class="wrapper-md">
 		<div class="panel panel-default m-n">
-			<div class="panel-body">
+			<div class="panel-body" style="position: relative;">
+				<span class="tag">制度体系</span><span class="tag-right"></span>
+			</div>
+		</div>
+		<div class="panel panel-default m-n">
+			<div class="panel-body" style="padding: 15px;">
 				<form method="get" class="form-inline">
 					<!--<div class="form-radio">
 						<label class="radio-inline i-checks" ng-repeat="type in typeList">
@@ -40,17 +45,22 @@
                     <button type="submit" class="btn btn-primary" ng-click="reSet()" style="margin-left:20px ;">
                         <i class="fa fa-search"></i>重置
                     </button>
+					<div class="input-group fr">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#docList">
+							<i class="fa fa-plus"></i> 新增文档
+						</button>
+					</div>
 				</form>
 			</div>
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="table-responsive">
-					<div class="table-bar">
-						<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#docList">
-                            <i class="fa fa-plus"></i> 新增文档
-                        </button>
-					</div>
+					<!--<div class="table-bar">-->
+						<!--<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#docList">-->
+                            <!--<i class="fa fa-plus"></i> 新增文档-->
+                        <!--</button>-->
+					<!--</div>-->
 					<table class="table table-bordered table-hover" data-filter="#filter">
 						<tr>
 							<th>序号</th>
@@ -110,7 +120,7 @@
 							</div>
 						</div>
 						<div class="file-item">
-							<label>上传文件</label>
+							<label style="padding-right: 31px;text-indent: 4px;">上传文件</label>
 							<div class="form-group">
 								<div class="wid-100">
 									<input id="uploadfile" type="file" name="file">
