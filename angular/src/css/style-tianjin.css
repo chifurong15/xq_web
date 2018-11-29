@@ -11,6 +11,12 @@ body {
     overflow: hidden;
     font-family: "Microsoft Yahei", Verdana, Simsun, "Segoe UI Web Light", "Segoe UI Light", "Segoe UI Web Regular", "Segoe UI", "Segoe UI Symbol", "Helvetica Neue", Arial;
 }
+.input-short{
+    /*width: 175px!important;*/
+}
+.m-n .panel-body{
+    padding: 0 15px 15px;
+}
 #logo:hover,#logo:active{
     color: #fff;
 }
