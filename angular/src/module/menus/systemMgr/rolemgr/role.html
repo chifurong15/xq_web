@@ -1,18 +1,23 @@
 
 <div class="wrapper-md" ng-controller="roleController" ng-init="init()">
+  <div class="panel panel-default m-n">
+    <div class="panel-body" style="position: relative;">
+      <span class="tag">角色设置</span><span class="tag-right"></span>
+    </div>
+  </div>
   <div class="panel panel-default m-all-0">
       <div class="panel-body">
         <form method="get">
           <div class="form-inline">
-            <button class="btn btn-primary" ng-click="addRole()">
+            <button class="btn btn-primary fr" ng-click="addRole()">
                <i class="fa fa-plus"></i>新增角色
             </button>
-            <div class="input-group" style="margin-left:20px;">
+            <div class="input-group">
               <select class="input-sm form-control w-sm inline v-middle" style="width:100px;" ng-model="x" ng-options="m.name for m in roles" ng-init="roleType()" ng-change='roleTypeFind(x)'>
                 <option value="">-- 请选择 --</option>
               </select>
             </div>
-            <div class="form-group" style="float:right;margin-right:20px;">
+            <div class="form-group">
               <input id="find" type="text" class="form-control" placeholder="输入角色名" ng-model="name" style="margin-right:10px;">
               <button type="submit" class="btn btn-primary" ng-click="find()">
                 <i class="fa fa-search"></i>搜索

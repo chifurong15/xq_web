@@ -1,74 +1,83 @@
 
 <div class="wrapper-md" ng-controller="sysMgrMenuManagerController" ng-init="init()">
-	<div class="col-md-2">
-        <div class="panel panel-default m-all-0 ztree-box ">
-            <div class="panel-body">
-            	<div class="panel-heading">
-			        菜单列表
-			    </div>
-                <ul id="tree1" class="ztree">
-	    		</ul>
-            </div>
-        </div>
-    </div>
-	<div class="menu-management col-sm-10">
-	  <div class="panel panel-default m-all-0">
-	      <div class="panel-body">
-	        <form method="get">
-	          <div class="form-inline">
-	            <button class="btn btn-primary" ng-click="addMenu()">
-					<i class="fa fa-plus"></i>菜单管理
-				</button>
-				<div class="form-group" style="float:right;margin-right:20px;">
-					<input id="find" type="text" class="form-control" placeholder="输入菜单名" ng-model="name" style="margin-right:10px;">
-					<button type="submit" class="btn btn-primary" ng-click="find()">
-						<i class="fa fa-search"></i>搜索
-					</button>
+	<div class="panel panel-default m-n">
+		<div class="panel-body" style="position: relative;">
+			<span class="tag">菜单设置</span><span class="tag-right"></span>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="col-md-2">
+				<div class="panel panel-default m-all-0 ztree-box ">
+					<div class="panel-body">
+						<div class="panel-heading">
+							菜单列表
+						</div>
+						<ul id="tree1" class="ztree">
+						</ul>
+					</div>
 				</div>
-	        </div>
-	      </form>
-	    </div>
-	  </div>
-  	  <div class="panel panel-default">
-        <div class="panel-body">
-		    <div class="table-responsive">
-		      <table class="table table-bordered table-hover">
-		        <thead>
-		          <tr>
-		            <th>序号</th>
-		            <th>功能标题</th>
-		            <th>状态</th>
-		            <th>功能路径</th>
-		            <th>样式</th>
-		            <th>备注</th>
-		            <th>操作</th>
-		          </tr>
-		        </thead>
-		        <tbody>
-		         <tr ng-repeat="menu in menuList" ng-init="index=$index+1">
-		            <td>{{index + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
-		            <td>{{menu.name}}</td>
-		            <td>
-		            	<span class="label bg-success" title="Active" ng-if="menu.status === 1">激活</span>
-		                <span class="label bg-danger" title="InActive" ng-if="menu.status === 2">禁用</span>
-		            </td>
-		            <td>{{menu.funcurl}}</td>
-		            <td>{{menu.ico}}</td>
-		            <td>{{menu.description}}</td>
-		            <td>
-		            	<button ng-click="cancel(menu.id)" ng-if="menu.status === 1" class='zxss btn btn-primary btn-xs'>禁用</button>
-              		  	<button ng-click="cancel(menu.id)" ng-if="menu.status === 2" class='zxss btn btn-primary btn-xs'>激活</button>&nbsp
-		                <a class="btn btn-primary btn-xs" ng-click="revise(menu.id)"><i class="fa fa-edit" title="修改"></i></a>
-		                <a class="btn btn-primary btn-xs" ng-click="deletes(menu.id)"><i class="fa fa-trash-o" title="删除"></i></a>
-		                <a class="btn btn-primary btn-xs" ng-click="up(menu.id)"><i class="fa  fa-arrow-up" title="上移"></i></a>
-		                <a class="btn btn-primary btn-xs" ng-click="down(menu.id)"><i class="fa  fa-arrow-down" title="下移"></i></a>
-		            </td>
-		          </tr>
-		        </tbody>
-		      </table>
-		    </div>
-		    <tm-pagination conf="paginationConf"></tm-pagination>
-		  </div>
+			</div>
+			<div class="menu-management col-sm-10">
+			  <div class="panel panel-default m-all-0">
+				  <div class="panel-body">
+					<form method="get">
+					  <div class="form-inline">
+						<button class="btn btn-primary" ng-click="addMenu()">
+							<i class="fa fa-plus"></i>菜单管理
+						</button>
+						<div class="form-group" style="float:right;margin-right:20px;">
+							<input id="find" type="text" class="form-control" placeholder="输入菜单名" ng-model="name" style="margin-right:10px;">
+							<button type="submit" class="btn btn-primary" ng-click="find()">
+								<i class="fa fa-search"></i>搜索
+							</button>
+						</div>
+					</div>
+				  </form>
+				</div>
+			  </div>
+			  <div class="panel panel-default">
+				<div class="panel-body">
+					<div class="table-responsive">
+					  <table class="table table-bordered table-hover">
+						<thead>
+						  <tr>
+							<th>序号</th>
+							<th>功能标题</th>
+							<th>状态</th>
+							<th>功能路径</th>
+							<th>样式</th>
+							<th>备注</th>
+							<th>操作</th>
+						  </tr>
+						</thead>
+						<tbody>
+						 <tr ng-repeat="menu in menuList" ng-init="index=$index+1">
+							<td>{{index + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
+							<td>{{menu.name}}</td>
+							<td>
+								<span class="label bg-success" title="Active" ng-if="menu.status === 1">激活</span>
+								<span class="label bg-danger" title="InActive" ng-if="menu.status === 2">禁用</span>
+							</td>
+							<td>{{menu.funcurl}}</td>
+							<td>{{menu.ico}}</td>
+							<td>{{menu.description}}</td>
+							<td>
+								<button ng-click="cancel(menu.id)" ng-if="menu.status === 1" class='zxss btn btn-primary btn-xs'>禁用</button>
+								<button ng-click="cancel(menu.id)" ng-if="menu.status === 2" class='zxss btn btn-primary btn-xs'>激活</button>&nbsp
+								<a class="btn btn-primary btn-xs" ng-click="revise(menu.id)"><i class="fa fa-edit" title="修改"></i></a>
+								<a class="btn btn-primary btn-xs" ng-click="deletes(menu.id)"><i class="fa fa-trash-o" title="删除"></i></a>
+								<a class="btn btn-primary btn-xs" ng-click="up(menu.id)"><i class="fa  fa-arrow-up" title="上移"></i></a>
+								<a class="btn btn-primary btn-xs" ng-click="down(menu.id)"><i class="fa  fa-arrow-down" title="下移"></i></a>
+							</td>
+						  </tr>
+						</tbody>
+					  </table>
+					</div>
+					<tm-pagination conf="paginationConf"></tm-pagination>
+				  </div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

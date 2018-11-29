@@ -1,8 +1,12 @@
 <div ng-controller="superviseReportMgtCtrl" ng-init="init()">
-    <div class="bg-light lter b-b wrapper-md">
-        <h1 class="m-n font-thin h3">监督举报</h1>
-    </div>
+
     <div class="wrapper-md">
+		<div class="panel panel-default m-n">
+			<div class="panel-body" style="position: relative;">
+				<span class="tag">社会监督举报</span><span class="tag-right"></span>
+			</div>
+		</div>
+
         <div class="panel panel-default m-all-0">
 			<div class="panel-body">
 				<form class="form-patrolMgt form-inline" method="get">
@@ -46,17 +50,17 @@
 					<button type="button" class="btn btn-primary m-l-15" ng-click="getReSet()">
                         <i class="fa fa-refresh"></i>重置
                     </button>
+					<div class="input-group fr">
+						<button type="button" class="btn btn-primary" ng-click="getReachAdd()">
+							<i class="fa fa-plus"></i>新增
+						</button>
+					</div>
 				</form>
 			</div>
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="table-responsive table-jm">
-					<div class="table-bar">
-						<button type="button" class="btn btn-primary" ng-click="getReachAdd()">
-                            <i class="fa fa-plus"></i>新增
-                        </button>
-					</div>
 					<table class="table table-bordered table-hover table-patrolMgt" data-filter="#filter">
 						<thead>
 							<tr>

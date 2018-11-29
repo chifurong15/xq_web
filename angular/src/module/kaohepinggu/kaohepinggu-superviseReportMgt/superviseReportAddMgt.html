@@ -1,232 +1,239 @@
 <div ng-controller="superviseReportAddMgtCtrl" ng-init="init()">
-    <div class="bg-light lter b-b wrapper-md">
-        <h1 class="m-n font-thin h3">监督举报新增</h1>
-    </div>
-    <div class="panel panel-default m-all-0">
-        <div class="panel-body pos-rlt">
-            <form class="form-inline form-jm">
-                <div class="form-item">
-                    <label>举报日期</label>
-                    <div class="input-group date date_picker date-tj" id="beginTime">
-                        <input type="text" class="form-control input-short-o" ng-model="beginTime"/>
-                        <span class="input-group-addon">
+
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">社会监督举报新增</span><span class="tag-right"></span>
+            </div>
+        </div>
+        <div class="panel panel-default m-all-0">
+            <div class="panel-body pos-rlt">
+                <form class="form-inline form-jm">
+                    <div class="form-item">
+                        <label>举报日期</label>
+                        <div class="input-group date date_picker date-tj" id="beginTime">
+                            <input type="text" class="form-control input-short-o" ng-model="beginTime"/>
+                            <span class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </span>
+                        </div>
                     </div>
-                </div>
-                <div class="form-item">
-                    <label>限制日期</label>
-                    <div class="input-group date date_picker date-tj" id="overtime">
-                        <input type="text" class="form-control input-short-o" ng-model="overtime"/>
-                        <span class="input-group-addon">
+                    <div class="form-item">
+                        <label>限制日期</label>
+                        <div class="input-group date date_picker date-tj" id="overtime">
+                            <input type="text" class="form-control input-short-o" ng-model="overtime"/>
+                            <span class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </span>
+                        </div>
                     </div>
-                </div>
-                <div class="form-item">
-                    <label>行政区划</label>
-                    <input ng-model="regionName" type="text" class="form-control input-short-o" readonly="readonly"
-                           ng-click="getRegionShow()">
-                    <a class="input-group-addon" ng-click="getRegionShow()"><i class="fa fa-search"></i></a>
-                </div>
-                <div class="form-item">
-                    <label>河段名称</label>
-                    <input type="text" class="form-control input-short" ng-model="riverName" lay-verify="required"/>
-                </div>
-                <br/>
-                <div class="form-item">
-                    <label>举报人员</label>
-                    <input type="text" class="form-control input-short" ng-model="reportor" lay-verify="required"/>
-                </div>
-                <div class="form-item">
-                    <label>联系电话</label>
-                    <input type="text" class="form-control input-short" ng-model="contactType" lay-verify="required"/>
-                </div>
-                <div class="form-item">
-                    <label>举报位置</label>
-                    <input type="text" class="form-control input-short" ng-model="problemPosition"
-                           lay-verify="required"/>
-                </div>
-                <br/>
-                <div class="form-item remarkInfo">
-                    <div class="dis-i-blc">
-                        <label>举报问题</label>
+                    <div class="form-item">
+                        <label>行政区划</label>
+                        <input ng-model="regionName" type="text" class="form-control input-short-o" readonly="readonly"
+                               ng-click="getRegionShow()">
+                        <a class="input-group-addon" ng-click="getRegionShow()"><i class="fa fa-search"></i></a>
                     </div>
-                    <div class="p-l-0 wid-100" style="margin-left: 95px">
+                    <div class="form-item">
+                        <label>河段名称</label>
+                        <input type="text" class="form-control input-short" ng-model="riverName" lay-verify="required"/>
+                    </div>
+                    <br/>
+                    <div class="form-item">
+                        <label>举报人员</label>
+                        <input type="text" class="form-control input-short" ng-model="reportor" lay-verify="required"/>
+                    </div>
+                    <div class="form-item">
+                        <label>联系电话</label>
+                        <input type="text" class="form-control input-short" ng-model="contactType" lay-verify="required"/>
+                    </div>
+                    <div class="form-item">
+                        <label>举报位置</label>
+                        <input type="text" class="form-control input-short" ng-model="problemPosition"
+                               lay-verify="required"/>
+                    </div>
+                    <br/>
+                    <div class="form-item remarkInfo">
+                        <div class="dis-i-blc">
+                            <label>举报问题</label>
+                        </div>
+                        <div class="p-l-0 wid-100" style="margin-left: 95px">
                         <textarea class="form-control textareaH" ng-model="reportProblem" ng-change="checkRemark()"
                                   rows="8" maxlength="512"></textarea>
-                        <p class="m-t-10">还可输入{{countNum}}个字</p>
+                            <p class="m-t-10">还可输入{{countNum}}个字</p>
+                        </div>
                     </div>
+                    <br/>
+                    <div class="form-item">
+                        <label>问题附件：</label>
+                        <button class="btn btn-info" ng-click="getUploadFile(1)"><i class="fa fa-css3"></i>查看附件</button>
+                    </div>
+                    <br/>
+                    <div class="form-item">
+                        <label>处理意见：</label>
+                        <button class="btn btn-primary" ng-click="getUploadFile(2)"><i class="fa fa-css3"></i>查看附件</button>
+                    </div>
+                    <br/>
+                    <div class="form-item">
+                        <label>处理结果：</label>
+                        <button class="btn btn-success" ng-click="getUploadFile(3)"><i class="fa fa-css3"></i>查看附件</button>
+                    </div>
+                    <br/>
+                    <div class="form-item">
+                        <label>处理状态</label>
+                        <select ng-model="status" ng-options="st as st.name for st in statusList"
+                                ng-change="getStatusChange(status.id)" class="form-control select-short">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <label>举报人评价</label>
+                        <select ng-model="assess" ng-options="se.id as se.name for se in assessList"
+                                ng-change="getAssessChange(assess.id)" class="form-control select-short">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <label>举报来源</label>
+                        <input type="text" class="form-control input-short" ng-model="source" lay-verify="required"/>
+                    </div>
+                </form>
+            </div>
+            <div class="panel-footer m-b-10">
+                <div class="btn-box">
+                    <button type="submit" class="btn btn-primary" ng-click="getSubmit()">
+                        <i class="fa fa-check"></i>确定
+                    </button>
+                    <button type="submit" class="btn btn-default" ng-click="getBack()">
+                        <i class="fa fa-reply"></i>返回
+                    </button>
                 </div>
-                <br/>
-                <div class="form-item">
-                    <label>问题附件：</label>
-                    <button class="btn btn-info" ng-click="getUploadFile(1)"><i class="fa fa-css3"></i>查看附件</button>
-                </div>
-                <br/>
-                <div class="form-item">
-                    <label>处理意见：</label>
-                    <button class="btn btn-primary" ng-click="getUploadFile(2)"><i class="fa fa-css3"></i>查看附件</button>
-                </div>
-                <br/>
-                <div class="form-item">
-                    <label>处理结果：</label>
-                    <button class="btn btn-success" ng-click="getUploadFile(3)"><i class="fa fa-css3"></i>查看附件</button>
-                </div>
-                <br/>
-                <div class="form-item">
-                    <label>处理状态</label>
-                    <select ng-model="status" ng-options="st as st.name for st in statusList"
-                            ng-change="getStatusChange(status.id)" class="form-control select-short">
-                        <option value="">请选择</option>
-                    </select>
-                </div>
-                <div class="form-item">
-                    <label>举报人评价</label>
-                    <select ng-model="assess" ng-options="se.id as se.name for se in assessList"
-                            ng-change="getAssessChange(assess.id)" class="form-control select-short">
-                        <option value="">请选择</option>
-                    </select>
-                </div>
-                <div class="form-item">
-                    <label>举报来源</label>
-                    <input type="text" class="form-control input-short" ng-model="source" lay-verify="required"/>
-                </div>
-            </form>
-        </div>
-        <div class="panel-footer m-b-10">
-            <div class="btn-box">
-                <button type="submit" class="btn btn-primary" ng-click="getSubmit()">
-                    <i class="fa fa-check"></i>确定
-                </button>
-                <button type="submit" class="btn btn-default" ng-click="getBack()">
-                    <i class="fa fa-reply"></i>返回
-                </button>
             </div>
         </div>
-    </div>
-    <!--描述：所属区域树-->
-    <div class="modal fade" id="regionTreeModal" role="dialog_region" data-backdrop="static">
-        <div class="modal-dialog modal-jm " role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">选择区域</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group">
-                        <input type="text" ng-model="regionSearchName" class="form-control" placeholder="请输入区域名称">
-                        <span class="input-group-btn">
+        <!--描述：所属区域树-->
+        <div class="modal fade" id="regionTreeModal" role="dialog_region" data-backdrop="static">
+            <div class="modal-dialog modal-jm " role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">选择区域</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <input type="text" ng-model="regionSearchName" class="form-control" placeholder="请输入区域名称">
+                            <span class="input-group-btn">
 				        	<button class="btn btn-default" type="button" ng-click="getSelectRegion()">查询</button>
 				        </span>
+                        </div>
+                        <ul id="regionTreeContainer" class="ztree regionTreeContent"></ul>
                     </div>
-                    <ul id="regionTreeContainer" class="ztree regionTreeContent"></ul>
-                </div>
-                <div class="modal-footer">
-                    <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getModalOk()">
-                        <i class="fa fa-check"></i>
-                        <span>确 定</span>
-                    </a>
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getModalOk()">
+                            <i class="fa fa-check"></i>
+                            <span>确 定</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--描述：附件-->
-    <div class="modal fade" id="coverModal1" data-backdrop="static">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        <li class="fa fa-remove"></li>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <div class="wid-100 announcementCoverPanel">
-                                <input class="uploadfile" type="file" name="file">
+        <!--描述：附件-->
+        <div class="modal fade" id="coverModal1" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <li class="fa fa-remove"></li>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <div class="wid-100 announcementCoverPanel">
+                                    <input class="uploadfile" type="file" name="file">
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
-                .
-                <div class="modal-footer">
-                    <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload(1)">
-                        <i class="fa fa-check"></i>
-                        <span>确定</span>
-                    </a>
-                    <a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
-                        <i class="fa fa-reply"></i>
-                        <span>取消</span>
-                    </a>
+                        </form>
+                    </div>
+                    .
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload(1)">
+                            <i class="fa fa-check"></i>
+                            <span>确定</span>
+                        </a>
+                        <a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
+                            <i class="fa fa-reply"></i>
+                            <span>取消</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--描述：附件-->
-    <div class="modal fade" id="coverModal2" data-backdrop="static">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        <li class="fa fa-remove"></li>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <div class="wid-100 announcementCoverPanel">
-                                <input class="uploadfile" type="file" name="file">
+        <!--描述：附件-->
+        <div class="modal fade" id="coverModal2" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <li class="fa fa-remove"></li>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <div class="wid-100 announcementCoverPanel">
+                                    <input class="uploadfile" type="file" name="file">
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
-                .
-                <div class="modal-footer">
-                    <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload(2)">
-                        <i class="fa fa-check"></i>
-                        <span>确定</span>
-                    </a>
-                    <a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
-                        <i class="fa fa-reply"></i>
-                        <span>取消</span>
-                    </a>
+                        </form>
+                    </div>
+                    .
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload(2)">
+                            <i class="fa fa-check"></i>
+                            <span>确定</span>
+                        </a>
+                        <a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
+                            <i class="fa fa-reply"></i>
+                            <span>取消</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--描述：附件-->
-    <div class="modal fade" id="coverModal3" data-backdrop="static">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        <li class="fa fa-remove"></li>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <div class="wid-100 announcementCoverPanel">
-                                <input class="uploadfile" type="file" name="file">
+        <!--描述：附件-->
+        <div class="modal fade" id="coverModal3" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <li class="fa fa-remove"></li>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <div class="wid-100 announcementCoverPanel">
+                                    <input class="uploadfile" type="file" name="file">
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload(3)">
-                        <i class="fa fa-check"></i>
-                        <span>确定</span>
-                    </a>
-                    <a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
-                        <i class="fa fa-reply"></i>
-                        <span>取消</span>
-                    </a>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload(3)">
+                            <i class="fa fa-check"></i>
+                            <span>确定</span>
+                        </a>
+                        <a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
+                            <i class="fa fa-reply"></i>
+                            <span>取消</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
+
 </div>
 <script>
     $(".uploadfile").fileinput({

@@ -1,11 +1,20 @@
 <div class="wrapper-md" ng-controller="userListController" ng-init="init()">
+    <div class="panel panel-default m-n">
+        <div class="panel-body" style="position: relative;">
+            <span class="tag">用户列表</span><span class="tag-right"></span>
+        </div>
+    </div>
+
     <div class="panel panel-default m-all-0">
         <div class="panel-body">
             <form method="get">
                 <div class="form-inline">
-                    <button type="submit" class="btn btn-primary" ng-click="addUser()">
-                        <i class="fa fa-plus"></i>新增用户
-                    </button>
+                    <div class="input-group fr">
+                        <button type="submit" class="btn btn-primary" ng-click="addUser()">
+                            <i class="fa fa-plus"></i>新增用户
+                        </button>
+                    </div>
+
                     <div class="input-group" style="margin-left:20px;">
                         <select class="input-sm form-control w-sm inline v-middle" style="width:140px;" ng-model="x"
                                 ng-options="m.name for m in users" ng-init="userType()" ng-change='userTypeFind(x)'>
