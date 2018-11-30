@@ -1,0 +1,16 @@
+{
+"data":[
+    {
+		"statusName": "启用",
+		"statusValue": 1,
+		"id": 1
+	},
+	{
+		"statusName": "禁用",
+		"statusValue": 2,
+		"id": 2
+	}
+     ],
+	"resCode":1,
+	"resMsg":"Success"
+}

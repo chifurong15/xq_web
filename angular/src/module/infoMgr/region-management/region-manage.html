@@ -1,0 +1,246 @@
+<div ng-controller="imRegion" ng-init="init()">
+	<!--<div class="bg-light lter b-b wrapper-md">
+		<h1 class="m-n font-thin h3">行政区划</h1>
+	</div>-->
+	<div class="wrapper-md">
+		<div class="row">
+			<div class="panel panel-default m-all-0">
+				<div class="panel-body">
+					<div class="col-md-3">
+						<div class="panel panel-default m-all-0 ztree-box">
+							<div class="panel-body" style="height: 100%;">
+								<ul id="regionTreeContainer" class="ztree" style="height: 100%;"></ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-9 tab1">
+						<div class="panel panel-default m-all-0">
+							<div class="panel-body" style="height: 100%;">
+								<form class="form-inline" method="get">
+									<div class="form-item">
+										<label>名称</label>
+										<input type="text" class="form-control input-short" ng-model="areaNameSearch" />
+									</div>
+									<button type="submit" class="btn btn-primary" ng-click="find()">
+                                <i class="fa fa-search"></i>搜索
+                            </button>
+								</form>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="table-responsive">
+									<div class="table-bar">
+										<button type="button" class="btn btn-primary" ng-click="addRegion()"><i
+                                        class="fa fa-plus"></i>新增
+                                </button>
+									</div>
+									<table class="table table-bordered table-hover" data-filter="#filter">
+										<tr class="wid-100">
+											<th class="wid-5">序号</th>
+											<th class="wid-10">名称</th>
+											<th class="wid-15">上级行政区划</th>
+											<th class="wid-15">行政编码</th>
+											<th class="wid-20">全称</th>
+											<th class="wid-10">级别</th>
+											<th class="wid-25">操作</th>
+										</tr>
+										<tr ng-repeat="module in moduleList" ng-init="index=$index+1">
+											<td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{index +(paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
+											<td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{module.areaName}}</td>
+											<td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{module.parentName}}</td>
+											<td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{module.areaCode}}</td>
+											<td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{module.fullName}}</td>
+											<td ng-class-odd="'active'" ng-class-even="'bg-FFF'" ng-if="module.grade == 1">省级</td>
+											<td ng-class-odd="'active'" ng-class-even="'bg-FFF'" ng-if="module.grade == 2">市级</td>
+											<td ng-class-odd="'active'" ng-class-even="'bg-FFF'" ng-if="module.grade == 3">县级</td>
+											<td ng-class-odd="'active'" ng-class-even="'bg-FFF'" ng-if="module.grade == 4">乡级</td>
+											<td ng-class-odd="'active'" ng-class-even="'bg-FFF'" ng-if="module.grade == 5">村级</td>
+											<!--   <td ng-class-odd="'active'" ng-class-even="'bg-FFF'">{{module.createTime}}</td>-->
+											<td ng-class-odd="'active'" ng-class-even="'bg-FFF'" class="td-tool">
+												<a class="btn btn-primary btn-xs" ng-click="regionDetail(module)"><i class="fa fa-info" title="详细"></i></a>
+												<a class="btn btn-primary btn-xs" ng-click="regionEdit(module)"><i class="fa fa-edit" title="修改"></i></a>
+												<a class="btn btn-primary btn-xs" ng-click="moduleDelete(module.id,module.areaCode);"><i class="fa fa-trash-o" title="删除"></i></a>
+												<a class="btn btn-primary btn-xs" ng-hide="moveStatus" ng-click="move(module.id,1,module.areaCode);"><i ng-hide="moveStatus" class="fa fa-chevron-up" title="上移"></i></a>
+												<a class="btn btn-primary btn-xs" ng-hide="moveStatus" ng-click="move(module.id,0,module.areaCode);"><i ng-hide="moveStatus" class="fa fa-chevron-down" title="下移"></i></a>
+											</td>
+										</tr>
+									</table>
+
+								</div>
+								<tm-pagination conf="paginationConf"></tm-pagination>
+							</div>
+						</div>
+					</div>
+					<!-- 新增-->
+					<div class="col-md-9 tab2" style="background: #fff; display:none">
+						<form id="myform" method="post" action="" class="form-inline" novalidate="novalidate">
+
+							<div class="form-item">
+								<label>行政区划名称</label>
+								<input type="text" class="form-control input-short" ng-model="areaName" />
+								<span class="required">*</span>
+							</div>
+							<div class="form-item">
+								<label>上级行政区划</label>
+								<input type="int" class="form-control input-short" ng-model="regionName" readonly="readonly" />
+							</div>
+							<div class="form-item" ng-if="greadShow()">
+								<label>行政区划等级</label>
+								<input type="text" class="form-control input-short" ng-model="gradeName" readonly="readonly" />
+							</div>
+							<div ng-hide="townHide" class="form-item">
+								<label>城乡分类代码</label>
+								<select ng-init="townType()" ng-model="town_Type" ng-options="tt.dictName for tt in townTypes" ng-change="townType_Change(town_Type)" class="form-control select-short"></select>
+							</div>
+							<div class="form-item">
+								<label>经度</label>
+								<input type="text" class="form-control input-short" ng-model="regionLongitude" />
+								<span class="required">*</span>
+							</div>
+							<div class="form-item">
+								<label>纬度</label>
+								<input type="text" class="form-control input-short" ng-model="regionLatitude" />
+								<span class="required">*</span>
+							</div>
+
+							<div class="form-item">
+								<label>描述</label>
+								<textarea id="remark" class="textarea-long" rows="3" ng-model="remark"></textarea>
+							</div>
+
+							<div class="btn-box">
+								<div class="btn-inline" style="margin-left: 90px">
+									<a ng-click="add_data()" class="btn btn-primary btn-o" ondragstart="return false;">
+										<i class="fa fa-plus"></i>
+										<span>新增</span>
+									</a>
+									<a ng-click="returnToList()" class="btn btn-default btn-o" ondragstart="return false;">
+										<i class="fa fa-reply"></i>
+										<span>返回</span>
+									</a>
+								</div>
+							</div>
+						</form>
+					</div>
+					<!--详情页面-->
+					<div class="col-md-9 tab3" style="background: #fff; display:none">
+						<form id="myform" method="post" action="" class="form-inline" novalidate="novalidate">
+
+							<div class="form-item">
+								<label>行政区划名称</label>
+								<input type="text" class="form-control input-short" ng-model="areaNameDetail" readonly/>
+								<span class="required">*</span>
+							</div>
+							<div class="form-item">
+								<label>编码</label>
+								<input type="text" class="form-control input-short" ng-model="areaCodeDetail" readonly />
+							</div>
+							<div class="form-item">
+								<label>级别</label>
+								<!--<select ng-init="regionType()" ng-model="region_type.dictValue" ng-options="x.dictValue as x.dictName for x in rTypes" ng-change="region_Change(region_type)" class="form-control select-short" readonly></select>-->
+								<input type="text" class="form-control input-short" ng-if="gradeDetail == 1" value="省级" readonly/>
+								<input type="text" class="form-control input-short" ng-if="gradeDetail == 2" value="市级" readonly/>
+								<input type="text" class="form-control input-short" ng-if="gradeDetail == 3" value="县级" readonly/>
+								<input type="text" class="form-control input-short" ng-if="gradeDetail == 4" value="乡级" readonly/>
+								<input type="text" class="form-control input-short" ng-if="gradeDetail == 5" value="村级" readonly/>
+
+							</div>
+
+							<div ng-hide="townDetailHide" class="form-item">
+								<label>城乡分类代码</label>
+								<input type="text" class="form-control input-short" ng-model="townTypeName" readonly/>
+							</div>
+
+							<div class="form-item">
+								<label>经度</label>
+								<input type="text" class="form-control input-short" ng-model="longitudeDetail" readonly/>
+								<span class="required">*</span>
+							</div>
+							<div class="form-item">
+								<label>纬度</label>
+								<input type="text" class="form-control input-short" ng-model="latitudeDetail" readonly/>
+								<span class="required">*</span>
+							</div>
+
+							<div class="form-item">
+								<label>创建时间</label>
+								<input type="text" class="form-control input-short" ng-model="createTimeDetail" readonly/>
+							</div>
+							<div class="form-item">
+								<label>全称</label>
+								<textarea class="form-control textarea-long" rows="1" ng-model="fullNameDetail" readonly></textarea>
+							</div>
+							<div class="form-item">
+								<label>描述</label>
+								<textarea id="remarkUpdate" class="form-control textarea-long" rows="3" ng-model="remarkDetail" readonly></textarea>
+							</div>
+							<div class="btn-box">
+								<div class="btn-inline" style="margin-left: 90px">
+									<a ng-click="returnToList()" class="btn btn-default btn-o" ondragstart="return false;">
+										<i class="fa fa-reply"></i>
+										<span>返回</span>
+									</a>
+								</div>
+							</div>
+						</form>
+					</div>
+					<!-- 更新-->
+					<div class="col-md-9 tab4" style="background: #fff;display:none">
+						<form id="myform" method="post" action="" class="form-inline" novalidate="novalidate">
+
+							<div class="form-item">
+								<label>行政区划名称</label>
+								<input type="text" class="form-control input-short" ng-model="areaNameUpdate" />
+								<span class="required">*</span>
+							</div>
+
+							<div ng-hide="townDetailHide" class="form-item">
+								<label>城乡分类代码</label>
+								<input type="text" class="form-control input-short" ng-model="townTypeName" readonly/>
+							</div>
+
+							<div class="form-item">
+								<label>经度</label>
+								<input type="text" class="form-control input-short" ng-model="longitudeUpdate" />
+								<span class="required">*</span>
+							</div>
+							<div class="form-item">
+								<label>纬度</label>
+								<input type="text" class="form-control input-short" ng-model="latitudeUpdate" />
+								<span class="required">*</span>
+							</div>
+							<div class="form-item">
+								<label>级别</label>
+								<!--<select ng-init="regionType()" ng-model="region_type.dictValue" ng-options="x.dictValue as x.dictName for x in rTypes" ng-change="region_Change(region_type)" class="form-control select-short" readonly></select>-->
+								<input type="text" class="form-control input-short" ng-if="gradeUpdate == 1" value="省级" readonly/>
+								<input type="text" class="form-control input-short" ng-if="gradeUpdate == 2" value="市级" readonly/>
+								<input type="text" class="form-control input-short" ng-if="gradeUpdate == 3" value="县级" readonly/>
+								<input type="text" class="form-control input-short" ng-if="gradeUpdate == 4" value="乡级" readonly/>
+								<input type="text" class="form-control input-short" ng-if="gradeUpdate == 5" value="村级" readonly/>
+
+							</div>
+							<div class="form-item">
+								<label>描述</label>
+								<textarea id="remark" class="textarea-long" rows="3" ng-model="remarkUpdate"></textarea>
+							</div>
+
+							<div class="btn-box">
+								<div class="btn-inline" style="margin-left: 90px">
+									<a ng-click="update_data()" class="btn btn-primary btn-o" ondragstart="return false;">
+										<i class="fa fa-plus"></i>
+										<span>更新</span>
+									</a>
+									<a ng-click="returnToList()" class="btn btn-default btn-o" ondragstart="return false;">
+										<i class="fa fa-reply"></i>
+										<span>返回</span>
+									</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
