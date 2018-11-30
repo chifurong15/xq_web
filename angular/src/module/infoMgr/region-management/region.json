@@ -1,0 +1,30 @@
+{
+"data":[
+	{
+		"dictName": "省级",
+		"dictValue": 1,
+		"id": 1
+	},
+	{
+		"dictName": "市级",
+		"dictValue": 2,
+		"id": 2
+	},
+	{
+		"dictName": "县级",
+		"dictValue": 3,
+		"id": 3
+	},
+	{
+		"dictName": "镇级",
+		"dictValue": 4,
+		"id": 4
+	},
+	{
+		"dictName": "乡级",
+		"dictValue": 5,
+		"id": 5
+	}],
+	"resCode":1,
+	"resMsg":"Success"
+}
