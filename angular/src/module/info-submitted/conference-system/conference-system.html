@@ -1,0 +1,186 @@
+<div class="conferenceCtrl" ng-controller="conferenceCtrl" ng-init="init()">
+    <div class="wrapper-md ">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">会议制度执行情况</span><span class="tag-right"></span>
+            </div>
+        </div>
+        <div class="panel panel-default m-all-0">
+            <div class="panel-body">
+                <form method="get">
+                    <div class="form-inline">
+                        <div class="form-item">
+                            <label>开始时间</label>
+                            <div class="input-group date date_picker" id="startTime">
+                                <input type="text" class="form-control input-short-o" ng-model="startTime">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <label>结束时间</label>
+                            <div class="input-group date date_picker" id="endTime">
+                                <input type="text" class="form-control input-short-o" ng-model="endTime">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <label>行政区域</label>
+                            <input ng-model="regionName" type="text" class="form-control input-short-o" readonly="readonly" ng-click="getRegionShow()">
+                            <a class="input-group-addon" ng-click="getRegionShow()"><i class="fa fa-search"></i></a>
+                        </div>
+                        <button type="submit" ng-click="searchData()" class="btn btn-primary">
+                            <i class="fa fa-search"></i>搜索
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <div class="form-inline">
+                        <div class="input-group fr">
+                            <button type="button" class="btn btn-primary btn-sm" ng-click="add(1)" style="margin: 0 5px;">
+                                <i class="fa fa-plus"></i> 新增
+                            </button>
+                            <button type="button" class="btn btn-info btn-sm" ng-click="export()">
+                                <i class="fa-sign-in"></i> 导出
+                            </button>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-hover" data-filter="#filter">
+                        <tr>
+                            <th style="width: 5%;">序号</th>
+                            <th style="width: 15%">行政区域</th>
+                            <th style="width: 10%">会议主持角色</th>
+                            <th style="width: 10%">姓名</th>
+                            <th style="width: 10%">职务</th>
+                            <th style="width: 10%">会议类别</th>
+                            <th style="width: 10%">会议时间</th>
+                            <th style="width: 10%">会议研究主要内容</th>
+                            <th style="width: 15%">操作</th>
+                        </tr>
+                        <tr ng-repeat="module in moduleList" style="cursor:pointer;">
+                            <td>{{$index+1}}</td>
+                            <td>{{module.region}}</td>
+                            <td>{{module.role}}</td>
+                            <td>{{module.name}}</td>
+                            <td>{{module.duty}}</td>
+                            <td>{{module.type}}</td>
+                            <td>{{module.time}}</td>
+                            <td>{{module.content}}</td>
+                            <td>
+                                <a class="btn btn-primary btn-xs" ng-click="add(module.id)"><i class="fa fa-info" title="查看"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-click="report(module.id)"><i class="fa fa-level-up" title="上报"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-click="delete(module.id)"><i class="fa fa-trash-o" title="删除"></i></a>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                <!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+            </div>
+        </div>
+
+        <!--描述：所属区域树-->
+        <div class="modal fade" id="regionTreeModal" role="dialog_region" data-backdrop="static" style="z-index: 99999;">
+            <div class="modal-dialog modal-jm " role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">选择区域</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <input type="text" ng-model="regionSearchName" class="form-control" placeholder="请输入区域名称">
+                            <span class="input-group-btn">
+				        	<button class="btn btn-default" type="button" ng-click="getSelectRegion()">查询</button>
+				        </span>
+                        </div>
+                        <ul id="regionTreeContainer" class="ztree regionTreeContent"></ul>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getModalOk()">
+                            <i class="fa fa-check"></i>
+                            <span>确 定</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 新增会议（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel1">
+                            {{tag}}会议制度执行情况
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-inline">
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">主持角色</font></font></label>
+                                <input type="text" class="form-control input-long" style="float: inherit;width: 410px;">
+                                <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                            </div>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">姓名</font></font></label>
+                                <input type="text" class="form-control input-short">
+                                <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+
+                            </div>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">职务</font></font></label>
+                                <input type="text" class="form-control input-short">
+                            </div>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">会议类别</font></font></label>
+                                <input type="text" class="form-control input-short">
+                            </div>
+                            <div class="form-item">
+                                <label>会议时间</label>
+                                <div class="input-group date date_picker" id="J-Time">
+                                    <input type="text" class="form-control input-short-o" ng-model="time">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                                <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                            </div>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">会议议题</font></font></label>
+                                <input type="text" class="form-control input-long" style="float: inherit">
+                                <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+
+                            </div>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">会议主要研究内容</font></font></label>
+                                <textarea class="form-control" rows="3"></textarea>
+                                <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+
+                            </div>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">备注</font></font></label>
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="save()">保存</button>
+                        <button type="button" class="btn btn-primary" ng-click="submit()">确认上报</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+</div>

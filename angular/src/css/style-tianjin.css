@@ -2261,3 +2261,15 @@ body .c-ffffff a {
     padding: 5px;
     line-height: 24px;
 }
+
+/*会议制度执行情况*/
+
+.conferenceCtrl .input-long{
+    width: 425px;
+}
+.conferenceCtrl .modal-body .form-item{
+    float: left;
+}
+.conferenceCtrl .modal-body textarea{
+    width: 425px;
+}
