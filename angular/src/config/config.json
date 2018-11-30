@@ -712,6 +712,20 @@
       "description": "二级菜单-周动态"
     },
     {
+      "seqId": "8-1",
+      "parentId": "8",
+      "isLeaf": false,
+      "isRoot": true,
+      "name": "工作简报",
+      "menuType": 1,
+      "icon": "fa fa-file-archive-o",
+      "url": "module/info-submitted/work-brief/list/list.html",
+      "requireJS": [
+        "module/info-submitted/work-brief/list/list.js"
+      ],
+      "description": "二级菜单-工作简报"
+    },
+    {
       "seqId": "8-2",
       "parentId": "8",
       "isLeaf": false,
@@ -1370,7 +1384,20 @@
         "module/info-submitted/weekly-dynamic/detail/detail.js"
       ],
       "description": "二级菜单-周动态-周动态详情"
+    },
+    {
+      "seqId": "8-1-1",
+      "parentId": "8",
+      "isLeaf": false,
+      "isRoot": true,
+      "name": "工作简报详情",
+      "menuType": 1,
+      "icon": "fa fa-file-archive-o",
+      "url": "module/info-submitted/work-brief/detail/detail.html",
+      "requireJS": [
+        "module/info-submitted/work-brief/detail/detail.js"
+      ],
+      "description": "二级菜单-工作简报-详情"
     }
-
   ]
 }

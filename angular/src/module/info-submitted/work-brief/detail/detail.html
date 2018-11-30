@@ -1,10 +1,183 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="conferenceCtrl" ng-controller="workBriefDetailCtrl" ng-init="init()">
+    <div class="wrapper-md ">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">工作简报</span><span class="tag-right"></span><span
+                    class="tag-right tag-left"></span><span class="tag tag1">查看</span><span
+                    class="tag-right"></span>
+                <div style="overflow: hidden;">
+                    <button type="button" class="btn btn-primary" ng-click="goBack()"
+                            style="position: absolute;right: 20px;bottom: 20px;">返回
+                    </button>
+                </div>
+            </div>
 
-</body>
-</html>
+        </div>
+        <div class="panel panel-default m-all-0">
+            <div class="panel-body">
+                <form method="get">
+                    <div class="form-inline">
+                        <div class="form-item">
+                            <label>报送状态</label>
+                            <select class="form-control select-short" ng-model="status">
+                                <option value="">全部</option>
+                                <option value="1">已上报</option>
+                                <option value="2">未上报</option>
+                                <option value="3">已退回</option>
+                            </select>
+                        </div>
+                        <div class="form-item">
+                            <label>报送区域</label>
+                            <input ng-model="regionName" type="text" class="form-control input-short-o" readonly="readonly" ng-click="getRegionShow()">
+                            <a class="input-group-addon" ng-click="getRegionShow()"><i class="fa fa-search"></i></a>
+                        </div>
+
+                        <div class="form-item">
+                            <label>是否采纳</label>
+                            <select class="form-control select-short">
+                                <option value="">全部</option>
+                                <option value="1">已采纳</option>
+                                <option value="2">未采纳</option>
+                            </select>
+                        </div>
+                        <button type="submit" ng-click="searchData()" class="btn btn-primary">
+                            <i class="fa fa-search"></i>搜索
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover" data-filter="#filter">
+                        <tr>
+                            <th style="width: 5%;">序号</th>
+                            <th style="width: 15%">报送标题</th>
+                            <th style="width: 10%">报送区域</th>
+                            <th style="width: 10%">报送时间</th>
+                            <th style="width: 10%">报送人</th>
+                            <th style="width: 10%">报送状态</th>
+                            <th style="width: 10%">是否采纳</th>
+                            <th style="width: 15%">操作</th>
+                        </tr>
+                        <tr ng-repeat="module in moduleList" style="cursor:pointer;">
+                            <td>{{$index+1}}</td>
+                            <td>{{module.title}}</td>
+                            <td>{{module.regionName}}</td>
+                            <td>{{module.time}}</td>
+                            <td>{{module.person}}</td>
+                            <td>
+                                <span ng-if="module.status == 1" class="label label-danger">已上报</span>
+                                <span ng-if="module.status == 2" class="label label-success">未上报</span>
+                                <span ng-if="module.status == 3" class="label label-info">已退回</span>
+                            </td>
+                            <td>
+                                <span ng-if="module.isAccept == 1">已采纳</span>
+                                <span ng-if="module.isAccept == 0">未采纳</span>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary btn-xs" ng-click="view(module.id)"><i class="fa fa-info" title="查看"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-click="adopt(1)"><i class="fa fa-thumbs-up" title="采纳"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-click="adopt(2)"><i class="fa fa-thumbs-down" title="不采纳"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-click="delete(module.id)"><i class="fa fa-trash-o" title="退回"></i></a>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                <!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+            </div>
+        </div>
+
+        <!--描述：所属区域树-->
+        <div class="modal fade" id="regionTreeModal" role="dialog_region" data-backdrop="static" style="z-index: 99999;">
+            <div class="modal-dialog modal-jm " role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">选择区域</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <input type="text" ng-model="regionSearchName" class="form-control" placeholder="请输入区域名称">
+                            <span class="input-group-btn">
+				        	<button class="btn btn-default" type="button" ng-click="getSelectRegion()">查询</button>
+				        </span>
+                        </div>
+                        <ul id="regionTreeContainer" class="ztree regionTreeContent"></ul>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getModalOk()">
+                            <i class="fa fa-check"></i>
+                            <span>确 定</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- 查看工作简报详情（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel1">
+                            工作简报详情
+                        </h4>
+                    </div>
+                    <div class="modal-body" style="height: 300px;">
+                        <form class="form-inline">
+                            <div>
+                                <div class="form-item">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">报送标题:</font></font></label>
+                                    <span>26期工作简报</span>
+                                </div>
+                                <div class="form-item">
+                                    <label>报送区域:</label>
+                                    <span >河北区</span>
+                                    <!--style="white-space: pre-wrap;display: inline-block;width: 80%;"-->
+                                </div>
+                                <div class="form-item">
+                                    <label>报送截止:</label>
+                                    <span >2018-11-30</span>
+                                    <!--style="white-space: pre-wrap;display: inline-block;width: 80%;"-->
+                                </div>
+                                <div class="form-item">
+                                    <label>发起人:</label>
+                                    <span>张三</span>
+                                </div>
+                            </div>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">简报说明:</font></font></label>
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">简报附件:</font></font></label>
+                                <span>/gongzuojianbao24.doc</span>
+                                <button type="button" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-download"></i> 下载
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+</div>
