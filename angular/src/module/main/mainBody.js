@@ -331,26 +331,38 @@
 //							$scope['bulletin4'] = res;
 //						}
 //					});
+                    //暗查暗访
                     $http({
                         url: apiPrefix + '/v1/bulletin/selectByFirst?type=1',
                         method: 'get'
                     }).success(function (res) {
                         $scope.bulletin1 = res;
                     });
+                    //工作动态
                     $http({
                         url: apiPrefix + '/v1/bulletin/selectByFirst?type=2',
                         method: 'get'
                     }).success(function (res) {
                         $scope.bulletin2 = res;
                     });
+                    //工作简报
                     $http({
                         url: apiPrefix + '/v1/bulletin/selectByFirst?type=3',
                         method: 'get'
                     }).success(function (res) {
                         $scope.bulletin3 = res;
                     });
+                    //考核通报
                     $http({
                         url: apiPrefix + '/v1/bulletin/selectByFirst?type=4',
+                        method: 'get'
+                    }).success(function (res) {
+                        $scope.bulletin5 = res;
+                    });
+
+                    //督导检查
+                    $http({
+                        url: apiPrefix + '/v1/bulletin/selectByFirst?type=5',
                         method: 'get'
                     }).success(function (res) {
                         $scope.bulletin4 = res;

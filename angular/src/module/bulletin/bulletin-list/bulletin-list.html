@@ -24,9 +24,10 @@
                             <select ng-model="type" class="form-control select-short">
                                 <option value="">全部</option>
                                 <option value="1">暗查暗访</option>
-                                <option value="2">每周动态</option>
-                                <option value="3">月度考核简报</option>
-                                <option value="4">督导检查通报</option>
+                                <option value="2">工作动态</option>
+                                <option value="3">工作简报</option>
+                                <option value="4">考核通报</option>
+                                <option value="5">督导检查</option>
                             </select>
                         </div>
                         <div class="input-group">
@@ -53,9 +54,10 @@
                                 </tr>
                                 <tr ng-repeat="list in bulletinList">
                                     <td ng-if="list.type == 1">暗查暗访</td>
-                                    <td ng-if="list.type == 2">每周动态</td>
-                                    <td ng-if="list.type == 3">月度考核简报</td>
-                                    <td ng-if="list.type == 4">督导检查通报</td>
+                                    <td ng-if="list.type == 2">工作动态</td>
+                                    <td ng-if="list.type == 3">工作简报</td>
+                                    <td ng-if="list.type == 4">考核通报</td>
+                                    <td ng-if="list.type == 5">督导检查</td>
                                     <td>{{list.title}}</td>
                                     <td>{{list.post_time}}</td>
                                     <td>{{list.issuer}}</td>

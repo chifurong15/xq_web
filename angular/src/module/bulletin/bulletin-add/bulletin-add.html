@@ -16,27 +16,27 @@
             <div class="panel-body">
                 <form class="form-inline">
                     <div class="form-item">
-                        <label><font style="vertical-align: inherit;"><font
+                        <label class="near"><font style="vertical-align: inherit;"><font
                                 style="vertical-align: inherit;">类型</font></font></label>
                         <select ng-model="type" class="form-control select-short">
                             <option value="">请选择类型</option>
                             <option value="1">暗查暗访</option>
-                            <option value="2">每周动态</option>
-                            <option value="3">月度考核简报</option>
-                            <option value="4">督导检查通报</option>
+                            <option value="2">工作动态</option>
+                            <option value="3">工作简报</option>
+                            <option value="4">考核通报</option>
+                            <option value="5">督导检查</option>
                         </select>
                     </div>
                     <div class="form-item">
-                        <label><font style="vertical-align: inherit;"><font
+                        <label class="near"><font style="vertical-align: inherit;"><font
                                 style="vertical-align: inherit;">标题</font></font></label>
                         <input type="text" class="form-control input-short" ng-model="title">
                         <span class="required"><font style="vertical-align: inherit;"><font
                                 style="vertical-align: inherit;">*</font></font></span>
                     </div>
-                    <br/>
                     <div class="form-item">
-                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上传人</font></font></label>
-                        <input type="text" class="form-control input-short" ng-model="issuer">
+                        <label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上传人</font></font></label>
+                        <input type="text" class="form-control input-short" readonly ng-model="issuer">
                         <span class="required"><font style="vertical-align: inherit;"><font
                                 style="vertical-align: inherit;">*</font></font></span>
                     </div>
@@ -45,12 +45,10 @@
                         <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched"
                                placeholder="请选择日期" ng-model="postTime">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        <span class="required"><font style="vertical-align: inherit;"><font
-                                style="vertical-align: inherit;">*</font></font></span>
                     </div>
                     <br>
                     <div class="form-item">
-                        <label><font style="vertical-align: inherit;"><font
+                        <label ><font style="vertical-align: inherit;"><font
                                 style="vertical-align: inherit;">描述</font></font></label>
                     </div>
                     <div id="editor"></div>

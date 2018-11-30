@@ -42,6 +42,9 @@ body .align-left .cross-simple-icon, body .align-left .cross-text{
     justify-content: space-between;
     padding-bottom: 62px;
 }
+.patr-count span span{
+    padding: 0 7px;
+}
 /*#mainBody #wea-dl{*/
     /*margin-left: 30px;*/
 /*}*/
@@ -344,7 +347,9 @@ body .align-left .cross-simple-icon, body .align-left .cross-text{
     float: left;
     width: 160px;
 }
-
+.modal-title{
+    height:20px;
+}
 /* ��  */
 .form-item {
     position: relative;
@@ -1760,7 +1765,7 @@ body .c-ffffff a {
     color: #60a2e5;
 }
 
-.patr-count span {
+.patr-count > span {
     flex: 1;
 }
 

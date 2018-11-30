@@ -22,11 +22,17 @@
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
 					var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
-					//var apiPrefix = 'http://10.0.9.133:8080' + '/bulletin';
+
+                    $scope.userInfo = $localStorage.userLoginInfo.userInfo;
+
+                    //var apiPrefix = 'http://10.0.9.133:8080' + '/bulletin';
 
 					$scope.init = function () {
+
+						$scope.issuer = $scope.userInfo.userName;
+
 						var bulletin = globalParam.getter().bulletin || {};
-						console.log(bulletin);
+						//console.log(bulletin);
 						// 编辑时获取原数据
 						if (bulletin.id) {
 							$location.search('id', bulletin.id);
@@ -77,13 +83,15 @@
                                 closeBtn: 1,
                                 anim: 3
                             });
-						} else if (!$scope.issuer) {
-                            layer.alert("请输入上传人", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-						} else if (!$scope.postTime) {
+						}
+						// else if (!$scope.issuer) {
+                         //    layer.alert("请输入上传人", {
+                         //        skin: 'my-skin',
+                         //        closeBtn: 1,
+                         //        anim: 3
+                         //    });
+						// }
+						else if (!$scope.postTime) {
                             layer.alert("请选择上传日期", {
                                 skin: 'my-skin',
                                 closeBtn: 1,
