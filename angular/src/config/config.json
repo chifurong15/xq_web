@@ -123,6 +123,19 @@
       "description": "三级菜单-基础资料-行政区划"
     },
     {
+      "seqId": "16",
+      "parentId": "1",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "流域管理",
+      "icon": "menu-icon-16",
+      "url": "module/drainage/drainage.html",
+      "requireJS": [
+        "module/drainage/drainage.js"
+      ],
+      "description": "三级菜单-基础资料-流域管理"
+    },
+    {
       "seqId": "2",
       "parentId": "0",
       "isLeaf": false,
@@ -788,6 +801,27 @@
         "module/fenxitongji/fenxitongji-detail/fenxitongji-detail.js"
       ],
       "description": "分析统计-河长的巡河情况"
+    },
+    {
+      "seqId": "1003",
+      "name": "流域新增",
+      "url": "src/module/drainage/drainage-add.html",
+      "requireJS":["src/module/drainage/drainage-add.js"],
+      "description": "公文办公--流域新增"
+    },
+    {
+      "seqId": "1004",
+      "name": "流域详情",
+      "url": "src/module/drainage/drainage-detail.html",
+      "requireJS":["src/module/drainage/drainage-detail.js"],
+      "description": "公文办公--流域详情"
+    },
+    {
+      "seqId": "1005",
+      "name": "流域编辑",
+      "url": "src/module/drainage/drainage-edit.html",
+      "requireJS":["src/module/drainage/drainage-edit.js"],
+      "description": "公文办公--流域编辑"
     },
     {
       "seqId": "3-1-2",

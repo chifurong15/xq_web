@@ -1,0 +1,83 @@
+<div ng-controller="drainageAddCtrl" ng-init="init()">
+	<!--<div class="bg-light lter b-b wrapper-md">
+		<h1 class="m-n font-thin h3">流域新增</h1>
+	</div>-->
+	<div id="wrapperMd" class="wrapper-md">
+		<div class="panel panel-default m-all-0">
+			<div class="panel-body pos-rlt">
+				<form id="catManageAddForm" class="form-inline" method="get" novalidate="novalidate">
+					<div id="left" class="left-panel wid-70 dis-i-blc">
+						<div class="form-item">
+							<label>流域名称</label>
+							<input type="text" class="form-control input-short" ng-model="drainageName" lay-verify="required"/>
+	                        <span class="required">*</span>
+						</div>
+						<div class="form-item">
+							<label>流域面积</label>
+							<input type="text" class="form-control input-short" ng-model="drainageAcreage" lay-verify="required"/ readonly="readonly">
+	                        <span class="required">km2</span>
+						</div>
+						<div class="form-item">
+							<label>流域经度</label>
+							<input type="text" class="form-control input-short" ng-model="drainageLongitude" lay-verify="required" readonly="readonly"/>
+						</div>
+						<div class="form-item">
+							<label>流域纬度</label>
+							<input type="text" class="form-control input-short" ng-model="drainageLatitude" lay-verify="required" readonly="readonly"/>
+						</div>
+						<br/>
+						<div class="form-item remarkInfo">
+							<div class="dis-i-blc">
+								<label>备注信息</label>
+							</div>
+							<div class="p-l-0 wid-100">
+								<textarea class="form-control textarea-width textareaH" ng-model="drainageRemark" ng-change="checkRemark()" rows="8" maxlength="512"></textarea>
+								<p class="m-t-10">还可输入{{countNum}}个字</p>
+							</div>
+						</div>
+						<br/>
+						<div class="editorPanel">
+							<label class="editorLabel">概述内容</label>
+							<div class="editorContent">
+								<div id="editor"></div>
+							</div>
+						</div>
+					</div>
+					<!-- map -->
+					<div class="right-panel wid-25 dis-i-blc" ng-class="{true : 'expandMap',false : 'compressMap' }[switchMapIcon]">
+	                    <div class="basicMap" id="mapContainer">
+	                        <div class="proMgr-map-tool">
+	                        	<ul class="drawTool">
+	                        		<li ng-click="doDraw();">
+	                        			<a id="doDraw" href="javascript:void(0);" title="画面"><i class="fa fa-pencil"></i></a>
+	                        		</li>
+	                        		<li ng-click="clearDraw();">
+	                        			<a id="clearDraw" href="javascript:void(0);" title="清除"><i class="fa fa-ban"></i></a>
+	                        		</li>
+	                        		<li ng-click="mapExpand();">
+	                        			<a id="mapExpand"  href="javascript:void(0);" title="缩放"><i class="fa" ng-class="{true : 'fa-expand',false : 'fa-compress' }[switchMapIcon]"></i></a>
+	                        		</li>
+	                        	</ul>
+	                        </div>
+	                        <div id="getgeo"></div>
+	                    </div>
+                    </div>
+				</form>
+			</div>
+			<div class="panel-footer m-b-10">
+				<div class="btn-box">
+					<button type="submit" class="btn btn-primary" ng-click="submit()">
+						<i class="fa fa-check"></i>确定
+					</button>
+					<button type="submit" class="btn btn-default" ng-click="back()">
+						<i class="fa fa-reply"></i>返回
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var ue =  CKEDITOR.replace( 'editor' );
+    CKEDITOR.instances.editor.setData(" ");
+</script>
