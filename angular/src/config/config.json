@@ -110,6 +110,19 @@
       "description": "三级菜单-基础资料-制度体系"
     },
     {
+      "seqId": "15",
+      "parentId": "1",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "行政区划",
+      "icon": "menu-icon-16",
+      "url": "module/infoMgr/region-management/region-manage.html",
+      "requireJS": [
+        "module/infoMgr/region-management/region-manage.js"
+      ],
+      "description": "三级菜单-基础资料-行政区划"
+    },
+    {
       "seqId": "2",
       "parentId": "0",
       "isLeaf": false,
