@@ -695,6 +695,62 @@
         "module/js/patrolRiverMgr/riverChiefOnline/riverChiefOnline.js"
       ],
       "description": "一级菜单-巡河管理"
+    },
+    {
+      "seqId": "8",
+      "parentId": "0",
+      "isLeaf": false,
+      "isRoot": true,
+      "name": "信息填报",
+      "menuType": 1,
+      "icon": "fa fa-bell-o",
+      "url": "module/info-submitted/weekly-dynamic/list/list.html",
+      "requireJS": [
+        "module/info-submitted/weekly-dynamic/list/list.js"
+      ],
+      "description": "一级菜单-信息报送"
+    },
+    {
+      "seqId": "8-0",
+      "parentId": "8",
+      "isLeaf": false,
+      "isRoot": true,
+      "name": "周动态",
+      "menuType": 1,
+      "icon": "fa fa-bullhorn",
+      "url": "module/info-submitted/weekly-dynamic/list/list.html",
+      "requireJS": [
+        "module/info-submitted/weekly-dynamic/list/list.js"
+      ],
+      "description": "二级菜单-周动态"
+    },
+    {
+      "seqId": "8-1",
+      "parentId": "8",
+      "isLeaf": false,
+      "isRoot": true,
+      "name": "工作简报",
+      "menuType": 1,
+      "icon": "fa fa-file-archive-o",
+      "url": "module/info-submitted/work-brief/list/list.html",
+      "requireJS": [
+        "module/info-submitted/work-brief/list/list.js"
+      ],
+      "description": "二级菜单-工作简报"
+    },
+    {
+      "seqId": "8-2",
+      "parentId": "8",
+      "isLeaf": false,
+      "isRoot": true,
+      "name": "会议制度执行情况",
+      "menuType": 1,
+      "icon": "fa fa-hand-paper-o",
+      "url": "module/info-submitted/conference-system/conference-system.html",
+      "requireJS": [
+        "module/info-submitted/conference-system/conference-system.js"
+      ],
+      "description": "二级菜单-会议制度执行情况"
     }
 
   ],
@@ -1327,7 +1383,34 @@
         "module/js/info-management/basic-data/reach/reach-doc.js"
       ],
       "description": "河段管理-一河一策"
+    },
+    {
+      "seqId": "8-0-1",
+      "parentId": "8",
+      "isLeaf": false,
+      "isRoot": true,
+      "name": "周动态详情",
+      "menuType": 1,
+      "icon": "fa fa-gears",
+      "url": "module/info-submitted/weekly-dynamic/detail/detail.html",
+      "requireJS": [
+        "module/info-submitted/weekly-dynamic/detail/detail.js"
+      ],
+      "description": "二级菜单-周动态-周动态详情"
+    },
+    {
+      "seqId": "8-1-1",
+      "parentId": "8",
+      "isLeaf": false,
+      "isRoot": true,
+      "name": "工作简报详情",
+      "menuType": 1,
+      "icon": "fa fa-file-archive-o",
+      "url": "module/info-submitted/work-brief/detail/detail.html",
+      "requireJS": [
+        "module/info-submitted/work-brief/detail/detail.js"
+      ],
+      "description": "二级菜单-工作简报-详情"
     }
-
   ]
 }
