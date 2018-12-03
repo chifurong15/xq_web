@@ -30,6 +30,7 @@
                         getList ();
                         getAllRegion ();
                         getAllRule ();
+                        getAllSection();
 
                     }
 
@@ -55,8 +56,6 @@
                         })
                     }
 
-
-
                     // 搜索
                     $scope.search = function () {
                         getList();
@@ -67,48 +66,42 @@
                         //clear();
                     }
 
-                    // // 新建
-                    // $scope.add = function () {
-                    //     //routeService.route('3-1-2', false);
-                    //     $('#myModal').modal('show');
-                    // }
-
-                    //新增评分报告
+                    //修改
                     $scope.save = function () {
-                        $('#myModal').modal('hide');
-
-                        // if (!$scope.title) {
-                        //     layer.alert("请输入标题", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // }
-                        // $ajaxhttp.myhttp({
-                        //     url: apiPrefix + '/v1/SurfaceWater/updatelist',
-                        //     method: 'PUT',
-                        //     params: {
-                        //         id: $scope.id,
-                        //         title: $scope.title,
-                        //         createtime: $scope.currentdate,
-                        //         issue: $scope.searchTime1,
-                        //         createUser: $scope.author,
-                        //         remark: $scope.issuer
-                        //     },
-                        //     callBack: function (res) {
-                        //         if(res.resCode == 1){
-                        //             layer.msg('修改成功', {time:2000});
-                        //             clear();//创建成功后清空
-                        //             $('#myModal').modal('hide');
-                        //         }else{
-                        //             layer.msg(res.resMsg, {time:2000});
-                        //         }
-                        //     }
-                        // })
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/reachAssess/updateReachAssess',
+                            method: 'PUT',
+                            params: {
+                                id: $scope.id,
+                                inputSection: $scope.inputSection,
+                                outputSection: $scope.outputSection,
+                                scoringRules: $scope.scoringRules1
+                            },
+                            callBack: function (res) {
+                                if(res.resCode == 1){
+                                    layer.msg('修改成功', {time:2000});
+                                    $('#myModal').modal('hide');
+                                    getList();
+                                }else{
+                                    layer.msg(res.resMsg, {time:2000});
+                                }
+                            }
+                        })
                     }
 
                     //修改
                     $scope.edit = function (item) {
+                        $scope.id = item.id;
+                        $scope.inputSection = item.inputSection;
+                        $scope.outputSection = item.outputSection;
+                        $scope.scoringRules1 = item.scoringRules;
+                        $scope.regionName1 = item.regionName;
+                        $scope.riverName1 = item.riverName;
+                        $scope.reachName1 = item.reachName;
+                        $scope.targetWaterQuality1 = item.targetWaterQuality;
+                        $scope.isSewageFactory1 = item.isSewageFactory == 0 ? '否' : '是';
+                        $scope.isCompensation1 = item.isCompensation == 0 ? '否' : '是';
+                        $scope.isWaterQualityAssess1 = item.isWaterQualityAssess == 0 ? '不考核' : '考核';
                         $('#myModal').modal('show');
                         //routeService.route('3-1-2', false);
                     }
@@ -120,6 +113,17 @@
                             method: 'get',
                             callBack: function (res) {
                                 $scope.ruleList = res.data;
+                            }
+                        })
+                    }
+
+                    //获取入境断面
+                    function getAllSection () {
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/reachAssess/listSections',
+                            method: 'get',
+                            callBack: function (res) {
+                                $scope.sectionList = res.data;
                             }
                         })
                     }

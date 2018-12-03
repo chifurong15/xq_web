@@ -153,23 +153,69 @@
                         修改河段考核配置
                     </h4>
                 </div>
-                <div class="modal-body" style="height: 200px">
-                    <form class="form-inline" style="padding-left: 25%;">
+                <div class="modal-body" style="height: 300px">
+                    <form class="form-inline">
                         <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">区县</font></font></label>
+                            <input type="text" class="form-control input-short" readonly ng-model="regionName1">
+                        </div>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">河道</font></font></label>
+                            <input type="text" class="form-control input-short" readonly ng-model="riverName1">
+                        </div>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">河段</font></font></label>
+                            <input type="text" class="form-control input-short" readonly ng-model="reachName1">
+                        </div>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">目标水质类别</font></font></label>
+                            <input type="text" class="form-control input-short" readonly ng-model="targetWaterQuality1">
+                        </div>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">含污水处理厂</font></font></label>
+                            <input type="text" class="form-control input-short" readonly ng-model="isSewageFactory1">
+                        </div>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">水质监测补偿</font></font></label>
+                            <input type="text" class="form-control input-short" readonly ng-model="isCompensation1">
+                        </div>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">水质考核</font></font></label>
+                            <input type="text" class="form-control input-short" readonly ng-model="isWaterQualityAssess1">
+                        </div>
+                        <div class="input-group form-item">
                             <label><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">入境断面</font></font></label>
-                            <input type="text" class="form-control input-short" ng-model="title">
+                            <select ng-model="inputSection" class="form-control select-short"
+                                    style="width: 160px;z-index: 0;">
+                                <option value="">请选择</option>
+                                <option value="{{item1}}" ng-repeat="item1 in sectionList track by $index" key="{{$index+1}}">{{item1}}</option>
+                            </select>
                         </div>
-                        <br>
-                        <div class="form-item">
+                        <div class="input-group form-item">
                             <label><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">出境断面</font></font></label>
-                            <input type="text" class="form-control input-short" ng-model="title">
+                            <select ng-model="outputSection" class="form-control select-short"
+                                    style="width: 160px;z-index: 0;">
+                                <option value="">请选择</option>
+                                <option value="{{item2}}" ng-repeat="item2 in sectionList track by $index" key="{{$index+1}}">{{item2}}</option>
+                            </select>
                         </div>
-                        <div class="form-item">
+                        <div class="input-group form-item">
                             <label><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">水质评分规则</font></font></label>
-                            <input type="text" class="form-control input-short" ng-model="author">
+                            <select ng-model="scoringRules1" class="form-control select-short"
+                                    style="width: 160px;z-index: 0;">
+                                <option value="">请选择</option>
+                                <option value="{{item3}}" ng-repeat="item3 in ruleList">{{item3}}</option>
+                            </select>
                         </div>
                         <!--<br/>-->
                         <!--<div class="form-item">-->
