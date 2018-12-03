@@ -21,8 +21,8 @@
                                         $location, $log, $q, $rootScope, $window,
                                         routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
-                    //var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
-                    //var apiPrefix = 'http://10.0.9.133:6008' + '/bulletin';
+                    var apiPrefix = moduleService.getServiceUrl() + '/messageSent';
+                    //var apiPrefix = 'http://10.0.9.203:8080' + '/messageSent';
 
                     var regionTree;
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree';
@@ -31,175 +31,234 @@
 
                     $scope.init = function () {
                         $scope.author = $scope.userInfo.userName;
+                        $scope.isShow = true;
+
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/v1/msMeetingCondition/userinfo',
+                            method:'get',
+                            callBack:function (res) {
+                                $scope.num = res.data;
+                            }
+                        })
+
+
                         getList();
-                        getAllRegion ();
-                    }
-                    // 获取数据列表
-                    function getList () {
-                        $scope.moduleList = [
-                            {
-                                region:'河西区',
-                                role:'河长',
-                                name:'张三',
-                                duty:'经理',
-                                type:'一级会议',
-                                time:'2018-11-17',
-                                content:'关于河长制区级系统建设问题',
-                            },
-                            {
-                                region:'津南区',
-                                role:'总河长',
-                                name:'李四',
-                                duty:'经理',
-                                type:'二级会议',
-                                time:'2018-11-13',
-                                content:'黑臭河问题治理',
-                            },
-                            {
-                                region:'西青区',
-                                role:'河长办主任',
-                                name:'王五',
-                                duty:'经理',
-                                type:'三级会议',
-                                time:'2018-11-09',
-                                content:'监测水质不达标区内污染严重',
-                            },
-                            {
-                                region:'红桥区',
-                                role:'总河长',
-                                name:'刘瑞',
-                                duty:'经理',
-                                type:'一级会议',
-                                time:'2018-11-05',
-                                content:'监测污水处理厂不达标区内污染严重',
-                            },
-                        ];
                     }
 
-                    function getAllRegion (){
-                        $scope.regionList = [
-                            {
-                                id:1,
-                                region:'天津市',
+                    //搜索
+                    $scope.searchData = function () {
+                        getList();
+                    }
+
+                    //重置
+                    $scope.reset = function () {
+                        $scope.regionName = '';
+                        $scope.startTime = '';
+                        $scope.endTime = '';
+                    }
+
+                    // 获取数据列表
+                    function getList () {
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/v1/msMeetingCondition/selectList',
+                            method:'get',
+                            params:{
+                                pageNumber: $scope.paginationConf.currentPage,
+                                pageSize: $scope.paginationConf.itemsPerPage,
+                                meetingTimeStart:$scope.startTime,
+                                meetingTimeEnd:$scope.endTime,
+                                region:$scope.regionName
                             },
-                            {
-                                id:2,
-                                region:'和平区',
-                            },
-                            {
-                                id:3,
-                                region:'河东区',
-                            },
-                            {
-                                id:4,
-                                region:'河西区',
-                            },
-                            {
-                                id:5,
-                                region:'南开区',
-                            },
-                            {
-                                id:6,
-                                region:'河北区',
-                            },
-                            {
-                                id:7,
-                                region:'红桥区',
-                            },
-                            {
-                                id:8,
-                                region:'东丽区',
-                            },
-                            {
-                                id:9,
-                                region:'西青区',
-                            },
-                            {
-                                id:10,
-                                region:'津南区',
-                            },
-                            {
-                                id:11,
-                                region:'北辰区',
-                            },
-                            {
-                                id:12,
-                                region:'武清区',
-                            },
-                            {
-                                id:13,
-                                region:'宝坻区',
-                            },
-                            {
-                                id:14,
-                                region:'滨海新区',
-                            },
-                            {
-                                id:15,
-                                region:'宁河区',
-                            },
-                            {
-                                id:16,
-                                region:'静海区',
-                            },
-                            {
-                                id:17,
-                                region:'蓟州区',
+                            callBack:function (res) {
+                                $scope.moduleList = res.data.list;
+                                $scope.paginationConf.totalItems = res.data.total;
                             }
-                        ]
+                        })
                     }
 
                     //导出
                     $scope.export = function (){
-                        layer.msg('导出成功',{times:500})
+                        window.open(apiPrefix + '/v1/msMeetingCondition/createExcel');
+                    }
 
+                    //关闭会议模态窗
+                    $scope.closeModal = function () {
+                        clear();
+                        $('#myModal').modal('hide');
+                    }
+
+                    //清除表单
+                    function clear () {
+                        $scope.topic = '';
+                        $scope.remark = '';
+                        $scope.time = '';
+                        $scope.content = '';
+                        $scope.duty = '';
+                        $scope.compereRole = '';
+                        $scope.compereName = '';
+                        $scope.category = '';
                     }
 
                     //显示发起周动态报送弹窗
                     $scope.add = function (id) {
                         if(id != 1){
-                            $scope.tag = '查看'
-                        }else{
-                            $scope.tag = '新增'
+                            $scope.tag = '查看';
+                            $scope.isShow = false;
+                            $ajaxhttp.myhttp({
+                                url:apiPrefix + '/v1/msMeetingCondition/detail',
+                                method:'GET',
+                                params:{
+                                    id:id
+                                },
+                                callBack:function (res) {
+                                    if(res.resCode == 1){
+                                        $scope.viewData = res.data;
+                                    }else{
+                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                                    }
+                                }
+                            })
 
+                        }else{
+                            $scope.tag = '新增';
+                            $scope.isShow = true;
                         }
                         $('#myModal').modal('show')
                     }
 
                     //确认上报
                     $scope.submit =  function () {
-                        $('#myModal').modal('hide');
-                        layer.msg('上报成功',{times:500})
+                        if($scope.compereRole && $scope.compereName && $scope.time && $scope.topic && $scope.content){
+                            var params = {
+                                topic:$scope.topic,
+                                meetingTime: $scope.time,
+                                compereRole:$scope.compereRole,
+                                compereName:$scope.compereName,
+                                duty:$scope.duty,
+                                category:$scope.category,
+                                content:$scope.content,
+                                remark:$scope.remark
+                            }
+                            $ajaxhttp.myhttp({
+                                url:apiPrefix + '/v1/msMeetingCondition/add',
+                                method:'post',
+                                params:params,
+                                callBack:function (res) {
+                                    if(res.resCode == 1){
+                                        layer.msg('上报成功',{times:500})
+                                        $('#myModal').modal('hide');
+                                        getList();
+                                        clear();
+                                    }else{
+                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                                    }
+                                }
+                            })
+
+                        }else{
+                            layer.alert("请输入必填项", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        }
                     }
+                    
                     //保存
                     $scope.save =  function () {
-                        $('#myModal').modal('hide');
-                        layer.msg('保存成功',{times:500})
+                        if($scope.compereRole && $scope.compereName && $scope.time && $scope.topic && $scope.content){
+                            var params = {
+                                topic:$scope.topic,
+                                meetingTime: $scope.time,
+                                compereRole:$scope.compereRole,
+                                compereName:$scope.compereName,
+                                duty:$scope.duty,
+                                category:$scope.category,
+                                content:$scope.content,
+                                remark:$scope.remark
+                            }
+                            $ajaxhttp.myhttp({
+                                url:apiPrefix + '/v1/msMeetingCondition/addTwo',
+                                method:'post',
+                                params:params,
+                                callBack:function (res) {
+                                    if(res.resCode == 1){
+                                        layer.msg('新增成功',{times:500})
+                                        $('#myModal').modal('hide');
+                                        getList();
+                                        clear();
+                                    }else{
+                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                                    }
+                                }
+                            })
+
+                        }else{
+                            layer.alert("请输入必填项", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        }
+
                     }
-                    //上报
-                    $scope.report =  function () {
-                        layer.msg('上报成功',{times:500})
+
+                    //上报状态
+                    $scope.report =  function (id) {
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/v1/msMeetingCondition/updateSentState',
+                            method:'put',
+                            params:{
+                                id:id,
+                                sentState:1
+                            },
+                            callBack:function (res) {
+                                if(res.resCode == 1){
+                                    layer.msg('上报成功',{times:500});
+                                    getList();
+                                }else{
+                                    layer.msg('服务器异常，请稍后再试',{times:500})
+                                }
+                            }
+                        })
                     }
 
                     //删除
-                    $scope.delete =  function () {
-                        layer.msg('删除成功',{times:500})
+                    $scope.delete =  function (id) {
+                        var layerIndex = layer.confirm('确定删除本条数据吗？', {
+                            btn: ['确定', '取消']
+                        }, function () {
+                            $ajaxhttp.myhttp({
+                                url:apiPrefix + '/v1/msMeetingCondition/delete',
+                                method:'delete',
+                                params:{
+                                    id:id
+                                },
+                                callBack:function (res) {
+                                    if(res.resCode == 1){
+                                        layer.msg('删除成功',{times:500});
+                                        getList();
+                                    }else{
+                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                                    }
+                                }
+                            })
+                            layer.close(layerIndex);
+                        }, function () {
+
+                        });
                     }
 
 
                     // 会议时间
                     var time = $('#J-Time').datetimepicker({
-                        format: 'YYYY-MM-DD',
+                        format: 'YYYY-MM-DD HH:mm:ss',
                         locale: moment.locale('zh-cn')
                     }).on('dp.change', function (c) {
-                        var result = new moment(c.date).format('YYYY-MM-DD');
+                        var result = new moment(c.date).format('YYYY-MM-DD HH:mm:ss');
                         $scope.time = result;
                         $scope.$apply();
                     });
-
-
-
-
 
                     // 开始时间
                     var startTime = $('#startTime').datetimepicker({
@@ -230,6 +289,41 @@
                     endTime.on('dp.change', function (e) {
                         startTime.data('DateTimePicker').maxDate(e.date);
                     });
+                    
+                    
+                    function  validateRules() {
+                        if (!$scope.compereRole) {
+                            layer.alert("请输入主持角色", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        }else if (!$scope.compereName) {
+                            layer.alert("请输入姓名", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        }else if (!$scope.time) {
+                            layer.alert("请选择会议时间", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        }else if (!$scope.topic) {
+                            layer.alert("请输入会议议题", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        }else if (!$scope.content) {
+                            layer.alert("会议主要研究内容", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        }
+                    }
 
                     /**
                      * 初始化行政区划树
@@ -297,7 +391,7 @@
                      * @param {Object} treeNode
                      */
                     function regionTreeOnClick(event, treeId, treeNode) {
-                        console.log(treeNode);
+                        //console.log(treeNode);
                         $scope.regionId = treeNode.id;
                         $scope.regionName = treeNode.name;
                         $scope.grade = treeNode.grade;
@@ -323,7 +417,7 @@
                      */
                     $scope.getModalOk = function(){
                         $('#regionTreeModal').modal('hide');
-                        console.log($scope.regionName)
+                        //console.log($scope.regionName)
                         //console.log('我是区域树关闭...')
                     }
 

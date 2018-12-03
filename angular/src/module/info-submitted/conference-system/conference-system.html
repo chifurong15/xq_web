@@ -31,6 +31,9 @@
                         <button type="submit" ng-click="searchData()" class="btn btn-primary">
                             <i class="fa fa-search"></i>搜索
                         </button>
+                        <button type="button" class="btn btn-primary" ng-click="reset()" style="margin: 0 5px;">
+                            <i class="fa fa-refresh"></i>重置
+                        </button>
                     </div>
                 </form>
             </div>
@@ -57,28 +60,28 @@
                             <th style="width: 10%">职务</th>
                             <th style="width: 10%">会议类别</th>
                             <th style="width: 10%">会议时间</th>
-                            <th style="width: 10%">会议研究主要内容</th>
-                            <th style="width: 15%">操作</th>
+                            <th style="width: 15%">会议研究主要内容</th>
+                            <th style="width: 10%">操作</th>
                         </tr>
                         <tr ng-repeat="module in moduleList" style="cursor:pointer;">
                             <td>{{$index+1}}</td>
                             <td>{{module.region}}</td>
-                            <td>{{module.role}}</td>
-                            <td>{{module.name}}</td>
+                            <td>{{module.compereRole}}</td>
+                            <td>{{module.compereName}}</td>
                             <td>{{module.duty}}</td>
-                            <td>{{module.type}}</td>
-                            <td>{{module.time}}</td>
-                            <td>{{module.content}}</td>
+                            <td>{{module.category}}</td>
+                            <td>{{module.meetingTime}}</td>
+                            <td>{{module.topic}}</td>
                             <td>
                                 <a class="btn btn-primary btn-xs" ng-click="add(module.id)"><i class="fa fa-info" title="查看"></i></a>
-                                <a class="btn btn-primary btn-xs" ng-click="report(module.id)"><i class="fa fa-level-up" title="上报"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-if="num == 5 && module.sentState == 2" ng-click="report(module.id)" ><i class="fa fa-level-up" title="上报"></i></a>
                                 <a class="btn btn-primary btn-xs" ng-click="delete(module.id)"><i class="fa fa-trash-o" title="删除"></i></a>
                             </td>
                         </tr>
                     </table>
 
                 </div>
-                <!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+                <tm-pagination conf="paginationConf"></tm-pagination>
             </div>
         </div>
 
@@ -108,7 +111,7 @@
                 </div>
             </div>
         </div>
-        <!-- 新增会议（Modal） -->
+        <!-- 会议执行情况（Modal） -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -124,63 +127,80 @@
                         <form class="form-inline">
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">主持角色</font></font></label>
-                                <input type="text" class="form-control input-long" style="float: inherit;width: 410px;">
-                                <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                                <input type="text" ng-show="isShow" class="form-control input-long" style="float: inherit;width: 410px;" ng-model="compereRole">
+                                <!--<span ng-show="!isShow">{{viewData.compereRole}}</span>-->
+                                <input type="text" ng-show="!isShow" class="form-control input-long" readonly style="float: inherit;width: 420px;" ng-model="viewData.compereRole">
+                                <span class="required" ng-show="isShow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">姓名</font></font></label>
-                                <input type="text" class="form-control input-short">
-                                <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                                <input type="text" ng-show="isShow" class="form-control input-short" ng-model="compereName">
+                                <!--<span ng-show="!isShow">{{viewData.compereName}}</span>-->
+                                <input type="text" ng-show="!isShow" readonly class="form-control input-short" ng-model="viewData.compereName">
+                                <span class="required" ng-show="isShow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">职务</font></font></label>
-                                <input type="text" class="form-control input-short">
+                                <input type="text" ng-show="isShow" class="form-control input-short" ng-model="duty">
+                                <!--<span ng-show="!isShow">{{viewData.duty}}</span>-->
+                                <input type="text" ng-show="!isShow" readonly class="form-control input-short" ng-model="viewData.duty" style="width: 148px;">
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">会议类别</font></font></label>
-                                <input type="text" class="form-control input-short">
+                                <input type="text"  ng-show="isShow" class="form-control input-short" ng-model="category">
+                                <!--<span ng-show="!isShow">{{category.category}}</span>-->
+                                <input type="text" ng-show="!isShow" readonly class="form-control input-short" ng-model="viewData.category">
                             </div>
-                            <div class="form-item">
+                            <div class="form-item" ng-show="isShow">
                                 <label>会议时间</label>
                                 <div class="input-group date date_picker" id="J-Time">
                                     <input type="text" class="form-control input-short-o" ng-model="time">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
-                                <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                                <!--<span ng-show="!isShow">{{viewData.meetingTime}}</span>-->
+                                <span class="required" ng-show="isShow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                            </div>
+                            <div class="form-item" ng-show="!isShow">
+                                <label>会议时间</label>
+                                <div class="input-group date date_picker">
+                                    <input type="text" readonly class="form-control input-short-o" ng-model="viewData.meetingTime" style="width: 148px;">
+                                </div>
+                                <span class="required" ng-show="isShow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">会议议题</font></font></label>
-                                <input type="text" class="form-control input-long" style="float: inherit">
-                                <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                                <input type="text" ng-show="isShow" class="form-control input-long" style="float: inherit" ng-model="topic">
+                                <input type="text" ng-show="!isShow"  readonly class="form-control input-long" style="float: inherit" ng-model="viewData.topic">
+                                <!--<span ng-show="!isShow">{{viewData.topic}}</span>-->
+                                <span class="required" ng-show="isShow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">会议主要研究内容</font></font></label>
-                                <textarea class="form-control" rows="3"></textarea>
-                                <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                                <textarea class="form-control" ng-show="isShow" rows="3" ng-model="content"></textarea>
+                                <!--<span ng-show="!isShow">{{viewData.content}}</span>-->
+                                <textarea class="form-control" ng-show="!isShow" readonly rows="3" ng-model="viewData.content"></textarea>
+                                <span class="required" ng-show="isShow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">备注</font></font></label>
-                                <textarea class="form-control" rows="3"></textarea>
+                                <textarea class="form-control" ng-show="isShow" rows="3" ng-model="remark"></textarea>
+                                <!--<span ng-show="!isShow">{{viewData.remark}}</span>-->
+                                <textarea class="form-control" ng-show="!isShow" readonly rows="3" ng-model="viewData.remark"></textarea>
                             </div>
 
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" ng-click="save()">保存</button>
-                        <button type="button" class="btn btn-primary" ng-click="submit()">确认上报</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                        <button type="button" ng-show="isShow" class="btn btn-primary" ng-click="save()">保存</button>
+                        <button type="button" ng-show="isShow" class="btn btn-primary" ng-click="submit()">确认上报</button>
+                        <button type="button" class="btn btn-primary" ng-click="closeModal()">取消</button>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
-
 
     </div>
 </div>
