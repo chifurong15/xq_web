@@ -27,7 +27,7 @@
                     <div class="layui-tab-item layui-show">
                         <div class="panel-body">
                             <div style="overflow: hidden">
-                                <form class="form-inline" style="float:left;padding-left: 25%;">
+                                <form class="form-inline" style="float:left;">
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font
                                                 style="vertical-align: inherit;">标题</font></font></label>
@@ -220,7 +220,7 @@
                     <div class="layui-tab-item" ng-show="isShow1" ng-if="state !=1 && state !=0">
                         <div class="panel-body" ng-if="state == 2">
                             <div class="clearfix">
-                                <form class="form-inline layui-form" style="float:left;padding-left: 25%;">
+                                <form class="form-inline layui-form" style="float:left;">
                                     <div class="layui-form-item" style="margin: 8px 10px;">
                                         <label><font style="vertical-align: inherit;"><font
                                                 style="vertical-align: inherit;">通报日期</font></font></label>
@@ -267,7 +267,7 @@
                                 </form>
 
                             </div>
-                            <div style="text-align: center;margin: 35px 0;">
+                            <div style="text-align: left;margin: 35px 0;">
                                 <button type="button" class="btn btn-primary" style="margin: 0 50px;"
                                         ng-click="confirmReport()">确定并通报
                                 </button>
@@ -277,7 +277,7 @@
 
                         <div class="panel-body" ng-if="state != 2">
                             <div class="clearfix">
-                                <form class="form-inline" style="float:left;padding-left: 25%;">
+                                <form class="form-inline" style="float:left;">
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font
                                                 style="vertical-align: inherit;">通报日期</font></font></label>
@@ -322,7 +322,7 @@
                     <div class="layui-tab-item" ng-show="isShow2" ng-if="state !=1 && state !=0 && state !=2">
                         <div class="panel-body">
                             <div class="clearfix">
-                                <form class="form-inline" style="float:left;padding-left: 15%;">
+                                <form class="form-inline" style="float:left;">
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font
                                                 style="vertical-align: inherit;">一区一单处理日期</font></font></label>
@@ -369,7 +369,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <div style="text-align: center;margin: 35px 0;" ng-if="state == 2">
+                            <div style="text-align: left;margin: 35px 0;" ng-if="state == 2">
                                 <button type="button" class="btn btn-primary" style="margin: 0 50px;"
                                         ng-click="oneRegionReport()">处理并上报
                                 </button>
@@ -381,7 +381,7 @@
                     <div class="layui-tab-item" ng-if="state !=1 && state !=0 && state !=2">
                         <div class="panel-body">
                             <div class="clearfix">
-                                <form class="form-inline layui-form" style="float:left;padding-left: 15%;">
+                                <form class="form-inline layui-form" style="float:left;">
                                     <div class="layui-form-item" style="margin: 8px 10px;">
                                         <label><font style="vertical-align: inherit;"><font
                                                 style="vertical-align: inherit;">处理日期</font></font></label>
@@ -392,8 +392,8 @@
                                     <br/>
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font
-                                                style="vertical-align: inherit;">附件</font></font></label>
-                                        <button class="btn btn-info" ng-click="getUploadFile(2)"><i
+                                                style="vertical-align: inherit;">处理附件</font></font></label>
+                                        <button class="btn btn-info" ng-click="getUploadFile(2)" style="margin-left: -23px;"><i
                                                 class="fa fa-css3"></i>上传附件
                                         </button>
                                     </div>
@@ -412,7 +412,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <div style="text-align: center;margin: 35px 0;">
+                            <div style="text-align: left;margin: 35px 0;">
                                 <button type="button" class="btn btn-primary" style="margin: 0 50px;" ng-click="deal()">
                                     处理并上报
                                 </button>
