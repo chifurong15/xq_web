@@ -352,22 +352,22 @@
                 x: '60%',
                 y: '25%',
                 bottom: '13%',
-                data: ['1', '2', '3'],
-                textStyle: {
-                    color: '#fff'
-                },
-                inactiveColor:'#ccc'
+                data: ['Ⅱ类', 'Ⅲ类'],
+                // textStyle: {
+                //     color: '#fff'
+                // },
+                // inactiveColor:'#ccc'
             },
             {
                 orient: 'vertical',
                 x: '78%',
                 y: '25%',
                 bottom: '13%',
-                data: ['4', '5', '6'],
-                textStyle: {
-                    color: '#fff'
-                },
-                inactiveColor:'#ccc'
+                data: [ 'Ⅳ类', 'Ⅴ类','VI类'],
+                // textStyle: {
+                //     color: '#fff'
+                // },
+                // inactiveColor:'#ccc'
             }
         ],
         series: [{
@@ -375,30 +375,27 @@
             type: 'pie',
             radius: ['40%', '60%'],
             center: ['28%', '45%'],
-            data: [{
-                value: 335,
-                name: '1'
-            },
+            data: [
                 {
                     value: 310,
-                    name: '2'
+                    name: 'Ⅱ类'
                 },
                 {
                     value: 234,
-                    name: '3'
+                    name: 'Ⅲ类'
                 },
                 {
                     value: 135,
-                    name: '4'
+                    name: 'Ⅳ类'
 
                 },
                 {
                     value: 348,
-                    name: '5'
+                    name: 'Ⅴ类'
                 },
                 {
-                    value: 367,
-                    name: '6'
+                    value: 368,
+                    name: 'VI类'
                 }
             ],
             itemStyle: {
@@ -411,13 +408,13 @@
             label: {
                 normal: {
                     textStyle: {
-                        color: '#fff'
+                        color: '#333'
                     }
                 }
             },
             labelLine: {
                 normal: {
-                    show: false
+                    show: true
                 }
             }
         }]
