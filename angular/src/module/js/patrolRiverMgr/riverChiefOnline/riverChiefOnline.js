@@ -279,6 +279,7 @@
                         //                  url: $localStorage.serviceUrl_chiefOnline + '/chairmanOnline/v1/region'
                     }).success(function (data) {
                         $scope.checkRegionId = data.data[0].id;
+                        console.log(data.data[1]);
                         //区划边界
                         if(data.data[0].spatialData !== "" && data.data[0].spatialData !== "[]"){
                             var spatialData = data.data[0].spatialData;
@@ -290,7 +291,7 @@
                         ReachService.getReachList();
                         leftStatusCount();
                         rightStatusCount();
-                        $.fn.zTree.init($('#regionTreeContainer'), regionTreeSetting, data.data);
+                        $.fn.zTree.init($('#regionTreeContainer'), regionTreeSetting, data.data[1]);
                         $scope.searchRiverChief();
                     });
                 };
