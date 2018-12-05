@@ -172,40 +172,97 @@
                      * 上传文件
                      */
 
-                    $scope.fileAdd = function () {
-//									var loadTips = layer.load(3, {shade: [0.3, '#000000']});
+//                     $scope.fileAdd = function () {
+// //									var loadTips = layer.load(3, {shade: [0.3, '#000000']});
+//                         var formFile = new FormData();
+//                         var fileObj = document.querySelector('input[type=file]').files[0];
+
+//                         formFile.append("file", fileObj); //加入文件对象
+//                         formFile.append("regionId", regionCode);
+//                         formFile.append("type", fileTypeId);
+
+//                         var data = formFile;
+
+//                         $http({
+//                                 method: 'post',
+// //										url: 'http://10.0.9.125:8085' + modulePrefix + "/v1/doc/add",
+//                                 url: $localStorage.gwUrl + modulePrefix + "/v1/doc/add",
+//                                 data: data,
+//                                 headers: {'Content-Type': undefined},
+//                                 transformRequest: angular.identity
+//                             }
+//                         ).success(function (res) {
+//                             if (res.resCode == 1) {
+//                                 console.log(res);
+//                                 $scope.fileData = res.data;
+// //												layer.close(loadTips);//关闭加载Loading
+// //						            			layer.msg("文件上传成功!");
+//                                 $("#docList").modal('hide');
+//                                 reGetProducts();
+//                             } else {
+//                                 layer.msg("服务器异常，请稍后再试");
+//                             }
+//                         }).error(function (res) {
+//                             layer.msg('服务器异常，请稍后再试');
+//                         });
+//                     }
+
+
+
+                    /**
+                     * 文件上传
+                     */
+                    $scope.fileAdd = function(){
                         var formFile = new FormData();
                         var fileObj = document.querySelector('input[type=file]').files[0];
-
-                        formFile.append("file", fileObj); //加入文件对象
-                        formFile.append("regionId", regionCode);
-                        formFile.append("type", fileTypeId);
-
+                        formFile.append("filePath", fileObj); //加入文件对象
                         var data = formFile;
-
                         $http({
-                                method: 'post',
-//										url: 'http://10.0.9.125:8085' + modulePrefix + "/v1/doc/add",
-                                url: $localStorage.gwUrl + modulePrefix + "/v1/doc/add",
-                                data: data,
-                                headers: {'Content-Type': undefined},
+                            method: 'post',
+                            url: $localStorage.gwUrl + modulePrefix +"/v1/doc/upload",
+                            data: data,
+                            headers: {'Content-Type': undefined},
                                 transformRequest: angular.identity
                             }
-                        ).success(function (res) {
-                            if (res.resCode == 1) {
-                                console.log(res);
-                                $scope.fileData = res.data;
-//												layer.close(loadTips);//关闭加载Loading
-//						            			layer.msg("文件上传成功!");
-                                $("#docList").modal('hide');
-                                reGetProducts();
-                            } else {
+                        ).success(function(res) {
+                            if(res.resCode == 1){
+                                var jsonFile = [{'name':res.data.name, 'path':res.data.virtualPath, 'type':res.data.extension}];
+                                jsonFile = JSON.stringify(jsonFile)
+                                $http({
+                                    url: $localStorage.gwUrl +'/watersource/v1/doc/add',
+                                    method: 'POST',
+                                    params: {
+                                        type: fileTypeId,
+                                        jsonFile: jsonFile,
+                                        regionId: regionCode,
+                                    }}).success(function(res){
+                                        if(res.resCode == 1){
+                                            var index = layer.open({
+                                                title: '提示',
+                                                content: '新增成功',
+                                                yes: function(index, layero){
+                                                    layer.close(index);
+                                                    //console.log(res);
+                                                    $scope.fileData = res.data;
+    //                                              layer.close(loadTips);//关闭加载Loading
+    //                                              layer.msg("文件上传成功!");
+                                                    $("#docList").modal('hide');
+                                                    reGetProducts();
+                                                }
+                                            });
+                                        }
+                                    });
+                            }else{
                                 layer.msg("服务器异常，请稍后再试");
                             }
-                        }).error(function (res) {
+                        }).error(function(res){
                             layer.msg('服务器异常，请稍后再试');
                         });
                     }
+
+
+
+
 
                     /**
                      * 文档列表

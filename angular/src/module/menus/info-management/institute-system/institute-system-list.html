@@ -2,13 +2,8 @@
 <div ng-controller="instituteSystemListCtrl" ng-init="init()">
 	<div class="wrapper-md">
 		<div class="panel panel-default m-n">
-			<div class="panel-body" style="position: relative;">
-				<span class="tag">制度体系</span><span class="tag-right"></span>
-			</div>
-		</div>
-		<div class="panel panel-default m-n">
-			<div class="panel-body" style="padding: 15px;">
-				<form method="get" class="form-inline">
+			<div class="panel-body">
+				<form method="get" class="selectPanel">
 					<!--<div class="form-radio">
 						<label class="radio-inline i-checks" ng-repeat="type in typeList">
                             <input type="radio" name="type" ng-model="isSelected" ng-click="radioBtn(isSelected)"
@@ -16,22 +11,26 @@
                         			{{type.typeName}}
                         </label>
 					</div>-->
-                    <div class="form-item">
-                        <label>开始日期</label>
-                        <div class="input-group date date_picker" id="beginTime">
-                            <input type="text" class="form-control input-short-o" ng-model="beginTime">
-                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        </div>
+					<div class="form-item datatimer">
+	                    <label>开始日期</label>
+	                    <div class="input-group date date_picker" id="beginTime" style="display: inline-flex;">
+	                        <input type="text" class="form-control input-sm" ng-model="beginTime" style="z-index: 0;height: 34px;"/>
+	                        <span class="input-group-addon">
+	                            <i class="fa fa-calendar"></i>
+	                        </span>
+	                    </div>
                     </div>
-                    <div class="form-item">
-                        <label>结束日期</label>
-                        <div class="input-group date date_picker" id="endTime">
-                            <input type="text" class="form-control input-short-o" ng-model="endTime">
-                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        </div>
-                    </div>
-					<div class="form-item">
-						<label>是否公有</label>
+                	<div class="form-item datatimer">
+	                    <label>结束日期</label>
+	                    <div class="input-group date date_picker" id="endTime" style="display: inline-flex;">
+	                        <input type="text" class="form-control input-sm" ng-model="endTime" style="z-index: 0;height: 34px;"/>
+	                        <span class="input-group-addon">
+	                            <i class="fa fa-calendar"></i>
+	                        </span>
+	                    </div>
+                	</div>
+					<div class="form-item" style="display: inline-flex;" >
+						<label style="width:107px;">是否公有</label>
 						<select class="form-control select-short" ng-change="selectChange();" ng-model="doc.public" >
 							<option value="1">公有</option>
 							<option value="2">私有</option>
@@ -45,22 +44,17 @@
                     <button type="submit" class="btn btn-primary" ng-click="reSet()" style="margin-left:20px ;">
                         <i class="fa fa-search"></i>重置
                     </button>
-					<div class="input-group fr">
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#docList">
-							<i class="fa fa-plus"></i> 新增文档
-						</button>
-					</div>
 				</form>
 			</div>
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="table-responsive">
-					<!--<div class="table-bar">-->
-						<!--<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#docList">-->
-                            <!--<i class="fa fa-plus"></i> 新增文档-->
-                        <!--</button>-->
-					<!--</div>-->
+					<div class="table-bar">
+						<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#docList">
+                            <i class="fa fa-plus"></i> 新增文档
+                        </button>
+					</div>
 					<table class="table table-bordered table-hover" data-filter="#filter">
 						<tr>
 							<th>序号</th>
@@ -120,7 +114,7 @@
 							</div>
 						</div>
 						<div class="file-item">
-							<label style="padding-right: 31px;text-indent: 4px;">上传文件</label>
+							<label>上传文件</label>
 							<div class="form-group">
 								<div class="wid-100">
 									<input id="uploadfile" type="file" name="file">

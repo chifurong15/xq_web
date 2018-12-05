@@ -35,13 +35,14 @@
 							$scope.userName1 = res.data.userName;
 							$scope.cellphone = res.data.cellphone;
 							$scope.regionName = res.data.regionName;
-							if (res.data.gender == 1){
-								$scope.gender = '男';
-							}else{
-								if (res.data.gender == 2) {
-									$scope.gender = '女';
-								}
-							}
+							// if (res.data.gender == 1){
+							// 	$scope.gender = '男';
+							// }else{
+							// 	if (res.data.gender == 2) {
+							// 		$scope.gender = '女';
+							// 	}
+							// }
+							$scope.gender = res.data.gender;
 							$scope.regionId = res.data.regionId;
 							$scope.email = res.data.email;
 							$scope.birthday = res.data.birthday;

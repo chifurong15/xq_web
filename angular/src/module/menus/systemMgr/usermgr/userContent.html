@@ -1,10 +1,5 @@
 
 <div class="wrapper-md" ng-controller="userContentController">
-  <div class="panel panel-default m-n">
-    <div class="panel-body" style="position: relative;">
-      <span class="tag">编辑用户信息</span><span class="tag-right"></span>
-    </div>
-  </div>
   <div class="panel panel-default pmcontainer">
     <div class="panel-body">
       <div class="search-form">
@@ -34,11 +29,12 @@
           <div class="form-item">
             <label>性别</label>
             <div class="input-group searchinputbox" style="width:157px;">
-              <select class="form-control w-sm inline v-middle" id="xb">
-              <option value="1" ng-if="gender == '男'">{{gender}}</option>
-              <option value="2" ng-if="gender == '女'">{{gender}}</option>
-              <option value="1" ng-if="gender == '女'">男</option>
-              <option value="2" ng-if="gender == '男'">女</option>
+              <select class="form-control w-sm inline v-middle" id="xb" ng-model='gender'>
+             <!--  <option value="1" ng-if="gender == '男'">{{gender}}</option>
+              <option value="2" ng-if="gender == '女'">{{gender}}</option> -->
+               <!-- <option value="0" >请选择</option> -->
+              <option value="1" >男</option>
+              <option value="2" >女</option>
               </select>
             </div>
             <i class="star" style="margin-left:5px;">*</i>

@@ -115,13 +115,14 @@ app.controller(
             var reGetProducts = function () {
                 // var serviceUrl = $localStorage.platformRouterConfig['serviceUrl'];
                 $http({
-                    url: $localStorage.serviceUrl + '/smUser/queryUserList',
+                    url: $localStorage.serviceUrl + '/smUser/queryUserListByRegion',
                     method: 'get',
                     params: {
                         regionId: $scope.regionId,
                         name: $scope.name,
                         pageNumber: $scope.paginationConf.currentPage,
-                        pageSize: $scope.paginationConf.itemsPerPage
+                        pageSize: $scope.paginationConf.itemsPerPage,
+                        roleId: $scope.role
                     },
                 }).success(function (res) {
                     if (res.resCode == 1) {
@@ -276,40 +277,42 @@ app.controller(
                 );
             }
             $scope.userTypeFind = function (x) {
-                if (x == null) {
-                    $http({
-                        url: $localStorage.serviceUrl + '/smUser/queryUserList',
-                        method: 'get',
-                        params: {
-                            pageNumber: $scope.paginationConf.currentPage,
-                            pageSize: $scope.paginationConf.itemsPerPage
-                        },
-                    }).success(function (res) {
-                        if (res.resCode == 1) {
-                            $scope.paginationConf.totalItems = res.data.totalNum;
-//		            // 变更产品条目
-                            $scope.userList = res.data.records;
-                        } else {
-                            alert("服务器异常!");
-                        }
-                    }).error(function (error) {
-                    });
-                } else {
-                    $http({
-                        method: "GET",
-                        url: $localStorage.serviceUrl + "/smUser/queryUserList",
-                        params: {roleId: x.id},
-                    }).success(
-                        function (res) {
-                            if (res.resCode == 1) {
-                                $scope.paginationConf.totalItems = res.data.totalNum;
-                                $scope.userList = res.data.records;
-                            } else {
-                                alert("服务器异常!");
-                            }
-                        }
-                    );
-                }
+                $scope.role = x == null ? null : x.id;
+                reGetProducts();
+//                 if (x == null) {
+//                     $http({
+//                         url: $localStorage.serviceUrl + '/smUser/queryUserList',
+//                         method: 'get',
+//                         params: {
+//                             pageNumber: $scope.paginationConf.currentPage,
+//                             pageSize: $scope.paginationConf.itemsPerPage
+//                         },
+//                     }).success(function (res) {
+//                         if (res.resCode == 1) {
+//                             $scope.paginationConf.totalItems = res.data.totalNum;
+// //		            // 变更产品条目
+//                             $scope.userList = res.data.records;
+//                         } else {
+//                             alert("服务器异常!");
+//                         }
+//                     }).error(function (error) {
+//                     });
+//                 } else {
+//                     $http({
+//                         method: "GET",
+//                         url: $localStorage.serviceUrl + "/smUser/queryUserList",
+//                         params: {roleId: x.id},
+//                     }).success(
+//                         function (res) {
+//                             if (res.resCode == 1) {
+//                                 $scope.paginationConf.totalItems = res.data.totalNum;
+//                                 $scope.userList = res.data.records;
+//                             } else {
+//                                 alert("服务器异常!");
+//                             }
+//                         }
+//                     );
+//                 }
             }
 
             //   $scope.find = function () {
