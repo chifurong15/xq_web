@@ -33,10 +33,6 @@
                             noneSelectedText : '请选择',
                             dropupAuto: false
                         });
-                        $('.selectpicker1').selectpicker({
-                            noneSelectedText : '请选择',
-                            dropupAuto: false
-                        });
 
 						// 编辑时获取原数据
 
@@ -113,6 +109,13 @@
 							method: 'get',
 							callBack: function (res) {
 								$scope.personList = res.data.records;
+                                var select = $("#slpk2");
+                                for (var i = 0; i <$scope.personList.length; i++) {
+                                    select.append("<option value='"+$scope.personList[i].name+"'>"
+                                        + $scope.personList[i].name + "</option>");
+                                }
+                                $('.selectpicker2').selectpicker('val', '');
+                                $('.selectpicker2').selectpicker('refresh');
 							}
 						})
 					}
@@ -139,11 +142,13 @@
                         getAllRiver();
                         $("#slpkRiver").selectpicker('val',$scope.reach);
                         $("#slpkRiver").selectpicker('refresh');
-						$scope.personnel = data.personnel;
+                        $scope.personnel = data.personnel;
+                        $("#slpk2").selectpicker('val',$scope.personnel);
+                        $("#slpk2").selectpicker('refresh');
 						$('#personnel').val(data.personnel)
-                        console.log($scope.region);
-                        console.log($scope.reach);
-                        console.log($scope.personnel);
+                        // console.log($scope.region);
+                        // console.log($scope.reach);
+                        // console.log($scope.personnel);
                     }
 
 					
@@ -187,13 +192,13 @@
                          //     anim: 3
                          // });
 						// }
-						// else if (!$scope.personnel) {
-                         // layer.alert("请选择下发人员", {
-                         //     skin: 'my-skin',
-                         //     closeBtn: 1,
-                         //     anim: 3
-                         // });
-						// }
+						else if (!$scope.personnel) {
+                         layer.alert("请选择下发人员", {
+                             skin: 'my-skin',
+                             closeBtn: 1,
+                             anim: 3
+                         });
+						}
 						
 						// 新增任务
 						var params = {
@@ -203,7 +208,7 @@
 								date: $scope.searchTime,
                                 reachname: $scope.reach ? $scope.reach.join(',') : '',
                                 // coordinate: $scope.coordinate,
-                                personnel:$scope.personnel
+                                personnel:$scope.personnel ? $scope.personnel.join(',') : ''
 						}
 						// console.log(params)
 						if (!$scope.id) {
@@ -232,8 +237,7 @@
                                     regionid: $scope.region ? $scope.region.join(',') : '',
                                     date: $scope.searchTime,
                                     reachname: $scope.reach ? $scope.reach.join(',') : '',
-                                    leader: $scope.leader,
-                                    personnel:$scope.personnel
+                                    personnel:$scope.personnel ? $scope.personnel.join(',') : ''
 
                                 },
                                 callBack: function (res) {
