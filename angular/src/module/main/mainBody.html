@@ -174,30 +174,6 @@
                 </div>
 
             </div>
-            <!-- 模态框（Modal） -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                 data-backdrop="static" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                &times;
-                            </button>
-                            <h4 class="modal-title" id="myModalLabel">
-                                {{bulletin.title}}
-                            </h4>
-                        </div>
-                        <div class="modal-body" >
-                            <p ng-bind-html="bulletin.detail"></p>
-                            <img src="{{bulletin.attand_url}}" alt="" ng-if="showImg">
-                            <div id="pdfOb" ng-if="!showImg" style="margin:10px 0;height: 300px;"></div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="mid-panel col-xs-6 p-all-0">
             <div id="mid-map" class="panel panel-default m-all-0">
@@ -334,7 +310,36 @@
 
         </div>
     </div>
-
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">
+                        &times;
+                    </button>
+                    <button type="button" class="close" aria-hidden="true" ng-click="enlarge()" style="margin: 0 10px;">
+                        <i class="fa fa-expand" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="close" aria-hidden="true" ng-click="shrink()">
+                        <i class="fa fa-compress" aria-hidden="true"></i>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        {{bulletin.title}}
+                    </h4>
+                </div>
+                <div class="modal-body" style="overflow-x: hidden">
+                    <p ng-bind-html="bulletin.detail"></p>
+                    <img src="{{bulletin.attand_url}}" alt="" ng-if="showImg">
+                    <div id="pdfOb" ng-if="!showImg" style="margin:10px 0;height: 300px;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
     var myChart = echarts.init(document.getElementById('main'));
