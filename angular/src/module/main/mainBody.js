@@ -63,6 +63,21 @@
                     getProblem();
                 };
 
+                //模态框的全屏显示
+                $scope.enlarge = function () {
+                    $('.modal-dialog').addClass('enlarge');
+                    $('.modal-body').addClass('enlarge');
+                }
+                $scope.shrink = function () {
+                    $('.modal-dialog').removeClass('enlarge');
+                    $('.modal-body').removeClass('enlarge');
+                }
+                $scope.cancel = function () {
+                    $('#myModal').modal('hide');
+                    //$('.modal-dialog').removeClass('enlarge');
+                    //$('.modal-body').removeClass('enlarge');
+                }
+
                 var region = {
                     "longitude": 117.19203455803067,
                     "latitude": 39.08350838137276,
@@ -426,6 +441,7 @@
                         }
                     })
                     getData(id);
+                    $scope.shrink();
                     $('#myModal').modal('show');
                 }
 
