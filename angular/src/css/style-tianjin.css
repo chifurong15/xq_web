@@ -1661,7 +1661,9 @@ body .align-left .cross-simple-icon, body .align-left .cross-text{
 .form-item .near {
     width: 60px;
 }
-
+.anchaanfang .modal-body .form-item{
+    float: left;
+}
 .anchaanfang .form-item .near {
     width: 76px;
 }
@@ -2261,6 +2263,7 @@ body .c-ffffff a {
     padding: 5px;
     line-height: 24px;
 }
+
 
 /*会议制度执行情况*/
 

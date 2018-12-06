@@ -8,7 +8,7 @@
         </div>
     	<div class="panel panel-default">
     		<div class="panel-body">
-				<form class="form-inline" style="padding-left: 25%;">
+				<form class="form-inline">
 					<div class="form-item" >
                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
                         <input type="text" class="form-control input-short" ng-model="title">
@@ -20,7 +20,6 @@
 						</select>
 						<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 	                </div>
-	                <br />
 					<div class="form-item input-group date date_picker"id="J-postTime">
 						<label><font style="vertical-align: inherit;"><fot style="vertical-align: inherit;">检查日期</fot></font></label>
 						<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="checkDate">
@@ -33,7 +32,6 @@
 						</select>
 						<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 	                </div>
-	                <br />
 	                <div class="input-group form-item">
                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">任务类型</font></font></label>
         				<select  class="form-control select-short" style="width: 160px;" ng-model="taskType">
@@ -54,7 +52,7 @@
                            			                 
 				</form>
 
-				<div style="text-align: center;margin: 35px 0;">
+				<div style="text-align: left;margin: 35px 0;">
 	                <button type="button" class="btn btn-primary" style="margin: 0 50px;" ng-click="submit()" >创建并下发</button>
                     <button type="button" class="btn btn-default" ng-click="cancel()">取消</button>
                 </div>

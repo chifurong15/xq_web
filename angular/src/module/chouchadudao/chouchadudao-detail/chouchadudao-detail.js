@@ -139,7 +139,7 @@
                         $scope.title = data.title;
                         $scope.date = data.date;
                         $scope.leader = data.leader;
-                        $scope.region = data.reachname;
+                        $scope.region = data.regionname;
                         $scope.reach = data.reachname;
                         $scope.personnel = data.personnel;
                     }
