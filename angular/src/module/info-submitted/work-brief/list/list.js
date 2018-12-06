@@ -21,8 +21,8 @@
                                         $location, $log, $q, $rootScope, $window,
                                         routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
-                    //var apiPrefix = moduleService.getServiceUrl() + '/messageSent';
-                    var apiPrefix = 'http://10.0.9.203:8080' + '/messageSent';
+                    var apiPrefix = moduleService.getServiceUrl() + '/messageSent';
+                    //var apiPrefix = 'http://10.0.9.203:8080' + '/messageSent';
 
 
                     var regionTree;
