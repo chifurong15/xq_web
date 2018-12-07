@@ -79,6 +79,7 @@
 						$scope.searchTime = '';
 						$scope.state = '';
 						$scope.renumber = '';
+						$scope.title = '';
 					}
 					
 					// 新建

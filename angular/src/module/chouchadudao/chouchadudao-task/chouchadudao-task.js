@@ -111,7 +111,7 @@
 
                     // 查看
                     $scope.view = function (id) {
-                        localStorage.setItem('id', id);
+                        localStorage.setItem('detailId', id);
                         routeService.route('2-1-2', false);
                     }
 

@@ -90,7 +90,12 @@
                                 transformRequest: angular.identity
                             }
                         ).success(function (res) {
-                            $scope.accessory = res.data[0];
+                            if(res.resCode == 1) {
+                                layer.msg('上传成功', {times: 2000})
+                                $scope.accessory = res.data[0];
+                            }else{
+                                layer.msg('上传失败', {times: 2000})
+                            }
 
                         }).error(function (res) {
                             layer.msg('服务器异常，请稍后再试');

@@ -342,6 +342,8 @@
                         ).success(function (res) {
                             if (res.resCode == 1) {
                                 //console.log(res);
+                                layer.msg("上传成功");
+
                                 if (id == 1) {
                                     $scope.assessory = res.data[0];
                                 } else if (id == 2) {
@@ -350,7 +352,7 @@
                                     $scope.assessory = res.data[0];
                                 }
                             } else {
-                                layer.msg("服务器异常，请稍后再试");
+                                layer.msg("上传失败");
                             }
                         }).error(function (res) {
                             layer.msg('服务器异常，请稍后再试');
