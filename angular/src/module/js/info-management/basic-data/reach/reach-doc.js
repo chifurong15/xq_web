@@ -120,37 +120,51 @@ var modulePrefix = "/watersource";
 			 * 文件上传
 			 */
 			$scope.submit = function(){
-				
-					var formFile = new FormData();
-					var fileObj = document.querySelector('input[type=file]').files[0];
-	            	
-	                formFile.append("file", fileObj); //加入文件对象
-	                formFile.append("reachId", $scope.reachId); 
-	                formFile.append("type", $scope.fileUid); 
-	                
-					var data = formFile;
-					debugger
-					$http({
-						method: 'post',
-						url: moduleService.getServiceUrl() + modulePrefix +"/v1/doc/add",
-						data: data,
-						headers: {'Content-Type': undefined},
-							transformRequest: angular.identity
-						}
-					).success(function(res) {
-						if(res.resCode == 1){
-							console.log(res);
-							$scope.fileData = res.data;
-							$("#reachDocModal").modal('hide');
-						}else{
-	            			layer.msg("服务器异常，请稍后再试");
-						}
-					}).error(function(res){
-		                layer.msg('服务器异常，请稍后再试');
+				var formFile = new FormData();
+				var fileObj = document.querySelector('input[type=file]').files[0];
+                formFile.append("filePath", fileObj); //加入文件对象
+				var data = formFile;
+				$http({
+					method: 'post',
+					url: moduleService.getServiceUrl() + modulePrefix +"/v1/doc/upload",
+					data: data,
+					headers: {'Content-Type': undefined},
+						transformRequest: angular.identity
+					}
+				).success(function(res) {
+					if(res.resCode == 1){
+						var jsonFile = [{'name':res.data.name, 'path':res.data.virtualPath, 'type':res.data.extension}];
+                        jsonFile = JSON.stringify(jsonFile)
+                        $http({
+                            url: moduleService.getServiceUrl() +'/watersource/v1/doc/add',
+                            method: 'POST',
+                            params: {
+                                type: $scope.fileUid,
+                                jsonFile: jsonFile,
+                                reachId: $scope.reachId,
+                            }}).success(function(res){
+                            	if(res.resCode == 1){
+                                    var index = layer.open({
+                                        title: '提示',
+                                        content: '新增成功',
+                                        yes: function(index, layero){
+                                            getReachDocList();
+                                            layer.close(index);
+                                            $("#uploadfile").fileinput('refresh').fileinput('enable');
+                                            $('#reachDocModal').find('.file-preview .close').trigger('click');
+                                            $('#reachDocModal').modal('hide');
+                                        }
+                                    });
+                                }
+                            });
+					}else{
+            			layer.msg("服务器异常，请稍后再试");
+					}
+				}).error(function(res){
+	                layer.msg('服务器异常，请稍后再试');
 	            });
-				
 			}
-			
+
 			/**
 			 * 文件状态
 			 */

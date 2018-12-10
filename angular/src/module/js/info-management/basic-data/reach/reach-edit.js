@@ -98,6 +98,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                 $scope.reachDetailData.grade = String($scope.reachDetailData.grade);
                 $scope.reachDetailData.whether = String($scope.reachDetailData.whether);
                 $scope.reachDetailData.isVirtual = String($scope.reachDetailData.isVirtual);
+                 CKEDITOR.instances.editor.setData($scope.reachDetailData.overView);
 
                 $scope.waterclassify = $scope.reachDetailData.classify == 'C' ? '库段' : $scope.reachDetailData.classify=="B" ? '湖段' : '河段';
                 //河湖库名称
@@ -670,6 +671,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                 var len =/^\d+(?:\.\d{1,2})?$/;
                 $scope.add = function() {
                     var param = $scope.reachDetailData;
+                    param.overView = CKEDITOR.instances.editor.getData();
                     var data = {
                         id:param.id,
                         reachName: param.reachName,
@@ -694,7 +696,6 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                         theirCode: param.theirCode,
                         overView: param.overView
                     };
-                    param.overView = CKEDITOR.instances.editor.getData();
                     if(!param.reachName || !jsname.test(param.reachName) == null) {
                         layer.alert("请完善信息", {
                             skin: 'my-skin',
