@@ -22,29 +22,37 @@
                                              routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl() + '/statistic';
-
+                    //var apiPrefix = 'http://10.0.9.116:7024' + '/statistic';
 
                     $scope.init = function () {
+                        var date = new Date();
+                        var year = date.getFullYear();
+                        var month = date.getMonth();
+                        if(month == 0){
+                            month = 12;
+                        }
+                        $scope.searchTime1 = year + '-' + month;
+                        $scope.searchTime2 = year + '-' + month;
                         getList1();
                         getList2();
                     }
 
                     // 区考核排名列表
                     function getList1 () {
-                        // $ajaxhttp.myhttp({
-                        //     url: apiPrefix + '',
-                        //     method: 'get',
-                        //     params: {
-                        //
-                        //     },
-                        //     callBack: function (res) {
-                        //         if(res.resCode == 1){
-                        //             $scope.regionSortList = res.data.list;
-                        //         }else{
-                        //             layer.msg(res.resMsg, {time:2000});
-                        //         }
-                        //     }
-                        // })
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/statistic/regionStatistic',
+                            method: 'get',
+                            params:{
+                                date:$scope.searchTime1
+                            },
+                            callBack: function (res) {
+                                if(res.resCode == 1){
+                                    $scope.regionSortList = res.data;
+                                }else{
+                                    layer.msg(res.resMsg, {time:2000});
+                                }
+                            }
+                        })
                     }
 
                     // 河湖水生态环境质量排名列表
@@ -52,6 +60,9 @@
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/statistic/riverStatistic',
                             method: 'get',
+                            params:{
+                                date:$scope.searchTime2
+                            },
                             callBack: function (res) {
                                 if(res.resCode == 1){
                                     $scope.envirSortList = res.data;
@@ -79,11 +90,15 @@
                         $(this).addClass('tab-active').siblings().removeClass('tab-active');
                         $(".js-con").find('.con').hide().eq(index).show();
                     });
+                    //默认上个月
+
+
 
                     $('#J-searchTime1').datetimepicker({
                         format: 'YYYY-MM',
                         locale: moment.locale('zh-cn')
                     }).on('dp.change', function (c) {
+                        $scope.searchTime1 = moment().subtract(1, 'month').startOf('month').format('YYYY-MM') + ' - ' + moment().subtract(1, 'month').endOf('month').format('YYYY-MM');
                         $scope.searchTime1 = new moment(c.date).format('YYYY-MM');
                         $scope.$apply();
                     });
