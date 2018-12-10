@@ -125,30 +125,26 @@
                         </h4>
                     </div>
                     <div class="modal-body">
-                        <form class="form-inline" style="padding-left: 25%;">
+                        <form class="form-inline">
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通报名称</font></font></label>
                                 <input type="text" class="form-control input-short" ng-model="title">
                             </div>
-                            <br />
-                            <div class="input-group date date_picker form-item" id="J-searchTime1">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">需反馈时间</font></font></label>
-                                <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="deadlinetime">
-                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                            </div>
-                            <br>
                             <div class="input-group form-item" style="z-index: 100;">
                                 <label><font style="vertical-align: inherit;"><font
                                         style="vertical-align: inherit;">需反馈区域</font></font></label>
                                 <select ng-model="region" id="slpk" class="form-control select-short selectpicker" multiple style="width: 160px;" ng-change="getChangeRegion(region)">
                                 </select>
                             </div>
-                            <br>
+                            <div class="input-group date date_picker form-item" id="J-searchTime1">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">需反馈时间</font></font></label>
+                                <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="deadlinetime">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
                             <div class="input-group form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">内容</font></font></label>
                                 <textarea class="form-control" id="deblock_udid2" name="deblock_udid" rows="2" style="width: 160px;max-width: 160px;" ng-model="content"></textarea>
                             </div>
-                            <br>
                             <div class="form-item" >
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">方案附件</font></font></label>
                                 <button class="btn btn-info" ng-click="getUploadFile()"><i class="fa fa-css3"></i>上传附件</button>

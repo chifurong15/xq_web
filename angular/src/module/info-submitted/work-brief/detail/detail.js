@@ -21,59 +21,48 @@
                                           $location, $log, $q, $rootScope, $window,
                                           routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
-                    //var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
-                    //var apiPrefix = 'http://10.0.9.133:6008' + '/bulletin';
+                    var apiPrefix = moduleService.getServiceUrl() + '/messageSent';
+                    //var apiPrefix = 'http://10.0.9.203:8080' + '/messageSent';
+
 
                     var regionTree;
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree';
 
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
-
+                    $scope.detailId = localStorage.getItem('id');
                     $scope.init = function () {
                         $scope.author = $scope.userInfo.userName;
+
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/v1/msWorkReports/userinfo',
+                            method:'get',
+                            callBack:function (res) {
+                                $scope.num = res.data;
+                            }
+                        })
                         getList();
                         getAllRegion ();
+
                     }
                     // 获取数据列表
                     function getList () {
-                        $scope.moduleList = [
-                            {
-                                title:'28期工作简报',
-                                time:'2018-11-05',
-                                person:'张三',
-                                regionName:'和平区',
-                                direction:'发起',
-                                status:'1',
-                                isAccept:'0'
+
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/v1/msSentReports/selectList',
+                            method:'get',
+                            params:{
+                                reportId:$scope.detailId,
+                                pageNumber: $scope.paginationConf.currentPage,
+                                pageSize: $scope.paginationConf.itemsPerPage,
+                                acceptState:$scope.acceptState,
+                                sentState:$scope.sentState,
+                                region:$scope.regionName,
                             },
-                            {
-                                title:'27期工作简报',
-                                time:'2018-11-10',
-                                person:'李四',
-                                regionName:'和平区',
-                                direction:'发起',
-                                status:'3',
-                                isAccept:'1'
-                            },
-                            {
-                                title:'26期工作简报',
-                                time:'2018-11-24',
-                                regionName:'河北区',
-                                person:'王五',
-                                direction:'发起',
-                                status:'2',
-                                isAccept:'1'
-                            },
-                            {
-                                title:'25期工作简报',
-                                time:'2018-10-25',
-                                person:'岑锐',
-                                regionName:'津南区',
-                                direction:'发起',
-                                status:'3',
-                                isAccept:'0'
-                            },
-                        ];
+                            callBack:function (res) {
+                                $scope.moduleList = res.data.list
+                                $scope.paginationConf.totalItems = res.data.total;
+                            }
+                        })
                     }
 
                     function getAllRegion (){
@@ -155,49 +144,173 @@
                     }
 
                     // 查看
-                    $scope.view = function () {
-
+                    $scope.view = function (id) {
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/v1/msSentReports/detail',
+                            method:'get',
+                            params:{
+                                id:id,
+                            },
+                            callBack:function (res) {
+                                if(res.resCode == 1){
+                                    if(res.data){
+                                        $scope.detailData = res.data;
+                                        $scope.briefDescription = $scope.detailData.briefDescription;
+                                        var options = {
+                                            pdfOpenParams: {
+                                                pagemode: "thumbs",
+                                                navpanes: 0,
+                                                toolbar: 0,
+                                                statusbar: 0,
+                                                view: "FitV"
+                                            }
+                                        };
+                                        PDFObject.embed($scope.detailData.accessoryUrl, "#pdfOb", options);
+                                    }
+                                }else{
+                                    layer.msg('服务器异常，请稍后再试',{times:500})
+                                }
+                            }
+                        })
                         $('#myModal').modal('show');
-
 
                     }
 
+                    $scope.download = function (path) {
+                        window.open(path)
+                    }
+
+                    //退回
+                    $scope.sendBack = function (id) {
+                        $('#myModal2').modal('show');
+                        $scope.backId = id;
+                    }
+                    //添加退回原因
+                    $scope.sendBackSave = function () {
+                        if (!$scope.backReason) {
+                            layer.alert("请输入退回原因", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        }
+                        var params = {
+                            sentReportsId:$scope.backId,
+                            returnReason:$scope.backReason
+                        }
+
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/v1/msWorkReturn/add',
+                            method:'post',
+                            params:params,
+                            callBack:function (res) {
+                                if(res.resCode == 1){
+                                    layer.msg('退回成功',{times:500});
+                                    $('#myModal2').modal('hide');
+                                    $scope.backReason = '';
+                                    getList();
+                                }else{
+                                    layer.msg('服务器异常，请稍后再试',{times:500})
+                                }
+                            }
+                        })
+                    }
+
+                    //获取退回历史列表
+                    $scope.viewBack = function (id) {
+                        $('#myModal3').modal('show');
+                        getBackList (id);
+                    }
+                    function getBackList (id){
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/v1/msWorkReturn/selectList',
+                            method:'get',
+                            params:{
+                                sentReportsId:id,
+                                pageNumber: $scope.paginationConf.currentPage,
+                                pageSize: $scope.paginationConf.itemsPerPage
+                            },
+                            callBack:function (res) {
+                                if(res.resCode == 1){
+                                    $scope.backList = res.data.list;
+                                    $scope.paginationConf.totalItems = res.data.total;
+                                }else{
+                                    layer.msg('服务器异常，请稍后再试',{times:500})
+                                }
+                            }
+                        })
+                    }
+
+
                     //是否采纳
-                    $scope.adopt =  function (id) {
-                        if(id == 1){
-                            layer.msg('接受采纳',{times:500});
+                    $scope.adopt =  function (isAdopt,id) {
+                        if(isAdopt == 1){
+                            $ajaxhttp.myhttp({
+                                url:apiPrefix + '/v1/msSentReports/updateAcceptState',
+                                method:'put',
+                                params:{
+                                    id:id,
+                                    acceptState:1
+                                },
+                                callBack:function (res) {
+                                    if(res.resCode == 1){
+                                        layer.msg('接受采纳',{times:500});
+                                        getList();
+                                    }else{
+                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                                    }
+                                }
+                            })
                         }else{
-                            layer.msg('拒绝采纳',{times:500});
+                            $ajaxhttp.myhttp({
+                                url:apiPrefix + '/v1/msSentReports/updateAcceptState',
+                                method:'put',
+                                params:{
+                                    id:id,
+                                    acceptState:2
+                                },
+                                callBack:function (res) {
+                                    if(res.resCode == 1){
+                                        layer.msg('拒绝采纳',{times:500});
+                                        getList();
+                                    }else{
+                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                                    }
+                                }
+                            })
                         }
                     }
 
                     //删除
-                    $scope.delete =  function () {
-                        layer.msg('删除成功',{times:500})
-                    }
-
-                    //合并周动态
-                    $scope.mesh = function () {
-                        var layerIndex = layer.confirm('当前还有未上报的区域，是否要合并？\n' +
-                            '\n' +
-                            '\n' +
-                            '重复合并会覆盖上一次的合并文件。', {
-                            btn: ['合并', '取消']
+                    $scope.delete =  function (id) {
+                        var layerIndex = layer.confirm('确定删除本条数据吗？', {
+                            btn: ['确定', '取消']
                         }, function () {
-                            layer.msg('合并成功',{times:500})
+                            $ajaxhttp.myhttp({
+                                url:apiPrefix + '/v1/msSentReports/delete',
+                                method:'delete',
+                                params:{
+                                    id:id
+                                },
+                                callBack:function (res) {
+                                    if(res.resCode == 1){
+                                        layer.msg('删除成功',{times:500});
+                                        getList();
+                                    }else{
+                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                                    }
+                                }
+                            })
                             layer.close(layerIndex);
                         }, function () {
 
                         });
                     }
 
-
                     //返回
                     $scope.goBack=function(){
                         history.back(-1);
                     }
-
-
 
                     // 开始时间
                     var startTime = $('#startTime').datetimepicker({
@@ -376,6 +489,6 @@
                     };
 
                     // 当他们一变化的时候，重新获取数据条目
-                    $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', getList);
+                    $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', getBackList);
                 } ]);
 })(window, angular);

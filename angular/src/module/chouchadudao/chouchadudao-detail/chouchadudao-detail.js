@@ -35,7 +35,7 @@
 							url: apiPrefix + '/v1/AnzhaInvestigations/detail',
 							method: 'get',
 							params: {
-								id: localStorage.getItem('id')
+								id: localStorage.getItem('detailId')
 							},
 							callBack: function (res) {
 								if(res.resCode == 1){
@@ -66,7 +66,7 @@
                             url: apiPrefix + '/v1/AnzhaReport/list',
                             method: 'get',
                             params: {
-                                anzhaid: localStorage.getItem('id'),
+                                anzhaid: localStorage.getItem('detailId'),
 								status:$scope.status
                             },
                             callBack: function (res) {
@@ -139,7 +139,7 @@
                         $scope.title = data.title;
                         $scope.date = data.date;
                         $scope.leader = data.leader;
-                        $scope.region = data.reachname;
+                        $scope.region = data.regionname;
                         $scope.reach = data.reachname;
                         $scope.personnel = data.personnel;
                     }

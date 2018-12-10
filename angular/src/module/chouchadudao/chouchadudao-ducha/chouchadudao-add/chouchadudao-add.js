@@ -72,9 +72,10 @@
                             }
                         ).success(function (res) {
                             if (res.resCode == 1) {
+                                layer.msg("上传成功");
                                 $scope.accessory = res.data[0];
                             } else {
-                                layer.msg("服务器异常，请稍后再试");
+                                layer.msg("上传失败");
                             }
                         }).error(function (res) {
                             layer.msg('服务器异常，请稍后再试');

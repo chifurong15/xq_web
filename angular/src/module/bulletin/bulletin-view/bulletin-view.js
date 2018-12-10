@@ -80,7 +80,7 @@
                                         view: "FitV"
                                     }
                                 };
-                                PDFObject.embed($scope.bulletin.attand_url, "#pdfOb", options);
+                                PDFObject.embed($scope.bulletin.detail_url, "#pdfOb", options);
 							}
 						})
 					}

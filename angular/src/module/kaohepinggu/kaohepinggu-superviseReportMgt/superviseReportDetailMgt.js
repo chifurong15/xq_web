@@ -48,6 +48,7 @@
 
 				$scope.init = function(){
                     $scope.eventImgUrl = 'http://10.0.0.196/api/download' ;
+                    $scope.showImg = false;
 					/**
 					 * 获取详情
 					 */
@@ -80,10 +81,42 @@
 				$scope.viewFile = function(id){
                  	$('#myModal').modal('show');
                  	if(id ==1){
+                        if($scope.reportList.problemAttant){
+                            var str = $scope.reportList.problemAttant.substring($scope.reportList.problemAttant.length-3);
+                            var str1 = $scope.reportList.problemAttant.substring($scope.reportList.problemAttant.length-4);
+                            if(str.toLowerCase() == 'jpg' || str.toLowerCase() == 'jpeg' || str.toLowerCase() == 'png'  || str1.toLowerCase() == 'jpeg'){
+                                $scope.showImg = true;
+                                $scope.imgUrl = $scope.reportList.problemAttant;
+                            }else{
+                                $scope.showImg = false;
+                            }
+                        }
                         PDFObject.embed($scope.reportList.problemAttant, "#file", options);
                     }else if(id ==2){
+                        $scope.showImg = false;
+                        if($scope.reportList.proposedTreatment){
+                            var str = $scope.reportList.proposedTreatment.substring($scope.reportList.proposedTreatment.length-3);
+                            var str1 = $scope.reportList.proposedTreatment.substring($scope.reportList.proposedTreatment.length-4);
+                            if(str.toLowerCase() == 'jpg' || str.toLowerCase() == 'jpeg' || str.toLowerCase() == 'png'  || str1.toLowerCase() == 'jpeg'){
+                                $scope.showImg = true;
+                                $scope.imgUrl = $scope.reportList.proposedTreatment;
+                            }else{
+                                $scope.showImg = false;
+                            }
+                        }
                         PDFObject.embed($scope.reportList.proposedTreatment, "#file", options);
                     }else if(id ==3){
+                        $scope.showImg = false;
+                        if($scope.reportList.processingResults){
+                            var str = $scope.reportList.processingResults.substring($scope.reportList.processingResults.length-3);
+                            var str1 = $scope.reportList.processingResults.substring($scope.reportList.processingResults.length-4);
+                            if(str.toLowerCase() == 'jpg' || str.toLowerCase() == 'jpeg' || str.toLowerCase() == 'png'  || str1.toLowerCase() == 'jpeg'){
+                                $scope.showImg = true;
+                                $scope.imgUrl = $scope.reportList.processingResults;
+                            }else{
+                                $scope.showImg = false;
+                            }
+                        }
                         PDFObject.embed($scope.reportList.processingResults, "#file", options);
                     }
 				}

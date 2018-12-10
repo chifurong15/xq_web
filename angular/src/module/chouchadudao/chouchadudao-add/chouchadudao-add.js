@@ -28,7 +28,6 @@
 						var bulletin = globalParam.getter().bulletin || {};
 						
 						$scope.id = bulletin.id;
-                        console.log('000',$scope.id);
                         $('.selectpicker').selectpicker({
                             noneSelectedText : '请选择',
                             dropupAuto: false
@@ -138,17 +137,18 @@
 						$scope.coordinate = data.coordinate;
                         $scope.region = data.regionid.split(',');
                         $scope.reach = data.reachname.split(',');
+                        $scope.personnel = data.personnel.split(',');
+
                         $("#slpk").selectpicker('val',$scope.region);
+                        $("#slpk").selectpicker('refresh');
+
                         getAllRiver();
+                        // console.log($scope.reach);
                         $("#slpkRiver").selectpicker('val',$scope.reach);
                         $("#slpkRiver").selectpicker('refresh');
-                        $scope.personnel = data.personnel;
+                        // console.log($scope.personnel);
                         $("#slpk2").selectpicker('val',$scope.personnel);
                         $("#slpk2").selectpicker('refresh');
-						$('#personnel').val(data.personnel)
-                        // console.log($scope.region);
-                        // console.log($scope.reach);
-                        // console.log($scope.personnel);
                     }
 
 					

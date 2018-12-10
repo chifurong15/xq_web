@@ -34,7 +34,7 @@
 
                         <div class="form-item">
                             <label>是否采纳</label>
-                            <select class="form-control select-short">
+                            <select class="form-control select-short" ng-model="acceptState">
                                 <option value="">全部</option>
                                 <option value="1">已采纳</option>
                                 <option value="2">未采纳</option>
@@ -64,23 +64,26 @@
                         <tr ng-repeat="module in moduleList" style="cursor:pointer;">
                             <td>{{$index+1}}</td>
                             <td>{{module.title}}</td>
-                            <td>{{module.regionName}}</td>
-                            <td>{{module.time}}</td>
-                            <td>{{module.person}}</td>
+                            <td>{{module.region}}</td>
+                            <td>{{module.beginTime}}</td>
+                            <td>{{module.initiator}}</td>
                             <td>
-                                <span ng-if="module.status == 1" class="label label-danger">已上报</span>
-                                <span ng-if="module.status == 2" class="label label-success">未上报</span>
-                                <span ng-if="module.status == 3" class="label label-info">已退回</span>
+                                <span ng-if="module.sentState == 1" class="label label-danger">已上报</span>
+                                <span ng-if="module.sentState == 2" class="label label-success">未上报</span>
+                                <span ng-if="module.sentState == 3" class="label label-info" ng-click="viewBack(module.id)" style="cursor:pointer;">已退回</span>
+                                <span ng-if="module.sentState != 1 &&  module.sentState != 2 &&  module.sentState != 3">-</span>
                             </td>
                             <td>
-                                <span ng-if="module.isAccept == 1">已采纳</span>
-                                <span ng-if="module.isAccept == 0">未采纳</span>
+                                <span ng-if="module.acceptState == 1">已采纳</span>
+                                <span ng-if="module.acceptState == 2">未采纳</span>
+                                <span ng-if="module.acceptState == 3">-</span>
                             </td>
                             <td>
                                 <a class="btn btn-primary btn-xs" ng-click="view(module.id)"><i class="fa fa-info" title="查看"></i></a>
-                                <a class="btn btn-primary btn-xs" ng-click="adopt(1)"><i class="fa fa-thumbs-up" title="采纳"></i></a>
-                                <a class="btn btn-primary btn-xs" ng-click="adopt(2)"><i class="fa fa-thumbs-down" title="不采纳"></i></a>
-                                <a class="btn btn-primary btn-xs" ng-click="delete(module.id)"><i class="fa fa-trash-o" title="退回"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-if="num ==2 && module.acceptState == 3 && module.sentState != 2" ng-click="adopt(1,module.id)"><i class="fa fa-thumbs-up" title="采纳"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-if="num ==2 && module.acceptState == 3 && module.sentState != 2" ng-click="adopt(2,module.id)"><i class="fa fa-thumbs-down" title="不采纳"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-click="delete(module.id)"><i class="fa fa-trash-o" title="删除"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-if="num == 2 && module.sentState == 1"ng-click="sendBack(module.id)"><i class="fa fa-stop" title="退回"></i></a>
                             </td>
                         </tr>
                     </table>
@@ -117,8 +120,6 @@
             </div>
         </div>
 
-
-
         <!-- 查看工作简报详情（Modal） -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
             <div class="modal-dialog">
@@ -136,36 +137,39 @@
                             <div>
                                 <div class="form-item">
                                     <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">报送标题:</font></font></label>
-                                    <span>26期工作简报</span>
+                                    <span>{{detailData.title}}</span>
                                 </div>
                                 <div class="form-item">
                                     <label>报送区域:</label>
-                                    <span >河北区</span>
+                                    <span >{{detailData.region}}</span>
                                     <!--style="white-space: pre-wrap;display: inline-block;width: 80%;"-->
                                 </div>
                                 <div class="form-item">
                                     <label>报送截止:</label>
-                                    <span >2018-11-30</span>
+                                    <span >{{detailData.deadline}}</span>
                                     <!--style="white-space: pre-wrap;display: inline-block;width: 80%;"-->
                                 </div>
                                 <div class="form-item">
                                     <label>发起人:</label>
-                                    <span>张三</span>
+                                    <span>{{detailData.initiator}}</span>
                                 </div>
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">简报说明:</font></font></label>
-                                <textarea class="form-control" rows="3"></textarea>
+                                <textarea class="form-control" rows="3" ng-model="briefDescription"></textarea>
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">简报附件:</font></font></label>
-                                <span>/gongzuojianbao24.doc</span>
-                                <button type="button" class="btn btn-primary btn-sm">
+                                <span>{{detailData.ren}}</span>
+                                <button type="button" class="btn btn-primary btn-sm" ng-click="download(detailData.accessoryUrl)" style="margin: 0 10px;">
+                                    <i class="fa fa-file-archive-o"></i> 预览
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm" ng-click="download(detailData.downurl)">
                                     <i class="fa fa-download"></i> 下载
                                 </button>
                             </div>
-
                         </form>
+                        <!--<div id="pdfOb" style="margin: 20px 0;height: 500px;"></div>-->
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
@@ -175,7 +179,71 @@
         </div>
 
 
+        <!-- 退回（Modal） -->
+        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel3">
+                            退回
+                        </h4>
+                    </div>
+                    <div class="modal-body" style="height: 300px;">
+                        <form class="form-inline">
+                            <div>
+                                <div class="form-item">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">退回原因:</font></font></label>
+                                    <textarea class="form-control" rows="3" ng-model="backReason"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="sendBackSave()">保存并关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- 退回历史（Modal） -->
+        <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel4">
+                            退回历史
+                        </h4>
+                    </div>
+                    <div class="modal-body" style="height: 300px;">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover" data-filter="#filter">
+                                <tr>
+                                    <th style="width: 5%;">序号</th>
+                                    <th style="width: 10%">退回日期</th>
+                                    <th style="width: 10%">退回原因</th>
+                                </tr>
+                                <tr ng-repeat="item in backList">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{item.returnDate}}</td>
+                                    <td>{{item.returnReason}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--<tm-pagination conf="paginationConf"></tm-pagination>-->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 

@@ -24,6 +24,15 @@
 					var apiPrefix = moduleService.getServiceUrl() + '/ancha';
                     //var apiPrefix = 'http://10.0.9.133:7021' + '/ancha';
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
+                    var options = {
+                        pdfOpenParams: {
+                            pagemode: "thumbs",
+                            navpanes: 0,
+                            toolbar: 0,
+                            statusbar: 0,
+                            view: "FitV"
+                        }
+                    };
 
 					$scope.init = function () {
                         //getList();
@@ -59,7 +68,36 @@
 							}
 						})
 					}
-					
+
+
+					$scope.viewDetail = function (id){
+						$('#myModal1').modal('show');
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/AnzhaScheme/detail',
+                            method: 'get',
+                            params: {
+                                id:id
+                            },
+                            callBack: function (res) {
+								if(res.data){
+                               		$scope.detailInfo = res.data;
+								}
+
+                            }
+                        })
+					}
+
+                    //查看附件
+                    $scope.viewFile = function (path) {
+                        $('#myModal').modal('show');
+                        PDFObject.embed(path, "#file", options);
+
+                    }
+                    //取消查看
+                    $scope.cancel = function () {
+                        $('#myModal').modal('hide');
+                    }
+
 					$('#J-searchTime').datetimepicker({
 	                    format: 'YYYY-MM',
 	                    locale: moment.locale('zh-cn')

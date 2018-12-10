@@ -16,7 +16,7 @@
         		<div class="panel-body js-con">
         			<div class="basis-con con">        				
 			    		<div class="panel-body">
-							<form class="form-inline" style="padding-left: 25%;">
+							<form class="form-inline">
 								<div class="form-item" >
 									<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
 									<input type="text" class="form-control input-short" ng-model="detail.title" readonly>
@@ -90,7 +90,7 @@
 									</div>
 								</form>
 							</div>
-        					<div style="text-align: center;margin: 35px 0;" ng-if="checkList.length != 0">
+        					<div style="text-align: left;margin: 35px 0;" ng-if="checkList.length != 0">
 								<button type="button" class="btn btn-primary" style="margin-right: 30px;" ng-click="send()" >确认并派发任务</button>
 								<button type="button" class="btn btn-default" ng-click="cancel()">取消</button>
 			                </div>
