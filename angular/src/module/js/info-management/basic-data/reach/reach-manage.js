@@ -218,7 +218,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                 }).success(
                     function success(result) {
                         console.log(result);
-                        $localStorage.reachDetailData = result;
+                        $localStorage.reachDetailData = result.data;
                         routeService.route(510, false);
                     });
             };
@@ -235,7 +235,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                 }).success(
                     function success(result) {
                         console.log(result);
-                        $localStorage.reachEditData = result;
+                        $localStorage.reachEditData = result.data;
                         routeService.route(511, false);
                     });
             };
