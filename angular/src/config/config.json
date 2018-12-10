@@ -764,7 +764,50 @@
         "module/info-submitted/conference-system/conference-system.js"
       ],
       "description": "二级菜单-会议制度执行情况"
-    }
+    },
+    {
+      "seqId": "8-3",
+      "parentId": "8",
+      "isLeaf": false,
+      "isRoot": true,
+      "name": "督导检查情况",
+      "menuType": 1,
+      "icon": "fa fa-building",
+      "url": "module/info-submitted/supervision/supervision.html",
+      "requireJS": [
+        "module/info-submitted/supervision/supervision.js"
+      ],
+      "description": "二级菜单-督导检查情况"
+    },
+    {
+      "seqId": "8-4",
+      "parentId": "8",
+      "isLeaf": false,
+      "isRoot": true,
+      "name": "镇街制度执行情况",
+      "menuType": 1,
+      "icon": "fa fa-tasks",
+      "url": "module/info-submitted/townStreet/townStreet.html",
+      "requireJS": [
+        "module/info-submitted/townStreet/townStreet.js"
+      ],
+      "description": "二级菜单-镇街制度执行情况"
+    },
+    {
+      "seqId": "8-5",
+      "parentId": "8",
+      "isLeaf": false,
+      "isRoot": true,
+      "name": "报送统计",
+      "menuType": 1,
+      "icon": "fa fa-signal",
+      "url": "module/info-submitted/submitStatistics/submitStatistics.html",
+      "requireJS": [
+        "module/info-submitted/submitStatistics/submitStatistics.js"
+      ],
+      "description": "二级菜单-报送统计"
+    },
+
 
   ],
   "components": [

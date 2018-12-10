@@ -23,14 +23,14 @@
                     <div class="bulletin-view-content" ng-bind-html="bulletin.detail"></div>
                     <p ng-if="!!bulletin.attand_url">
                         附件:<span>{{bulletin.ren}}</span>
-                        <a href="{{bulletin.downurl}}" target="_blank"
+                        <a href="{{bulletin.attand_url}}" target="_blank"
                            style="color: #3189e1;margin-left: 10px;">下载</a>
                         <!--<a ng-href="{{getServiceUrl}}/bulletin/v1/bulletin/lookload?attand_url={{bulletin.attand_url}}"-->
                         <!--target="_blank" class="downOrLook">预览</a>-->
                     </p>
                 </div>
                 <div style="margin: 10px 0;">
-                    <img src="{{bulletin.downurl}}" alt="" ng-if="showImg" >
+                    <img src="{{bulletin.attand_url}}" alt="" ng-if="showImg" >
                 </div>
                 <div id="pdfOb" style="margin: 20px 0;height: 500px;" ng-if="!showImg"></div>
             </div>

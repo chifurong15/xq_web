@@ -246,17 +246,22 @@
 				 * 关闭上传附件
 				 */
 				$scope.getUpload = function(id){
+                    var formFile = new FormData();
                     if( id == 1 ){
                         $('#coverModal1').modal('hide');
+                        // var fileObj = document.querySelector('input[type=file]').files[0];
+                        var fileObj = document.querySelector('#uploadfile1').files[0];
+                        formFile.append("file", fileObj); //加入文件对象
                     }else if( id == 2 ) {
                         $('#coverModal2').modal('hide');
+                        var fileObj = document.querySelector('#uploadfile2').files[0];
+                        formFile.append("file", fileObj); //加入文件对象
                     }else if ( id == 3 ) {
                         $('#coverModal3').modal('hide');
+                        var fileObj = document.querySelector('#uploadfile3').files[0];
+                        formFile.append("file", fileObj); //加入文件对象
                     }
-                    var formFile = new FormData();
-                    var fileObj = document.querySelector('input[type=file]').files[0];
 
-                    formFile.append("file", fileObj); //加入文件对象
                     $http({
                             method: 'post',
                             url: apiPrefix + '/v1/socialReport/upload',
@@ -269,8 +274,9 @@
                             //console.log(res);
                             if(id == 1){
                                 $scope.problemAttant = res.data;
-							}else if(id == 2) {
+                            }else if(id == 2) {
                                 $scope.proposedTreatment = res.data;
+
                             }else if (id == 3){
                                 $scope.processingResults = res.data;
                             }
@@ -303,7 +309,7 @@
 							overTime: $scope.overtime
 
 					}
-                    console.log(params);
+                    //console.log(params);
                     $ajaxhttp.myhttp({
                         url: apiPrefix + '/v1/socialReport/addReport',
                         method: 'POST',

@@ -98,7 +98,10 @@
 					</h4>
 				</div>
 				<div class="modal-body">
-					<div id="file" style="height: 400px;"></div>
+					<div style="margin: 10px 0;" ng-show="showImg" >
+						<img src="{{imgUrl}}" alt="">
+					</div>
+					<div id="file" style="height: 400px;" ng-show="!showImg"></div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
