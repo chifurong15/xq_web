@@ -1,4 +1,4 @@
-<div ng-controller="superviseEvaluateDetailMgtCtrl" ng-init="init()">
+<div ng-controller="superviseEvaluateDetailMgtCtrl" class="superviseEvaluateDetailMgtCtrl" ng-init="init()">
 
     <div class="wrapper-md">
         <div class="panel panel-default m-n">
@@ -50,12 +50,18 @@
                             <label>是否满意：</label>
                             <span>{{superviseList.isSatisfied == 0 ? '不满意' : '满意'}}</span>
                         </div>
-                        <div class="form-item">
+                        <br>
+                        <div class="form-item" ng-show="showInput">
                             <label>不满意原因：</label>
-                            <span ng-bind="superviseList.dissatisfiedReason"></span>
+                            <!--<span ng-bind="superviseList.dissatisfiedReason"></span>-->
+                            <div class="clearfix reasonList" style="margin: 0 100px;">
+                                <label class="checkbox-inline" ng-repeat="item in reasonList" style="width: auto;display: block;float: inherit;">
+                                    <input type="checkbox" value="{{item}}">{{item}}
+                                </label>
+                            </div>
+
                         </div>
                         <br>
-
                         <div class="form-item">
                             <label>其他说明：</label>
                             <span ng-bind="superviseList.otherReason"></span>

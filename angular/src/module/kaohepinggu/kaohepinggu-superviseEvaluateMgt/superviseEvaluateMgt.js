@@ -52,6 +52,19 @@
                     getAssessList();
 
                     $scope.showInput = false;
+                    $scope.checkList = [];
+                    $scope.reasonList = [
+                        '水质发臭、水体颜色不正常',
+                        '水域内有阻水障碍物',
+                        '水面环境卫生差',
+                        '水环境治理和水生态修复设施损坏',
+                        '排水口门水质异常',
+                        '偷排污染物、清洗有污染容器等影响水质行为',
+                        '河长制公示牌、宣传牌内容不准确或损坏',
+                        '堤岸环境卫生差',
+                        '河道两岸存在违法建筑、围垦、占压等现象',
+                        '其他不满'
+                    ]
 
                 }
 
@@ -192,7 +205,6 @@
                     }else {
                         $scope.showInput = false;
                     }
-
                 }
 
 
@@ -224,6 +236,7 @@
                 //修改
                 $scope.edit = function (module) {
                     $('#myModal').modal('show');
+
                     $scope.editId = module.id;
                     $scope.evaluationDate = module.evaluationDate;
                     $scope.riverName1 = module.riverName;
@@ -232,10 +245,25 @@
                     $scope.townChairman = module.townChairman;
                     $scope.supervisor = module.supervisor;
                     $scope.otherReason = module.otherReason;
+                    $scope.assess1 = module.isSatisfied;
+                    $scope.reason = module.dissatisfiedReason.split('|');
+                    $.each($scope.reason,function(i,item){
+                        $("input[type='checkbox'][value="+item+"]").attr("checked","checked");
+                    });
+                    if($scope.assess1 == 0){
+                        $scope.showInput = true;
+                    }else{
+                        $scope.showInput = false;
+                    }
                 }
+
+
 
                 //修改评价满意度
                 $scope.submit = function (){
+                    $('input[type="checkbox"]:checked').each(function(){
+                        $scope.checkList.push($(this).val());
+                    });
                     var params = {
                         id: $scope.editId,
                         termNumber: $scope.evaluationDate,
@@ -245,8 +273,10 @@
                         townChairman: $scope.townChairman,
                         supervisor: $scope.supervisor,
                         otherReason: $scope.otherReason,
-                        isSatisfied:$scope.assess1
+                        isSatisfied:$scope.assess1,
+                        dissatisfiedReason:$scope.checkList ? $scope.checkList.join('|') : ''
                     }
+
                     $ajaxhttp.myhttp({
                         url: apiPrefix + '/v1/SocialEvaluation/updateEvaluation',
                         method: 'put',

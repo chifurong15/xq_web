@@ -1,4 +1,4 @@
-<div ng-controller="superviseEvaluateMgtCtrl" ng-init="init()">
+<div ng-controller="superviseEvaluateMgtCtrl" class="superviseEvaluateMgtCtrl" ng-init="init()">
     <div class="wrapper-md">
         <div class="panel panel-default m-n">
             <div class="panel-body" style="position: relative;">
@@ -109,57 +109,55 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-inline" style="padding-left: 25%;">
+                    <form class="form-inline">
                         <div class="input-group date date_picker form-item" id="J-searchTime1">
                             <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">评价时间</font></font></label>
                             <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="evaluationDate">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         </div>
-                        <br>
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">水域名称</font></font></label>
                             <input type="text" class="form-control input-short" ng-model="riverName1">
                         </div>
-                        <br>
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">具体位置</font></font></label>
                             <input type="text" class="form-control input-short" ng-model="problemPosition1">
                         </div>
-                        <br />
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">区级河长</font></font></label>
                             <input type="text" class="form-control input-short" ng-model="districtChairman">
                         </div>
-                        <br>
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">镇街级河长</font></font></label>
                             <input type="text" class="form-control input-short" ng-model="townChairman">
                         </div>
-                        <br>
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">监督员姓名</font></font></label>
                             <input type="text" class="form-control input-short" ng-model="supervisor">
                         </div>
-                        <br />
                         <div class="form-item">
                             <label>满意度</label>
                             <select ng-model="assess1" ng-options="ai.id as ai.name for ai in assessList"
-                                    ng-change="getAssessChange(ai.id)" class="form-control select-short">
+                                    ng-change="getAssessChange(assess1)" class="form-control select-short">
                                 <option value="">请选择</option>
                             </select>
                         </div>
-                        <br>
-                        <!--<div class="form-item" ng-show="showInput">-->
-                            <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">不满意原因</font></font></label>-->
-                            <!--&lt;!&ndash;<input type="text" class="form-control input-short" ng-model="issuer">&ndash;&gt;-->
-                            <!--<textarea class="form-control" id="deblock_udid1" name="deblock_udid" ng-model="dissatisfiedReason" rows="3" style="width: 160px;max-width: 160px;"></textarea>-->
-                        <!--</div>-->
-                        <!--<br>-->
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">其它说明</font></font></label>
                             <!--<input type="text" class="form-control input-short" ng-model="issuer">-->
                             <textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="otherReason" rows="3" style="width: 160px;max-width: 160px;"></textarea>
                         </div>
+
+                        <div class="form-item" ng-show="showInput">
+                            <label>不满意原因</label>
+                            <div class="clearfix reasonList" style="margin: 0 110px;">
+                                <label class="checkbox-inline" ng-repeat="item in reasonList" style="width: auto;display: block;float: inherit;">
+                                    <input type="checkbox" value="{{item}}">{{item}}
+                                </label>
+                            </div>
+
+                        </div>
+
                     </form>
                 </div>
                 <div class="modal-footer">
