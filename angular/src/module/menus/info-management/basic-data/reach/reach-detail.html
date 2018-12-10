@@ -7,112 +7,84 @@
         </div>
         <div class="panel panel-default m-all-0">
             <div class="panel-body pos-rlt panel-map" style="padding-right: 340px;">
-
                 <div class="reachDetailContent m-t-20">
                     <div class="form-item">
                         <label>河湖库名称：</label>
-                        <span ng-bind="reachFName" class="form-span">河湖库名称</span>
+                        <span ng-bind="reachDetailData.reachName"></span>
+                        <span>{{classify=='C'?'库段':classify=='B'?'湖段':'河段'}}</span>
                     </div>
                     <div class="form-item">
                         <label>河湖库别名：</label>
-                        <span ng-bind="alias" class="form-span">河湖库别名</span>
-                    </div>
-                    <div class="form-item">
-                        <label>水质等级：</label>
-                        <span ng-bind="water_quality" class="form-span">水质等级</span>
-                    </div>
-                    <br/>
-                    <div class="form-item">
-                        <label>淤积情况：</label>
-                        <span ng-bind="deposit_status" class="form-span">淤积情况</span>
+                        <span ng-bind="reachDetailData.alias"></span>
                     </div>
                     <div class="form-item">
                         <label>河湖库级别：</label>
-                        <span ng-bind="river_part" class="form-span">河湖库级别</span>
+                        <span ng-bind="reachDetailData.gradeName"></span>
+                    </div>
+                    <br>
+                    <div class="form-item">
+                        <label>水质等级：</label>
+                        <span ng-bind="reachDetailData.waterGradeName"></span>
                     </div>
                     <div class="form-item">
+                        <label>淤积情况：</label>
+                        <span ng-bind="reachDetailData.siltyName"></span>
+                    </div>
+                    <div class="form-item">
+                        <label>河湖库编码：</label>
+                        <span ng-bind="reachDetailData.reachCode"></span>
+                    </div>
+                    <br>
+                    <div class="form-item">
                         <label>起点：</label>
-                        <span ng-bind="startPoint" class="form-span">起点</span>
+                        <span ng-bind="reachDetailData.startPoint"></span>
                     </div>
                     <div class="form-item">
                         <label>终点：</label>
-                        <span ng-bind="endPoint" class="form-span">起点</span>
-                    </div>
-                    <br/>
-                    <div class="form-item">
-                        <label>河湖库编码：</label>
-                        <span ng-bind="reachCode" class="form-span">河湖库编码</span>
+                        <span ng-bind="reachDetailData.endPoint"></span>
                     </div>
                     <div class="form-item">
                         <label>是否虚拟：</label>
-                        <span ng-bind="whether_virtual" class="form-span">是否虚拟</span>
+                        <span ng-bind="reachDetailData.isVirtualName"></span>
+                    </div>
+                    <br>
+                    <div class="form-item">
+                        <label>长度(km)：</label>
+                        <span ng-bind="reachDetailData.length"></span>
                     </div>
                     <div class="form-item">
-                        <label>长度：</label>
-                        <span ng-bind="length" class="form-span">长度km</span>
+                        <label>宽度(km)：</label>
+                        <span ng-bind="reachDetailData.width"></span>
                     </div>
-                    <div class="form-item">
-                        <label>宽度：</label>
-                        <span ng-bind="width" class="form-span">宽度km</span>
-                    </div>
-                    <br/>
                     <div class="form-item">
                         <label>流经区域：</label>
-                        <span ng-bind="throughArea" class="form-span">流经区域</span>
+                        <span ng-bind="reachDetailData.throughArea"></span>
                     </div>
-                    <div ng-if="riverBox" class="dis-i-blc">
-                        <div class="form-item">
-                            <label>河段岸别：</label>
-                            <span ng-bind="river_shore" class="form-span">河段岸别</span>
-                        </div>
-                        <div class="form-item">
-                            <label>所属区域：</label>
-                            <span ng-bind="region" class="form-span">所属区域</span>
-                        </div>
-                        <div class="form-item">
-                            <label>所属河流：</label>
-                            <span ng-bind="river_ztree" class="form-span">所属河流</span>
-                        </div>
-                    </div>
-                    <div ng-if="lakesBox" class="dis-i-blc">
-                        <div class="form-item">
-                            <label>湖段岸别：</label>
-                            <span ng-bind="lakes_shore" class="form-span">湖段岸别</span>
-                        </div>
-                        <div class="form-item">
-                            <label>所属区域：</label>
-                            <span ng-bind="region" class="form-span">所属区域</span>
-                        </div>
-                        <div class="form-item">
-                            <label>所属湖泊：</label>
-                            <span ng-bind="lakes_ztree" class="form-span">所属湖泊</span>
-                        </div>
-                    </div>
-                    <div ng-if="reservoirBox" class="dis-i-blc">
-                        <div class="form-item">
-                            <label>库段岸别：</label>
-                            <span ng-bind="reservoir_shore" class="form-span">库段岸别</span>
-                        </div>
-                        <div class="form-item">
-                            <label>所属区域：</label>
-                            <span ng-bind="region" class="form-span">所属区域</span>
-                        </div>
-                        <div class="form-item">
-                            <label>所属水库：</label>
-                            <span ng-bind="reservoir_ztree" class="form-span">所属水库</span>
-                        </div>
+                    <br>
+                    <div class="form-item">
+                        <label>{{classify=='C'?'库段':classify=='B'?'湖段':'河段'}}岸别：</label>
+                        <span ng-bind="reachDetailData.shoreName"></span>
                     </div>
                     <div class="form-item">
-                        <label>是否位于山区：</label>
-                        <span ng-bind="whether_mountain" class="form-span">是否位于山区</span>
+                        <label>所属区域：</label>
+                        <span ng-bind="reachDetailData.regionName"></span>
                     </div>
+                    <div class="form-item">
+                        <label>所属{{classify=='C'?'水库':classify=='B'?'湖泊':'河流'}}：</label>
+                        <span ng-bind="reachDetailData.pName"></span>
+                    </div>
+                    <br>
+                    <div class="form-item">
+                        <label width='108'>位于山区：</label>
+                        <span ng-bind="reachDetailData.whetherName"></span>
+                    </div>
+                    <br>
                     <div class="editorPanel">
                         <label class="editorLabel">概述内容</label>
                         <div class="editorContent" ng-bind-html="drainageOverview|trustHtml" style="padding: 8px 12px;">
                         </div>
                     </div>
                 </div>
-
                 <!-- map -->
                 <div class="right-panel wid-25 dis-i-blc">
                     <div class="basicMap" id="mapContainer">
