@@ -181,8 +181,8 @@
                     // 清空水质评分细则
                     function clearF () {
                         $scope.paramType1 = '';
-                        $scope.boundaryValue = '';
-                        $scope.matchRule = '';
+                        $scope.maxValue = '';
+                        $scope.minValue = '';
                         $scope.waterQualityType1 = '';
                         $scope.scoreCoefficient = '';
                         $scope.factorCoefficient = '';
@@ -191,9 +191,9 @@
                     // 清空水质变化细则
                     function clearK () {
                         $scope.paramType3 = '';
-                        $scope.boundaryValue3 = '';
-                        $scope.leftMatch = '';
-                        $scope.rightMatch = '';
+                        $scope.minValue3 = '';
+                        $scope.maxValue3 = '';
+                        // $scope.rightMatch = '';
                         $scope.deductValue = '';
                         $scope.sortOrder3 = '';
                     }
@@ -204,8 +204,8 @@
                         if(item){
                             $scope.idF = item.id;
                             $scope.paramType1 = item.paramType;
-                            $scope.boundaryValue = item.boundaryValue;
-                            $scope.matchRule = item.matchRule;
+                            $scope.maxValue = item.maxValue;
+                            $scope.minValue = item.minValue;
                             $scope.waterQualityType1 = item.waterQualityType;
                             $scope.scoreCoefficient = item.scoreCoefficient;
                             $scope.factorCoefficient = item.factorCoefficient;
@@ -221,8 +221,8 @@
                         var params = {
                             ruleName: $scope.waterQualityRule,
                             paramType: $scope.paramType1,
-                            boundaryValue: $scope.boundaryValue,
-                            matchRule: $scope.matchRule,
+                            maxValue: $scope.maxValue,
+                            minValue: $scope.minValue,
                             waterQualityType: $scope.waterQualityType1,
                             scoreCoefficient:$scope.scoreCoefficient,
                             factorCoefficient: $scope.factorCoefficient,
@@ -293,9 +293,9 @@
                         if(item){
                             $scope.idK = item.id;
                             $scope.paramType3 = item.paramType;
-                            $scope.boundaryValue3 = item.boundaryValue;
-                            $scope.leftMatch = item.leftMatch;
-                            $scope.rightMatch = item.rightMatch;
+                            $scope.maxValue3 = item.maxValue;
+                            $scope.minValue3 = item.minValue3;
+                            // $scope.rightMatch = item.rightMatch;
                             $scope.deductValue = item.deductValue;
                             $scope.sortOrder3 = item.sortOrder;
                         }else{
@@ -309,9 +309,9 @@
                         var params = {
                             assessRule: $scope.waterQualityRule1,
                             paramType: $scope.paramType3,
-                            boundaryValue: $scope.boundaryValue3,
-                            leftMatch: $scope.leftMatch,
-                            rightMatch: $scope.rightMatch,
+                            maxValue: $scope.maxValue3,
+                            minValue: $scope.minValue3,
+                            // rightMatch: $scope.rightMatch,
                             deductValue:$scope.deductValue,
                             sortOrder:$scope.sortOrder3
                         }

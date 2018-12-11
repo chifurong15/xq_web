@@ -122,8 +122,8 @@
                                                 <th width="5%">序号</th>
                                                 <th width="10%">规则名称</th>
                                                 <th width="10%">参数类型</th>
-                                                <th width="10%">分解数值</th>
-                                                <th width="10%">匹配规则</th>
+                                                <th width="10%">最大值</th>
+                                                <th width="10%">最小值</th>
                                                 <th width="10%">水质类别</th>
                                                 <th width="10%">得分系数</th>
                                                 <th width="10%">修正系数</th>
@@ -134,8 +134,8 @@
                                                 <td>{{$index+1}}</td>
                                                 <td>{{item.ruleName}}</td>
                                                 <td>{{item.paramType}}</td>
-                                                <td>{{item.boundaryValue}}</td>
-                                                <td>{{item.matchRule}}</td>
+                                                <td>{{item.maxValue}}</td>
+                                                <td>{{item.minValue}}</td>
                                                 <td>{{item.waterQualityType}}</td>
                                                 <td>{{item.scoreCoefficient}}</td>
                                                 <td>{{item.factorCoefficient}}</td>
@@ -199,9 +199,8 @@
                                                 <th width="5%">序号</th>
                                                 <th width="10%">评分规则</th>
                                                 <th width="10%">参数类型</th>
-                                                <th width="10%">分界数值</th>
-                                                <th width="10%">左匹配规则</th>
-                                                <th width="10%">右匹配规则</th>
+                                                <th width="10%">最大值</th>
+                                                <th width="10%">最小值</th>
                                                 <th width="10%">扣分数</th>
                                                 <th width="10%">排序</th>
                                                 <th width="15%">操作</th>
@@ -210,9 +209,8 @@
                                                 <td>{{$index+1}}</td>
                                                 <td>{{item.assessRule}}</td>
                                                 <td>{{item.paramType}}</td>
-                                                <td>{{item.boundaryValue}}</td>
-                                                <td>{{item.leftMatch}}</td>
-                                                <td>{{item.rightMatch}}</td>
+                                                <td>{{item.maxValue}}</td>
+                                                <td>{{item.minValue}}</td>
                                                 <td>{{item.deductValue}}</td>
                                                 <td>{{item.sortOrder}}</td>
                                                 <td style="text-align: center;">
@@ -253,17 +251,15 @@
                         </h4>
                     </div>
                     <div class="modal-body" style="height: 220px;">
-                        <form class="form-inline" style="padding-left: 25%;">
+                        <form class="form-inline">
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">规则名称</font></font></label>
                                 <input type="text" class="form-control input-short" ng-model="ruleName">
                             </div>
-                            <br>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">排序</font></font></label>
                                 <input name="number" min="1" class="form-control input-short" ng-model="sortOrder">
                             </div>
-                            <br>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">备注</font></font></label>
                                 <textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="remark" rows="3" style="width: 160px;max-width: 160px;"></textarea>
@@ -291,7 +287,7 @@
                         </h4>
                     </div>
                     <div class="modal-body">
-                        <form class="form-inline" style="padding-left: 25%;">
+                        <form class="form-inline">
                             <div class="input-group form-item" style="float: left;">
                                 <label><font style="vertical-align: inherit;"><font
                                         style="vertical-align: inherit;">参数类型</font></font></label>
@@ -305,25 +301,26 @@
                                     <!--<option value="5">总氮</option>-->
                                 </select>
                             </div>
-                            <br>
                             <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">分解数值</font></font></label>
-                                <input name="number" min="1" class="form-control input-short" ng-model="boundaryValue">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">最大值</font></font></label>
+                                <input name="number" min="1" class="form-control input-short" ng-model="maxValue">
                             </div>
-                            <br>
-                            <div class="input-group form-item" style="float: left;">
-                                <label><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">匹配规则</font></font></label>
-                                <select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="matchRule">
-                                    <option value="">无规则</option>
-                                    <option value="<"><</option>
-                                    <option value="<="><=</option>
-                                    <option value=">">></option>
-                                    <option value=">=">>=</option>
-                                    <option value="=">=</option>
-                                </select>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">最小值</font></font></label>
+                                <input name="number" min="1" class="form-control input-short" ng-model="minValue">
                             </div>
-                            <br>
+                            <!--<div class="input-group form-item" style="float: left;">-->
+                                <!--<label><font style="vertical-align: inherit;"><font-->
+                                        <!--style="vertical-align: inherit;">匹配规则</font></font></label>-->
+                                <!--<select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="matchRule">-->
+                                    <!--<option value="">无规则</option>-->
+                                    <!--<option value="<"><</option>-->
+                                    <!--<option value="<="><=</option>-->
+                                    <!--<option value=">">></option>-->
+                                    <!--<option value=">=">>=</option>-->
+                                    <!--<option value="=">=</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
                             <div class="input-group form-item" style="float: left;">
                                 <label><font style="vertical-align: inherit;"><font
                                         style="vertical-align: inherit;">水质类别名称</font></font></label>
@@ -338,18 +335,15 @@
                                     <option value="Ⅸ">Ⅸ</option>
                                 </select>
                             </div>
-                            <br>
-                            <div class="form-item">
+                            <div class="form-item" style="position: relative;left: -275px;">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">得分系数</font></font></label>
                                 <input name="number" min="1" class="form-control input-short" ng-model="scoreCoefficient">
                             </div>
-                            <br>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">修正系数</font></font></label>
                                 <input name="number" min="1" class="form-control input-short" ng-model="factorCoefficient">
                             </div>
-                            <br>
-                            <div class="form-item">
+                            <div class="form-item" style="position: relative;top: -40px;">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">排序</font></font></label>
                                 <input name="number" min="1" class="form-control input-short" ng-model="sortOrder1">
                             </div>
@@ -362,7 +356,7 @@
                 </div>
             </div>
         </div>
-        <!--水质评分细则 F值---模态框-->
+        <!--水质评分细则 k值---模态框-->
         <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -375,7 +369,7 @@
                         </h4>
                     </div>
                     <div class="modal-body">
-                        <form class="form-inline" style="padding-left: 25%;">
+                        <form class="form-inline">
                             <div class="input-group form-item" style="float: left;">
                                 <label><font style="vertical-align: inherit;"><font
                                         style="vertical-align: inherit;">参数类型</font></font></label>
@@ -389,42 +383,42 @@
                                     <!--<option value="5">总氮</option>-->
                                 </select>
                             </div>
-                            <br>
                             <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">分解数值</font></font></label>
-                                <input name="number" min="1" class="form-control input-short" ng-model="boundaryValue3">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">最大值</font></font></label>
+                                <input name="number" min="1" class="form-control input-short" ng-model="maxValue3">
                             </div>
-                            <br>
-                            <div class="input-group form-item" style="float: left;">
-                                <label><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">左匹配规则</font></font></label>
-                                <select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="leftMatch">
-                                    <option value="">无规则</option>
-                                    <option value="<"><</option>
-                                    <option value="<="><=</option>
-                                    <option value=">">></option>
-                                    <option value=">=">>=</option>
-                                    <option value="=">=</option>
-                                </select>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">最小值</font></font></label>
+                                <input name="number" min="1" class="form-control input-short" ng-model="minValue3">
                             </div>
-                            <br>
-                            <div class="input-group form-item" style="float: left;">
-                                <label><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">右匹配规则</font></font></label>
-                                <select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="rightMatch">
-                                    <option value="">无规则</option>
-                                    <option value="<"><</option>
-                                    <option value="<="><=</option>
-                                    <option value=">">></option>
-                                    <option value=">=">>=</option>
-                                    <option value="=">=</option>
-                                </select>
-                            </div>
+                            <!--<div class="input-group form-item" style="float: left;">-->
+                                <!--<label><font style="vertical-align: inherit;"><font-->
+                                        <!--style="vertical-align: inherit;">左匹配规则</font></font></label>-->
+                                <!--<select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="leftMatch">-->
+                                    <!--<option value="">无规则</option>-->
+                                    <!--<option value="<"><</option>-->
+                                    <!--<option value="<="><=</option>-->
+                                    <!--<option value=">">></option>-->
+                                    <!--<option value=">=">>=</option>-->
+                                    <!--<option value="=">=</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                            <!--<div class="input-group form-item" style="float: left;">-->
+                                <!--<label><font style="vertical-align: inherit;"><font-->
+                                        <!--style="vertical-align: inherit;">右匹配规则</font></font></label>-->
+                                <!--<select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="rightMatch">-->
+                                    <!--<option value="">无规则</option>-->
+                                    <!--<option value="<"><</option>-->
+                                    <!--<option value="<="><=</option>-->
+                                    <!--<option value=">">></option>-->
+                                    <!--<option value=">=">>=</option>-->
+                                    <!--<option value="=">=</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">扣分数</font></font></label>
                                 <input name="number" min="1" class="form-control input-short" ng-model="deductValue">
                             </div>
-                            <br>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">排序</font></font></label>
                                 <input name="number" min="1" class="form-control input-short" ng-model="sortOrder3">
