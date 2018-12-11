@@ -807,7 +807,20 @@
       ],
       "description": "二级菜单-报送统计"
     },
-
+    {
+      "seqId": "8-6",
+      "parentId": "8",
+      "isLeaf": false,
+      "isRoot": true,
+      "name": "工作简报",
+      "menuType": 1,
+      "icon": "fa fa-file-o",
+      "url": "module/info-submitted/infoReport/infoReport.html",
+      "requireJS": [
+        "module/info-submitted/infoReport/infoReport.js"
+      ],
+      "description": "二级菜单-工作简报"
+    }
 
   ],
   "components": [
