@@ -294,7 +294,7 @@
                             $scope.idK = item.id;
                             $scope.paramType3 = item.paramType;
                             $scope.maxValue3 = item.maxValue;
-                            $scope.minValue3 = item.minValue3;
+                            $scope.minValue3 = item.minValue;
                             // $scope.rightMatch = item.rightMatch;
                             $scope.deductValue = item.deductValue;
                             $scope.sortOrder3 = item.sortOrder;
