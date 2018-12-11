@@ -103,7 +103,7 @@
                                         <button type="button" class="btn btn-success"
                                                 ng-click="view(item.id , item.status)">查看
                                         </button>
-                                        <button type="button" class="btn btn-warning" ng-if="item.status == 2"
+                                        <button type="button" class="btn btn-warning" ng-if="item.status == 2 ||item.status == 3"
                                                 ng-click="oprate(item.id ,3 ,item.status)">核查
                                         </button>
                                     </td>
