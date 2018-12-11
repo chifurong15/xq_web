@@ -210,7 +210,7 @@
                         var params = {
                             whether: $('#is').val() == 1 ? '是': '否',
                             feedbackTime:$scope.currentdate,
-                            describe:$scope.describe,
+                            describe:$('#deblock_udid').val(),
                             filePath:$scope.assessory,
                             objectid: $scope.userInfo.id,
                             bulletinid:localStorage.getItem('id'),
