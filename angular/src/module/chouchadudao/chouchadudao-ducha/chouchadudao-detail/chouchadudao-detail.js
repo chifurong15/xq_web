@@ -72,8 +72,9 @@
                     }
 
                     //查看附件
-                    $scope.viewFile = function () {
-                        $('#myModal').modal('show');
+                    $scope.viewFile = function (path) {
+                        //$('#myModal').modal('show');
+                        window.open(path)
                     }
                     //取消查看
                     $scope.cancel = function () {

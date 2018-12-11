@@ -121,8 +121,9 @@
 
 
                     //查看附件
-                    $scope.viewFile = function () {
-                        $('#myModal2').modal('show');
+                    $scope.viewFile = function (path) {
+                        // $('#myModal2').modal('show');
+                        window.open(path)
                     }
                     //取消查看
                     $scope.cancel = function () {
