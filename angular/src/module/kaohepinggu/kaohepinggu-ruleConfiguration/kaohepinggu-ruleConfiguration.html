@@ -91,13 +91,14 @@
                                             style="vertical-align: inherit;">水质类别</font></font></label>
                                     <select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="waterQualityType">
                                         <option value="">全部</option>
-                                        <option value="Ⅰ-Ⅲ">Ⅰ-Ⅲ</option>
-                                        <option value="Ⅳ">Ⅳ</option>
-                                        <option value="Ⅴ">Ⅴ</option>
-                                        <option value="Ⅵ">Ⅵ</option>
-                                        <option value="Ⅶ">Ⅶ</option>
-                                        <option value="Ⅷ">Ⅷ</option>
-                                        <option value="Ⅸ">Ⅸ</option>
+                                        <option value="1">Ⅰ</option>
+                                        <option value="2">Ⅱ</option>
+                                        <option value="3">Ⅲ</option>
+                                        <option value="4">Ⅳ</option>
+                                        <option value="5">Ⅴ</option>
+                                        <option value="6">Ⅵ</option>
+                                        <option value="7">Ⅶ</option>
+                                        <option value="8">Ⅷ</option>
                                     </select>
                                 </div>
                                 <div class="form-item" style="float: right;">
@@ -151,7 +152,7 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <tm-pagination conf="paginationConf1"></tm-pagination>
+                                        <!--<tm-pagination conf="paginationConf1"></tm-pagination>-->
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="chartStatistics2">
@@ -224,7 +225,7 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <tm-pagination conf="paginationConf2"></tm-pagination>
+                                        <!--<tm-pagination conf="paginationConf2"></tm-pagination>-->
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="chartStatistics3">
@@ -243,7 +244,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel(1)">
                             &times;
                         </button>
                         <h4 class="modal-title" id="myModalLabel">
@@ -279,7 +280,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel(2)">
                             &times;
                         </button>
                         <h4 class="modal-title" id="myModalLabel2">
@@ -326,13 +327,14 @@
                                         style="vertical-align: inherit;">水质类别名称</font></font></label>
                                 <select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="waterQualityType1">
                                     <option value="">请选择</option>
-                                    <option value="Ⅰ-Ⅲ">Ⅰ-Ⅲ</option>
-                                    <option value="Ⅳ">Ⅳ</option>
-                                    <option value="Ⅴ">Ⅴ</option>
-                                    <option value="Ⅵ">Ⅵ</option>
-                                    <option value="Ⅶ">Ⅶ</option>
-                                    <option value="Ⅷ">Ⅷ</option>
-                                    <option value="Ⅸ">Ⅸ</option>
+                                    <option value="1">Ⅰ</option>
+                                    <option value="2">Ⅱ</option>
+                                    <option value="3">Ⅲ</option>
+                                    <option value="4">Ⅳ</option>
+                                    <option value="5">Ⅴ</option>
+                                    <option value="6">Ⅵ</option>
+                                    <option value="7">Ⅶ</option>
+                                    <option value="8">Ⅷ</option>
                                 </select>
                             </div>
                             <div class="form-item" style="position: relative;left: -275px;">
@@ -361,7 +363,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel(3)">
                             &times;
                         </button>
                         <h4 class="modal-title" id="myModalLabel3">

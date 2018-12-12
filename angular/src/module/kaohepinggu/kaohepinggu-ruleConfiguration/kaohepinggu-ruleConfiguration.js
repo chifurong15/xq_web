@@ -49,8 +49,8 @@
                     //获取水质评分细则列表 -- F值
                     function getFRule () {
                         var params = {
-                            pageNumber: $scope.paginationConf1.currentPage,
-                            pageSize: $scope.paginationConf1.itemsPerPage,
+                            //pageNumber: $scope.paginationConf1.currentPage,
+                            //pageSize: $scope.paginationConf1.itemsPerPage,
                             paramType: $scope.paramType,
                             waterQualityType: $scope.waterQualityType,
                             waterQualityRule: $scope.waterQualityRule
@@ -61,7 +61,7 @@
                             params:params,
                             callBack: function (res) {
                                 $scope.moduleList1 = res.data.list;
-                                $scope.paginationConf1.totalItems = res.data.total;
+                               /// $scope.paginationConf1.totalItems = res.data.total;
                             }
                         })
                     }
@@ -70,8 +70,8 @@
                     //获取水质变化细则列表 -- K值
                     function getKRule (){
                         var params = {
-                            pageNumber: $scope.paginationConf2.currentPage,
-                            pageSize: $scope.paginationConf2.itemsPerPage,
+                            //pageNumber: $scope.paginationConf2.currentPage,
+                           // pageSize: $scope.paginationConf2.itemsPerPage,
                             paramType: $scope.paramType2,
                             waterQualityRule: $scope.waterQualityRule1
                         }
@@ -81,7 +81,7 @@
                             params:params,
                             callBack: function (res) {
                                 $scope.moduleList2 = res.data.list;
-                                $scope.paginationConf2.totalItems = res.data.total;
+                                //$scope.paginationConf2.totalItems = res.data.total;
                             }
                         })
                     }
@@ -97,9 +97,10 @@
 
                     //查看F/K值明细
                     $scope.view = function (name ,tab) {
+                        $scope.tab = tab;
+                        alert(name)
                         if(tab == 1){ //跳转F值明细
                             $scope.isShow = true;
-
                             $scope.waterQualityRule = name;
                             getFRule ();
                         }else if (tab == 2){//跳转K值明细
@@ -404,7 +405,7 @@
                     $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', getScoreRule);
 
                     //评分细则分页
-                    if($scope.waterQualityRule){
+                    if($scope.waterQualityRule && $scope.tab == 1){
                         // 配置分页基本参数
                         $scope.paginationConf1 = {
                             currentPage: $location.search().currentPage ? $location.search().currentPage : 1,
@@ -412,12 +413,12 @@
                             pagesLength: 10,
                             perPageOptions: [1, 2, 3, 4, 5, 10],
                             onChange: function () {
-                                //console.log($scope.paginationConf.currentPage);
+                                //console.log($scope.paginationConf1.currentPage);
                                 $location.search('currentPage', $scope.paginationConf1.currentPage);
                             }
                         };
                         // 当他们一变化的时候，重新获取数据条目
-                        $scope.$watch('paginationConf1.currentPage + paginationConf1.itemsPerPage', getFRule);
+                        $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', getFRule);
                     }else{
                         // 配置分页基本参数
                         $scope.paginationConf1 = {
@@ -426,7 +427,7 @@
                             pagesLength: 10,
                             perPageOptions: [1, 2, 3, 4, 5, 10],
                             onChange: function () {
-                                //console.log($scope.paginationConf.currentPage);
+                                //console.log($scope.paginationConf1.currentPage);
                                 $location.search('currentPage', $scope.paginationConf1.currentPage);
                             }
                         };
@@ -434,7 +435,7 @@
                     }
 
                     //变化细则分页
-                    if($scope.waterQualityRule1){
+                    if($scope.waterQualityRule1 && $scope.tab == 2){
                         // 配置分页基本参数
                         $scope.paginationConf2 = {
                             currentPage: $location.search().currentPage ? $location.search().currentPage : 1,
@@ -442,12 +443,12 @@
                             pagesLength: 10,
                             perPageOptions: [1, 2, 3, 4, 5, 10],
                             onChange: function () {
-                                //console.log($scope.paginationConf.currentPage);
+                                //console.log('a',$scope.paginationConf2.currentPage);
                                 $location.search('currentPage', $scope.paginationConf2.currentPage);
                             }
                         };
                         // 当他们一变化的时候，重新获取数据条目
-                        $scope.$watch('paginationConf2.currentPage + paginationConf2.itemsPerPage', getFRule);
+                        $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', getKRule);
                     }else{
                         // 配置分页基本参数
                         $scope.paginationConf2 = {
@@ -456,7 +457,7 @@
                             pagesLength: 10,
                             perPageOptions: [1, 2, 3, 4, 5, 10],
                             onChange: function () {
-                                //console.log($scope.paginationConf.currentPage);
+                                //console.log('b',$scope.paginationConf2.currentPage);
                                 $location.search('currentPage', $scope.paginationConf2.currentPage);
                             }
                         };
