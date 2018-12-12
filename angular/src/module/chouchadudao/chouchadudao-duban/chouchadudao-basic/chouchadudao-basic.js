@@ -232,7 +232,7 @@
                             method: 'get',
                             params: {
                                 supervisionid: $scope.id,
-                                objectid: $scope.num == 5 ? $scope.userInfo.id : ''
+                                objectid: $scope.num == 5 ? $scope.userInfo.regionId : ''
                             },
                             callBack: function (res) {
                                 if(res.data){
