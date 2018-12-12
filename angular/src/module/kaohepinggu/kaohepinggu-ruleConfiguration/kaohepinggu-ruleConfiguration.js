@@ -98,7 +98,6 @@
                     //查看F/K值明细
                     $scope.view = function (name ,tab) {
                         $scope.tab = tab;
-                        alert(name)
                         if(tab == 1){ //跳转F值明细
                             $scope.isShow = true;
                             $scope.waterQualityRule = name;
