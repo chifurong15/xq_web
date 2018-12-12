@@ -107,7 +107,16 @@
 
                                     <td>{{item.outputSection}}</td>
 
-                                    <td>{{item.targetWaterQuality}}</td>
+                                    <td>
+                                        <span ng-if="item.targetWaterQuality == 1">Ⅰ</span>
+                                        <span ng-if="item.targetWaterQuality == 2">Ⅱ</span>
+                                        <span ng-if="item.targetWaterQuality == 3">Ⅲ</span>
+                                        <span ng-if="item.targetWaterQuality == 4">Ⅳ</span>
+                                        <span ng-if="item.targetWaterQuality == 5">Ⅴ</span>
+                                        <span ng-if="item.targetWaterQuality == 6">Ⅵ</span>
+                                        <span ng-if="item.targetWaterQuality == 7">Ⅶ</span>
+                                        <span ng-if="item.targetWaterQuality == 8">Ⅷ</span>
+                                    </td>
 
                                     <td>{{item.yearTargetWaterQuality}}</td>
 
