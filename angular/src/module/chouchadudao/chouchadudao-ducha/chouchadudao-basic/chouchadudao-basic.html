@@ -83,9 +83,9 @@
                                                   style="width: 160px;max-width: 160px;"></textarea>
                                     </div>
                                     <br/>
-                                    <div class="form-item">
+                                    <div class="form-item" ng-if="resBasic.pdfUrl">
                                         <label><font style="vertical-align: inherit;"><font
-                                                style="vertical-align: inherit;">方案附件</font></font></label>
+                                                style="vertical-align: inherit;">附件</font></font></label>
                                         <button class="btn btn-info" ng-click="viewFile(resBasic.pdfUrl)"><i class="fa fa-css3"></i>查看附件
                                         </button>
                                     </div>
@@ -259,7 +259,7 @@
                                     <br/>
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font
-                                                style="vertical-align: inherit;">通报附件</font></font></label>
+                                                style="vertical-align: inherit;">附件</font></font></label>
                                         <button class="btn btn-info" ng-click="getUploadFile(1)"><i
                                                 class="fa fa-css3"></i>上传附件
                                         </button>
@@ -306,9 +306,9 @@
                                         </label>
                                     </div>
                                     <br/>
-                                    <div class="form-item">
+                                    <div class="form-item" ng-if="resReport.pdfUrl">
                                         <label><font style="vertical-align: inherit;"><font
-                                                style="vertical-align: inherit;">通报附件</font></font></label>
+                                                style="vertical-align: inherit;">附件</font></font></label>
                                         <button class="btn btn-info" ng-click="viewFile(resReport.pdfUrl)"><i class="fa fa-css3"></i>查看附件</button>
                                     </div>
                                 </form>
@@ -392,7 +392,7 @@
                                     <br/>
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font
-                                                style="vertical-align: inherit;">处理附件</font></font></label>
+                                                style="vertical-align: inherit;">附件</font></font></label>
                                         <button class="btn btn-info" ng-click="getUploadFile(2)" style="margin-left: -23px;"><i
                                                 class="fa fa-css3"></i>上传附件
                                         </button>

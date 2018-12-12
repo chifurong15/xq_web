@@ -41,14 +41,11 @@
                             url: apiPrefix + '/v1/DubanSupervision/selectPersonnel',
                             method: 'get',
                             callBack: function (res) {
-                                $scope.personList = [];
-                                res.data.map(function (item, index) {
-                                    $scope.personList.push({id: item.id, name: item.name});
-                                })
+                                $scope.regionList = res.data;
                                 var select = $("#slpk");
-                                for (var i = 0; i < $scope.personList.length; i++) {
-                                    select.append("<option value='"+$scope.personList[i].id+"'>"
-                                        + $scope.personList[i].name + "</option>");
+                                for (var i = 0; i < $scope.regionList.length; i++) {
+                                    select.append("<option value='"+$scope.regionList[i].regionName+"'>"
+                                        + $scope.regionList[i].regionName + "</option>");
                                 }
                                 $('.selectpicker1').selectpicker('val', '');
                                 $('.selectpicker1').selectpicker('refresh');
@@ -59,15 +56,15 @@
 
                     $scope.getChange = function (objectid) {
                         // console.log(objectid);
-                        $scope.objectname = [];
+                        $scope.regionIdList = [];
                         objectid.map(function (item){
-                            $scope.personList.map(function(val,index){
-                                if(item == val.id){
-                                    $scope.objectname.push(val.name);
+                            $scope.regionList.map(function(val,index){
+                                if(item == val.regionName){
+                                    $scope.regionIdList.push(val.regionId)
                                 }
                             })
                         })
-                        // console.log($scope.objectname);
+                        // console.log('区id',$scope.regionIdList)
                     }
 
                     $('#J-searchTime1').datetimepicker({
@@ -185,8 +182,8 @@
                                 deadlinedate: $scope.issuedtime,
                                 project: $scope.project,
                                 type:$scope.type,
-                                objectid: $scope.objectid ? $scope.objectid.join(',') : '',
-                                objectname:$scope.objectname ? $scope.objectname.join(',') : '',
+                                objectid: $scope.regionIdList ? $scope.regionIdList.join(',') : '',
+                                objectname:$scope.objectid ? $scope.objectid.join(',') : '',
                                 assessory: $scope.assessory,
                                 reason: $scope.reason
                             }

@@ -84,9 +84,9 @@
                                                   style="width: 160px;max-width: 160px;"></textarea>
                                     </div>
                                     <br/>
-                                    <div class="form-item">
+                                    <div class="form-item" ng-if="resBasic.pdfUrl">
                                         <label><font style="vertical-align: inherit;"><font
-                                                style="vertical-align: inherit;">方案附件</font></font></label>
+                                                style="vertical-align: inherit;">附件</font></font></label>
                                         <button class="btn btn-info" ng-click="viewFile(resBasic.pdfUrl)"><i class="fa fa-css3"></i>查看附件
                                         </button>
                                     </div>
@@ -217,9 +217,9 @@
                                         </label>
                                     </div>
                                     <br/>
-                                    <div class="form-item">
+                                    <div class="form-item" ng-if="resReport.pdfUrl">
                                         <label><font style="vertical-align: inherit;"><font
-                                                style="vertical-align: inherit;">通报附件</font></font></label>
+                                                style="vertical-align: inherit;">附件</font></font></label>
                                         <button class="btn btn-info" ng-click="viewFile(resReport.pdfUrl)"><i class="fa fa-css3"></i>查看附件
                                         </button>
                                     </div>
@@ -267,9 +267,9 @@
                                                   style="width: 160px;max-width: 160px;"></textarea>
                                     </div>
                                     <br/>
-                                    <div class="form-item">
+                                    <div class="form-item" ng-if="resReport.pdfUrl">
                                         <label><font style="vertical-align: inherit;"><font
-                                                style="vertical-align: inherit;">通报附件</font></font></label>
+                                                style="vertical-align: inherit;">附件</font></font></label>
                                         <button class="btn btn-info" ng-click="viewFile(resReport.pdfUrl)"><i class="fa fa-css3"></i>查看附件
                                         </button>
                                     </div>
@@ -290,7 +290,7 @@
                                                readonly ng-model="resDealDetail.sentDate">
                                     </div>
                                     <br/>
-                                    <div class="form-item">
+                                    <div class="form-item" ng-if="resDealDetail.pdfUrl">
                                         <label><font style="vertical-align: inherit;"><font
                                                 style="vertical-align: inherit;">附件</font></font></label>
                                         <button class="btn btn-info" ng-click="viewFile(resDealDetail.pdfUrl)"><i class="fa fa-css3"></i>查看附件

@@ -56,7 +56,8 @@
                                 objectname: $scope.objectname,
                                 issuedtime: $scope.searchTime,
                                 status: $scope.status,
-                                objectid: $scope.num == 5 ? $scope.userInfo.id : ''
+                                objectid: $scope.num == 5 ? $scope.userInfo.id : '',
+                                regionid:$scope.userInfo.regionId
                             },
                             callBack: function (res) {
                                 $scope.moduleList = res.data.list;

@@ -89,8 +89,9 @@
 
                     //查看附件
                     $scope.viewFile = function (path) {
-                        $('#myModal').modal('show');
-                        PDFObject.embed(path, "#file", options);
+                        // $('#myModal').modal('show');
+                        // PDFObject.embed(path, "#file", options);
+						window.open(path)
 
                     }
                     //取消查看

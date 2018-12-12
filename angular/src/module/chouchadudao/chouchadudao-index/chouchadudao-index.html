@@ -59,7 +59,7 @@
 										</td>
 	                                    <td style="text-align: center;">
 											<button type="button" class="btn btn-success" ng-click="viewDetail(item.id)">查看详情</button>
-											<button type="button" class="btn btn-info" ng-click="view(item.id)">查看计划</button>
+											<button type="button" class="btn btn-info" ng-click="view(item.id)">查看任务</button>
 	                                    </td>
 	                                </tr>
                             	</tbody>
@@ -106,9 +106,9 @@
 								<label class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">主要内容：</font></font></label>
 								<span>{{detailInfo.content}}</span>
 							</div>
-							<div class="form-item">
+							<div class="form-item" ng-if="detailInfo.assessory">
 								<label><font style="vertical-align: inherit;"><font
-										style="vertical-align: inherit;">方案附件</font></font></label>
+										style="vertical-align: inherit;">附件</font></font></label>
 								<button class="btn btn-info" ng-click="viewFile(detailInfo.assessory)"><i class="fa fa-css3"></i>查看附件
 								</button>
 							</div>

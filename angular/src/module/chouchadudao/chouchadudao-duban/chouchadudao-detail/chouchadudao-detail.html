@@ -83,10 +83,10 @@
                                                ng-model="res.type">
                                     </div>
                                     <br/>
-                                    <div class="form-item">
+                                    <div class="form-item" ng-if="res.assessory">
                                         <label><font style="vertical-align: inherit;"><font
                                                 style="vertical-align: inherit;">附件</font></font></label>
-                                        <button class="btn btn-info" ng-click="viewFile()"><i class="fa fa-css3"></i>查看附件</button>
+                                        <button class="btn btn-info" ng-click="viewFile(res.assessory)"><i class="fa fa-css3"></i>查看附件</button>
                                     </div>
                                 </form>
                             </div>
@@ -128,9 +128,9 @@
                                                style="width: 160px;">
                                     </div>
                                     <br/>
-                                    <div class="form-item">
+                                    <div class="form-item" ng-if="item.assessory">
                                         <label><font style="vertical-align: inherit;"><font
-                                                style="vertical-align: inherit;">处理附件</font></font></label>
+                                                style="vertical-align: inherit;">附件</font></font></label>
                                         <button class="btn btn-info" ng-click="viewFile(item.assessory)"><i class="fa fa-css3"></i>查看附件</button>
                                     </div>
                                 </form>
@@ -171,9 +171,9 @@
                                         <input type="text" class="form-control input-short" ng-model="resResult.feedbacktime"  readonly="readonly">
                                     </div>
                                     <br/>
-                                    <div class="form-item">
+                                    <div class="form-item" ng-if="resResult.assessory">
                                         <label><font style="vertical-align: inherit;"><font
-                                                style="vertical-align: inherit;">结果附件</font></font></label>
+                                                style="vertical-align: inherit;">附件</font></font></label>
                                         <button class="btn btn-info" ng-click="viewFile(resResult.assessory)"><i
                                                 class="fa fa-css3"></i>查看附件
                                         </button>

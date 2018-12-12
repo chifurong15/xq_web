@@ -40,8 +40,8 @@
                                     <textarea class="form-control" id="deblock_udid2" name="deblock_udid" readonly rows="2" style="width: 160px;max-width: 160px;" ng-model="basicDetail.content"></textarea>
                                 </div>
                                 <br>
-                                <div class="form-item" >
-                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">方案附件：</font></font></label>
+                                <div class="form-item" ng-if="basicDetail.accessory">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">附件：</font></font></label>
                                     <button class="btn btn-info" ng-click="viewFile(basicDetail.accessory)"><i class="fa fa-css3"></i>查看附件</button>
                                 </div>
                             </form>
@@ -137,23 +137,28 @@
 
                         <div class="panel-body" ng-if="isView == 1">
                             <form class="form-inline" ng-repeat="item in backList">
-
+                                <div class="form-item" >
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">反馈人</font></font></label>
+                                    <input type="text" class="form-control input-short" readonly ng-model="item.objectname">
+                                    <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{whether}}</font></font></label>-->
+                                </div>
                                 <div class="form-item" >
                                     <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">完成</font></font></label>
                                     <input type="text" class="form-control input-short" readonly ng-model="item.whether">
                                     <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{whether}}</font></font></label>-->
                                 </div>
+                                <br />
                                 <div class="form-item">
                                     <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">反馈时间</font></font></label>
                                     <input type="text" class="form-control input-short" readonly ng-model="item.feedbacktime" style="width: 165px;">
                                 </div>
-                                <br />
-                                <div class="form-item" style="margin-top: -2px;">
+                                <div class="form-item" style="position:relative;top: 15px;left: -4px;">
                                     <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">反馈描述</font></font></label>
                                     <textarea class="form-control" id="deblock_udid1" name="deblock_udid" ng-model="item.description" rows="3" readonly style="width: 160px;" ></textarea>
                                 </div>
-                                <div class="form-item" >
-                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理附件</font></font></label>
+                                <br>
+                                <div class="form-item" ng-if="item.assessory">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">附件</font></font></label>
                                     <button type="button" class="btn btn-info" ng-click="viewFile(item.assessory)">查看附件</button>
                                 </div>
                             </form>
@@ -180,7 +185,7 @@
                                     <textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="describe" rows="3"  style="width: 160px;" ></textarea>
                                 </div>
                                 <div class="form-item" >
-                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理附件</font></font></label>
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">附件</font></font></label>
                                     <button type="button" class="btn btn-info" ng-click="getUploadFile()">上传附件</button>
                                 </div>
                             </form>
