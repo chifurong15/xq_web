@@ -25,7 +25,6 @@
                         	<option value="">请选择</option>
                         </select>
                     </div>
-					<br/>
 					<div class="form-item">
 	                    <label>开始日期</label>
 	                    <div class="input-group date date_picker date-tj" id="beginTime">
@@ -50,16 +49,19 @@
 					<button type="button" class="btn btn-primary m-l-15" ng-click="getReSet()">
                         <i class="fa fa-refresh"></i>重置
                     </button>
-					<div class="input-group fr">
-						<button type="button" class="btn btn-primary" ng-click="getReachAdd()">
-							<i class="fa fa-plus"></i>新增
-						</button>
-					</div>
 				</form>
 			</div>
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-body">
+				<form class="form-inline clearfix">
+					<div class="input-group fr">
+						<button type="button" class="btn btn-primary btn-group-sm" ng-click="getReachAdd()">
+							<i class="fa fa-plus"></i>新增
+						</button>
+					</div>
+				</form>
+
 				<div class="table-responsive table-jm">
 					<table class="table table-bordered table-hover table-patrolMgt" data-filter="#filter">
 						<thead>
