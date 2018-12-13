@@ -291,7 +291,7 @@
                         ReachService.getReachList();
                         leftStatusCount();
                         rightStatusCount();
-                        $.fn.zTree.init($('#regionTreeContainer'), regionTreeSetting, data.data[1]);
+                        $.fn.zTree.init($('#regionTreeContainer'), regionTreeSetting, data.data);
                         $scope.searchRiverChief();
                     });
                 };
