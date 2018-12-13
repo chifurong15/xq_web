@@ -16,6 +16,11 @@ angular.module('app').controller('AppCtrl', ['$scope', 'routeService', '$locatio
         $localStorage.serviceUrl_reachTree = $localStorage.gwUrl + "/watersource";
         $localStorage.serviceUrl_eventMgr = $localStorage.gwUrl + "/eventMgr/";
         $localStorage.serviceUrl_fileService = $localStorage.gwUrl + '/fm';
+
+        //文件预览地址
+        $scope.fileUrl = 'http://10.0.0.196:8888';
+
+
         // logo显示隐藏
         $scope.noblock = false;
         moduleService.getConfig();

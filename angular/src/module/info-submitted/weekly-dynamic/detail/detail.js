@@ -21,8 +21,8 @@
                                         $location, $log, $q, $rootScope, $window,
                                         routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
-                    //var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
-                    //var apiPrefix = 'http://10.0.9.133:6008' + '/bulletin';
+                    var apiPrefix = moduleService.getServiceUrl() + '/messageSent';
+                    //var apiPrefix = 'http://10.0.9.203:8080' + '/messageSent';
 
                     var regionTree;
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree';
@@ -30,167 +30,137 @@
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
 
                     $scope.init = function () {
+                        $scope.viewId = localStorage.getItem('viewId');
+
                         $scope.author = $scope.userInfo.userName;
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/v1/msWeekDynamic/userinfo',
+                            method:'get',
+                            callBack:function (res) {
+                                $scope.num = res.data;
+                            }
+                        })
+
                         getList();
-                        getAllRegion ();
+
                     }
                     // 获取数据列表
                     function getList () {
-                        $scope.moduleList = [
-                            {
-                                title:'28期一周动态',
-                                time:'2018-11-05',
-                                person:'张三',
-                                regionName:'和平区',
-                                direction:'发起',
-                                status:'1',
-                                isAccept:'0'
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/v1/msSentDynamis/selectList',
+                            method:'get',
+                            params:{
+                                reportId:$scope.viewId,
+                                pageNumber: $scope.paginationConf.currentPage,
+                                pageSize: $scope.paginationConf.itemsPerPage,
+                                acceptState:$scope.acceptState,
+                                sentState:$scope.status,
+                                region:$scope.regionName,
                             },
-                            {
-                                title:'27期一周动态',
-                                time:'2018-11-10',
-                                person:'李四',
-                                regionName:'和平区',
-                                direction:'发起',
-                                status:'3',
-                                isAccept:'1'
-                            },
-                            {
-                                title:'26期一周动态',
-                                time:'2018-11-24',
-                                regionName:'河北区',
-                                person:'王五',
-                                direction:'发起',
-                                status:'2',
-                                isAccept:'1'
-                            },
-                            {
-                                title:'25期一周动态',
-                                time:'2018-10-25',
-                                person:'岑锐',
-                                regionName:'津南区',
-                                direction:'发起',
-                                status:'3',
-                                isAccept:'0'
-                            },
-                        ];
-                    }
-
-                    function getAllRegion (){
-                        $scope.regionList = [
-                            {
-                                id:1,
-                                region:'天津市',
-                            },
-                            {
-                                id:2,
-                                region:'和平区',
-                            },
-                            {
-                                id:3,
-                                region:'河东区',
-                            },
-                            {
-                                id:4,
-                                region:'河西区',
-                            },
-                            {
-                                id:5,
-                                region:'南开区',
-                            },
-                            {
-                                id:6,
-                                region:'河北区',
-                            },
-                            {
-                                id:7,
-                                region:'红桥区',
-                            },
-                            {
-                                id:8,
-                                region:'东丽区',
-                            },
-                            {
-                                id:9,
-                                region:'西青区',
-                            },
-                            {
-                                id:10,
-                                region:'津南区',
-                            },
-                            {
-                                id:11,
-                                region:'北辰区',
-                            },
-                            {
-                                id:12,
-                                region:'武清区',
-                            },
-                            {
-                                id:13,
-                                region:'宝坻区',
-                            },
-                            {
-                                id:14,
-                                region:'滨海新区',
-                            },
-                            {
-                                id:15,
-                                region:'宁河区',
-                            },
-                            {
-                                id:16,
-                                region:'静海区',
-                            },
-                            {
-                                id:17,
-                                region:'蓟州区',
+                            callBack:function (res) {
+                                $scope.moduleList = res.data.list
+                                $scope.paginationConf.totalItems = res.data.total;
                             }
-                        ]
+                        })
                     }
 
-                    //显示发起周动态报送弹窗
-                    $scope.add = function () {
-                        $('#myModal').modal('show')
+                    $scope.searchData = function (){
+                        getList();
                     }
+
 
                     // 查看
-                    $scope.view = function () {
+                    $scope.view = function (id) {
 
                         $('#myModal').modal('show');
 
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/v1/msSentDynamis/detail',
+                            method:'get',
+                            params:{
+                                id:id
+                            },
+                            callBack:function (res) {
+                                $scope.detailData = res.data;
+                                $scope.fileNameList = $scope.detailData.ren.split(',');
+                                $scope.fileUrlList = $scope.detailData.accessoryUrl.split(',');
 
-                    }
+                                console.log($scope.fileNameList);
+                            }
+                        })
 
-                    //是否采纳
-                    $scope.adopt =  function (id) {
-                        if(id == 1){
-                            layer.msg('接受采纳',{times:500});
-                        }else{
-                            layer.msg('拒绝采纳',{times:500});
-                        }
-                    }
-
-                    //删除
-                    $scope.delete =  function () {
-                        layer.msg('删除成功',{times:500})
                     }
 
                     //合并周动态
                     $scope.mesh = function () {
-                        var layerIndex = layer.confirm('当前还有未上报的区域，是否要合并？\n' +
-                            '\n' +
-                            '\n' +
-                            '重复合并会覆盖上一次的合并文件。', {
+                        var layerIndex = layer.confirm('确定要合并吗', {
                             btn: ['合并', '取消']
                         }, function () {
-                            layer.msg('合并成功',{times:500})
-                            layer.close(layerIndex);
+                            $ajaxhttp.myhttp({
+                                url:apiPrefix + '/v1/msSentDynamis/judge',
+                                method:'get',
+                                params:{
+                                    reportId:$scope.viewId
+                                },
+                                callBack:function (res) {
+                                    if(res.resCode == 1){
+                                        if(res.data == 1){
+                                            layer.msg('合并成功',{times:500});
+                                            layer.close(layerIndex);
+                                        }else{
+                                            var layerIndex = layer.confirm('\n' +
+                                                '\n' +
+                                                '当前还有未上报的区域，是否要合并？\n' +
+                                                '\n' +
+                                                '\n' +
+                                                '重复合并会覆盖上一次的合并文件。', {
+                                                btn: ['合并', '取消']
+                                            }, function () {
+                                                $ajaxhttp.myhttp({
+                                                    url:apiPrefix + '/v1/msSentDynamis/judge',
+                                                    method:'get',
+                                                    params:{
+                                                        reportId:$scope.viewId
+                                                    },
+                                                    callBack:function (res) {
+                                                        if(res.resCode == 1){
+                                                             layer.msg('合并成功',{times:500});
+                                                             layer.close(layerIndex);
+
+                                                        }else{
+                                                            layer.msg('服务器异常，请稍后再试',{times:500});
+                                                        }
+                                                    }
+                                                })
+                                                layer.close(layerIndex);
+                                            }, function () {
+
+                                            });
+                                        }
+                                    }else{
+                                        layer.msg('服务器异常，请稍后再试',{times:500});
+                                    }
+                                }
+                            })
                         }, function () {
 
                         });
                     }
 
+                    //查看合并
+                    $scope.viewMesh = function (){
+                        window.open(apiPrefix + '/v1/msSentDynamis/pdfView?reportId=' + $scope.viewId )
+                    }
+
+                    //下载合并
+                    $scope.download = function () {
+                        window.open(apiPrefix + '/v1/msSentDynamis/combine?reportId=' + $scope.viewId )
+                    }
+
+                    //查看附件
+                    $scope.viewFile = function (path) {
+                        window.open($scope.fileUrl + path)
+                    }
 
                     //返回
                     $scope.goBack=function(){
@@ -198,73 +168,6 @@
                     }
 
 
-
-                    // 开始时间
-                    var startTime = $('#startTime').datetimepicker({
-                        format: 'YYYY-MM-DD',
-                        locale: moment.locale('zh-cn')
-                    }).on('dp.change', function (c) {
-                        var result = new moment(c.date).format('YYYY-MM-DD');
-                        $scope.startTime = result;
-                        $scope.$apply();
-                    });
-
-                    // 结束时间
-                    var endTime = $('#endTime').datetimepicker({
-                        format: 'YYYY-MM-DD',
-                        locale: moment.locale('zh-cn')
-                    }).on('dp.change', function (c) {
-                        var result = new moment(c.date).format('YYYY-MM-DD');
-                        $scope.endTime = result;
-                        $scope.$apply();
-                    });
-                    // 开始时间
-                    var startTime1 = $('#startTime1').datetimepicker({
-                        format: 'YYYY-MM-DD',
-                        locale: moment.locale('zh-cn')
-                    }).on('dp.change', function (c) {
-                        var result = new moment(c.date).format('YYYY-MM-DD');
-                        $scope.startTime1 = result;
-                        $scope.$apply();
-                    });
-
-                    // 结束时间
-                    var endTime2 = $('#endTime2').datetimepicker({
-                        format: 'YYYY-MM-DD',
-                        locale: moment.locale('zh-cn')
-                    }).on('dp.change', function (c) {
-                        var result = new moment(c.date).format('YYYY-MM-DD');
-                        $scope.endTime2 = result;
-                        $scope.$apply();
-                    });
-
-                    // 结束时间
-                    $('#J-searchTime').datetimepicker({
-                        format: 'YYYY-MM-DD',
-                        locale: moment.locale('zh-cn')
-                    }).on('dp.change', function (c) {
-                        var result = new moment(c.date).format('YYYY-MM-DD');
-                        $scope.searchTime = result;
-                        $scope.$apply();
-                    });
-
-
-                    //动态设置最小值
-                    startTime.on('dp.change', function (e) {
-                        endTime.data('DateTimePicker').minDate(e.date);
-                    });
-                    //动态设置最大值
-                    endTime.on('dp.change', function (e) {
-                        startTime.data('DateTimePicker').maxDate(e.date);
-                    });
-                    //动态设置最小值
-                    startTime1.on('dp.change', function (e) {
-                        endTime1.data('DateTimePicker').minDate(e.date);
-                    });
-                    //动态设置最大值
-                    endTime2.on('dp.change', function (e) {
-                        startTime2.data('DateTimePicker').maxDate(e.date);
-                    });
 
                     /**
                      * 初始化行政区划树
@@ -358,15 +261,8 @@
                      */
                     $scope.getModalOk = function(){
                         $('#regionTreeModal').modal('hide');
-                        console.log($scope.regionName)
                         //console.log('我是区域树关闭...')
                     }
-
-
-
-
-
-
 
 
                     // 配置分页基本参数

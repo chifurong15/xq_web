@@ -1,0 +1,69 @@
+<div class="conferenceCtrl" ng-controller="statisticsCtrl" ng-init="init()">
+    <div class="wrapper-md ">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">报送统计</span><span class="tag-right"></span>
+            </div>
+
+        </div>
+        <div class="panel panel-default m-all-0">
+            <div class="panel-body">
+                <form method="get">
+                    <div class="form-inline">
+                        <div class="form-item">
+                            <label>开始时间</label>
+                            <div class="input-group date date_picker" id="startTime">
+                                <input type="text" class="form-control input-short-o" ng-model="startTime">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <label>结束时间</label>
+                            <div class="input-group date date_picker" id="endTime">
+                                <input type="text" class="form-control input-short-o" ng-model="endTime">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <label>统计方式</label>
+                            <select class="form-control select-short"  ng-model="kind">
+                                <option value="">全部</option>
+                                <option value="1">工作简报</option>
+                                <option value="2">信息报送</option>
+                            </select>
+                        </div>
+                        <button type="submit" ng-click="searchData()" class="btn btn-primary">
+                            <i class="fa fa-search"></i>搜索
+                        </button>
+                        <button type="button" class="btn btn-primary" ng-click="reset()" style="margin: 0 5px;">
+                            <i class="fa fa-refresh"></i>重置
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover" data-filter="#filter">
+                        <tr>
+                            <th style="width: 5%;">序号</th>
+                            <th style="width: 15%">行政区域</th>
+                            <th style="width: 10%">报送次数</th>
+                            <th style="width: 10%">采纳次数</th>
+                            <th style="width: 10%">退回次数</th>
+                        </tr>
+                        <tr ng-repeat="module in moduleList">
+                            <td>{{$index+1}}</td>
+                            <td>{{module.region}}</td>
+                            <td>{{module.sentNumber}}</td>
+                            <td>{{module.acceptNumber}}</td>
+                            <td>{{module.returnNumber}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
