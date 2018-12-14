@@ -3,7 +3,7 @@
     angular
         .module("app")
         .controller(
-            'conferenceCtrl',
+            'townStreetCtrl',
             [
                 '$localStorage',
                 '$scope',
@@ -17,12 +17,13 @@
                 '$ajaxhttp',
                 'moduleService',
                 'globalParam',
-                function conferenceCtrl($localStorage, $scope,
-                                        $location, $log, $q, $rootScope, $window,
-                                        routeService, $http, $ajaxhttp, moduleService, globalParam) {
+                function townStreetCtrl($localStorage, $scope,
+                                          $location, $log, $q, $rootScope, $window,
+                                          routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl() + '/messageSent';
-                    //var apiPrefix = 'http://10.0.9.203:8080' + '/messageSent';
+                    //var apiPrefix = 'http://10.0.9.114:8080' + '/messageSent';
+
 
                     var regionTree;
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree';
@@ -30,72 +31,51 @@
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
 
                     $scope.init = function () {
+                        // $scope.num = 5;
                         $scope.author = $scope.userInfo.userName;
-                        $scope.isShow = true;
-                        $scope.regionName = '';
                         $scope.startTime = '';
                         $scope.endTime = '';
-
+                        $scope.regionName = '';
+                        $scope.status = '';
                         $ajaxhttp.myhttp({
-                            url:apiPrefix + '/v1/msMeetingCondition/userinfo',
+                            url:apiPrefix + '/v1/msTownstreetCondition/userinfo',
                             method:'get',
                             callBack:function (res) {
                                 $scope.num = res.data;
+                                getList();
                             }
                         })
-
-
-                        getList();
                     }
-
+                    // 获取数据列表
+                    function getList () {
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/v1/msTownstreetCondition/selectList',
+                            method:'get',
+                            params:{
+                                pageNumber: $scope.paginationConf.currentPage,
+                                pageSize: $scope.paginationConf.itemsPerPage,
+                                sentTimeStart:$scope.startTime,
+                                sentTimeEnd:$scope.endTime,
+                                region:$scope.regionName,
+                                informationSystem:$scope.status
+                            },
+                            callBack:function (res) {
+                                $scope.moduleList = res.data.list
+                                $scope.paginationConf.totalItems = res.data.total;
+                            }
+                        })
+                    }
                     //搜索
-                    $scope.searchData = function () {
+                    $scope.searchData = function (){
                         getList();
                     }
 
                     //重置
                     $scope.reset = function () {
-                        $scope.regionName = '';
                         $scope.startTime = '';
                         $scope.endTime = '';
-                    }
-
-                    // 获取数据列表
-                    function getList () {
-                        $ajaxhttp.myhttp({
-                            url:apiPrefix + '/v1/msMeetingCondition/selectList',
-                            method:'get',
-                            params:{
-                                pageNumber: $scope.paginationConf.currentPage,
-                                pageSize: $scope.paginationConf.itemsPerPage,
-                                meetingTimeStart:$scope.startTime,
-                                meetingTimeEnd:$scope.endTime,
-                                region:$scope.regionName
-                            },
-                            callBack:function (res) {
-                                $scope.moduleList = res.data.list;
-                                $scope.paginationConf.totalItems = res.data.total;
-                            }
-                        })
-                    }
-
-                    //导出
-                    $scope.export = function (){
-                        window.open(
-                            apiPrefix
-                            + '/v1/msMeetingCondition/createExcel?meetingTimeStart='
-                            + $scope.startTime
-                            + '&meetingTimeEnd='
-                            + $scope.endTime
-                            + '&region='
-                            + $scope.regionName
-                        )
-                    }
-
-                    //关闭会议模态窗
-                    $scope.closeModal = function () {
-                        clear();
-                        $('#myModal').modal('hide');
+                        $scope.regionName = '';
+                        $scope.status = '';
                     }
 
                     //查看  下载附件
@@ -103,156 +83,137 @@
                         window.open($scope.fileUrl + path);
                     }
 
-                    //清除表单
-                    function clear () {
-                        $scope.topic = '';
-                        $scope.remark = '';
-                        $scope.time = '';
-                        $scope.content = '';
-                        $scope.duty = '';
-                        $scope.compereRole = '';
-                        $scope.compereName = '';
-                        $scope.category = '';
+                    //查看详情
+                    $scope.view = function (id) {
+                        $('#myModal').modal('show');
+                        getDetail(id);
                     }
 
-                    //显示发起周动态报送弹窗
-                    $scope.add = function (id) {
-                        $scope.assessory = [];
-                        if(id != 1){
-                            $scope.tag = '查看';
-                            $scope.isShow = false;
-                            $ajaxhttp.myhttp({
-                                url:apiPrefix + '/v1/msMeetingCondition/detail',
-                                method:'GET',
-                                params:{
-                                    id:id
-                                },
-                                callBack:function (res) {
-                                    if(res.resCode == 1){
-                                        $scope.viewData = res.data;
-                                        if(res.data.fileList){
-                                            $scope.accessoryURL = [];
-                                            res.data.fileList.map(function (item){
-                                                // console.log(item.substring(item.lastIndexOf('/')+1));
-                                                $scope.accessoryURL.push({
-                                                    name:item.downloadURL.substring(item.previewURL.lastIndexOf('/')+1),
-                                                    previewURL:item.previewURL,
-                                                    downloadURL:item.downloadURL
-                                                })
-                                            })
-                                        }
-
-                                    }else{
-                                        layer.msg('服务器异常，请稍后再试',{times:500})
-                                    }
-                                }
-                            })
-
-                        }else{
-                            $scope.tag = '新增';
-                            $scope.isShow = true;
-                        }
-                        $('#myModal').modal('show')
-                    }
-
-                    //确认上报
-                    $scope.submit =  function () {
-                        if($scope.compereRole && $scope.compereName && $scope.time && $scope.topic && $scope.content){
-                            var params = {
-                                topic:$scope.topic,
-                                meetingTime: $scope.time,
-                                compereRole:$scope.compereRole,
-                                compereName:$scope.compereName,
-                                duty:$scope.duty,
-                                category:$scope.category,
-                                content:$scope.content,
-                                remark:$scope.remark,
-                                accessoryUrl:$scope.assessory ? $scope.assessory.join(',') : ''
-                            }
-                            $ajaxhttp.myhttp({
-                                url:apiPrefix + '/v1/msMeetingCondition/add',
-                                method:'post',
-                                params:params,
-                                callBack:function (res) {
-                                    if(res.resCode == 1){
-                                        layer.msg('上报成功',{times:500})
-                                        $('#myModal').modal('hide');
-                                        getList();
-                                        clear();
-                                    }else{
-                                        layer.msg('服务器异常，请稍后再试',{times:500})
-                                    }
-                                }
-                            })
-
-                        }else{
-                            layer.alert("请输入必填项", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        }
-                    }
-                    
-                    //保存
-                    $scope.save =  function () {
-                        if($scope.compereRole && $scope.compereName && $scope.time && $scope.topic && $scope.content){
-                            var params = {
-                                topic:$scope.topic,
-                                meetingTime: $scope.time,
-                                compereRole:$scope.compereRole,
-                                compereName:$scope.compereName,
-                                duty:$scope.duty,
-                                category:$scope.category,
-                                content:$scope.content,
-                                remark:$scope.remark,
-                                accessoryUrl:$scope.assessory ? $scope.assessory.join(',') : ''
-                            }
-                            $ajaxhttp.myhttp({
-                                url:apiPrefix + '/v1/msMeetingCondition/addTwo',
-                                method:'post',
-                                params:params,
-                                callBack:function (res) {
-                                    if(res.resCode == 1){
-                                        layer.msg('新增成功',{times:500})
-                                        $('#myModal').modal('hide');
-                                        getList();
-                                        clear();
-                                    }else{
-                                        layer.msg('服务器异常，请稍后再试',{times:500})
-                                    }
-                                }
-                            })
-
-                        }else{
-                            layer.alert("请输入必填项", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        }
-
-                    }
-
-                    //上报状态
-                    $scope.report =  function (id) {
+                    //获取详情
+                    function getDetail (id){
                         $ajaxhttp.myhttp({
-                            url:apiPrefix + '/v1/msMeetingCondition/updateSentState',
+                            url:apiPrefix + '/v1/msTownstreetCondition/detail',
+                            method:'get',
+                            params:{
+                                id:id
+                            },
+                            callBack:function (res) {
+                                if(res.resCode == 1){
+                                    $scope.detailData = res.data;
+                                    if(res.data.fileList){
+                                        $scope.accessoryURL = [];
+                                        res.data.fileList.map(function (item){
+                                            // console.log(item.substring(item.lastIndexOf('/')+1));
+                                            $scope.accessoryURL.push({
+                                                name:item.downloadURL.substring(item.previewURL.lastIndexOf('/')+1),
+                                                previewURL:item.previewURL,
+                                                downloadURL:item.downloadURL
+                                            })
+                                        })
+                                    }
+                                }else{
+                                    layer.msg('服务器异常，请稍后再试')
+                                }
+                            }
+                        })
+                    }
+
+                    //新增
+                    $scope.add = function (){
+                        $scope.assessory = [];
+                        $('#addMyModal').modal('show')
+                    }
+                    function clear (){
+                        $scope.informationSystem = '';
+                        $scope.executeCircumstance = '';
+                        $scope.remark = '';
+                    }
+
+                    //新增 保存 上报
+                    $scope.save = function (id){
+                        if($scope.informationSystem && $scope.executeCircumstance){
+                            var params = {
+                                informationSystem:$scope.informationSystem,
+                                executeCircumstance:$scope.executeCircumstance,
+                                remark:$scope.remark,
+                                accessoryUrl:$scope.assessory ? $scope.assessory.join(',') : ''
+                            }
+                            // console.log(params);
+                            if(id == 1){//保存
+                                $ajaxhttp.myhttp({
+                                    url:apiPrefix + '/v1/msTownstreetCondition/addTwo',
+                                    method:'post',
+                                    params:params,
+                                    callBack:function (res) {
+                                        if(res.resCode == 1){
+                                            layer.msg('保存成功',{times:500});
+                                            getList();
+                                            clear();
+                                            $('#addMyModal').modal('hide')
+                                        }else{
+                                            layer.msg('服务器异常，请稍后再试')
+                                        }
+                                    }
+                                })
+                            }else if (id == 2){//上报
+                                $ajaxhttp.myhttp({
+                                    url:apiPrefix + '/v1/msTownstreetCondition/add',
+                                    method:'post',
+                                    params:params,
+                                    callBack:function (res) {
+                                        if(res.resCode == 1){
+                                            layer.msg('上报成功',{times:500});
+                                            getList();
+                                            clear();
+                                            $('#addMyModal').modal('hide')
+                                        }else{
+                                            layer.msg('服务器异常，请稍后再试')
+                                        }
+                                    }
+                                })
+                            }
+                        }else if (!$scope.informationSystem) {
+                            layer.alert("请选择制度类型", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        }else if (!$scope.executeCircumstance) {
+                            layer.alert("请输入执行情况", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        }
+
+                    }
+
+                    //关闭新增窗口
+                    $scope.closeAddModal = function (){
+                        clear();
+                        $('#addMyModal').modal('hide')
+                    }
+
+                    //上报
+                    $scope.report = function (id){
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/v1/msTownstreetCondition/updateSentState',
                             method:'put',
                             params:{
                                 id:id,
-                                sentState:1
+                                sentState: 1
                             },
                             callBack:function (res) {
                                 if(res.resCode == 1){
                                     layer.msg('上报成功',{times:500});
                                     getList();
                                 }else{
-                                    layer.msg('服务器异常，请稍后再试',{times:500})
+                                    layer.msg('服务器异常，请稍后再试')
                                 }
                             }
                         })
                     }
+
 
                     //删除
                     $scope.delete =  function (id) {
@@ -260,7 +221,7 @@
                             btn: ['确定', '取消']
                         }, function () {
                             $ajaxhttp.myhttp({
-                                url:apiPrefix + '/v1/msMeetingCondition/delete',
+                                url:apiPrefix + '/v1/msTownstreetCondition/delete',
                                 method:'delete',
                                 params:{
                                     id:id
@@ -279,6 +240,21 @@
 
                         });
                     }
+                    //导出
+                    $scope.download = function (){
+                        window.open(
+                            apiPrefix
+                            + '/v1/msTownstreetCondition/createExcel?sentTimeStart='
+                            + $scope.startTime
+                            + '&sentTimeEnd='
+                            + $scope.endTime
+                            + '&region='
+                            + $scope.regionName
+                            + '&informationSystem='
+                            + $scope.status
+                        )
+                    }
+
                     /**
                      * 上传附件
                      */
@@ -299,7 +275,7 @@
 
                         $http({
                                 method: 'post',
-                                url: apiPrefix + '/v1/msMeetingCondition/upload',
+                                url: apiPrefix + '/v1/msTownstreetCondition/upload',
                                 data: formFile,
                                 headers: {'Content-Type': undefined},
                                 transformRequest: angular.identity
@@ -316,15 +292,11 @@
                         });
                     }
 
-                    // 会议时间
-                    var time = $('#J-Time').datetimepicker({
-                        format: 'YYYY-MM-DD',
-                        locale: moment.locale('zh-cn')
-                    }).on('dp.change', function (c) {
-                        var result = new moment(c.date).format('YYYY-MM-DD');
-                        $scope.time = result;
-                        $scope.$apply();
-                    });
+
+                    //返回
+                    $scope.goBack=function(){
+                        history.back(-1);
+                    }
 
                     // 开始时间
                     var startTime = $('#startTime').datetimepicker({
@@ -346,7 +318,6 @@
                         $scope.$apply();
                     });
 
-
                     //动态设置最小值
                     startTime.on('dp.change', function (e) {
                         endTime.data('DateTimePicker').minDate(e.date);
@@ -355,41 +326,6 @@
                     endTime.on('dp.change', function (e) {
                         startTime.data('DateTimePicker').maxDate(e.date);
                     });
-                    
-                    
-                    function  validateRules() {
-                        if (!$scope.compereRole) {
-                            layer.alert("请输入主持角色", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        }else if (!$scope.compereName) {
-                            layer.alert("请输入姓名", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        }else if (!$scope.time) {
-                            layer.alert("请选择会议时间", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        }else if (!$scope.topic) {
-                            layer.alert("请输入会议议题", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        }else if (!$scope.content) {
-                            layer.alert("会议主要研究内容", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        }
-                    }
 
                     /**
                      * 初始化行政区划树
@@ -457,7 +393,7 @@
                      * @param {Object} treeNode
                      */
                     function regionTreeOnClick(event, treeId, treeNode) {
-                        //console.log(treeNode);
+                        console.log(treeNode);
                         $scope.regionId = treeNode.id;
                         $scope.regionName = treeNode.name;
                         $scope.grade = treeNode.grade;
@@ -483,9 +419,9 @@
                      */
                     $scope.getModalOk = function(){
                         $('#regionTreeModal').modal('hide');
-                        //console.log($scope.regionName)
                         //console.log('我是区域树关闭...')
                     }
+
 
                     // 配置分页基本参数
                     $scope.paginationConf = {

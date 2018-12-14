@@ -2,7 +2,7 @@
     <div class="wrapper-md ">
         <div class="panel panel-default m-n">
             <div class="panel-body" style="position: relative;">
-                <span class="tag">工作简报</span><span class="tag-right"></span><span
+                <span class="tag">信息报送</span><span class="tag-right"></span><span
                     class="tag-right tag-left"></span><span class="tag tag1">查看</span><span
                     class="tag-right"></span>
                 <div style="overflow: hidden;">
@@ -156,17 +156,16 @@
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">简报说明:</font></font></label>
-                                <textarea class="form-control" rows="3" ng-model="briefDescription"></textarea>
+                                <!--<span>{{briefDescription}}</span>-->
+                                <textarea class="form-control" readonly rows="3" ng-model="briefDescription"></textarea>
                             </div>
-                            <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">简报附件:</font></font></label>
-                                <span>{{detailData.ren}}</span>
-                                <button type="button" class="btn btn-primary btn-sm" ng-click="download(detailData.accessoryUrl)" style="margin: 0 10px;">
-                                    <i class="fa fa-file-archive-o"></i> 预览
-                                </button>
-                                <button type="button" class="btn btn-primary btn-sm" ng-click="download(detailData.downurl)">
-                                    <i class="fa fa-download"></i> 下载
-                                </button>
+                            <div class="form-item" ng-if="detailData.fileList.length != 0">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">附件:</font></font></label>
+                            </div>
+                            <div class="form-item" style="position: relative;left: -20px;width: 446px;">
+                                <span ng-repeat="item in accessoryURL" style="color: #333;cursor: pointer;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
+                                   <span style="color: #3189e1;" ng-click="downFile(item.downloadURL)">下载</span>
+                                </span>
                             </div>
                         </form>
                         <!--<div id="pdfOb" style="margin: 20px 0;height: 500px;"></div>-->

@@ -2,7 +2,7 @@
     <div class="wrapper-md ">
         <div class="panel panel-default m-n">
             <div class="panel-body" style="position: relative;">
-                <span class="tag">工作简报</span><span class="tag-right"></span>
+                <span class="tag">信息报送</span><span class="tag-right"></span>
             </div>
         </div>
         <div class="panel panel-default m-all-0">
@@ -65,7 +65,7 @@
                     <div class="form-inline" ng-if="num == 2">
                         <div class="input-group fr">
                             <button type="button" class="btn btn-primary btn-sm" ng-click="add()">
-                                <i class="fa fa-plus"></i> 发起工作简报报送
+                                <i class="fa fa-plus"></i> 发起信息报送
                             </button>
                         </div>
                     </div>
@@ -141,23 +141,23 @@
         </div>
 
 
-        <!-- 发起工作简报报送（Modal） -->
+        <!-- 发起信息报送（Modal） -->
         <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog" style="width: 680px;">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="closeModal()">
                             &times;
                         </button>
                         <h4 class="modal-title" id="myModalLabel3">
-                            发起工作简报报送
+                            发起信息报送
                         </h4>
                     </div>
                     <div class="modal-body" style="height: 350px;">
                         <form class="form-inline">
                             <div class="form-item">
                                 <label class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">报送标题</font></font></label>
-                                <input type="text" class="form-control input-short" ng-model="title">
+                                <input type="text" class="form-control input-long" ng-model="title">
                             </div>
                             <div class="input-group form-item" style="z-index: 9;">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">报送区域</font></font></label>
@@ -189,6 +189,17 @@
                                 <label class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发起人</font></font></label>
                                 <input type="text" class="form-control input-short" readonly ng-model="author">
                             </div>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">报送说明</font></font></label>
+                                <textarea class="form-control" rows="3" ng-model="briefDescription1"></textarea>
+                            </div>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font
+                                        style="vertical-align: inherit;">报送附件</font></font></label>
+                                <button class="btn btn-info" ng-click="getUploadFile()"><i
+                                        class="fa fa-css3"></i>上传附件
+                                </button>
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -199,7 +210,7 @@
         </div>
 
 
-        <!-- 工作简报答复（Modal） -->
+        <!-- 信息答复（Modal） -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -208,52 +219,83 @@
                             &times;
                         </button>
                         <h4 class="modal-title" id="myModalLabel1">
-                            回复工作简报
+                            报送
                         </h4>
                     </div>
-                    <div class="modal-body" style="height: 350px;">
-                        <form class="form-inline">
-                            <div class="form-item">
-                                <label class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">报送标题：</font></font></label>
-                                <span>{{resDetail.title}}</span>
-                                <!--<input type="text" class="form-control input-short" readonly ng-model="title">-->
-                            </div>
-                            <div class="form-item">
-                                <label class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">所在区域：</font></font></label>
-                                <span>{{nowRegion}}</span>
-                                <!--<textarea class="form-control"  rows="3" ng-model="region"></textarea>-->
-                            </div>
-                            <div class="form-item">
-                                <label class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">报送截止：</font></font></label>
-                                <span>{{resDetail.deadline}}</span>
-                                <!--<input type="text" class="form-control input-short" readonly ng-model="title">-->
-                            </div>
-                            <div class="form-item">
-                                <label class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发起人：</font></font></label>
-                                <span>{{author}}</span>
-                                <!--<textarea class="form-control"  rows="3" ng-model="region"></textarea>-->
-                            </div>
-                            <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">简报说明</font></font></label>
-                                <textarea class="form-control" id="textarea" rows="3" ng-model="briefDescription"></textarea>
-                            </div>
-                            <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">报送附件</font></font></label>
-                                <button class="btn btn-info" ng-click="getUploadFile()"><i
-                                        class="fa fa-css3"></i>上传附件
-                                </button>
-                            </div>
+                    <div class="modal-body" style="height: 350px;width: 595px;overflow-y: auto;overflow-x: hidden">
+                        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                            <ul class="layui-tab-title">
+                                <li class="layui-this">答复报送</li>
+                                <li>报送要求</li>
+                            </ul>
+                            <div class="layui-tab-content">
+                                <!--答复报送-->
+                                <div class="layui-tab-item layui-show">
+                                    <form class="form-inline">
+                                        <div class="form-item">
+                                            <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">报送说明</font></font></label>
+                                            <textarea class="form-control" id="textarea" rows="3" ng-model="briefDescription"></textarea>
+                                        </div>
+                                        <div class="form-item">
+                                            <label><font style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">报送附件</font></font></label>
+                                            <button class="btn btn-info" ng-click="getUploadFile()"><i
+                                                    class="fa fa-css3"></i>上传附件
+                                            </button>
+                                        </div>
 
-                            <!--<div class="form-item">-->
-                                <!--<label><font style="vertical-align: inherit;"><font-->
-                                        <!--style="vertical-align: inherit;">报送附件</font></font></label>-->
-                                <!--<button class="btn btn-info" ng-click="viewFile(item.assessory)"><i class="fa fa-css3"></i>查看附件</button>-->
-                            <!--</div>-->
-                        </form>
+                                    </form>
+                                </div>
+                                <!--报送要求-->
+                                <div class="layui-tab-item">
+                                    <form class="form-inline clearfix">
+                                        <div class="form-item" style="float: inherit;">
+                                            <label class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">报送标题：</font></font></label>
+                                            <span>{{resDetail.title}}</span>
+                                        </div>
+                                        <div class="form-item" style="float: inherit;">
+                                            <label class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">报送区域：</font></font></label>
+                                            <span>{{resDetail.sentRegion}}</span>
+                                        </div>
+                                        <br>
+                                        <div class="form-item" style="float: inherit;">
+                                            <label class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发起日期：</font></font></label>
+                                            <span>{{resDetail.beginTime}}</span>
+                                        </div>
+                                        <div class="form-item" style="float: inherit;">
+                                            <label class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">截止日期：</font></font></label>
+                                            <span>{{resDetail.deadline}}</span>
+                                        </div>
+                                        <div class="form-item" style="float: inherit;">
+                                            <label class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发起人：</font></font></label>
+                                            <span>{{resDetail.initiator}}</span>
+                                        </div>
+                                        <br>
+                                        <div class="form-item" style="float: inherit;">
+                                            <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">报送说明：</font></font></label>
+                                            <!--<span>{{resDetail.briefDescription}}</span>-->
+                                            <textarea class="form-control" id="textarea1" rows="3" readonly ng-model="resDetail.briefDescription" style="width: 400px;"></textarea>
+                                        </div>
+                                        <br>
+                                        <div class="form-item" ng-if="fileList.length !=0" style="float: inherit;">
+                                            <label><font style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">报送附件</font></font></label>
+                                        </div>
+                                        <div class="form-item" style="position: relative;top: -50px;left:85px ;width: 446px;">
+                                            <span ng-repeat="item in accessoryURL" style="color: #333;cursor: pointer;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
+                                               <span style="color: #3189e1;" ng-click="downFile(item.downloadURL)">下载</span>
+                                            </span>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" ng-click="save()">确认回复</button>
+                        <button type="button" class="btn btn-primary" ng-click="save(1)">保存</button>
+                        <button type="button" class="btn btn-primary" ng-click="save(2)">确认上报</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
                     </div>
                 </div>
             </div>
@@ -267,7 +309,6 @@
                             <li class="fa fa-remove"></li>
                         </button>
                         <h4>上传附件</h4>
-
                     </div>
                     <div class="modal-body">
                         <form class="form-horizontal">
@@ -296,7 +337,7 @@
         <!-- 查看附件（Modal） -->
         <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              data-backdrop="static" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog" style="width: 680px!important;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -323,7 +364,7 @@
         allowedFileExtensions: [],
         uploadAsync: true, //默认异步上传
         showRemove: true, //显示移除按钮
-        maxFileCount: 1, //表示允许同时上传的最大文件个数
+        maxFileCount: 5, //表示允许同时上传的最大文件个数
         language: 'zh', //设置语言
         uploadUrl: '#', //上传的地址
         showUpload: false, //显示批量上传按钮
@@ -335,5 +376,27 @@
         slugCallback: function (filename) {
             return filename.replace('(', '_').replace(']', '_');
         }
+    });
+    layui.use('element', function () {
+        var $ = layui.jquery
+            , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        //触发事件
+        var active = {
+            tabChange: function () {
+                //切换到指定Tab项
+                element.tabChange('demo', '22'); //切换到：用户管理
+            }
+        };
+
+        $('.site-demo-active').on('click', function () {
+            var othis = $(this), type = othis.data('type');
+            active[type] ? active[type].call(this, othis) : '';
+        });
+
+        element.on('tab(test)', function (elem) {
+            location.hash = 'test=' + $(this).attr('lay-id');
+        });
+
     });
 </script>

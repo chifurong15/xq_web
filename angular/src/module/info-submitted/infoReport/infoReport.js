@@ -152,6 +152,7 @@
                                     $scope.editContent = $scope.detailData.content;
                                     if(res.data.fileList){
                                         $scope.accessoryURL = [];
+                                        $scope.detailData = res.data;
                                         res.data.fileList.map(function (item){
                                             // console.log(item.substring(item.lastIndexOf('/')+1));
                                             $scope.accessoryURL.push({
@@ -335,12 +336,6 @@
                         })
                     }
 
-
-
-
-                    // $scope.viewFile = function (path) {
-                    //     window.open($scope.fileUrl + path)
-                    // }
                     //查看  下载附件
                     $scope.downFile = function (path){
                         window.open($scope.fileUrl + path);

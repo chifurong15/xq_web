@@ -142,6 +142,11 @@
                     $scope.add = function () {
                         $('#myModal').modal('show')
                     }
+                    //查看  下载附件
+                    $scope.downFile = function (path){
+                        window.open($scope.fileUrl + path);
+                    }
+
 
                     // 查看
                     $scope.view = function (id) {
@@ -156,16 +161,17 @@
                                     if(res.data){
                                         $scope.detailData = res.data;
                                         $scope.briefDescription = $scope.detailData.briefDescription;
-                                        var options = {
-                                            pdfOpenParams: {
-                                                pagemode: "thumbs",
-                                                navpanes: 0,
-                                                toolbar: 0,
-                                                statusbar: 0,
-                                                view: "FitV"
-                                            }
-                                        };
-                                        PDFObject.embed($scope.detailData.accessoryUrl, "#pdfOb", options);
+                                        if(res.data.fileList){
+                                            $scope.accessoryURL = [];
+                                            res.data.fileList.map(function (item){
+                                                // console.log(item.substring(item.lastIndexOf('/')+1));
+                                                $scope.accessoryURL.push({
+                                                    name:item.downloadURL.substring(item.previewURL.lastIndexOf('/')+1),
+                                                    previewURL:item.previewURL,
+                                                    downloadURL:item.downloadURL
+                                                })
+                                            })
+                                        }
                                     }
                                 }else{
                                     layer.msg('服务器异常，请稍后再试',{times:500})

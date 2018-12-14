@@ -133,7 +133,7 @@
                             报送详情
                         </h4>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body" style="overflow-x: hidden">
                         <form class="form-inline">
                             <div class="clearfix">
                                 <div class="form-item">
@@ -166,11 +166,13 @@
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">其它情况</font></font></label>
                                 <textarea class="form-control" rows="3" readonly ng-model="detailData.otherCondition"></textarea>
                             </div>
-                            <div class="form-item">
+                            <div class="form-item" ng-if="detailData.fileList.length != 0">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">附件</font></font></label>
                             </div>
-                            <div class="form-item" style="position: relative;top: -44px;left: 90px;width: 446px;">
-                                <span ng-repeat="item in fileUrlList" style="color: #3189e1;cursor: pointer;margin: 8px 10px;" ng-click="viewFile(item)">{{item}}</span>
+                            <div class="form-item" style="position: relative;left: 90px;top: -50px;width: 446px;">
+                                <span ng-repeat="item in accessoryURL" style="color: #333;cursor: pointer;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
+                                   <span style="color: #3189e1;" ng-click="downFile(item.downloadURL)">下载</span>
+                                </span>
                             </div>
                         </form>
                     </div>

@@ -51,17 +51,28 @@
                                 $scope.num = res.data;
                             }
                         })
-                        $ajaxhttp.myhttp({
-                            url:apiPrefix + '/v1/msSentReports/getRegion',
-                            method:'get',
-                            callBack:function (res) {
-                                $scope.nowRegion = res.data;
-                            }
-                        })
+                        // $ajaxhttp.myhttp({
+                        //     url:apiPrefix + '/v1/msSentReports/getRegion',
+                        //     method:'get',
+                        //     callBack:function (res) {
+                        //         $scope.nowRegion = res.data;
+                        //     }
+                        // })
 
                         getList();
                         getAllRegion ();
 
+                    }
+
+                    //关闭模态框清空表单
+                    $scope.closeModal = function () {
+                        $scope.title = '';
+                        $('.selectpicker').selectpicker('val', '');
+                        $('.selectpicker').selectpicker('refresh');
+                        $scope.startTime1 = '';
+                        $scope.endTime1 = '';
+                        $scope.searchTime = '';
+                        $scope.briefDescription1 = '';
                     }
 
                     //搜索
@@ -185,17 +196,20 @@
 
                     //显示发起周动态报送弹窗
                     $scope.add = function () {
+                        $scope.assessory = [];
                         $('#myModal2').modal('show')
                     }
 
-                    //发起工作简报
+                    //发起信息报送
                     $scope.confirm = function () {
                         var params = {
                             title:$scope.title,
                             sentRegion:$scope.region1.join(','),
                             sentTimeStart:$scope.startTime1,
                             sentTimeEnd:$scope.endTime1,
-                            deadline:$scope.searchTime
+                            deadline:$scope.searchTime,
+                            briefDescription:$scope.briefDescription1,
+                            accessoryUrl:$scope.assessory ? $scope.assessory.join(',') : ''
                         }
                         $ajaxhttp.myhttp({
                             url:apiPrefix + '/v1/msWorkReports/add',
@@ -228,6 +242,7 @@
                         $scope.endTime1 = '';
                         $scope.searchTime = '';
                         $scope.briefDescription = '';
+                        $scope.briefDescription1 = '';
                         $('.selectpicker').selectpicker('val', '');
                         $('.selectpicker').selectpicker('refresh');
                     }
@@ -236,31 +251,48 @@
                         clear();
                         $('#myModal').modal('hide');
                     }
-                    //确认回复
-                    $scope.save = function () {
+                    //确认答复
+                    $scope.save = function (id) {
                         var params = {
                             reportId:$scope.answerId,
                             briefDescription:$scope.briefDescription,
-                            accessoryUrl:$scope.assessory,
-                            title:$scope.resDetail.title,
-                            region:$scope.nowRegion,
-                            deadline:$scope.resDetail.deadline
+                            accessoryUrl:$scope.assessory ? $scope.assessory.join(',') : '',
                         }
-                        $ajaxhttp.myhttp({
-                            url:apiPrefix + '/v1/msSentReports/add',
-                            method:'post',
-                            params: params,
-                            callBack:function (res) {
-                                if(res.resCode == 1){
-                                    getList();
-                                    layer.msg('回复成功',{times:2000});
-                                    $('#myModal').modal('hide');
-                                    clear();
-                                }else{
-                                    layer.msg('服务器异常，请稍后再试',{times:500})
+                        //console.log(params);
+                        if(id == 1){//保存
+                            $ajaxhttp.myhttp({
+                                url:apiPrefix + '/v1/msSentReports/add',
+                                method:'post',
+                                params: params,
+                                callBack:function (res) {
+                                    if(res.resCode == 1){
+                                        getList();
+                                        layer.msg('答复成功',{times:2000});
+                                        $('#myModal').modal('hide');
+                                        clear();
+                                    }else{
+                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                                    }
                                 }
-                            }
-                        })
+                            })
+                        }else if (id == 2){//保存并上报
+                            $ajaxhttp.myhttp({
+                                url:apiPrefix + '/v1/msSentReports/addAndSave',
+                                method:'post',
+                                params: params,
+                                callBack:function (res) {
+                                    if(res.resCode == 1){
+                                        getList();
+                                        layer.msg('保存并上报成功',{times:2000});
+                                        $('#myModal').modal('hide');
+                                        clear();
+                                    }else{
+                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                                    }
+                                }
+                            })
+                        }
+
                     }
 
 
@@ -284,15 +316,44 @@
                         })
                     }
 
-                    //回复模态框
-                    $scope.answer =  function (module) {
-                        // layer.msg('回复成功',{times:500});
-                        //document.querySelector('input[type=file]').files[0].val('');
-                        $('#myModal').modal('show');
-                        $scope.resDetail = module;
-                        $scope.answerId = module.id;
+                    //查看  下载附件
+                    $scope.downFile = function (path){
+                        window.open($scope.fileUrl + path);
                     }
+                    //展示答复模态框
+                    $scope.answer =  function (module) {
+                        $scope.assessory = [];
+                        $scope.briefDescription = '';
+                        $('#myModal').modal('show');
+                        $scope.answerId = module.id;
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/v1/msWorkReports/detail',
+                            method:'get',
+                            params: {
+                                id:module.id
+                            },
+                            callBack:function (res) {
+                                if(res.resCode == 1){
+                                    $scope.resDetail = res.data;
 
+                                    if(res.data.fileList){
+                                        $scope.accessoryURL = [];
+                                        $scope.fileList = res.data.fileList;
+                                        res.data.fileList.map(function (item){
+                                            // console.log(item.substring(item.lastIndexOf('/')+1));
+                                            $scope.accessoryURL.push({
+                                                name:item.downloadURL.substring(item.previewURL.lastIndexOf('/')+1),
+                                                previewURL:item.previewURL,
+                                                downloadURL:item.downloadURL
+                                            })
+                                        })
+                                    }
+                                }else{
+                                    layer.msg('服务器异常，请稍后再试',{times:500})
+                                }
+                            }
+                        })
+                    }
 
 
                     //删除
@@ -323,8 +384,9 @@
 
                     //查看附件
                     $scope.viewFile = function (path) {
-                        $('#myModal1').modal('show');
-                        PDFObject.embed(path, "#file", options);
+                        window.open($scope.fileUrl + path)
+                        //$('#myModal1').modal('show');
+                        //PDFObject.embed(path, "#file", options);
                     }
                     //取消查看
                     $scope.cancel1 = function () {
@@ -358,7 +420,7 @@
                             }
                         ).success(function (res) {
                             if (res.resCode == 1) {
-                                $scope.assessory = res.data[0];
+                                $scope.assessory.push(res.data[0]);
                             } else {
                                 layer.msg("服务器异常，请稍后再试");
                             }
@@ -529,7 +591,7 @@
                      */
                     $scope.getModalOk = function(){
                         $('#regionTreeModal').modal('hide');
-                        console.log($scope.regionName)
+                        //console.log($scope.regionName)
                         //console.log('我是区域树关闭...')
                     }
 

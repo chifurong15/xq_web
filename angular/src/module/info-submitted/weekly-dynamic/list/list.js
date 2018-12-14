@@ -576,7 +576,7 @@
                      */
                     $scope.getModalOk = function(){
                         $('#regionTreeModal').modal('hide');
-                        console.log($scope.regionName)
+                        //console.log($scope.regionName)
                         //console.log('我是区域树关闭...')
                     }
 
