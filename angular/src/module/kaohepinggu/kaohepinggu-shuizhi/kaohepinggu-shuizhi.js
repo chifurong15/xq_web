@@ -114,12 +114,6 @@
                                 closeBtn: 1,
                                 anim: 3
                             });
-                        } else if (!$scope.searchTime) {
-                            layer.alert("请选择期号", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
                         } else if (!$scope.author) {
                             layer.alert("请输入创建人", {
                                 skin: 'my-skin',
@@ -245,24 +239,7 @@
 							}
 						})
 	                }
-	                
-	                //修改 水质报告
-	                $scope.edit = function (id) {						
-						$ajaxhttp.myhttp({
-							url: apiPrefix + '/v1/WaterQuality/detail',
-							method: 'get',
-							params: {
-								id: id
-							},
-							callBack: function (res) {
-								globalParam.setter({
-									bulletin: res.data
-								})
-							}
-						})						
-						routeService.route('3-2-2', false);
-	                }
-					
+
 					// 退回
 	                $scope.sendBack = function (id) {
 						$ajaxhttp.myhttp({
