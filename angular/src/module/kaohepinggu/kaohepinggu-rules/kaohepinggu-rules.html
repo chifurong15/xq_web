@@ -33,7 +33,7 @@
                         <span style="width: 20%;padding: 10px 0;"><i class="fa fa-sort-desc" aria-hidden="true"
                                                                      ng-if="item.gradeillegal && item.childList.length != 0"></i>{{item.gradeillegal}}</span>
                         <span style="width: 15%;padding: 10px 0;">{{item.gradetype}}</span>
-                        <span style="width: 20%;padding: 10px 0;">{{item.gradedetailed}}</span>
+                        <span style="width: 20%;padding: 10px 0;">{{item.gradedetailed.length > 30 ? item.gradedetailed.substring(0,30) + '...' : item.gradedetailed}}</span>
                         <span style="width: 10%;padding: 10px 0;">{{item.gradeway}}</span>
                         <span style="width: 10%;padding: 10px 0;">{{item.deductMarks}}</span>
                         <span style="width: 10%;padding: 10px 0;">{{item.processLimitted}}</span>
@@ -55,7 +55,7 @@
                                                                                 ng-if="items.childList.length != 0"
                                                                                 style="margin-left: 50px;"></i>{{items.gradeillegal}}</span>
                                 <span style="width: 15%;">{{items.gradetype}}</span>
-                                <span style="width: 20%;">{{items.gradedetailed}}</span>
+                                <span style="width: 20%;">{{items.gradedetailed.length > 30 ? items.gradedetailed.substring(0,30) + '...' : items.gradedetailed}}</span>
                                 <span style="width: 10%;">{{items.gradeway}}</span>
                                 <span style="width: 10%;">{{items.deductMarks}}</span>
                                 <span style="width: 10%;">{{items.processLimitted}}</span>
@@ -74,7 +74,7 @@
                                     <li ng-repeat="itemss in items.childList" ng-if="items.childList">
                                         <span style="width: 20%;position: relative;">{{itemss.gradeillegal}}</span>
                                         <span style="width: 15%;">{{itemss.gradetype}}</span>
-                                        <span style="width: 20%;">{{itemss.gradedetailed}}</span>
+                                        <span style="width: 20%;">{{itemss.gradedetailed.length > 30 ? itemss.gradedetailed.substring(0,30) + '...' : itemss.gradedetailed}}</span>
                                         <span style="width: 10%;">{{itemss.gradeway}}</span>
                                         <span style="width: 10%;">{{itemss.deductMarks}}</span>
                                         <span style="width: 10%;">{{itemss.processLimitted}}</span>
@@ -107,8 +107,8 @@
     <!-- 模态框（Modal） -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          data-backdrop="static" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content" style="width: 450px;position: absolute;left: 50%;margin-left: -230px">
+        <div class="modal-dialog" style="width: 600px;">
+            <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
@@ -132,7 +132,7 @@
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">评分规则名称</font></font></label>
-                            <input type="text" class="form-control input-short" ng-model="$parent.gradeIllegal">
+                            <input type="text" class="form-control input-long" style="width: 440px" ng-model="$parent.gradeIllegal">
                             <span class="required"><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">*</font></font></span>
                         </div>
@@ -160,15 +160,17 @@
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">评分类型</font></font></label>
-                            <input type="text" class="form-control input-short" ng-model="$parent.gradetype1"
-                                   readonly="readonly">
+                            <!--<input type="text" class="form-control input-short" ng-model="$parent.gradetype1"-->
+                                   <!--readonly="readonly">-->
+                            <textarea class="form-control" id="deblock_udid1" name="deblock_udid1" ng-model="$parent.gradetype1" readonly rows="2" style="width: 440px;max-width: 440px;"></textarea>
                             <span class="required"><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">*</font></font></span>
                         </div>
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">违规细则名称</font></font></label>
-                            <input type="text" class="form-control input-short" ng-model="$parent.gradedetailed">
+                            <!--<input type="text" class="form-control input-short" ng-model="$parent.gradedetailed">-->
+                            <textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="$parent.gradedetailed" rows="3" style="width: 440px;max-width: 440px;"></textarea>
                             <span class="required"><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">*</font></font></span>
                         </div>

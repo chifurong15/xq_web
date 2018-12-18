@@ -1,4 +1,4 @@
-<div class="kaohepingfen-add" ng-controller="kaohepingfenViewCtrl" ng-init="init()">
+<div class="" ng-controller="kaohepingfenViewCtrl" ng-init="init()">
     <div class="wrapper-md ">
     	<div class="panel panel-default m-n">
         	<div class="panel-body" style="position: relative;">
@@ -10,7 +10,7 @@
     	<div class="panel panel-default">
         	<div class="panel-body">
         		<div>
-        			<h3 style="font-size: 16px;font-weight: 700;display: inline-block;">地表水津南区评分管理</h3>
+        			<h3 style="font-size: 16px;font-weight: 700;display: inline-block;">{{surTitle}}</h3>
 					<div style="display: inline-block;float: right;">
 						<button type="button" class="btn btn-info" ng-click="add()" ng-if="num == 1">新增</button>
 						<input type="file" class="hidden" id="J-attandUploader" ng-model="attandUrl" onchange="angular.element(this).scope().uploadFile(this)"/>
@@ -63,11 +63,11 @@
 						{{type == 1 ? "修改" : "新增"}}条目
 					</h4>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body" style="height: 200px;">
 					<form class="form-inline">
-						<div class="input-group form-item" >
+						<div class="input-group form-item">
 							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">行政区域</font></font></label>
-							<select ng-model="area" class="form-control select-short" style="width: auto;">
+							<select ng-model="area" class="form-control select-short" style="width: 160px;">
 								<option value="">请选择</option>
 								<option value="{{item}}" ng-repeat="item in allArea">{{item}}</option>
 							</select>
@@ -75,7 +75,7 @@
 						</div>
 						<div class="form-item">
 							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">考核分数</font></font></label>
-							<input name="number" min="0" max="100"  step="0.01" class="form-control input-short" ng-model="score">
+							<input name="number" min="0" max="100" onkeyup="value=value.replace(/[^\d]/g,'')"  step="0.01" class="form-control input-short" ng-model="score">
 							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 						</div>
 					</form>

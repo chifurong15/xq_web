@@ -98,7 +98,7 @@
                             $scope.region = item.region;
                             $scope.assess = item.assess;
                             $scope.reason = item.reason;
-                            $scope.status = item.status;
+                            $scope.status1 = item.status;
                             $scope.selfId = item.id;
                         }
 
@@ -123,102 +123,107 @@
 
                     //保存条目
                     $scope.save = function () {
-                        if (!$scope.name) {
-                            layer.alert("请输入名称", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        } else if (!$scope.region) {
-                            layer.alert("请选择行政区", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        }else if (!$scope.assess) {
-                            layer.alert("请选择考核区", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        }else if (!$scope.status) {
-                            layer.alert("请选择是否达标", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        }else if (!$scope.region) {
-                            layer.alert("请输入不达标原因", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        }
-
-                        if($scope.type == 2){ //新增
-                            console.log($scope.type)
-
-                            $ajaxhttp.myhttp({
-                                url: apiPrefix + '/v1/SewageDisposeReport/haveSewage',
-                                method: 'get',
-                                params: {
-                                    parentid: $scope.id,
-                                    name: $scope.name
-                                },
-                                callBack: function (res) {
-                                    if(res.data == 10){ //可以添加
-                                        $ajaxhttp.myhttp({
-                                            url: apiPrefix + '/v1/SewageDisposeReport/add',
-                                            method: 'POST',
-                                            params: {
-                                                parentid:$scope.id,
-                                                name: $scope.name,
-                                                region: $scope.region,
-                                                assess:$scope.assess,
-                                                status:$scope.status ? $scope.status : 0,
-                                                reason:$scope.reason
-                                            },
-                                            callBack: function (res) {
-                                                if(res.resCode == 1){
-                                                    layer.msg('新增成功', {time:2000});
-                                                    getData();
-                                                    clear();//创建成功后清空
-                                                    $('#myModal').modal('hide');
-                                                }else{
-                                                    layer.msg(res.resMsg, {time:2000});
+                        // if (!$scope.name) {
+                        //     layer.alert("请输入名称", {
+                        //         skin: 'my-skin',
+                        //         closeBtn: 1,
+                        //         anim: 3
+                        //     });
+                        // } else if (!$scope.region) {
+                        //     layer.alert("请选择行政区", {
+                        //         skin: 'my-skin',
+                        //         closeBtn: 1,
+                        //         anim: 3
+                        //     });
+                        // }else if (!$scope.assess) {
+                        //     layer.alert("请选择考核区", {
+                        //         skin: 'my-skin',
+                        //         closeBtn: 1,
+                        //         anim: 3
+                        //     });
+                        // }else if (!$scope.status1) {
+                        //     layer.alert("请选择是否达标", {
+                        //         skin: 'my-skin',
+                        //         closeBtn: 1,
+                        //         anim: 3
+                        //     });
+                        // }else if (!$scope.reason) {
+                        //     layer.alert("请输入不达标原因", {
+                        //         skin: 'my-skin',
+                        //         closeBtn: 1,
+                        //         anim: 3
+                        //     });
+                        // }
+                        if($scope.name && $scope.region && $scope.assess && $scope.status1 && $scope.reason){
+                            if($scope.type == 2){ //新增
+                                $ajaxhttp.myhttp({
+                                    url: apiPrefix + '/v1/SewageDisposeReport/haveSewage',
+                                    method: 'get',
+                                    params: {
+                                        parentid: $scope.id,
+                                        name: $scope.name
+                                    },
+                                    callBack: function (res) {
+                                        if(res.data == 10){ //可以添加
+                                            $ajaxhttp.myhttp({
+                                                url: apiPrefix + '/v1/SewageDisposeReport/add',
+                                                method: 'POST',
+                                                params: {
+                                                    parentid:$scope.id,
+                                                    name: $scope.name,
+                                                    region: $scope.region,
+                                                    assess:$scope.assess,
+                                                    status:$scope.status1 ? $scope.status1 : 0,
+                                                    reason:$scope.reason
+                                                },
+                                                callBack: function (res) {
+                                                    if(res.resCode == 1){
+                                                        layer.msg('新增成功', {time:2000});
+                                                        getData();
+                                                        clear();//创建成功后清空
+                                                        $('#myModal').modal('hide');
+                                                    }else{
+                                                        layer.msg(res.resMsg, {time:2000});
+                                                    }
                                                 }
-                                            }
-                                        })
-                                    }else{
-                                        layer.msg('不能添加已有的处理厂', {time:2000});
+                                            })
+                                        }else{
+                                            layer.msg('不能添加已有的处理厂', {time:2000});
+                                        }
                                     }
-                                }
-                            })
+                                })
 
-                        }else if($scope.type == 1){ //修改
+                            }else if($scope.type == 1){ //修改
 
-                            $ajaxhttp.myhttp({
-                                url: apiPrefix + '/v1/SewageDisposeReport/update',
-                                method: 'PUT',
-                                params: {
-                                    id: $scope.selfId,
-                                    name: $scope.name,
-                                    region: $scope.region,
-                                    assess:$scope.assess,
-                                    status:$scope.status,
-                                    reason:$scope.reason
-                                },
-                                callBack: function (res) {
-                                    if(res.resCode == 1){
-                                        layer.msg('修改成功', {time:2000});
-                                        clear();//创建成功后清空
-                                        getData();
-                                        $('#myModal').modal('hide');
-                                    }else{
-                                        layer.msg(res.resMsg, {time:2000});
+                                $ajaxhttp.myhttp({
+                                    url: apiPrefix + '/v1/SewageDisposeReport/update',
+                                    method: 'PUT',
+                                    params: {
+                                        id: $scope.selfId,
+                                        name: $scope.name,
+                                        region: $scope.region,
+                                        assess:$scope.assess,
+                                        status:$scope.status1,
+                                        reason:$scope.reason
+                                    },
+                                    callBack: function (res) {
+                                        if(res.resCode == 1){
+                                            layer.msg('修改成功', {time:2000});
+                                            clear();//创建成功后清空
+                                            getData();
+                                            $('#myModal').modal('hide');
+                                        }else{
+                                            layer.msg(res.resMsg, {time:2000});
+                                        }
                                     }
-                                }
-                            })
+                                })
+                            }
+                        }else{
+                            layer.alert("请输入必填项", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
                         }
 
                     }
@@ -248,6 +253,7 @@
                                             transformRequest: angular.identity
                                         }).success(function (data) {
                                             if(data.resCode == 1){
+                                                layer.msg('导入成功', {time:2000});
                                                 getData($scope.id)
                                             }
                                         }).error(function (data) {
@@ -268,7 +274,7 @@
                         $scope.name='';
                         $scope.region='';
                         $scope.assess='';
-                        $scope.status='';
+                        $scope.status1='';
                         $scope.reason='';
 
                     }

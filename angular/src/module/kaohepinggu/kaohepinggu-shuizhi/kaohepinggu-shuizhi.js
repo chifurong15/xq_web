@@ -108,25 +108,25 @@
                     // 保存
                     $scope.save = function() {
 
-                        if (!$scope.title) {
-                            layer.alert("请输入标题", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        } else if (!$scope.author) {
-                            layer.alert("请输入创建人", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        } else if (!$scope.issuer) {
-                            layer.alert("请输入备注", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        }
+                        // if (!$scope.title) {
+                        //     layer.alert("请输入标题", {
+                        //         skin: 'my-skin',
+                        //         closeBtn: 1,
+                        //         anim: 3
+                        //     });
+                        // } else if (!$scope.author) {
+                        //     layer.alert("请输入创建人", {
+                        //         skin: 'my-skin',
+                        //         closeBtn: 1,
+                        //         anim: 3
+                        //     });
+                        // } else if (!$scope.issuer) {
+                        //     layer.alert("请输入备注", {
+                        //         skin: 'my-skin',
+                        //         closeBtn: 1,
+                        //         anim: 3
+                        //     });
+                        // }
 
                         // 新增水质管理
                         var params = {
@@ -136,67 +136,76 @@
                             createUser: $scope.author,
                             remark: $scope.issuer
                         }
-                        if (!$scope.id) {
-                            $ajaxhttp.myhttp({
-                                url: apiPrefix + '/v1/WaterQuality/selectHave',
-                                method: 'get',
-                                params: {
-                                    issue: $scope.searchTime1
-                                },
-                                callBack: function (res) {
-                                    if(res.resCode == 1){
-                                        if(res.data == '没有'){
-                                            $ajaxhttp.myhttp({
-                                                url: apiPrefix + '/v1/WaterQuality/add',
-                                                method: 'POST',
-                                                params: params,
-                                                callBack: function (res) {
-                                                    if(res.resCode == 1){
-                                                        $scope.newid = res.data.id;
-                                                        $scope.pid = res.data.id;
-                                                        layer.msg('新建成功', {time:2000});
-                                                        clear();//创建成功后清空
-														getList();
-														$('#myModal').modal('hide');
-                                                    }else{
-                                                        layer.msg(res.resMsg, {time:2000});
+                        if($scope.title && $scope.author && $scope.issuer){
+                            if (!$scope.id) {
+                                $ajaxhttp.myhttp({
+                                    url: apiPrefix + '/v1/WaterQuality/selectHave',
+                                    method: 'get',
+                                    params: {
+                                        issue: $scope.searchTime1
+                                    },
+                                    callBack: function (res) {
+                                        if(res.resCode == 1){
+                                            if(res.data == '没有'){
+                                                $ajaxhttp.myhttp({
+                                                    url: apiPrefix + '/v1/WaterQuality/add',
+                                                    method: 'POST',
+                                                    params: params,
+                                                    callBack: function (res) {
+                                                        if(res.resCode == 1){
+                                                            $scope.newid = res.data.id;
+                                                            $scope.pid = res.data.id;
+                                                            layer.msg('新建成功', {time:2000});
+                                                            clear();//创建成功后清空
+                                                            getList();
+                                                            $('#myModal').modal('hide');
+                                                        }else{
+                                                            layer.msg(res.resMsg, {time:2000});
+                                                        }
                                                     }
-                                                }
-                                            })
+                                                })
+                                            }else{
+                                                layer.msg('一个月只能新增一个报告');
+                                            }
                                         }else{
-                                            layer.msg('一个月只能新增一个报告');
+                                            layer.msg(res.resMsg, {time:2000});
                                         }
-                                    }else{
-                                        layer.msg(res.resMsg, {time:2000});
                                     }
-                                }
-                            })
+                                })
 
-                        }else{//修改水质报告
-                            $ajaxhttp.myhttp({
-                                url: apiPrefix + '/v1/WaterQuality/updatelist',
-                                method: 'PUT',
-                                params: {
-                                    id: $scope.id,
-                                    title: $scope.title,
-                                    createtime: $scope.currentdate,
-                                    issue: $scope.searchTime1,
-                                    createUser: $scope.author,
-                                    remark: $scope.issuer
-                                },
-                                callBack: function (res) {
-                                    if(res.resCode == 1){
-                                        layer.msg('修改成功', {time:2000});
-                                        clear();//创建成功后清空
-                                        $('#myModal').modal('hide');
-                                        getList();
-                                    }else{
-                                        layer.msg(res.resMsg, {time:2000});
+                            }else{//修改水质报告
+                                $ajaxhttp.myhttp({
+                                    url: apiPrefix + '/v1/WaterQuality/updatelist',
+                                    method: 'PUT',
+                                    params: {
+                                        id: $scope.id,
+                                        title: $scope.title,
+                                        createtime: $scope.currentdate,
+                                        issue: $scope.searchTime1,
+                                        createUser: $scope.author,
+                                        remark: $scope.issuer
+                                    },
+                                    callBack: function (res) {
+                                        if(res.resCode == 1){
+                                            layer.msg('修改成功', {time:2000});
+                                            clear();//创建成功后清空
+                                            $('#myModal').modal('hide');
+                                            getList();
+                                        }else{
+                                            layer.msg(res.resMsg, {time:2000});
+                                        }
                                     }
-                                }
-                            })
+                                })
 
+                            }
+                        }else{
+                            layer.alert("请输入必填项", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
                         }
+
                     }
 	                
 	                // 编辑

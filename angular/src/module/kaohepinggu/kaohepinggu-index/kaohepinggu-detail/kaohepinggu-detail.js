@@ -29,6 +29,8 @@
 						var bulletin = globalParam.getter().bulletin || {};
 						$scope.id = localStorage.getItem('id');
 						$scope.status = localStorage.getItem('status');
+                        $scope.surTitle = localStorage.getItem('surTitle');
+
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/SurfaceWater/userinfo1',
                             method: 'get',
@@ -84,77 +86,94 @@
 
 					//保存
                     $scope.save = function () {
-                        if (!$scope.area) {
-                            layer.alert("请选择区域", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        } else if (!$scope.score) {
-                            layer.alert("请输入分数", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        }
-
-                        if($scope.type == 2){ //新增
-                            $ajaxhttp.myhttp({
-                                url: apiPrefix + '/v1/SurfaceWaterGrade/haveDistrict',
-                                method: 'get',
-                                params: {
-                                    parentid: $scope.id,
-                                    popedom: $scope.area
-                                },
-                                callBack: function (res) {
-                                    if(res.data == 10){ //可以添加
-                                        $ajaxhttp.myhttp({
-                                            url: apiPrefix + '/v1/SurfaceWaterGrade/add',
-                                            method: 'POST',
-                                            params: {
-                                                parentid: $scope.id,
-                                                popedom: $scope.area,
-                                                grade: $scope.score
-                                            },
-                                            callBack: function (res) {
-                                                if(res.resCode == 1){
-                                                    layer.msg('新增成功', {time:2000});
-                                                    getData($scope.id);
-                                                    clear();//创建成功后清空
-                                                    $('#myModal').modal('hide');
-                                                }else{
-                                                    layer.msg(res.resMsg, {time:2000});
-                                                }
+                        // if (!$scope.area) {
+                        //     layer.alert("请选择区域", {
+                        //         skin: 'my-skin',
+                        //         closeBtn: 1,
+                        //         anim: 3
+                        //     });
+                        // } else if (!$scope.score) {
+                        //     layer.alert("请输入分数", {
+                        //         skin: 'my-skin',
+                        //         closeBtn: 1,
+                        //         anim: 3
+                        //     });
+                        // }
+                        if($scope.area && $scope.score){
+                            if($scope.score >= 0 && $scope.score <= 100){
+                                if($scope.type == 2){ //新增
+                                    $ajaxhttp.myhttp({
+                                        url: apiPrefix + '/v1/SurfaceWaterGrade/haveDistrict',
+                                        method: 'get',
+                                        params: {
+                                            parentid: $scope.id,
+                                            popedom: $scope.area
+                                        },
+                                        callBack: function (res) {
+                                            if(res.data == 10){ //可以添加
+                                                $ajaxhttp.myhttp({
+                                                    url: apiPrefix + '/v1/SurfaceWaterGrade/add',
+                                                    method: 'POST',
+                                                    params: {
+                                                        parentid: $scope.id,
+                                                        popedom: $scope.area,
+                                                        grade: $scope.score
+                                                    },
+                                                    callBack: function (res) {
+                                                        if(res.resCode == 1){
+                                                            layer.msg('新增成功', {time:2000});
+                                                            getData($scope.id);
+                                                            clear();//创建成功后清空
+                                                            $('#myModal').modal('hide');
+                                                        }else{
+                                                            layer.msg(res.resMsg, {time:2000});
+                                                        }
+                                                    }
+                                                })
+                                            }else{
+                                                layer.msg('行政区域不能相同', {time:2000});
                                             }
-                                        })
-                                    }else{
-                                        layer.msg('行政区域不能相同', {time:2000});
-                                    }
-                                }
-                            })
+                                        }
+                                    })
 
-                        }else if($scope.type == 1){ //修改
+                                }else if($scope.type == 1){ //修改
 
-                            $ajaxhttp.myhttp({
-                                url: apiPrefix + '/v1/SurfaceWaterGrade/update',
-                                method: 'PUT',
-                                params: {
-                                    id: $scope.selfId,
-                                    popedom: $scope.area,
-                                    grade: $scope.score
-                                },
-                                callBack: function (res) {
-                                    if(res.resCode == 1){
-                                        layer.msg('修改成功', {time:2000});
-                                        clear();//创建成功后清空
-                                        getData($scope.id);
-                                        $('#myModal').modal('hide');
-                                    }else{
-                                        layer.msg(res.resMsg, {time:2000});
-                                    }
+                                    $ajaxhttp.myhttp({
+                                        url: apiPrefix + '/v1/SurfaceWaterGrade/update',
+                                        method: 'PUT',
+                                        params: {
+                                            id: $scope.selfId,
+                                            popedom: $scope.area,
+                                            grade: $scope.score
+                                        },
+                                        callBack: function (res) {
+                                            if(res.resCode == 1){
+                                                layer.msg('修改成功', {time:2000});
+                                                clear();//创建成功后清空
+                                                getData($scope.id);
+                                                $('#myModal').modal('hide');
+                                            }else{
+                                                layer.msg(res.resMsg, {time:2000});
+                                            }
+                                        }
+                                    })
                                 }
-                            })
+                            }else{
+                                layer.alert("考核分数范围是0-100", {
+                                    skin: 'my-skin',
+                                    closeBtn: 1,
+                                    anim: 3
+                                });
+                            }
+
+                        }else{
+                            layer.alert("请输入必填项", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
                         }
+
 
 					}
 
@@ -200,6 +219,7 @@
                                             transformRequest: angular.identity
                                         }).success(function (data) {
                                             if(data.resCode == 1){
+                                                layer.msg('导入成功', {time:2000});
                                                 getData($scope.id)
                                             }
                                         }).error(function (data) {

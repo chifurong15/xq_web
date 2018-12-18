@@ -10,15 +10,14 @@
             <div class="panel-body">
                 <div class="panel-content">
                     <div class="patrolDetailContent">
-                        <div class="form-item">
-                            <label>期号：</label>
-                            <span ng-bind="superviseList.termNumber"></span>
-                        </div>
+                        <!--<div class="form-item">-->
+                            <!--<label>期号：</label>-->
+                            <!--<span ng-bind="superviseList.termNumber"></span>-->
+                        <!--</div>-->
                         <div class="form-item">
                             <label>行政区域：</label>
                             <span ng-bind="superviseList.regionName"></span>
                         </div>
-                        <br/>
                         <div class="form-item">
                             <label>评价时间：</label>
                             <span ng-bind="superviseList.evaluationDate"></span>
@@ -56,8 +55,8 @@
                             <label>不满意原因：</label>
                             <!--<span ng-bind="superviseList.dissatisfiedReason"></span>-->
                             <div class="clearfix reasonList" style="margin: 0 100px;">
-                                <label class="checkbox-inline" ng-repeat="item in reasonList" style="width: auto;display: block;float: inherit;">
-                                    <input type="checkbox" value="{{item}}">{{item}}
+                                <label class="checkbox-inline"  ng-repeat="item in reasonList" style="width: auto;display: block;float: inherit;">
+                                    <input type="checkbox" disabled="disabled" value="{{item}}">{{item}}
                                 </label>
                             </div>
 

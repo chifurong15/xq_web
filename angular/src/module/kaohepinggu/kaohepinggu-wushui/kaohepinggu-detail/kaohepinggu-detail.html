@@ -1,4 +1,4 @@
-<div class="kaohepingfen-add" ng-controller="wushuiViewCtrl" ng-init="init()">
+<div class="kaohepingfen-add kaohepingfen" ng-controller="wushuiViewCtrl" ng-init="init()">
     <div class="wrapper-md ">
     	<div class="panel panel-default m-n">
         	<div class="panel-body" style="position: relative;">
@@ -62,7 +62,7 @@
 
 		<!-- 模态框（Modal） -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog" style="width: 600px;">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -75,7 +75,7 @@
 					<div class="modal-body">
 						<form class="form-inline">
 							<div class="input-group form-item" >
-								<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">名称</font></font></label>
+								<label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">名称</font></font></label>
 								<select ng-model="name" class="form-control select-short" style="width: 160px!important;">
 									<option value="">请选择</option>
 									<option value="{{item}}" ng-repeat="item in dataLists">{{item}}</option>
@@ -83,7 +83,7 @@
 								<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 							</div>
 							<div class="input-group form-item" >
-								<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">所在行政区</font></font></label>
+								<label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">所在行政区</font></font></label>
 								<select ng-model="region" class="form-control select-short" style="width: auto;">
 									<option value="">请选择</option>
 									<option value="{{item}}" ng-repeat="item in allArea">{{item}}</option>
@@ -91,7 +91,7 @@
 								<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 							</div>
 							<div class="input-group form-item" >
-								<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">考核区</font></font></label>
+								<label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">考核区</font></font></label>
 								<select ng-model="assess" class="form-control select-short" style="width: auto;">
 									<option value="">请选择</option>
 									<option value="{{item}}" ng-repeat="item in allArea">{{item}}</option>
@@ -99,16 +99,16 @@
 								<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 							</div>
 							<div class="form-item">
-								<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否达标</font></font></label>
-								<select ng-model="status" class="form-control select-short">
+								<label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否达标</font></font></label>
+								<select ng-model="status1" class="form-control select-short">
 									<option value="">请选择</option>
 									<option value="0">是</option>
 									<option value="1">否</option>
 								</select>
 								<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 							</div>
-							<div class="form-item">
-								<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">原因</font></font></label>
+							<div class="form-item" style="position: relative;left: -280px;">
+								<label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">原因</font></font></label>
 								<!--<input type="text"  class="form-control input-short" ng-model="reason">-->
 								<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="reason" rows="3" style="width: 160px;max-width: 160px;"></textarea>
 								<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>

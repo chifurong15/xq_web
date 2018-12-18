@@ -139,113 +139,139 @@
 
                     //保存条目
                     $scope.save = function () {
-                        if (!$scope.samplingTime) {
-                            layer.alert("请选择日期", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        } else if (!$scope.water_temperature) {
-                            layer.alert("请输入水温", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        }else if (!$scope.total_phosphorus) {
-                            layer.alert("请输入总磷", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        }else if (!$scope.ammonia_nitrogen) {
-                            layer.alert("请输入氨氮", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        }else if (!$scope.permanganate_index) {
-                            layer.alert("请输入高锰酸盐指数", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        }else if (!$scope.DO) {
-                            layer.alert("请输入溶解氧", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            });
-                        }
-                        if($scope.type == 2){ //新增
-                            //console.log($scope.type)
+                        // if (!$scope.samplingTime) {
+                        //     layer.alert("请选择日期", {
+                        //         skin: 'my-skin',
+                        //         closeBtn: 1,
+                        //         anim: 3
+                        //     });
+                        // } else if (!$scope.water_temperature) {
+                        //     layer.alert("请输入水温", {
+                        //         skin: 'my-skin',
+                        //         closeBtn: 1,
+                        //         anim: 3
+                        //     });
+                        // }else if (!$scope.total_phosphorus) {
+                        //     layer.alert("请输入总磷", {
+                        //         skin: 'my-skin',
+                        //         closeBtn: 1,
+                        //         anim: 3
+                        //     });
+                        // }else if (!$scope.ammonia_nitrogen) {
+                        //     layer.alert("请输入氨氮", {
+                        //         skin: 'my-skin',
+                        //         closeBtn: 1,
+                        //         anim: 3
+                        //     });
+                        // }else if (!$scope.permanganate_index) {
+                        //     layer.alert("请输入高锰酸盐指数", {
+                        //         skin: 'my-skin',
+                        //         closeBtn: 1,
+                        //         anim: 3
+                        //     });
+                        // }else if (!$scope.DO) {
+                        //     layer.alert("请输入溶解氧", {
+                        //         skin: 'my-skin',
+                        //         closeBtn: 1,
+                        //         anim: 3
+                        //     });
+                        // }
+                        if($scope.samplingTime && $scope.water_temperature && $scope.total_phosphorus && $scope.ammonia_nitrogen && $scope.permanganate_index && $scope.DO){
+                            if ($scope.water_temperature >= 0 && $scope.water_temperature <= 100
+                                && $scope.total_phosphorus >= 0 && $scope.total_phosphorus <= 100
+                                && $scope.ammonia_nitrogen >= 0 && $scope.ammonia_nitrogen <= 100
+                                && $scope.permanganate_index >= 0 && $scope.permanganate_index <= 100
+                                && $scope.DO >= 0 && $scope.DO <= 100)
+                            {
 
-                            $ajaxhttp.myhttp({
-                                url: apiPrefix + '/v1/WaterQualityGrade/haveSection',
-                                method: 'get',
-                                params: {
-                                    parentid: $scope.id,
-                                    name: $scope.sectionType
-                                },
-                                callBack: function (res) {
-                                    if(res.data == 10){
-                                        //可以添加
-                                        $ajaxhttp.myhttp({
-                                            url: apiPrefix + '/v1/WaterQualityGrade/add',
-                                            method: 'POST',
-                                            params: {
-                                                parentid: $scope.id,
-                                                name: $scope.sectionType,
-                                                riverName: $scope.riverName,
-                                                samplingTime: $scope.samplingTime,
-                                                water_temperature: $scope.water_temperature,
-                                                total_phosphorus: $scope.total_phosphorus,
-                                                ammonia_nitrogen: $scope.ammonia_nitrogen,
-                                                permanganate_index: $scope.permanganate_index,
-                                                DO: $scope.DO,
-                                            },
-                                            callBack: function (res) {
-                                                if(res.resCode == 1){
-                                                    layer.msg('新增成功', {time:2000});
-                                                    getData($scope.id);
-                                                    clear();//创建成功后清空
-                                                    $('#myModal').modal('hide');
-                                                }else{
-                                                    layer.msg(res.resMsg, {time:2000});
-                                                }
+                                if($scope.type == 2){ //新增
+                                    //console.log($scope.type)
+
+                                    $ajaxhttp.myhttp({
+                                        url: apiPrefix + '/v1/WaterQualityGrade/haveSection',
+                                        method: 'get',
+                                        params: {
+                                            parentid: $scope.id,
+                                            name: $scope.sectionType
+                                        },
+                                        callBack: function (res) {
+                                            if(res.data == 10){
+                                                //可以添加
+                                                $ajaxhttp.myhttp({
+                                                    url: apiPrefix + '/v1/WaterQualityGrade/add',
+                                                    method: 'POST',
+                                                    params: {
+                                                        parentid: $scope.id,
+                                                        name: $scope.sectionType,
+                                                        riverName: $scope.riverName,
+                                                        samplingTime: $scope.samplingTime,
+                                                        water_temperature: $scope.water_temperature,
+                                                        total_phosphorus: $scope.total_phosphorus,
+                                                        ammonia_nitrogen: $scope.ammonia_nitrogen,
+                                                        permanganate_index: $scope.permanganate_index,
+                                                        DO: $scope.DO,
+                                                    },
+                                                    callBack: function (res) {
+                                                        if(res.resCode == 1){
+                                                            layer.msg('新增成功', {time:2000});
+                                                            getData($scope.id);
+                                                            clear();//创建成功后清空
+                                                            $('#myModal').modal('hide');
+                                                        }else{
+                                                            layer.msg(res.resMsg, {time:2000});
+                                                        }
+                                                    }
+                                                })
+                                            }else{
+                                                layer.msg('不能添加已有的断面', {time:2000});
                                             }
-                                        })
-                                    }else{
-                                        layer.msg('不能添加已有的断面', {time:2000});
-                                    }
-                                }
-                            })
+                                        }
+                                    })
 
-                        }else if($scope.type == 1){ //修改
+                                }else if($scope.type == 1){ //修改
 
-                            $ajaxhttp.myhttp({
-                                url: apiPrefix + '/v1/WaterQualityGrade/update',
-                                method: 'PUT',
-                                params: {
-                                    id: $scope.selfId ,
-                                    samplingTime: $scope.samplingTime ,
-                                    water_temperature: $scope.water_temperature ,
-                                    total_phosphorus: $scope.total_phosphorus ,
-                                    ammonia_nitrogen: $scope.ammonia_nitrogen ,
-                                    permanganate_index: $scope.permanganate_index ,
-                                    DO: $scope.DO
-                                },
-                                callBack: function (res) {
-                                    if(res.resCode == 1){
-                                        layer.msg('修改成功', {time:2000});
-                                        clear();//创建成功后清空
-                                        getData($scope.id);
-                                        $('#myModal').modal('hide');
-                                    }else{
-                                        layer.msg(res.resMsg, {time:2000});
-                                    }
+                                    $ajaxhttp.myhttp({
+                                        url: apiPrefix + '/v1/WaterQualityGrade/update',
+                                        method: 'PUT',
+                                        params: {
+                                            id: $scope.selfId ,
+                                            samplingTime: $scope.samplingTime ,
+                                            water_temperature: $scope.water_temperature ,
+                                            total_phosphorus: $scope.total_phosphorus ,
+                                            ammonia_nitrogen: $scope.ammonia_nitrogen ,
+                                            permanganate_index: $scope.permanganate_index ,
+                                            DO: $scope.DO
+                                        },
+                                        callBack: function (res) {
+                                            if(res.resCode == 1){
+                                                layer.msg('修改成功', {time:2000});
+                                                clear();//创建成功后清空
+                                                getData($scope.id);
+                                                $('#myModal').modal('hide');
+                                            }else{
+                                                layer.msg(res.resMsg, {time:2000});
+                                            }
+                                        }
+                                    })
                                 }
-                            })
+
+
+                            }else{
+                                layer.alert("数据范围是0-100", {
+                                    skin: 'my-skin',
+                                    closeBtn: 1,
+                                    anim: 3
+                                });
+                            }
+
+                        }else{
+                            layer.alert("请输入必填项", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
                         }
+
 
                     }
 
@@ -291,6 +317,7 @@
                                             transformRequest: angular.identity
                                         }).success(function (data) {
                                             if(data.resCode == 1){
+                                                layer.msg('导入成功', {time:2000});
                                                 getData($scope.id);
                                             }
                                         }).error(function (data) {

@@ -63,8 +63,8 @@
                                     <th width="10%">操作</th>
                                 </tr>
                                 <tr ng-repeat="item in surfaceWaterList" ng-if="num != 2">
-                                    <td>{{$index+1}}</td>
-                                    <td>{{item.title}}</td>
+                                    <td>{{$index + 1 + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
+                                    <td>{{item.title.length > 20 ? item.title.substring(0,20) + '...' : item.title}}</td>
                                     <td>{{item.issue}}</td>
                                     <td>
                                         <span ng-if="item.status==0" class="label label-danger">已上报</span>
@@ -73,9 +73,9 @@
                                     </td>
                                     <td>{{item.createtime}}</td>
                                     <td>{{item.createuser}}</td>
-                                    <td>{{item.remark}}</td>
+                                    <td>{{item.remark.length > 18 ? item.remark.substring(0,18) + '...' : item.remark}}</td>
                                     <td style="text-align: left;">
-                                        <button type="button" class="btn btn-success" ng-click="view(item.id)">查看
+                                        <button type="button" class="btn btn-success" ng-click="view(item.id ,item.status, item.title)">查看
                                         </button>
                                         <button ng-if="item.status==1" type="button" class="btn btn-warning"
                                                 ng-click="edit(item.id)">修改
@@ -86,7 +86,7 @@
                                     </td>
                                 </tr>
                                 <tr ng-repeat="item in surfaceWaterList" ng-if="num == 2">
-                                    <td>{{$index+1}}</td>
+                                    <td>{{$index + 1 + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
                                     <td>{{item.title}}</td>
                                     <td>{{item.issue}}</td>
                                     <td>
@@ -97,7 +97,7 @@
                                     <td>{{item.createuser}}</td>
                                     <td>{{item.remark}}</td>
                                     <td style="text-align: left;">
-                                        <button type="button" class="btn btn-success" ng-click="view(item.id)">查看
+                                        <button type="button" class="btn btn-success" ng-click="view(item.id,item.status, item.title)">查看
                                         </button>
                                         <button ng-if="item.status==0" type="button" class="btn btn-primary"
                                                 ng-click="sendBack(item.id)">退回
@@ -134,8 +134,8 @@
                         {{id ? '修改' : '新增'}}地表水质环境评分报告
                     </h4>
                 </div>
-                <div class="modal-body">
-                    <form class="form-inline" style="padding-left: 25%;">
+                <div class="modal-body" style="height: 300px;">
+                    <form class="form-inline">
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">标题</font></font></label>
@@ -147,7 +147,7 @@
                             <label><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">创建时间</font></font></label>
                             <input type="text" class="form-control input-short" ng-model="currentdate"
-                                   readonly="readonly">
+                                   readonly="readonly" style="width: 162px;">
                             <span class="required"><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">*</font></font></span>
                         </div>
@@ -156,10 +156,10 @@
                             <label><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">期号</font></font></label>
                             <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched"
-                                   placeholder="请选择日期" ng-model="$parent.searchTime1">
+                                   placeholder="请选择日期" ng-model="searchTime1">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         </div>
-                        <div class="form-item">
+                        <div class="form-item" style="margin-left: 10px;">
                             <label><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">创建人</font></font></label>
                             <input type="text" class="form-control input-short" ng-model="author">
@@ -172,7 +172,7 @@
                                     style="vertical-align: inherit;">备注</font></font></label>
                             <!--<input type="text" class="form-control input-short" ng-model="issuer">-->
                             <textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="issuer"
-                                      rows="3" style="width: 160px;max-width: 160px;"></textarea>
+                                      rows="3" style="width: 440px;max-width: 440px;"></textarea>
                             <span class="required"><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">*</font></font></span>
                         </div>

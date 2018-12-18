@@ -1,4 +1,4 @@
-<div class="kaohepingfen-add" ng-controller="shuizhiUpdateCtrl" ng-init="init()">
+<div class="" ng-controller="shuizhiUpdateCtrl" ng-init="init()">
     <div class="wrapper-md ">
     	<div class="panel panel-default m-n">
         	<div class="panel-body" style="position: relative;">
@@ -55,9 +55,9 @@
 		                                    <th width="10%">溶解氧（mg/L）</th>		                                    
 		                                    <th width="15%" ng-if="num == 1">操作</th>
 		                                </tr>
-	                                	<tr ng-repeat="item in detailList">		                                   
-		                                    <td>{{$index+1}}</td>
-		                                    <td></td>
+	                                	<tr ng-repeat="item in detailList">
+											<td>{{$index + 1 + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
+											<td></td>
 		                                    <td>{{item.name}}</td>
 		                                    <td>{{item.riverName}}</td>
 		                                    <td>{{item.samplingTime}}</td>
@@ -87,7 +87,7 @@
     </div>
 	<!-- 模态框（Modal） -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog" style="width: 610px;">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -101,7 +101,7 @@
 					<form class="form-inline">
 
 						<div class="input-group form-item" ng-if="type == 2">
-							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">断面名称</font></font></label>
+							<label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">断面名称</font></font></label>
 							<select ng-model="section" ng-options="s.id as s.name for s in nameOption" ng-change="getSectionChange(section)" class="form-control select-short" style="width: 160px;">
 								<option value="">请选择</option>
 							</select>
@@ -109,13 +109,13 @@
 						</div>
 
 						<div class="form-item" ng-if="type == 2">
-							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">河流</font></font></label>
+							<label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">河流</font></font></label>
 							<input type="text" class="form-control input-short" ng-model="riverName" readonly="">
 							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 						</div>
 
-						<div class="form-item" style="margin-left: 107px;">
-							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">采样日期</font></font></label>
+						<div class="form-item">
+							<label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">采样日期</font></font></label>
 							<div class="input-group date date_picker" id="samplingTime">
 								<input type="text" class="form-control input-short-o" ng-model="samplingTime">
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -123,32 +123,32 @@
 						</div>
 
 						<div class="form-item">
-							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">水温(℃)</font></font></label>
-							<input name="number" min="0" max="100" class="form-control input-short" ng-model="water_temperature">
+							<label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">水温(℃)</font></font></label>
+							<input name="number" min="0" max="100" onkeyup="value=value.replace(/[^\d]/g,'')" class="form-control input-short" ng-model="water_temperature">
 							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 						</div>
 
 						<div class="form-item">
-							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">总磷(mg/L)</font></font></label>
-							<input name="number" min="0" max="100" class="form-control input-short" ng-model="total_phosphorus">
+							<label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">总磷(mg/L)</font></font></label>
+							<input name="number" min="0" max="100" onkeyup="value=value.replace(/[^\d]/g,'')" class="form-control input-short" ng-model="total_phosphorus">
 							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 						</div>
 
 						<div class="form-item">
-							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">氨氮(mg/L)</font></font></label>
-							<input name="number" min="0" max="100" class="form-control input-short" ng-model="ammonia_nitrogen">
+							<label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">氨氮(mg/L)</font></font></label>
+							<input name="number" min="0" max="100" onkeyup="value=value.replace(/[^\d]/g,'')" class="form-control input-short" ng-model="ammonia_nitrogen">
 							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 						</div>
 
 						<div class="form-item">
-							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">高锰酸盐指数(mg/L)</font></font></label>
-							<input name="number" min="0" max="100" class="form-control input-short" ng-model="permanganate_index">
+							<label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">高锰酸盐指数(mg/L)</font></font></label>
+							<input name="number" min="0" max="100" onkeyup="value=value.replace(/[^\d]/g,'')" class="form-control input-short" ng-model="permanganate_index">
 							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 						</div>
 
 						<div class="form-item">
-							<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">溶解氧(mg/L)</font></font></label>
-							<input name="number" min="0" max="100" class="form-control input-short" ng-model="DO">
+							<label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">溶解氧(mg/L)</font></font></label>
+							<input name="number" min="0" max="100" onkeyup="value=value.replace(/[^\d]/g,'')" class="form-control input-short" ng-model="DO">
 							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 						</div>
 					</form>
