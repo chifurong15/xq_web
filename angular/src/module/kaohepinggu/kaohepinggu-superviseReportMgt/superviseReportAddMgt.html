@@ -44,7 +44,7 @@
                     </div>
                     <div class="form-item">
                         <label>联系电话</label>
-                        <input type="text" class="form-control input-short" ng-model="contactType" lay-verify="required"/>
+                        <input type="text" name="tel" onkeyup="this.value=this.value.replace(/[^-\d、/\s]/g, '')" class="form-control input-short" ng-model="contactType" lay-verify="required"/>
                     </div>
                     <div class="form-item">
                         <label>举报位置</label>

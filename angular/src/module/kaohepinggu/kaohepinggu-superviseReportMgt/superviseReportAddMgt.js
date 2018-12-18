@@ -287,7 +287,24 @@
                         layer.msg('服务器异常，请稍后再试');
                     });
                 }
-				
+
+                /**
+                 验证手机号码是否输入合法
+                 验证规则：11位数字，以1开头
+                 */
+                function checkMobile(str)
+                {
+                    var re=/^1\d{10}$/;
+                    if(re.test(str))
+                    {
+                        alert("正确！");
+                    }else
+                    {
+                        alert("错误！");
+                    }
+                }
+
+
 				/**
 				 * 新增
 				 */
@@ -309,19 +326,35 @@
 							overTime: $scope.overtime
 
 					}
-                    //console.log(params);
-                    $ajaxhttp.myhttp({
-                        url: apiPrefix + '/v1/socialReport/addReport',
-                        method: 'POST',
-                        params: params,
-                        callBack: function (res) {
-                            if(res.resCode == 1){
-                                layer.msg("新增成功！",{time:2000});
-                                clear();
-                                routeService.route('3-8', true);
-                            }
+                    if(params.contactType.length != 11 ){
+                        layer.alert("请输入正确的手机格式", {
+                            skin: 'my-skin',
+                            closeBtn: 1,
+                            anim: 3
+                        });
+					}else{
+                        var re=/^1\d{10}$/;
+                        if(re.test(params.contactType)) {
+                            $ajaxhttp.myhttp({
+                                url: apiPrefix + '/v1/socialReport/addReport',
+                                method: 'POST',
+                                params: params,
+                                callBack: function (res) {
+                                    if(res.resCode == 1){
+                                        layer.msg("新增成功！",{time:2000});
+                                        clear();
+                                        routeService.route('3-8', true);
+                                    }
+                                }
+                            })
+                        }else {
+                            layer.alert("请输入正确的手机格式", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
                         }
-                    })
+					}
 				}
 				
 				
