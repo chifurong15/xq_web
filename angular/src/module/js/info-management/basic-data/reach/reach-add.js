@@ -172,13 +172,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                 $scope.regionShow = function(){
                     $scope.areaName = '';
                     $("#region_ztree").modal('show');
-                    $http({
-                        method: "GET",
-                        url: $localStorage.gwUrl + basicUrl + "/tree",
-                        dataType:'json'
-                    }).success(function(data) {
-                        regionTree = $.fn.zTree.init($("#regionTree"), setting1, data.data);
-                    }).error(function() {});
+                    treeList();
                     var setting1 = {
                         view: {
                             selectedMulti: true,
@@ -194,6 +188,15 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                             onClick: zTreeOnClicks
                         }
                     };
+                    function treeList(){
+                        $http({
+                            method: "GET",
+                            url: $localStorage.gwUrl + basicUrl + "/tree",
+                            dataType:'json'
+                        }).success(function(data) {
+                            regionTree = $.fn.zTree.init($("#regionTree"), setting1, data.data);
+                        }).error(function() {});
+                    }
 
                     function zTreeOnClicks(event,treeId,treeNode){ //所属区域树节点点击
                         treeNode_find = treeNode.id,
@@ -278,32 +281,36 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                 //水系选择模态
                 var water_ztree_node, water_ztree_name, water_ztree_code;
                 $scope.waterShow = function() {
+                    $scope.waterName = '';
                     $("#water_ztree").modal('show');
+                    waterTreelist();
                     //初始化水系树
-                    $http({
-                        method: "get",
-                        url: $localStorage.gwUrl +waterUrl + "/belongWater",
-                        params: {
-                            areaCode:treeNode_find
-                        },
-                    }).success(
-                        function(res) {
-                            var setting1 = {
-                                enable: true,
-                                callback: {
-                                    onClick: zTreeOnClick_water
-                                }
-                            };
-                            var zNodes1 = [{
-                                name: "根节点",
-                                icon: "/vendor/zTree_v3/css/zTreeStyle/img/diy/10.png",
-                                open: true,
-                                children: res.data
-                            }];
-                            $.fn.zTree.init($("#waterZtree"), setting1, zNodes1);
-                            $scope.tree = res.data
-                        }
-                    );
+                    function waterTreelist(){
+                        $http({
+                            method: "get",
+                            url: $localStorage.gwUrl +waterUrl + "/belongWater",
+                            params: {
+                                areaCode:treeNode_find
+                            },
+                        }).success(
+                            function(res) {
+                                var setting1 = {
+                                    enable: true,
+                                    callback: {
+                                        onClick: zTreeOnClick_water
+                                    }
+                                };
+                                var zNodes1 = [{
+                                    name: "根节点",
+                                    icon: "/vendor/zTree_v3/css/zTreeStyle/img/diy/10.png",
+                                    open: true,
+                                    children: res.data
+                                }];
+                                $.fn.zTree.init($("#waterZtree"), setting1, zNodes1);
+                                $scope.tree = res.data
+                            }
+                        );
+                    }
 
                     //树节点点击事件
                     function zTreeOnClick_water(event, treeId, treeNode) {
@@ -329,31 +336,35 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                     };
                     //水系模态框搜索框
                     $scope.select_water = function() {
-                        $http({
-                            method: "GET",
-                            url: $localStorage.gwUrl +waterUrl + "/belongWater",
-                            params: {
-                                waterName: $scope.waterName,
-                                areaCode:treeNode_find
-                            },
-                        }).success(
-                            function(res) {
-                                var setting1 = {
-                                    enable: true,
-                                    callback: {
-                                        onClick: zTreeOnClick_water
-                                    }
-                                };
-                                var zNodes1 = [{
-                                    name: "根节点",
-                                    icon: "/vendor/zTree_v3/css/zTreeStyle/img/diy/10.png",
-                                    open: true,
-                                    children: res.data
-                                }];
-                                $.fn.zTree.init($("#waterZtree"), setting1, zNodes1);
-                                $scope.tree = res.data
-                            }
-                        );
+                        if($scope.waterName == null || $scope.waterName == ''){
+                            waterTreelist();
+                        }else{
+                            $http({
+                                method: "GET",
+                                url: $localStorage.gwUrl +waterUrl + "/belongWater",
+                                params: {
+                                    waterName: $scope.waterName,
+                                    areaCode:treeNode_find
+                                },
+                            }).success(
+                                function(res) {
+                                    var setting1 = {
+                                        enable: true,
+                                        callback: {
+                                            onClick: zTreeOnClick_water
+                                        }
+                                    };
+                                    var zNodes1 = [{
+                                        name: "根节点",
+                                        icon: "/vendor/zTree_v3/css/zTreeStyle/img/diy/10.png",
+                                        open: true,
+                                        children: res.data
+                                    }];
+                                    $.fn.zTree.init($("#waterZtree"), setting1, zNodes1);
+                                    $scope.tree = res.data
+                                }
+                            );
+                        }
                     };
                     //关闭模态框【确定按钮】
                     $scope.water_modalOk = function (){
@@ -446,34 +457,38 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                 //河流选择模态框【show】
                 var river_ztree_node, river_ztree_name, river_ztree_code;
                 $scope.riverShow = function() {
+                    $scope.riverName =  '';
                     $("#river_ztree").modal('show');
+                    riverTreelist();
                     //生成河流树
-                    $http({
-                        method: "get",
-                        url: $localStorage.gwUrl +waterUrl + "/riverLakesReservoir",
-                        params: {
-                            areaCode:treeNode_find,
-                            waterCode:water_ztree_node,
-                            type: $scope.reachDetailData.classify
-                        },
-                    }).success(
-                        function(res) {
-                            var setting1 = {
-                                enable: true,
-                                callback: {
-                                    onClick: zTreeOnClick_river
-                                }
-                            };
-                            var zNodes1 = [{
-                                name: "根节点",
-                                icon: "/vendor/zTree_v3/css/zTreeStyle/img/diy/10.png",
-                                open: true,
-                                children: res.data
-                            }];
-                            $.fn.zTree.init($("#riverZtree"), setting1, zNodes1);
-                            $scope.tree = res.data
-                        }
-                    );
+                    function riverTreelist(){
+                        $http({
+                            method: "get",
+                            url: $localStorage.gwUrl +waterUrl + "/riverLakesReservoir",
+                            params: {
+                                areaCode:treeNode_find,
+                                waterCode:water_ztree_node,
+                                type: $scope.reachDetailData.classify
+                            },
+                        }).success(
+                            function(res) {
+                                var setting1 = {
+                                    enable: true,
+                                    callback: {
+                                        onClick: zTreeOnClick_river
+                                    }
+                                };
+                                var zNodes1 = [{
+                                    name: "根节点",
+                                    icon: "/vendor/zTree_v3/css/zTreeStyle/img/diy/10.png",
+                                    open: true,
+                                    children: res.data
+                                }];
+                                $.fn.zTree.init($("#riverZtree"), setting1, zNodes1);
+                                $scope.tree = res.data
+                            }
+                        );
+                    }
 
                     //树节点点击事件
                     function zTreeOnClick_river(event, treeId, treeNode) {
@@ -498,33 +513,37 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                     };
                     //河流模态框搜索框
                     $scope.select_river = function() {
-                        $http({
-                            method: "GET",
-                            url: $localStorage.gwUrl +waterUrl + "/riverLakesReservoir",
-                            params: {
-                                areaCode: treeNode_find,
-                                waterCode: water_ztree_node,
-                                type: $scope.reachDetailData.classify,
-                                name: $scope.riverName
-                            },
-                        }).success(
-                            function(res) {
-                                var setting1 = {
-                                    enable: true,
-                                    callback: {
-                                        onClick: zTreeOnClick_river
-                                    }
-                                };
-                                var zNodes1 = [{
-                                    name: "根节点",
-                                    icon: "/vendor/zTree_v3/css/zTreeStyle/img/diy/10.png",
-                                    open: true,
-                                    children: res.data
-                                }];
-                                $.fn.zTree.init($("#riverZtree"), setting1, zNodes1);
-                                $scope.tree = res.data
-                            }
-                        );
+                        if($scope.riverName == null || $scope.riverName == ''){
+                            riverTreelist();
+                        }else{
+                            $http({
+                                method: "GET",
+                                url: $localStorage.gwUrl +waterUrl + "/riverLakesReservoir",
+                                params: {
+                                    areaCode: treeNode_find,
+                                    waterCode: water_ztree_node,
+                                    type: $scope.reachDetailData.classify,
+                                    name: $scope.riverName
+                                },
+                            }).success(
+                                function(res) {
+                                    var setting1 = {
+                                        enable: true,
+                                        callback: {
+                                            onClick: zTreeOnClick_river
+                                        }
+                                    };
+                                    var zNodes1 = [{
+                                        name: "根节点",
+                                        icon: "/vendor/zTree_v3/css/zTreeStyle/img/diy/10.png",
+                                        open: true,
+                                        children: res.data
+                                    }];
+                                    $.fn.zTree.init($("#riverZtree"), setting1, zNodes1);
+                                    $scope.tree = res.data
+                                }
+                            );
+                        }
                     };
                     //关闭模态框【确定按钮】
                     $scope.river_modalOk = function (){
@@ -557,26 +576,9 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                 //管理人员树
                 var regionAndUserTree;
                 $scope.adminTree = function (index) {
+                    $scope.waterName_one = '';
                     $("#myModal_ztree_one").modal('show');
-                    $http({
-                        method: "GET",
-                        url: $localStorage.gwUrl + reachUrl + "/regionAndUserTree",
-                        dataType: 'json'
-                    }).success(function (data) {
-                        regionAndUserTree = $.fn.zTree.init($("#regionAndUserTree"), setting, data.data);
-                    }).error(function () {});
-                    //河长搜索
-                    $scope.select_one = function () {
-                        $http({
-                            method: "GET",
-                            url: $localStorage.gwUrl + reachUrl + "/findByUser",
-                            params: {
-                                userName: $scope.waterName_one,
-                            },
-                        }).success(function (resp) {
-                            regionAndUserTree = $.fn.zTree.init($("#regionAndUserTree"), setting, resp.data);
-                        })
-                    }
+                    userTreelist();
                     var setting = {
                         view: {
                             selectedMulti: true,
@@ -592,6 +594,34 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                             onClick: zTreeOnClickUser
                         }
                     };
+
+                    function userTreelist(){
+                        $http({
+                            method: "GET",
+                            url: $localStorage.gwUrl + reachUrl + "/regionAndUserTree",
+                            dataType: 'json'
+                        }).success(function (data) {
+                            regionAndUserTree = $.fn.zTree.init($("#regionAndUserTree"), setting, data.data);
+                        }).error(function () {});
+                    }
+
+                    //河长搜索
+                    $scope.select_one = function () {
+                        if($scope.waterName_one == null || $scope.waterName_one == ''){
+                            userTreelist();
+                        }else{
+                            $http({
+                                method: "GET",
+                                url: $localStorage.gwUrl + reachUrl + "/findByUser",
+                                params: {
+                                    userName: $scope.waterName_one,
+                                },
+                            }).success(function (resp) {
+                                regionAndUserTree = $.fn.zTree.init($("#regionAndUserTree"), setting, resp.data);
+                            })
+                        }
+                    }
+
                     function zTreeOnCheck(event, treeId, treeNode) {
                     };
                     function zTreeOnClickUser(event, treeId, treeNode) {
