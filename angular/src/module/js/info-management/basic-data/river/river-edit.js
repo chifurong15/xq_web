@@ -28,7 +28,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
 									$log, $q, $rootScope,globalParam, $window,
 									routeService, $http) {
 								//获取当前数据
-								$scope.riverDetail = $localStorage.riverDetailData;
+								$scope.riverDetail = $localStorage.riverEditData;
                                 CKEDITOR.instances.editor.setData($scope.riverDetail.overView);
 
 								//所属区域树模态框【show】
