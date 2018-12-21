@@ -14,42 +14,43 @@
 						<form id="riverAddForm" class="form-inline" method="get" novalidate="novalidate">
 							<div class="form-item">
 								<label>河流名称</label>
-								<input type="text" class="form-control input-short" ng-model="riverName" readonly="readonly"/>
+								<input type="text" class="form-control input-short" ng-model="riverDetail.riverName" readonly="readonly"/>
 							</div>
 							<div class="form-item">
 	                            <label>河流长度</label>
-	                            <input type="text" class="form-control input-short" ng-model="length" readonly="readonly"/>
-	                            <span>km</span><span class="required">*</span>
+	                            <input type="text" class="form-control input-short-o" ng-model="riverDetail.length" readonly="readonly"/>
+	                            <a class="input-group-addon"><i>km</i></a>
+	                            <span class="required">*</span>
 	                        </div>
 	                      	<div class="form-item">
 								<label>河流类型</label>
-	                            <input type="text" class="form-control input-short" ng-model="riverTypeName" readonly="readonly"/>
+	                            <input type="text" class="form-control input-short" ng-model="riverDetail.riverTypeName" readonly="readonly"/>
 							</div>
 							<br/>
 	                        <div class="form-item">
 	                            <label>河流等级</label>
-	                            <input type="text" class="form-control input-short" ng-model="gradeName" readonly="readonly"/>
+	                            <input type="text" class="form-control input-short" ng-model="riverDetail.gradeName" readonly="readonly"/>
 	                        </div>
 							<div class="form-item">
 								<label>所属水系</label>
-	                            <input type="text" class="form-control input-short" ng-model="waterName" readonly="readonly"/>
+	                            <input type="text" class="form-control input-short" ng-model="riverDetail.waterName" readonly="readonly"/>
 							</div>
 							<div class="form-item">
 		                        <label>所属区域</label>
-	                            <input type="text" class="form-control input-short" ng-model="regionName" readonly="readonly"/>
+	                            <input type="text" class="form-control input-short" ng-model="riverDetail.regionName" readonly="readonly"/>
 		                    </div>
 		                    <br/>
 							<div class="form-item">
 	                            <label>起点</label>
-	                            <input type="text" class="form-control input-short" ng-model="startPoint" readonly="readonly"/>
+	                            <input type="text" class="form-control input-short" ng-model="riverDetail.startPoint" readonly="readonly"/>
 	                        </div>
 	                        <div class="form-item">
 	                            <label>终点</label>
-	                            <input type="text" class="form-control input-short" ng-model="endPoint" readonly="readonly"/>
+	                            <input type="text" class="form-control input-short" ng-model="riverDetail.endPoint" readonly="readonly"/>
 	                        </div>
 	                        <div class="form-item">
 	                            <label>河流编码</label>
-	                            <input type="text" class="form-control input-short" ng-model="riverCode" readonly="readonly"/>
+	                            <input type="text" class="form-control input-short" ng-model="riverDetail.riverCode" readonly="readonly"/>
 	                        </div>
 							<br/>
 
@@ -62,7 +63,7 @@
 							<br/>
 							<div class="form-item">
 								<label>备注</label>
-								<textarea class="form-control textarea-long" ng-model="remark" rows="4" readonly="readonly"></textarea>
+								<textarea class="form-control textarea-long" ng-model="riverDetail.remark" rows="4" readonly="readonly"></textarea>
 							</div>
 						</form>
 					</div>

@@ -350,8 +350,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                             id: id
                         }
                     }).success(function success(result) {
-                        console.log(result);
-                        $localStorage.riverDetailData = result;
+                        $localStorage.riverDetailData = result.data;
                         routeService.route(507, false);
                     });
                 }
@@ -365,8 +364,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                             id: id
                         }
                     }).success(function success(result) {
-                        console.log(result);
-                        $localStorage.riverEditData = result;
+                        $localStorage.riverEditData = result.data;
                         routeService.route(508, false);
                     });
                 }

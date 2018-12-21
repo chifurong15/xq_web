@@ -2296,6 +2296,11 @@ body .c-ffffff a {
 .kaohepingfen .modal-body .form-item{
     float: left;
 }
+
+
+.td-tool a.btn {
+    min-width: 24px;
+}
 .chouchadudao .bootstrap-select , .chouchadudao .dropdown-menu {
     width: 425px!important;
 }

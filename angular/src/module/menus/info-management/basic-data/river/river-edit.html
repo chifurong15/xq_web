@@ -14,18 +14,18 @@
 						<form id="riverAddForm" class="form-inline" method="get" novalidate="novalidate">
 							<div class="form-item">
 								<label>河流名称</label>
-								<input type="text" class="form-control input-short" ng-model="riverName"  ng-blur="isRepeat()"/>
+								<input type="text" id="riverName" class="form-control input-short" ng-model="riverDetail.riverName"  ng-blur="isRepeat()"/>
                                 <span class="required">*</span>
 							</div>
 							<div class="form-item">
 	                            <label>河流长度</label>
-	                            <input type="text" class="form-control input-short" ng-model="length"/>
-	                            <span>km</span><span class="required">*</span>
+	                            <input type="text" class="form-control input-short-o" ng-model="riverDetail.length"/>
+	                            <a class="input-group-addon"><i>km</i></a>
+	                            <span class="required">*</span>
 	                        </div>
 	                      	<div class="form-item">
 								<label>河流类型</label>
-								<select ng-init="riverType()" ng-model="river_type.typeValue" ng-options="rv.typeValue as rv.typeName for rv in riverTypes"
-                                        ng-change="river_Change(river_type.typeValue)" class="form-control select-short">
+								<select ng-init="riverType()" ng-model="riverDetail.riverType" ng-options="rv.typeValue as rv.typeName for rv in riverTypes" class="form-control select-short">
                                     <option  value="">请选择</option>
                                 </select>
                                 <span class="required">*</span>
@@ -33,24 +33,24 @@
 							<br/>
 							<div class="form-item">
 		                        <label>所属区域</label>
-								<input ng-model="region" type="text" class="form-control input-short-o"  ng-click="regionShow()">
+								<input ng-model="riverDetail.regionName" type="text" class="form-control input-short-o" ng-click="regionShow()">
 								<a class="input-group-addon" ng-click="regionShow()"><i class="fa fa-search"></i></a>
                                 <span class="required">*</span>
 		                    </div>
 							<div class="form-item">
 								<label>所属水系</label>
-								<input ng-model="water_ztree" type="text" class="form-control input-short-o"  ng-click="waterShow()">
-								<a class="input-group-addon"  ng-click="waterShow()"><i class="fa fa-search"></i></a>
+								<input ng-model="riverDetail.waterName" type="text" class="form-control input-short-o"  ng-click="waterShow()">
+								<a class="input-group-addon" ng-click="waterShow()"><i class="fa fa-search"></i></a>
                                 <span class="required">*</span>
 							</div>
 		                    <br/>
 							<div class="form-item">
 	                            <label>起点</label>
-	                            <input type="text" class="form-control input-short" ng-model="startPoint"/>
+	                            <input type="text" class="form-control input-short" ng-model="riverDetail.startPoint"/>
 	                        </div>
 	                        <div class="form-item">
 	                            <label>终点</label>
-	                            <input type="text" class="form-control input-short" ng-model="endPoint"/>
+	                            <input type="text" class="form-control input-short" ng-model="riverDetail.endPoint"/>
 	                        </div>
 							<br/>
 
@@ -63,7 +63,7 @@
 							<br/>
 							<div class="form-item">
 								<label>备注</label>
-								<textarea class="form-control textarea-long" ng-model="remark" rows="4" maxlength="512"></textarea>
+								<textarea class="form-control textarea-long" ng-model="riverDetail.remark" rows="4" maxlength="512"></textarea>
 							</div>
 						</form>
 					</div>
