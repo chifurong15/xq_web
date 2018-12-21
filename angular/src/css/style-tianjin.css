@@ -2296,3 +2296,7 @@ body .c-ffffff a {
 .kaohepingfen .modal-body .form-item{
     float: left;
 }
+.chouchadudao .bootstrap-select , .chouchadudao .dropdown-menu {
+    width: 425px!important;
+}
+
