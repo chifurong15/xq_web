@@ -499,6 +499,7 @@
                             var re=/^1\d{10}$/;
                             if(re.test($scope.phone)) {
                                 if(id == 1) {//新增联络员
+                                    params.feedbackid = $scope.answerId;
                                     $ajaxhttp.myhttp({
                                         url: apiPrefix + '/inspection/v1/ComtactPerson/add',
                                         method: 'POST',
