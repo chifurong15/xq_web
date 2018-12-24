@@ -1,10 +1,235 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-通知通报详情页
-</body>
-</html>
+<div class="anchaanfang" ng-controller="notificationDetailCtrl" ng-init="init()">
+    <div class="wrapper-md ">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">通知通报</span><span class="tag-right"></span><span
+                    class="tag-right tag-left"></span><span class="tag tag1">详情</span><span class="tag-right"></span>
+                <div style="overflow: hidden;">
+                    <button type="button" class="btn btn-primary" ng-click="goBack()"
+                            style="position: absolute;right: 20px;bottom: 20px;">返回
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">通知详情</li>
+                        <li>{{isreply == 2 ? '已阅' : '答复'}}情况</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <!--通知详情-->
+                        <div class="layui-tab-item layui-show">
+                            <div class="panel-body">
+                                <form class="form-inline clearfix">
+                                    <div class="form-item">
+                                        <label>类型</label>
+                                        <select class="form-control select-short" disabled ng-model="detailData.informType">
+                                            <option value="">请选择</option>
+                                            <option value="600101">信息通知</option>
+                                            <option value="600102">信息通报</option>
+                                        </select>
+                                    </div>
+                                    <br>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
+                                        <input type="text" class="form-control input-long" readonly ng-model="detailData.title">
+                                    </div>
+                                    <br>
+                                    <div class="form-item">
+                                        <label>发起日期</label>
+                                        <div class="input-group date date_picker">
+                                            <input type="text" class="form-control input-short-o" readonly ng-model="detailData.createDate">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发起人</font></font></label>
+                                        <input type="text" class="form-control input-short" readonly ng-model="detailData.createPerson">
+                                    </div>
+                                    <br>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">问责内容</font></font></label>
+                                        <textarea class="form-control" readonly ng-model="detailData.content" rows="3" style="width: 425px;max-width: 425px;"></textarea>
+                                    </div>
+                                    <br>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">接受区域</font></font></label>
+                                        <input type="text" class="form-control input-long" readonly ng-model="detailData.regionName">
+                                    </div>
+                                    <br>
+                                    <div class="form-item">
+                                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">成员单位</font></font></label>
+                                        <input type="text" class="form-control input-long" readonly ng-model="detailData.unitsName">
+                                    </div>
+                                    <br>
+                                    <div class="form-item" ng-if="detailData.fileList.length > 0">
+                                        <label><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">附件</font></font></label>
+                                    </div>
+                                    <div class="form-item" style="position: relative;left: -20px;width: 446px;">
+                                        <span ng-repeat="item in accessoryURL" style="color: #333;display: block;cursor: pointer;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!--已阅情况-->
+                        <div class="layui-tab-item">
+                            <div class="panel-body">
+                                <!--已阅情况-->
+                                <div class="tab-content" ng-if="isreply == 2">
+                                    <div class="tab-pane active" id="tableStatistics2">
+                                        <div class="table-responsive" style="margin-top: 20px;">
+                                            <table class="table table-bordered table-hover">
+                                                <tbody>
+                                                    <tr class='tHeader'>
+                                                        <th width="5%">序号</th>
+                                                        <th width="10%">标题</th>
+                                                        <th width="10%">通知区域</th>
+                                                        <th width="15%">已阅状态</th>
+                                                    </tr>
+                                                    <tr ng-repeat="item in readList">
+                                                        <td>{{$index + 1}}</td>
+                                                        <td>{{item.title}}</td>
+                                                        <td>{{item.region_name}}</td>
+                                                        <td>
+                                                            <span ng-if="item.readStatus == 1">已阅</span>
+                                                            <span ng-if="item.readStatus == 2">未阅</span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--答复情况-->
+                                <div class="tab-content" ng-if="isreply == 1">
+                                    <div class="tab-pane active" id="tableStatistics3">
+                                        <div class="table-responsive" style="margin-top: 20px;">
+                                            <table class="table table-bordered table-hover">
+                                                <tbody>
+                                                <tr class='tHeader'>
+                                                    <th width="5%">序号</th>
+                                                    <th width="10%">行政区域</th>
+                                                    <th width="10%">是否已阅</th>
+                                                    <th width="15%">是否反馈</th>
+                                                    <th width="10%">操作</th>
+                                                </tr>
+                                                <tr ng-repeat="item in readList">
+                                                    <td>{{$index + 1}}</td>
+                                                    <td>{{item.region_name}}</td>
+                                                    <td>
+                                                        <span ng-if="item.readStatus == 1">已阅</span>
+                                                        <span ng-if="item.readStatus == 2">未阅</span>
+                                                    </td>
+                                                    <td>
+                                                        <span ng-if="item.replyStatus == 1">是</span>
+                                                        <span ng-if="item.replyStatus == 2">否</span>
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-primary btn-xs" ng-if="item.replyStatus == 1" ng-click="view(item.id)"><i class="fa fa-info" title="查看"></i></a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 查看反馈（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel1">
+                            反馈详情
+                        </h4>
+                    </div>
+                    <div class="modal-body" style="height: 350px;">
+                        <form class="form-inline clearfix">
+                            <div class="form-item">
+                                <label>答复时间</label>
+                                <div class="input-group date date_picker">
+                                    <input type="text" class="form-control input-short-o" readonly ng-model="detailData1.replyDate">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">答复人</font></font></label>
+                                <input type="text" class="form-control input-short" readonly ng-model="detailData1.replyPerson">
+                            </div>
+                            <br>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">答复说明</font></font></label>
+                                <textarea class="form-control" ng-model="detailData1.description" readonly rows="3" style="width: 425px;max-width: 425px;"></textarea>
+                            </div>
+                            <br>
+                            <div class="form-item" ng-if="detailData1.fileList.length > 0">
+                                <label><font style="vertical-align: inherit;"><font
+                                        style="vertical-align: inherit;">附件</font></font></label>
+                            </div>
+                            <div class="form-item" style="position: relative;left: -20px;width: 446px;">
+                                        <span ng-repeat="item in accessoryURL1" style="color: #333;display: block;cursor: pointer;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
+                                        </span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+</div>
+<script>
+    layui.use('element', function () {
+        var $ = layui.jquery
+            , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        //触发事件
+        var active = {
+            tabChange: function () {
+                //切换到指定Tab项
+                element.tabChange('demo', '22'); //切换到：用户管理
+            }
+        };
+
+        $('.site-demo-active').on('click', function () {
+            var othis = $(this), type = othis.data('type');
+            active[type] ? active[type].call(this, othis) : '';
+        });
+
+        element.on('tab(test)', function (elem) {
+            location.hash = 'test=' + $(this).attr('lay-id');
+        });
+
+    });
+</script>

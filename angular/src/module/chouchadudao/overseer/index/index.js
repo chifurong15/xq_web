@@ -21,8 +21,10 @@
                                                $location, $log, $q, $rootScope, $window,
                                                routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
-                    // var apiPrefix = moduleService.getServiceUrl();
-                    var apiPrefix = 'http://10.0.9.203:8080';
+                    var apiPrefix = moduleService.getServiceUrl();
+
+                    //var apiPrefix = 'http://10.0.9.203:8080';
+
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/list';
                     var sentUnitUrl = moduleService.getServiceUrl() + '/information/v1/dictionary/list';
 

@@ -1,10 +1,237 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-通知通报首页
-</body>
-</html>
+<div class="conferenceCtrl chouchadudao anchaanfang" ng-controller="notificationCtrl" ng-init="init()">
+    <div class="wrapper-md ">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">通知通报</span><span class="tag-right"></span>
+            </div>
+
+        </div>
+        <div class="panel panel-default m-all-0">
+            <div class="panel-body">
+                <form method="get">
+                    <div class="form-inline">
+                        <div class="form-item">
+                            <label>标题</label>
+                            <input type="text" class="form-control input-short" ng-model="title"/>
+                        </div>
+                        <div class="form-item">
+                            <label>发起日期</label>
+                            <div class="input-group date date_picker" id="startTime">
+                                <input type="text" class="form-control input-short-o" ng-model="startTime">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="form-item">
+                            <label>通知类别</label>
+                            <select class="form-control select-short"  ng-model="informType">
+                                <option value="">全部</option>
+                                <option value="600101">信息通知</option>
+                                <option value="600102">信息通报</option>
+                                <option value="600103">督查</option>
+                                <option value="600104">督办</option>
+                                <option value="600105"> 一区一单</option>
+                                <!--<option value="600106">暗查暗访</option>-->
+                            </select>
+                        </div>
+                        <div class="form-item">
+                            <label>已阅</label>
+                            <select class="form-control select-short"  ng-model="readStatus">
+                                <option value="">全部</option>
+                                <option value="1">已阅</option>
+                                <option value="2">未阅</option>
+                            </select>
+                        </div>
+                        <button type="submit" ng-click="searchData()" class="btn btn-primary">
+                            <i class="fa fa-search"></i>搜索
+                        </button>
+                        <button type="button" class="btn btn-primary" ng-click="reset()" style="margin: 0 5px;">
+                            <i class="fa fa-refresh"></i>重置
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <div class="form-inline">
+                        <div class="input-group fr" ng-if="num == 2">
+                            <button type="button" class="btn btn-primary btn-sm " ng-click="add()" style="margin: 0 5px;">
+                                <i class="fa fa-plus"></i> 发起通知通报
+                            </button>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-hover" data-filter="#filter">
+                        <tr>
+                            <th style="width: 5%;">序号</th>
+                            <th style="width: 15%">标题</th>
+                            <th style="width: 10%">通知类别</th>
+                            <th style="width: 10%">发起人</th>
+                            <th style="width: 10%">发起日期</th>
+                            <th style="width: 10%">答复状态</th>
+                            <th style="width: 10%">已阅状态</th>
+                            <th style="width: 10%">操作</th>
+                        </tr>
+                        <tr ng-repeat="module in moduleList">
+                            <td>{{$index + 1 + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
+                            <td>{{module.title}}</td>
+                            <td>{{module.informType_name}}</td>
+                            <td>{{module.createPerson}}</td>
+                            <td>{{module.createDate}}</td>
+                            <td>
+                                <span ng-if="module.replyStatus == 1">已答复</span>
+                                <span ng-if="module.replyStatus == 2" style="color: #f00;">未答复</span>
+                                <span ng-if="module.replyStatus != 1 && module.replyStatus != 2">-</span>
+                            </td>
+                            <td>
+                                <span ng-if="module.readStatus == 1">已读</span>
+                                <span ng-if="module.readStatus == 2" style="color: #f00;">未读</span>
+                                <span ng-if="module.readStatus != 1 && module.readStatus != 2">-</span>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary btn-xs" ng-if="module.isStart == 1" ng-click="view(module)"><i class="fa fa-info" title="查看"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-if="module.isStart == 2" ng-click="answer(module)"><i class="fa fa-bullhorn" title="查看/答复"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-if="module.isStart == 1" ng-click="delete(module.id)"><i class="fa fa-trash-o" title="删除"></i></a>
+                            </td>
+                        </tr>
+                    </table>
+                    <tm-pagination conf="paginationConf"></tm-pagination>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- 发起通知通报（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="close()">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel1">
+                            发起通知通报
+                        </h4>
+                    </div>
+                    <div class="modal-body" style="height: 450px;">
+                        <form class="form-inline clearfix">
+                            <div class="form-item">
+                                <label>类型</label>
+                                <select class="form-control select-short" ng-change="getChange(type)" ng-model="type">
+                                    <option value="">请选择</option>
+                                    <option value="600101">信息通知</option>
+                                    <option value="600102">信息通报</option>
+                                </select>
+                            </div>
+                            <div class="form-item" ng-show="isShow">
+                                <label>需要答复</label>
+                                <select class="form-control select-short" ng-model="isNeedReply">
+                                    <option value="">请选择</option>
+                                    <option value="1">是</option>
+                                    <option value="2">否</option>
+                                </select>
+                            </div>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
+                                <input type="text" class="form-control input-long" ng-model="supervisingTitle">
+                            </div>
+                            <div class="form-item">
+                                <label>发起日期</label>
+                                <div class="input-group date date_picker" id="Time">
+                                    <input type="text" class="form-control input-short-o" ng-model="Time">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发起人</font></font></label>
+                                <input type="text" class="form-control input-short" ng-model="createPerson">
+                            </div>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">问责内容</font></font></label>
+                                <textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="content" rows="3" style="width: 425px;max-width: 425px;"></textarea>
+                            </div>
+                            <div class="input-group form-item" style="z-index: 11;">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">接受区域</font></font></label>
+                                <select id="slpk" class="form-control selectpicker" multiple  style="width: 426px;z-index: 0;" ng-model="acceptArea">
+                                </select>
+                            </div>
+
+                            <div class="input-group form-item" style="z-index: 10;">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">成员单位</font></font></label>
+                                <select id="slpk1" class="form-control selectpicker selectpicker1" multiple  style="width: 426px;z-index: 0;" ng-model="units">
+                                </select>
+                            </div>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font
+                                        style="vertical-align: inherit;">附件</font></font></label>
+                                <button class="btn btn-info" ng-click="getUploadFile()"><i
+                                        class="fa fa-css3"></i>上传附件
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="save()">发起</button>
+                        <button type="button" class="btn btn-default" ng-click="close()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--附件上传-->
+        <div class="modal fade" id="coverModal" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <li class="fa fa-remove"></li>
+                        </button>
+                        <h4>上传附件</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <div class="wid-100 announcementCoverPanel">
+                                    <input class="uploadfile" id="problemFile" type="file" name="file">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    .
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload()">
+                            <i class="fa fa-check"></i>
+                            <span>确定</span>
+                        </a>
+                        <a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
+                            <i class="fa fa-reply"></i>
+                            <span>取消</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(".uploadfile").fileinput({
+        allowedFileExtensions: [],
+        uploadAsync: true, //默认异步上传
+        showRemove: true, //显示移除按钮
+        maxFileCount: 5, //表示允许同时上传的最大文件个数
+        language: 'zh', //设置语言
+        uploadUrl: '#', //上传的地址
+        showUpload: false, //显示批量上传按钮
+        showCaption: true, //是否显示标题
+        browseClass: "btn btn-primary", //按钮样式
+        showPreview: true, //是否显示预览
+        dropZoneEnabled: true, //是否显示拖拽区域
+        validateInitialCount: true,
+        slugCallback: function (filename) {
+            return filename.replace('(', '_').replace(']', '_');
+        }
+    });
+</script>

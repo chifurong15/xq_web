@@ -227,6 +227,72 @@
       "description": "二级菜单-抽查督导-督办"
     },
     {
+      "seqId": "2-5",
+      "parentId": "2",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "暗查暗访",
+      "icon": "fa fa-users",
+      "url": "module/chouchadudao/darkInvestigation/index/index.html",
+      "requireJS": [
+        "module/chouchadudao/darkInvestigation/index/index.js"
+      ],
+      "description": "二级菜单-抽查督导-暗查暗访"
+    },
+    {
+      "seqId": "2-9",
+      "parentId": "2",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "通知通报",
+      "icon": "fa fa-envelope",
+      "url": "module/chouchadudao/notification/notification-index/notification-index.html",
+      "requireJS": [
+        "module/chouchadudao/notification/notification-index/notification-index.js"
+      ],
+      "description": "二级菜单-抽查督导-通知通报"
+    },
+    {
+      "seqId": "2-7",
+      "parentId": "2",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "问责台账",
+      "icon": "fa fa-gavel",
+      "url": "module/chouchadudao/accountabilityAccount/accountabilityAccount.html",
+      "requireJS": [
+        "module/chouchadudao/accountabilityAccount/accountabilityAccount.js"
+      ],
+      "description": "二级菜单-抽查督导-问责台账"
+    },
+    {
+      "seqId": "2-8",
+      "parentId": "2",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "督办",
+      "icon": "fa fa-hand-o-left",
+      "url": "module/chouchadudao/supervising/supervising.html",
+      "requireJS": [
+        "module/chouchadudao/supervising/supervising.js"
+      ],
+      "description": "二级菜单-抽查督导-督办"
+    },
+    {
+      "seqId": "2-10",
+      "parentId": "2",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "督查",
+      "icon": "fa fa-hand-o-right",
+      "url": "module/chouchadudao/overseer/index/index.html",
+      "requireJS": [
+        "module/chouchadudao/overseer/index/index.js"
+      ],
+      "description": "二级菜单-抽查督导-督查"
+    },
+
+    {
       "seqId": "3",
       "parentId": "0",
       "isLeaf": false,
@@ -836,6 +902,58 @@
     }
   ],
   "pages": [
+    {
+      "seqId": "2-5-1",
+      "parentId": "2",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "暗查暗访-详情",
+      "icon": "menu-icon-6",
+      "url": "module/chouchadudao/darkInvestigation/detail/detail.html",
+      "requireJS": [
+        "module/chouchadudao/darkInvestigation/detail/detail.js"
+      ],
+      "description": "二级菜单-抽查督导-暗查暗访-详情"
+    },
+    {
+      "seqId": "2-9-1",
+      "parentId": "2",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "通知通报详情",
+      "icon": "",
+      "url": "module/chouchadudao/notification/notification-detail/notification-detail.html",
+      "requireJS": [
+        "module/chouchadudao/notification/notification-detail/notification-detail.js"
+      ],
+      "description": "二级菜单-抽查督导-通知通报-详情"
+    },
+    {
+      "seqId": "2-9-2",
+      "parentId": "2",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "通知通报答复",
+      "icon": "",
+      "url": "module/chouchadudao/notification/notification-reply/notification-reply.html",
+      "requireJS": [
+        "module/chouchadudao/notification/notification-reply/notification-reply.js"
+      ],
+      "description": "二级菜单-抽查督导-通知通报-答复"
+    },
+    {
+      "seqId": "2-10-1",
+      "parentId": "2",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "督查详情",
+      "icon": "",
+      "url": "module/chouchadudao/overseer/detail/detail.html",
+      "requireJS": [
+        "module/chouchadudao/overseer/detail/detail.js"
+      ],
+      "description": "二级菜单-抽查督导-督查-详情"
+    },
     {
       "seqId": "501",
       "name": "单页面",
