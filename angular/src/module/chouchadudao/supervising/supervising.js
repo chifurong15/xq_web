@@ -395,6 +395,7 @@
                             objectid:$scope.supervisingObjectid ? $scope.supervisingObjectid.join(',') : '',
                             objectname:$scope.regionNameList ?$scope.regionNameList.join(',') : '',
                             address:$scope.supervisingAddress,
+                            assessoryyuan:$scope.assessory ? $scope.assessory.join(',') : ''
                         }
                         if(
                             $scope.supervisingTitle && $scope.supervisingProject
