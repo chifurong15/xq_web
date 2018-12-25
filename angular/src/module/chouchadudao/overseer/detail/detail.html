@@ -218,11 +218,11 @@
                                                         <th width="10%">是否已阅</th>
                                                         <th width="15%">已阅日期</th>
                                                     </tr>
-                                                    <tr ng-repeat="item in supersingList">
+                                                    <tr ng-repeat="item in noticeList">
                                                         <td>{{$index+1}}</td>
                                                         <td>{{item.region_name}}</td>
                                                         <td>{{item.readStatus == 1 ? '是' : '否'}}</td>
-                                                        <td>{{item.createDate}}</td>
+                                                        <td>{{item.readDate}}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -320,7 +320,7 @@
                                                         <th width="15%">是否反馈</th>
                                                         <th width="10%">操作</th>
                                                     </tr>
-                                                    <tr ng-repeat="item in supersingList">
+                                                    <tr ng-repeat="item in reportList">
                                                         <td>{{$index+1}}</td>
                                                         <td>{{item.region_name}}</td>
                                                         <td>{{item.readStatus == 1 ? '是' : '否'}}</td>

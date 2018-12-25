@@ -360,6 +360,7 @@
                             callBack:function (res) {
                                 if(res.resCode == 1 && res.data){
                                     $scope.supersingList = res.data;
+                                    console.log($scope.supersingList);
                                 }else{
                                     layer.msg('服务器异常，请稍后再试',{times:500})
                                 }
@@ -437,7 +438,8 @@
                             url:apiPrefix + '/inspection/v1/ScLittleNotice/selectList',
                             method:'get',
                             params:{
-                                inspectionid:$scope.id
+                                inspectionid:$scope.id,
+
                             },
                             callBack:function (res) {
                                 if(res.resCode == 1 && res.data){
@@ -452,7 +454,7 @@
                                             },
                                             callBack:function (res) {
                                                 if(res.resCode == 1 && res.data){
-                                                    $scope.supersingList = res.data;
+                                                    $scope.noticeList = res.data;
                                                 }else{
                                                     layer.msg('服务器异常，请稍后再试',{times:500})
                                                 }

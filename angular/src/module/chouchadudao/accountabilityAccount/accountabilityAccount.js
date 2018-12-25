@@ -90,7 +90,7 @@
                         var params = {
                             turnarounddate:$scope.Time,
                             accountabilitytype:$scope.type,
-                            objectid:$scope.accoutObjectid ? $scope.accoutObjectid.join(',') : '',
+                            objectid:$scope.accoutObjectid,
                             objectname:$scope.regionNameList ? $scope.regionNameList.join(',') : '',
                             name:$scope.userName,
                             duty:$scope.accountDuty,
@@ -135,8 +135,7 @@
                         $('#myModal').modal('hide');
                         $scope.Time = '';
                         $scope.type = '';
-                        $('.selectpicker').selectpicker('val', []);
-                        $('.selectpicker').selectpicker('refresh');
+                        $scope.accoutObjectid = '';
                         $scope.userName = '';
                         $scope.accountDuty = '';
                         $scope.recordMan = '';
@@ -217,27 +216,27 @@
                             },
                             callBack:function (res) {
                                 $scope.regionList = res.data;
-                                var select = $("#slpk");
-                                for (var i = 0; i < $scope.regionList.length; i++) {
-                                    select.append("<option value='"+$scope.regionList[i].regionId+"'>"
-                                        + $scope.regionList[i].regionName + "</option>");
-                                }
-                                $('.selectpicker').selectpicker('val', '');
-                                $('.selectpicker').selectpicker('refresh');
+                                // var select = $("#slpk");
+                                // for (var i = 0; i < $scope.regionList.length; i++) {
+                                //     select.append("<option value='"+$scope.regionList[i].regionId+"'>"
+                                //         + $scope.regionList[i].regionName + "</option>");
+                                // }
+                                // $('.selectpicker').selectpicker('val', '');
+                                // $('.selectpicker').selectpicker('refresh');
                             }
                         })
                     }
 
-                    $scope.getChange = function (objectid) {
-                        $scope.regionNameList = [];
-                        objectid.map(function (item){
-                            $scope.regionList.map(function(val,index){
-                                if(item == val.regionId){
-                                    $scope.regionNameList.push(val.regionName)
-                                }
-                            })
-                        })
-                    }
+                    // $scope.getChange = function (objectid) {
+                    //     $scope.regionNameList = [];
+                    //     objectid.map(function (item){
+                    //         $scope.regionList.map(function(val,index){
+                    //             if(item == val.regionId){
+                    //                 $scope.regionNameList.push(val.regionName)
+                    //             }
+                    //         })
+                    //     })
+                    // }
 
                     //查看  下载附件
                     $scope.downFile = function (path){
