@@ -445,7 +445,7 @@
                                         $scope.showAddNotice = false;//隐藏发起按钮
                                         $scope.viewNoticeId = res.data[0];
                                         $ajaxhttp.myhttp({
-                                            url:apiPrefix1 + '/inform/v1/informAccept/list',
+                                            url:apiPrefix + '/inform/v1/informAccept/list',
                                             method:'get',
                                             params:{
                                                 reportId:res.data[0],
@@ -666,7 +666,7 @@
                                         $scope.showAddReport = false;//隐藏发起按钮
                                         $scope.viewReportId = res.data[0];
                                         $ajaxhttp.myhttp({
-                                            url:apiPrefix1 + '/inform/v1/informAccept/list',
+                                            url:apiPrefix + '/inform/v1/informAccept/list',
                                             method:'get',
                                             params:{
                                                 reportId:res.data[0],
@@ -782,7 +782,7 @@
                     $scope.viewReportBack = function (item){
                         $('#viewReportBack').modal('show');
                         $ajaxhttp.myhttp({
-                            url: apiPrefix1 + '/inform/v1/informReply/detail',
+                            url: apiPrefix + '/inform/v1/informReply/detail',
                             method: 'get',
                             params: {
                                 acceptId:item.id
@@ -833,7 +833,7 @@
                                         $scope.showAddOneRegion = false;//隐藏发起按钮
                                         $scope.viewOneRegionId = res.data[0];
                                         $ajaxhttp.myhttp({
-                                            url:apiPrefix1 + '/inform/v1/informAccept/list',
+                                            url:apiPrefix + '/inform/v1/informAccept/list',
                                             method:'get',
                                             params:{
                                                 reportId:res.data[0],
@@ -947,7 +947,7 @@
                     $scope.viewOneRegionBack = function (item){
                         $('#viewOneRegionBack').modal('show');
                         $ajaxhttp.myhttp({
-                            url: apiPrefix1 + '/inform/v1/informReply/detail',
+                            url: apiPrefix + '/inform/v1/informReply/detail',
                             method: 'get',
                             params: {
                                 acceptId:item.id
