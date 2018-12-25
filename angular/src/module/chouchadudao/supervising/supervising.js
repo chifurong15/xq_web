@@ -79,6 +79,11 @@
                         $scope.proof = '';
                     }
 
+                    //查看  下载附件
+                    $scope.downFile = function (path){
+                        window.open($scope.fileUrl + path);
+                    }
+
                     function getAllRegion (){
                         $ajaxhttp.myhttp({
                             url:apiPrefix + '/v1/DubanSupervision/selectPersonnel',
@@ -156,7 +161,7 @@
                     $scope.feedback = function (id){
                         $scope.feedbackId = id;
                         $ajaxhttp.myhttp({
-                            url:apiPrefix1 + '/inform/v1/informAccept/list',
+                            url:apiPrefix + '/inform/v1/informAccept/list',
                             method:'get',
                             params:{
                                 reportId:id,
