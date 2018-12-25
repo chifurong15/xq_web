@@ -21,7 +21,7 @@
                                         $location, $log, $q, $rootScope, $window,
                                         routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
-                    var apiPrefix = moduleService.getServiceUrl() + '/duban';
+                    var apiPrefix = moduleService.getServiceUrl();
                     ///var apiPrefix = 'http://10.0.9.133:7026' + '/duban';
                     //var apiPrefix1 = 'http://10.0.9.194:8066';
 
@@ -45,7 +45,7 @@
                     // 获取数据列表
                     function getList () {
                         $ajaxhttp.myhttp({
-                            url:apiPrefix + '/v1/DubanSupervision/list',
+                            url:apiPrefix + '/duban/v1/DubanSupervision/list',
                             method:'get',
                             params:{
                                 pageNumber: $scope.paginationConf.currentPage,
@@ -86,7 +86,7 @@
 
                     function getAllRegion (){
                         $ajaxhttp.myhttp({
-                            url:apiPrefix + '/v1/DubanSupervision/selectPersonnel',
+                            url:apiPrefix + '/duban/v1/DubanSupervision/selectPersonnel',
                             method:'get',
                             callBack:function (res) {
                                 $scope.regionList = res.data;
@@ -125,7 +125,7 @@
                     $scope.view = function (id) {
                         $('#myModalView').modal('show');
                         $ajaxhttp.myhttp({
-                            url:apiPrefix + '/v1/DubanSupervision/detail',
+                            url:apiPrefix + '/duban/v1/DubanSupervision/detail',
                             method:'get',
                             params:{
                                 id:id
@@ -223,7 +223,7 @@
                             }
 
                             $ajaxhttp.myhttp({
-                                url:apiPrefix + '/v1/DubanSupervision/update',
+                                url:apiPrefix + '/duban/v1/DubanSupervision/update',
                                 method:'put',
                                 params:params,
                                 callBack:function (res) {
@@ -258,7 +258,7 @@
                             var params =  $scope.detailData;
                             params.deadlinedate = $scope.enddingTime;
                             $ajaxhttp.myhttp({
-                                url:apiPrefix + '/v1/DubanSupervision/add',
+                                url:apiPrefix + '/duban/v1/DubanSupervision/add',
                                 method:'post',
                                 params:params,
                                 callBack:function (res) {
@@ -295,7 +295,7 @@
                         $scope.checkId = id;
                         $('#myModal3').modal('show');
                         $ajaxhttp.myhttp({
-                            url:apiPrefix + '/v1/DubanSupervision/detailFeedbackhc',
+                            url:apiPrefix + '/duban/v1/DubanSupervision/detailFeedbackhc',
                             method:'get',
                             params:{
                                 supervisionid:id
@@ -331,7 +331,7 @@
                         }
                         if($scope.checkData.feedbacktime && $scope.checkData.objectname && $scope.checkData.description && $scope.checkStatus){
                             $ajaxhttp.myhttp({
-                                url:apiPrefix + '/v1/DubanSupervision/updateFeedbackhc',
+                                url:apiPrefix + '/duban/v1/DubanSupervision/updateFeedbackhc',
                                 method:'put',
                                 params:params,
                                 callBack:function (res) {
@@ -363,7 +363,7 @@
                         }
                         if($scope.checkStatus){
                             $ajaxhttp.myhttp({
-                                url:apiPrefix + '/v1/DubanSupervision/update',
+                                url:apiPrefix + '/duban/v1/DubanSupervision/update',
                                 method:'put',
                                 params:params,
                                 callBack:function (res) {
@@ -411,7 +411,7 @@
                         )
                         {
                             $ajaxhttp.myhttp({
-                                url:apiPrefix + '/v1/DubanSupervision/add',
+                                url:apiPrefix + '/duban/v1/DubanSupervision/add',
                                 method:'post',
                                 params:params,
                                 callBack:function (res) {
@@ -470,7 +470,7 @@
                             btn: ['确定', '取消']
                         }, function () {
                             $ajaxhttp.myhttp({
-                                url:apiPrefix + '/v1/msWeekDynamic/delete',
+                                url:apiPrefix + '/duban/v1/msWeekDynamic/delete',
                                 method:'delete',
                                 params:{
                                     id:id
@@ -512,7 +512,7 @@
 
                         $http({
                                 method: 'post',
-                                url: apiPrefix + '/v1/DubanSupervision/upload',
+                                url: apiPrefix + '/duban/v1/DubanSupervision/upload',
                                 data: formFile,
                                 headers: {'Content-Type': undefined},
                                 transformRequest: angular.identity
