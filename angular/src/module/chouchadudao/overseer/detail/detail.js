@@ -495,7 +495,7 @@
                             inspectionid:$scope.id,
                             title:$scope.addTitle,
                             createDate:$scope.Time,
-                            noticeRegion:$scope.addRegion.join(','),
+                            noticeRegion:$scope.addRegion ? $scope.addRegion.join(',') : '',
                             noticeContent:$scope.addContent,
                             initiator:$scope.addUser,
                             accessoryUrl:$scope.assessory ? $scope.assessory.join(',') : ''
