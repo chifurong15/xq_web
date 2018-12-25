@@ -360,7 +360,7 @@
                             callBack:function (res) {
                                 if(res.resCode == 1 && res.data){
                                     $scope.supersingList = res.data;
-                                    console.log($scope.supersingList);
+                                    // console.log($scope.supersingList);
                                 }else{
                                     layer.msg('服务器异常，请稍后再试',{times:500})
                                 }
