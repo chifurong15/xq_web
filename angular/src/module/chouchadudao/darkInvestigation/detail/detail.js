@@ -550,15 +550,35 @@
                                         $scope.showButton = true;
                                     }else{//隐藏新增按钮 、显示修改按钮
                                         $scope.showButton = false;
+                                        $scope.reportId = res.data[0].id;
                                         $scope.reportTitle = res.data[0].title;
                                         $scope.reportStartTime = res.data[0].issuetime;
                                         $scope.reportEndTime = res.data[0].deadlinetime;
                                         $scope.reportContent = res.data[0].content;
                                         $scope.reportFileUrl = res.data[0].assessoryyuan;
+
                                         $('.selectpicker4').selectpicker('val', res.data[0].feedbackareaid.split(','));
                                         $('.selectpicker4').selectpicker('refresh');
+
+                                        $scope.fileList2 = [];
+                                        $scope.accessoryURL2 = [];
+                                        if(res.data[0].assessoryyuan){
+                                            var viewUrl = [] ,downUrl = [];
+                                            viewUrl = res.data[0].assessory.split(',');
+                                            downUrl = res.data[0].assessoryyuan.split(',');
+                                            if(viewUrl.length == downUrl.length){
+                                                viewUrl.map((item,i)=>{
+                                                    $scope.fileList2.push({
+                                                        name:downUrl[i].substring(downUrl[i].lastIndexOf('/')+1),
+                                                        previewURL:item,
+                                                        downloadURL:downUrl[i]
+                                                    })
+                                                })
+                                            }
+                                        }
+
                                     }
-                                    // layer.msg("新增成功！",{time:2000});
+
                                 }else{
                                     layer.msg('服务器异常，请稍后再试',{times:500})
                                 }
@@ -605,6 +625,42 @@
 
                     }
 
+                    //修改暗访通报
+                    $scope.editReport = function (){
+                        var params = {
+                            id:$scope.reportId,
+                            title:$scope.reportTitle,
+                            issuetime:$scope.reportStartTime,
+                            deadlinetime:$scope.reportEndTime,
+                            feedbackareaid:$scope.reportRegion ? $scope.reportRegion.join(',') : '',
+                            content:$scope.reportContent,
+                            assessoryyuan:$scope.assessory ? $scope.assessory.join(',') : $scope.reportFileUrl
+                        }
+
+                        if(
+                            $scope.reportTitle && $scope.reportStartTime && $scope.reportEndTime && $scope.reportRegion && $scope.reportContent
+                        ){
+                            $ajaxhttp.myhttp({
+                                url: apiPrefix + '/ancha/v1/AnzhaBulletin/update',
+                                method: 'put',
+                                params: params,
+                                callBack: function (res) {
+                                    if(res.resCode == 1){
+                                        layer.msg("修改成功！",{time:2000});
+                                        getReportDetail();
+                                    }else{
+                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                                    }
+                                }
+                            })
+                        }else{
+                            layer.alert("输入的信息不全", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        }
+                    }
 
                     //清空通报表单
                     function clear () {

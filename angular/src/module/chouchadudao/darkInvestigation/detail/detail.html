@@ -220,6 +220,10 @@
                                             class="fa fa-css3"></i>上传附件
                                     </button>
                                 </div>
+                                <div class="form-item" style="position: relative;left: -20px; width: 425px;" ng-show="!showButton">
+                                    <span ng-repeat="item in fileList2" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
+                                    </span>
+                                </div>
                                 <!--<div class="form-item" ng-if="fileList.length > 0">-->
                                     <!--<label><font style="vertical-align: inherit;"><font-->
                                             <!--style="vertical-align: inherit;">附件</font></font></label>-->
