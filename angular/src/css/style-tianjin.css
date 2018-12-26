@@ -2305,3 +2305,9 @@ body .c-ffffff a {
     width: 425px!important;
 }
 
+.modal-backdrop{
+    z-index: 100;
+}
+.anchaanfang .tableBot{
+    margin-bottom: 0;
+}

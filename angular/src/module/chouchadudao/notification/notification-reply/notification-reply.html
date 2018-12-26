@@ -49,12 +49,12 @@
                                     </div>
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发起人</font></font></label>
-                                        <input type="text" class="form-control input-short" readonly ng-model="detailData.createPerson">
+                                        <input type="text" class="form-control input-short" readonly ng-model="detailData.createPerson" style="width: 173px;">
                                     </div>
                                     <br>
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通知通报内容</font></font></label>
-                                        <textarea class="form-control" readonly ng-model="detailData.content" rows="3" style="width: 425px;max-width: 425px;"></textarea>
+                                        <textarea class="form-control" readonly ng-model="detailData.content" rows="3" style="width: 452px;"></textarea>
                                     </div>
                                     <br>
                                     <div class="form-item">
@@ -93,7 +93,7 @@
                                     </div>
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发起人</font></font></label>
-                                        <input type="text" class="form-control input-short" readonly ng-model="noticeData.initiator">
+                                        <input type="text" class="form-control input-short" readonly ng-model="noticeData.initiator" style="width: 173px;">
                                     </div>
                                     <br>
                                     <div class="form-item">
@@ -103,7 +103,7 @@
                                     <br>
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通知内容</font></font></label>
-                                        <textarea class="form-control" ng-model="noticeData.noticeContent" readonly rows="3" style="width: 425px;max-width: 425px;"></textarea>
+                                        <textarea class="form-control" ng-model="noticeData.noticeContent" readonly rows="3" style="width: 452px;"></textarea>
                                     </div>
                                     <br>
                                     <div class="form-item" ng-if="noticeData.fileList.length > 0">
@@ -121,8 +121,9 @@
                                 <form class="form-inline clearfix" ng-show="informType == 600104">
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办标题</font></font></label>
-                                        <input type="text" readonly class="form-control input-short" ng-model="supersionData.title">
+                                        <input type="text" readonly class="form-control input-long" ng-model="supersionData.title">
                                     </div>
+                                    <br>
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办文号</font></font></label>
                                         <input type="text" readonly class="form-control input-short" ng-model="supersionData.proof">
@@ -136,26 +137,26 @@
                                     <div class="form-item">
                                         <label>下发日期</label>
                                         <div class="input-group date date_picker">
-                                            <input type="text" readonly class="form-control input-short-o" ng-model="supersionData.issuedtime">
+                                            <input type="text" readonly class="form-control input-short-o" ng-model="supersionData.issuedtime" style="width: 134px;">
                                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                         </div>
                                     </div>
                                     <div class="form-item">
                                         <label>截止日期</label>
                                         <div class="input-group date date_picker">
-                                            <input type="text" readonly class="form-control input-short-o" ng-model="supersionData.deadlinedate">
+                                            <input type="text" readonly class="form-control input-short-o" ng-model="supersionData.deadlinedate" style="width: 134px;">
                                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                         </div>
                                     </div>
                                     <br>
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办地址</font></font></label>
-                                        <input type="text" class="form-control input-long" readonly ng-model="supersionData.address">
+                                        <input type="text" class="form-control input-long" readonly ng-model="supersionData.address" style="width: 452px;">
                                     </div>
                                     <br>
                                     <div class="form-item">
                                         <label>督办类型</label>
-                                        <select class="form-control select-short" disabled ng-change="selectChange();" ng-model="supersionData.type" style="width: 425px;">
+                                        <select class="form-control select-short" disabled ng-change="selectChange();" ng-model="supersionData.type" style="width: 452px;">
                                             <option value="">请选择</option>
                                             <option value="1">普通督办</option>
                                             <option value="2">现场督办</option>
@@ -165,7 +166,7 @@
                                     <br>
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办原因</font></font></label>
-                                        <textarea class="form-control" readonly ng-model="supersionData.reason" rows="3" style="width: 425px;max-width: 425px;"></textarea>
+                                        <textarea class="form-control" readonly ng-model="supersionData.reason" rows="3" style="width: 452px;"></textarea>
                                     </div>
                                     <br>
                                     <div class="form-item" ng-if="fileList.length > 0">
@@ -177,9 +178,6 @@
                                         </span>
                                     </div>
                                 </form>
-
-
-
 
 
                                 <!--督查详情-->
@@ -198,7 +196,7 @@
                                     </div>
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文号</font></font></label>
-                                        <input type="text" class="form-control input-short" readonly ng-model="renumber">
+                                        <input type="text" class="form-control input-short" readonly ng-model="renumber" style="width: 173px;">
                                     </div>
                                     <br>
                                     <div class="form-item">
@@ -210,7 +208,7 @@
                                     </div>
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">创建人</font></font></label>
-                                        <input type="text" class="form-control input-short" readonly ng-model="createUser">
+                                        <input type="text" class="form-control input-short" readonly ng-model="createUser" style="width: 173px;">
                                     </div>
                                     <br>
                                     <div class="form-item">
@@ -226,7 +224,7 @@
                                     <br>
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查说明</font></font></label>
-                                        <textarea class="form-control" ng-model="content" readonly rows="3" style="width: 425px;max-width: 425px;"></textarea>
+                                        <textarea class="form-control" ng-model="content" readonly rows="3" style="width: 452px;"></textarea>
                                     </div>
                                     <br>
                                     <div class="form-item" ng-if="accessoryURL.length !=0">
@@ -250,7 +248,7 @@
                                     <div class="form-item">
                                         <label>发起时间</label>
                                         <div class="input-group date date_picker">
-                                            <input type="text" class="form-control input-short-o" readonly ng-model="reportData.createTime">
+                                            <input type="text" class="form-control input-short-o" readonly ng-model="reportData.createTime" style="width: 134px;">
                                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                         </div>
                                     </div>
@@ -258,7 +256,7 @@
                                     <div class="form-item">
                                         <label>截止时间</label>
                                         <div class="input-group date date_picker">
-                                            <input type="text" class="form-control input-short-o" readonly ng-model="reportData.deadline">
+                                            <input type="text" class="form-control input-short-o" readonly ng-model="reportData.deadline" style="width: 134px;">
                                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                         </div>
                                     </div>
@@ -270,7 +268,7 @@
                                     <br>
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通报说明</font></font></label>
-                                        <textarea class="form-control" ng-model="reportData.notificationExplain" readonly rows="3" style="width: 425px;max-width: 425px;"></textarea>
+                                        <textarea class="form-control" ng-model="reportData.notificationExplain" readonly rows="3" style="width: 452px;"></textarea>
                                     </div>
                                     <br>
                                     <div class="form-item" ng-if="reportData.fileList.length > 0">
@@ -290,13 +288,13 @@
                                 <form class="form-inline clearfix" ng-show="informType == 600109">
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一区一单名称</font></font></label>
-                                        <input type="text" class="form-control input-long" readonly ng-model="oneRegionData.title">
+                                        <input type="text" class="form-control input-long" readonly ng-model="oneRegionData.title" style="width: 425px;">
                                     </div>
                                     <br>
                                     <div class="form-item">
                                         <label>发起时间</label>
                                         <div class="input-group date date_picker">
-                                            <input type="text" class="form-control input-short-o" readonly ng-model="oneRegionData.deadline">
+                                            <input type="text" class="form-control input-short-o" readonly ng-model="oneRegionData.deadline" style="width: 118px;">
                                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                         </div>
                                     </div>
@@ -336,7 +334,7 @@
                                     <div class="form-item">
                                         <label>答复时间</label>
                                         <div class="input-group date date_picker" id="reportTime">
-                                            <input type="text" class="form-control input-short-o" ng-model="reportTime">
+                                            <input type="text" class="form-control input-short-o" ng-model="reportTime" style="width: 118px;">
                                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                         </div>
                                     </div>
@@ -395,7 +393,7 @@
                                     <br>
                                     <div class="form-item">
                                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">答复说明</font></font></label>
-                                        <textarea class="form-control" ng-model="detailData1.description" readonly rows="3" style="width: 425px;max-width: 425px;"></textarea>
+                                        <textarea class="form-control" ng-model="detailData1.description" readonly rows="3" style="width: 440px;"></textarea>
                                     </div>
                                     <br>
                                     <div class="form-item" ng-if="detailData1.fileList.length > 0">

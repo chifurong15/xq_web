@@ -21,21 +21,13 @@
                                         $location, $log, $q, $rootScope, $window,
                                         routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
-                    var apiPrefix = moduleService.getServiceUrl() + '/messageSent';
-                    //var apiPrefix = 'http://10.0.9.203:8080' + '/messageSent';
+                    var apiPrefix = moduleService.getServiceUrl();
+                    //var apiPrefix = 'http://10.0.9.133:7021';
 
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
 
                     $scope.init = function () {
-                        //
-                        // $ajaxhttp.myhttp({
-                        //     url:apiPrefix + '/v1/msMeetingCondition/userinfo',
-                        //     method:'get',
-                        //     callBack:function (res) {
-                        //         $scope.num = res.data;
-                        //     }
-                        // })
-
+                        $scope.createUser = $scope.userInfo.name;
 
                         getList();
                     }
@@ -47,27 +39,150 @@
 
                     //重置
                     $scope.reset = function () {
-                        $scope.startTime = '';
+                        $scope.issue = '';
                     }
 
                     // 获取数据列表
                     function getList () {
-                        // $ajaxhttp.myhttp({
-                        //     url:apiPrefix + '/v1/msMeetingCondition/selectList',
-                        //     method:'get',
-                        //     params:{
-                        //         pageNumber: $scope.paginationConf.currentPage,
-                        //         pageSize: $scope.paginationConf.itemsPerPage,
-                        //         meetingTimeStart:$scope.startTime,
-                        //         meetingTimeEnd:$scope.endTime,
-                        //         region:$scope.regionName
-                        //     },
-                        //     callBack:function (res) {
-                        //         $scope.moduleList = res.data.list;
-                        //         $scope.paginationConf.totalItems = res.data.total;
-                        //     }
-                        // })
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/ancha/v1/ScAnzhaScheme/list/',
+                            method:'get',
+                            params:{
+                                pageNumber: $scope.paginationConf.currentPage,
+                                pageSize: $scope.paginationConf.itemsPerPage,
+                                issue:$scope.issue
+                            },
+                            callBack:function (res) {
+                                $scope.moduleList = res.data.list;
+                                $scope.paginationConf.totalItems = res.data.total;
+                            }
+                        })
                     }
+                    //查看详情
+                    $scope.view = function (id){
+                        localStorage.setItem('id',id);
+                        routeService.route('2-5-1',true);
+                    }
+
+                    //显示新增模态框
+                    $scope.add = function () {
+                        $scope.assessory = [];
+                        $('#myModal').modal('show');
+                    }
+                    //保存新增方案
+                    $scope.save = function () {
+                        var params = {
+                            title:$scope.title,
+                            issue:$scope.Time,
+                            createuser:$scope.createUser,
+                            content:$scope.content,
+                            assessoryyuan:$scope.assessory ? $scope.assessory.join(',') : ''
+                        }
+                        if
+                        (
+                            $scope.title && $scope.Time && $scope.createUser && $scope.content
+                        )
+                        {
+                            $ajaxhttp.myhttp({
+                                url:apiPrefix + '/ancha/v1/ScAnzhaScheme/add/',
+                                method:'post',
+                                params:params,
+                                callBack:function (res) {
+                                    if(res.resCode == 1){
+                                        layer.msg('新增成功',{times:2000});
+                                        getList();
+                                        $scope.close();
+                                    }else{
+                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                                    }
+                                }
+                            })
+
+                        }else{
+                            layer.alert("输入的信息不全", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        }
+
+                    }
+
+                    //显示修改模态框
+                    $scope.edit = function (id){
+                        $('#myModaledit').modal('show');
+                        $scope.assessory = [];
+                        $scope.id = id;
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/ancha/v1/ScAnzhaScheme/detail',
+                            method:'get',
+                            params:{
+                                id:id
+                            },
+                            callBack:function (res) {
+                                if(res.data){
+                                    $scope.editTitle = res.data.title;
+                                    $scope.editTime = res.data.issue;
+                                    $scope.editUser = res.data.createuser;
+                                    $scope.editContent = res.data.content;
+                                    $scope.assessoryEdit = res.data.accessory
+                                }
+                            }
+                        })
+                    }
+
+                    //修改
+                    $scope.update = function (){
+                        var params = {
+                            id:$scope.id,
+                            title:$scope.editTitle,
+                            issue:$scope.editTime,
+                            createuser:$scope.editUser,
+                            content:$scope.editContent,
+                            assessoryyuan:$scope.assessory ? $scope.assessory.join(',') : $scope.assessoryEdit
+                        }
+                        if
+                        (
+                            $scope.editTitle && $scope.editTime && $scope.editUser && $scope.editContent
+                        )
+                        {
+                            $ajaxhttp.myhttp({
+                                url:apiPrefix + '/ancha/v1/ScAnzhaScheme/update/',
+                                method:'put',
+                                params:params,
+                                callBack:function (res) {
+                                    if(res.resCode == 1){
+                                        layer.msg('修改成功',{times:2000});
+                                        getList();
+                                        $('#myModaledit').modal('hide');
+                                    }else{
+                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                                    }
+                                }
+                            })
+                        }else{
+                            layer.alert("输入的信息不全", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        }
+                    }
+
+                    //关闭修改窗口
+                    $scope.updateClose = function () {
+                        $('#myModaledit').modal('hide');
+                    }
+
+
+                    //清空新增表单
+                    $scope.close = function () {
+                        $('#myModal').modal('hide');
+                        $scope.title = '';
+                        $scope.Time = '';
+                        $scope.content = '';
+                    }
+
 
                     //查看  下载附件
                     $scope.downFile = function (path){
@@ -80,21 +195,21 @@
                         var layerIndex = layer.confirm('确定删除本条数据吗？', {
                             btn: ['确定', '取消']
                         }, function () {
-                            // $ajaxhttp.myhttp({
-                            //     url:apiPrefix + '/v1/msMeetingCondition/delete',
-                            //     method:'delete',
-                            //     params:{
-                            //         id:id
-                            //     },
-                            //     callBack:function (res) {
-                            //         if(res.resCode == 1){
-                            //             layer.msg('删除成功',{times:500});
-                            //             getList();
-                            //         }else{
-                            //             layer.msg('服务器异常，请稍后再试',{times:500})
-                            //         }
-                            //     }
-                            // })
+                            $ajaxhttp.myhttp({
+                                url:apiPrefix + '/ancha/v1/ScAnzhaScheme/delete/',
+                                method:'delete',
+                                params:{
+                                    id:id
+                                },
+                                callBack:function (res) {
+                                    if(res.resCode == 1){
+                                        layer.msg('删除成功',{times:500});
+                                        getList();
+                                    }else{
+                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                                    }
+                                }
+                            })
                             layer.close(layerIndex);
                         }, function () {
 
@@ -120,7 +235,7 @@
 
                         $http({
                                 method: 'post',
-                                url: apiPrefix + '/v1/msMeetingCondition/upload',
+                                url: apiPrefix + '/ancha/v1/AnzhaReport/upload',
                                 data: formFile,
                                 headers: {'Content-Type': undefined},
                                 transformRequest: angular.identity
@@ -137,13 +252,34 @@
                         });
                     }
 
-                    // 开始时间
-                    var startTime = $('#startTime').datetimepicker({
+
+                    // 期号
+                    $('#issue').datetimepicker({
                         format: 'YYYY-MM',
                         locale: moment.locale('zh-cn')
                     }).on('dp.change', function (c) {
                         var result = new moment(c.date).format('YYYY-MM');
-                        $scope.startTime = result;
+                        $scope.issue = result;
+                        $scope.$apply();
+                    });
+
+                    // 新增期号
+                    $('#Time').datetimepicker({
+                        format: 'YYYY-MM',
+                        locale: moment.locale('zh-cn')
+                    }).on('dp.change', function (c) {
+                        var result = new moment(c.date).format('YYYY-MM');
+                        $scope.Time = result;
+                        $scope.$apply();
+                    });
+
+                    // 修改期号
+                    $('#editTime').datetimepicker({
+                        format: 'YYYY-MM',
+                        locale: moment.locale('zh-cn')
+                    }).on('dp.change', function (c) {
+                        var result = new moment(c.date).format('YYYY-MM');
+                        $scope.editTime = result;
                         $scope.$apply();
                     });
 

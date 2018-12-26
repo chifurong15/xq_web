@@ -553,10 +553,9 @@
                                     if(res.data){
                                         $scope.noticeData = res.data;
                                         if(res.data.fileList){
-                                            $scope.accessoryURL = [];
-                                            $scope.noticeData = res.data;
+                                            $scope.accessoryURL1 = [];
                                             res.data.fileList.map(function (item){
-                                                $scope.accessoryURL.push({
+                                                $scope.accessoryURL1.push({
                                                     name:item.downloadURL.substring(item.previewURL.lastIndexOf('/')+1),
                                                     previewURL:item.previewURL,
                                                     downloadURL:item.downloadURL
@@ -760,10 +759,9 @@
                                     if(res.data){
                                         $scope.reportData = res.data;
                                         if(res.data.fileList){
-                                            $scope.accessoryURL = [];
-                                            $scope.reportData = res.data;
+                                            $scope.accessoryURL2 = [];
                                             res.data.fileList.map(function (item){
-                                                $scope.accessoryURL.push({
+                                                $scope.accessoryURL2.push({
                                                     name:item.downloadURL.substring(item.previewURL.lastIndexOf('/')+1),
                                                     previewURL:item.previewURL,
                                                     downloadURL:item.downloadURL
@@ -795,10 +793,9 @@
                                         $scope.reportBackRegion = item.region_name;
                                         $scope.reportBackData = res.data;
                                         if(res.data.fileList){
-                                            $scope.accessoryURL = [];
-                                            $scope.reportBackData = res.data;
+                                            $scope.accessoryURL3 = [];
                                             res.data.fileList.map(function (item){
-                                                $scope.accessoryURL.push({
+                                                $scope.accessoryURL3.push({
                                                     name:item.downloadURL.substring(item.previewURL.lastIndexOf('/')+1),
                                                     previewURL:item.previewURL,
                                                     downloadURL:item.downloadURL
@@ -924,10 +921,9 @@
                                     if(res.data){
                                         $scope.oneRegionData = res.data;
                                         if(res.data.fileList){
-                                            $scope.accessoryURL = [];
-                                            $scope.oneRegionData = res.data;
+                                            $scope.accessoryURL4 = [];
                                             res.data.fileList.map(function (item){
-                                                $scope.accessoryURL.push({
+                                                $scope.accessoryURL4.push({
                                                     name:item.downloadURL.substring(item.previewURL.lastIndexOf('/')+1),
                                                     previewURL:item.previewURL,
                                                     downloadURL:item.downloadURL
@@ -960,10 +956,9 @@
                                         $scope.oneRegionBackRegion = item.region_name;
                                         $scope.oneRegionBackData = res.data;
                                         if(res.data.fileList){
-                                            $scope.accessoryURL = [];
-                                            $scope.oneRegionBackData = res.data;
+                                            $scope.accessoryURL5 = [];
                                             res.data.fileList.map(function (item){
-                                                $scope.accessoryURL.push({
+                                                $scope.accessoryURL5.push({
                                                     name:item.downloadURL.substring(item.previewURL.lastIndexOf('/')+1),
                                                     previewURL:item.previewURL,
                                                     downloadURL:item.downloadURL

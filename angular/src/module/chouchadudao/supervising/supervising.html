@@ -142,15 +142,29 @@
                             发起督办
                         </h4>
                     </div>
-                    <div class="modal-body" style="height: 450px;">
+                    <div class="modal-body" style="height: 500px;">
                         <form class="form-inline clearfix">
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办标题</font></font></label>
-                                <input type="text" class="form-control input-short" ng-model="supervisingTitle">
+                                <input type="text" class="form-control input-long" ng-model="supervisingTitle">
+                            </div>
+                            <div class="form-item">
+                                <label>下发日期</label>
+                                <div class="input-group date date_picker" id="startTime1">
+                                    <input type="text" class="form-control input-short-o" ng-model="startTime1">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办文号</font></font></label>
-                                <input type="text" class="form-control input-short" ng-model="supervisingProof">
+                                <input type="text" class="form-control input-short" ng-model="supervisingProof" style="width: 150px;">
+                            </div>
+                            <div class="form-item">
+                                <label>截止日期</label>
+                                <div class="input-group date date_picker" id="endTime1">
+                                    <input type="text" class="form-control input-short-o" ng-model="endTime1">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办项目</font></font></label>
@@ -161,22 +175,10 @@
                                 <select id="slpk" class="form-control selectpicker" ng-change="getChange(supervisingObjectid)" multiple  style="width: 426px;z-index: 0;" ng-model="supervisingObjectid">
                                 </select>
                             </div>
-                            <div class="form-item">
-                                <div class="">
-                                    <label>下发日期</label>
-                                    <div class="input-group date date_picker" id="startTime1">
-                                        <input type="text" class="form-control input-short-o" ng-model="startTime1" style="width: 173px;">
-                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    </div>
-                                </div>
-                                <div style="margin-top: 15px;">
-                                    <label>截止日期</label>
-                                    <div class="input-group date date_picker" id="endTime1">
-                                        <input type="text" class="form-control input-short-o" ng-model="endTime1"  style="width: 173px;">
-                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    </div>
-                                </div>
-                            </div>
+
+                            <!--<div class="form-item">-->
+                                <!---->
+                            <!--</div>-->
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办地址</font></font></label>
                                 <input type="text" class="form-control input-long" ng-model="supervisingAddress">
@@ -223,19 +225,11 @@
                             查看详情
                         </h4>
                     </div>
-                    <div class="modal-body" style="height: 450px;">
+                    <div class="modal-body" style="height: 500px;">
                         <form class="form-inline clearfix">
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办标题</font></font></label>
-                                <input type="text" readonly class="form-control input-short" ng-model="detailData.title">
-                            </div>
-                            <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办文号</font></font></label>
-                                <input type="text" readonly class="form-control input-short" ng-model="detailData.proof">
-                            </div>
-                            <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办项目</font></font></label>
-                                <input type="text" readonly class="form-control input-long" ng-model="detailData.project">
+                                <input type="text" readonly class="form-control input-long" ng-model="detailData.title">
                             </div>
                             <div class="form-item">
                                 <label>下发日期</label>
@@ -245,11 +239,19 @@
                                 </div>
                             </div>
                             <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办文号</font></font></label>
+                                <input type="text" readonly class="form-control input-short" ng-model="detailData.proof" style="width: 150px;">
+                            </div>
+                            <div class="form-item">
                                 <label>截止日期</label>
                                 <div class="input-group date date_picker">
                                     <input type="text" readonly class="form-control input-short-o" ng-model="detailData.deadlinedate">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
+                            </div>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办项目</font></font></label>
+                                <input type="text" readonly class="form-control input-long" ng-model="detailData.project">
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办地址</font></font></label>
@@ -272,7 +274,7 @@
                                 <label><font style="vertical-align: inherit;"><font
                                         style="vertical-align: inherit;">附件</font></font></label>
                             </div>
-                            <div class="form-item" style="position: relative;left: 80px; top: -50px;">
+                            <div class="form-item" style="position: relative;width: 425px;">
                                 <span ng-repeat="item in fileList" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
                                 </span>
                             </div>
@@ -323,7 +325,7 @@
                                     <label><font style="vertical-align: inherit;"><font
                                             style="vertical-align: inherit;">附件</font></font></label>
                                 </div>
-                                <div class="form-item" style="position: relative;left: -20px;">
+                                <div class="form-item" style="position: relative;left: -20px;width: 425px;">
                                     <span ng-repeat="item in item.replyList[0].accessoryURL" style="color: #333;display: block;cursor: pointer;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
                                     </span>
                                 </div>
@@ -331,17 +333,18 @@
                             </form>
                             <div class="form-item">
                                 <label>处理结果</label>
-                                <select class="form-control select-short"  ng-change="selectChange();" ng-model="dealStatus" style="width: 425px;">
+                                <select class="form-control select-short"  ng-change="selectChange(dealStatus);" ng-model="dealStatus" style="width: 425px;">
                                     <option value="">请选择</option>
-                                    <option value="1">已办结</option>
-                                    <option value="2">未办结</option>
-                                    <option value="3">未按期整改</option>
+                                    <option value="3">已办结</option>
+                                    <option value="1">未办结</option>
+                                    <option value="2">未按期整改</option>
                                 </select>
                             </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" ng-click="save(1)">重新办理</button>
-                        <button type="button" class="btn btn-primary" ng-click="save(2)">发起现场核查</button>
+                        <button type="button" class="btn btn-primary" ng-show="isShow" ng-click="save(1)">重新办理</button>
+                        <button type="button" class="btn btn-primary" ng-show="isShow" ng-click="save(2)">发起现场核查</button>
+                        <button type="button" class="btn btn-primary" ng-show="!isShow" ng-click="save(3)">保存</button>
                         <button type="button" class="btn btn-primary" ng-click="closeModal()">取消</button>
                     </div>
                 </div>
@@ -364,31 +367,30 @@
                         <form class="form-inline clearfix">
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办标题</font></font></label>
-                                <input type="text" readonly class="form-control input-short" ng-model="detailData.title">
+                                <input type="text" readonly class="form-control input-long" ng-model="detailData.title">
+                            </div>
+                            <div class="form-item">
+                                <label>下发日期</label>
+                                <div class="input-group date date_picker">
+                                    <input type="text" readonly class="form-control input-short-o" ng-model="detailData.issuedtime"  style="width: 173px;">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办文号</font></font></label>
-                                <input type="text" readonly class="form-control input-short" ng-model="detailData.proof">
+                                <input type="text" readonly class="form-control input-short" ng-model="detailData.proof" style="width: 150px;">
                             </div>
+                            <div class="form-item">
+                                <label>截止日期</label>
+                                <div class="input-group date date_picker" id="enddingTime">
+                                    <input type="text" class="form-control input-short-o" ng-model="enddingTime"  style="width: 173px;">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办项目</font></font></label>
                                 <input type="text" readonly class="form-control input-long" ng-model="detailData.project">
-                            </div>
-                            <div class="form-item">
-                               <div>
-                                   <label>下发日期</label>
-                                   <div class="input-group date date_picker">
-                                       <input type="text" readonly class="form-control input-short-o" ng-model="detailData.issuedtime"  style="width: 173px;">
-                                       <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                   </div>
-                               </div>
-                               <div style="margin-top: 15px;">
-                                   <label>截止日期</label>
-                                   <div class="input-group date date_picker" id="enddingTime">
-                                       <input type="text" class="form-control input-short-o" ng-model="enddingTime"  style="width: 173px;">
-                                       <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                   </div>
-                               </div>
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办地址</font></font></label>
@@ -411,7 +413,7 @@
                                 <label><font style="vertical-align: inherit;"><font
                                         style="vertical-align: inherit;">附件</font></font></label>
                             </div>
-                            <div class="form-item" style="position: relative;left: 80px; top: -50px;">
+                            <div class="form-item" style="position: relative;width: 425px;">
                                 <span ng-repeat="item in fileList" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
                                 </span>
                             </div>
@@ -423,11 +425,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
 
         <!--现场核查-->
         <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
@@ -458,10 +455,13 @@
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">核查说明：</font></font></label>
                                 <textarea class="form-control"  ng-model="checkData.description" rows="3" style="width: 425px;max-width: 425px;"></textarea>
                             </div>
-                            <div class="form-item">
+                            <div class="form-item" ng-if="fileList1.length > 0">
                                 <label><font style="vertical-align: inherit;"><font
                                         style="vertical-align: inherit;">附件</font></font></label>
-
+                            </div>
+                            <div class="form-item" style="position: relative;width: 425px;">
+                                <span ng-repeat="item in fileList1" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
+                                </span>
                             </div>
                             <div class="form-item">
                                 <label>核查结果</label>

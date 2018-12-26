@@ -231,6 +231,11 @@
                                         if(id == 1){//重新办理
                                             $scope.view($scope.feedbackId);
                                             $('#myModalView1').modal('show');
+                                        }else if (id == 3){//保存
+                                            layer.msg('保存成功',{times:500})
+                                            $('#myModal2').modal('hide');
+                                            getList();
+                                            $scope.dealStatus = ''
                                         }else{//现场核查
                                             layer.msg('已发起现场核查',{times:500})
                                             $('#myModal2').modal('hide');
@@ -303,6 +308,25 @@
                             callBack:function (res) {
                                 if(res.data){
                                     $scope.checkData = res.data[0];
+                                    $scope.fileList1= [];
+                                    $scope.accessoryURL1 = [];
+                                    if(res.data.assessoryyuan){
+                                        var viewUrl = [] ,downUrl = [];
+                                        viewUrl = res.data.assessory.split(',');
+                                        downUrl = res.data.assessoryyuan.split(',');
+                                        if(viewUrl.length == downUrl.length){
+                                            viewUrl.map((item,i)=>{
+                                                $scope.fileList1.push({
+                                                    name:downUrl[i].substring(downUrl[i].lastIndexOf('/')+1),
+                                                    previewURL:item,
+                                                    downloadURL:downUrl[i]
+                                                })
+                                            })
+                                        }
+                                    }
+
+
+
                                 }else{
                                     layer.msg('服务器异常，请稍后再试',{times:500})
                                 }
@@ -313,7 +337,7 @@
 
                     //监听现场核查 核查结果
                     $scope.selectChange = function (status){
-                        if(status == 3){ //已办结不显示
+                        if(status == 3){ //已办结 不显示
                             $scope.isShow = false;
                         }else{
                             $scope.isShow = true;

@@ -36,7 +36,7 @@
                             dropupAuto: false
                         });
 
-                        $scope.createUser = $scope.userInfo.userName;
+                        $scope.createUser = $scope.userInfo.name;
                         //
                         // $ajaxhttp.myhttp({
                         //     url:apiPrefix + '/v1/msMeetingCondition/userinfo',
@@ -109,8 +109,8 @@
                                     $scope.createUser = res.data.initiator;
                                     $scope.title = res.data.title;
                                     $scope.content = res.data.content;
-                                    $scope.sentRegion = res.data.sentRegion;
-                                    $scope.sentUnit = res.data.sentUnit;
+                                    $scope.sentRegion = res.data.regionList;
+                                    $scope.sentUnit = res.data.unitList;
                                     $scope.assessoryEdit = res.data.accessory
 
                                 }

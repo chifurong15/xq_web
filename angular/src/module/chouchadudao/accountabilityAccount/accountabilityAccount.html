@@ -193,7 +193,7 @@
                             </div>
                             <div class="form-item" >
                                 <label>问责对象</label>
-                                <input type="text" class="form-control input-long" readonly ng-model="detailData.objectname">
+                                <input type="text" class="form-control input-long" readonly ng-model="detailData.objectname" style="width: 435px">
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">记录人</font></font></label>
@@ -219,7 +219,7 @@
                                 <label><font style="vertical-align: inherit;"><font
                                         style="vertical-align: inherit;">附件</font></font></label>
                             </div>
-                            <div class="form-item" style="position: relative;left: 80px;top: -52px;width: 446px;">
+                            <div class="form-item" style="position: relative;width: 426px;">
                                 <span ng-repeat="item in fileList" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
                                    <!--<span style="color: #3189e1;" ng-click="downFile(item.downloadURL)">下载</span>-->
                                 </span>
