@@ -791,10 +791,10 @@
                                 if(res.resCode == 1){
                                     if(res.data){
                                         $scope.reportBackRegion = item.region_name;
-                                        $scope.reportBackData = res.data;
-                                        if(res.data.fileList){
+                                        $scope.reportBackData = res.data[0];
+                                        if(res.data[0].fileList){
                                             $scope.accessoryURL3 = [];
-                                            res.data.fileList.map(function (item){
+                                            res.data[0].fileList.map(function (item){
                                                 $scope.accessoryURL3.push({
                                                     name:item.downloadURL.substring(item.previewURL.lastIndexOf('/')+1),
                                                     previewURL:item.previewURL,
@@ -954,10 +954,10 @@
                                 if(res.resCode == 1){
                                     if(res.data){
                                         $scope.oneRegionBackRegion = item.region_name;
-                                        $scope.oneRegionBackData = res.data;
-                                        if(res.data.fileList){
+                                        $scope.oneRegionBackData = res.data[0];
+                                        if(res.data[0].fileList){
                                             $scope.accessoryURL5 = [];
-                                            res.data.fileList.map(function (item){
+                                            res.data[0].fileList.map(function (item){
                                                 $scope.accessoryURL5.push({
                                                     name:item.downloadURL.substring(item.previewURL.lastIndexOf('/')+1),
                                                     previewURL:item.previewURL,

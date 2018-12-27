@@ -546,38 +546,43 @@
                             },
                             callBack: function (res) {
                                 if(res.resCode == 1){
-                                    if(res.data.length <= 0){//显示新增按钮 、隐藏修改按钮
-                                        $scope.showButton = true;
-                                    }else{//隐藏新增按钮 、显示修改按钮
-                                        $scope.showButton = false;
-                                        $scope.reportId = res.data[0].id;
-                                        $scope.reportTitle = res.data[0].title;
-                                        $scope.reportStartTime = res.data[0].issuetime;
-                                        $scope.reportEndTime = res.data[0].deadlinetime;
-                                        $scope.reportContent = res.data[0].content;
-                                        $scope.reportFileUrl = res.data[0].assessoryyuan;
+                                    if(Array.isArray(res.data)){
+                                        if(res.data.length <= 0){//显示新增按钮 、隐藏修改按钮
+                                            $scope.showButton = true;
+                                        }else{//隐藏新增按钮 、显示修改按钮
+                                            $scope.showButton = false;
+                                            $scope.reportId = res.data[0].id;
+                                            $scope.reportTitle = res.data[0].title;
+                                            $scope.reportStartTime = res.data[0].issuetime;
+                                            $scope.reportEndTime = res.data[0].deadlinetime;
+                                            $scope.reportContent = res.data[0].content;
+                                            $scope.reportFileUrl = res.data[0].assessoryyuan;
 
-                                        $('.selectpicker4').selectpicker('val', res.data[0].feedbackareaid.split(','));
-                                        $('.selectpicker4').selectpicker('refresh');
+                                            $('.selectpicker4').selectpicker('val', res.data[0].feedbackareaid.split(','));
+                                            $('.selectpicker4').selectpicker('refresh');
 
-                                        $scope.fileList2 = [];
-                                        $scope.accessoryURL2 = [];
-                                        if(res.data[0].assessoryyuan){
-                                            var viewUrl = [] ,downUrl = [];
-                                            viewUrl = res.data[0].assessory.split(',');
-                                            downUrl = res.data[0].assessoryyuan.split(',');
-                                            if(viewUrl.length == downUrl.length){
-                                                viewUrl.map((item,i)=>{
-                                                    $scope.fileList2.push({
-                                                        name:downUrl[i].substring(downUrl[i].lastIndexOf('/')+1),
-                                                        previewURL:item,
-                                                        downloadURL:downUrl[i]
+                                            $scope.fileList2 = [];
+                                            $scope.accessoryURL2 = [];
+                                            if(res.data[0].assessoryyuan){
+                                                var viewUrl = [] ,downUrl = [];
+                                                viewUrl = res.data[0].assessory.split(',');
+                                                downUrl = res.data[0].assessoryyuan.split(',');
+                                                if(viewUrl.length == downUrl.length){
+                                                    viewUrl.map((item,i)=>{
+                                                        $scope.fileList2.push({
+                                                            name:downUrl[i].substring(downUrl[i].lastIndexOf('/')+1),
+                                                            previewURL:item,
+                                                            downloadURL:downUrl[i]
+                                                        })
                                                     })
-                                                })
+                                                }
                                             }
-                                        }
 
+                                        }
+                                    }else{
+                                        $scope.showButton = true;
                                     }
+
 
                                 }else{
                                     layer.msg('服务器异常，请稍后再试',{times:500})
