@@ -91,7 +91,7 @@
                             turnarounddate:$scope.Time,
                             accountabilitytype:$scope.type,
                             objectid:$scope.accoutObjectid,
-                            objectname:$scope.regionNameList ? $scope.regionNameList.join(',') : '',
+                            objectname:$scope.regionNameList,
                             name:$scope.userName,
                             duty:$scope.accountDuty,
                             recordmen:$scope.recordMan,
@@ -99,7 +99,7 @@
                             remark:$scope.accountRemark,
                             assessoryyuan:$scope.assessory ? $scope.assessory.join(',') : ''
                         }
-
+                        // console.log(params);
                         if
                         (
                             $scope.Time && $scope.type && $scope.accoutObjectid && $scope.userName && $scope.accountDuty
@@ -228,13 +228,10 @@
                     }
 
                     $scope.getChange = function (objectid) {
-                        $scope.regionNmeList = [];
-                        objectid.map(function (item){
-                            $scope.regionList.map(function(val,index){
-                                if(item == val.regionId){
-                                    $scope.regionNameList.push(val.regionName)
-                                }
-                            })
+                        $scope.regionList.map(function(val){
+                            if(objectid == val.regionId){
+                                $scope.regionNameList= val.regionName;
+                            }
                         })
                     }
 

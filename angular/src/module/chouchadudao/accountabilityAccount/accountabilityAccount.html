@@ -119,9 +119,9 @@
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">问责对象</font></font></label>
-                                <select class="form-control"  style="z-index: 0;width: 160px;" ng-model="accoutObjectid" ng-change="getChange(accoutObjectid)">
+                                <select class="form-control"  style="z-index: 0;width: 160px;" ng-model="accoutObjectid" ng-options="item.regionId as item.regionName for item in regionList" ng-change="getChange(accoutObjectid)">
                                     <option value="">请选择</option>
-                                    <option value="{{item.regionId}}" ng-repeat="item in regionList">{{item.regionName}}</option>
+                                    <!--<option value="{{item.regionId}}" ng-repeat="item in regionList">{{item.regionName}}</option>-->
                                 </select>
                             </div>
                             <div class="form-item">
