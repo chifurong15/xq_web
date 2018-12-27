@@ -458,8 +458,6 @@
                                         $scope.duty = res.data.duty;
                                         $scope.phone = res.data.phone;
                                         $scope.region = res.data.region;
-                                        $('#regionAdd').val(res.data.region);
-                                        console.log($('#regionAdd').val());
                                         $scope.fillUnit = res.data.fillUnit;
                                     }
                                 }
@@ -564,8 +562,7 @@
                             callBack:function (res) {
                                 if(res.data){
                                     $scope.contactData = res.data;
-                                    $('#regionView').val(res.data.region);
-                                    console.log($scope.regionList[3].code == $scope.contactData.region);
+                                    //$('#regionView').val(res.data.region);
                                 }
                             }
                         })

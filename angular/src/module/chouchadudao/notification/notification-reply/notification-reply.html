@@ -508,9 +508,8 @@
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">行政区</font></font></label>
-                                <select class="form-control select-short" ng-model="region" id="regionAdd">
+                                <select class="form-control select-short" ng-model="region"  ng-options="item.code as item.name for item in regionList">
                                     <option value="">请选择</option>
-                                    <option value="{{item.code}}" ng-repeat="item in regionList">{{item.name}}</option>
                                 </select>
                             </div>
                             <div class="form-item">
@@ -563,9 +562,8 @@
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">行政区</font></font></label>
-                                <select class="form-control select-short" ng-model="regionView" disabled id="regionView">
+                                <select class="form-control select-short" ng-model="contactData.region"  ng-options="item.code as item.name for item in regionList" disabled>
                                     <option value="">请选择</option>
-                                    <option value="{{item.code}}" ng-repeat="item in regionList">{{item.name}}</option>
                                 </select>
                             </div>
                             <div class="form-item">

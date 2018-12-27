@@ -227,16 +227,16 @@
                         })
                     }
 
-                    // $scope.getChange = function (objectid) {
-                    //     $scope.regionNameList = [];
-                    //     objectid.map(function (item){
-                    //         $scope.regionList.map(function(val,index){
-                    //             if(item == val.regionId){
-                    //                 $scope.regionNameList.push(val.regionName)
-                    //             }
-                    //         })
-                    //     })
-                    // }
+                    $scope.getChange = function (objectid) {
+                        $scope.regionNmeList = [];
+                        objectid.map(function (item){
+                            $scope.regionList.map(function(val,index){
+                                if(item == val.regionId){
+                                    $scope.regionNameList.push(val.regionName)
+                                }
+                            })
+                        })
+                    }
 
                     //查看  下载附件
                     $scope.downFile = function (path){
