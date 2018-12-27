@@ -324,7 +324,7 @@
                                     $scope.unitArr = [];//存储成员单位
                                     if($scope.sentUnitList.length == $scope.sentUnitCodeList.length){
                                         $scope.sentUnitList.map((item , i)=>{
-                                            $scope.regionArr.push({
+                                            $scope.unitArr.push({
                                                 code:$scope.sentUnitCodeList[i],
                                                 name:item
                                             })
@@ -336,7 +336,6 @@
                                         $scope.accessoryURL = [];
                                         $scope.detailData = res.data;
                                         res.data.fileList.map(function (item){
-                                            // console.log(item.substring(item.lastIndexOf('/')+1));
                                             $scope.accessoryURL.push({
                                                 name:item.downloadURL.substring(item.previewURL.lastIndexOf('/')+1),
                                                 previewURL:item.previewURL,
@@ -420,31 +419,16 @@
 
 
                     //获取联络员列表
-                    function getContactList (type) {
+                    function getContactList () {
                         $ajaxhttp.myhttp({
                             url:apiPrefix + '/inspection/v1/ComtactPerson/selectList',
                             method:'get',
                             params:{
                                 inspectionid:$scope.noticeId,
-                                type:type
                             },
                             callBack:function (res) {
                                 if(res.resCode == 1 && res.data){
-
-                                    if(type == 1){ //带队领导
-                                        $scope.leaderList = res.data;
-                                    }else if(type == 2){//联络员
-                                        $scope.contactPersonList = res.data;
-                                    }else{
-                                        $scope.contactList = res.data;
-                                        var select = $("#slpk1");
-                                        for (var i = 0; i < $scope.contactList.length; i++) {
-                                            select.append("<option value='"+$scope.contactList[i].name + $scope.contactList[i].phone +"'>"
-                                                + $scope.contactList[i].name + "</option>");
-                                        }
-                                        $('.selectpicker').selectpicker('val', '');
-                                        $('.selectpicker').selectpicker('refresh');
-                                    }
+                                    $scope.contactList = res.data;
                                 }else{
                                     layer.msg('服务器异常，请稍后再试',{times:500})
                                 }
@@ -474,6 +458,8 @@
                                         $scope.duty = res.data.duty;
                                         $scope.phone = res.data.phone;
                                         $scope.region = res.data.region;
+                                        $('#regionAdd').val(res.data.region);
+                                        console.log($('#regionAdd').val());
                                         $scope.fillUnit = res.data.fillUnit;
                                     }
                                 }
@@ -492,7 +478,6 @@
                             region:$scope.region,
                             fillUnit:$scope.fillUnit
                         };
-                        console.log(params);
                         if(
                             $scope.type && $scope.name && $scope.duty && $scope.phone && $scope.region && $scope.fillUnit
                         ){
@@ -568,6 +553,7 @@
 
                     //查看联络员详情
                     $scope.viewContact = function (id){
+                        console.log($scope.regionList);
                         $('#viewContact').modal('show');
                         $ajaxhttp.myhttp({
                             url:apiPrefix + '/inspection/v1/ComtactPerson/detail',
@@ -578,6 +564,8 @@
                             callBack:function (res) {
                                 if(res.data){
                                     $scope.contactData = res.data;
+                                    $('#regionView').val(res.data.region);
+                                    console.log($scope.regionList[3].code == $scope.contactData.region);
                                 }
                             }
                         })
@@ -608,18 +596,6 @@
 
                         });
                     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

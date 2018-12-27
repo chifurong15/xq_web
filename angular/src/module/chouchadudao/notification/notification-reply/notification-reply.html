@@ -442,7 +442,7 @@
                                                     </tr>
                                                     <tr ng-repeat="item in contactList">
                                                         <td>{{$index+1}}</td>
-                                                        <td>{{item.fillUnit}}</td>
+                                                        <td>{{item.regionName}}</td>
                                                         <td>{{item.name}}</td>
                                                         <td>{{item.type == 1 ? '带队领导' : '联络员'}}</td>
                                                         <td>{{item.duty}}</td>
@@ -508,7 +508,7 @@
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">行政区</font></font></label>
-                                <select class="form-control select-short" ng-model="region">
+                                <select class="form-control select-short" ng-model="region" id="regionAdd">
                                     <option value="">请选择</option>
                                     <option value="{{item.code}}" ng-repeat="item in regionList">{{item.name}}</option>
                                 </select>
@@ -563,7 +563,7 @@
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">行政区</font></font></label>
-                                <select class="form-control select-short" ng-model="contactData.region" disabled>
+                                <select class="form-control select-short" ng-model="regionView" disabled id="regionView">
                                     <option value="">请选择</option>
                                     <option value="{{item.code}}" ng-repeat="item in regionList">{{item.name}}</option>
                                 </select>

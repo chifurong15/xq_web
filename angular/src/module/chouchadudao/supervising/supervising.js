@@ -261,6 +261,9 @@
                     $scope.reSave = function (){
                         if($scope.enddingTime){
                             var params =  $scope.detailData;
+                            params.resule = '';
+                            params.status = '';
+                            params.whetherinspect = '';
                             params.deadlinedate = $scope.enddingTime;
                             $ajaxhttp.myhttp({
                                 url:apiPrefix + '/duban/v1/DubanSupervision/add',

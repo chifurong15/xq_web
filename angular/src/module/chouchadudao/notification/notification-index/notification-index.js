@@ -91,7 +91,7 @@
                     $scope.reset = function (){
                         $scope.startTime = '';
                         $scope.title = '';
-                        $scope.innformType = '';
+                        $scope.informType = '';
                         $scope.readStatus = '';
                     }
 

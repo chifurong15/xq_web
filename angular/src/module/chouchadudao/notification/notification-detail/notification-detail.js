@@ -117,6 +117,10 @@
                         })
                     }
 
+                    //查看  下载附件
+                    $scope.downFile = function (path){
+                        window.open($scope.fileUrl + path);
+                    }
 
 
                     //返回
