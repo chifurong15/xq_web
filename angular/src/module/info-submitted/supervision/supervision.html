@@ -76,7 +76,7 @@
                             <td>{{module.administrationRegion}}</td>
                             <td>{{module.superviseTime}}</td>
                             <td>{{module.superviseWay}}</td>
-                            <td>{{module.superviseContent}}</td>
+                            <td>{{module.superviseContent.length > 20 ? module.superviseContent.substring(0,20) + '...' : module.superviseContent}}</td>
                             <td>
                                 <span ng-if="module.rectifyState == 1" style="color: #f00;">已整改</span>
                                 <span ng-if="module.rectifyState == 2" style="color: #0db2ef">未整改</span>

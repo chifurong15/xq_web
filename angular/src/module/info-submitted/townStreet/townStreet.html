@@ -82,7 +82,7 @@
                                 <span ng-if="module.informationSystem == 3">验收制度</span>
                             </td>
                             <td>{{module.sentTime}}</td>
-                            <td>{{module.executeCircumstance}}</td>
+                            <td>{{module.executeCircumstance.length > 20 ? module.executeCircumstance.substring(0,20) + '...' : module.executeCircumstance}}</td>
                             <td>
                                 <span ng-if="module.sentState == 1" class="label label-danger">已上报</span>
                                 <span ng-if="module.sentState == 2" class="label label-success">未上报</span>
