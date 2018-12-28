@@ -281,7 +281,7 @@
 </div>
 <script>
     $(".uploadfile").fileinput({
-        allowedFileExtensions: [],
+        allowedFileExtensions: ['doc','docx','pdf','png','jpg','jpeg'],
         uploadAsync: true, //默认异步上传
         showRemove: true, //显示移除按钮
         maxFileCount: 5, //表示允许同时上传的最大文件个数
@@ -291,7 +291,7 @@
         showCaption: true, //是否显示标题
         browseClass: "btn btn-primary", //按钮样式
         showPreview: true, //是否显示预览
-        dropZoneEnabled: true, //是否显示拖拽区域
+        dropZoneEnabled: false, //是否显示拖拽区域
         validateInitialCount: true,
         slugCallback: function (filename) {
             return filename.replace('(', '_').replace(']', '_');
