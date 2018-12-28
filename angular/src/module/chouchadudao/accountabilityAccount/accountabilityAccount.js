@@ -88,7 +88,7 @@
                     //保存
                     $scope.save = function (){
                         var params = {
-                            turnarounddate:$scope.Time,
+                            turnarounddate:$("#Time").find("input").val(),
                             accountabilitytype:$scope.type,
                             objectid:$scope.accoutObjectid,
                             objectname:$scope.regionNameList,
@@ -102,7 +102,7 @@
                         // console.log(params);
                         if
                         (
-                            $scope.Time && $scope.type && $scope.accoutObjectid && $scope.userName && $scope.accountDuty
+                            $("#Time").find("input").val() && $scope.type && $scope.accoutObjectid && $scope.userName && $scope.accountDuty
                             && $scope.recordMan && $scope.accountContent && $scope.accountRemark
                         )
                         {
@@ -133,7 +133,8 @@
                     //关闭并清空新增窗口
                     $scope.close = function () {
                         $('#myModal').modal('hide');
-                        $scope.Time = '';
+                        // $scope.Time = '';
+                        $("#Time").find("input").val('');
                         $scope.type = '';
                         $scope.accoutObjectid = '';
                         $scope.userName = '';
@@ -296,15 +297,17 @@
                         $scope.endTime = result;
                         $scope.$apply();
                     });
-                    // 问责日期
+                    //问责日期
                     $('#Time').datetimepicker({
                         format: 'YYYY-MM-DD',
                         locale: moment.locale('zh-cn')
                     }).on('dp.change', function (c) {
                         var result = new moment(c.date).format('YYYY-MM-DD');
-                        $scope.Time = result;
+                        // $scope.Time = result;
+                        $("#Time").find("input").val(result)
                         $scope.$apply();
                     });
+
 
                     //动态设置最小值
                     startTime.on('dp.change', function (e) {

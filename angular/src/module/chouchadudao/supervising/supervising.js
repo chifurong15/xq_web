@@ -421,18 +421,19 @@
                             project:$scope.supervisingProject,
                             proof:$scope.supervisingProof,
                             type:$scope.supervisingType,
-                            issuedtime:$scope.startTime1,
-                            deadlinedate:$scope.endTime1,
+                            issuedtime:$("#startTime1").find("input").val(),
+                            deadlinedate:$("#endTime1").find("input").val(),
                             reason:$scope.supervisingReason,
                             objectid:$scope.supervisingObjectid ? $scope.supervisingObjectid.join(',') : '',
-                            objectname:$scope.regionNameList ?$scope.regionNameList.join(',') : '',
+                            objectname:$scope.regionNameList ? $scope.regionNameList.join(',') : '',
                             address:$scope.supervisingAddress,
                             assessoryyuan:$scope.assessory ? $scope.assessory.join(',') : ''
                         }
+                        // console.log(params);
                         if(
                             $scope.supervisingTitle && $scope.supervisingProject
                             && $scope.supervisingProof && $scope.supervisingType
-                            && $scope.startTime1 && $scope.endTime1
+                            && $("#startTime1").find("input").val() && $("#endTime1").find("input").val()
                             && $scope.supervisingReason && $scope.supervisingObjectid
                             && $scope.supervisingAddress
                         )
@@ -469,8 +470,8 @@
                         $scope.supervisingProject = '';
                         $scope.supervisingProof = '';
                         $scope.supervisingType = '';
-                        $scope.startTime1 = '';
-                        $scope.endTime1 = '';
+                        $("#startTime1").find("input").val('');
+                        $("#endTime1").find("input").val('');
                         $scope.supervisingReason = '';
                         $scope.supervisingAddress = '';
                         $('.selectpicker').selectpicker('val', []);
@@ -546,6 +547,7 @@
                             }
                         ).success(function (res) {
                             if (res.resCode == 1) {
+                                layer.msg("上传成功");
                                 $scope.assessory.push(res.data[0]);
                             } else {
                                 layer.msg("服务器异常，请稍后再试");
@@ -583,7 +585,8 @@
                         locale: moment.locale('zh-cn')
                     }).on('dp.change', function (c) {
                         var result = new moment(c.date).format('YYYY-MM-DD');
-                        $scope.startTime1 = result;
+                        // $scope.startTime1 = result;
+                        $("#startTime1").find("input").val('');
                         $scope.$apply();
                     });
 
@@ -593,7 +596,8 @@
                         locale: moment.locale('zh-cn')
                     }).on('dp.change', function (c) {
                         var result = new moment(c.date).format('YYYY-MM-DD');
-                        $scope.endTime1 = result;
+                        // $scope.endTime1 = result;
+                        $("#endTime1").find("input").val('');
                         $scope.$apply();
                     });
 
