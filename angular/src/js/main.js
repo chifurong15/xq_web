@@ -18,7 +18,8 @@ angular.module('app').controller('AppCtrl', ['$scope', 'routeService', '$locatio
         $localStorage.serviceUrl_fileService = $localStorage.gwUrl + '/fm';
 
         //文件预览地址
-        $scope.fileUrl = 'http://10.0.0.196:8888';
+        $scope.fileUrl = 'http://10.0.0.196:8888';//开发环境文件服务器地址
+        $scope.fileUrl = 'http://60.28.163.75:6001';//线上环境文件服务器地址
 
 
         // logo显示隐藏
