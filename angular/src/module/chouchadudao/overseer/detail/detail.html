@@ -534,7 +534,7 @@
                             </div>
                             <div class="input-group form-item" style="z-index: 10;">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">组成成员</font></font></label>
-                                <select id="slpk1" class="form-control selectpicker selectpicker1" multiple  style="width: 426px;z-index: 0;" ng-model="supervisePerson">
+                                <select id="slpk1" class="form-control selectpicker selectpicker1" multiple ng-options="item.name + item.phone as item.name for item in contactList"  style="width: 426px;z-index: 0;" ng-model="supervisePerson">
                                 </select>
                             </div>
                         </form>

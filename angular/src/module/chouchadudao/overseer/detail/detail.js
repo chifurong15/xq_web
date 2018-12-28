@@ -42,6 +42,10 @@
                             dropupAuto: false
                         });
 
+                        $('.selectpicker').selectpicker('val', '');
+                        $('.selectpicker').selectpicker('refresh');
+                        $('.selectpicker').selectpicker('render');
+
                         $scope.regionList = [];
                         getBasicDetail ();
                         getContactList ();
@@ -174,13 +178,14 @@
                                         $scope.contactPersonList = res.data;
                                     }else{
                                         $scope.contactList = res.data;
-                                        var select = $("#slpk1");
-                                        for (var i = 0; i < $scope.contactList.length; i++) {
-                                            select.append("<option value='"+$scope.contactList[i].name + $scope.contactList[i].phone +"'>"
-                                                + $scope.contactList[i].name + "</option>");
-                                        }
+                                        // var select = $("#slpk1");
+                                        // for (var i = 0; i < res.data.length; i++) {
+                                        //     // select.append("<option value='"+res.data[i].name + res.data[i].phone +"'>"
+                                        //     //     + res.data[i].name + "</option>");
+                                        // }
                                         $('.selectpicker').selectpicker('val', '');
                                         $('.selectpicker').selectpicker('refresh');
+                                        $('.selectpicker').selectpicker('render');
                                     }
                                 }else{
                                     layer.msg('服务器异常，请稍后再试',{times:500})
@@ -229,6 +234,7 @@
                             region:$scope.region,
                             fillUnit:$scope.fillUnit
                         };
+                        // console.log(params);
 
                         if(
                             $scope.type && $scope.name && $scope.duty && $scope.phone && $scope.region && $scope.fillUnit
@@ -371,6 +377,9 @@
 
                     //显示督导组弹窗
                     $scope.addCheck = function (){
+                        $('.selectpicker').selectpicker('val', '');
+                        $('.selectpicker').selectpicker('refresh');
+                        $('.selectpicker').selectpicker('render');
                         $('#addCheckGroup').modal('show');
                         getContactList (1);
                         getContactList (2);
@@ -381,11 +390,12 @@
                         var params = {
                             inspectionid:$scope.id,
                             grouping:$scope.groupName,
-                            area:$scope.area.join(','),
+                            area:$scope.area ? $scope.area.join(',') : '',
                             contact:$scope.contact,
                             groupLeader:$scope.groupLeader,
-                            supervisePerson:$scope.supervisePerson.join(',')
+                            supervisePerson:$scope.supervisePerson ? $scope.supervisePerson.join(',') : ''
                         }
+                        // console.log(params);
                         if(
                             $scope.groupName && $scope.area && $scope.contact && $scope.groupLeader && $scope.supervisePerson
                         ){
