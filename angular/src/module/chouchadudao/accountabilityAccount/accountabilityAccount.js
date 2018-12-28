@@ -259,7 +259,7 @@
 
                         var fileObj = document.querySelector('input[type=file]').files[0];
                         formFile.append("files", fileObj); //加入文件对象
-
+                        // console.log(formFile.files);
                         $http({
                                 method: 'post',
                                 url: apiPrefix + '/v1/scstandingbook/upload',
@@ -270,6 +270,7 @@
                         ).success(function (res) {
                             if (res.resCode == 1) {
                                 $scope.assessory.push(res.data[0]);
+                                $('#problemFile').fileinput('clear');
                             } else {
                                 layer.msg("服务器异常，请稍后再试");
                             }
