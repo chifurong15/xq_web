@@ -268,7 +268,7 @@
                                 // console.log($scope.personList);
                                 var select = $("#slpk3");
                                 for (var i = 0; i < $scope.personList.length; i++) {
-                                    select.append("<option value='"+$scope.personList[i].name+"'>"
+                                    select.append("<option value='"+$scope.personList[i].id+"'>"
                                         + $scope.personList[i].name + "</option>");
                                 }
                                 $('.selectpicker3').selectpicker('val', '');
