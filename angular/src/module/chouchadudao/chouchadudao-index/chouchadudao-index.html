@@ -71,7 +71,11 @@
                         <div id="patrolChart" class="tj-chart-con"></div>
                     </div>
                 </div>
-        	
+				<video id="example_video_1" class="video-js vjs-default-skin video-js video-js vjs-big-play-centered" controls preload="none" width="640" height="264"
+					   poster="http://vjs.zencdn.net/v/oceans.png">
+					<source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+				</video>
+
         	</div>
         </div>
 
@@ -148,3 +152,26 @@
 
     </div>
 </div>
+<script>
+    var player = videojs('example_video_1',{
+        muted: true, //是否静音
+        controls : true,//
+        height:100,
+        width:100,
+        loop : true,
+        // 更多配置.....
+    });
+    var options = {};
+
+    var player = videojs('example_video_1', options, function onPlayerReady() {
+
+
+        this.play();
+
+
+        this.on('ended', function() {
+            videojs.log('播放结束了!');
+        });
+    });
+
+</script>
