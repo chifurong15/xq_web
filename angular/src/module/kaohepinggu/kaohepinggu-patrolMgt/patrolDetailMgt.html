@@ -1,7 +1,5 @@
 <div ng-controller="patrolDetailMgtCtrl" ng-init="init()">
-    <div class="bg-light lter b-b wrapper-md">
-        <h1 class="m-n font-thin h3">巡查详情</h1>
-    </div>
+
     <div class="wrapper-md">
 		<div class="panel panel-default m-n">
 			<div class="panel-body" style="position: relative;">
@@ -51,8 +49,12 @@
 						<div class="form-item">
 							<label>问题照片：</label>
 		                	<div id="layer-photos-before" class="layer-photos-demo" style="margin-left: 30px;">
-							  	<img style="margin: 0 5px;" layer-pid="" layer-src="/src/img/bg.jpg" src="/src/img/bg.jpg" alt="问题照片" width="60px" height="60px">
-							  	<img style="margin: 0 5px;" layer-pid="" layer-src="/src/img/bg.jpg" src="/src/img/bg.jpg" alt="问题照片" width="60px" height="60px">
+								<div style="display: inline-block;" id="layer-photos-check">
+									<img style="margin: 0 5px;" ng-repeat="items in problemList.photoUrl"
+										 layer-pid="" layer-src="{{fileUrl}}{{items}}"
+										 src="{{fileUrl}}{{items}}" alt="问题照片" width="100px"
+										 height="100px" key="{{$index}}">
+								</div>
 							</div>
 						</div>
 					</div>
@@ -69,11 +71,12 @@
 	</div>
 </div>
 <script>
-	layui.use('layer', function() {
-		layer.photos({
-		  photos: '#layer-photos-before'
-		  ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
-		}); 
-	});
+    //调用示例
+    layui.use('layer', function () {
+        layer.photos({
+            photos: '#layer-photos-check',
+            anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+        });
+    });
 
 </script>

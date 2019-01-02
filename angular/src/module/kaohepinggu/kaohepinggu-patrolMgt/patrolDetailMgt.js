@@ -54,6 +54,9 @@
                         },
                         callBack: function (res) {
                               $scope.problemList = res.data;
+                              if(res.data.photoUrl){
+                                  $scope.problemList.photoUrl = res.data.photoUrl.split(',')
+                              }
                         }
                     })
 				}
