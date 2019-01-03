@@ -22,9 +22,10 @@
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
 					var apiPrefix = moduleService.getServiceUrl() + '/spotcheck';
-					//var apiPrefix = "http://10.0.9.116:7022" + '/spotcheck';
+                    // var apiPrefix = 'http://10.0.9.194:7022' + '/spotcheck';
 
-					$scope.init = function () {
+
+                    $scope.init = function () {
                         getList();
                         getAllRegion();
 //						$ajaxhttp.myhttp({
@@ -100,8 +101,7 @@
 								}
                             })
 						}
-						//localStorage.setItem('selectedId',id);
-						//localStorage.setItem('detailId',detailId);
+						localStorage.setItem('id',id);
 						routeService.route('2-2-2', false);
 	                }
 

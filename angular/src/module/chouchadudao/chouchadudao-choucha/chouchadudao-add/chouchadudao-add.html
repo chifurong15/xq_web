@@ -1,4 +1,4 @@
-<div class="anchaanfang" ng-controller="chouchaAddCtrl" ng-init="init()">
+<div class="anchaanfang chouchadudao conferenceCtrl" ng-controller="chouchaAddCtrl" ng-init="init()">
     <div class="wrapper-md ">
     	<div class="panel panel-default m-n">
         	<div class="panel-body" style="position: relative;">
@@ -11,27 +11,31 @@
 				<form class="form-inline">
 					<div class="form-item" >
                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
-                        <input type="text" class="form-control input-short" ng-model="title">
+                        <input type="text" class="form-control input-long" ng-model="title">
 						<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
                     </div>
-                    <div class="input-group form-item" style="z-index: 10;">
-                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查区域</font></font></label>
-						<select id="slpk" class="form-control selectpicker"  ng-multiple="true" multiple  style="width: 160px;" ng-model="region" ng-change="getChangeRegion()">
-						</select>
-						<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
-	                </div>
+					<br>
 					<div class="form-item input-group date date_picker"id="J-postTime">
 						<label><font style="vertical-align: inherit;"><fot style="vertical-align: inherit;">检查日期</fot></font></label>
 						<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="checkDate">
 						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 						<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 					</div>
+					<br>
+					<div class="input-group form-item" style="z-index: 10;">
+						<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查区域</font></font></label>
+						<select id="slpk" class="form-control selectpicker"  ng-multiple="true" multiple  style="width: 160px;" ng-model="region" ng-change="getChangeRegion()">
+						</select>
+						<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+					</div>
+					<br>
                     <div class="input-group form-item" style="z-index: 9;">
                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查河道</font></font></label>
 						<select id="slpkRiver" class="form-control selectpicker selectpicker1" multiple  style="width: 160px;" ng-model="river">
 						</select>
 						<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 	                </div>
+					<br>
 	                <div class="input-group form-item">
                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">任务类型</font></font></label>
         				<select  class="form-control select-short" style="width: 160px;" ng-model="taskType">
@@ -41,6 +45,7 @@
                         </select>
 						<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 	                </div>
+					<br>
 	                <div class="input-group form-item">
                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发人员</font></font></label>
         				<select  class="form-control"  style="width: 160px;" ng-model="sendPerson">
