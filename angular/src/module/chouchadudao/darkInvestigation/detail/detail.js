@@ -222,6 +222,9 @@
                     //监听区域选择框
                     $scope.getRegionListener = function (region){
                         $scope.sentRegion = region;
+                        $('.selectpicker2').selectpicker('val', []);
+                        $('.selectpicker2').selectpicker('refresh');
+                        $('.selectpicker2').selectpicker('render');
 
                         getReach ($scope.sentRegion);
                     }
@@ -240,22 +243,23 @@
                             url:apiPrefix + '/ancha/v1/ScAnzhaInvestigations/reachlist',
                             method:'get',
                             params:{
-                                regionStr:regionStr.join(',')
+                                regionStr:regionStr ? regionStr.join(',') : ''
                             },
                             callBack:function (res) {
                                 $scope.reachList = res.data;
-                                // console.log('2222222',$scope.reachList);
-
                                 var select = $("#slpk2");
-                                for (var i = 0; i < $scope.reachList.length; i++) {
-                                    select.append("<option value='"+$scope.reachList[i].reachname+"'>"
-                                        + $scope.reachList[i].reachname + "</option>");
+                                select.html('');
+                                for (var i = 0; i < res.data.length; i++) {
+                                    select.append("<option value='"+res.data[i].reachname+"'>"
+                                        + res.data[i].reachname + "</option>");
                                 }
+
                                 $('.selectpicker2').selectpicker('val', '');
-                                // $('.selectpicker2').selectpicker('deselectAll');
                                 $('.selectpicker2').selectpicker('refresh');
+                                $('.selectpicker2').selectpicker('render');
                             }
                         })
+
                     }
 
                     //获取暗查人员
@@ -328,19 +332,18 @@
                                                 callBack:function (res) {
                                                     $scope.reachList = res.data;
 
-                                                    // console.log('11111',$scope.reachList);
-
                                                     var select = $("#slpk2");
-                                                    for (var i = 0; i < $scope.reachList.length; i++) {
-                                                        select.append("<option value='"+$scope.reachList[i].reachname+"'>"
-                                                            + $scope.reachList[i].reachname + "</option>");
+                                                    select.html('');
+                                                    for (var i = 0; i < res.data.length; i++) {
+                                                        select.append("<option value='"+res.data[i].reachname+"'>"
+                                                            + res.data[i].reachname + "</option>");
                                                     }
 
                                                     $scope.sentReach = $scope.editData.reachname.split(',');
-                                                    $scope.reachList.map((item,i)=>{
+                                                    res.data.map((item,i)=>{
                                                         $scope.sentReach.map((val,j)=>{
                                                             if(item == val){
-                                                                $scope.reachList[i].selected=true;
+                                                                res.data[i].selected=true;
                                                                 $('.selectpicker2').selectpicker('refresh');
                                                             }
                                                         })
