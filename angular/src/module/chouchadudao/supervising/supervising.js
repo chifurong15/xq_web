@@ -420,7 +420,8 @@
                             feedbacktime:$scope.checkData.feedbacktime,
                             objectname:$scope.checkData.objectname,
                             description:$scope.checkData.description,
-                            status:$scope.checkStatus
+                            status:$scope.checkStatus,
+                            assessoryyuan:$scope.checkData.assessoryyuan
                         }
                         if($scope.checkData.feedbacktime && $scope.checkData.objectname && $scope.checkData.description && $scope.checkStatus){
                             $ajaxhttp.myhttp({
