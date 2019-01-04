@@ -293,7 +293,45 @@
                         }
                     }
 
+                    $scope.openImg = function (item) {
+                        console.log(item)
+                        $('#openImg').show();
+                        $('#imgShade').show();
+                        $scope.imgUrl = $scope.fileUrl +  item;
+                        $("#openImg img").attr("src", $scope.imgUrl);
+                    }
 
+                    $scope.closeImg = function () {
+                        $('#openImg').hide();
+                        $('#imgShade').hide();
+                    }
+
+                    // 音视频播放
+                    $scope.playVideo = function(item){
+                        $('#videoBox').show();
+                        $('#audioPlayer').css('display','none');
+                        $("#videoPlayerBox").css('display','block');
+                        $scope.videoUrl = $scope.fileUrl +  item;
+                        $("#videoPlayerBox source").attr("src", $scope.videoUrl);
+                        var myPlayer = videojs("videoPlayerBox")
+                        myPlayer.ready(function () {
+                            myPlayer.play()
+                        });
+                    };
+                    $scope.playAudio = function(item){
+                        $('#videoBox').show();
+                        $('#audioPlayer').css('display','block');
+                        $("#videoPlayerBox").css('display','none');
+                        $scope.videoUrl = $scope.fileUrl + item;
+                        console.log($("#audioPlayer"))
+                        $("#audioPlayer audio").attr("src", $scope.videoUrl);
+                        // var myPlayer = $("#audioPlayer");
+                        // myPlayer.play()
+                    }
+                    // 停止并关闭视频、
+                    $scope.closePlayer = function(){
+                        $('#videoBox').hide();
+                    };
 
 
 
@@ -311,12 +349,42 @@
                             callBack:function (res) {
                                 if(res.data){
                                     $scope.checkData = res.data[0];
+                                    $scope.checkStatus = $scope.checkData.status;
                                     $scope.fileList1= [];
                                     $scope.accessoryURL1 = [];
-                                    if(res.data.assessoryyuan){
+                                    if(res.data[0].assessoryyuan){
                                         var viewUrl = [] ,downUrl = [];
-                                        viewUrl = res.data.assessory.split(',');
-                                        downUrl = res.data.assessoryyuan.split(',');
+                                        var viewUrl1 = [] ,downUrl1 = [];
+                                        $scope.mp3Url = [],$scope.mp4Url = [];
+                                        viewUrl1 = res.data[0].assessory.split(',');
+                                        downUrl1 = res.data[0].assessoryyuan.split(',');
+
+                                        // console.log(viewUrl1);
+
+                                        viewUrl1.map(function (item,i){
+                                            console.log(item);
+                                            if(item.substring(item.length-3).toLowerCase() == 'mp3'){
+                                                $scope.mp3Url.push(viewUrl1[i]);
+                                            }else if(item.substring(item.length-3).toLowerCase() == 'mp4'){
+                                                $scope.mp4Url.push(viewUrl1[i]);
+                                            }else{
+                                                viewUrl.push(item)
+                                            }
+                                        })
+                                        downUrl1.map(function (item,i){
+                                            if(item.substring(item.length-3).toLowerCase() == 'mp3'){
+                                                downUrl.splice(i,1);
+                                            }else if(item.substring(item.length-3).toLowerCase() == 'mp4'){
+                                                downUrl.splice(i,1);
+                                            }else{
+                                                downUrl.push(item)
+                                            }
+                                        })
+                                        // console.log('vviewUrl',viewUrl);
+                                        // console.log('downUrl',downUrl);
+                                        // console.log('mp3Url',$scope.mp3Url);
+                                        // console.log('mp4Url',$scope.mp4Url);
+
                                         if(viewUrl.length == downUrl.length){
                                             viewUrl.map((item,i)=>{
                                                 $scope.fileList1.push({
@@ -327,8 +395,6 @@
                                             })
                                         }
                                     }
-
-
 
                                 }else{
                                     layer.msg('服务器异常，请稍后再试',{times:500})
