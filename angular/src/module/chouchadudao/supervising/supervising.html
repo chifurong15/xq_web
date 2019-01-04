@@ -75,8 +75,9 @@
                             <th style="width: 10%">督办文号</th>
                             <th style="width: 10%">应回复日期</th>
                             <th style="width: 10%">督办地址</th>
-                            <th style="width: 10%">督办结果</th>
+                            <th style="width: 5%">督办结果</th>
                             <th style="width: 10%">是否办结</th>
+                            <th style="width: 10%">现场核查</th>
                             <th style="width: 15%">操作</th>
                         </tr>
                         <tr ng-repeat="module in moduleList"  style="cursor:pointer;">
@@ -96,8 +97,12 @@
                                 <span ng-if="module.status == 2" class="label label-info">未按期整改</span>
                             </td>
                             <td>
+                                <span ng-if="module.whetherinspect == 2">已核查</span>
+                                <span ng-if="module.whetherinspect == 1">已发起</span>
+                            </td>
+                            <td>
                                 <a class="btn btn-primary btn-xs" ng-click="view(module.id)"><i class="fa fa-info" title="查看"></i></a>
-                                <a class="btn btn-primary btn-xs" ng-click="feedback(module.id)"><i class="fa fa-file-text-o" title="督办反馈"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-click="feedback(module)"><i class="fa fa-file-text-o" title="督办反馈"></i></a>
                                 <a class="btn btn-primary btn-xs" ng-if="module.whetherinspect == 2" ng-click="check(module.id)"><i class="fa fa-chain-broken" title="现场核查"></i></a>
                             </td>
                         </tr>

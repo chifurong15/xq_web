@@ -158,13 +158,15 @@
                     }
 
                     //查看督办反馈
-                    $scope.feedback = function (id){
-                        $scope.feedbackId = id;
+                    $scope.feedback = function (module){
+                        $scope.feedbackId = module.id;
+                        $scope.dealStatus = module.status;
+
                         $ajaxhttp.myhttp({
                             url:apiPrefix + '/inform/v1/informAccept/list',
                             method:'get',
                             params:{
-                                reportId:id,
+                                reportId:module.id,
                                 replyStatus: 1
                             },
                             callBack:function (res) {
