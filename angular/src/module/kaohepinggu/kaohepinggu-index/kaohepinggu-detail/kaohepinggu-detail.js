@@ -22,6 +22,7 @@
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
 					var apiPrefix = moduleService.getServiceUrl() + '/water';
+                    // var apiPrefix = "http://10.0.9.133:7006" + '/water';
 
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
 					
@@ -221,6 +222,8 @@
                                             if(data.resCode == 1){
                                                 layer.msg('导入成功', {time:2000});
                                                 getData($scope.id)
+                                            }else if(data.resCode == 0){
+                                                layer.msg(data.resMsg, {time:2000});
                                             }
                                         }).error(function (data) {
                                             console.log('upload fail');

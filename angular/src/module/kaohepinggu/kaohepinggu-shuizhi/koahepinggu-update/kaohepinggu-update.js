@@ -319,6 +319,8 @@
                                             if(data.resCode == 1){
                                                 layer.msg('导入成功', {time:2000});
                                                 getData($scope.id);
+                                            }else if(data.resCode == 0){
+                                                layer.msg(data.resMsg, {time:2000});
                                             }
                                         }).error(function (data) {
                                             console.log('upload fail');

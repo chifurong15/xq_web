@@ -23,7 +23,8 @@
 					
 
 					var apiPrefix = moduleService.getServiceUrl() + '/water';
-					
+                    // var apiPrefix = "http://10.0.9.133:7006" + '/water';
+
 					$scope.userInfo = $localStorage.userLoginInfo.userInfo;
 					$scope.init = function () {
 						$ajaxhttp.myhttp({
@@ -43,19 +44,14 @@
 					
 					// 获取数据列表
 					function getList () {
-												
-						let month=new moment($scope.searchTime).format('M')<10 ? '0'+ new moment($scope.searchTime).format('M') : new moment($scope.searchTime).format('M');
-						$scope.date=new moment($scope.searchTime).format('YYYY') + '-' + month;
-
 						$ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/SurfaceWater/list',
 							method: 'get',
 							params: {
 								pageNumber: $scope.paginationConf.currentPage,
 								pageSize: $scope.paginationConf.itemsPerPage,
-								issue: $scope.searchTime && $scope.date,
+								issue: $scope.searchTime,
 								status: $scope.type,
-                                num: $scope.num == 2 ? 2 : '',
 								createUser:$scope.createuser
 							},
 							callBack: function (res) {
@@ -76,7 +72,9 @@
                         format: 'YYYY-MM',
                         locale: moment.locale('zh-cn')
                     }).on('dp.change', function (c) {
-                        $scope.searchTime1 = new moment(c.date).format('YYYY-MM');
+                        var result = new moment(c.date).format('YYYY-MM');
+                        // $scope.searchTime1 = result;
+                        $("#J-searchTime1").find("input").val(result)
                         $scope.$apply();
                     });
 					
@@ -111,76 +109,33 @@
 
 	                //新增评分报告
 					$scope.save = function () {
-                        // if (!$scope.title) {
-                        //     layer.alert("请输入标题", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // } else if (!$scope.searchTime1) {
-                        //     layer.alert("请选择期号", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // } else if (!$scope.author) {
-                        //     layer.alert("请输入创建人", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // } else if (!$scope.issuer) {
-                        //     layer.alert("请输入备注", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // }
                         var params = {
                             title: $scope.title,
                             createtime: $scope.currentdate,
-                            issue: $scope.searchTime1,
+                            issue: $("#J-searchTime1").find("input").val(),
                             createUser: $scope.author,
                             remark: $scope.issuer
                         }
 
-                        if($scope.title && $scope.author && $scope.issuer && $scope.searchTime1){
+                        if($scope.title && $scope.author && $scope.issuer && $("#J-searchTime1").find("input").val()){
                             if(!$scope.id){//新增报告
                                 $ajaxhttp.myhttp({
-                                    url: apiPrefix + '/v1/SurfaceWater/selectHave',
-                                    method: 'get',
-                                    params: {
-                                        issue: $scope.searchTime1
-                                    },
+                                    url: apiPrefix + '/v1/SurfaceWater/add',
+                                    method: 'POST',
+                                    params: params,
                                     callBack: function (res) {
                                         if(res.resCode == 1){
-                                            if(res.data == '没有'){
-                                                $ajaxhttp.myhttp({
-                                                    url: apiPrefix + '/v1/SurfaceWater/add',
-                                                    method: 'POST',
-                                                    params: params,
-                                                    callBack: function (res) {
-                                                        if(res.resCode == 1){
-                                                            $scope.newid = res.data.id;
-                                                            $scope.pid = res.data.id;
-                                                            layer.msg('新建成功', {time:2000});
-                                                            getList ();
-                                                            clear();//创建成功后清空
-                                                            $('#myModal').modal('hide');
-                                                        }else{
-                                                            layer.msg(res.resMsg, {time:2000});
-                                                        }
-                                                    }
-                                                })
-                                            }else{
-                                                layer.msg('一个月只能新增一个报告');
-                                            }
+                                            $scope.newid = res.data.id;
+                                            $scope.pid = res.data.id;
+                                            layer.msg('新建成功', {time:2000});
+                                            getList ();
+                                            clear();//创建成功后清空
+                                            $('#myModal').modal('hide');
                                         }else{
                                             layer.msg(res.resMsg, {time:2000});
                                         }
                                     }
                                 })
-
                             }else{//修改报告
                                 $ajaxhttp.myhttp({
                                     url: apiPrefix + '/v1/SurfaceWater/updatelist',
@@ -189,7 +144,7 @@
                                         id: $scope.id,
                                         title: $scope.title,
                                         createtime: $scope.currentdate,
-                                        issue: $scope.searchTime1,
+                                        issue: $("#J-searchTime1").find("input").val(),
                                         createUser: $scope.author,
                                         remark: $scope.issuer
                                     },

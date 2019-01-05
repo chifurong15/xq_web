@@ -22,7 +22,7 @@
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
 
-					//var apiPrefix = "http://10.0.9.116:7004" + '/quality';
+					// var apiPrefix = "http://10.0.9.133:7004" + '/quality';
 					var apiPrefix = moduleService.getServiceUrl() + '/quality';
 					$scope.userInfo = $localStorage.userLoginInfo.userInfo;
 					
@@ -43,21 +43,18 @@
 					
 					// 获取数据列表
 					function getList () {
-						
-						let month=new moment($scope.searchTime).format('M')<10 ? '0'+ new moment($scope.searchTime).format('M') : new moment($scope.searchTime).format('M');
-						$scope.date=new moment($scope.searchTime).format('YYYY') + '-' + month;
-						
+					    var params = {
+                            pageNumber: $scope.paginationConf.currentPage,
+                            pageSize: $scope.paginationConf.itemsPerPage,
+                            issue: $scope.searchTime,
+                            status: $scope.type,
+                            createUser:$scope.createuser
+                        }
+
 						$ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/WaterQuality/list',
 							method: 'get',
-							params: {
-								pageNumber: $scope.paginationConf.currentPage,
-								pageSize: $scope.paginationConf.itemsPerPage,
-								issue: $scope.searchTime && $scope.date,
-								status: $scope.type,
-                                num: $scope.num == 2 ? 2 : '',
-								createUser:$scope.createuser
-							},
+							params:params,
 							callBack: function (res) {
 								$scope.waterQualityList = res.data.list;
                     			$scope.paginationConf.totalItems = res.data.total;
@@ -78,7 +75,9 @@
                         format: 'YYYY-MM',
                         locale: moment.locale('zh-cn')
                     }).on('dp.change', function (c) {
-                        $scope.searchTime1 = new moment(c.date).format('YYYY-MM');
+                        var result = new moment(c.date).format('YYYY-MM');
+                        // $scope.searchTime1 = result;
+                        $("#J-searchTime1").find("input").val(result)
                         $scope.$apply();
                     });
 					
@@ -108,65 +107,29 @@
                     // 保存
                     $scope.save = function() {
 
-                        // if (!$scope.title) {
-                        //     layer.alert("请输入标题", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // } else if (!$scope.author) {
-                        //     layer.alert("请输入创建人", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // } else if (!$scope.issuer) {
-                        //     layer.alert("请输入备注", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // }
-
                         // 新增水质管理
                         var params = {
                             title: $scope.title,
                             createtime: $scope.currentdate,
-                            issue: $scope.searchTime1,
+                            issue: $("#J-searchTime1").find("input").val(),
                             createUser: $scope.author,
                             remark: $scope.issuer
                         }
-                        if($scope.title && $scope.author && $scope.issuer){
+                        // console.log(params);
+                        if($scope.title && $scope.author && $scope.issuer && $("#J-searchTime1").find("input").val()){
                             if (!$scope.id) {
                                 $ajaxhttp.myhttp({
-                                    url: apiPrefix + '/v1/WaterQuality/selectHave',
-                                    method: 'get',
-                                    params: {
-                                        issue: $scope.searchTime1
-                                    },
+                                    url: apiPrefix + '/v1/WaterQuality/add',
+                                    method: 'POST',
+                                    params: params,
                                     callBack: function (res) {
                                         if(res.resCode == 1){
-                                            if(res.data == '没有'){
-                                                $ajaxhttp.myhttp({
-                                                    url: apiPrefix + '/v1/WaterQuality/add',
-                                                    method: 'POST',
-                                                    params: params,
-                                                    callBack: function (res) {
-                                                        if(res.resCode == 1){
-                                                            $scope.newid = res.data.id;
-                                                            $scope.pid = res.data.id;
-                                                            layer.msg('新建成功', {time:2000});
-                                                            clear();//创建成功后清空
-                                                            getList();
-                                                            $('#myModal').modal('hide');
-                                                        }else{
-                                                            layer.msg(res.resMsg, {time:2000});
-                                                        }
-                                                    }
-                                                })
-                                            }else{
-                                                layer.msg('一个月只能新增一个报告');
-                                            }
+                                            $scope.newid = res.data.id;
+                                            $scope.pid = res.data.id;
+                                            layer.msg('新建成功', {time:2000});
+                                            clear();//创建成功后清空
+                                            getList();
+                                            $('#myModal').modal('hide');
                                         }else{
                                             layer.msg(res.resMsg, {time:2000});
                                         }
@@ -181,7 +144,7 @@
                                         id: $scope.id,
                                         title: $scope.title,
                                         createtime: $scope.currentdate,
-                                        issue: $scope.searchTime1,
+                                        issue: $("#J-searchTime1").find("input").val(),
                                         createUser: $scope.author,
                                         remark: $scope.issuer
                                     },
