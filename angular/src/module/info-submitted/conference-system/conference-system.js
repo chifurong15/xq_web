@@ -22,7 +22,7 @@
                                         routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl() + '/messageSent';
-                    //var apiPrefix = 'http://10.0.9.203:8080' + '/messageSent';
+                    // var apiPrefix = 'http://10.0.9.203:8081' + '/messageSent';
 
                     var regionTree;
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree';
@@ -89,6 +89,10 @@
                             + $scope.endTime
                             + '&region='
                             + $scope.regionName
+                            + '&userId='
+                            + $scope.userInfo.id
+                            + '&regionId='
+                            + $scope.userInfo.regionId
                         )
                     }
 

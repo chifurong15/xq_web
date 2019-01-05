@@ -255,7 +255,12 @@
                             + '&region='
                             + $scope.regionName
                             + '&rectifyState='
-                            + $scope.status)
+                            + $scope.status
+                            + '&userId='
+                            + $scope.userInfo.id
+                            + '&regionId='
+                            + $scope.userInfo.regionId
+                        )
                      }
 
 

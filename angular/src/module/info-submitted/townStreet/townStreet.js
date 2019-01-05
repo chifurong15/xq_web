@@ -252,6 +252,10 @@
                             + $scope.regionName
                             + '&informationSystem='
                             + $scope.status
+                            + '&userId='
+                            + $scope.userInfo.id
+                            + '&regionId='
+                            + $scope.userInfo.regionId
                         )
                     }
 
