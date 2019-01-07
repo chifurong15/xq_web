@@ -35,6 +35,7 @@
                     PatrolRiverService.init($scope.map, "patrolRiverLayer");
                     $scope.regionId = $localStorage.userLoginInfo.userInfo.regionId;
                     getLoginUserInfo();
+
                     regionTreeList();
                     clearList();
                 };
@@ -292,9 +293,12 @@
                             pageNumber: '-1'
                         }
                     }).success( function(res) {
-                        $scope.grade = res.data.list[0].grade;
-                        //console.log($scope.grade);
-                        getList();
+                        if(res.resCode == 1){
+                            $scope.grade = res.data.list[0].grade;
+                            if($scope.grade){
+                                getList();
+                            }
+                        }
                     }).error(function(res) {
                     });
                 }
@@ -336,7 +340,7 @@
                     }
                 };
                 // 当他们一变化的时候，重新获取数据条目
-                $scope.$watch('paginationConf1.currentPage + paginationConf1.itemsPerPage', getList);
+                $scope.$watch('paginationConf1.currentPage + paginationConf1.itemsPerPage', getLoginUserInfo);
 
                 // 分页
                 var patrolChart;
