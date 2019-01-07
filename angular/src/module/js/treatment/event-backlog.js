@@ -45,7 +45,7 @@
 							    };
 							    var treeList = function(){
 							    	$ajaxhttp.myhttp({
-										//url: $localStorage.serviceUrl_eventMgr + 'v1/event/getEventTypes',
+										url: $localStorage.serviceUrl_eventMgr + 'v1/event/getEventTypes',
 										method: 'GET',
 										callBack: function(res){
 											typeTree = $.fn.zTree.init($('#typeTree'), setting, res.data);
