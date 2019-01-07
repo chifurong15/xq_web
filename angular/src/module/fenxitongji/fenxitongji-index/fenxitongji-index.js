@@ -277,7 +277,8 @@
 						        data: ['已巡查次数', '应巡查次数', '巡查达标率'],
 						    },
 						    grid: {
-								top: '50%'
+								top: '50%',
+                                height: '120'
 						    },
 						    tooltip: {
 						    	trigger:'axis',
