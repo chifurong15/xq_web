@@ -29,20 +29,24 @@
                     </div>                    
                     <button type="submit" class="btn btn-primary" ng-click="search()"><i class="fa fa-search"></i>搜索</button>
                 </form>
-                <div class="form-radio">
-                    <label class="radio-inline i-checks" ng-repeat="type in typeList">
-                        <input type="radio" name="type" ng-model="isSelected" ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>
-                        {{type.typeName}}
-                    </label>
-                </div>
-                <ul class="nav nav-tabs chart-tab" role="tablist">
-                    <li class="active">
-                        <a href="#tableStatistics" onclick="return false;" data-toggle="tab">表格</a>
-                    </li>
-                    <li>
-                        <a href="#chartStatistics" onclick="return false;" data-toggle="tab">图表</a>
-                    </li>
-                </ul>
+				<form class="form-inline"style="height: 40px;">
+					<ul class="nav nav-tabs chart-tab" role="tablist" >
+						<li class="active">
+							<a href="#tableStatistics" onclick="return false;" data-toggle="tab">表格</a>
+						</li>
+						<li>
+							<a href="#chartStatistics" onclick="return false;" data-toggle="tab">图表</a>
+						</li>
+					</ul>
+				</form>
+
+				<!--<div class="form-radio">-->
+                    <!--<label class="radio-inline i-checks" ng-repeat="type in typeList">-->
+                        <!--<input type="radio" name="type" ng-model="isSelected" ng-click="radioBtn(isSelected)" value="{{type.id}}"><i></i>-->
+                        <!--{{type.typeName}}-->
+                    <!--</label>-->
+                <!--</div>-->
+
                 <div class="tab-content">
                     <div class="tab-pane active" id="tableStatistics">
                         <div class="table-responsive" style="margin-top: 20px;">
