@@ -30,6 +30,7 @@
                         var month = date.getMonth();
                         if(month == 0){
                             month = 12;
+                            year = year - 1;
                         }
                         $scope.searchTime1 = year + '-' + month;
                         $scope.searchTime2 = year + '-' + month;
