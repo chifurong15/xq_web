@@ -11,6 +11,47 @@ body {
     overflow: hidden;
     font-family: "Microsoft Yahei", Verdana, Simsun, "Segoe UI Web Light", "Segoe UI Light", "Segoe UI Web Regular", "Segoe UI", "Segoe UI Symbol", "Helvetica Neue", Arial;
 }
+
+.weather-panel{
+    background-color: #1192f6!important;
+    /*background: -webkit-linear-gradient( );*/
+}
+.mainBody .c-ffffff a{
+    color: #ff4800!important;
+}
+.mainBody .c-ffffff a:hover {
+     color: #ff4800;
+     text-decoration: none!important;
+}
+.mainBody .panel-heading{
+    padding: 15px;
+}
+.titleAndTime .dot{
+    border: 1px solid #0AA908;
+    width: 5px;
+    height: 5px;
+    background-color: #0AA908;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    margin-top: 10px;
+}
+.blueActive{
+    color: #3189e1!important;
+}
+
+.titleBg{
+    background-color: #1192f6!important;
+}
+.titleBgActive{
+    background-color: #fff!important;
+}
+.title{
+    color: #fff!important;
+}
+.titleActive{
+    color: #333!important;
+}
 .modal{
     padding-left: 0!important;
 }
@@ -53,6 +94,9 @@ body .align-left .cross-simple-icon, body .align-left .cross-text{
 .patr-count span span{
     padding: 0 7px;
 }
+.patr-count div span{
+    margin: 0 3px;
+}
 /*#mainBody #wea-dl{*/
     /*margin-left: 30px;*/
 /*}*/
@@ -65,8 +109,8 @@ body .align-left .cross-simple-icon, body .align-left .cross-text{
     font-size: 15px;
 }
 
-#news-l , #check-active{
-    height: 50%;
+#news-l{
+    height: 100%;
 }
 
 .downOrLook {
@@ -156,7 +200,7 @@ body .align-left .cross-simple-icon, body .align-left .cross-text{
     height: 145px;
 }
 .mainBody #water-quality {
-    height: 33%;
+    height: 30%;
     margin-top: 5px;
 }
 
@@ -1747,6 +1791,7 @@ body .c-ffffff a {
 .weather-iframe {
     width: 140px;
     float: left;
+    margin-left: -5px;
 }
 
 .left-panel .panel .weather-date {
@@ -1754,17 +1799,17 @@ body .c-ffffff a {
 }
 
 .left-panel .panel .weather-date p {
-    color: #60a2e5;
+    color: #fff;
     line-height: 30px;
     padding-right: 10px;
 }
 
 .left-panel .panel .weather-date .date {
-    font-size: 14px;
+    font-size: 18px;
 }
 
 .left-panel .panel .weather-date .time {
-    font-size: 20px;
+    font-size: 15px;
 }
 .body .c-ffffff{
     margin-left: -20px!important;
@@ -1772,11 +1817,11 @@ body .c-ffffff a {
 .patr-count {
     width: 100%;
     display: flex;
-    color: #60a2e5;
+    color: #fff;
 }
 
 .patr-count > span {
-    flex: 1;
+    margin: 0 5px;
 }
 
 .tabs-content {
@@ -1846,16 +1891,17 @@ body .c-ffffff a {
 }
 
 .mainbody-tips {
-    background-color: #3189e1;
+    background-color: #fff;
 }
 
 .mainbody-tips span {
     display: inline-block;
     height: 35px;
     line-height: 35px;
-    padding-left: 15px;
-    font-size: 14px;
-    color: #fff;
+    /*padding-left: 15px;*/
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
 }
 
 #check-active {
@@ -2093,22 +2139,21 @@ body .c-ffffff a {
 /* 地图部件管理 */
 .unitCtrl {
     position: absolute;
-    width: 160px;
+    width: 66px;
     height: auto;
     top: 80px;
-    left: 10px;
+    /*left: 10px;*/
     z-index: 100;
-    padding: 10px 5px;
+    /*padding: 10px 5px;*/
     border-radius: 4px;
     background-color: #fff;
     box-shadow: 2px 2px 2px rgba(35, 4, 4, 0.78);
 }
 
 .unitCtrl li {
-    float: left;
     width: 64px;
     height: 72px;
-    margin: 5px;
+    margin: 5px 0;
 }
 
 .unitCtrl li a {
@@ -2136,48 +2181,52 @@ body .c-ffffff a {
     width: 100%;
     margin:5px 0 ;
 }
-#accordion1 ,#accordion2{
-    height: 80%;
+#accordion1{
+    height: 100%;
     overflow: auto;
     margin-top: 5px;    
 }
-#accordion1 ,#accordion2{
+#accordion1{
     font-size: 14px;
     color: #333;
 }
-#accordion1 .panel-heading ,#accordion2 .panel-heading{
+#accordion1 .panel-heading{
     width: 100%;
     border: 2px solid #efefef;
 }
-#accordion1 .panel-default ,#accordion2 .panel-default{
+#accordion1 .panel-default{
     border: 0;
 }
-#accordion1  .panel-heading i,#accordion2 .panel-heading i {
-    color: #9cbbda;
+#accordion1  .panel-heading i{
+    /*color: #9cbbda;*/
     font-size: 15px;
 }
-#accordion1  .panel-heading a:hover,#accordion1  .panel-heading a:active,#accordion2 .panel-heading a:hover,#accordion2 .panel-heading a:active {
+#accordion1  .panel-heading a:hover,#accordion1  .panel-heading a:active{
     color: #006edd;
 }
 .panel-active{
     color: #006edd;
 }
-#accordion1 h4 ,#accordion2 h4{
+#accordion1 h4 {
    font-size: 13px;
 }
-#accordion1 h4 a,#accordion2 h4 a{
+#accordion1 h4 a{
     display: block;
     width: 100%;
     height: 100%;
     position: relative;
     color: #666;
 }
-#accordion1 h4 a i,#accordion2 h4 a i{
+#accordion1 h4 a i{
     position: absolute;
     right: 10px;
     top: 0;
     font-size: 14px;
 }
+/*#accordion1 .panel-body{*/
+    /*height: 330px;*/
+    /*overflow: auto;*/
+/*}*/
 .titleAndTime{
     margin: 0 10px;
 }

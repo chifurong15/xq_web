@@ -3,16 +3,17 @@
     <div id="mainBody" class="mainBody row m-all-0">
         <div class="left-panel col-xs-3 p-all-0">
             <div id="weather" class="panel panel-default weather-default m-all-0">
-                <div class="panel-body weather-panel" style="margin-top: -3px;display: flex;flex-direction: column;justify-content: space-between;">
-                    <div class="mainbody-tips" style="margin-top: -10px;">
-						<span>
-	        				天气情况
-	        			</span>
-                    </div>
-                    <div class="clearfix">
+                <div class="panel-body weather-panel" style="margin-top: 5px;">
+                    <!--<div class="mainbody-tips" style="margin-top: -10px;">-->
+						<!--<span>-->
+	        				<!--天气情况-->
+	        			<!--</span>-->
+                    <!--</div>-->
+                    <div class="clearfix" style="padding: 7px 15px;">
                         <div class="weather-iframe">
-                            <iframe allowtransparency="true" frameborder="0" width="180" height="36" scrolling="no"
-                                    src="//tianqi.eastday.com/plugin/widget_v1.html?sc=3&z=2&t=1&v=0&d=3&bd=0&k=&f=ffffff&q=1&a=1&c=54511&w=180&h=36&align=left"></iframe>
+                            <!--<iframe allowtransparency="true" frameborder="0" width="180" height="36" scrolling="no"-->
+                                    <!--src="//tianqi.eastday.com/plugin/widget_v1.html?sc=3&z=2&t=1&v=0&d=3&bd=0&k=&f=ffffff&q=1&a=1&c=54511&w=180&h=36&align=left"></iframe>-->
+                            <iframe width="400" scrolling="no" height="80" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=12&color=%23FFFFFF&bgc=%23&icon=1&num=1&site=16"></iframe>
                         </div>
                         <div class="weather-date">
                             <p class="date">{{weatherDate.year}}年{{weatherDate.month}}月{{weatherDate.day}}日</p>
@@ -20,29 +21,27 @@
                         </div>
                     </div>
                     <div class="patr-count">
-                        <span>今日巡河:</span>
-                        <span>市: <span>{{countHZOnline.cityCount ? countHZOnline.cityCount : 0}}</span></span>
-                        <span>区: <span>{{countHZOnline.countyCount ? countHZOnline.countyCount : 0}}</span></span>
-                        <span>镇: <span>{{countHZOnline.townCount ? countHZOnline.townCount : 0}}</span></span>
-                        <span>村: <span>{{countHZOnline.villageCount ? countHZOnline.villageCount : 0}}</span></span>
+                        <span style="font-size: 16px;">今日巡河<span style="font-size: 12px;">次数</span></span>
+                        <div>
+                            <span style="font-size: 16px;">{{countHZOnline.cityCount ? countHZOnline.cityCount : 0}}<span style="font-size: 12px;">市级</span></span>
+                            <span style="font-size: 16px;">{{countHZOnline.countyCount ? countHZOnline.countyCount : 0}}<span style="font-size: 12px;">区级</span></span>
+                            <span style="font-size: 16px;">{{countHZOnline.townCount ? countHZOnline.townCount : 0}}<span style="font-size: 12px;">镇级</span></span>
+                            <span style="font-size: 16px;">{{countHZOnline.villageCount ? countHZOnline.villageCount : 0}}<span style="font-size: 12px;">村级</span></span>
+                        </div>
                     </div>
                 </div>
             </div>
             <div style="margin-top:5px;display: flex;flex: 1;justify-content: space-between;flex-direction: column">
                 <div id="news-l" class="panel panel-default m-all-0">
                     <div class="panel-body">
-                        <div class="mainbody-tips">
-							<span>
-								工作动态
-							</span>
-                        </div>
                         <div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
                             <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingOne">
+                                <div class="panel-heading titleBgActive" role="tab" id="headingOne">
                                     <h4 class="panel-title panel-active" ng-click="tab1()">
                                         <a role="button" data-toggle="collapse" data-parent="#accordion1"
-                                           href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            工作动态
+                                           href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="titleActive">
+                                            <i class="fa fa-file-text-o" aria-hidden="true" style="position: absolute;left: 0px;top: 2px;"></i>
+                                            <strong style="font-size: 15px;margin: 0 20px;">工作动态</strong>
                                             <i class="fa fa-caret-down" aria-hidden="true" ng-show="!isShow1"></i>
                                             <i class="fa fa-caret-up" aria-hidden="true" ng-show="isShow1"></i>
                                         </a>
@@ -54,53 +53,46 @@
                                         <div ng-repeat="list in bulletin2" class="titleAndTime">
                                             <a href="javascript:void(0);" ng-click="viewBulletin(list.id)">
                                                 <span>{{list.title.length > 18 ? list.title.substring(0,15) + "..." : list.title }}</span>
-                                                <span>{{list.postTime}}</span>
+                                                <!--<span class="dot"></span>-->
+                                                <span>{{list.post_time}}</span>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingTwo">
+                                <div class="panel-heading titleBg" role="tab" id="headingTwo">
                                     <h4 class="panel-title" ng-click="tab2()">
-                                        <a class="collapsed" role="button" data-toggle="collapse"
-                                           data-parent="#accordion1" href="#collapseTwo" aria-expanded="false"
+                                        <a class="collapsed title" role="button" data-toggle="collapse"
+                                           data-parent="#accordion1" href="#collapseTwo" aria-expanded="true"
                                            aria-controls="collapseTwo">
-                                            工作简报
-                                            <i class="fa fa-caret-down" aria-hidden="true" ng-show="isShow2"></i>
-                                            <i class="fa fa-caret-up" aria-hidden="true" ng-show="!isShow2"></i>
+                                            <i class="fa fa-file-excel-o" aria-hidden="true" style="position: absolute;left: 0px;top: 2px;"></i>
+                                            <strong style="font-size: 15px;margin: 0 20px;">工作简报</strong>
+                                            <i class="fa fa-caret-down" aria-hidden="true" ng-show="!isShow2"></i>
+                                            <i class="fa fa-caret-up" aria-hidden="true" ng-show="isShow2"></i>
                                         </a>
                                     </h4>
                                 </div>
-                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+                                <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel"
                                      aria-labelledby="headingTwo">
                                     <div class="panel-body">
                                         <div ng-repeat="list in bulletin3" class="titleAndTime">
                                             <a href="javascript:void(0);" ng-click="viewBulletin(list.id)">
                                                 <span>{{list.title.length > 18 ? list.title.substring(0,15) + "..." : list.title }}</span>
-                                                <span>{{list.postTime}}</span>
+                                                <span>{{list.post_time}}</span>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                    </div>
-                </div>
-
-                <div id="check-active" class="panel panel-default m-all-0" style="margin-top: 5px;">
-                    <div class="panel-body">
-                        <div class="mainbody-tips">
-                            <span>工作通报</span>
-                        </div>
-                        <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
                             <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingThree">
+                                <div class="panel-heading titleBg" role="tab" id="headingThree">
                                     <h4 class="panel-title panel-active" ng-click="tab3()">
-                                        <a role="button" data-toggle="collapse" data-parent="#accordion2"
-                                           href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                                            暗查暗访
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion1"
+                                           href="#collapseThree" aria-expanded="true" aria-controls="collapseThree" class="title">
+                                            <i class="fa fa-folder-o" aria-hidden="true" style="position: absolute;left: 0px;top: 2px;"></i>
+                                            <strong style="font-size: 15px;margin: 0 20px;">暗查暗访</strong>
                                             <i class="fa fa-caret-down" aria-hidden="true" ng-show="!isShow3"></i>
                                             <i class="fa fa-caret-up" aria-hidden="true" ng-show="isShow3"></i>
                                         </a>
@@ -112,56 +104,58 @@
                                         <div ng-repeat="list in bulletin1" class="titleAndTime">
                                             <a href="javascript:void(0);" ng-click="viewBulletin(list.id)">
                                                 <span>{{list.title.length > 18 ? list.title.substring(0,15) + "..." : list.title }}</span>
-                                                <span>{{list.postTime}}</span>
+                                                <span>{{list.post_time}}</span>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingFour">
+                                <div class="panel-heading titleBg" role="tab" id="headingFour">
                                     <h4 class="panel-title" ng-click="tab4()">
-                                        <a class="collapsed" role="button" data-toggle="collapse"
-                                           data-parent="#accordion2" href="#collapseFour" aria-expanded="false"
+                                        <a class="collapsed title" role="button" data-toggle="collapse"
+                                           data-parent="#accordion1" href="#collapseFour" aria-expanded="true"
                                            aria-controls="collapseFour">
-                                            督导检查
-                                            <i class="fa fa-caret-down" aria-hidden="true" ng-show="isShow4"></i>
-                                            <i class="fa fa-caret-up" aria-hidden="true" ng-show="!isShow4"></i>
+                                            <i class="fa fa-bookmark-o" aria-hidden="true" style="position: absolute;left: 0px;top: 2px;"></i>
+                                            <strong style="font-size: 15px;margin: 0 20px;">督导检查</strong>
+                                            <i class="fa fa-caret-down" aria-hidden="true" ng-show="!isShow4"></i>
+                                            <i class="fa fa-caret-up" aria-hidden="true" ng-show="isShow4"></i>
                                         </a>
                                     </h4>
                                 </div>
-                                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel"
+                                <div id="collapseFour" class="panel-collapse collapse in" role="tabpanel"
                                      aria-labelledby="headingFour">
                                     <div class="panel-body">
                                         <div ng-repeat="list in bulletin4" class="titleAndTime">
                                             <a href="javascript:void(0);" ng-click="viewBulletin(list.id)">
                                                 <span>{{list.title.length > 18 ? list.title.substring(0,15) + "..." : list.title }}</span>
-                                                <span>{{list.postTime}}</span>
+                                                <span>{{list.post_time}}</span>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingFive">
+                                <div class="panel-heading titleBg" role="tab" id="headingFive">
                                     <h4 class="panel-title" ng-click="tab5()">
-                                        <a class="collapsed" role="button" data-toggle="collapse"
-                                           data-parent="#accordion2" href="#collapseFive" aria-expanded="false"
+                                        <a class="collapsed title" role="button" data-toggle="collapse"
+                                           data-parent="#accordion1" href="#collapseFive" aria-expanded="true"
                                            aria-controls="collapseFive">
-                                            考核通报
-                                            <i class="fa fa-caret-down" aria-hidden="true" ng-show="isShow5"></i>
-                                            <i class="fa fa-caret-up" aria-hidden="true" ng-show="!isShow5"></i>
+                                            <i class="fa fa-minus-square-o" aria-hidden="true" style="position: absolute;left: 0px;top: 2px;"></i>
+                                            <strong style="font-size: 15px;margin: 0 20px;">考核通报</strong>
+                                            <i class="fa fa-caret-down" aria-hidden="true" ng-show="!isShow5"></i>
+                                            <i class="fa fa-caret-up" aria-hidden="true" ng-show="isShow5"></i>
                                         </a>
                                     </h4>
                                 </div>
-                                <div id="collapseFive" class="panel-collapse collapse" role="tabpanel"
+                                <div id="collapseFive" class="panel-collapse collapse in" role="tabpanel"
                                      aria-labelledby="headingFive">
                                     <div class="panel-body">
                                         <div class="titleAndTime">
                                             <div ng-repeat="list in bulletin5" class="titleAndTime">
                                                 <a href="javascript:void(0);" ng-click="viewBulletin(list.id)">
                                                     <span>{{list.title.length > 18 ? list.title.substring(0,15) + "..." : list.title }}</span>
-                                                    <span>{{list.postTime}}</span>
+                                                    <span>{{list.post_time}}</span>
                                                 </a>
                                             </div>
                                         </div>
@@ -172,7 +166,6 @@
 
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="mid-panel col-xs-6 p-all-0">
@@ -182,10 +175,9 @@
 
                         <!--全屏操作-->
                         <div class="mapCtrl">
-                            <a href="javascript:void(0);" id="fullScreen" ng-click="fullScreen();"><i
-                                    class="fa fa-expand"></i></a>
+                            <a href="javascript:void(0);" id="fullScreen" ng-click="fullScreen();"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a>
                             <a href="javascript:void(0);" id="exitScreen" ng-click="exitScreen();"
-                               style="display: none"><i class="fa fa-compress"></i></a>
+                               style="display: none"><i class="fa fa-arrows-alt" aria-hidden="true"></i></a>
                         </div>
 
                         <!--地图部件操作-->
@@ -251,7 +243,7 @@
                 <div class="panel-body">
                     <div class="mainbody-tips">
 						<span>
-	        				全市考核排名
+	        				考核排名
 	        			</span>
                     </div>
                     <div id="main1" style="min-width: 350px;height:250px;"></div>
@@ -278,7 +270,7 @@
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tableStatistics"
-                             style="height: 180px; overflow-x: hidden; overflow-y: auto">
+                             style="height: 265px; overflow-x: hidden; overflow-y: auto">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover" style="margin-top: 2px;">
                                     <tbody>
@@ -350,7 +342,7 @@
             confine: true,
             formatter: "{a} {b} : {c} ({d}%)"
         },
-        color: ['#ff0000', '#000000', '#000099', '#008000', '#ffff00', '#00dd88'],
+        color: ['#ff0000', '#a777e8', '#58aeff', '#f47a8f', '#ff9800', '#00dd88'],
         legend: [
             {
                 orient: 'vertical',
@@ -378,8 +370,8 @@
         series: [{
             name: '水质情况',
             type: 'pie',
-            radius: ['40%', '60%'],
-            center: ['30%', '45%'],
+            radius: ['30%', '50%'],
+            center: ['33%', '40%'],
             data: [
                 {
                     value: 310,
@@ -438,13 +430,13 @@
         },
         color: ['#ff0000', '#000000', '#000099', '#008000', '#00dd88'],
         grid: {
-            top: '17%',
+            top: '3%',
             left: '15%',
-            height: '130'
+            height: '150'
         },
         xAxis: [{
             type: 'value',
-            position: 'top',
+            position: 'bottom',
             min: 0,
             max: 250,
             interval: 50,
@@ -484,4 +476,10 @@
     };
     myChart.setOption(option);
     myChart1.setOption(option1);
+
+    // $('#collapseOne .titleAndTime').click(function (e) {
+    //     alert(1)
+    //     e.stopPropagation();
+    //     $(this).find('.dot').css('display','none');
+    // })
 </script>

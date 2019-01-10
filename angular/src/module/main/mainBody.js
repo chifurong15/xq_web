@@ -1,5 +1,5 @@
 (function (window, angular) {
-    'use strict';
+    'use ';
 
     var app = angular.module("app");
     app.filter("trustHtml", function ($sce) {
@@ -161,24 +161,91 @@
                 $scope.isShow3 = true;
                 $scope.isShow4 = true;
                 $scope.isShow5 = true;
-                //$scope.isSelected = false;
                 $scope.tab1 = function () {
                     $scope.isShow1 = !$scope.isShow1 ;
-                    //$scope.isSelected = true;
-                    //$('#accordion1 .panel-heading').find('h4').addClass('panel-active').parent().parent().siblings().find('h4').removeClass('panel-active')
+                    $('#headingOne').removeClass('titleBg').addClass('titleBgActive');
+                    $('#headingOne a').removeClass('title').addClass('titleActive');
+
+                    $('#headingTwo').removeClass('titleBgActive').addClass('titleBg');
+                    $('#headingTwo a').removeClass('titleActive').addClass('title');
+
+                    $('#headingThree').removeClass('titleBgActive').addClass('titleBg');
+                    $('#headingThree a').removeClass('titleActive').addClass('title');
+
+                    $('#headingFour').removeClass('titleBgActive').addClass('titleBg');
+                    $('#headingFour a').removeClass('titleActive').addClass('title');
+
+                    $('#headingFive').removeClass('titleBgActive').addClass('titleBg');
                 }
                 $scope.tab2 = function () {
                     $scope.isShow2 = !$scope.isShow2 ;
+                    $('#headingOne').removeClass('titleBgActive').addClass('titleBg');
+                    $('#headingOne a').removeClass('titleActive').addClass('title');
+
+                    $('#headingTwo').removeClass('titleBg').addClass('titleBgActive');
+                    $('#headingTwo a').removeClass('title').addClass('titleActive');
+
+                    $('#headingThree').removeClass('titleBgActive').addClass('titleBg');
+                    $('#headingThree a').removeClass('titleActive').addClass('title');
+
+                    $('#headingFour').removeClass('titleBgActive').addClass('titleBg');
+                    $('#headingFour a').removeClass('titleActive').addClass('title');
+
+                    $('#headingFive').removeClass('titleBgActive').addClass('titleBg');
+                    $('#headingFive a').removeClass('titleActive').addClass('title');
                 }
                 $scope.tab3 = function () {
                     $scope.isShow3 = !$scope.isShow3 ;
-                    //$('#accordion2 .panel-heading').find('h4').addClass('panel-active').parent().parent().siblings().find('h4').removeClass('panel-active')
+                    $('#headingOne').removeClass('titleBgActive').addClass('titleBg');
+                    $('#headingOne a').removeClass('titleActive').addClass('title');
+
+                    $('#headingTwo').removeClass('titleBgActive').addClass('titleBg');
+                    $('#headingTwo a').removeClass('titleActive').addClass('title');
+
+                    $('#headingThree').removeClass('titleBg').addClass('titleBgActive');
+                    $('#headingThree a').removeClass('title').addClass('titleActive');
+
+                    $('#headingFour').removeClass('titleBgActive').addClass('titleBg');
+                    $('#headingFour a').removeClass('titleActive').addClass('title');
+
+                    $('#headingFive').removeClass('titleBgActive').addClass('titleBg');
+                    $('#headingFive a').removeClass('titleActive').addClass('title');
                 }
                 $scope.tab4 = function () {
                     $scope.isShow4 = !$scope.isShow4 ;
+
+                    $('#headingOne').removeClass('titleBgActive').addClass('titleBg');
+                    $('#headingOne a').removeClass('titleActive').addClass('title');
+
+                    $('#headingTwo').removeClass('titleBgActive').addClass('titleBg');
+                    $('#headingTwo a').removeClass('titleActive').addClass('title');
+
+                    $('#headingThree').removeClass('titleBgActive').addClass('titleBg');
+                    $('#headingThree a').removeClass('titleActive').addClass('title');
+
+                    $('#headingFour').removeClass('titleBg').addClass('titleBgActive');
+                    $('#headingFour a').removeClass('title').addClass('titleActive')
+
+                    $('#headingFive').removeClass('titleBgActive').addClass('titleBg');
+                    $('#headingFive a').removeClass('titleActive').addClass('title');
+
                 }
                 $scope.tab5 = function () {
                     $scope.isShow5 = !$scope.isShow5 ;
+                    $('#headingOne').removeClass('titleBgActive').addClass('titleBg');
+                    $('#headingOne a').removeClass('titleActive').addClass('title');
+
+                    $('#headingTwo').removeClass('titleBgActive').addClass('titleBg');
+                    $('#headingTwo a').removeClass('titleActive').addClass('title');
+
+                    $('#headingThree').removeClass('titleBgActive').addClass('titleBg');
+                    $('#headingThree a').removeClass('titleActive').addClass('title');
+
+                    $('#headingFour').removeClass('titleBgActive').addClass('titleBg');
+                    $('#headingFour a').removeClass('titleActive').addClass('title');
+
+                    $('#headingFive').removeClass('titleBg').addClass('titleBgActive');
+                    $('#headingFive a').removeClass('title').addClass('titleActive')
                 }
 
                 /**
@@ -435,6 +502,7 @@
 
                 // 通报预览
                 $scope.viewBulletin = function (id) {
+
                     globalParam.setter({
                         bulletin: {
                             id: id
