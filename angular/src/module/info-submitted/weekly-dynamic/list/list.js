@@ -22,7 +22,7 @@
                                           routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl() + '/messageSent';
-                    //var apiPrefix = 'http://10.0.9.203:8080' + '/messageSent';
+                    // var apiPrefix = 'http://10.0.9.203:7028' + '/messageSent';
 
                     var regionTree;
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree';
@@ -71,8 +71,11 @@
                                 direction:$scope.direction
                             },
                             callBack:function (res) {
-                                $scope.moduleList = res.data.list
-                                $scope.paginationConf.totalItems = res.data.total;
+                                if(res.data){
+                                    $scope.moduleList = res.data.list
+                                    $scope.paginationConf.totalItems = res.data.total;
+                                }
+
                             }
                         })
                     }
@@ -180,7 +183,37 @@
                     //设置定时报送
                     $scope.setTimeAdd = function () {
                         //$('#myModal1').modal('show')
-                        layer.msg('已定时每周一发起',{times:2000});
+                        var layerIndex = layer.confirm('确定启用设置定时周报吗？', {
+                            btn: ['启用', '禁用']
+                        }, function () {
+                            $ajaxhttp.myhttp({
+                                url:apiPrefix + '/cron/start',
+                                method:'post',
+                                callBack:function (res) {
+                                    if(res.resCode == 1){
+                                        layer.msg(res.data,{times:500});
+                                        getList ();
+                                    }else{
+                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                                    }
+                                }
+                            })
+                            layer.close(layerIndex);
+                        }, function () {
+                            $ajaxhttp.myhttp({
+                                url:apiPrefix + '/cron/stop',
+                                method:'post',
+                                callBack:function (res) {
+                                    if(res.resCode == 1){
+                                        layer.msg(res.data,{times:500});
+                                        getList ();
+                                    }else{
+                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                                    }
+                                }
+                            })
+                            layer.close(layerIndex);
+                        });
                     }
 
                     // 查看
