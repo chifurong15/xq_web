@@ -1,0 +1,102 @@
+<div class="anchaanfang" ng-controller="chouchaListCtrl" ng-init="init()">
+    <div class="wrapper-md ">
+    	<div class="panel panel-default m-n">
+        	<div class="panel-body" style="position: relative;">
+        		<span class="tag">抽查</span><span class="tag-right"></span>
+
+        	</div>
+        	
+        </div>
+    	<div class="panel panel-default">
+        	<div class="panel-body">
+        		<div class="table-bar">
+        			<form class="form-inline clearfix">
+						<div class="form-item input-group date date_picker"id="J-postTime">
+							<label><font style="vertical-align: inherit;"><fot style="vertical-align: inherit;">检查日期</fot></font></label>
+							<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="postTime">
+							<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						</div>
+	        			<div class="input-group form-item">
+	                        <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查区域</font></font></label>
+	        				<select class="form-control select-short" style="width: auto;" ng-model="region">
+	                        	<option value="">请选择</option>
+	                        	<option value="{{item.regionName}}" ng-repeat="item in RegionList">{{item.regionName}}</option>
+	                        </select>
+	                    </div>
+	                    <div class="input-group form-item">
+	                        <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">状态</font></font></label>
+	        				<select class="form-control select-short" style="width: auto;" ng-model="status">
+	                        	<option value="">请选择</option>
+	                        	<option value="0">已下发</option>
+	                        	<option value="1">已检查</option>
+	                        </select>
+	                    </div>	                    
+        				<div class="input-group">
+		                    <button class="btn btn-primary" ng-click="search()">
+		                    	<i class="fa fa-search"></i>搜索
+		                    </button>
+							<button type="button" class="btn btn-primary" ng-click="reset()" style="margin: 0 5px;">
+								<i class="fa fa-refresh"></i>重置
+							</button>
+	                    </div>
+	                    <div class="input-group fr">
+		                    <button type="button" class="btn btn-primary" ng-click="add()">
+		                        <i class="fa fa-plus"></i> 新增
+		                    </button>
+	                    </div>
+                    </form>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                	<tr class='tHeader'>
+	                                    <th width="5%">序号</th>
+	                                    <th width="15%">标题</th>
+	                                    <th width="10%">检查日期</th>
+	                                    <th width="10%">检查区域</th>
+	                                    <th width="15%">检查河道</th>
+	                                    <th width="10%">任务类型</th>
+	                                    <th width="15%">下发人员</th>
+	                                    <th width="10%">状态</th>
+	                                    <th width="10%">操作</th>
+	                                </tr>
+	                                <tr ng-repeat="item in spotcheckList">
+	                                    <td>{{$index+1}}</td>
+	                                    <td>{{item.title}}</td>
+	                                    <td>{{item.checkDate}}</td>
+										<td>
+											{{item.regionName}}
+											<!--<span ng-repeat="items in item.regionName.split(',')" key="{{$index}}">{{items}}<br></span>-->
+										</td>
+	                                    <td>
+											{{item.checkRiver}}
+											<!--<span ng-repeat="itemss in item.checkRiver.split(',')" key="{{$index}}">{{itemss}}<br></span>-->
+										</td>
+	                                    <td>{{item.taskType == 0 ? '临时任务' : '常规任务'}}</td>
+	                                    <td>{{item.sendPerson}}</td>
+	                                    <td>
+	                                    	<span class="label label-danger" ng-if="item.status == 0">已下发</span>
+											<span class="label label-info" ng-if="item.status == 1">已检查</span>
+	                                    </td>	                                   
+	                                    <td style="text-align: left;">
+	                                    	<button type="button" class="btn btn-success" ng-click="view(item.id)">查看</button>
+											<button type="button" class="btn btn-warning" ng-if="item.status == 0" ng-click="check(item.id)">检查</button>
+	                                    </td>
+	                                </tr>
+                            	</tbody>
+                            </table>
+                			<tm-pagination conf="paginationConf"></tm-pagination>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="chartStatistics">
+                        <div id="patrolChart" class="tj-chart-con"></div>
+                    </div>
+                </div>
+        	
+        	</div>
+        </div>
+    	
+    </div>
+</div>

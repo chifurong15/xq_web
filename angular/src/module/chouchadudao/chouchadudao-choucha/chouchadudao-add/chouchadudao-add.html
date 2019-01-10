@@ -1,0 +1,75 @@
+<div class="anchaanfang chouchadudao conferenceCtrl" ng-controller="chouchaAddCtrl" ng-init="init()">
+    <div class="wrapper-md ">
+    	<div class="panel panel-default m-n">
+        	<div class="panel-body" style="position: relative;">
+        		<span class="tag">抽查</span><span class="tag-right"></span><span class="tag-right tag-left"></span><span class="tag tag1">新增</span><span class="tag-right"></span>
+        		<div style="overflow: hidden;"><button type="button" class="btn btn-primary" ng-click="goBack()" style="position: absolute;right: 20px;bottom: 20px;">返回</button></div>
+        	</div>
+        </div>
+    	<div class="panel panel-default">
+    		<div class="panel-body">
+				<form class="form-inline">
+					<div class="form-item" >
+                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
+                        <input type="text" class="form-control input-long" ng-model="title">
+						<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                    </div>
+					<br>
+					<div class="form-item input-group date date_picker"id="J-postTime">
+						<label><font style="vertical-align: inherit;"><fot style="vertical-align: inherit;">检查日期</fot></font></label>
+						<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="checkDate">
+						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+					</div>
+					<br>
+					<div class="input-group form-item" style="z-index: 10;">
+						<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查区域</font></font></label>
+						<select id="slpk" class="form-control selectpicker"  ng-multiple="true" multiple  style="width: 160px;" ng-model="region" ng-change="getChangeRegion()">
+						</select>
+						<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+					</div>
+					<br>
+                    <div class="input-group form-item" style="z-index: 9;">
+                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查河道</font></font></label>
+						<select id="slpkRiver" class="form-control selectpicker selectpicker1" multiple  style="width: 160px;" ng-model="river">
+						</select>
+						<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+	                </div>
+					<br>
+	                <div class="input-group form-item">
+                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">任务类型</font></font></label>
+        				<select  class="form-control select-short" style="width: 160px;" ng-model="taskType">
+                        	<option value="">请选择</option>
+                        	<option value="0">临时任务</option>
+                        	<option value="1">常规任务</option>
+                        </select>
+						<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+	                </div>
+					<br>
+	                <div class="input-group form-item">
+                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发人员</font></font></label>
+        				<select  class="form-control"  style="width: 160px;" ng-model="sendPerson">
+                        	<option value="">请选择</option>
+                        	<option value="{{item.name}}" ng-repeat="item in personList">{{item.name}}</option>
+                        </select>
+						<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+	                </div>
+                           			                 
+				</form>
+
+				<div style="text-align: left;margin: 35px 0;">
+	                <button type="button" class="btn btn-primary" style="margin: 0 50px;" ng-click="submit()" >创建并下发</button>
+                    <button type="button" class="btn btn-default" ng-click="cancel()">取消</button>
+                </div>
+				<!--<div style="text-align: right;">
+	                <input type="file" class="hidden" id="J-attandUploader" ng-model="attandUrl" onchange="angular.element(this).scope().uploadFile(this)"/>
+					<button class="btn btn-default" onclick="document.getElementById('J-attandUploader').click()">导入(.xls)</button>
+	            </div>-->
+	        	
+    		</div>
+    	</div>
+    	
+    </div>
+   
+</div>
+
