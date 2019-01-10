@@ -1066,6 +1066,22 @@ body .align-left .cross-simple-icon, body .align-left .cross-text{
     text-align: center;
     display: table-cell;
     vertical-align: middle;
+    position: relative;
+}
+.table .fa-caret-up{
+    position:absolute;
+    right: 10px;
+    top: 2px;
+    cursor: pointer;
+}
+.table .fa-caret-down{
+    position:absolute;
+    right: 10px;
+    bottom: 2px;
+    cursor: pointer;
+}
+.thSort{
+    color: #b2b2b2;
 }
 
 .table-tj tr {

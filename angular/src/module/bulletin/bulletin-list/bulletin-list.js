@@ -22,29 +22,47 @@
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
 					var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
-                    //var apiPrefix = 'http://10.0.9.133:6008' + '/bulletin';
+                    // var apiPrefix = 'http://10.0.9.133:6008' + '/bulletin';
 
 					$scope.init = function () {
+                        $scope.params =  {
+                            pageNumber: $scope.paginationConf.currentPage,
+                            pageSize: $scope.paginationConf.itemsPerPage,
+                            post_time: $scope.searchTime ? $scope.searchTime : '',
+                            type: $scope.type ? $scope.type : '',
+                            column:'',
+                            order:''
+                        }
 						getList();
 					}
+
 					// 获取数据列表
 					function getList () {
 						$ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/bulletin/list',
 							method: 'get',
-							params: {
-								pageNumber: $scope.paginationConf.currentPage,
-								pageSize: $scope.paginationConf.itemsPerPage,
-                                post_time: $scope.searchTime,
-								type: $scope.type
-							},
+							params:$scope.params,
 							callBack: function (res) {
 								$scope.bulletinList = res.data.list;
                     			$scope.paginationConf.totalItems = res.data.total;
 							}
 						})
 					}
-					
+
+					// 表格排序
+					$scope.sort = function (id , name) {
+                        $scope.params.column = name;
+                        $scope.params.order = id;
+                        console.log($scope.params);
+                        getList ();
+						// if(id == 1){//升序
+                        //
+						// }else if(id == 2){//降序
+                        //
+						// }
+					}
+
+
 					$('#J-searchTime').datetimepicker({
 	                    format: 'YYYY-MM',
 	                    locale: moment.locale('zh-cn')

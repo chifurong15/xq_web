@@ -23,7 +23,7 @@
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
 					var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
-                    //var apiPrefix = 'http://10.0.9.133:6008' + '/bulletin';
+                    // var apiPrefix = 'http://10.0.9.133:6008' + '/bulletin';
 
                     $scope.getServiceUrl= moduleService.getServiceUrl();
 					$scope.init = function () {
@@ -71,19 +71,23 @@
 								}
                                 var index = $scope.bulletin.attand_url.lastIndexOf("\/");
                                 $scope.attandName = $scope.bulletin.attand_url.substring(index+1);
-                                var options = {
-                                    pdfOpenParams: {
-                                        pagemode: "thumbs",
-                                        navpanes: 0,
-                                        toolbar: 0,
-                                        statusbar: 0,
-                                        view: "FitV"
-                                    }
-                                };
-                                PDFObject.embed($scope.bulletin.detail_url, "#pdfOb", options);
+                                // var options = {
+                                //     pdfOpenParams: {
+                                //         pagemode: "thumbs",
+                                //         navpanes: 0,
+                                //         toolbar: 0,
+                                //         statusbar: 0,
+                                //         view: "FitV"
+                                //     }
+                                // };
+                                // PDFObject.embed($scope.bulletin.detail_url, "#pdfOb", options);
 							}
 						})
 					}
+
+                    $scope.downFile = function (path){
+                        window.open($scope.fileUrl + path);
+                    }
 					
 					// 获取url参数
 					function  getQueryString (params, url) {

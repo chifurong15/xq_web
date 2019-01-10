@@ -29,7 +29,7 @@
 
 					$scope.init = function () {
 
-						$scope.issuer = $scope.userInfo.userName;
+						$scope.issuer = $scope.userInfo.name;
 
 						var bulletin = globalParam.getter().bulletin || {};
 						//console.log(bulletin);
