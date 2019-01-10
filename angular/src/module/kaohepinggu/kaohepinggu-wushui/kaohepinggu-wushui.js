@@ -23,26 +23,37 @@
 					
 
 					var apiPrefix = moduleService.getServiceUrl() + '/sewage';
-					//var apiPrefix = 'http://10.0.9.116:7005' + '/sewage';
+					// var apiPrefix = 'http://10.0.9.133:7005' + '/sewage';
 
 					$scope.userInfo = $localStorage.userLoginInfo.userInfo;
 
 					$scope.init = function () {
-						$ajaxhttp.myhttp({
-							url: apiPrefix + '/v1/SewageDispose/userinfo1',
-							method: 'get',
-							params:{
-								id: $scope.userInfo.id
-							},
-							callBack: function (res) {
-								$scope.num = res.data;
-								getList();								
-							}
-						})
-
-                        getDate();
+                        $scope.params = {
+                            pageNumber: $scope.paginationConf.currentPage,
+                            pageSize: $scope.paginationConf.itemsPerPage,
+                            issue: $scope.searchTime,
+                            status: $scope.type,
+                            createUser:$scope.createuser,
+                            column:'',
+                            order:''
+                        }
+                        getDate ();
+                        getUserInfo ();
 					}
-					
+
+                    function getUserInfo () {
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/SewageDispose/userinfo1',
+                            method: 'get',
+                            params:{
+                                id: $scope.userInfo.id
+                            },
+                            callBack: function (res) {
+                                $scope.num = res.data;
+                                getList();
+                            }
+                        })
+                    }
 					//返回
 					$scope.goBack=function(){
 						history.back(-1);
@@ -53,19 +64,19 @@
 						$ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/SewageDispose/list',
 							method: 'get',
-							params: {
-								pageNumber: $scope.paginationConf.currentPage,
-								pageSize: $scope.paginationConf.itemsPerPage,
-								issue: $scope.searchTime,
-								status: $scope.type,
-								createUser:$scope.createuser
-							},
+							params: $scope.params,
 							callBack: function (res) {
 								$scope.sewageWaterList = res.data.list;
                     			$scope.paginationConf.totalItems = res.data.total;
 							}
 						})
 					}
+                    // 表格排序
+                    $scope.sort = function (id , name) {
+                        $scope.params.column = name;
+                        $scope.params.order = id;
+                        getList ();
+                    }
 					
 					$('#J-searchTime').datetimepicker({
 	                    format: 'YYYY-MM',

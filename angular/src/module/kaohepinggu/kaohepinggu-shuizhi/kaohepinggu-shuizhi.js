@@ -27,34 +27,37 @@
 					$scope.userInfo = $localStorage.userLoginInfo.userInfo;
 					
 					$scope.init = function () {
-                        getDate ();
-						$ajaxhttp.myhttp({
-							url: apiPrefix + '/v1/WaterQuality/userinfo1',
-							method: 'get',
-							params:{
-								id: $scope.userInfo.id
-							},					
-							callBack: function (res) {
-								$scope.num = res.data;
-								getList();
-							}
-						})
-					}
-					
-					// 获取数据列表
-					function getList () {
-					    var params = {
+                        $scope.params = {
                             pageNumber: $scope.paginationConf.currentPage,
                             pageSize: $scope.paginationConf.itemsPerPage,
                             issue: $scope.searchTime,
                             status: $scope.type,
-                            createUser:$scope.createuser
+                            createUser:$scope.createuser,
+                            column:'',
+                            order:''
                         }
-
+                        getDate ();
+                        getUserInfo ();
+					}
+                    function getUserInfo () {
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/WaterQuality/userinfo1',
+                            method: 'get',
+                            params:{
+                                id: $scope.userInfo.id
+                            },
+                            callBack: function (res) {
+                                $scope.num = res.data;
+                                getList();
+                            }
+                        })
+                    }
+					// 获取数据列表
+					function getList () {
 						$ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/WaterQuality/list',
 							method: 'get',
-							params:params,
+							params: $scope.params,
 							callBack: function (res) {
 								$scope.waterQualityList = res.data.list;
                     			$scope.paginationConf.totalItems = res.data.total;
@@ -62,6 +65,13 @@
 						})
 						
 					}
+
+                    // 表格排序
+                    $scope.sort = function (id , name) {
+                        $scope.params.column = name;
+                        $scope.params.order = id;
+                        getList ();
+                    }
 					
 					$('#J-searchTime').datetimepicker({
                         format: 'YYYY-MM',

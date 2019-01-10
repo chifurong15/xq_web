@@ -53,13 +53,7 @@
 					$scope.sort = function (id , name) {
                         $scope.params.column = name;
                         $scope.params.order = id;
-                        console.log($scope.params);
                         getList ();
-						// if(id == 1){//升序
-                        //
-						// }else if(id == 2){//降序
-                        //
-						// }
 					}
 
 
