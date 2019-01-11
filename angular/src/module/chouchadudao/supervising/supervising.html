@@ -70,14 +70,38 @@
                     <table class="table table-bordered table-hover" data-filter="#filter">
                         <tr>
                             <th style="width: 5%;">序号</th>
-                            <th style="width: 15%">督办项目</th>
-                            <th style="width: 10%">督办对象</th>
-                            <th style="width: 10%">督办文号</th>
-                            <th style="width: 10%">应回复日期</th>
-                            <th style="width: 10%">督办地址</th>
-                            <th style="width: 5%">督办结果</th>
-                            <th style="width: 10%">是否办结</th>
-                            <th style="width: 10%">现场核查</th>
+                            <th style="width: 15%">督办项目
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','project')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','project')"></i>
+                            </th>
+                            <th style="width: 10%">督办对象
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','objectname')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','objectname')"></i>
+                            </th>
+                            <th style="width: 10%">督办文号
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','proof')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','proof')"></i>
+                            </th>
+                            <th style="width: 10%">应回复日期
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','deadlinedate')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','deadlinedate')"></i>
+                            </th>
+                            <th style="width: 10%">督办地址
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','address')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','address')"></i>
+                            </th>
+                            <th style="width: 5%">督办结果
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','resule')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','resule')"></i>
+                            </th>
+                            <th style="width: 10%">是否办结
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','status')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','status')"></i>
+                            </th>
+                            <th style="width: 10%">现场核查
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','whetherinspect')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','whetherinspect')"></i>
+                            </th>
                             <th style="width: 15%">操作</th>
                         </tr>
                         <tr ng-repeat="module in moduleList"  style="cursor:pointer;">

@@ -25,34 +25,37 @@
                     // var apiPrefix = 'http://10.0.9.133:6008' + '/bulletin';
 
 					$scope.init = function () {
-                        $scope.params =  {
-                            pageNumber: $scope.paginationConf.currentPage,
-                            pageSize: $scope.paginationConf.itemsPerPage,
-                            post_time: $scope.searchTime ? $scope.searchTime : '',
-                            type: $scope.type ? $scope.type : '',
-                            column:'',
-                            order:''
-                        }
+
 						getList();
 					}
 
 					// 获取数据列表
 					function getList () {
+                        var params =  {
+                            pageNumber: $scope.paginationConf.currentPage,
+                            pageSize: $scope.paginationConf.itemsPerPage,
+                            post_time: $scope.searchTime ? $scope.searchTime : '',
+                            type: $scope.type ? $scope.type : '',
+                            column:$scope.column ? $scope.column : '',
+                            order:$scope.order ? $scope.order : ''
+                        }
 						$ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/bulletin/list',
 							method: 'get',
-							params:$scope.params,
+							params:params,
 							callBack: function (res) {
-								$scope.bulletinList = res.data.list;
-                    			$scope.paginationConf.totalItems = res.data.total;
+							    if(res.data){
+                                    $scope.bulletinList = res.data.list;
+                                    $scope.paginationConf.totalItems = res.data.total;
+                                }
 							}
 						})
 					}
 
 					// 表格排序
 					$scope.sort = function (id , name) {
-                        $scope.params.column = name;
-                        $scope.params.order = id;
+                        $scope.column = name;
+                        $scope.order = id;
                         getList ();
 					}
 

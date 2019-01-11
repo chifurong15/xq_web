@@ -99,7 +99,7 @@
                  * @param {Object} treeNode
                  */
                 function regionTreeOnClick(event, treeId, treeNode) {
-                    console.log(treeNode);
+                    // console.log(treeNode);
                     $scope.regionId = treeNode.id;
                     $scope.regionName = treeNode.name;
                     $scope.grade = treeNode.grade;
@@ -111,7 +111,7 @@
                  * @param {Object} treeNode
                  */
                 function regionTreeOnExpand(treeId, treeNode) {
-                    console.log('===========regionTreeOnExpand===========');
+                    // console.log('===========regionTreeOnExpand===========');
                     var cnodes = treeNode.children;
                     $http({
                         method: 'get',
@@ -121,7 +121,7 @@
                         },
                     }).success(
                         function (res) {
-                            console.log(res);
+                            // console.log(res);
                             regionTree.addNodes(treeNode, res.data, true);
                         }
                     );
@@ -135,7 +135,7 @@
                         method: 'get',
                         url: regionTreeUrl
                     }).success(function (res) {
-                        console.log(res)
+                        // console.log(res)
                         if (res.resCode == 1) {
                             regionTree = $.fn.zTree.init($("#regionTreeContainer"), regionTreeSetting, res.data);
                         } else {
@@ -156,7 +156,7 @@
                  * 区域树搜索
                  */
                 $scope.getSelectRegion = function () {
-                    console.log('我是区域树搜索...')
+                    // console.log('我是区域树搜索...')
                 }
 
                 /**
@@ -164,7 +164,7 @@
                  */
                 $scope.getModalOk = function () {
                     $('#regionTreeModal').modal('hide');
-                    console.log('我是区域树关闭...')
+                    // console.log('我是区域树关闭...')
                 }
 
 
@@ -227,8 +227,10 @@
                             problemPosition:$scope.problemPosition
                         },
                         callBack: function (res) {
-                            $scope.moduleList = res.data.list;
-                            $scope.paginationConf.totalItems = res.data.total;
+                            if(res.data){
+                                $scope.moduleList = res.data.list;
+                                $scope.paginationConf.totalItems = res.data.total;
+                            }
                         }
                     })
                 }

@@ -28,15 +28,7 @@
 					$scope.userInfo = $localStorage.userLoginInfo.userInfo;
 
 					$scope.init = function () {
-                        $scope.params = {
-                            pageNumber: $scope.paginationConf.currentPage,
-                            pageSize: $scope.paginationConf.itemsPerPage,
-                            issue: $scope.searchTime,
-                            status: $scope.type,
-                            createUser:$scope.createuser,
-                            column:'',
-                            order:''
-                        }
+
                         getDate ();
                         getUserInfo ();
 					}
@@ -61,10 +53,19 @@
 					
 					// 获取数据列表
 					function getList () {
+                        var params = {
+                            pageNumber: $scope.paginationConf.currentPage,
+                            pageSize: $scope.paginationConf.itemsPerPage,
+                            issue: $scope.searchTime,
+                            status: $scope.type,
+                            createUser:$scope.createuser,
+                            column:$scope.column ? $scope.column : '',
+                            order:$scope.order ? $scope.order : ''
+                        }
 						$ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/SewageDispose/list',
 							method: 'get',
-							params: $scope.params,
+							params: params,
 							callBack: function (res) {
 								$scope.sewageWaterList = res.data.list;
                     			$scope.paginationConf.totalItems = res.data.total;
@@ -73,8 +74,8 @@
 					}
                     // 表格排序
                     $scope.sort = function (id , name) {
-                        $scope.params.column = name;
-                        $scope.params.order = id;
+                        $scope.column = name;
+                        $scope.order = id;
                         getList ();
                     }
 					

@@ -60,12 +60,27 @@
                     <table class="table table-bordered table-hover" data-filter="#filter">
                         <tr>
                             <th style="width: 5%;">序号</th>
-                            <th style="width: 15%">问责日期</th>
+                            <th style="width: 15%">问责日期
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','turnarounddate')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','turnarounddate')"></i>
+                            </th>
                             <th style="width: 10%">问责内容</th>
-                            <th style="width: 10%">问责对象</th>
-                            <th style="width: 10%">姓名</th>
-                            <th style="width: 10%">职务</th>
-                            <th style="width: 10%">问责类型</th>
+                            <th style="width: 10%">问责对象
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','objectname')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','objectname')"></i>
+                            </th>
+                            <th style="width: 10%">姓名
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','name')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','name')"></i>
+                            </th>
+                            <th style="width: 10%">职务
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','duty')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','duty')"></i>
+                            </th>
+                            <th style="width: 10%">问责类型
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','accountabilitytype')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','accountabilitytype')"></i>
+                            </th>
                             <th style="width: 10%">操作</th>
                         </tr>
                         <tr ng-repeat="module in moduleList">

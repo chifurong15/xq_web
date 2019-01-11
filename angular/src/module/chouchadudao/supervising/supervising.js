@@ -22,8 +22,8 @@
                                         routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl();
-                    ///var apiPrefix = 'http://10.0.9.133:7026' + '/duban';
-                    //var apiPrefix1 = 'http://10.0.9.194:8066';
+                    // var apiPrefix = 'http://10.0.9.133:7026';
+                    var apiPrefix1 = 'http://10.0.9.194:8066';
 
                     var regionTree;
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree';
@@ -42,21 +42,31 @@
                         getList();
                         getAllRegion ();
                     }
+
+                    // 表格排序
+                    $scope.sort = function (id , name) {
+                        $scope.column = name;
+                        $scope.order = id;
+                        getList ();
+                    }
                     // 获取数据列表
                     function getList () {
+                        var params = {
+                            pageNumber: $scope.paginationConf.currentPage,
+                            pageSize: $scope.paginationConf.itemsPerPage,
+                            project:$scope.project,
+                            statTime:$scope.startTime,
+                            endTime:$scope.endTime,
+                            objectid:$scope.region,
+                            proof:$scope.proof,
+                            status:$scope.status,
+                            column:$scope.column ? $scope.column : '',
+                            order:$scope.order ? $scope.order : ''
+                        }
                         $ajaxhttp.myhttp({
                             url:apiPrefix + '/duban/v1/DubanSupervision/list',
                             method:'get',
-                            params:{
-                                pageNumber: $scope.paginationConf.currentPage,
-                                pageSize: $scope.paginationConf.itemsPerPage,
-                                project:$scope.project,
-                                statTime:$scope.startTime,
-                                endTime:$scope.endTime,
-                                objectid:$scope.region,
-                                proof:$scope.proof,
-                                status:$scope.status
-                            },
+                            params:params,
                             callBack:function (res) {
                                 $scope.moduleList = res.data.list
                                 $scope.paginationConf.totalItems = res.data.total;

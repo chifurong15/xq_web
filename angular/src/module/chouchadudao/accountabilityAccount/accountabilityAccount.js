@@ -22,7 +22,7 @@
                                         routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl() + '/scstandingbook';
-                    //var apiPrefix = 'http://10.0.9.133:7029' + '/scstandingbook';
+                    // var apiPrefix = 'http://10.0.9.133:7029' + '/scstandingbook';
 
 
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
@@ -45,20 +45,30 @@
                         getObject ();
 
                     }
+
+                    // 表格排序
+                    $scope.sort = function (id , name) {
+                        $scope.column = name;
+                        $scope.order = id;
+                        getList ();
+                    }
                     // 获取数据列表
                     function getList () {
+                        var params  = {
+                            userid:$scope.userInfo.id,
+                            name:$scope.name,
+                            statTime:$scope.startTime,
+                            endTime:$scope.endTime,
+                            accountabilitytype:$scope.accountabilitytype,
+                            column:$scope.column ? $scope.column : '',
+                            order:$scope.order ? $scope.order : '',
+                            pageNumber: $scope.paginationConf.currentPage,
+                            pageSize: $scope.paginationConf.itemsPerPage
+                        }
                         $ajaxhttp.myhttp({
                             url:apiPrefix + '/v1/scstandingbook/list',
                             method:'get',
-                            params:{
-                                userid:$scope.userInfo.id,
-                                name:$scope.name,
-                                statTime:$scope.startTime,
-                                endTime:$scope.endTime,
-                                accountabilitytype:$scope.accountabilitytype,
-                                pageNumber: $scope.paginationConf.currentPage,
-                                pageSize: $scope.paginationConf.itemsPerPage
-                            },
+                            params:params,
                             callBack:function (res) {
                                 $scope.moduleList = res.data.list;
                                 $scope.paginationConf.totalItems = res.data.total;

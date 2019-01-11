@@ -22,7 +22,7 @@
                                         routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl();
-                    //var apiPrefix = 'http://10.0.9.133:7021';
+                    // var apiPrefix = 'http://10.0.9.133:7021';
 
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
 
@@ -30,6 +30,13 @@
                         $scope.createUser = $scope.userInfo.name;
 
                         getList();
+                    }
+
+                    // 表格排序
+                    $scope.sort = function (id , name) {
+                        $scope.column = name;
+                        $scope.order = id;
+                        getList ();
                     }
 
                     //搜索
@@ -44,14 +51,17 @@
 
                     // 获取数据列表
                     function getList () {
+                        var params = {
+                            pageNumber: $scope.paginationConf.currentPage,
+                            pageSize: $scope.paginationConf.itemsPerPage,
+                            issue:$scope.issue,
+                            column:$scope.column ? $scope.column : '',
+                            order:$scope.order ? $scope.order : ''
+                        };
                         $ajaxhttp.myhttp({
                             url:apiPrefix + '/ancha/v1/ScAnzhaScheme/list/',
                             method:'get',
-                            params:{
-                                pageNumber: $scope.paginationConf.currentPage,
-                                pageSize: $scope.paginationConf.itemsPerPage,
-                                issue:$scope.issue
-                            },
+                            params:params,
                             callBack:function (res) {
                                 $scope.moduleList = res.data.list;
                                 $scope.paginationConf.totalItems = res.data.total;

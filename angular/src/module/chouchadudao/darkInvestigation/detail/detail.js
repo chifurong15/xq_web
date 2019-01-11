@@ -22,7 +22,7 @@
                                                routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl();
-                    //var apiPrefix = 'http://10.0.9.133:7021';
+                    // var apiPrefix = 'http://10.0.9.133:7021';
 
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
                     $scope.schemeId = localStorage.getItem('id');
@@ -175,20 +175,31 @@
                             }
                         })
                     }
+                    // 表格排序
+                    $scope.sort = function (id , name) {
+                        $scope.column = name;
+                        $scope.order = id;
+                        getCountList ();
+                    }
 
                     //获取暗查台账列表
                     function  getCountList () {
+                        var params = {
+                            anzhaid:$scope.schemeId,
+                            pageNumber: $scope.paginationConf.currentPage,
+                            pageSize: $scope.paginationConf.itemsPerPage,
+                            column:$scope.column ? $scope.column : '',
+                            order:$scope.order ? $scope.order : ''
+                        }
                         $ajaxhttp.myhttp({
                             url:apiPrefix + '/ancha/v1/ScAnzhaInvestigations/list',
                             method:'get',
-                            params:{
-                                anzhaid:$scope.schemeId,
-                                pageNumber: $scope.paginationConf.currentPage,
-                                pageSize: $scope.paginationConf.itemsPerPage
-                            },
+                            params:params,
                             callBack:function (res) {
-                                $scope.countList = res.data.list;
-                                $scope.paginationConf.totalItems = res.data.total;
+                                if(res.data){
+                                    $scope.countList = res.data.list;
+                                    $scope.paginationConf.totalItems = res.data.total;
+                                }
                             }
                         })
                     }
