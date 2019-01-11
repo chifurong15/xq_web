@@ -27,7 +27,7 @@ angular.module('app').controller('AppCtrl', ['$scope', 'routeService', '$locatio
         moduleService.getConfig();
         // config
         $scope.app = {
-            name: '天津市河(湖)长制管理信息系统',
+            name: '天津市河(湖)长制管理信息平台',
             version: '3.0.0',
             logoImg: 'img/logo.png',
 
