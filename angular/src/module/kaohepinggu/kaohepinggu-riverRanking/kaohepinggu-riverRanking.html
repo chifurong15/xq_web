@@ -17,7 +17,8 @@
                             <select ng-model="regionName" class="form-control select-short"
                                     style="width: 160px;z-index: 0;">
                                 <option value="">全部</option>
-                                <option value="{{item}}" ng-repeat="item in regionList">{{item}}</option>
+                                <option value="{{item.regionCode}}" ng-repeat="item in regionList">{{item.regionName}}
+                                </option>
                             </select>
                         </div>
                         <div class="input-group form-item">
@@ -46,12 +47,12 @@
                             <select ng-model="scoringRules" class="form-control select-short"
                                     style="width: 160px;z-index: 0;">
                                 <option value="">全部</option>
-                                <option value="{{item}}" ng-repeat="item in ruleList">{{item}}</option>
+                                <option value="{{item.ruleId}}" ng-repeat="item in ruleList">{{item.ruleName}}</option>
                             </select>
                         </div>
                         <div class="input-group form-item">
                             <label><font style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">水质考核</font></font></label>
+                                    style="vertical-align: inherit;">是否水质考核</font></font></label>
                             <select ng-model="isWaterQualityAssess" class="form-control select-short"
                                     style="width: 160px;z-index: 0;">
                                 <option value="">全部</option>
@@ -64,9 +65,9 @@
                             <button class="btn btn-primary" ng-click="search()">
                                 <i class="fa fa-search"></i>搜索
                             </button>
-                            <!--<button type="button" class="btn btn-primary" ng-click="reset()" style="margin: 0 5px;">-->
-                            <!--<i class="fa fa-refresh"></i>重置-->
-                            <!--</button>-->
+                            <button type="button" class="btn btn-primary" ng-click="reset()" style="margin: 0 5px;">
+                                <i class="fa fa-refresh"></i>重置
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -90,7 +91,7 @@
                                     <th width="5%">目标水质类别</th>
                                     <th width="5%">年度水质目标</th>
                                     <th width="5%">含污水处理厂</th>
-                                    <th width="5%">水质监测补偿</th>
+                                    <th width="5%">水质检测补偿</th>
                                     <th width="10%">水质评分规则</th>
                                     <th width="5%">水质考核</th>
                                     <th width="5%">操作</th>
@@ -117,9 +118,16 @@
                                         <span ng-if="item.targetWaterQuality == 7">Ⅶ</span>
                                         <span ng-if="item.targetWaterQuality == 8">Ⅷ</span>
                                     </td>
-
-                                    <td>{{item.yearTargetWaterQuality}}</td>
-
+                                    <td>
+                                        <span ng-if="item.yearTargetWaterQuality == 1">Ⅰ</span>
+                                        <span ng-if="item.yearTargetWaterQuality == 2">Ⅱ</span>
+                                        <span ng-if="item.yearTargetWaterQuality == 3">Ⅲ</span>
+                                        <span ng-if="item.yearTargetWaterQuality == 4">Ⅳ</span>
+                                        <span ng-if="item.yearTargetWaterQuality == 5">Ⅴ</span>
+                                        <span ng-if="item.yearTargetWaterQuality == 6">Ⅵ</span>
+                                        <span ng-if="item.yearTargetWaterQuality == 7">Ⅶ</span>
+                                        <span ng-if="item.yearTargetWaterQuality == 8">Ⅷ</span>
+                                    </td>
                                     <td>{{item.isSewageFactory == 0 ? '否' : '是'}}</td>
 
                                     <td>{{item.isCompensation == 0 ? '否' : '是'}}</td>
@@ -162,7 +170,7 @@
                         修改河段考核配置
                     </h4>
                 </div>
-                <div class="modal-body" style="height: 300px">
+                <div class="modal-body" style="height:450px">
                     <form class="form-inline">
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font
@@ -172,32 +180,80 @@
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">河道</font></font></label>
-                            <input type="text" class="form-control input-short" readonly ng-model="riverName1">
+                            <input type="text" class="form-control input-long" readonly ng-model="riverName1" style="width: 430px;">
                         </div>
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">河段</font></font></label>
-                            <input type="text" class="form-control input-short" readonly ng-model="reachName1">
+                            <textarea class="form-control" readonly ng-model="reachName1"
+                                      rows="3" style="width: 430px;"></textarea>
+                            <!--<input type="text" class="form-control input-long" readonly ng-model="reachName1">-->
                         </div>
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">目标水质类别</font></font></label>
-                            <input type="text" class="form-control input-short" readonly ng-model="targetWaterQuality1">
+                            <select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="targetWaterQuality1">
+                                <option value="">请选择</option>
+                                <option value="1">Ⅰ</option>
+                                <option value="2">Ⅱ</option>
+                                <option value="3">Ⅲ</option>
+                                <option value="4">Ⅳ</option>
+                                <option value="5">Ⅴ</option>
+                                <option value="6">Ⅵ</option>
+                                <option value="7">Ⅶ</option>
+                                <option value="8">Ⅷ</option>
+                            </select>
+                            <!--<input type="text" class="form-control input-short" readonly ng-model="targetWaterQuality1">-->
+                        </div>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">年度目标水质</font></font></label>
+                            <select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="yearTargetWaterQuality1">
+                                <option value="">请选择</option>
+                                <option value="1">Ⅰ</option>
+                                <option value="2">Ⅱ</option>
+                                <option value="3">Ⅲ</option>
+                                <option value="4">Ⅳ</option>
+                                <option value="5">Ⅴ</option>
+                                <option value="6">Ⅵ</option>
+                                <option value="7">Ⅶ</option>
+                                <option value="8">Ⅷ</option>
+                            </select>
+
+                            <!--<input type="text" class="form-control input-short" readonly ng-model="targetWaterQuality1">-->
                         </div>
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">含污水处理厂</font></font></label>
-                            <input type="text" class="form-control input-short" readonly ng-model="isSewageFactory1">
+                            <select ng-model="isSewageFactory1" class="form-control select-short" style="width: 160px;z-index: 0;">
+                                <option value="">请选择</option>
+                                <option value="0">否</option>
+                                <option value="1">是</option>
+                            </select>
+                            <!--<input type="text" class="form-control input-short" readonly ng-model="isSewageFactory1">-->
                         </div>
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">水质监测补偿</font></font></label>
-                            <input type="text" class="form-control input-short" readonly ng-model="isCompensation1">
+                                    style="vertical-align: inherit;">水质检测补偿</font></font></label>
+                            <select ng-model="isCompensation1" class="form-control select-short"
+                                    style="width: 160px;z-index: 0;">
+                                <option value="">请选择</option>
+                                <option value="0">否</option>
+                                <option value="1">是</option>
+                            </select>
+                            <!--<input type="text" class="form-control input-short" readonly ng-model="isCompensation1">-->
                         </div>
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">水质考核</font></font></label>
-                            <input type="text" class="form-control input-short" readonly ng-model="isWaterQualityAssess1">
+                                    style="vertical-align: inherit;">是否水质考核</font></font></label>
+                            <select ng-model="isWaterQualityAssess1" class="form-control select-short"
+                                    style="width: 160px;z-index: 0;">
+                                <option value="">请选择</option>
+                                <option value="0">不考核</option>
+                                <option value="1">考核</option>
+                            </select>
+                            <!--<input type="text" class="form-control input-short" readonly-->
+                                   <!--ng-model="isWaterQualityAssess1">-->
                         </div>
                         <div class="input-group form-item">
                             <label><font style="vertical-align: inherit;"><font
@@ -205,7 +261,9 @@
                             <select ng-model="inputSection" class="form-control select-short"
                                     style="width: 160px;z-index: 0;">
                                 <option value="">请选择</option>
-                                <option value="{{item1}}" ng-repeat="item1 in sectionList track by $index" key="{{$index+1}}">{{item1}}</option>
+                                <option value="{{item1.sectionCode}}" ng-repeat="item1 in sectionList track by $index"
+                                        key="{{$index+1}}">{{item1.sectionName}}
+                                </option>
                             </select>
                         </div>
                         <div class="input-group form-item">
@@ -214,24 +272,26 @@
                             <select ng-model="outputSection" class="form-control select-short"
                                     style="width: 160px;z-index: 0;">
                                 <option value="">请选择</option>
-                                <option value="{{item2}}" ng-repeat="item2 in sectionList track by $index" key="{{$index+1}}">{{item2}}</option>
+                                <option value="{{item2.sectionCode}}" ng-repeat="item2 in sectionList track by $index"
+                                        key="{{$index+1}}">{{item2.sectionName}}
+                                </option>
                             </select>
                         </div>
-                        <div class="input-group form-item">
+                        <div class="input-group form-item" style="position:relative;top: -40px;">
                             <label><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">水质评分规则</font></font></label>
                             <select ng-model="scoringRules1" class="form-control select-short"
                                     style="width: 160px;z-index: 0;">
                                 <option value="">请选择</option>
-                                <option value="{{item3}}" ng-repeat="item3 in ruleList">{{item3}}</option>
+                                <option value="{{item3.ruleId}}" ng-repeat="item3 in ruleList">{{item3.ruleName}}
+                                </option>
                             </select>
                         </div>
-                        <!--<br/>-->
                         <!--<div class="form-item">-->
                             <!--<label><font style="vertical-align: inherit;"><font-->
                                     <!--style="vertical-align: inherit;">备注</font></font></label>-->
-                            <!--<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="issuer"-->
-                                      <!--rows="3" style="width: 160px;max-width: 160px;"></textarea>-->
+                            <!--<textarea class="form-control" style="width: 430px;" ng-model="remark"-->
+                                      <!--rows="3" style="width: 440px;max-width: 440px;"></textarea>-->
                         <!--</div>-->
                     </form>
 
