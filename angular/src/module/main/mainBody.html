@@ -9,11 +9,11 @@
 	        				<!--天气情况-->
 	        			<!--</span>-->
                     <!--</div>-->
-                    <div class="clearfix" style="padding: 7px 15px;">
+                    <div class="clearfix" style="padding: 7px">
                         <div class="weather-iframe">
                             <!--<iframe allowtransparency="true" frameborder="0" width="180" height="36" scrolling="no"-->
                                     <!--src="//tianqi.eastday.com/plugin/widget_v1.html?sc=3&z=2&t=1&v=0&d=3&bd=0&k=&f=ffffff&q=1&a=1&c=54511&w=180&h=36&align=left"></iframe>-->
-                            <iframe width="400" scrolling="no" height="80" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=12&color=%23FFFFFF&bgc=%23&icon=1&num=1&site=16"></iframe>
+                            <iframe width="400" scrolling="no" height="50" frameborder="0" allowtransparency="true" src="//i.tianqi.com/index.php?c=code&id=12&color=%23FFFFFF&bgc=%23&icon=1&num=1&site=16"></iframe>
                         </div>
                         <div class="weather-date">
                             <p class="date">{{weatherDate.year}}年{{weatherDate.month}}月{{weatherDate.day}}日</p>
@@ -21,12 +21,12 @@
                         </div>
                     </div>
                     <div class="patr-count">
-                        <span style="font-size: 16px;">今日巡河<span style="font-size: 12px;">次数</span></span>
+                        <span style="font-size: 14px;">今日巡河<span style="font-size: 10px;">&nbsp;&nbsp;次数</span></span>
                         <div>
-                            <span style="font-size: 16px;">{{countHZOnline.cityCount ? countHZOnline.cityCount : 0}}<span style="font-size: 12px;">市级</span></span>
-                            <span style="font-size: 16px;">{{countHZOnline.countyCount ? countHZOnline.countyCount : 0}}<span style="font-size: 12px;">区级</span></span>
-                            <span style="font-size: 16px;">{{countHZOnline.townCount ? countHZOnline.townCount : 0}}<span style="font-size: 12px;">镇级</span></span>
-                            <span style="font-size: 16px;">{{countHZOnline.villageCount ? countHZOnline.villageCount : 0}}<span style="font-size: 12px;">村级</span></span>
+                            <span style="font-size: 14px;">{{countHZOnline.cityCount ? countHZOnline.cityCount : 0}}<span style="font-size: 10px;">市级</span></span>
+                            <span style="font-size: 14px;">{{countHZOnline.countyCount ? countHZOnline.countyCount : 0}}<span style="font-size: 10px;">区级</span></span>
+                            <span style="font-size: 14px;">{{countHZOnline.townCount ? countHZOnline.townCount : 0}}<span style="font-size: 10px;">镇级</span></span>
+                            <span style="font-size: 14px;">{{countHZOnline.villageCount ? countHZOnline.villageCount : 0}}<span style="font-size: 10px;">村级</span></span>
                         </div>
                     </div>
                 </div>
@@ -270,7 +270,7 @@
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tableStatistics"
-                             style="height: 265px; overflow-x: hidden; overflow-y: auto">
+                             style="height: 180px; overflow-x: hidden; overflow-y: auto">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover" style="margin-top: 2px;">
                                     <tbody>
@@ -346,9 +346,13 @@
         legend: [
             {
                 orient: 'vertical',
-                x: '60%',
+                icon: "circle",
+                x: '65%',
                 y: '25%',
-                bottom: '13%',
+                itemWidth: 10,  // 设置宽度
+                itemHeight: 10, // 设置高度
+                itemGap: 5 ,// 设置间距
+                bottom: '15%',
                 data: ['Ⅱ类', 'Ⅲ类'],
                 // textStyle: {
                 //     color: '#fff'
@@ -357,9 +361,13 @@
             },
             {
                 orient: 'vertical',
-                x: '78%',
+                icon: "circle",
+                x: '80%',
                 y: '25%',
-                bottom: '13%',
+                itemWidth: 10,  // 设置宽度
+                itemHeight: 10, // 设置高度
+                itemGap: 5 ,// 设置间距
+                bottom: '15%',
                 data: [ 'Ⅳ类', 'Ⅴ类','VI类'],
                 // textStyle: {
                 //     color: '#fff'
@@ -371,7 +379,7 @@
             name: '水质情况',
             type: 'pie',
             radius: ['30%', '50%'],
-            center: ['33%', '40%'],
+            center: ['30%', '35%'],
             data: [
                 {
                     value: 310,
@@ -432,7 +440,7 @@
         grid: {
             top: '3%',
             left: '15%',
-            height: '150'
+            height: '110'
         },
         xAxis: [{
             type: 'value',

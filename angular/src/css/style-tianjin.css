@@ -91,9 +91,6 @@ body .align-left .cross-simple-icon, body .align-left .cross-text{
     justify-content: space-between;
     padding-bottom: 62px;
 }
-.patr-count span span{
-    padding: 0 7px;
-}
 .patr-count div span{
     margin: 0 3px;
 }
@@ -1817,11 +1814,10 @@ body .c-ffffff a {
 .left-panel .panel .weather-date p {
     color: #fff;
     line-height: 30px;
-    padding-right: 10px;
 }
 
 .left-panel .panel .weather-date .date {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .left-panel .panel .weather-date .time {
@@ -2200,6 +2196,7 @@ body .c-ffffff a {
 #accordion1{
     height: 100%;
     overflow: auto;
+    overflow-x: hidden;
     margin-top: 5px;    
 }
 #accordion1{
