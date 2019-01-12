@@ -109,24 +109,20 @@
                                     <td>{{item.outputSection}}</td>
 
                                     <td>
-                                        <span ng-if="item.targetWaterQuality == 1">Ⅰ</span>
-                                        <span ng-if="item.targetWaterQuality == 2">Ⅱ</span>
-                                        <span ng-if="item.targetWaterQuality == 3">Ⅲ</span>
-                                        <span ng-if="item.targetWaterQuality == 4">Ⅳ</span>
-                                        <span ng-if="item.targetWaterQuality == 5">Ⅴ</span>
-                                        <span ng-if="item.targetWaterQuality == 6">Ⅵ</span>
-                                        <span ng-if="item.targetWaterQuality == 7">Ⅶ</span>
-                                        <span ng-if="item.targetWaterQuality == 8">Ⅷ</span>
+                                        <span ng-if="item.targetWaterQuality == 1">Ⅱ</span>
+                                        <span ng-if="item.targetWaterQuality == 2">Ⅲ</span>
+                                        <span ng-if="item.targetWaterQuality == 3">Ⅳ</span>
+                                        <span ng-if="item.targetWaterQuality == 4">Ⅴ</span>
+                                        <span ng-if="item.targetWaterQuality == 5">一级A</span>
+                                        <span ng-if="item.targetWaterQuality == 6">一级B</span>
                                     </td>
                                     <td>
-                                        <span ng-if="item.yearTargetWaterQuality == 1">Ⅰ</span>
-                                        <span ng-if="item.yearTargetWaterQuality == 2">Ⅱ</span>
-                                        <span ng-if="item.yearTargetWaterQuality == 3">Ⅲ</span>
-                                        <span ng-if="item.yearTargetWaterQuality == 4">Ⅳ</span>
-                                        <span ng-if="item.yearTargetWaterQuality == 5">Ⅴ</span>
-                                        <span ng-if="item.yearTargetWaterQuality == 6">Ⅵ</span>
-                                        <span ng-if="item.yearTargetWaterQuality == 7">Ⅶ</span>
-                                        <span ng-if="item.yearTargetWaterQuality == 8">Ⅷ</span>
+                                        <span ng-if="item.yearTargetWaterQuality == 1">Ⅱ</span>
+                                        <span ng-if="item.yearTargetWaterQuality == 2">Ⅲ</span>
+                                        <span ng-if="item.yearTargetWaterQuality == 3">Ⅳ</span>
+                                        <span ng-if="item.yearTargetWaterQuality == 4">Ⅴ</span>
+                                        <span ng-if="item.yearTargetWaterQuality == 5">一级A</span>
+                                        <span ng-if="item.yearTargetWaterQuality == 6">一级B</span>
                                     </td>
                                     <td>{{item.isSewageFactory == 0 ? '否' : '是'}}</td>
 
@@ -180,7 +176,7 @@
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">河道</font></font></label>
-                            <input type="text" class="form-control input-long" readonly ng-model="riverName1" style="width: 430px;">
+                            <input type="text" class="form-control input-short" readonly ng-model="riverName1">
                         </div>
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font
@@ -194,14 +190,12 @@
                                     style="vertical-align: inherit;">目标水质类别</font></font></label>
                             <select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="targetWaterQuality1">
                                 <option value="">请选择</option>
-                                <option value="1">Ⅰ</option>
-                                <option value="2">Ⅱ</option>
-                                <option value="3">Ⅲ</option>
-                                <option value="4">Ⅳ</option>
-                                <option value="5">Ⅴ</option>
-                                <option value="6">Ⅵ</option>
-                                <option value="7">Ⅶ</option>
-                                <option value="8">Ⅷ</option>
+                                <option value="1">Ⅱ</option>
+                                <option value="2">Ⅲ</option>
+                                <option value="3">Ⅳ</option>
+                                <option value="4">Ⅴ</option>
+                                <option value="5">一级A</option>
+                                <option value="6">一级B</option>
                             </select>
                             <!--<input type="text" class="form-control input-short" readonly ng-model="targetWaterQuality1">-->
                         </div>
@@ -210,14 +204,12 @@
                                     style="vertical-align: inherit;">年度目标水质</font></font></label>
                             <select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="yearTargetWaterQuality1">
                                 <option value="">请选择</option>
-                                <option value="1">Ⅰ</option>
-                                <option value="2">Ⅱ</option>
-                                <option value="3">Ⅲ</option>
-                                <option value="4">Ⅳ</option>
-                                <option value="5">Ⅴ</option>
-                                <option value="6">Ⅵ</option>
-                                <option value="7">Ⅶ</option>
-                                <option value="8">Ⅷ</option>
+                                <option value="1">Ⅱ</option>
+                                <option value="2">Ⅲ</option>
+                                <option value="3">Ⅳ</option>
+                                <option value="4">Ⅴ</option>
+                                <option value="5">一级A</option>
+                                <option value="6">一级B</option>
                             </select>
 
                             <!--<input type="text" class="form-control input-short" readonly ng-model="targetWaterQuality1">-->

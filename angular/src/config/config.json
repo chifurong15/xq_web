@@ -903,6 +903,32 @@
   ],
   "pages": [
     {
+      "seqId": "3-11-1",
+      "parentId": "3",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "评分规则配置-F值明细",
+      "icon": "menu-icon-6",
+      "url": "module/kaohepinggu/kaohepinggu-ruleConfiguration/ruleF/ruleF.html",
+      "requireJS": [
+        "module/kaohepinggu/kaohepinggu-ruleConfiguration/ruleF/ruleF.js"
+      ],
+      "description": "考核评分-评分规则配置-F值明细"
+    },
+    {
+      "seqId": "3-11-2",
+      "parentId": "3",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "评分规则配置-K值明细",
+      "icon": "menu-icon-6",
+      "url": "module/kaohepinggu/kaohepinggu-ruleConfiguration/ruleK/ruleK.html",
+      "requireJS": [
+        "module/kaohepinggu/kaohepinggu-ruleConfiguration/ruleK/ruleK.js"
+      ],
+      "description": "考核评分-评分规则配置-K值明细"
+    },
+    {
       "seqId": "2-5-1",
       "parentId": "2",
       "isLeaf": true,

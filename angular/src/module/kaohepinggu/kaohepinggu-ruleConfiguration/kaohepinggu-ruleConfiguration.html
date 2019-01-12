@@ -2,240 +2,62 @@
     <div class="wrapper-md ">
         <div class="panel panel-default m-n">
             <div class="panel-body" style="position: relative;">
-                <span class="tag">评分规则配置</span><span class="tag-right"></span>
+                <span class="tag">水质评分规则</span><span class="tag-right"></span>
             </div>
         </div>
 
         <div class="panel panel-default">
-            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-                <ul class="layui-tab-title">
-                    <li class="layui-this">水质评分规则</li>
-                    <li ng-show="isShow" class="">水质评分细则</li>
-                    <li ng-show="isShow1" class="">水质变化细则</li>
-                </ul>
-                <div class="layui-tab-content">
-                    <!--水质评分规则-->
-                    <div class="layui-tab-item layui-show">
-                        <div class="panel-body">
-                            <form class="form-inline clearfix">
-                                <div class="input-group fr">
-                                    <button type="button" class="btn btn-primary" ng-click="add1()">
-                                        <i class="fa fa-plus"></i> 新增
-                                    </button>
-                                </div>
-                            </form>
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="tableStatistics1">
-                                    <div class="table-responsive" style="margin-top: 20px;">
-                                        <table class="table table-bordered table-hover">
-                                            <tbody>
-                                            <tr class='tHeader'>
-                                                <th width="5%">序号</th>
-                                                <th width="10%">名称</th>
-                                                <th width="10%">创建人</th>
-                                                <th width="15%">创建时间</th>
-                                                <th width="15%">备注</th>
-                                                <th width="10%">排序</th>
-                                                <th width="20%">操作</th>
-                                            </tr>
-                                            <tr ng-repeat="item in moduleList">
-                                                <td>{{$index+1}}</td>
-                                                <td>{{item.ruleName}}</td>
-                                                <td>{{item.creator}}</td>
-                                                <td>{{item.createTime}}</td>
-                                                <td>{{item.remark}}</td>
-                                                <td>{{item.sortOrder}}</td>
-                                                <td style="text-align: center;">
-                                                    <button type="button" class="btn btn-success"
-                                                            ng-click="view(item.ruleName , 1)">F值明细
-                                                    </button>
-                                                    <button type="button" class="btn btn-info"
-                                                            ng-click="view(item.ruleName, 2)">K值明细
-                                                    </button>
-                                                    <button type="button" class="btn btn-warning"
-                                                            ng-click="add1(item)">修改
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <tm-pagination conf="paginationConf"></tm-pagination>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="chartStatistics1">
-                                    <div id="patrolChart1" class="tj-chart-con"></div>
-                                </div>
-                            </div>
-
+            <div class="panel-body">
+                <form class="form-inline clearfix">
+                    <div class="input-group fr">
+                        <button type="button" class="btn btn-primary" ng-click="add1()">
+                            <i class="fa fa-plus"></i> 新增
+                        </button>
+                    </div>
+                </form>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                <tr class='tHeader'>
+                                    <th width="5%">序号</th>
+                                    <th width="10%">名称</th>
+                                    <th width="10%">创建人</th>
+                                    <th width="15%">创建时间</th>
+                                    <!--<th width="15%">备注</th>-->
+                                    <th width="10%">排序</th>
+                                    <th width="20%">操作</th>
+                                </tr>
+                                <tr ng-repeat="item in moduleList">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{item.ruleName}}</td>
+                                    <td>{{item.creatorName}}</td>
+                                    <td>{{item.createTime}}</td>
+                                    <!--<td>{{item.remark}}</td>-->
+                                    <td>{{item.sortOrder}}</td>
+                                    <td style="text-align: center;">
+                                        <button type="button" class="btn btn-success"
+                                                ng-click="view(item.id,1)">F值明细
+                                        </button>
+                                        <button type="button" class="btn btn-info"
+                                                ng-click="view(item.id,2)">K值明细
+                                        </button>
+                                        <button type="button" class="btn btn-warning"
+                                                ng-click="add1(item)">修改
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <tm-pagination conf="paginationConf"></tm-pagination>
                         </div>
                     </div>
-                    <!--水质评分细则-->
-                    <div class="layui-tab-item" ng-show="isShow">
-                        <div class="panel-body">
-                            <form class="form-inline clearfix">
-                                <div class="input-group form-item" style="float: left;">
-                                    <label><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">参数类型</font></font></label>
-                                    <select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="paramType">
-                                        <option value="">全部</option>
-                                        <option value="tp">总磷</option>
-                                        <option value="nh4n">氨氮</option>
-                                        <option value="do">溶解氧</option>
-                                        <option value="codmn">高锰酸盐指数</option>
-                                        <!--<option value="4">化学需氧量</option>-->
-                                        <!--<option value="5">总氮</option>-->
-                                    </select>
-                                </div>
-                                <div class="input-group form-item" style="float: left;">
-                                    <label><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">水质类别</font></font></label>
-                                    <select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="waterQualityType">
-                                        <option value="">全部</option>
-                                        <option value="1">Ⅰ</option>
-                                        <option value="2">Ⅱ</option>
-                                        <option value="3">Ⅲ</option>
-                                        <option value="4">Ⅳ</option>
-                                        <option value="5">Ⅴ</option>
-                                        <option value="6">Ⅵ</option>
-                                        <option value="7">Ⅶ</option>
-                                        <option value="8">Ⅷ</option>
-                                    </select>
-                                </div>
-                                <div class="form-item" style="float: right;">
-                                    <div class="input-group" style="margin: 0 10px">
-                                        <button type="button" class="btn btn-primary" ng-click="searchF()">
-                                            <i class="glyphicon glyphicon-search"></i> 查询
-                                        </button>
-                                    </div>
-                                    <div class="input-group">
-                                        <button type="button" class="btn btn-primary" ng-click="add2()">
-                                            <i class="fa fa-plus"></i> 新增
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="tableStatistics2">
-                                    <div class="table-responsive" style="margin-top: 20px;">
-                                        <table class="table table-bordered table-hover">
-                                            <tbody>
-                                            <tr class='tHeader'>
-                                                <th width="5%">序号</th>
-                                                <th width="10%">规则名称</th>
-                                                <th width="10%">参数类型</th>
-                                                <th width="10%">最大值</th>
-                                                <th width="10%">最小值</th>
-                                                <th width="10%">水质类别</th>
-                                                <th width="10%">得分系数</th>
-                                                <th width="10%">修正系数</th>
-                                                <th width="10%">排序</th>
-                                                <th width="15%">操作</th>
-                                            </tr>
-                                            <tr ng-repeat="item in moduleList1">
-                                                <td>{{$index+1}}</td>
-                                                <td>{{item.ruleName}}</td>
-                                                <td>{{item.paramType}}</td>
-                                                <td>{{item.maxValue}}</td>
-                                                <td>{{item.minValue}}</td>
-                                                <td>{{item.waterQualityType}}</td>
-                                                <td>{{item.scoreCoefficient}}</td>
-                                                <td>{{item.factorCoefficient}}</td>
-                                                <td>{{item.sortOrder}}</td>
-                                                <td style="text-align: center;">
-                                                    <button type="button" class="btn btn-warning"
-                                                            ng-click="add2(item)">修改
-                                                    </button>
-                                                    <button type="button" class="btn btn-danger"
-                                                            ng-click="delF(item.id)">删除
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <!--<tm-pagination conf="paginationConf1"></tm-pagination>-->
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="chartStatistics2">
-                                    <div id="patrolChart2" class="tj-chart-con"></div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="tab-pane" id="chartStatistics">
+                        <div id="patrolChart1" class="tj-chart-con"></div>
                     </div>
-                    <!--水质变化细则-->
-                    <div class="layui-tab-item" ng-show="isShow1">
-                        <div class="panel-body">
-                            <form class="form-inline clearfix">
-                                <div class="input-group form-item" style="float: left;">
-                                    <label><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">参数类型</font></font></label>
-                                    <select class="form-control select-short" ng-model="paramType2" style="width: 160px;z-index: 0;">
-                                        <option value="">全部</option>
-                                        <option value="tp">总磷</option>
-                                        <option value="nh4n">氨氮</option>
-                                        <option value="do">溶解氧</option>
-                                        <option value="codmn">高锰酸盐指数</option>
-                                        <!--<option value="4">化学需氧量</option>-->
-                                        <!--<option value="5">总氮</option>-->
-                                    </select>
-                                </div>
-                                <div class="form-item" style="float: right;">
-                                    <div class="input-group" style="margin: 0 10px">
-                                        <button type="button" class="btn btn-primary" ng-click="searchK()">
-                                            <i class="glyphicon glyphicon-search"></i> 查询
-                                        </button>
-                                    </div>
-                                    <div class="input-group">
-                                        <button type="button" class="btn btn-primary" ng-click="add3()">
-                                            <i class="fa fa-plus"></i> 新增
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="tableStatistics3">
-                                    <div class="table-responsive" style="margin-top: 20px;">
-                                        <table class="table table-bordered table-hover">
-                                            <tbody>
-                                            <tr class='tHeader'>
-                                                <th width="5%">序号</th>
-                                                <th width="10%">评分规则</th>
-                                                <th width="10%">参数类型</th>
-                                                <th width="10%">最大值</th>
-                                                <th width="10%">最小值</th>
-                                                <th width="10%">扣分数</th>
-                                                <th width="10%">排序</th>
-                                                <th width="15%">操作</th>
-                                            </tr>
-                                            <tr ng-repeat="item in moduleList2">
-                                                <td>{{$index+1}}</td>
-                                                <td>{{item.assessRule}}</td>
-                                                <td>{{item.paramType}}</td>
-                                                <td>{{item.maxValue}}</td>
-                                                <td>{{item.minValue}}</td>
-                                                <td>{{item.deductValue}}</td>
-                                                <td>{{item.sortOrder}}</td>
-                                                <td style="text-align: center;">
-                                                    <button type="button" class="btn btn-warning"
-                                                            ng-click="add3(item)">修改
-                                                    </button>
-                                                    <button type="button" class="btn btn-danger"
-                                                            ng-click="delK(item.id)">删除
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <!--<tm-pagination conf="paginationConf2"></tm-pagination>-->
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="chartStatistics3">
-                                    <div id="patrolChart3" class="tj-chart-con"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
+
             </div>
         </div>
 
@@ -244,7 +66,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel(1)">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">
                             &times;
                         </button>
                         <h4 class="modal-title" id="myModalLabel">
@@ -263,203 +85,18 @@
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">备注</font></font></label>
-                                <textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="remark" rows="3" style="width: 160px;max-width: 160px;"></textarea>
+                                <textarea class="form-control" ng-model="remark" rows="3" style="width: 440px;"></textarea>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" ng-click="saveRule()">保存</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel(1)">取消</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!--水质评分细则 F值---模态框-->
-        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel(2)">
-                            &times;
-                        </button>
-                        <h4 class="modal-title" id="myModalLabel2">
-                            {{idF ? '修改' : '新增'}}水质评分细则
-                        </h4>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-inline">
-                            <div class="input-group form-item" style="float: left;">
-                                <label><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">参数类型</font></font></label>
-                                <select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="paramType1">
-                                    <option value="">请选择</option>
-                                    <option value="tp">总磷</option>
-                                    <option value="nh4n">氨氮</option>
-                                    <option value="do">溶解氧</option>
-                                    <option value="codmn">高锰酸盐指数</option>
-                                    <!--<option value="4">化学需氧量</option>-->
-                                    <!--<option value="5">总氮</option>-->
-                                </select>
-                            </div>
-                            <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">最大值</font></font></label>
-                                <input name="number" min="1" class="form-control input-short" ng-model="maxValue">
-                            </div>
-                            <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">最小值</font></font></label>
-                                <input name="number" min="1" class="form-control input-short" ng-model="minValue">
-                            </div>
-                            <!--<div class="input-group form-item" style="float: left;">-->
-                                <!--<label><font style="vertical-align: inherit;"><font-->
-                                        <!--style="vertical-align: inherit;">匹配规则</font></font></label>-->
-                                <!--<select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="matchRule">-->
-                                    <!--<option value="">无规则</option>-->
-                                    <!--<option value="<"><</option>-->
-                                    <!--<option value="<="><=</option>-->
-                                    <!--<option value=">">></option>-->
-                                    <!--<option value=">=">>=</option>-->
-                                    <!--<option value="=">=</option>-->
-                                <!--</select>-->
-                            <!--</div>-->
-                            <div class="input-group form-item" style="float: left;">
-                                <label><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">水质类别名称</font></font></label>
-                                <select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="waterQualityType1">
-                                    <option value="">请选择</option>
-                                    <option value="1">Ⅰ</option>
-                                    <option value="2">Ⅱ</option>
-                                    <option value="3">Ⅲ</option>
-                                    <option value="4">Ⅳ</option>
-                                    <option value="5">Ⅴ</option>
-                                    <option value="6">Ⅵ</option>
-                                    <option value="7">Ⅶ</option>
-                                    <option value="8">Ⅷ</option>
-                                </select>
-                            </div>
-                            <div class="form-item" style="position: relative;left: -275px;">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">得分系数</font></font></label>
-                                <input name="number" min="1" class="form-control input-short" ng-model="scoreCoefficient">
-                            </div>
-                            <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">修正系数</font></font></label>
-                                <input name="number" min="1" class="form-control input-short" ng-model="factorCoefficient">
-                            </div>
-                            <div class="form-item" style="position: relative;top: -40px;">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">排序</font></font></label>
-                                <input name="number" min="1" class="form-control input-short" ng-model="sortOrder1">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" ng-click="saveF()">保存</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel(2)">取消</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--水质评分细则 k值---模态框-->
-        <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel(3)">
-                            &times;
-                        </button>
-                        <h4 class="modal-title" id="myModalLabel3">
-                            {{idK ? '修改' : '新增'}}水质变化细则
-                        </h4>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-inline">
-                            <div class="input-group form-item" style="float: left;">
-                                <label><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">参数类型</font></font></label>
-                                <select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="paramType3">
-                                    <option value="">请选择</option>
-                                    <option value="tp">总磷</option>
-                                    <option value="nh4n">氨氮</option>
-                                    <option value="do">溶解氧</option>
-                                    <option value="codmn">高锰酸盐指数</option>
-                                    <!--<option value="4">化学需氧量</option>-->
-                                    <!--<option value="5">总氮</option>-->
-                                </select>
-                            </div>
-                            <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">最大值</font></font></label>
-                                <input name="number" min="1" class="form-control input-short" ng-model="maxValue3">
-                            </div>
-                            <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">最小值</font></font></label>
-                                <input name="number" min="1" class="form-control input-short" ng-model="minValue3">
-                            </div>
-                            <!--<div class="input-group form-item" style="float: left;">-->
-                                <!--<label><font style="vertical-align: inherit;"><font-->
-                                        <!--style="vertical-align: inherit;">左匹配规则</font></font></label>-->
-                                <!--<select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="leftMatch">-->
-                                    <!--<option value="">无规则</option>-->
-                                    <!--<option value="<"><</option>-->
-                                    <!--<option value="<="><=</option>-->
-                                    <!--<option value=">">></option>-->
-                                    <!--<option value=">=">>=</option>-->
-                                    <!--<option value="=">=</option>-->
-                                <!--</select>-->
-                            <!--</div>-->
-                            <!--<div class="input-group form-item" style="float: left;">-->
-                                <!--<label><font style="vertical-align: inherit;"><font-->
-                                        <!--style="vertical-align: inherit;">右匹配规则</font></font></label>-->
-                                <!--<select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="rightMatch">-->
-                                    <!--<option value="">无规则</option>-->
-                                    <!--<option value="<"><</option>-->
-                                    <!--<option value="<="><=</option>-->
-                                    <!--<option value=">">></option>-->
-                                    <!--<option value=">=">>=</option>-->
-                                    <!--<option value="=">=</option>-->
-                                <!--</select>-->
-                            <!--</div>-->
-                            <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">扣分数</font></font></label>
-                                <input name="number" min="1" class="form-control input-short" ng-model="deductValue">
-                            </div>
-                            <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">排序</font></font></label>
-                                <input name="number" min="1" class="form-control input-short" ng-model="sortOrder3">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" ng-click="saveK()">保存</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel(3)">取消</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </div>
 </div>
-
-<script>
-    layui.use('element', function () {
-        var $ = layui.jquery
-            , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
-
-        //触发事件
-        var active = {
-            tabChange: function () {
-                //切换到指定Tab项
-                element.tabChange('demo', '22'); //切换到：用户管理
-            }
-        };
-
-        $('.site-demo-active').on('click', function () {
-            var othis = $(this), type = othis.data('type');
-            active[type] ? active[type].call(this, othis) : '';
-        });
-
-        element.on('tab(test)', function (elem) {
-            location.hash = 'test=' + $(this).attr('lay-id');
-        });
-
-    });
-
-</script>
