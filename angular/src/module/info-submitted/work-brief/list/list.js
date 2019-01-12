@@ -27,6 +27,8 @@
 
                     var regionTree;
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree';
+                    var regionTreeUrl1 = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/list';
+
                     var options = {
                         pdfOpenParams: {
                             pagemode: "thumbs",
@@ -43,7 +45,7 @@
                             noneSelectedText : '请选择',
                             dropupAuto: false
                         });
-                        $scope.author = $scope.userInfo.userName;
+                        $scope.author = $scope.userInfo.name;
                         $ajaxhttp.myhttp({
                             url:apiPrefix + '/v1/msWorkReports/userinfo',
                             method:'get',
@@ -51,16 +53,9 @@
                                 $scope.num = res.data;
                             }
                         })
-                        // $ajaxhttp.myhttp({
-                        //     url:apiPrefix + '/v1/msSentReports/getRegion',
-                        //     method:'get',
-                        //     callBack:function (res) {
-                        //         $scope.nowRegion = res.data;
-                        //     }
-                        // })
+                        getRegion ()
 
                         getList();
-                        getAllRegion ();
 
                     }
 
@@ -105,93 +100,52 @@
                                 sentTimeEnd:$scope.endTime,
                                 sentRegion:$scope.regionName,
                                 sentState:$scope.status,
-                                direction:$scope.direction
+                                direction:$scope.direction,
+                                column:$scope.column ? $scope.column : '',
+                                order:$scope.order ? $scope.order : ''
                             },
                             callBack:function (res) {
-                                $scope.moduleList = res.data.list
-                                $scope.paginationConf.totalItems = res.data.total;
+                                if(res.data){
+                                    $scope.moduleList = res.data.list
+                                    $scope.paginationConf.totalItems = res.data.total;
+                                }
                             }
                         })
                     }
 
-                    function getAllRegion (){
-                        $scope.regionList = [
-                            {
-                                id:1,
-                                region:'天津市',
+                    // 表格排序
+                    $scope.sort = function (id , name) {
+                        $scope.column = name;
+                        $scope.order = id;
+                        getList ();
+                    }
+
+
+                    //获取下发区域
+                    function getRegion (){
+                        $ajaxhttp.myhttp({
+                            url:regionTreeUrl1,
+                            method:'get',
+                            params:{
+                                pageNum:-1,
+                                pageSize:-1,
+                                grade:3
                             },
-                            {
-                                id:2,
-                                region:'和平区',
-                            },
-                            {
-                                id:3,
-                                region:'河东区',
-                            },
-                            {
-                                id:4,
-                                region:'河西区',
-                            },
-                            {
-                                id:5,
-                                region:'南开区',
-                            },
-                            {
-                                id:6,
-                                region:'河北区',
-                            },
-                            {
-                                id:7,
-                                region:'红桥区',
-                            },
-                            {
-                                id:8,
-                                region:'东丽区',
-                            },
-                            {
-                                id:9,
-                                region:'西青区',
-                            },
-                            {
-                                id:10,
-                                region:'津南区',
-                            },
-                            {
-                                id:11,
-                                region:'北辰区',
-                            },
-                            {
-                                id:12,
-                                region:'武清区',
-                            },
-                            {
-                                id:13,
-                                region:'宝坻区',
-                            },
-                            {
-                                id:14,
-                                region:'滨海新区',
-                            },
-                            {
-                                id:15,
-                                region:'宁河区',
-                            },
-                            {
-                                id:16,
-                                region:'静海区',
-                            },
-                            {
-                                id:17,
-                                region:'蓟州区',
+                            callBack:function (res) {
+                                $scope.regionList = res.data.list;
+                                $scope.regionList.push({
+                                    areaCode: 120100000000,
+                                    areaName:'天津市'
+                                })
+                                var select = $("#slpk");
+                                for (var i = 0; i < $scope.regionList.length; i++) {
+                                    select.append("<option value='"+$scope.regionList[i].areaName+"'>"
+                                        + $scope.regionList[i].areaName + "</option>");
+                                }
+                                $('.selectpicker').selectpicker('val', '');
+                                $('.selectpicker').selectpicker('refresh');
                             }
-                        ];
-                        var select = $("#slpk");
-                        for (var i = 0; i < $scope.regionList.length; i++) {
-                            select.append("<option value='"+$scope.regionList[i].region+"'>"
-                                + $scope.regionList[i].region + "</option>");
-                        }
-                        $('.selectpicker').selectpicker('val', '');
-                        $('.selectpicker').selectpicker('refresh');
+                        })
                     }
 
                     //显示发起周动态报送弹窗

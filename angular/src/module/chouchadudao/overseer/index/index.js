@@ -51,6 +51,13 @@
                         getList();
                     }
 
+                    // 表格排序
+                    $scope.sort = function (id , name) {
+                        $scope.column = name;
+                        $scope.order = id;
+                        getList ();
+                    }
+
                     //搜索
                     $scope.searchData = function () {
                         getList();
@@ -69,7 +76,9 @@
                             params:{
                                 pageNumber: $scope.paginationConf.currentPage,
                                 pageSize: $scope.paginationConf.itemsPerPage,
-                                issue:$scope.startTime
+                                issue:$scope.startTime,
+                                column:$scope.column ? $scope.column : '',
+                                order:$scope.order ? $scope.order : ''
                             },
                             callBack:function (res) {
                                 $scope.moduleList = res.data.list;

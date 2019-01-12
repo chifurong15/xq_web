@@ -32,7 +32,7 @@
                     $scope.init = function () {
                         $scope.viewId = localStorage.getItem('viewId');
 
-                        $scope.author = $scope.userInfo.userName;
+                        $scope.author = $scope.userInfo.name;
                         $ajaxhttp.myhttp({
                             url:apiPrefix + '/v1/msWeekDynamic/userinfo',
                             method:'get',

@@ -39,8 +39,14 @@
                     <table class="table table-bordered table-hover" data-filter="#filter">
                         <tr>
                             <th style="width: 5%;">序号</th>
-                            <th style="width: 15%">方案标题</th>
-                            <th style="width: 10%">期号</th>
+                            <th style="width: 15%">方案标题
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','title')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','title')"></i>
+                            </th>
+                            <th style="width: 10%">期号
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','issue')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','issue')"></i>
+                            </th>
                             <th style="width: 10%">操作</th>
                         </tr>
                         <tr ng-repeat="module in moduleList" style="cursor:pointer;">

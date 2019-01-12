@@ -27,11 +27,13 @@
 
                     var regionTree;
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree';
+                    var regionTreeUrl1 = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/list';
+
 
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
                     $scope.detailId = localStorage.getItem('id');
                     $scope.init = function () {
-                        $scope.author = $scope.userInfo.userName;
+                        $scope.author = $scope.userInfo.name;
 
                         $ajaxhttp.myhttp({
                             url:apiPrefix + '/v1/msWorkReports/userinfo',
@@ -41,7 +43,7 @@
                             }
                         })
                         getList();
-                        getAllRegion ();
+                        getRegion ();
 
                     }
                     // 获取数据列表
@@ -65,77 +67,28 @@
                         })
                     }
 
-                    function getAllRegion (){
-                        $scope.regionList = [
-                            {
-                                id:1,
-                                region:'天津市',
+                    $scope.searchData = function () {
+                        getList ()
+                    }
+
+                    //获取下发区域
+                    function getRegion (){
+                        $ajaxhttp.myhttp({
+                            url:regionTreeUrl1,
+                            method:'get',
+                            params:{
+                                pageNum:-1,
+                                pageSize:-1,
+                                grade:3
                             },
-                            {
-                                id:2,
-                                region:'和平区',
-                            },
-                            {
-                                id:3,
-                                region:'河东区',
-                            },
-                            {
-                                id:4,
-                                region:'河西区',
-                            },
-                            {
-                                id:5,
-                                region:'南开区',
-                            },
-                            {
-                                id:6,
-                                region:'河北区',
-                            },
-                            {
-                                id:7,
-                                region:'红桥区',
-                            },
-                            {
-                                id:8,
-                                region:'东丽区',
-                            },
-                            {
-                                id:9,
-                                region:'西青区',
-                            },
-                            {
-                                id:10,
-                                region:'津南区',
-                            },
-                            {
-                                id:11,
-                                region:'北辰区',
-                            },
-                            {
-                                id:12,
-                                region:'武清区',
-                            },
-                            {
-                                id:13,
-                                region:'宝坻区',
-                            },
-                            {
-                                id:14,
-                                region:'滨海新区',
-                            },
-                            {
-                                id:15,
-                                region:'宁河区',
-                            },
-                            {
-                                id:16,
-                                region:'静海区',
-                            },
-                            {
-                                id:17,
-                                region:'蓟州区',
+                            callBack:function (res) {
+                                $scope.regionList = res.data.list;
+                                $scope.regionList.push({
+                                    areaCode: 120100000000,
+                                    areaName:'天津市'
+                                })
                             }
-                        ]
+                        })
                     }
 
                     //显示发起周动态报送弹窗
@@ -247,6 +200,61 @@
                         })
                     }
 
+                    //修改
+                    $scope.edit = function (id) {
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/v1/msSentReports/detail',
+                            method:'get',
+                            params:{
+                                id:id,
+                            },
+                            callBack:function (res) {
+                                if(res.resCode == 1){
+                                    if(res.data){
+                                        $scope.editData = res.data;
+                                        $scope.briefDescription = $scope.editData.briefDescription;
+                                        if(res.data.fileList){
+                                            $scope.accessoryURL1 = [];
+                                            res.data.fileList.map(function (item){
+                                                // console.log(item.substring(item.lastIndexOf('/')+1));
+                                                $scope.accessoryURL1.push({
+                                                    name:item.downloadURL.substring(item.previewURL.lastIndexOf('/')+1),
+                                                    previewURL:item.previewURL,
+                                                    downloadURL:item.downloadURL
+                                                })
+                                            })
+                                        }
+                                    }
+                                }else{
+                                    layer.msg('服务器异常，请稍后再试',{times:500})
+                                }
+                            }
+                        })
+                        $('#myModal4').modal('show')
+                    }
+
+                    //确定
+                    $scope.update = function () {
+                        var params = {
+                            id:$scope.editData.id,
+                            briefDescription:$scope.briefDescription
+                        }
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/v1/msSentReports/update',
+                            method:'put',
+                            params:params,
+                            callBack:function (res) {
+                                if(res.resCode == 1){
+                                    layer.msg('修改成功',{times:500});
+                                    getList ();
+                                    $('#myModal4').modal('hide');
+                                }else{
+                                    layer.msg('服务器异常，请稍后再试',{times:500})
+                                }
+                            }
+                        })
+
+                    }
 
                     //是否采纳
                     $scope.adopt =  function (isAdopt,id) {
@@ -366,6 +374,17 @@
                         $scope.searchTime = result;
                         $scope.$apply();
                     });
+
+                    // 结束时间
+                    $('#EditReportTime').datetimepicker({
+                        format: 'YYYY-MM-DD',
+                        locale: moment.locale('zh-cn')
+                    }).on('dp.change', function (c) {
+                        var result = new moment(c.date).format('YYYY-MM-DD');
+                        $scope.EditReportTime = result;
+                        $scope.$apply();
+                    });
+
 
 
                     //动态设置最小值

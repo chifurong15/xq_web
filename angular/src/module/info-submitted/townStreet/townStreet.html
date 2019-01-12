@@ -64,12 +64,24 @@
                     <table class="table table-bordered table-hover" data-filter="#filter">
                         <tr>
                             <th style="width: 5%;">序号</th>
-                            <th style="width: 15%">行政区域</th>
-                            <th style="width: 10%">行政区域级别</th>
+                            <th style="width: 15%">行政区域
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','administrationRegion')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','administrationRegion')"></i>
+                            </th>
+                            <th style="width: 10%">行政区域级别
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','administrationLevel')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','administrationLevel')"></i>
+                            </th>
                             <th style="width: 10%">信息共享&报送制度</th>
-                            <th style="width: 10%">报送日期</th>
+                            <th style="width: 10%">报送日期
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','sentTime')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','sentTime')"></i>
+                            </th>
                             <th style="width: 10%">执行情况</th>
-                            <th style="width: 10%">报送状态</th>
+                            <th style="width: 10%">报送状态
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','sentState')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','sentState')"></i>
+                            </th>
                             <th style="width: 15%">操作</th>
                         </tr>
                         <tr ng-repeat="module in moduleList" style="cursor:pointer;">

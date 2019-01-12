@@ -22,7 +22,7 @@
                                          routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl() + '/messageSent';
-                    //var apiPrefix = 'http://10.0.9.194:8080' + '/messageSent';
+                    // var apiPrefix = 'http://10.0.9.194:7028' + '/messageSent';
 
                     var regionTree;
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree';
@@ -61,13 +61,22 @@
                                 title:$scope.eventContent,
                                 acceptState:$scope.acceptState,
                                 sentState:$scope.sentState,
-                                reportTime:$scope.startTime
+                                reportTime:$scope.startTime,
+                                column:$scope.column ? $scope.column : '',
+                                order:$scope.order ? $scope.order : ''
                             },
                             callBack:function (res) {
                                 $scope.moduleList = res.data.list
                                 $scope.paginationConf.totalItems = res.data.total;
                             }
                         })
+                    }
+
+                    // 表格排序
+                    $scope.sort = function (id , name) {
+                        $scope.column = name;
+                        $scope.order = id;
+                        getList ();
                     }
 
                     //搜索

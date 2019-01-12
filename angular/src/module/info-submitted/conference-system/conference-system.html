@@ -54,12 +54,27 @@
                     <table class="table table-bordered table-hover" data-filter="#filter">
                         <tr>
                             <th style="width: 5%;">序号</th>
-                            <th style="width: 15%">行政区域</th>
-                            <th style="width: 10%">会议主持角色</th>
-                            <th style="width: 10%">姓名</th>
-                            <th style="width: 10%">职务</th>
+                            <th style="width: 15%">行政区域
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','region')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','region')"></i>
+                            </th>
+                            <th style="width: 10%">会议主持角色
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','compereRole')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','compereRole')"></i>
+                            </th>
+                            <th style="width: 10%">姓名
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','compereName')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','compereName')"></i>
+                            </th>
+                            <th style="width: 10%">职务
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','duty')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','duty')"></i>
+                            </th>
                             <th style="width: 10%">会议类别</th>
-                            <th style="width: 10%">会议时间</th>
+                            <th style="width: 10%">会议时间
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','meetingTime')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','meetingTime')"></i>
+                            </th>
                             <th style="width: 15%">会议研究主要内容</th>
                             <th style="width: 10%">操作</th>
                         </tr>

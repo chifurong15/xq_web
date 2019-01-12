@@ -51,7 +51,7 @@
                             }
                         })
                         $scope.weekList = ['星期一','星期二','星期三','星期四','星期五','星期六','星期日'];
-                        $scope.author = $scope.userInfo.userName;
+                        $scope.author = $scope.userInfo.name;
                         getList();
                         getAllRegion ();
                     }
@@ -68,7 +68,9 @@
                                 deadline:$scope.endTime,
                                 sentRegion:$scope.regionName,
                                 sentState:$scope.status,
-                                direction:$scope.direction
+                                direction:$scope.direction,
+                                column:$scope.column ? $scope.column : '',
+                                order:$scope.order ? $scope.order : ''
                             },
                             callBack:function (res) {
                                 if(res.data){
@@ -78,6 +80,14 @@
 
                             }
                         })
+                    }
+
+
+                    // 表格排序
+                    $scope.sort = function (id , name) {
+                        $scope.column = name;
+                        $scope.order = id;
+                        getList ();
                     }
 
                     //搜索

@@ -77,6 +77,7 @@
                             callBack: function (res) {
                                 $scope.riverList = res.data;
                                 var select = $("#slpkRiver");
+                                $('#slpkRiver').html('');
                                 for (var i = 0; i < res.data.length; i++) {
                                     select.append("<option value='"+res.data[i]+"'>"
                                         + res.data[i] + "</option>");

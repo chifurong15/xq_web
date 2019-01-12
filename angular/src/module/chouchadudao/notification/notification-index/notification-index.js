@@ -23,7 +23,7 @@
 
                     var apiPrefix = moduleService.getServiceUrl();
 
-                    //var apiPrefix = 'http://10.0.9.194:8066';
+                    // var apiPrefix = 'http://10.0.9.194:7030';
 
 
 
@@ -62,6 +62,13 @@
                         getUnit ();
 
                     }
+
+                    // 表格排序
+                    $scope.sort = function (id , name) {
+                        $scope.column = name;
+                        $scope.order = id;
+                        getList ();
+                    }
                     // 获取数据列表
                     function getList () {
                         $ajaxhttp.myhttp({
@@ -73,7 +80,9 @@
                                 title:$scope.title,
                                 createDate:$scope.startTime,
                                 informType:$scope.informType,
-                                readStatus:$scope.readStatus
+                                readStatus:$scope.readStatus,
+                                column:$scope.column ? $scope.column : '',
+                                order:$scope.order ? $scope.order : ''
                             },
                             callBack:function (res) {
                                 $scope.moduleList = res.data.list;

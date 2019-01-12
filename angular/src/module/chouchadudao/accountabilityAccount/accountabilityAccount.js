@@ -281,6 +281,7 @@
                             if (res.resCode == 1) {
                                 $scope.assessory.push(res.data[0]);
                                 $('#problemFile').fileinput('clear');
+                                layer.msg("上传成功");
                             } else {
                                 layer.msg("服务器异常，请稍后再试");
                             }

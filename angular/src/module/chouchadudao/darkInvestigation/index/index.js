@@ -83,14 +83,15 @@
                     $scope.save = function () {
                         var params = {
                             title:$scope.title,
-                            issue:$scope.Time,
+                            issue:$('#Time').find('input').val(),
                             createuser:$scope.createUser,
                             content:$scope.content,
                             assessoryyuan:$scope.assessory ? $scope.assessory.join(',') : ''
                         }
+                        // console.log(params);
                         if
                         (
-                            $scope.title && $scope.Time && $scope.createUser && $scope.content
+                            $scope.title && $('#Time').find('input').val() && $scope.createUser && $scope.content
                         )
                         {
                             $ajaxhttp.myhttp({
@@ -132,7 +133,7 @@
                             callBack:function (res) {
                                 if(res.data){
                                     $scope.editTitle = res.data.title;
-                                    $scope.editTime = res.data.issue;
+                                    $('#editTime').find('input').val(res.data.issue);
                                     $scope.editUser = res.data.createuser;
                                     $scope.editContent = res.data.content;
                                     $scope.assessoryEdit = res.data.accessory
@@ -146,14 +147,15 @@
                         var params = {
                             id:$scope.id,
                             title:$scope.editTitle,
-                            issue:$scope.editTime,
+                            issue:$('#editTime').find('input').val(),
                             createuser:$scope.editUser,
                             content:$scope.editContent,
                             assessoryyuan:$scope.assessory ? $scope.assessory.join(',') : $scope.assessoryEdit
                         }
+                        // console.log(params);
                         if
                         (
-                            $scope.editTitle && $scope.editTime && $scope.editUser && $scope.editContent
+                            $scope.editTitle && $('#editTime').find('input').val() && $scope.editUser && $scope.editContent
                         )
                         {
                             $ajaxhttp.myhttp({
@@ -189,7 +191,7 @@
                     $scope.close = function () {
                         $('#myModal').modal('hide');
                         $scope.title = '';
-                        $scope.Time = '';
+                        $('#Time').find('input').val('');
                         $scope.content = '';
                     }
 
@@ -281,7 +283,8 @@
                         locale: moment.locale('zh-cn')
                     }).on('dp.change', function (c) {
                         var result = new moment(c.date).format('YYYY-MM');
-                        $scope.Time = result;
+                        // $scope.Time = result;
+                        $('#Time').find('input').val(result);
                         $scope.$apply();
                     });
 
@@ -291,7 +294,8 @@
                         locale: moment.locale('zh-cn')
                     }).on('dp.change', function (c) {
                         var result = new moment(c.date).format('YYYY-MM');
-                        $scope.editTime = result;
+                        // $scope.editTime = result;
+                        $('#editTime').find('input').val(result);
                         $scope.$apply();
                     });
 

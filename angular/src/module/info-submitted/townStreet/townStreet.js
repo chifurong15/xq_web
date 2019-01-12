@@ -32,7 +32,7 @@
 
                     $scope.init = function () {
                         // $scope.num = 5;
-                        $scope.author = $scope.userInfo.userName;
+                        $scope.author = $scope.userInfo.name;
                         $scope.startTime = '';
                         $scope.endTime = '';
                         $scope.regionName = '';
@@ -46,6 +46,13 @@
                             }
                         })
                     }
+
+                    // 表格排序
+                    $scope.sort = function (id , name) {
+                        $scope.column = name;
+                        $scope.order = id;
+                        getList ();
+                    }
                     // 获取数据列表
                     function getList () {
                         $ajaxhttp.myhttp({
@@ -57,11 +64,15 @@
                                 sentTimeStart:$scope.startTime,
                                 sentTimeEnd:$scope.endTime,
                                 region:$scope.regionName,
-                                informationSystem:$scope.status
+                                informationSystem:$scope.status,
+                                column:$scope.column ? $scope.column : '',
+                                order:$scope.order ? $scope.order : ''
                             },
                             callBack:function (res) {
-                                $scope.moduleList = res.data.list
-                                $scope.paginationConf.totalItems = res.data.total;
+                                if(res.data){
+                                    $scope.moduleList = res.data.list
+                                    $scope.paginationConf.totalItems = res.data.total;
+                                }
                             }
                         })
                     }
