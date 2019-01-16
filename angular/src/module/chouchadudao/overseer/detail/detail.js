@@ -39,7 +39,9 @@
                         $scope.showAddOneRegion = false;
                         $('.selectpicker').selectpicker({
                             noneSelectedText : '请选择',
-                            dropupAuto: false
+                            dropupAuto: false,
+                            'deselectAllText':'取消全选',
+                            'selectAllText': '全选',
                         });
 
                         $('.selectpicker').selectpicker('val', '');

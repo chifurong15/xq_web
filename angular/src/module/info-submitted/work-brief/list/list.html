@@ -1,4 +1,4 @@
-<div class="conferenceCtrl anchaanfang" ng-controller="workBriefListCtrl" ng-init="init()">
+<div class="conferenceCtrl anchaanfang chouchadudao" ng-controller="workBriefListCtrl" ng-init="init()">
     <div class="wrapper-md ">
         <div class="panel panel-default m-n">
             <div class="panel-body" style="position: relative;">
@@ -121,7 +121,7 @@
                                 <a class="btn btn-primary btn-xs" ng-click="view(module.id)"><i class="fa fa-info" title="查看"></i></a>
                                 <a class="btn btn-primary btn-xs" ng-if="num == 5 && module.replyState == 2 && module.weatherSent == 2" ng-click="answer(module)"><i class="fa fa-bullhorn" title="答复"></i></a>
                                 <a class="btn btn-primary btn-xs" ng-if="num == 5 && module.replyState == 1 && module.weatherSent == 2" ng-click="report(module.id)"><i class="fa fa-level-up" title="上报"></i></a>
-                                <a class="btn btn-primary btn-xs" ng-if="num == 2" ng-click="delete(module.id)"><i class="fa fa-trash-o" title="删除"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-if="num == 2 && module.initiator == userInfo.id" ng-click="delete(module.id)"><i class="fa fa-trash-o" title="删除"></i></a>
                             </td>
                         </tr>
                     </table>
@@ -156,7 +156,7 @@
 
         <!-- 发起信息报送（Modal） -->
         <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
-            <div class="modal-dialog" style="width: 680px;">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="closeModal()">
@@ -166,7 +166,7 @@
                             发起信息报送
                         </h4>
                     </div>
-                    <div class="modal-body" style="height: 350px;">
+                    <div class="modal-body" style="height: 400px;">
                         <form class="form-inline">
                             <div class="form-item">
                                 <label class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">报送标题</font></font></label>
@@ -174,7 +174,7 @@
                             </div>
                             <div class="input-group form-item" style="z-index: 9;">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">报送区域</font></font></label>
-                                <select ng-model="region1" id="slpk" class="form-control select-short selectpicker" multiple style="width: 160px;">
+                                <select ng-model="region1" id="slpk" class="form-control select-short selectpicker" data-actions-box="true" data-size="8" multiple style="width: 160px;">
                                 </select>
                             </div>
                             <div class="form-item">
@@ -185,22 +185,22 @@
                                 </div>
                             </div>
                             <div class="form-item">
+                                <label class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发起人</font></font></label>
+                                <input type="text" class="form-control input-short" readonly ng-model="author">
+                            </div>
+                            <div class="form-item">
                                 <label>结束时间</label>
                                 <div class="input-group date date_picker" id="endTime1">
                                     <input type="text" class="form-control input-short-o" ng-model="endTime1">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
                             </div>
-                            <div class="form-item">
+                            <div class="form-item" style="margin-left: 20px;position: relative;left: -19px;">
                                 <label>报送截止</label>
                                 <div class="input-group date date_picker" id="J-searchTime">
                                     <input type="text" class="form-control input-short-o" ng-model="searchTime">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
-                            </div>
-                            <div class="form-item">
-                                <label class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发起人</font></font></label>
-                                <input type="text" class="form-control input-short" readonly ng-model="author">
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">报送说明</font></font></label>

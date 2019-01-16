@@ -33,7 +33,9 @@
                     $scope.init = function () {
                         $('.selectpicker').selectpicker({
                             noneSelectedText : '请选择',
-                            dropupAuto: false
+                            dropupAuto: false,
+                            'deselectAllText':'取消全选',
+                            'selectAllText': '全选',
                         });
 
                         $scope.createUser = $scope.userInfo.name;

@@ -14,26 +14,26 @@
         <div class="panel panel-default">
             <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
                 <ul class="layui-tab-title">
-                    <li class="layui-this">督查方案</li>
+                    <li class="layui-this">督查通知</li>
                     <li>联络员</li>
                     <li>督导组</li>
-                    <li>下发小通知</li>
+                    <li>行程通知</li>
                     <li>督查问题</li>
                     <li>督查通报</li>
-                    <li>一区一单</li>
+                    <li>问题清单</li>
                 </ul>
                 <div class="layui-tab-content">
-                    <!--督查方案-->
+                    <!--督查通知-->
                     <div class="layui-tab-item layui-show">
                         <div class="panel-body">
                             <form class="form-inline clearfix">
                                 <div class="form-item">
-                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">方案标题</font></font></label>
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通知标题</font></font></label>
                                     <input type="text" class="form-control input-long" readonly ng-model="title">
                                 </div>
                                 <br>
                                 <div class="form-item">
-                                    <label>方案期号</label>
+                                    <label>通知期号</label>
                                     <div class="input-group date date_picker">
                                         <input type="text" class="form-control input-short-o" readonly ng-model="Time1">
                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -193,7 +193,7 @@
                         </div>
                     </div>
 
-                    <!--下发小通知-->
+                    <!--行程通知-->
                     <div class="layui-tab-item">
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -338,7 +338,7 @@
                         </div>
                     </div>
 
-                    <!--一区一单-->
+                    <!--问题清单-->
                     <div class="layui-tab-item">
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -534,7 +534,7 @@
                             </div>
                             <div class="input-group form-item" style="z-index: 10;">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">组成成员</font></font></label>
-                                <select id="slpk1" class="form-control selectpicker selectpicker1" multiple ng-options="item.name + item.phone as item.name for item in contactList"  style="width: 426px;z-index: 0;" ng-model="supervisePerson">
+                                <select id="slpk1" class="form-control selectpicker selectpicker1" multiple data-actions-box="true" data-size="5" ng-options="item.name + item.phone as item.name for item in contactList"  style="width: 426px;z-index: 0;" ng-model="supervisePerson">
                                 </select>
                             </div>
                         </form>
@@ -547,7 +547,7 @@
             </div>
         </div>
 
-        <!--发起小通知-->
+        <!--发起行程通知-->
         <div class="modal fade" id="addNotice" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -578,7 +578,7 @@
                             </div>
                             <div class="input-group form-item" style="z-index: 10;">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通知区域</font></font></label>
-                                <select id="slpk3" class="form-control selectpicker selectpicker3" multiple  style="width: 426px;z-index: 0;" ng-model="addRegion">
+                                <select id="slpk3" class="form-control selectpicker selectpicker3" multiple data-actions-box="true" data-size="5"  style="width: 426px;z-index: 0;" ng-model="addRegion">
                                 </select>
                             </div>
                             <div class="form-item">
@@ -602,7 +602,7 @@
             </div>
         </div>
 
-        <!--查看小通知-->
+        <!--查看行程通知-->
         <div class="modal fade" id="viewNotice" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -754,7 +754,7 @@
 
                             <div class="input-group form-item" style="z-index: 10;">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">反馈区域</font></font></label>
-                                <select id="slpk4" class="form-control selectpicker selectpicker4" multiple  style="width: 426px;z-index: 0;" ng-model="feedBackRegion">
+                                <select id="slpk4" class="form-control selectpicker selectpicker4" multiple data-actions-box="true" data-size="5" style="width: 426px;z-index: 0;" ng-model="feedBackRegion">
                                 </select>
                             </div>
                             <div class="form-item">
@@ -889,7 +889,7 @@
 
 
 
-        <!--发起一区一单-->
+        <!--发起问题清单-->
         <div class="modal fade" id="addOneRegion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -943,7 +943,7 @@
             </div>
         </div>
 
-        <!--一区一单详情-->
+        <!--问题清单详情-->
         <div class="modal fade" id="viewOneRegion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -997,7 +997,7 @@
             </div>
         </div>
 
-        <!--查看一区一单反馈详情-->
+        <!--查看问题清单反馈详情-->
         <div class="modal fade" id="viewOneRegionBack" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">

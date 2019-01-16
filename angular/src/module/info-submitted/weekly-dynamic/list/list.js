@@ -26,6 +26,7 @@
 
                     var regionTree;
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree';
+                    var regionTreeUrl1 = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/list';
 
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
 
@@ -33,7 +34,9 @@
                         $scope.assessory = [];//存储上传附件路径
                         $('.selectpicker').selectpicker({
                             noneSelectedText : '请选择',
-                            dropupAuto: false
+                            dropupAuto: false,
+                            'deselectAllText':'取消全选',
+                            'selectAllText': '全选',
                         });
                         $ajaxhttp.myhttp({
                             url:apiPrefix + '/v1/msWeekDynamic/userinfo',
@@ -106,83 +109,25 @@
                     }
 
                     function getAllRegion (){
-                        $scope.regionList = [
-                            {
-                                id:1,
-                                region:'天津市',
+                        $ajaxhttp.myhttp({
+                            url:regionTreeUrl1,
+                            method:'get',
+                            params:{
+                                pageNum:-1,
+                                pageSize:-1,
+                                grade:3
                             },
-                            {
-                                id:2,
-                                region:'和平区',
-                            },
-                            {
-                                id:3,
-                                region:'河东区',
-                            },
-                            {
-                                id:4,
-                                region:'河西区',
-                            },
-                            {
-                                id:5,
-                                region:'南开区',
-                            },
-                            {
-                                id:6,
-                                region:'河北区',
-                            },
-                            {
-                                id:7,
-                                region:'红桥区',
-                            },
-                            {
-                                id:8,
-                                region:'东丽区',
-                            },
-                            {
-                                id:9,
-                                region:'西青区',
-                            },
-                            {
-                                id:10,
-                                region:'津南区',
-                            },
-                            {
-                                id:11,
-                                region:'北辰区',
-                            },
-                            {
-                                id:12,
-                                region:'武清区',
-                            },
-                            {
-                                id:13,
-                                region:'宝坻区',
-                            },
-                            {
-                                id:14,
-                                region:'滨海新区',
-                            },
-                            {
-                                id:15,
-                                region:'宁河区',
-                            },
-                            {
-                                id:16,
-                                region:'静海区',
-                            },
-                            {
-                                id:17,
-                                region:'蓟州区',
+                            callBack:function (res) {
+                                $scope.regionList = res.data.list;
+                                var select = $("#slpk");
+                                for (var i = 0; i < $scope.regionList.length; i++) {
+                                    select.append("<option value='"+$scope.regionList[i].areaName+"'>"
+                                        + $scope.regionList[i].areaName + "</option>");
+                                }
+                                $('.selectpicker').selectpicker('val', '');
+                                $('.selectpicker').selectpicker('refresh');
                             }
-                        ];
-                        var select = $("#slpk");
-                        for (var i = 0; i < $scope.regionList.length; i++) {
-                            select.append("<option value='"+$scope.regionList[i].region+"'>"
-                                + $scope.regionList[i].region + "</option>");
-                        }
-                        $('.selectpicker').selectpicker('val', '');
-                        $('.selectpicker').selectpicker('refresh');
+                        })
                     }
 
                     //显示发起周动态报送弹窗
@@ -237,11 +182,21 @@
                     $scope.submit =  function () {
                         var params = {
                             title:$scope.title,
-                            sentRegion:$scope.region1.join(','),
+                            sentRegion:$scope.region1 ? $scope.region1.join(',') : '',
                             sentTimeStart:$scope.startTime1,
                             sentTimeEnd:$scope.endTime1,
                             deadline:$scope.searchTime,
                         }
+                        // console.log(params);
+                        // if($scope.title && $scope.sentRegion && $scope.sentTimeStart && $scope.sentTimeEnd &&　$scope.deadline){
+                        //     console.log(1);
+                        // }else{
+                        //     layer.alert("输入的信息不全", {
+                        //         skin: 'my-skin',
+                        //         closeBtn: 1,
+                        //         anim: 3
+                        //     });
+                        // }
                         $ajaxhttp.myhttp({
                             url:apiPrefix + '/v1/msWeekDynamic/add',
                             method:'post',

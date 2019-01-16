@@ -1,4 +1,4 @@
-<div class="conferenceCtrl anchaanfang" ng-controller="weeklyListCtrl" ng-init="init()">
+<div class="conferenceCtrl anchaanfang chouchadudao" ng-controller="weeklyListCtrl" ng-init="init()">
     <div class="wrapper-md ">
         <div class="panel panel-default m-n">
             <div class="panel-body" style="position: relative;">
@@ -75,37 +75,42 @@
                     <table class="table table-bordered table-hover" data-filter="#filter">
                         <tr>
                             <th style="width: 5%;">序号</th>
-                            <th style="width: 15%">报送标题
+                            <th style="width: 10%">报送标题
                                 <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','title')"></i>
                                 <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','title')"></i>
                             </th>
-                            <th style="width: 10%">发起时间
-                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','beginTime')"></i>
-                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','beginTime')"></i>
+                            <th style="width: 7%">发起时间
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','sentTimeStart')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','sentTimeStart')"></i>
                             </th>
-                            <th style="width: 10%">截止时间
+                            <th style="width: 7%">结束时间
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','sentTimeEnd')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','sentTimeEnd')"></i>
+                            </th>
+                            <th style="width: 7%">截止时间
                                 <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','deadline')"></i>
                                 <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','deadline')"></i>
                             </th>
                             <th style="width: 10%">应报送区域</th>
-                            <th style="width: 10%">报送方向
+                            <th style="width: 7%">报送方向
                                 <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','direction')"></i>
                                 <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','direction')"></i>
                             </th>
-                            <th style="width: 10%">报送状态
+                            <th style="width: 7%">报送状态
                                 <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','weatherSent')"></i>
                                 <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','weatherSent')"></i>
                             </th>
-                            <th style="width: 10%">是否采纳
+                            <th style="width: 7%">是否采纳
                                 <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','weatherAccept')"></i>
                                 <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','weatherAccept')"></i>
                             </th>
-                            <th style="width: 15%">操作</th>
+                            <th style="width: 10%">操作</th>
                         </tr>
                         <tr ng-repeat="module in moduleList" style="cursor:pointer;">
                             <td>{{$index+1}}</td>
                             <td>{{module.title}}</td>
-                            <td>{{module.beginTime}}</td>
+                            <td>{{module.sentTimeStart}}</td>
+                            <td>{{module.sentTimeEnd}}</td>
                             <td>{{module.deadline}}</td>
                             <td>{{module.sentRegion}}</td>
                             <td>{{module.direction}}</td>
@@ -171,14 +176,7 @@
                             <div class="form-item">
                                 <label>起始时间</label>
                                 <div class="input-group date date_picker" id="startTime1">
-                                    <input type="text" class="form-control input-short-o" ng-model="startTime1">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                </div>
-                            </div>
-                            <div class="form-item">
-                                <label>结束时间</label>
-                                <div class="input-group date date_picker" id="endTime1">
-                                    <input type="text" class="form-control input-short-o" ng-model="endTime1">
+                                    <input type="text" class="form-control input-short-o" placeholder="请选择日期" ng-model="startTime1">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
                             </div>
@@ -186,19 +184,26 @@
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">报送标题</font></font></label>
                                 <input type="text" class="form-control input-short" ng-model="title">
                             </div>
-                            <div class="input-group date date_picker form-item" id="J-searchTime">
+                            <div class="form-item">
+                                <label>结束时间</label>
+                                <div class="input-group date date_picker" id="endTime1">
+                                    <input type="text" class="form-control input-short-o" placeholder="请选择日期" ng-model="endTime1">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                            <div class="input-group date date_picker form-item" id="J-searchTime" style="margin-left: 20px;position: relative;left: -19px;">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">报送截止</font></font></label>
                                 <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime">
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
-                            <div class="form-item" style="z-index: 9;">
+                            <div class="form-item input-group" style="z-index: 9;">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">报送区域</font></font></label>
-                                <select ng-model="region1" id="slpk" class="form-control select-short selectpicker" multiple style="width: 160px;">
+                                <select ng-model="region1" id="slpk" class="form-control select-short selectpicker" multiple data-actions-box="true" data-size="5" style="width: 426px;">
                                 </select>
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发起人</font></font></label>
-                                <input type="text" class="form-control input-short" readonly ng-model="author">
+                                <input type="text" class="form-control input-long" readonly ng-model="author" style="width: 426px;">
                             </div>
                         </form>
                     </div>

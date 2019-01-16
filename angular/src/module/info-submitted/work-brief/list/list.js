@@ -22,7 +22,7 @@
                                         routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl() + '/messageSent';
-                    //var apiPrefix = 'http://10.0.9.203:8080' + '/messageSent';
+                    // var apiPrefix = 'http://10.0.9.110:7028' + '/messageSent';
 
 
                     var regionTree;
@@ -43,7 +43,9 @@
                     $scope.init = function () {
                         $('.selectpicker').selectpicker({
                             noneSelectedText : '请选择',
-                            dropupAuto: false
+                            dropupAuto: false,
+                            'deselectAllText':'取消全选',
+                            'selectAllText': '全选',
                         });
                         $scope.author = $scope.userInfo.name;
                         $ajaxhttp.myhttp({
@@ -133,10 +135,6 @@
                             },
                             callBack:function (res) {
                                 $scope.regionList = res.data.list;
-                                $scope.regionList.push({
-                                    areaCode: 120100000000,
-                                    areaName:'天津市'
-                                })
                                 var select = $("#slpk");
                                 for (var i = 0; i < $scope.regionList.length; i++) {
                                     select.append("<option value='"+$scope.regionList[i].areaName+"'>"
