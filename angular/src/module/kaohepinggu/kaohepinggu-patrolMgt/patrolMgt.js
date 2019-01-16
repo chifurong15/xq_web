@@ -199,6 +199,14 @@
                     $scope.problem = '';
                     $scope.region = '';
                 }
+
+                // 表格排序
+                $scope.sort = function (id , name) {
+                    $scope.column = name;
+                    $scope.order = id;
+                    getModuleList ();
+                }
+
 				/**
 				 * 列表数据
 				 */
@@ -214,7 +222,9 @@
                             patorPerson:$scope.patrolperson,
                             region:$scope.regionName,
                             patrolDateStart:$scope.beginTime,
-                            patrolDateEnd:$scope.endTime
+                            patrolDateEnd:$scope.endTime,
+                            column:$scope.column ? $scope.column : '',
+                            order:$scope.order ? $scope.order : ''
 
                         },
                         callBack: function (res) {

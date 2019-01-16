@@ -70,11 +70,23 @@
 						<thead>
 							<tr>
 								<th class="wid-5">序号</th>
-								<th class="wid-10">日期</th>
-								<th class="wid-10">河道</th>
+								<th class="wid-10">日期
+									<i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','patrolDate')"></i>
+									<i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','patrolDate')"></i></th>
+								</th>
+								<th class="wid-10">河道
+									<i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','riverName')"></i>
+									<i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','riverName')"></i></th>
+								</th>
 								<th class="wid-10">问题</th>
-								<th class="wid-10">巡查员</th>
-								<th class="wid-25">所扣分数</th>
+								<th class="wid-10">巡查员
+									<i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','patorPerson')"></i>
+									<i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','patorPerson')"></i></th>
+								</th>
+								<th class="wid-25">所扣分数
+									<i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','buckleScores')"></i>
+									<i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','buckleScores')"></i></th>
+								</th>
 								<th>操作</th>
 							</tr>
 						</thead>
