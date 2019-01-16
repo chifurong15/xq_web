@@ -31,7 +31,9 @@
 
                         $('.selectpicker').selectpicker({
                             noneSelectedText : '请选择',
-                            dropupAuto: false
+                            dropupAuto: false,
+                            'deselectAllText':'取消全选',
+                            'selectAllText': '全选',
                         });
                         $scope.reachList = [];
                         $scope.status = 1;
@@ -571,9 +573,11 @@
                                             $scope.reportEndTime = res.data[0].deadlinetime;
                                             $scope.reportContent = res.data[0].content;
                                             $scope.reportFileUrl = res.data[0].assessoryyuan;
+                                            $scope.reportRegion = res.data[0].feedbackareaid.split(',');
 
                                             $('.selectpicker4').selectpicker('val', res.data[0].feedbackareaid.split(','));
                                             $('.selectpicker4').selectpicker('refresh');
+                                            $('.selectpicker4').selectpicker('render');
 
                                             $scope.fileList2 = [];
                                             $scope.accessoryURL2 = [];
@@ -655,6 +659,7 @@
                             content:$scope.reportContent,
                             assessoryyuan:$scope.assessory ? $scope.assessory.join(',') : $scope.reportFileUrl
                         }
+                        // console.log(params);
 
                         if(
                             $scope.reportTitle && $scope.reportStartTime && $scope.reportEndTime && $scope.reportRegion && $scope.reportContent

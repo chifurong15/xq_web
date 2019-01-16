@@ -33,7 +33,9 @@
                     $scope.init = function () {
                         $('.selectpicker').selectpicker({
                             noneSelectedText : '请选择',
-                            dropupAuto: false
+                            dropupAuto: false,
+                            'deselectAllText':'取消全选',
+                            'selectAllText': '全选',
                         });
                         $scope.isShow = false; //控制现场核查时，重新办理按钮显示  默认不显示
 

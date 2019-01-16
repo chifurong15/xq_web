@@ -219,7 +219,7 @@
                                 <br>
                                 <div class="input-group form-item" style="z-index: 5;">
                                     <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">反馈区域</font></font></label>
-                                    <select id="slpk4" class="form-control selectpicker selectpicker4" multiple  style="width: 426px;z-index: 0;" ng-model="reportRegion">
+                                    <select id="slpk4" class="form-control selectpicker selectpicker4" multiple data-actions-box="true" data-size="7"  style="width: 426px;z-index: 0;" ng-model="reportRegion">
                                     </select>
                                 </div>
                                 <br>
@@ -318,13 +318,13 @@
                             </div>
                             <div class="input-group form-item" style="z-index: 11;">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查区域</font></font></label>
-                                <select id="slpk1" class="form-control selectpicker selectpicker1" multiple  style="width: 426px;z-index: 0;" ng-change="getRegionListener(sentRegion)" ng-model="sentRegion">
+                                <select id="slpk1" class="form-control selectpicker selectpicker1" multiple data-actions-box="true" data-size="7"  style="width: 426px;z-index: 0;" ng-change="getRegionListener(sentRegion)" ng-model="sentRegion">
                                 </select>
                             </div>
 
                             <div class="input-group form-item" style="z-index: 10;">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查河段</font></font></label>
-                                <select id="slpk2" class="form-control selectpicker selectpicker2" multiple  ng-change="getReachListener(sentReach)"  style="width: 426px;z-index: 0;" data-live-search="true" ng-model="sentReach">
+                                <select id="slpk2" class="form-control selectpicker selectpicker2" multiple data-actions-box="true" data-size="7"  ng-change="getReachListener(sentReach)"  style="width: 426px;z-index: 0;" data-live-search="true" ng-model="sentReach">
                                 </select>
                                 <!--<select id="slpk2" class="form-control selectpicker selectpicker2" multiple  ng-change="getReachListener(r.reachname)"  style="width: 426px;z-index: 0;" data-live-search="true" ng-model="sentReach" ng-options="r.reachname as r.reachname for r in reachList track by r.id ">-->
 
@@ -332,7 +332,7 @@
                             </div>
                             <div class="input-group form-item" style="z-index: 9;">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">暗查成员</font></font></label>
-                                <select id="slpk3" class="form-control selectpicker selectpicker3" multiple  style="width: 426px;z-index: 0;" ng-model="personnel">
+                                <select id="slpk3" class="form-control selectpicker selectpicker3" multiple data-actions-box="true" data-size="5"  style="width: 426px;z-index: 0;" ng-model="personnel">
                                 </select>
                             </div>
                             <div class="form-item">
