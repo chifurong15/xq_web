@@ -98,9 +98,9 @@
                             <td>{{module.createPerson}}</td>
                             <td>{{module.createDate}}</td>
                             <td>
-                                <span ng-if="module.replyStatus == 1">已答复</span>
-                                <span ng-if="module.replyStatus == 2" style="color: #f00;">未答复</span>
-                                <span ng-if="module.replyStatus != 1 && module.replyStatus != 2">-</span>
+                                <span ng-if="module.replyStatus == 1 && module.isreply == 1">已答复</span>
+                                <span ng-if="module.replyStatus == 2 && module.isreply == 1" style="color: #f00;">未答复</span>
+                                <span ng-if="module.isreply != 1">-</span>
                             </td>
                             <td>
                                 <span ng-if="module.readStatus == 1">已读</span>
