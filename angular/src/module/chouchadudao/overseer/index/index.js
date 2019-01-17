@@ -22,6 +22,7 @@
                                                routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl();
+                    // var apiPrefix = 'http://10.0.9.110:7025';
 
                     //var apiPrefix = 'http://10.0.9.203:8080';
 

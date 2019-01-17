@@ -39,8 +39,6 @@
                         });
                         $scope.isShow = false; //控制现场核查时，重新办理按钮显示  默认不显示
 
-
-
                         getList();
                         getAllRegion ();
                     }
@@ -62,6 +60,7 @@
                             objectid:$scope.region,
                             proof:$scope.proof,
                             status:$scope.status,
+                            type:$scope.type,
                             column:$scope.column ? $scope.column : '',
                             order:$scope.order ? $scope.order : ''
                         }
@@ -89,7 +88,25 @@
                         $scope.region = '';
                         $scope.status = '';
                         $scope.proof = '';
+                        $scope.type = '';
                     }
+
+                    // //导出
+                    // $scope.export = function (){
+                    //     window.open(
+                    //         apiPrefix
+                    //         + '/v1/msMeetingCondition/createExcel?meetingTimeStart='
+                    //         + $scope.startTime
+                    //         + '&meetingTimeEnd='
+                    //         + $scope.endTime
+                    //         + '&region='
+                    //         + $scope.regionName
+                    //         + '&userId='
+                    //         + $scope.userInfo.id
+                    //         + '&regionId='
+                    //         + $scope.userInfo.regionId
+                    //     )
+                    // }
 
                     //查看  下载附件
                     $scope.downFile = function (path){
@@ -136,6 +153,9 @@
                     // 查看
                     $scope.view = function (id) {
                         $('#myModalView').modal('show');
+                        getDetail(id);
+                    }
+                    function getDetail(id){
                         $ajaxhttp.myhttp({
                             url:apiPrefix + '/duban/v1/DubanSupervision/detail',
                             method:'get',
@@ -173,6 +193,7 @@
                     $scope.feedback = function (module){
                         $scope.feedbackId = module.id;
                         $scope.dealStatus = module.status;
+                        $scope.selectChange($scope.dealStatus);
 
                         $ajaxhttp.myhttp({
                             url:apiPrefix + '/inform/v1/informAccept/list',
@@ -243,7 +264,7 @@
                                 callBack:function (res) {
                                     if(res.resCode == 1){
                                         if(id == 1){//重新办理
-                                            $scope.view($scope.feedbackId);
+                                            getDetail($scope.feedbackId);
                                             $('#myModalView1').modal('show');
                                         }else if (id == 3){//保存
                                             layer.msg('保存成功',{times:500})
@@ -288,6 +309,7 @@
                                         layer.msg('重新发起成功',{times:2000});
                                         $('#myModalView1').modal('hide');
                                         $('#myModal2').modal('hide');
+                                        $('#myModal3').modal('hide');
                                         $('#myModalView').modal('hide');
                                         getList();
                                         $scope.enddingTime = '';
@@ -351,19 +373,22 @@
 
 
                     //现场核查
-                    $scope.check = function (id) {
-                        $scope.checkId = id;
+                    $scope.check = function (module) {
+                        $scope.assessory = [];
+                        $scope.checkId = module.id;
                         $('#myModal3').modal('show');
+
                         $ajaxhttp.myhttp({
                             url:apiPrefix + '/duban/v1/DubanSupervision/detailFeedbackhc',
                             method:'get',
                             params:{
-                                supervisionid:id
+                                supervisionid:$scope.checkId
                             },
                             callBack:function (res) {
                                 if(res.data){
                                     $scope.checkData = res.data[0];
                                     $scope.checkStatus = $scope.checkData.status;
+                                    $scope.selectChange($scope.checkStatus);
                                     $scope.fileList1= [];
                                     $scope.accessoryURL1 = [];
                                     if(res.data[0].assessoryyuan){
@@ -376,7 +401,6 @@
                                         // console.log(viewUrl1);
 
                                         viewUrl1.map(function (item,i){
-                                            console.log(item);
                                             if(item.substring(item.length-3).toLowerCase() == 'mp3'){
                                                 $scope.mp3Url.push(viewUrl1[i]);
                                             }else if(item.substring(item.length-3).toLowerCase() == 'mp4'){
@@ -426,8 +450,12 @@
                             $scope.isShow = true;
                         }
                     }
-                    //核查保存
-                    $scope.checkSave = function () {
+                    //核查保存 、核查重新办理
+                    $scope.checkSave = function (id) {
+                        var assessory = [];
+                        if($scope.assessory){
+                            assessory = [...$scope.checkData.assessoryyuan.split(','),...$scope.assessory];
+                        }
                         var params = {
                             id:$scope.checkData.id,
                             supervisionid:$scope.checkId,
@@ -435,7 +463,7 @@
                             objectname:$scope.checkData.objectname,
                             description:$scope.checkData.description,
                             status:$scope.checkStatus,
-                            assessoryyuan:$scope.checkData.assessoryyuan
+                            assessoryyuan:assessory
                         }
                         if($scope.checkData.feedbacktime && $scope.checkData.objectname && $scope.checkData.description && $scope.checkStatus){
                             $ajaxhttp.myhttp({
@@ -444,10 +472,15 @@
                                 params:params,
                                 callBack:function (res) {
                                     if(res.resCode == 1){
-                                        layer.msg('保存成功',{times:2000});
-                                        getList();
-                                        $('#myModal3').modal('hide');
-                                        $scope.checkStatus = '';
+                                        if(id == 1){//重新办理
+                                            getDetail($scope.checkId);
+                                            $('#myModalView1').modal('show');
+                                        }else if(id == 2){//保存
+                                            layer.msg('保存成功',{times:2000});
+                                            getList();
+                                            $('#myModal3').modal('hide');
+                                            $scope.checkStatus = '';
+                                        }
                                     }else{
                                         layer.msg('服务器异常，请稍后再试',{times:500})
                                     }
@@ -463,37 +496,37 @@
                         }
                     }
 
-                    //核查重新办理
-                    $scope.reStartCheck = function (){
-                        var params = {
-                            supervisionid:$scope.checkData.id,
-                            status:$scope.checkStatus
-                        }
-                        if($scope.checkStatus){
-                            $ajaxhttp.myhttp({
-                                url:apiPrefix + '/duban/v1/DubanSupervision/update',
-                                method:'put',
-                                params:params,
-                                callBack:function (res) {
-                                    if(res.resCode == 1){
-                                        layer.msg('已重新办理',{times:2000});
-                                        getList();
-                                        $('#myModal3').modal('hide');
-                                        $scope.checkStatus = '';
-                                    }else{
-                                        layer.msg('服务器异常，请稍后再试',{times:500})
-                                    }
-                                }
-                            })
-
-                        }else{
-                            layer.alert("请选择督办结果", {
-                                skin: 'my-skin',
-                                closeBtn: 1,
-                                anim: 3
-                            })
-                        }
-                    }
+                    // //核查重新办理
+                    // $scope.reStartCheck = function (){
+                    //     var params = {
+                    //         supervisionid:$scope.checkData.id,
+                    //         status:$scope.checkStatus
+                    //     }
+                    //     if($scope.checkStatus){
+                    //         $ajaxhttp.myhttp({
+                    //             url:apiPrefix + '/duban/v1/DubanSupervision/update',
+                    //             method:'put',
+                    //             params:params,
+                    //             callBack:function (res) {
+                    //                 if(res.resCode == 1){
+                    //                     layer.msg('已重新办理',{times:2000});
+                    //                     getList();
+                    //                     $('#myModal3').modal('hide');
+                    //                     $scope.checkStatus = '';
+                    //                 }else{
+                    //                     layer.msg('服务器异常，请稍后再试',{times:500})
+                    //                 }
+                    //             }
+                    //         })
+                    //
+                    //     }else{
+                    //         layer.alert("请选择督办结果", {
+                    //             skin: 'my-skin',
+                    //             closeBtn: 1,
+                    //             anim: 3
+                    //         })
+                    //     }
+                    // }
 
                     //确认发起
                     $scope.submit =  function () {
@@ -567,6 +600,7 @@
                     }
                     //关闭核查结果模态框
                     $scope.closeCheckModal = function () {
+                        $scope.assessory = [];
                         $('#myModal3').modal('hide');
                         $scope.checkStatus = '';
                         $scope.isShow = false;
@@ -696,10 +730,10 @@
 
                     //核查时间
                     $('#checkTime').datetimepicker({
-                        format: 'YYYY-MM-DD HH:mm:ss',
+                        format: 'YYYY-MM-DD',
                         locale: moment.locale('zh-cn')
                     }).on('dp.change', function (c) {
-                        var result = new moment(c.date).format('YYYY-MM-DD  HH:mm:ss');
+                        var result = new moment(c.date).format('YYYY-MM-DD');
                         $scope.checkData.feedbacktime = result;
                         $scope.$apply();
                     });

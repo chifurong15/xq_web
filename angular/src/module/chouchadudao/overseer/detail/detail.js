@@ -22,8 +22,9 @@
                                       routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl();
-                    //var apiPrefix = 'http://10.0.9.203:8080';
+                    // var apiPrefix = 'http://10.0.9.110:7025';
                     //var apiPrefix1 = 'http://10.0.9.194:8066';
+
 
                     var regionTree;
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree';
@@ -57,9 +58,8 @@
                         getRegion ();
                         sentReportList ();
                         sentOneRegionList ();
-
-
                     }
+
 
                     //获取天津市所有的区
                     function getRegion (){
@@ -436,13 +436,17 @@
                         $('.selectpicker1').selectpicker('refresh');
                     }
 
-                    //导出督查组
-                    $scope.export = function () {
-                        window.open(apiPrefix + '/inspection/v1/Supervise/createExcel?inspectionid=' + $scope.id)
+                    //导出督导组、联络员
+                    $scope.export = function (id) {
+                        if(id == 1){//联络员
+                            window.open(
+                                apiPrefix
+                                + '/inspection/v1/ComtactPerson/createExcel?inspectionid=' + $scope.id
+                            )
+                        }else if (id == 2){//督导组
+                            window.open(apiPrefix + '/inspection/v1/Supervise/createExcel?inspectionid=' + $scope.id)
+                        }
                     }
-
-
-
 
                     //获取下发小通知列表
                     function sentNoticeList () {

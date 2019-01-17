@@ -40,11 +40,20 @@
                         </div>
                         <div class="form-item">
                             <label>是否办结</label>
-                            <select class="form-control select-short" ng-change="selectChange();" ng-model="status">
+                            <select class="form-control select-short" ng-model="status">
                                 <option value="">全部</option>
                                 <option value="1">未办结</option>
                                 <option value="2">未按期整改</option>
                                 <option value="3">已办结</option>
+                            </select>
+                        </div>
+                        <div class="form-item">
+                            <label>督办类型</label>
+                            <select class="form-control select-short" ng-model="type">
+                                <option value="">全部</option>
+                                <option value="1">普通督办</option>
+                                <option value="2">现场督办</option>
+                                <option value="3">挂牌督办</option>
                             </select>
                         </div>
                         <button type="submit" ng-click="searchData()" class="btn btn-primary">
@@ -62,15 +71,18 @@
                 <div class="table-responsive">
                     <div class="form-inline">
                         <div class="input-group fr">
-                            <button type="button" class="btn btn-primary btn-sm" ng-click="add()">
+                            <button type="button" class="btn btn-primary btn-sm" ng-click="add()" style="margin:0 10px;">
                                 <i class="fa fa-plus"></i> 发起督办
                             </button>
+                            <!--<button type="button" class="btn btn-primary btn-sm" ng-click="export()">-->
+                                <!--<i class="fa-sign-in"></i> 导出-->
+                            <!--</button>-->
                         </div>
                     </div>
                     <table class="table table-bordered table-hover" data-filter="#filter">
                         <tr>
-                            <th style="width: 5%;">序号</th>
-                            <th style="width: 15%">督办项目
+                            <th style="width: 3%;">序号</th>
+                            <th style="width: 15%">督办事项
                                 <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','project')"></i>
                                 <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','project')"></i>
                             </th>
@@ -78,31 +90,32 @@
                                 <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','objectname')"></i>
                                 <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','objectname')"></i>
                             </th>
-                            <th style="width: 10%">督办文号
-                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','proof')"></i>
-                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','proof')"></i>
-                            </th>
+                            <th style="width: 7%">督办文号</th>
                             <th style="width: 10%">应回复日期
                                 <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','deadlinedate')"></i>
                                 <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','deadlinedate')"></i>
                             </th>
-                            <th style="width: 10%">督办地址
+                            <th style="width: 10%">督办点位
                                 <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','address')"></i>
                                 <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','address')"></i>
                             </th>
-                            <th style="width: 5%">督办结果
+                            <th style="width: 7%">督办类型
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','type')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','type')"></i>
+                            </th>
+                            <th style="width: 7%">督办结果
                                 <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','resule')"></i>
                                 <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','resule')"></i>
                             </th>
-                            <th style="width: 10%">是否办结
+                            <th style="width: 8%">是否办结
                                 <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','status')"></i>
                                 <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','status')"></i>
                             </th>
-                            <th style="width: 10%">现场核查
+                            <th style="width: 8%">现场核查
                                 <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','whetherinspect')"></i>
                                 <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','whetherinspect')"></i>
                             </th>
-                            <th style="width: 15%">操作</th>
+                            <th style="width: 10%">操作</th>
                         </tr>
                         <tr ng-repeat="module in moduleList"  style="cursor:pointer;">
                             <td>{{$index + 1 + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
@@ -111,6 +124,11 @@
                             <td>{{module.proof}}</td>
                             <td>{{module.deadlinedate}}</td>
                             <td>{{module.address}}</td>
+                            <td>
+                                <span ng-if="module.type == 1">普通督办</span>
+                                <span ng-if="module.type == 2">现场督办</span>
+                                <span ng-if="module.type == 3">挂牌督办</span>
+                            </td>
                             <td>
                                 <span ng-if="module.resule == 2">完成</span>
                                 <span ng-if="module.resule == 1">未完成</span>
@@ -127,7 +145,7 @@
                             <td>
                                 <a class="btn btn-primary btn-xs" ng-click="view(module.id)"><i class="fa fa-info" title="查看"></i></a>
                                 <a class="btn btn-primary btn-xs" ng-click="feedback(module)"><i class="fa fa-file-text-o" title="督办反馈"></i></a>
-                                <a class="btn btn-primary btn-xs" ng-if="module.whetherinspect == 2" ng-click="check(module.id)"><i class="fa fa-chain-broken" title="现场核查"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-if="module.whetherinspect == 2" ng-click="check(module)"><i class="fa fa-chain-broken" title="现场核查"></i></a>
                             </td>
                         </tr>
                     </table>
@@ -196,7 +214,7 @@
                                 </div>
                             </div>
                             <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办项目</font></font></label>
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办事项</font></font></label>
                                 <input type="text" class="form-control input-long" ng-model="supervisingProject">
                             </div>
                             <div class="input-group form-item" style="z-index: 10;">
@@ -209,7 +227,7 @@
                                 <!---->
                             <!--</div>-->
                             <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办地址</font></font></label>
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办点位</font></font></label>
                                 <input type="text" class="form-control input-long" ng-model="supervisingAddress">
                             </div>
                             <div class="form-item">
@@ -279,11 +297,11 @@
                                 </div>
                             </div>
                             <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办项目</font></font></label>
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办事项</font></font></label>
                                 <input type="text" readonly class="form-control input-long" ng-model="detailData.project">
                             </div>
                             <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办地址</font></font></label>
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办点位</font></font></label>
                                 <input type="text" class="form-control input-long" readonly ng-model="detailData.address">
                             </div>
                             <div class="form-item">
@@ -310,7 +328,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
                     </div>
                 </div>
             </div>
@@ -389,7 +407,7 @@
                             &times;
                         </button>
                         <h4 class="modal-title" id="myModalLabelView1">
-                            查看详情
+                            重新发起督办
                         </h4>
                     </div>
                     <div class="modal-body" style="height: 450px;">
@@ -418,11 +436,11 @@
                             </div>
 
                             <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办项目</font></font></label>
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办事项</font></font></label>
                                 <input type="text" readonly class="form-control input-long" ng-model="detailData.project">
                             </div>
                             <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办地址</font></font></label>
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督办点位</font></font></label>
                                 <input type="text" class="form-control input-long" readonly ng-model="detailData.address">
                             </div>
                             <div class="form-item">
@@ -456,7 +474,7 @@
         </div>
 
         <!--现场核查-->
-        <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+        <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true" style="z-index: 9999;">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -486,7 +504,7 @@
                             </div>
                             <div class="form-item" ng-if="fileList1.length > 0">
                                 <label><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">附件</font></font></label>
+                                        style="vertical-align: inherit;">附件预览</font></font></label>
                             </div>
                             <div class="form-item" style="position: relative;width: 425px;" id="layer-photos" >
                                 <span ng-repeat="item in fileList1" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
@@ -497,7 +515,13 @@
                                 <img ng-show="mp4Url.length > 0" ng-repeat="item in mp4Url"
                                      style="float: left;margin: 0 5px;width:60px; height:60px;}" src="img/audio_img.png"
                                      ng-click="playVideo(item)"  alt="巡河视频">
-
+                            </div>
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font
+                                        style="vertical-align: inherit;">上传附件</font></font></label>
+                                <button class="btn btn-info" ng-click="getUploadFile()"><i
+                                        class="fa fa-css3"></i>上传附件
+                                </button>
                             </div>
                             <div class="form-item">
                                 <label>核查结果</label>
@@ -511,8 +535,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" ng-show="isShow" class="btn btn-primary" ng-click="reStartCheck()">重新办理</button>
-                        <button type="button" class="btn btn-primary" ng-click="checkSave()">保存</button>
+                        <button type="button" ng-show="isShow" class="btn btn-primary" ng-click="checkSave(1)">重新办理</button>
+                        <button type="button" class="btn btn-primary" ng-click="checkSave(2)">保存</button>
                         <button type="button" class="btn btn-primary" ng-click="closeCheckModal()">取消</button>
                     </div>
                 </div>
