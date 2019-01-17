@@ -23,7 +23,7 @@
 
                     var apiPrefix = moduleService.getServiceUrl();
                     // var apiPrefix = 'http://10.0.9.133:7026';
-                    var apiPrefix1 = 'http://10.0.9.194:8066';
+                    // var apiPrefix1 = 'http://10.0.9.194:8066';
 
                     var regionTree;
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree';
@@ -41,6 +41,7 @@
 
                         getList();
                         getAllRegion ();
+                        $scope.reset()
                     }
 
                     // 表格排序
@@ -91,22 +92,26 @@
                         $scope.type = '';
                     }
 
-                    // //导出
-                    // $scope.export = function (){
-                    //     window.open(
-                    //         apiPrefix
-                    //         + '/v1/msMeetingCondition/createExcel?meetingTimeStart='
-                    //         + $scope.startTime
-                    //         + '&meetingTimeEnd='
-                    //         + $scope.endTime
-                    //         + '&region='
-                    //         + $scope.regionName
-                    //         + '&userId='
-                    //         + $scope.userInfo.id
-                    //         + '&regionId='
-                    //         + $scope.userInfo.regionId
-                    //     )
-                    // }
+                    //导出
+                    $scope.export = function (){
+                        window.open(
+                            apiPrefix
+                            + '/duban/v1/DubanSupervision/createExcel?project='
+                            + $scope.project
+                            + '&statTime='
+                            + $scope.startTime
+                            + '&endTime='
+                            + $scope.endTime
+                            + '&objectid='
+                            + $scope.region
+                            + '&proof='
+                            + $scope.proof
+                            + '&status='
+                            + $scope.status
+                            + '&type='
+                            + $scope.type
+                        )
+                    }
 
                     //查看  下载附件
                     $scope.downFile = function (path){
