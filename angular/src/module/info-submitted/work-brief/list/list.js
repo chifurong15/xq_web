@@ -185,6 +185,27 @@
                     $scope.view = function (id) {
                         localStorage.setItem('id',id);
                         routeService.route('8-1-1', true);
+                        changeState(id);
+                    }
+
+                    //修改阅读状态
+                    function changeState (id){
+                        if($scope.num == 5){
+                            $ajaxhttp.myhttp({
+                                url:apiPrefix + '/v1/MsSentReadStateController/update',
+                                method:'put',
+                                params:{
+                                    sentId:id
+                                },
+                                callBack:function (res) {
+                                    if(res.resCode == 1){
+
+                                    }else{
+                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                                    }
+                                }
+                            })
+                        }
                     }
 
                     //清空新增工作简报表单
@@ -278,6 +299,9 @@
                         $scope.briefDescription = '';
                         $('#myModal').modal('show');
                         $scope.answerId = module.id;
+
+                        changeState(module.id);
+
                         $ajaxhttp.myhttp({
                             url:apiPrefix + '/v1/msWorkReports/detail',
                             method:'get',

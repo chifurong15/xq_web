@@ -22,7 +22,7 @@
                                           routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl() + '/messageSent';
-                    //var apiPrefix = 'http://10.0.9.203:8080' + '/messageSent';
+                    // var apiPrefix = 'http://10.0.9.110:7028' + '/messageSent';
 
 
                     var regionTree;
@@ -44,6 +44,7 @@
                         })
                         getList();
                         getRegion ();
+                        getReadList ();
 
                     }
                     // 获取数据列表
@@ -63,6 +64,20 @@
                             callBack:function (res) {
                                 $scope.moduleList = res.data.list
                                 $scope.paginationConf.totalItems = res.data.total;
+                            }
+                        })
+                    }
+
+                    //获取已阅情况列表
+                    function getReadList () {
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/v1/MsSentReadStateController/selectList',
+                            method:'get',
+                            params:{
+                                sentId:$scope.detailId,
+                            },
+                            callBack:function (res) {
+                                $scope.readList = res.data
                             }
                         })
                     }
