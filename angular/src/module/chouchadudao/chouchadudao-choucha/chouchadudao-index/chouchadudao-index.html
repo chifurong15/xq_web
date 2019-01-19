@@ -27,8 +27,8 @@
 	                        <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">状态</font></font></label>
 	        				<select class="form-control select-short" style="width: 180px;" ng-model="status">
 	                        	<option value="">请选择</option>
-	                        	<option value="0">已下发</option>
-	                        	<option value="1">已检查</option>
+	                        	<option value="1">已下发</option>
+	                        	<option value="2">未下发</option>
 	                        </select>
 	                    </div>	                    
         				<div class="input-group">
@@ -77,8 +77,8 @@
 	                                    <td>{{item.taskType == 0 ? '临时任务' : '常规任务'}}</td>
 	                                    <td>{{item.sendPerson}}</td>
 	                                    <td>
-	                                    	<span class="label label-danger" ng-if="item.status == 0">已下发</span>
-											<span class="label label-info" ng-if="item.status == 1">已检查</span>
+	                                    	<span class="label label-danger" ng-if="item.status == 1">已下发</span>
+											<span class="label label-info" ng-if="item.status == 0 || item.status == 2">未下发</span>
 	                                    </td>	                                   
 	                                    <td style="text-align: left;">
 	                                    	<button type="button" class="btn btn-success" ng-click="view(item.id)">查看</button>

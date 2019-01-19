@@ -184,7 +184,7 @@
 					$scope.sent = function (){
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/spotcheck/doDistribute',
-                            method: 'PATCH',
+                            method: 'post',
                             params:{
                                 id: $scope.id
                             },
