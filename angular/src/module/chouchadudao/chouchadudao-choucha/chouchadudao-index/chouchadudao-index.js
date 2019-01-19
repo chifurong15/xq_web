@@ -22,7 +22,7 @@
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
 					var apiPrefix = moduleService.getServiceUrl() + '/spotcheck';
-                    // var apiPrefix = 'http://10.0.9.194:7022' + '/spotcheck';
+                    // var apiPrefix = 'http://10.0.9.214:7022' + '/spotcheck';
 
 
                     $scope.init = function () {
@@ -51,7 +51,7 @@
 								pageNumber: $scope.paginationConf.currentPage,
 								pageSize: $scope.paginationConf.itemsPerPage,
                                 status:$scope.status,
-								regionName:$scope.region,
+								regionCode:$scope.region,
                                 checkTime:$scope.postTime
 							},
 							callBack: function (res) {

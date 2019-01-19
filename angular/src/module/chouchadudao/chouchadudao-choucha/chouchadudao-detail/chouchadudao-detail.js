@@ -22,10 +22,9 @@
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
 					var apiPrefix = moduleService.getServiceUrl() + '/spotcheck';
-					// var apiPrefix = 'http://10.0.9.194:7022' + '/spotcheck';
+                    // var apiPrefix = 'http://10.0.9.214:7022' + '/spotcheck';
 
 
-					
 					$scope.init = function () {
                         $scope.eventImgUrl = 'http://10.0.0.196/api/download' ;
 						var bulletin = globalParam.getter().bulletin || {};

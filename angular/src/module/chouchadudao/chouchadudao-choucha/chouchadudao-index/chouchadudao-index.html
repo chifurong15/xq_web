@@ -18,14 +18,14 @@
 						</div>
 	        			<div class="input-group form-item">
 	                        <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查区域</font></font></label>
-	        				<select class="form-control select-short" style="width: auto;" ng-model="region">
+	        				<select class="form-control select-short" style="width: 180px;" ng-model="region">
 	                        	<option value="">请选择</option>
-	                        	<option value="{{item.regionName}}" ng-repeat="item in RegionList">{{item.regionName}}</option>
+	                        	<option value="{{item.regionId}}" ng-repeat="item in RegionList">{{item.regionName}}</option>
 	                        </select>
 	                    </div>
 	                    <div class="input-group form-item">
 	                        <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">状态</font></font></label>
-	        				<select class="form-control select-short" style="width: auto;" ng-model="status">
+	        				<select class="form-control select-short" style="width: 180px;" ng-model="status">
 	                        	<option value="">请选择</option>
 	                        	<option value="0">已下发</option>
 	                        	<option value="1">已检查</option>
@@ -71,7 +71,7 @@
 											<!--<span ng-repeat="items in item.regionName.split(',')" key="{{$index}}">{{items}}<br></span>-->
 										</td>
 	                                    <td>
-											{{item.checkRiver}}
+											{{item.riverName}}
 											<!--<span ng-repeat="itemss in item.checkRiver.split(',')" key="{{$index}}">{{itemss}}<br></span>-->
 										</td>
 	                                    <td>{{item.taskType == 0 ? '临时任务' : '常规任务'}}</td>

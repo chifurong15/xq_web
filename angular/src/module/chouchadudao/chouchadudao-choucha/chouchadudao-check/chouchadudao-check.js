@@ -22,6 +22,8 @@
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
 					var apiPrefix = moduleService.getServiceUrl() + '/spotcheck';
+                    // var apiPrefix = 'http://10.0.9.214:7022' + '/spotcheck';
+
                     $scope.eventImgUrl = 'http://10.0.0.196/api/download';
 					
 					$scope.init = function () {

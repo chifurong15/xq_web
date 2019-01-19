@@ -22,11 +22,12 @@
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
 					var apiPrefix = moduleService.getServiceUrl() + '/spotcheck';
-					
-					$scope.init = function () {	
+                    // var apiPrefix = 'http://10.0.9.214:7022' + '/spotcheck';
+
+                    $scope.init = function () {
 						$('.selectpicker').selectpicker({
                             noneSelectedText : '请选择',
-                            dropupAuto: false
+                            dropupAuto: false,
 			            });
                         getAllRegion();
                         getAllPerson();
@@ -41,11 +42,12 @@
                                 $scope.RegionList = res.data;
                                 var select = $("#slpk");
                                 for (var i = 0; i < res.data.length; i++) {
-                                    select.append("<option value='"+res.data[i].regionName+"'>"
+                                    select.append("<option value='"+res.data[i].regionId+"'>"
                                         + res.data[i].regionName + "</option>");
                                 }
                                 $('.selectpicker').selectpicker('val', '');
                                 $('.selectpicker').selectpicker('refresh');
+                                $('.selectpicker').selectpicker('render');
                             }
                         })
                     }
@@ -62,28 +64,33 @@
                     }
 
                     //监听区域选择
-                    $scope.getChangeRegion = function () {
-                        getAllRiver();
+                    $scope.getChangeRegion = function (region) {
+                        getAllRiver(region);
+                    }
+
+                    //监听区域选择
+                    $scope.getChangeRiver = function (river) {
+                        $scope.river = river;
                     }
 
                     //获取所有的河道
-                    function getAllRiver(){
+                    function getAllRiver(region){
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/spotcheck/listRiver',
                             method: 'get',
 							params:{
-                            	regionStr:$scope.region.join(',')
+                                regionId:region
 							},
                             callBack: function (res) {
                                 $scope.riverList = res.data;
                                 var select = $("#slpkRiver");
-                                $('#slpkRiver').html('');
                                 for (var i = 0; i < res.data.length; i++) {
-                                    select.append("<option value='"+res.data[i]+"'>"
-                                        + res.data[i] + "</option>");
+                                    select.append("<option value='"+res.data[i].riverCode+"'>"
+                                        + res.data[i].riverName + "</option>");
                                 }
                                 $('.selectpicker1').selectpicker('val', '');
                                 $('.selectpicker1').selectpicker('refresh');
+                                $('.selectpicker1').selectpicker('render');
                             }
                         })
 
@@ -104,10 +111,6 @@
 					
 					// 保存
 					$scope.submit = function() {
-						// var arrCon = [] ;
-						// $.each($('input:checkbox:checked'),function(){
-						// 	arrCon.push($(this).val());
-			           	// });
 
 						if (!$scope.title) {
                          layer.alert("请输入标题", {
@@ -146,32 +149,30 @@
                                 anim: 3
                             });
                         }
-						
-						// 新增抽查
-						var params = {
-								title: $scope.title,
-                            	checkDate: $scope.checkDate,
-                            	checkRiver: $scope.river ? $scope.river.join(',') : '',
-                            	regionName: $scope.region ? $scope.region.join(',') : '',
-								taskType: $scope.taskType,
-                            	sendPerson:$scope.sendPerson
+                        // 新增抽查
+                        var params = {
+                            title: $scope.title,
+                            checkDate: $scope.checkDate,
+                            checkRiver: $scope.river ,
+                            regionCode: $scope.region,
+                            taskType: $scope.taskType,
+                            sendPersonId:$scope.sendPerson
 
-						}
-                        console.log(params);
-
-						$ajaxhttp.myhttp({
-						    url: apiPrefix + '/v1/spotcheck/addSpotcheck',
-						    method: 'POST',
-						    params:params,
-						    callBack: function (res) {
-								if(res.resCode == 1){
-						            layer.msg('新增成功', {time:2000});
-						            routeService.route('2-2', true);
-								}
-						    }
-						})
-
-
+                        }
+                        // console.log(params);
+                        if($scope.title && $scope.checkDate  && $scope.region  && $scope.river  && $scope.taskType  && $scope.sendPerson){
+                            $ajaxhttp.myhttp({
+                                url: apiPrefix + '/v1/spotcheck/addSpotcheck',
+                                method: 'POST',
+                                params:params,
+                                callBack: function (res) {
+                            		if(res.resCode == 1){
+                                        layer.msg('新增成功', {time:2000});
+                                        routeService.route('2-2', true);
+                            		}
+                                }
+                            })
+                        }
 					}
 					
 					//取消

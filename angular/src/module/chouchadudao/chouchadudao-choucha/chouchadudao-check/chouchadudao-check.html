@@ -8,56 +8,63 @@
 		</div>
         
     	<div class="panel panel-default">
-        	<div class="panel-body">
-        		<ul class="js-tab">
-        			<li class="basis tab-active" >基础资料</li>        			
-        			<li class="check">检查结果</li>
-        		</ul>
-        		<div class="panel-body js-con">
-        			<div class="basis-con con">        				
-			    		<div class="panel-body">
+			<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+				<ul class="layui-tab-title">
+					<li class="layui-this">基础资料</li>
+					<li>检查结果</li>
+				</ul>
+				<div class="layui-tab-content">
+					<!--基础资料-->
+					<div class="layui-tab-item layui-show">
+						<div class="panel-body">
 							<form class="form-inline">
 								<div class="form-item" >
 									<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
-									<input type="text" class="form-control input-short" ng-model="detail.title" readonly>
+									<input type="text" class="form-control input-long" ng-model="detail.title" readonly>
 								</div>
-								<div class="form-item" style="margin-left: 5px;">
+								<br>
+								<div class="form-item">
 									<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查区域</font></font></label>
-									<!--<input type="text" class="form-control input-short" ng-model="detail.regionName" readonly>-->
-									<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="detail.regionName" style="width: 160px;max-width: 160px;" readonly></textarea>
+									<input type="text" class="form-control input-long" ng-model="detail.regionName"  readonly>
+									<!--<textarea class="form-control" ng-model="detail.regionName" style="width: 453px;max-width: 453px;" readonly></textarea>-->
 								</div>
 								<br />
 								<div class="form-item">
 									<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查日期</font></font></label>
 									<input type="text" class="form-control input-short" ng-model="detail.checkDate" readonly>
 								</div>
-								<div class="form-item" style="position: relative;left: 5px;">
-									<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查河道</font></font></label>
-									<!--<input type="text" class="form-control input-short" ng-model="detail.checkRiver" readonly>-->
-									<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="detail.checkRiver" style="width: 160px;max-width: 160px;" readonly></textarea>
-								</div>
-								<br />
-								<div class="form-item">
+								<div class="form-item" style="margin-left: 15px;">
 									<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">任务类型</font></font></label>
 									<input type="text" class="form-control input-short" ng-model="taskType" readonly>
 								</div>
-								<div class="form-item" style="position: relative;left: 5px;">
-									<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发人员</font></font></label>
-									<input type="text" class="form-control input-short" ng-model="detail.sendPerson" readonly>
+								<br>
+								<div class="form-item">
+									<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查河道</font></font></label>
+									<input type="text" class="form-control input-long" ng-model="detail.riverName"  readonly>
+									<!--<textarea class="form-control" ng-model="detail.riverName" style="width: 453px;max-width: 453px;" readonly></textarea>-->
 								</div>
+								<br />
+								<div class="form-item">
+									<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发人员</font></font></label>
+									<input type="text" class="form-control input-long" ng-model="detail.sendPerson" readonly>
+								</div>
+
+
 							</form>
-			    		</div>
-        			</div>
-        			
-					<div class="check-con con tab-show">
-        				<div class="panel-body">
+						</div>
+					</div>
+
+					<!--检查结果-->
+					<div class="layui-tab-item">
+						<div class="panel-body">
 							<div ng-if="checkList.length == 0">暂无检查结果</div>
 							<div style="overflow: hidden" ng-if="checkList.length != 0">
-								<form class="form-inline" style="float:left;padding-left: 15%;">
+								<form class="form-inline">
 									<div class="form-item" >
 										<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>检查时间</font></label>
 										<input type="text" class="form-control input-short" readonly ng-model="checkTime">
 									</div>
+									<br>
 									<div class="form-item" >
 										<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>上报人</font></label>
 										<input type="text" class="form-control input-short" readonly ng-model="checkPerson">
@@ -90,26 +97,77 @@
 									</div>
 								</form>
 							</div>
-        					<div style="text-align: left;margin: 35px 0;" ng-if="checkList.length != 0">
+							<div style="text-align: left;margin: 35px 0;" ng-if="checkList.length != 0">
 								<button type="button" class="btn btn-primary" style="margin-right: 30px;" ng-click="send()" >确认并派发任务</button>
 								<button type="button" class="btn btn-default" ng-click="cancel()">取消</button>
-			                </div>
-        				</div>
-        			</div>
-        			
-        		</div> 
-        		
-        	</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
        	</div>
     </div>
 </div>
 
+
 <script>
+
     //调用示例
-    layui.use('layer', function() {
+    layui.use('layer', function () {
         layer.photos({
-            photos: '#layer-photos-check'
-            ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+            photos: '#layer-photos-check',
+            anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
         });
     });
+    //调用示例
+    layui.use('layer', function () {
+        layer.photos({
+            photos: '#layer-photos-check1',
+            anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+        });
+    });
+
+    layui.use('element', function () {
+        var $ = layui.jquery
+            , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        //触发事件
+        var active = {
+            tabChange: function () {
+                //切换到指定Tab项
+                element.tabChange('demo', '22'); //切换到：用户管理
+            }
+        };
+
+        $('.site-demo-active').on('click', function () {
+            var othis = $(this), type = othis.data('type');
+            active[type] ? active[type].call(this, othis) : '';
+        });
+
+        element.on('tab(test)', function (elem) {
+            location.hash = 'test=' + $(this).attr('lay-id');
+        });
+
+    });
+
+    $(".uploadfile").fileinput({
+        allowedFileExtensions: ['png','jpg','jpeg'],
+        uploadAsync: true, //默认异步上传
+        showRemove: true, //显示移除按钮
+        maxFileCount: 5, //表示允许同时上传的最大文件个数
+        language: 'zh', //设置语言
+        uploadUrl: '#', //上传的地址
+        showUpload: false, //显示批量上传按钮
+        showCaption: true, //是否显示标题
+        browseClass: "btn btn-primary", //按钮样式
+        showPreview: true, //是否显示预览
+        dropZoneEnabled: false, //是否显示拖拽区域
+        validateInitialCount: true,
+        slugCallback: function (filename) {
+            return filename.replace('(', '_').replace(']', '_');
+        }
+    });
+
 </script>
