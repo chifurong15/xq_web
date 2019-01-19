@@ -25,6 +25,7 @@
 
                     // var apiPrefix = 'http://10.0.9.194:7030';
 
+                    // var apiPrefix1 = 'http://10.0.9.110:7025';
 
 
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/list';
@@ -301,7 +302,28 @@
                         })
 
                     }
+                    //显示退回历史窗口
+                    $scope.openBackModal = function (id){
+                        $('#backModal').modal('show');
+                        getBackHistory (id);
+                    }
 
+                    function getBackHistory (id) {
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/inspection/v1/ScSuperviseNotificationReturnback/selectList',
+                            method:'get',
+                            params:{
+                                superviseNotificationId:id
+                            },
+                            callBack:function (res) {
+                                if(res.resCode == 1 && res.data){
+                                    $scope.backList = res.data;
+                                }else{
+                                    layer.msg('服务器异常，请稍后再试',{times:500})
+                                }
+                            }
+                        })
+                    }
 
                     /**
                      * 上传附件

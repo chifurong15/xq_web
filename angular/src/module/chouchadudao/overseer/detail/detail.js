@@ -23,7 +23,7 @@
 
                     var apiPrefix = moduleService.getServiceUrl();
                     // var apiPrefix = 'http://10.0.9.110:7025';
-                    //var apiPrefix1 = 'http://10.0.9.194:8066';
+                    // var apiPrefix1 = 'http://10.0.9.194:7030';
 
 
                     var regionTree;
@@ -707,8 +707,51 @@
                             }
 
                         })
-
                     }
+
+                    //退回通报
+                    $scope.sendBack = function (id){
+                        $scope.backId = id;
+                        $('#backModal').modal('show');
+                    }
+
+                    //保存退回原因
+                    $scope.confirmBack = function (){
+                        if($scope.backDescription){
+                            $ajaxhttp.myhttp({
+                                url:apiPrefix + '/inspection/v1/ScSuperviseNotificationReturnback/add',
+                                method:'post',
+                                params:{
+                                    superviseNotificationId:$scope.backId,
+                                    returnReason:$scope.backDescription
+                                },
+                                callBack:function (res) {
+                                    if(res.resCode == 1){
+                                        layer.msg('退回成功');
+                                        sentReportList () ;
+                                        $('#backModal').modal('hide');
+                                        $scope.backDescription = ''
+                                    }else{
+                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                                    }
+                                }
+
+                            })
+                        }else{
+                            layer.alert("请输入退回原因", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        }
+                    }
+
+                    //关闭退回窗口
+                    $scope.closeBack = function () {
+                        $('#backModal').modal('hide');
+                        $scope.backDescription = ''
+                    }
+
 
                     //保存通报
                     $scope.saveReport = function (){

@@ -98,9 +98,10 @@
                             <td>{{module.createPerson}}</td>
                             <td>{{module.createDate}}</td>
                             <td>
-                                <span ng-if="module.replyStatus == 1 && module.isreply == 1">已答复</span>
-                                <span ng-if="module.replyStatus == 2 && module.isreply == 1" style="color: #f00;">未答复</span>
-                                <span ng-if="module.isreply != 1">-</span>
+                                <span ng-if="module.isStart != 1 && module.replyStatus == 1 && module.isreply == 1" style="color: #000;">已答复</span>
+                                <span ng-if="module.isStart != 1 && module.replyStatus == 3 && module.isreply == 1" style="color: cornflowerblue;cursor: pointer" ng-click="openBackModal(module.id)">已退回</span>
+                                <span ng-if="module.isStart != 1 && module.replyStatus == 2 && module.isreply == 1" style="color: #f00;">未答复</span>
+                                <span ng-if="module.isStart == 1 || module.isreply != 1">-</span>
                             </td>
                             <td>
                                 <span ng-if="module.readStatus == 1">已读</span>
@@ -197,6 +198,42 @@
             </div>
         </div>
 
+        <!-- 退回历史（Modal） -->
+        <div class="modal fade" id="backModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="backviewModal">
+                            退回历史记录
+                        </h4>
+                    </div>
+                    <div class="modal-body" style="height: 350px;">
+                        <table class="table table-bordered table-hover" >
+                            <tr>
+                                <th style="width: 5%;">序号</th>
+                                <th style="width: 7%;">退回日期</th>
+                                <th style="width: 35%;">退回原因</th>
+                                <!--<th style="width: 5%">操作</th>-->
+                            </tr>
+                            <tr ng-repeat="module in backList">
+                                <td>{{$index + 1}}</td>
+                                <td>{{module.returnDate}}</td>
+                                <td>{{module.returnReason}}</td>
+                                <!--<td>-->
+                                    <!--<a class="btn btn-primary btn-xs" ng-if="module.isStart == 1" ng-click="view(module)"><i class="fa fa-info" title="查看"></i></a>-->
+                                <!--</td>-->
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary"  data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
         <!--附件上传-->

@@ -112,9 +112,9 @@
                             }
                         }
 
-                        // if($scope.informType == 600106){
-                        //     $scope.informType_name = '暗查暗访';
-                        // }
+                        if($scope.replyStatus == 3){
+                            getDetail();
+                        }
                     }
 
                     //获取通知通报详情
@@ -191,19 +191,37 @@
                             accessoryURL:$scope.assessory ? $scope.assessory.join(',') : ''
                         }
                         if($scope.reportTime && $scope.reportPerson && $scope.reportContent){
-                            $ajaxhttp.myhttp({
-                                url:apiPrefix + '/inform/v1/informReply/add',
-                                method:'post',
-                                params:params,
-                                callBack:function (res) {
-                                    if(res.resCode == 1){
-                                        routeService.route('2-9', true);
-                                        layer.msg('答复成功',{times:2000});
-                                    }else{
-                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                            if($scope.replyStatus == 3){
+                                params.id = $scope.detailData1.id
+                                $ajaxhttp.myhttp({
+                                    url:apiPrefix + '/inform/v1/informReply/update',
+                                    method:'post',
+                                    params:params,
+                                    callBack:function (res) {
+                                        if(res.resCode == 1){
+                                            routeService.route('2-9', true);
+                                            layer.msg('答复成功',{times:2000});
+                                        }else{
+                                            layer.msg('服务器异常，请稍后再试',{times:500})
+                                        }
                                     }
-                                }
-                            })
+                                })
+                            }else{
+                                $ajaxhttp.myhttp({
+                                    url:apiPrefix + '/inform/v1/informReply/add',
+                                    method:'post',
+                                    params:params,
+                                    callBack:function (res) {
+                                        if(res.resCode == 1){
+                                            routeService.route('2-9', true);
+                                            layer.msg('答复成功',{times:2000});
+                                        }else{
+                                            layer.msg('服务器异常，请稍后再试',{times:500})
+                                        }
+                                    }
+                                })
+                            }
+
                         }else{
                             layer.alert("输入的信息不全", {
                                 skin: 'my-skin',
@@ -234,6 +252,11 @@
                                                 downloadURL: item.downloadURL
                                             })
                                         })
+                                    }
+                                    if($scope.replyStatus == 3){
+                                        $scope.reportTime = $scope.detailData1.replyDate;
+                                        $scope.reportPerson = $scope.detailData1.replyPerson;
+                                        $scope.reportContent = $scope.detailData1.description;
                                     }
 
                                 } else {

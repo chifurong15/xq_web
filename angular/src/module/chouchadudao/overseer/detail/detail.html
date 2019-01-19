@@ -330,6 +330,7 @@
                                                         <td>{{item.replyStatus == 1 ? '是' : '否'}}</td>
                                                         <td>
                                                             <a class="btn btn-primary btn-xs" ng-click="viewReportBack(item)" ng-if="item.replyStatus == 1"><i class="fa fa-info" title="查看"></i></a>
+                                                            <a class="btn btn-primary btn-xs" ng-if="item.replyStatus == 1"ng-click="sendBack(item.id)"><i class="fa fa-stop" title="退回"></i></a>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -1049,7 +1050,44 @@
 
 
 
+        <!--督查通报退回-->
+        <div class="modal fade" id="backModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" ng-click="closeBack()">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="backViewModal">
+                            退回督查通报
+                        </h4>
+                    </div>
+                    <div class="modal-body" style="height: 200px;">
+                        <form class="form-inline clearfix">
+                            <!--<div class="form-item">-->
+                                <!--<label>退回时间</label>-->
+                                <!--<div class="input-group date date_picker">-->
+                                    <!--<input type="text" class="form-control input-short-o" ng-model="oneRegionBackData.replyDate">-->
+                                    <!--<span class="input-group-addon"><i class="fa fa-calendar"></i></span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <div class="form-item">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">退回原因</font></font></label>
+                                <textarea class="form-control" ng-model="backDescription" rows="3" style="width: 425px;max-width: 425px;"></textarea>
+                            </div>
+                            <!--<div class="form-item" ng-if="oneRegionBackData.fileList.length > 0">-->
+                                <!--<label><font style="vertical-align: inherit;"><font-->
+                                        <!--style="vertical-align: inherit;">上传附件</font></font></label>-->
 
+                            <!--</div>                           -->
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="confirmBack()">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
         <!--附件上传-->
