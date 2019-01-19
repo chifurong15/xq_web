@@ -89,6 +89,10 @@
                                 <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','readStatus')"></i>
                                 <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','readStatus')"></i>
                             </th>
+                            <th style="width: 10%">发起状态
+                                <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','state')"></i>
+                                <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','state')"></i>
+                            </th>
                             <th style="width: 10%">操作</th>
                         </tr>
                         <tr ng-repeat="module in moduleList">
@@ -109,9 +113,15 @@
                                 <span ng-if="module.readStatus != 1 && module.readStatus != 2">-</span>
                             </td>
                             <td>
+                                <span ng-if="module.isStart == 1 && module.state != 2">已发起</span>
+                                <span ng-if="module.isStart == 1 && module.state == 2" style="color: #f00;">已撤回</span>
+                                <span ng-if="module.isStart != 1">-</span>
+                            </td>
+                            <td>
                                 <a class="btn btn-primary btn-xs" ng-if="module.isStart == 1" ng-click="view(module)"><i class="fa fa-info" title="查看"></i></a>
                                 <a class="btn btn-primary btn-xs" ng-if="module.isStart == 2" ng-click="answer(module)"><i class="fa fa-bullhorn" title="查看/答复"></i></a>
                                 <a class="btn btn-primary btn-xs" ng-if="module.isStart == 1" ng-click="delete(module.id)"><i class="fa fa-trash-o" title="删除"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-if="module.isStart == 1 && num == 2 && module.state != 2" ng-click="revoke(module.id)"><i class="fa fa-hand-o-down" title="撤回"></i></a>
                             </td>
                         </tr>
                     </table>

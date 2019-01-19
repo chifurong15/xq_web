@@ -107,6 +107,26 @@
                         $scope.readStatus = '';
                     }
 
+                    //撤回
+                    $scope.revoke = function (id) {
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/inform/v1/informReport/callback',
+                            method:'post',
+                            params:{
+                                id: id
+                            },
+                            callBack:function (res) {
+                                if(res.resCode == 1){
+                                    layer.msg(res.data,{times:2000});
+                                    getList();
+                                }else{
+                                    layer.msg('服务器异常，请稍后再试',{times:500})
+                                }
+
+                            }
+                        })
+                    }
+
                     //新增弹窗
                     $scope.add = function () {
                         $scope.assessory = [];
