@@ -1,0 +1,342 @@
+/**
+ * ================================
+ * 描述说明
+ * @author yuanhaitao</br>2018/08/28
+ * @version 3.0.0
+ * ================================
+ */
+
+.table tr .remark{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -icab-text-overflow: ellipsis;
+    -khtml-text-overflow: ellipsis;
+    -moz-text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+}
+.form-inline textarea.wid-100 {
+	width: 100%;
+}
+.basicMapContainer{
+	position: relative;
+	border: solid 1px #E3E3E3;
+	box-shadow: 4px 8px 5px rgba(0, 0, 0, .3);
+    z-index: 0;
+}
+.basicMapDetail{
+	position: relative;
+	width: 100%;
+	border: solid 1px #E3E3E3;
+}
+.remark-panel{
+    position: relative;
+    display: -webkit-box;
+    margin: 5px 0;
+    padding-right: 15px;
+    vertical-align: middle;
+}
+.remark-panel label{
+	width: 95px;
+    line-height: 24px;
+    color: #555;
+    font-size: 14px;
+    text-align: left;
+    font-weight: normal;
+    padding: 5px;
+    margin: 0;
+}
+.panel-body .remark-panel p {
+	margin: 0;
+    line-height: 33px;
+    text-indent: 0;
+}
+.remark-info{
+    white-space: normal;
+    word-break: break-all;
+    word-wrap: break-word;
+    padding-right: 100px;
+}
+
+/*流域管理 */
+
+.left-panel .remarkInfo ,.water-panel .remarkInfo{
+	display: flex;
+	padding: 0;
+}
+.float-right-panel{
+	float: right;
+    background-color: #f5f4ee;
+}
+.form-inline .compressMap{
+	width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.file-input span {
+	line-height: 20px;
+	margin: 0;
+}
+
+.file-input .btn-primary span {
+	color: #fff;
+}
+
+
+/* PDF导入 */
+
+.pdfobject-container {
+	height: 500px;
+}
+
+.pdfobject {
+	border: 1px solid #666;
+}
+
+
+/* 标签页 */
+
+.tabs-list {
+	float: left;
+	width: 100%;
+	border-bottom: 1px solid #ddd;
+	padding-left: 10px;
+	margin-bottom: 0;
+	list-style: none;
+}
+
+.tabs-list li {
+	position: relative;
+	display: block;
+	float: left;
+	padding: 8px 24px;
+	margin-bottom: -1px;
+	margin-right: 5px;
+	background-color: #ddd;
+}
+
+.tabs-list li.select {
+	background-color: #428bca;
+}
+
+.tabs-list li.select a {
+	color: #fff;
+}
+
+/*.tab-content {
+	margin-top: 36px;
+}*/
+.reach-content{
+	margin-left: 200px;
+}
+.tab-con {
+	display: none;
+	padding: 10px;
+}
+
+
+/* 列表 */
+
+.list-group li {
+	cursor: pointer;
+	position: relative;
+}
+
+.list-group li:hover {
+	color: #555;
+	text-decoration: none;
+	background-color: #f5f5f5;
+}
+
+.list-group-item {
+	padding: 5px 15px;
+}
+
+.list-group-item a {
+	float: right;
+	padding: 0 5px;
+	margin: 0 0 0 5px;
+}
+
+.searchBar {
+	position: relative;
+	margin-bottom: 15px;
+}
+
+.searchBar button,
+.searchBar a {
+	position: absolute;
+	top: 2px;
+	right: 2px;
+}
+
+
+/* 框架select样式 */
+
+.ui-select-bootstrap {
+	float: left;
+	width: 160px;
+}
+
+.ui-select-bootstrap>.ui-select-search,
+.ui-select-bootstrap>.ui-select-match {
+	width: 160px;
+	padding: 0 15px;
+}
+
+
+
+/*完善项目细节=> 修复*/
+
+#remarkModalPanel{
+	overflow: hidden;
+	overflow-y: scroll;
+}
+.editorPanel{
+	margin:0;
+}
+.editorContent{
+	margin-left: 95px;
+}
+.editorLabel{
+    float: left;
+    line-height: 24px;
+    color: #555;
+    width: 95px;
+    font-size: 14px;
+    text-align: left;
+    font-weight: normal;
+    padding: 5px;
+    margin: 0;
+}
+.proMgr-map-tool{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 1;
+    border: 1px solid #4c4949;
+    border-radius: 6px;
+    background-color: #fff;
+    overflow: hidden;
+}
+.proMgr-map-tool .drawTool{
+	margin: 0;
+	padding: 0;
+}
+.proMgr-map-tool .drawTool li{
+	list-style: none;
+	float: left;
+    /*border: 1px solid #4c4949;*/
+}
+.proMgr-map-tool .drawTool li:hover{
+    background-color: #e3e3e3;
+}
+.proMgr-map-tool .drawTool li:active{
+    background-color: #dedede;
+}
+.proMgr-map-tool .drawTool li:first-child{
+	border-right: 1px solid #b9b7b7;
+}
+.proMgr-map-tool .drawTool li:nth-child(2){
+	border-right: 1px solid #b9b7b7;
+}
+.proMgr-map-tool .drawTool li a{
+	padding: 0;
+	width: 40px;
+    height: 36px;
+    line-height: 38px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+}
+.wrapper-md .panel .panel-map{
+	min-height: 600px;
+}
+
+.reachUploadDocPanel .file-input{
+	width:100%;
+	padding: 0 10px;
+}
+
+.tree-content{
+    background-color: #fbfbfb;
+}
+.tree-content .nav li{
+	width: 50%;
+}
+.pos-rlt .right-panel-content{
+	position: absolute;
+    top: 15px;
+    left: 210px;
+}
+
+.border-bottom-n {
+	border-bottom: none;
+}
+
+.thumbnail-block {
+	position: relative;
+	display: inline-block;
+	width: 96px;
+	height: 96px;
+	text-align: center;
+}
+.thumbnail-block img {
+	width: 100%;
+	height: 100%;
+}
+.thumbnail-block-close {
+	display: inline-block;
+	position: absolute;
+	right: -8px;
+	top: -8px;
+	color: #666;
+	cursor: pointer;
+}
+.thumbnail-block:hover:before{
+	content: '更换封面';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	line-height: 96px;
+	background: rgba(85,85,85,.5) ;
+	color: #fff;
+}
+.no-mask:before {
+	display: none;
+}
+
+.v-top .form-item {
+	vertical-align: top;
+}
+
+.file-thumbnail-block {
+	position: relative;
+	display: inline-block;
+	width: 96px;
+	height: 96px;
+	text-align: center;
+	margin: 2px 5px;
+	border: 1px solid #ddd;
+	box-shadow: 1px 1px 1px #eee;
+    vertical-align: middle;
+}
+.file-thumbnail-block a {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.ztree_box_modal {
+    height: 400px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+.ztree li ul {
+    height: auto;
+}
