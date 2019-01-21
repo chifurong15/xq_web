@@ -33,7 +33,6 @@
 
 
                     $scope.init = function () {
-
                         $scope.reportPerson = $scope.userInfo.name;
                         $scope.assessory = [];
                         $('.selectpicker').selectpicker({
@@ -664,15 +663,20 @@
                     }
 
                     // 通知通报答复时间
-                    $('#reportTime').datetimepicker({
+                    var reportTime = $('#reportTime').datetimepicker({
                         format: 'YYYY-MM-DD',
-                        locale: moment.locale('zh-cn')
+                        locale: moment.locale('zh-cn'),
                     }).on('dp.change', function (c) {
                         var result = new moment(c.date).format('YYYY-MM-DD');
                         $scope.reportTime = result;
                         $scope.$apply();
                     });
 
+
+                    //动态设置最小值
+                    reportTime.on('dp.change', function (e) {
+                        reportTime.data('DateTimePicker').minDate(e.date);
+                    });
 
                     //返回
                     $scope.goBack=function(){
