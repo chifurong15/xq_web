@@ -134,7 +134,7 @@
                                             res.data.fileList.map(function (item){
                                                 // console.log(item.substring(item.lastIndexOf('/')+1));
                                                 $scope.accessoryURL.push({
-                                                    name:item.downloadURL.substring(item.previewURL.lastIndexOf('/')+1),
+                                                    name:item.downloadURL.substring(item.downloadURL.lastIndexOf('/')+1),
                                                     previewURL:item.previewURL,
                                                     downloadURL:item.downloadURL
                                                 })
