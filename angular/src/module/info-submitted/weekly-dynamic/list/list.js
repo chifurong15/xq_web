@@ -22,7 +22,8 @@
                                           routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl() + '/messageSent';
-                    // var apiPrefix = 'http://10.0.9.203:7028' + '/messageSent';
+                    // var apiPrefix = 'http://10.0.9.110:7028' + '/messageSent';
+
 
                     var regionTree;
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree';
@@ -580,12 +581,6 @@
                         //console.log($scope.regionName)
                         //console.log('我是区域树关闭...')
                     }
-
-
-
-
-
-
 
 
                     // 配置分页基本参数

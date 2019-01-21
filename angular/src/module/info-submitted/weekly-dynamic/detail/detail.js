@@ -22,7 +22,7 @@
                                         routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl() + '/messageSent';
-                    //var apiPrefix = 'http://10.0.9.203:8080' + '/messageSent';
+                    // var apiPrefix = 'http://10.0.9.110:7028' + '/messageSent';
 
                     var regionTree;
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree';
@@ -33,6 +33,8 @@
                         $scope.viewId = localStorage.getItem('viewId');
 
                         $scope.author = $scope.userInfo.name;
+
+
                         $ajaxhttp.myhttp({
                             url:apiPrefix + '/v1/msWeekDynamic/userinfo',
                             method:'get',
@@ -169,16 +171,126 @@
                     $scope.downFile = function (path){
                         window.open($scope.fileUrl + path);
                     }
-                    //
-                    // //查看附件
-                    // $scope.viewFile = function (path) {
-                    //     window.open($scope.fileUrl + path)
-                    // }
 
                     //返回
                     $scope.goBack=function(){
                         history.back(-1);
                     }
+                    //显示修改窗口
+                    $scope.edit = function (module) {
+                        $scope.assessory = [];
+                        $('#myModal2').modal('show');
+                        $scope.editId = module.id;
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/v1/msSentDynamis/detail',
+                            method:'get',
+                            params:{
+                                id:module.id
+                            },
+                            callBack:function (res) {
+                                if(res.data){
+                                    $scope.answerTitle = res.data.title;
+                                    $scope.answerTime = res.data.deadline;
+                                    $scope.nowRegion = res.data.region;
+                                    $scope.patrolCondition = res.data.patrolCondition;
+                                    $scope.meetingCondition = res.data.meetingCondition;
+                                    $scope.problemSolvingCondition = res.data.problemSolvingCondition;
+                                    $scope.otherCondition = res.data.otherCondition;
+
+                                }
+                            }
+                        })
+
+                    }
+                    //保存/上报 答复
+                    $scope.save = function (id) {
+                        var params = {
+                            title:$scope.answerTitle,
+                            id: $scope.editId,
+                            region:$scope.nowRegion,
+                            deadline:$scope.answerTime,
+                            patrolCondition:$scope.patrolCondition,
+                            meetingCondition:$scope.meetingCondition,
+                            problemSolvingCondition:$scope.problemSolvingCondition,
+                            otherCondition:$scope.otherCondition,
+                            accessoryUrl:$scope.assessory ? $scope.assessory.join(',') : ''
+                        }
+                        if($scope.patrolCondition && $scope.meetingCondition && $scope.problemSolvingCondition &&  $scope.otherCondition){
+                            $ajaxhttp.myhttp({
+                                url:apiPrefix + '/v1/msSentDynamis/update',
+                                method:'put',
+                                params: params,
+                                callBack:function (res) {
+                                    if(res.resCode == 1){
+                                        layer.msg('保存成功',{times:2000});
+                                        $('#myModal2').modal('hide');
+                                        getList();
+                                    }else{
+                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                                    }
+                                }
+                            })
+                        }else{
+                            layer.alert("输入框不能为空", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
+                        }
+
+                    }
+
+                    $scope.closeModal = function () {
+                        $('#myModal2').modal('hide');
+                    }
+
+
+
+
+
+
+
+
+
+                    /**
+                     * 上传附件
+                     */
+                    $scope.getUploadFile = function () {
+                        $('#coverModal').modal('show');
+                    }
+
+
+                    /**
+                     * 关闭上传附件
+                     */
+                    $scope.getUpload = function () {
+                        $('#coverModal').modal('hide');
+                        var formFile = new FormData();
+
+                        var fileObj = document.querySelector('input[type=file]').files[0];
+                        formFile.append("files", fileObj); //加入文件对象
+
+                        $http({
+                                method: 'post',
+                                url: apiPrefix + '/v1/msSentReports/upload',
+                                data: formFile,
+                                headers: {'Content-Type': undefined},
+                                transformRequest: angular.identity
+                            }
+                        ).success(function (res) {
+                            if (res.resCode == 1) {
+                                layer.msg("上传成功");
+                                $scope.assessory.push(res.data[0]);
+                                $('#problemFile').fileinput('clear');
+
+                            } else {
+                                layer.msg("服务器异常，请稍后再试");
+                            }
+                        }).error(function (res) {
+                            layer.msg('服务器异常，请稍后再试');
+                        });
+                    }
+
 
                     /**
                      * 初始化行政区划树
