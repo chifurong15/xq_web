@@ -1,10 +1,10 @@
-<div ng-controller="dataDictionaryCtrl" ng-init="init()" class="wrapper-md rel dataDictionary">
-    <div class="panel-tree">
+<div ng-controller="dataDictionaryCtrl" ng-init="init()" class="wrapper-md rel dataDictionary" style="display: flex;">
+    <div class="panel-tree" style="flex: 1;">
         <div class="ztree-block">
             <ul id="regionTree" class="ztree"></ul>
         </div>
     </div>
-    <div class="panel-wrapper">
+    <div class="panel-wrapper" style="width: 90%;">
         <div class="panel panel-default m-all-0  border-bottom-n">
             <div class="panel-body">
                 <form class="form-inline query-conditions-form" method="get">
@@ -27,8 +27,8 @@
                         <label>名称</label>
                         <input type="text" class="form-control input-short" ng-model="dictionaryName"/>
                     </div>
-                    <button type="button" class="btn btn-search" ng-click="query()">搜 索</button>
-                    <button type="button" class="btn btn-reset" ng-click="reSet()">重 置</button>
+                    <button type="button" class="btn btn-search btn-primary" ng-click="query()">搜 索</button>
+                    <button type="button" class="btn btn-reset btn-primary" ng-click="reSet()">重 置</button>
                 </form>
             </div>
         </div>
@@ -55,11 +55,11 @@
                             <td>{{module.typeName}}</td>
                             <td>{{module.remark}}</td>
                             <td class="td-tool">
-                                <a class="btn btn-xs" ng-click="dataDictionaryDetail(module)" title="详细"><i class="icon-jx_info" ></i></a>
-                                <a class="btn btn-xs" ng-click="dataDictionaryEdit(module)" title="修改"><i class="icon-jx_edit"></i></a>
-                                <a class="btn btn-xs" ng-click="moveUp(module)" ng-hide="searchStatus" title="上移"><i class="icon-jx_up"></i></a>
-                                <a class="btn btn-xs" ng-click="moveDown(module)" ng-hide="searchStatus" title="下移"><i class="icon-jx_down"></i></a>
-                                <a class="btn btn-xs" ng-click="delete(module)" title="删除"><i class="icon-jx_delete_form"></i></a>
+                                <a class="btn btn-xs btn-primary" ng-click="moveUp(module)" ng-hide="searchStatus" title="上移"><i class="fa fa-chevron-up"></i></a>
+                                <a class="btn btn-xs btn-primary" ng-click="moveDown(module)" ng-hide="searchStatus" title="下移"><i class="fa fa-chevron-down"></i></a>
+                                <a class="btn btn-xs btn-primary" ng-click="dataDictionaryDetail(module)" title="详细"><i class="fa fa-info" ></i></a>
+                                <a class="btn btn-xs btn-primary" ng-click="dataDictionaryEdit(module)" title="修改"><i class="fa fa-edit"></i></a>
+                                <a class="btn btn-xs btn-primary" ng-click="delete(module)" title="删除"><i class="fa fa-trash-o"></i></a>
                             </td>
                         </tr>
                     </table>
