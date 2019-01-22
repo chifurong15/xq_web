@@ -125,12 +125,11 @@
                             </div>
                             <div class="form-item">
                                 <label>问责类型</label>
-                                <input type="text" class="form-control input-short" ng-model="type">
-                                <!--<select class="form-control select-short" ng-model="type">-->
-                                    <!--<option value="">请选择</option>-->
-                                    <!--<option value="1">工作简报</option>-->
-                                    <!--<option value="2">信息报送</option>-->
-                                <!--</select>-->
+                                <!--<input type="text" class="form-control input-short" ng-model="type">-->
+                                <select class="form-control select-short" ng-model="type">
+                                    <option value="">请选择</option>
+                                    <option value="{{item.id}}" ng-repeat="item in typeList">{{item.dictname}}</option>
+                                </select>
                             </div>
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">问责对象</font></font></label>
@@ -199,12 +198,11 @@
                             </div>
                             <div class="form-item">
                                 <label>问责类型</label>
-                                <input type="text" class="form-control input-short" readonly ng-model="detailData.accountabilitytype"/>
-                                <!--<select class="form-control select-short" disabled ng-model="detailData.accountabilitytype">-->
-                                    <!--<option value="">请选择</option>-->
-                                    <!--<option value="1">工作简报</option>-->
-                                    <!--<option value="2">信息报送</option>-->
-                                <!--</select>-->
+                                <!--<input type="text" class="form-control input-short" ng-model="type">-->
+                                <select class="form-control select-short" ng-model="detailData.accountabilitytype" disabled>
+                                    <option value="">请选择</option>
+                                    <option value="{{item.id}}" ng-repeat="item in typeList">{{item.dictname}}</option>
+                                </select>
                             </div>
                             <div class="form-item" >
                                 <label>问责对象</label>

@@ -43,6 +43,18 @@
 
                         getList();
                         getObject ();
+                        getTypes ();
+
+                    }
+                    //获取问责类型
+                    function getTypes (){
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/v1/scstandingbook/selectDictionary',
+                            method:'get',
+                            callBack:function (res) {
+                                $scope.typeList = res.data;
+                            }
+                        })
 
                     }
 
