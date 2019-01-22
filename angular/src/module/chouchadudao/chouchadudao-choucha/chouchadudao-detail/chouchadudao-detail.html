@@ -123,6 +123,29 @@
             </div>
         </div>
 
+        <div id="videoBox"
+             style="position: absolute!important;;z-index: 99998!important;;left: 30%;top: 30%;display: none;background-color: #333;padding: 30px;">
+            <span style="position: absolute;z-index: 9991;top: 10px;right: 10px;color: #fff;padding: 2px 8px;cursor: pointer;"
+                  ng-click="closePlayer()">关闭</span>
+            <div id="videoPlayerBox">
+                <video id="my-player" class="video-js" controls preload="auto" data-setup='{}'>
+                    <source class="source" src="" type="video/mp4"></source>
+                </video>
+            </div>
+            <div id="audioPlayer">
+                <audio controls src="" autoplay="true"></audio>
+            </div>
+        </div>
+
+        <div id="openImg"
+             style="position: absolute!important;;z-index: 99998!important;display: none;top: 0;left: 0;width: 100%;height: 100%;">
+            <img src="" style="height: 50%;left: 30%;position: absolute;top: 20%; z-index: 100000">
+            <a ng-click="closeImg()" style="position: absolute; top: 15px; right: 15px; width: 30px; height: 30px; color: #fff; font-size: 20px;
+    z-index: 100000; text-align: center; line-height: 30px;"><i class="fa fa-close"></i></a>
+            <div id="imgShade" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;background: #000; opacity: 0.9"></div>
+
+        </div>
+
         <!--修改问题详情-->
         <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
             <div class="modal-dialog">
@@ -171,13 +194,13 @@
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">问题描述</font></font></label>
                                 <textarea class="form-control" ng-model="problemDesc" rows="3" style="width: 410px;"></textarea>
                             </div>
-                            <div class="form-item">
-                                <label style=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>问题照片</font></label>
-                                <div style="display: inline-block;" id="layer-photos-check1">
-                                    <img style="margin: 0 5px;" ng-repeat="items in updateData.attach"  layer-pid="" layer-src="{{fileUrl}}{{items}}" src="{{fileUrl}}{{items}}" alt="问题照片" width="100px"
-                                    height="100px" key="{{$index}}">
-                                </div>
-                            </div>
+                            <!--<div class="form-item"style="width: 470px;">-->
+                                <!--<label style=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>问题照片</font></label>-->
+                                <!--<div style="display: inline-block;" id="layer-photos-check1">-->
+                                    <!--<img style="margin: 0 5px;" ng-repeat="items in updateData.attach"  layer-pid="" layer-src="{{fileUrl}}{{items}}" src="{{fileUrl}}{{items}}" alt="问题照片" width="100px"-->
+                                    <!--height="100px" key="{{$index}}">-->
+                                <!--</div>-->
+                            <!--</div>-->
                             <br>
                             <div class="form-item" style="float: ;">
                                 <label><font style="vertical-align: inherit;"><font
@@ -210,7 +233,7 @@
                             查看问题
                         </h4>
                     </div>
-                    <div class="modal-body" style="height: 450px;overflow-x: hidden">
+                    <div class="modal-body" style="height: 550px;overflow-x: hidden">
                         <form class="form-inline clearfix">
                             <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上报人</font></font></label>
@@ -239,9 +262,19 @@
                             </div>
                             <div class="form-item">
                                 <label style=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font>问题照片</font></label>
-                                <div style="display: inline-block;" id="layer-photos-check">
-                                    <img style="margin: 0 5px;" ng-repeat="items in problemDetail.attach"  layer-pid="" layer-src="{{fileUrl}}{{items}}" src="{{fileUrl}}{{items}}" alt="问题照片" width="100px"
+                                <div class="clearfix" style="display: flex;flex-wrap: wrap" id="layer-photos-check">
+                                    <img style="margin: 0 5px;float: left;" ng-repeat="items in imgUrl"  layer-pid="" layer-src="{{fileUrl}}{{items}}" src="{{fileUrl}}{{items}}" alt="问题照片" width="100px"
                                          height="100px" key="{{$index}}">
+                                    <!--<div style="float: left;position:relative;top: 10px;">-->
+                                        <img ng-show="mp3Url.length > 0" ng-repeat="item in mp3Url"
+                                             style=" float: left; margin:5px;width:60px; height:60px;}"
+                                             src="img/music_img.png" ng-click="playAudio(item)" alt="巡河录音">
+                                    <!--</div>-->
+                                    <!--<div style="float: left;position:relative;top: 10px;">-->
+                                        <img ng-show="mp4Url.length > 0" ng-repeat="item in mp4Url"
+                                             style="float: left;margin: 5px;width:60px; height:60px;}" src="img/audio_img.png"
+                                             ng-click="playVideo(item)"  alt="巡河视频">
+                                    <!--</div>-->
                                 </div>
                             </div>
                         </form>

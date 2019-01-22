@@ -230,7 +230,24 @@
                                     $scope.problemDetail = res.data;
                                     $scope.problemDetail.creatorName = item.creatorName;
 									if($scope.problemDetail.attach){
-                                        $scope.problemDetail.attach = $scope.problemDetail.attach.split(',');
+                                        var urlList = [];
+                                        $scope.imgUrl = [];
+                                        urlList = $scope.problemDetail.attach.split(',');
+                                        $scope.mp3Url = [],$scope.mp4Url = [];
+
+                                        urlList.map(function (item,i){
+                                            if(item.substring(item.length-3).toLowerCase() == 'mp3'){
+                                                $scope.mp3Url.push(urlList[i]);
+                                            }else if(item.substring(item.length-3).toLowerCase() == 'mp4'){
+                                                $scope.mp4Url.push(urlList[i]);
+                                            }else{
+                                                $scope.imgUrl.push(item)
+                                            }
+                                        })
+                                        console.log('mp3Url',$scope.mp3Url);
+                                        console.log('mp4Url',$scope.mp4Url);
+                                        console.log('imgUrl',$scope.imgUrl);
+                                        // $scope.problemDetail.attach = $scope.problemDetail.attach.split(',');
 									}
                                 }
                             }
@@ -293,6 +310,48 @@
 
                         });
                     }
+
+
+                    $scope.openImg = function (item) {
+                        console.log(item)
+                        $('#openImg').show();
+                        $('#imgShade').show();
+                        $scope.imgUrl = $scope.fileUrl +  item;
+                        $("#openImg img").attr("src", $scope.imgUrl);
+                    }
+
+                    $scope.closeImg = function () {
+                        $('#openImg').hide();
+                        $('#imgShade').hide();
+                    }
+
+                    // 音视频播放
+                    $scope.playVideo = function(item){
+                        $('#videoBox').show();
+                        $('#audioPlayer').css('display','none');
+                        $("#videoPlayerBox").css('display','block');
+                        $scope.videoUrl = $scope.fileUrl +  item;
+                        $("#videoPlayerBox source").attr("src", $scope.videoUrl);
+                        var myPlayer = videojs("videoPlayerBox")
+                        myPlayer.ready(function () {
+                            myPlayer.play()
+                        });
+                    };
+                    $scope.playAudio = function(item){
+                        $('#videoBox').show();
+                        $('#audioPlayer').css('display','block');
+                        $("#videoPlayerBox").css('display','none');
+                        $scope.videoUrl = $scope.fileUrl + item;
+                        // console.log($("#audioPlayer"))
+                        $("#audioPlayer audio").attr("src", $scope.videoUrl);
+                        // var myPlayer = $("#audioPlayer");
+                        // myPlayer.play()
+                    }
+                    // 停止并关闭视频、
+                    $scope.closePlayer = function(){
+                        $('#videoBox').hide();
+                    };
+
                     /**
                      * 上传附件
                      */
