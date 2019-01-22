@@ -30,12 +30,11 @@
                         </div>
                         <div class="form-item">
                             <label>问责类型</label>
-                            <input type="text" class="form-control input-short" ng-model="accountabilitytype"/>
-                            <!--<select class="form-control select-short"  ng-model="accountabilitytype">-->
-                                <!--<option value="">全部</option>-->
-                                <!--<option value="1">工作简报</option>-->
-                                <!--<option value="2">信息报送</option>-->
-                            <!--</select>-->
+                            <!--<input type="text" class="form-control input-short" ng-model="accountabilitytype"/>-->
+                            <select class="form-control select-short" ng-model="accountabilitytype">
+                                <option value="">请选择</option>
+                                <option value="{{item.id}}" ng-repeat="item in typeList">{{item.dictname}}</option>
+                            </select>
                         </div>
                         <button type="submit" ng-click="searchData()" class="btn btn-primary">
                             <i class="fa fa-search"></i>搜索

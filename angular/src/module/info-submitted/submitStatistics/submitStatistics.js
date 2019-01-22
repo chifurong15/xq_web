@@ -22,7 +22,7 @@
                                         routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl() + '/messageSent';
-                    //var apiPrefix = 'http://10.0.9.203:8080' + '/messageSent';
+                    // var apiPrefix = 'http://10.0.9.110:7028' + '/messageSent';
 
 
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;

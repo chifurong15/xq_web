@@ -30,6 +30,7 @@
                                 <option value="">全部</option>
                                 <option value="1">工作简报</option>
                                 <option value="2">信息报送</option>
+                                <option value="3">周动态</option>
                             </select>
                         </div>
                         <button type="submit" ng-click="searchData()" class="btn btn-primary">
@@ -52,6 +53,7 @@
                             <th style="width: 10%">报送次数</th>
                             <th style="width: 10%">采纳次数</th>
                             <th style="width: 10%">退回次数</th>
+                            <th style="width: 10%">延迟汇报次数</th>
                         </tr>
                         <tr ng-repeat="module in moduleList">
                             <td>{{$index+1}}</td>
@@ -59,6 +61,7 @@
                             <td>{{module.sentNumber}}</td>
                             <td>{{module.acceptNumber}}</td>
                             <td>{{module.returnNumber}}</td>
+                            <td>{{module.overtime}}</td>
                         </tr>
                     </table>
                 </div>

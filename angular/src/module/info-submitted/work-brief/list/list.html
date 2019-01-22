@@ -110,7 +110,9 @@
                                 <span ng-if="module.weatherSent	 == 1" class="label label-danger">已上报</span>
                                 <span ng-if="module.weatherSent	 == 2" class="label label-success">未上报</span>
                                 <span ng-if="module.weatherSent	 == 3" class="label label-info">已退回</span>
-                                <span ng-if="module.weatherSent != 1 &&  module.weatherSent != 2 &&  module.weatherSent != 3">-</span>
+                                <span ng-if="module.weatherSent  == 4" class="label label-info">延时上报</span>
+
+                                <span ng-if="module.weatherSent != 1 &&  module.weatherSent != 2 &&  module.weatherSent != 3 &&  module.weatherSent != 4">-</span>
                             </td>
                             <td>
                                 <span ng-if="module.weatherAccept == 1">已采纳</span>
