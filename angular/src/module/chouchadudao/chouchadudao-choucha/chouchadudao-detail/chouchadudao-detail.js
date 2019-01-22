@@ -244,9 +244,9 @@
                                                 $scope.imgUrl.push(item)
                                             }
                                         })
-                                        console.log('mp3Url',$scope.mp3Url);
-                                        console.log('mp4Url',$scope.mp4Url);
-                                        console.log('imgUrl',$scope.imgUrl);
+                                        // console.log('mp3Url',$scope.mp3Url);
+                                        // console.log('mp4Url',$scope.mp4Url);
+                                        // console.log('imgUrl',$scope.imgUrl);
                                         // $scope.problemDetail.attach = $scope.problemDetail.attach.split(',');
 									}
                                 }
