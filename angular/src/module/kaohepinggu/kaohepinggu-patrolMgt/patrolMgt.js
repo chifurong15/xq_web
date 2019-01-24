@@ -240,7 +240,7 @@
 				function getProblemList(){
 					//alert(1)
 					$ajaxhttp.myhttp({
-						url: apiPrefix + '/v1/ExeAssPatrol/selectGradeDedetailed',
+						url: apiPrefix + '/v1/ExeAssPatrol/selectProblem',
 						method: 'get',
 						callBack: function (res) {
 							$scope.problemList = res.data;
