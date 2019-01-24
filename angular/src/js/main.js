@@ -246,15 +246,13 @@ angular.module('app').controller('AppCtrl', ['$scope', 'routeService', '$locatio
             isopen: false
         };
         $scope.langs =
-        {
-            en: 'English',
-                de_DE
-        :
-            'German',
-                it_IT
-        :
-            'Italian'
-        }
+            {
+                en: 'English',
+                de_DE:
+                    'German',
+                it_IT:
+                    'Italian'
+            }
         ;
         $scope.selectLang = $scope.langs[$translate.proposedLanguage()] || "English";
         $scope.setLang = function (langKey, $event) {
@@ -337,6 +335,66 @@ angular.module('app').controller('AppCtrl', ['$scope', 'routeService', '$locatio
                     //($localStorage.userLoginInfo.userInfo)
                 }
             }, function errorCallback(response) {
+            });
+        }
+
+        //修改密码弹窗
+        $scope.editPwdModal = function () {
+            $scope.editPwd = {
+                'oldPwd': '',
+                'newPwd': '',
+                'confirmPwd': '',
+                'authError': '',
+                'textType': 'text-danger'
+            };
+            $("#editPwd_modal").modal('show');
+            $("#editPwd_modal").on('Hide.bs.modal', function (e) {
+                $scope.editPwd = {
+                    'oldPwd': '',
+                    'newPwd': '',
+                    'confirmPwd': '',
+                    'authError': '',
+                    'textType': 'text-danger'
+                };
+            })
+        }
+        $scope.editPwdSubmit = function () {
+            var oldPwd = $scope.editPwd.oldPwd;
+            var newPwd = $scope.editPwd.newPwd;
+            var confirmPwd = $scope.editPwd.confirmPwd;
+            if (!oldPwd) {
+                $scope.editPwd.authError = '请输入原密码';
+                return;
+            } else if (!newPwd) {
+                $scope.editPwd.authError = '请输入新密码';
+                return;
+            } else if (!confirmPwd) {
+                $scope.editPwd.authError = '请确认新密码';
+                return;
+            } else if (newPwd != confirmPwd) {
+                $scope.editPwd.authError = '两次输入密码不一致';
+                return;
+            }
+            $http({
+                method: 'PUT',
+                url: $localStorage.serviceUrl + "/smUser/updatePassword",
+                params: {
+                    id: $localStorage.userLoginInfo.userInfo.id,
+                    oldPassword: oldPwd,
+                    newPassword: newPwd
+                }
+            }).then(function successCallback(resp) {
+                if (resp.data.resCode == 1) {
+                    $scope.editPwd.textType = 'text-success';
+                    $scope.editPwd.authError = '密码修改成功';
+                    setTimeout(function () {
+                        $("#editPwd_modal").modal('hide');
+                    }, 1000);
+                } else {
+                    $scope.editPwd.authError = resp.data.resMsg;
+                }
+            }, function errorCallback(response) {// 请求失败执行代码
+                $scope.authError = '服务器异常！';
             });
         }
     }
