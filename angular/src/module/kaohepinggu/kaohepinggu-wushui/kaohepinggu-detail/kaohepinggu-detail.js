@@ -21,8 +21,8 @@
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
-					// var apiPrefix = moduleService.getServiceUrl() + '/sewage';
-                    var apiPrefix = 'http://10.0.9.133:8001' + '/sewage';
+					var apiPrefix = moduleService.getServiceUrl() + '/sewage';
+                    // var apiPrefix = 'http://10.0.9.133:8001' + '/sewage';
 
 
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
