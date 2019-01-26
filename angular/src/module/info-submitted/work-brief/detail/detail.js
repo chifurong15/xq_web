@@ -229,11 +229,13 @@
                                         $scope.editData = res.data;
                                         $scope.briefDescription = $scope.editData.briefDescription;
                                         if(res.data.fileList){
+                                            $scope.accessoryUrl = res.data.fileList.downloadURL
+
                                             $scope.accessoryURL1 = [];
                                             res.data.fileList.map(function (item){
                                                 // console.log(item.substring(item.lastIndexOf('/')+1));
                                                 $scope.accessoryURL1.push({
-                                                    name:item.downloadURL.substring(item.previewURL.lastIndexOf('/')+1),
+                                                    name:item.downloadURL.substring(item.downloadURL.lastIndexOf('/')+1),
                                                     previewURL:item.previewURL,
                                                     downloadURL:item.downloadURL
                                                 })
@@ -245,14 +247,16 @@
                                 }
                             }
                         })
-                        $('#myModal4').modal('show')
+                        $('#myModal4').modal('show');
+                        $scope.assessory = [];
                     }
 
                     //确定
                     $scope.update = function () {
                         var params = {
                             id:$scope.editData.id,
-                            briefDescription:$scope.briefDescription
+                            briefDescription:$scope.briefDescription,
+                            accessoryUrl:$scope.assessory? $scope.assessory.join(',') : $scope.accessoryUrl
                         }
                         $ajaxhttp.myhttp({
                             url:apiPrefix + '/v1/msSentReports/update',
@@ -333,6 +337,45 @@
                             layer.close(layerIndex);
                         }, function () {
 
+                        });
+                    }
+
+                    /**
+                     * 上传附件
+                     */
+                    $scope.getUploadFile = function () {
+                        $('#coverModal').modal('show');
+                    }
+
+
+                    /**
+                     * 关闭上传附件
+                     */
+                    $scope.getUpload = function () {
+                        $('#coverModal').modal('hide');
+                        var formFile = new FormData();
+
+                        var fileObj = document.querySelector('input[type=file]').files[0];
+                        formFile.append("files", fileObj); //加入文件对象
+
+                        $http({
+                                method: 'post',
+                                url: apiPrefix + '/v1/msSentReports/upload',
+                                data: formFile,
+                                headers: {'Content-Type': undefined},
+                                transformRequest: angular.identity
+                            }
+                        ).success(function (res) {
+                            if (res.resCode == 1) {
+                                layer.msg("上传成功");
+                                $scope.assessory.push(res.data[0]);
+                                $('#problemFile').fileinput('clear');
+
+                            } else {
+                                layer.msg("服务器异常，请稍后再试");
+                            }
+                        }).error(function (res) {
+                            layer.msg('服务器异常，请稍后再试');
                         });
                     }
 

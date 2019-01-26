@@ -192,7 +192,6 @@
                                 </span>
                             </div>
                         </form>
-                        <!--<div id="pdfOb" style="margin: 20px 0;height: 500px;"></div>-->
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
@@ -307,14 +306,17 @@
                                 <!--<span>{{briefDescription}}</span>-->
                                 <textarea class="form-control" rows="3" ng-model="briefDescription"></textarea>
                             </div>
-                            <div class="form-item" ng-if="editData.fileList.length != 0">
+                            <div class="form-item">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">附件:</font></font></label>
+                                <button class="btn btn-info" ng-click="getUploadFile()"><i
+                                        class="fa fa-css3"></i>上传附件
+                                </button>
                             </div>
-                            <div class="form-item" style="position: relative;left: -20px;top: -10px;width: 446px;">
-                                <span ng-repeat="item in accessoryURL1" style="color: #333;cursor: pointer;margin: 8px 10px;">{{item.name}}
-                                   <span style="color: #3189e1;" ng-click="downFile(item.downloadURL)">下载</span>
-                                </span>
-                            </div>
+                            <!--<div class="form-item" style="position: relative;left: -20px;top: -10px;width: 446px;">-->
+                                <!--<span ng-repeat="item in accessoryURL1" style="color: #333;cursor: pointer;margin: 8px 10px;">{{item.name}}-->
+                                   <!--<span style="color: #3189e1;" ng-click="downFile(item.downloadURL)">下载</span>-->
+                                <!--</span>-->
+                            <!--</div>-->
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -323,8 +325,60 @@
                 </div>
             </div>
         </div>
-
+        <!--附件上传-->
+        <div class="modal fade" id="coverModal" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <li class="fa fa-remove"></li>
+                        </button>
+                        <h4>上传附件</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <div class="wid-100 announcementCoverPanel">
+                                    <input class="uploadfile" id="problemFile" type="file" name="file">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    .
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload()">
+                            <i class="fa fa-check"></i>
+                            <span>确定</span>
+                        </a>
+                        <a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
+                            <i class="fa fa-reply"></i>
+                            <span>取消</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
     </div>
 </div>
+
+<script>
+    $(".uploadfile").fileinput({
+        allowedFileExtensions: ['doc','docx','pdf','png','jpg','jpeg','xlsx','xls'],
+        uploadAsync: true, //默认异步上传
+        showRemove: true, //显示移除按钮
+        maxFileCount: 5, //表示允许同时上传的最大文件个数
+        language: 'zh', //设置语言
+        uploadUrl: '#', //上传的地址
+        showUpload: false, //显示批量上传按钮
+        showCaption: true, //是否显示标题
+        browseClass: "btn btn-primary", //按钮样式
+        showPreview: true, //是否显示预览
+        dropZoneEnabled: false, //是否显示拖拽区域
+        validateInitialCount: true,
+        slugCallback: function (filename) {
+            return filename.replace('(', '_').replace(']', '_');
+        }
+    });
+</script>
