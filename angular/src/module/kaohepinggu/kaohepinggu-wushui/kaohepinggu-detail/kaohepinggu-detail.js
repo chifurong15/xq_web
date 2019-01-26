@@ -21,8 +21,8 @@
 						$location, $log, $q, $rootScope, $window,
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
-					var apiPrefix = moduleService.getServiceUrl() + '/sewage';
-                    //var apiPrefix = 'http://10.0.9.116:7005' + '/sewage';
+					// var apiPrefix = moduleService.getServiceUrl() + '/sewage';
+                    var apiPrefix = 'http://10.0.9.133:8001' + '/sewage';
 
 
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
@@ -104,21 +104,28 @@
 
                     }
 
-                    //删除单条得分条目
-                    $scope.delete = function (id) {
-                        $ajaxhttp.myhttp({
-                            url: apiPrefix + '/v1/SewageDisposeReport/delete',
-                            method: 'DELETE',
-                            params: {
-                                id: id
-                            },
-                            callBack: function (res) {
-                                if(res.resCode == 1){
-                                    layer.msg('删除成功', {time:2000});
-                                    getData();
+                    //删除
+                    $scope.delete =  function (id) {
+                        var layerIndex = layer.confirm('确定删除本条数据吗？', {
+                            btn: ['确定', '取消']
+                        }, function () {
+                            $ajaxhttp.myhttp({
+                                url: apiPrefix + '/v1/SewageDisposeReport/delete',
+                                method: 'DELETE',
+                                params: {
+                                    id: id
+                                },
+                                callBack: function (res) {
+                                    if(res.resCode == 1){
+                                        layer.msg('删除成功', {time:2000});
+                                        getData();
+                                    }
                                 }
-                            }
-                        })
+                            })
+                            layer.close(layerIndex);
+                        }, function () {
+
+                        });
                     }
 
                     //保存条目
