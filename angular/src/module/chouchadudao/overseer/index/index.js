@@ -35,19 +35,12 @@
                         $('.selectpicker').selectpicker({
                             noneSelectedText : '请选择',
                             dropupAuto: false,
-                            'deselectAllText':'取消全选',
-                            'selectAllText': '全选',
+                            deselectAllText:'取消全选',
+                            selectAllText: '全选',
                         });
 
                         $scope.createUser = $scope.userInfo.name;
-                        //
-                        // $ajaxhttp.myhttp({
-                        //     url:apiPrefix + '/v1/msMeetingCondition/userinfo',
-                        //     method:'get',
-                        //     callBack:function (res) {
-                        //         $scope.num = res.data;
-                        //     }
-                        // })
+
                         getRegion ();
                         getUnit ();
 

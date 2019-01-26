@@ -39,7 +39,7 @@
                     <table class="table table-bordered table-hover" data-filter="#filter">
                         <tr>
                             <th style="width: 5%;">序号</th>
-                            <th style="width: 15%">方案标题
+                            <th style="width: 15%">标题
                                 <i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','title')"></i>
                                 <i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','title')"></i>
                             </th>
@@ -82,11 +82,11 @@
                     <div class="modal-body" style="height: 450px;">
                         <form class="form-inline clearfix">
                             <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">方案标题</font></font></label>
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
                                 <input type="text" class="form-control input-long" ng-model="title">
                             </div>
                             <div class="form-item">
-                                <label>方案期号</label>
+                                <label>期号</label>
                                 <div class="input-group date date_picker" id="Time">
                                     <input type="text" class="form-control input-short-o" ng-model="Time">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -107,15 +107,14 @@
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">创建人</font></font></label>
                                 <input type="text" class="form-control input-short" ng-model="createUser">
                             </div>
+                            <div class="input-group form-item" style="z-index: 12;">
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发单位</font></font></label>
+                                <select id="slpk1" class="form-control selectpicker selectpicker1" multiple data-actions-box="true" data-size="6"  style="width: 426px;z-index: 0;" ng-model="sentUnit">
+                                </select>
+                            </div>
                             <div class="input-group form-item" style="z-index: 11;">
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发区域</font></font></label>
                                 <select id="slpk" class="form-control selectpicker" multiple data-actions-box="true" data-size="8"  style="width: 426px;z-index: 0;" ng-model="sentRegion">
-                                </select>
-                            </div>
-
-                            <div class="input-group form-item" style="z-index: 10;">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下发单位</font></font></label>
-                                <select id="slpk1" class="form-control selectpicker selectpicker1" multiple data-actions-box="true" data-size="6"  style="width: 426px;z-index: 0;" ng-model="sentUnit">
                                 </select>
                             </div>
 
@@ -149,17 +148,17 @@
                             &times;
                         </button>
                         <h4 class="modal-title" id="myModalLabelEdit">
-                            修改督查方案
+                            修改督查通知
                         </h4>
                     </div>
                     <div class="modal-body" style="height: 450px;">
                         <form class="form-inline clearfix">
                             <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">方案标题</font></font></label>
+                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标题</font></font></label>
                                 <input type="text" class="form-control input-long" ng-model="title">
                             </div>
                             <div class="form-item">
-                                <label>方案期号</label>
+                                <label>期号</label>
                                 <div class="input-group date date_picker" id="Time1">
                                     <input type="text" class="form-control input-short-o" ng-model="Time1">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
