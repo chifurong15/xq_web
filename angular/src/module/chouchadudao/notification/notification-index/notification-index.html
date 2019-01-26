@@ -121,7 +121,7 @@
                                 <a class="btn btn-primary btn-xs" ng-if="module.isStart == 1" ng-click="view(module)"><i class="fa fa-info" title="查看"></i></a>
                                 <a class="btn btn-primary btn-xs" ng-if="module.isStart == 2" ng-click="answer(module)"><i class="fa fa-bullhorn" title="查看/答复"></i></a>
                                 <a class="btn btn-primary btn-xs" ng-if="module.isStart == 1" ng-click="delete(module.id)"><i class="fa fa-trash-o" title="删除"></i></a>
-                                <a class="btn btn-primary btn-xs" ng-if="module.isStart == 1 && num == 2 && module.state != 2" ng-click="revoke(module.id)"><i class="fa fa-hand-o-down" title="撤回"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-if="module.isStart == 1 && module.state != 2 && module.readStatus == 0" ng-click="revoke(module.id)"><i class="fa fa-hand-o-down" title="撤回"></i></a>
                             </td>
                         </tr>
                     </table>
