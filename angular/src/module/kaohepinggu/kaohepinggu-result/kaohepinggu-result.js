@@ -32,8 +32,9 @@
                             month = 12;
                             year = year - 1;
                         }
-                        $scope.searchTime1 = year + '-' + month;
-                        $scope.searchTime2 = year + '-' + month;
+                        month =  month < 10 ? '0' + month : month
+                        $scope.searchTime1 = year + '-' + month ;
+                        $scope.searchTime2 = year + '-' + month ;
                         getList1();
                         getList2();
                     }

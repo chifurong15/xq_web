@@ -37,6 +37,10 @@
 
                 var apiPrefix = moduleService.getServiceUrl() + '/bulletin';
                 var apiPrefix1 = moduleService.getServiceUrl() + '/resumption';
+                var apiPrefix2 = moduleService.getServiceUrl() + '/statistic';
+                var apiPrefix3 = moduleService.getServiceUrl() + '/quality';
+                // var apiPrefix3 = "http://10.0.9.133:7004" + '/quality';
+
 
                 var promise = esriApiDeps.query();
                 var w = wish.get();
@@ -51,6 +55,16 @@
                     queryAdminregion.init($scope.map);
                     WorkbenchService.init($scope.map, "workbenchLayer");
 
+                    var date = new Date();
+                    var year = date.getFullYear();
+                    var month = date.getMonth();
+                    if(month == 0){
+                        month = 12;
+                        year = year - 1;
+                    }
+                    month =  month < 10 ? '0' + month : month
+                    $scope.defaultTime = year + '-' + month ;//默认上个月
+
                     //自适应图表
                     chartContainer();
                     /*当前巡河数据*/
@@ -61,7 +75,207 @@
                     getDate();
                     getCountHZOnline();
                     getProblem();
+
+                    getRegionSort ();
+
                 };
+
+                // 区考核排名列表
+                function getRegionSort () {
+                    $ajaxhttp.myhttp({
+                        url: apiPrefix2 + '/v1/statistic/regionStatistic',
+                        method: 'get',
+                        params:{
+                            // date:$scope.defaultTime
+                            date:'2018-11'
+                        },
+                        callBack: function (res) {
+                            if(res.resCode == 1){
+                                $scope.regionSortList = res.data;
+                                $scope.sortRegion = [],$scope.sortRegionScore = [];
+                                $scope.regionSortList.map(function (item){
+                                    $scope.sortRegion.push(item.regionName)
+                                    $scope.sortRegionScore.push(Number(item.resultScore))
+                                })
+                                getInitCharts()
+                            }else{
+                                layer.msg(res.resMsg, {time:2000});
+                            }
+                        }
+                    })
+
+                    $ajaxhttp.myhttp({
+                        url: apiPrefix3 + '/v1/WaterQualityGrade/selectWaterQualityPercent',
+                        method: 'get',
+                        callBack: function (res) {
+                            if(res.resCode == 1){
+                                $scope.waterList = res.data;
+                                $scope.waterType1 = ['Ⅰ-Ⅲ类','Ⅳ类', 'Ⅴ类'];
+                                $scope.waterType2 = [ 'Ⅵ-Ⅶ类', 'Ⅷ-Ⅸ类','其它'];
+
+                                getInitCharts()
+                                // console.log('dddd',$scope.waterList);
+                            }else{
+                                layer.msg(res.resMsg, {time:2000});
+                            }
+                        }
+                    })
+                }
+
+                function getInitCharts(){
+                    this.chartInstance = [];
+                    var myChart = echarts.init(document.getElementById('main'));
+                    var myChart1 = echarts.init(document.getElementById('main1'));
+                    var option = {
+                        tooltip: {
+                            trigger: 'item',
+                            confine: true,
+                            formatter: function (params) {
+                                return params.name + ' </br> ' + params.value +'(' + params.percent + '%)';
+                            }
+                        },
+                        color: ['#72a7f5', '#1153b5', '#20d850','#d2d820', '#e92432', '#3b3636'],
+                        legend: [
+                            {
+                                orient: 'vertical',
+                                icon: "circle",
+                                x: '65%',
+                                y: '25%',
+                                itemWidth: 10,  // 设置宽度
+                                itemHeight: 10, // 设置高度
+                                itemGap: 5 ,// 设置间距
+                                bottom: '15%',
+                                data:$scope.waterType1,
+                            },
+                            {
+                                orient: 'vertical',
+                                icon: "circle",
+                                x: '80%',
+                                y: '25%',
+                                itemWidth: 10,  // 设置宽度
+                                itemHeight: 10, // 设置高度
+                                itemGap: 5 ,// 设置间距
+                                bottom: '15%',
+                                data: $scope.waterType2,
+                            }
+                        ],
+                        series: [{
+                            name: '',
+                            type: 'pie',
+                            radius: ['30%', '50%'],
+                            center: ['30%', '35%'],
+                            data: [
+                                {
+                                    value: $scope.waterList.one,
+                                    percent:$scope.waterList.onePercent,
+                                    name: 'Ⅰ-Ⅲ类'
+                                },
+                                {
+                                    value: $scope.waterList.two,
+                                    percent:$scope.waterList.twoPercent,
+                                    name: 'Ⅳ类'
+                                },
+                                {
+                                    value: $scope.waterList.three,
+                                    percent:$scope.waterList.threePercent,
+                                    name: 'Ⅴ类'
+
+                                },
+                                {
+                                    value: $scope.waterList.four,
+                                    percent:$scope.waterList.fourPercent,
+                                    name: 'Ⅵ-Ⅶ类'
+                                },
+                                {
+                                    value: $scope.waterList.five,
+                                    percent:$scope.waterList.fivePercent,
+                                    name: 'Ⅷ-Ⅸ类'
+                                },
+                                {
+                                    value: $scope.waterList.six,
+                                    percent:$scope.waterList.sixPercent,
+                                    name: '其它'
+                                }
+                            ],
+                            itemStyle: {
+                                emphasis: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            },
+                            label: {
+                                normal: {
+                                    textStyle: {
+                                        color: '#333'
+                                    }
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    show: true
+                                }
+                            }
+                        }]
+                    };
+                    // 使用刚指定的配置项和数据显示图表。
+
+                    var option1 = {
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'shadow',
+                            },
+                            formatter: function (params) {
+                                return params[0].name + ' : ' + params[0].value + "%";
+                            }
+
+                        },
+                        color: ['#ff0000', '#000000', '#000099', '#008000', '#00dd88'],
+                        grid: {
+                            top: '3%',
+                            left: '15%',
+                            height: '110'
+                        },
+                        xAxis: [{
+                            type: 'value',
+                            position: 'bottom',
+                            data: [],
+                            axisTick: {
+                                alignWithLabel: false
+                            }
+                        }],
+                        yAxis: {
+                            type: 'category',
+                            // data: ['蓟州区', '静海区', '宁河区', '滨海新区', '宝坻区', '武清区', '北辰区', '津南区', '西青区', '东丽区', '红桥区', '河北区', '南开区', '河西区', '河东区', '和平区'],
+                            data:$scope.sortRegion,
+                            nameLocation: 'start',
+                            nameTextStyle: {
+                                fontSize: 10
+                            },
+                        },
+                        series: [{
+                            name: '',
+                            type: 'bar',
+                            // data: [60, 88, 118, 90, 160, 103, 134, 70, 94, 175, 120, 70, 99, 100, 220, 88],
+                            data:$scope.sortRegionScore,
+                            barWidth: '30%',
+                            barGap: '1%',
+                            itemStyle: {   //配置样式，设置每个柱子的颜色
+                                normal: {
+                                    color: function (params) {
+                                        var colorList = ['#60a6ec', '#0473e2', '#00ae4f', '#ffc000', '#de1414', '#60a6ec', '#0473e2', '#00ae4f', '#ffc000', '#de1414', '#60a6ec', '#0473e2', '#00ae4f', '#ffc000', '#de1414', '#00ae4f'];
+                                        return colorList[params.dataIndex];
+                                    }
+                                }
+                            }
+                        }]
+                    };
+                    myChart.setOption(option);
+                    myChart1.setOption(option1);
+                }
+
+
 
                 //模态框的全屏显示
                 $scope.enlarge = function () {
