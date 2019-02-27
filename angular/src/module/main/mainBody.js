@@ -86,8 +86,8 @@
                         url: apiPrefix2 + '/v1/statistic/regionStatistic',
                         method: 'get',
                         params:{
-                            // date:$scope.defaultTime
-                            date:'2018-11'
+                            date:$scope.defaultTime
+                            // date:'2018-11'
                         },
                         callBack: function (res) {
                             if(res.resCode == 1){
