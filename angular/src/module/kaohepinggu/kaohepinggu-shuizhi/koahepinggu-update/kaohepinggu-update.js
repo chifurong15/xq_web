@@ -22,8 +22,8 @@
 						routeService, $http, $ajaxhttp, moduleService, globalParam) {
 				
 					var apiPrefix = moduleService.getServiceUrl() + '/quality';
-                    //var apiPrefix = "http://10.0.9.116:7004" + '/quality';
-					
+                    // var apiPrefix = "http://10.0.9.133:7004" + '/quality';
+
 					$scope.init = function () {						
 						
                         $scope.userInfo = $localStorage.userLoginInfo.userInfo;
