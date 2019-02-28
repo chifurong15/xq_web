@@ -122,7 +122,7 @@
                             if(res.resCode == 1){
                                 $scope.waterList = res.data;
                                 $scope.waterType1 = ['Ⅰ-Ⅲ类','Ⅳ类', 'Ⅴ类'];
-                                $scope.waterType2 = [ 'Ⅵ-Ⅶ类', 'Ⅷ-Ⅸ类','其它'];
+                                $scope.waterType2 = [ 'Ⅵ-Ⅶ类', 'Ⅷ-Ⅸ类','河干'];
 
                                 getInitCharts()
                                 console.log('dddd',$scope.waterList);
@@ -205,7 +205,7 @@
                                 {
                                     value: $scope.waterList ? $scope.waterList.six : 0,
                                     percent:$scope.waterList ? $scope.waterList.sixPercent : 0,
-                                    name: '其它'
+                                    name: '河干'
                                 }
                             ],
                             itemStyle: {
