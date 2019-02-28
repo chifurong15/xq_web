@@ -93,10 +93,21 @@
                             if(res.resCode == 1){
                                 $scope.regionSortList = res.data;
                                 $scope.sortRegion = [],$scope.sortRegionScore = [];
-                                $scope.regionSortList.map(function (item){
-                                    $scope.sortRegion.push(item.regionName)
-                                    $scope.sortRegionScore.push(Number(item.resultScore))
-                                })
+
+                                if(Array.isArray(res.data) && res.data.length == 0){
+                                    $scope.sortRegion = ['蓟州区', '静海区', '宁河区', '滨海新区', '宝坻区',
+                                        '武清区', '北辰区', '津南区', '西青区', '东丽区', '红桥区', '河北区',
+                                        '南开区', '河西区', '河东区', '和平区']
+                                    $scope.sortRegionScore = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                                }else{
+                                    $scope.regionSortList.map(function (item){
+                                        $scope.sortRegion.push(item.regionName)
+                                        $scope.sortRegionScore.push(Number(item.resultScore))
+                                    })
+                                }
+                                // console.log($scope.sortRegion);
+                                // console.log($scope.sortRegionScore);
+
                                 getInitCharts()
                             }else{
                                 layer.msg(res.resMsg, {time:2000});
@@ -114,7 +125,7 @@
                                 $scope.waterType2 = [ 'Ⅵ-Ⅶ类', 'Ⅷ-Ⅸ类','其它'];
 
                                 getInitCharts()
-                                // console.log('dddd',$scope.waterList);
+                                console.log('dddd',$scope.waterList);
                             }else{
                                 layer.msg(res.resMsg, {time:2000});
                             }
@@ -166,34 +177,34 @@
                             center: ['30%', '35%'],
                             data: [
                                 {
-                                    value: $scope.waterList.one,
-                                    percent:$scope.waterList.onePercent,
+                                    value: $scope.waterList ? $scope.waterList.one : 0,
+                                    percent:$scope.waterList ? $scope.waterList.onePercent : 0,
                                     name: 'Ⅰ-Ⅲ类'
                                 },
                                 {
-                                    value: $scope.waterList.two,
-                                    percent:$scope.waterList.twoPercent,
+                                    value: $scope.waterList ? $scope.waterList.two : 0,
+                                    percent:$scope.waterList ? $scope.waterList.twoPercent : 0,
                                     name: 'Ⅳ类'
                                 },
                                 {
-                                    value: $scope.waterList.three,
-                                    percent:$scope.waterList.threePercent,
+                                    value: $scope.waterList ? $scope.waterList.three : 0,
+                                    percent:$scope.waterList ? $scope.waterList.threePercent : 0,
                                     name: 'Ⅴ类'
 
                                 },
                                 {
-                                    value: $scope.waterList.four,
-                                    percent:$scope.waterList.fourPercent,
+                                    value: $scope.waterList ? $scope.waterList.four : 0,
+                                    percent:$scope.waterList ? $scope.waterList.fourPercent : 0,
                                     name: 'Ⅵ-Ⅶ类'
                                 },
                                 {
-                                    value: $scope.waterList.five,
-                                    percent:$scope.waterList.fivePercent,
+                                    value: $scope.waterList ? $scope.waterList.five : 0,
+                                    percent:$scope.waterList ? $scope.waterList.fivePercent : 0,
                                     name: 'Ⅷ-Ⅸ类'
                                 },
                                 {
-                                    value: $scope.waterList.six,
-                                    percent:$scope.waterList.sixPercent,
+                                    value: $scope.waterList ? $scope.waterList.six : 0,
+                                    percent:$scope.waterList ? $scope.waterList.sixPercent : 0,
                                     name: '其它'
                                 }
                             ],
@@ -247,7 +258,6 @@
                         }],
                         yAxis: {
                             type: 'category',
-                            // data: ['蓟州区', '静海区', '宁河区', '滨海新区', '宝坻区', '武清区', '北辰区', '津南区', '西青区', '东丽区', '红桥区', '河北区', '南开区', '河西区', '河东区', '和平区'],
                             data:$scope.sortRegion,
                             nameLocation: 'start',
                             nameTextStyle: {
@@ -257,7 +267,6 @@
                         series: [{
                             name: '',
                             type: 'bar',
-                            // data: [60, 88, 118, 90, 160, 103, 134, 70, 94, 175, 120, 70, 99, 100, 220, 88],
                             data:$scope.sortRegionScore,
                             barWidth: '30%',
                             barGap: '1%',
