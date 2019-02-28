@@ -182,7 +182,7 @@ angular.module('app')
                 }
                 var polygon = new _w.Polygon(new _w.SpatialReference({wkid: 4326}));
                 var sfs = new _w.SimpleFillSymbol(_w.SimpleFillSymbol.STYLE_SOLID,
-                    new _w.SimpleLineSymbol(_w.SimpleLineSymbol.STYLE_SOLID, new _w.Color([56,168,0])).setWidth(1),new _w.Color([255, 255, 255, 0])
+                    new _w.SimpleLineSymbol(_w.SimpleLineSymbol.STYLE_SOLID, new _w.Color([56,168,0])).setWidth(3),new _w.Color([255, 255, 255, 0])
                 );
                 var primitive = Terraformer.WKT.parse(spatialData);
                 if(spatialData.indexOf("MULTIPOLYGON") >= 0){
