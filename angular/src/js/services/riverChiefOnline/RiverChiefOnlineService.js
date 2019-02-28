@@ -1813,6 +1813,7 @@ angular.module('app')
                 this.clearPatrolLineClear();
                 this.clearHistoryPatrolLayer();
                 this.clearEventLayer();
+                this.clearMarkSymbolLayer();
             };
             this.clearPatrolLineClear = function(){
                 if(this._patrolLayer != null){
@@ -1822,6 +1823,11 @@ angular.module('app')
             this.clearHistoryPatrolLayer = function(){
                 if(this._historyPatrolLayer != null){
                     this._historyPatrolLayer.clear();
+                }
+            };
+            this.clearMarkSymbolLayer = function () {
+                if (this._markSymbolLayer != null){
+                    this._markSymbolLayer.clear();
                 }
             };
             this.clearHistoryPatrolLayerBySelect = function(item){

@@ -31,9 +31,10 @@
             'ReachService',
             'GeometryUtil',
             'queryAdminregion',
+            'WorkbenchService',
             function riverChiefOnlineCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http,
                                           wish, esriApiDeps, tiandituFactory, MapTool, MapUtil, EventService, PatrolRiverService, RiverChiefOnlineService,
-                                          ReachService, GeometryUtil, queryAdminregion) {
+                                          ReachService, GeometryUtil, queryAdminregion,WorkbenchService) {
 
                 var promise = esriApiDeps.query();
                 var w = wish.get();
@@ -51,6 +52,7 @@
                     PatrolRiverService.init($scope.map, "patrolRiverLayer");
                     ReachService.init($scope.map, $scope.checkRegionId);
                     RiverChiefOnlineService.init($scope.map, "riverChiefOnlineLayer");
+                    WorkbenchService.init($scope.map, "workbenchLayer");
                     //自适应模态框
                     modalContainer();
                 };
@@ -220,6 +222,14 @@
                     if(MapUtil.isCoordValid(treeNode["longitude"],treeNode["latitude"])){
                         if(treeNode["grade"] != null){
                             MapUtil.center2LongLat(treeNode["longitude"],treeNode["latitude"],treeNode["grade"]);
+                            if (treeNode["spatialData"] && treeNode["spatialData"] !== null && treeNode["spatialData"] !== "") {
+                                var regionLayer = $scope.map.getLayer("adminregionLayer");
+                                regionLayer.clear();
+                                WorkbenchService.addParentGraphic(treeNode["spatialData"], true);
+                            }else {
+                                WorkbenchService.clearReginLayer();
+                                console.warn("spatialData is null");
+                            }
                         }
                     }else{
                         console.error("无效坐标");
