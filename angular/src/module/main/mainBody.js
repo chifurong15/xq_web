@@ -238,7 +238,7 @@
                                 type: 'shadow',
                             },
                             formatter: function (params) {
-                                return params[0].name + ' : ' + params[0].value + "%";
+                                return params[0].name + ' : ' + params[0].value;
                             }
 
                         },
