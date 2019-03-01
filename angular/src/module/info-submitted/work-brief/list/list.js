@@ -231,40 +231,54 @@
                             briefDescription:$scope.briefDescription,
                             accessoryUrl:$scope.assessory ? $scope.assessory.join(',') : '',
                         }
-                        //console.log(params);
-                        if(id == 1){//保存
-                            $ajaxhttp.myhttp({
-                                url:apiPrefix + '/v1/msSentReports/add',
-                                method:'post',
-                                params: params,
-                                callBack:function (res) {
-                                    if(res.resCode == 1){
-                                        getList();
-                                        layer.msg('答复成功',{times:2000});
-                                        $('#myModal').modal('hide');
-                                        clear();
-                                    }else{
-                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                        if($scope.briefDescription){
+                            if(id == 1){//保存
+                                // console.log(params);
+                                $('#saveOne').attr('disabled',true);
+                                $ajaxhttp.myhttp({
+                                    url:apiPrefix + '/v1/msSentReports/add',
+                                    method:'post',
+                                    params: params,
+                                    callBack:function (res) {
+                                        if(res.resCode == 1){
+                                            getList();
+                                            layer.msg('答复成功',{times:2000});
+                                            $('#myModal').modal('hide');
+                                            clear();
+                                        }else{
+                                            layer.msg('服务器异常，请稍后再试',{times:500})
+                                        }
                                     }
-                                }
-                            })
-                        }else if (id == 2){//保存并上报
-                            $ajaxhttp.myhttp({
-                                url:apiPrefix + '/v1/msSentReports/addAndSave',
-                                method:'post',
-                                params: params,
-                                callBack:function (res) {
-                                    if(res.resCode == 1){
-                                        getList();
-                                        layer.msg('保存并上报成功',{times:2000});
-                                        $('#myModal').modal('hide');
-                                        clear();
-                                    }else{
-                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                                })
+                            }else if (id == 2){//保存并上报
+                                // console.log(params);
+                                $('#saveTwo').attr('disabled',true);
+                                $ajaxhttp.myhttp({
+                                    url:apiPrefix + '/v1/msSentReports/addAndSave',
+                                    method:'post',
+                                    params: params,
+                                    callBack:function (res) {
+                                        if(res.resCode == 1){
+                                            getList();
+                                            layer.msg('保存并上报成功',{times:2000});
+                                            $('#myModal').modal('hide');
+                                            clear();
+                                        }else{
+                                            layer.msg('服务器异常，请稍后再试',{times:500})
+                                        }
                                     }
-                                }
-                            })
+                                })
+                            }
+                        }else{
+                            layer.alert("报送说明不能为空", {
+                                skin: 'my-skin',
+                                closeBtn: 1,
+                                anim: 3
+                            });
                         }
+
+                        //console.log(params);
+
 
                     }
 
@@ -295,6 +309,9 @@
                     }
                     //展示答复模态框
                     $scope.answer =  function (module) {
+                        $('#saveOne').attr('disabled',false);
+                        $('#saveTwo').attr('disabled',false);
+
                         $scope.assessory = [];
                         $scope.briefDescription = '';
                         $('#myModal').modal('show');
