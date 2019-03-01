@@ -339,32 +339,6 @@
                     }
 
 
-                    //删除
-                    $scope.delete =  function (id) {
-                        var layerIndex = layer.confirm('确定删除本条数据吗？', {
-                            btn: ['确定', '取消']
-                        }, function () {
-                            $ajaxhttp.myhttp({
-                                url:apiPrefix + '/v1/msWeekDynamic/delete',
-                                method:'delete',
-                                params:{
-                                    id:id
-                                },
-                                callBack:function (res) {
-                                    if(res.resCode == 1){
-                                        layer.msg('删除成功',{times:500});
-                                        getList();
-                                    }else{
-                                        layer.msg('服务器异常，请稍后再试',{times:500})
-                                    }
-                                }
-                            })
-                            layer.close(layerIndex);
-                        }, function () {
-
-                        });
-                    }
-
 
 
                     /**
