@@ -1,10 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>巡查统计</title>
-</head>
-<body>
+<div class="patrolStatisic" ng-controller="patrolStatisicCtrl" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">巡查统计</span><span class="tag-right"></span>
+            </div>
+        </div>
+        <div class="panel panel-default panel-m" style="border-top: none;">
+            <div class="panel-body">
+                <form class="form-inline" method="get">
+                    <div class="form-item">
+                        <label>开始月份</label>
+                        <div class="input-group date date_picker" id="startTime">
+                            <input type="text" class="form-control input-short-o" ng-model="startTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>截止月份</label>
+                        <div class="input-group date date_picker" id="endTime">
+                            <input type="text" class="form-control input-short-o" ng-model="endTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>考核单位</label>
+                        <select ng-model="dictName" class="form-control select-short">
+                            <option value="">全部</option>
+                            <option value="{{item.dict_name}}" ng-repeat="item in unitList">{{item.dict_name}}</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="search()"><i class="fa fa-search"></i>搜索</button>
+                    <button type="button" class="btn btn-primary m-l-15" ng-click="getReSet()">
+                        <i class="fa fa-refresh"></i>重置
+                    </button>
+                </form>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                <tr class='tHeader'>
+                                    <th>序号</th>
+                                    <th>巡查月份</th>
+                                    <th>行政区</th>
+                                    <th>河湖名称</th>
+                                    <th>河段名称</th>
+                                    <th>考核单位</th>
+                                    <th>应巡查次数</th>
+                                    <th>实际巡查次数</th>
+                                    <th>完成率(%)</th>
+                                    <th>发现问题</th>
+                                </tr>
+                                <!--<tr ng-repeat="lst in dataList" ng-init="index = $index+1" style="cursor: pointer">-->
+                                    <!---->
+                                <!--</tr>-->
+                                <tr ng-repeat="item in moduleList" ng-init="index = $index+1">
+                                    <td>{{index}}</td>
+                                    <td>{{item.month}}</td>
+                                    <td>{{item.regionId}}</td>
+                                    <td>{{item.riverId}}</td>
+                                    <td>{{item.reachId}}</td>
+                                    <td>{{item.unit}}</td>
+                                    <td>{{item.patrolCount}}</td>
+                                    <td>{{item.realPatrolCount}}</td>
+                                    <td>{{item.finishRate}}</td>
+                                    <td>{{item.problemCount}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <tm-pagination conf="paginationConf"></tm-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-</body>
-</html>
+    </div>
+</div>

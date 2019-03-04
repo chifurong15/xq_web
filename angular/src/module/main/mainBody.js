@@ -142,7 +142,7 @@
                             trigger: 'item',
                             confine: true,
                             formatter: function (params) {
-                                return params.name + ' </br> ' + params.value +'(' + params.percent + '%)';
+                                return params.name + ' </br> ' + params.value + '个' +'(' + params.percent + '%)';
                             }
                         },
                         color: ['#72a7f5', '#1153b5', '#20d850','#d2d820', '#e92432', '#3b3636'],
