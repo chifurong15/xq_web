@@ -19,7 +19,6 @@
           var error, expand_all_parents, expand_level, for_all_ancestors, for_each_branch, get_parent, n, on_treeData_change, select_branch, selected_branch, tree;
           error = function(s) {
             console.log('ERROR:' + s);
-            debugger;
             return void 0;
           };
           if (attrs.iconExpand == null) {
@@ -436,7 +435,6 @@
               tree.last_descendant = function(b) {
                 var last_child;
                 if (b == null) {
-                  debugger;
                 }
                 n = b.children.length;
                 if (n === 0) {

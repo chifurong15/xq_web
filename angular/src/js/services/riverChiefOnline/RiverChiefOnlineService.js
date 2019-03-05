@@ -996,7 +996,6 @@ angular.module('app')
             };
             this.addOneDayHistoryPatrolByTableSelect = function (patrolArr) {
                 console.log(patrolArr);
-                debugger;
                 if(patrolArr.length !== 0){
                     var len = patrolArr.length;
                     var coords = [];
@@ -1032,10 +1031,8 @@ angular.module('app')
                                     continue;
                                 }
                                 if(j === 0){
-                                    debugger;
                                     lineExtent = this.addGraphicToMap(coords, item);
                                 }else {
-                                    debugger;
                                     lineExtent = lineExtent.union(this.addGraphicToMap(coords, item));
                                 }
                                 historyPatrolArray.push(coords);
@@ -1067,7 +1064,6 @@ angular.module('app')
                                 endTime: item.endTime
                             }
                         }).success(function (data) {
-                            debugger;
                             if(data.data && data.data.length > 0){
                                 //_that.addCurrentHistoryPatrolEvents(data.data);
                                 _that.addCurrentOneDayHistoryPatrolEvents(data.data);
@@ -1220,7 +1216,6 @@ angular.module('app')
                     item = data[i];
                     eventList = data[i].eventList;
                     if(eventList && eventList.length > 0){
-                        debugger;
                         for(var j = 0;j<eventList.length;j++){
                             if(MapUtil.isCoordValid(eventList[j].longitude, eventList[j].latitude)){
                                 PatrolRiverService.addPatrolEventPoint(eventList[j]);
@@ -1236,7 +1231,6 @@ angular.module('app')
 
                 if(PatrolRiverService.patrolEventGraphicArray != null && PatrolRiverService.patrolEventGraphicArray.length > 0){
                     console.log(PatrolRiverService.patrolEventGraphicArray);
-                    debugger;
                     for(var i = 0;i<PatrolRiverService.patrolEventGraphicArray.length;i++){
                         this._eventLayer.add(PatrolRiverService.patrolEventGraphicArray[i]);
                     }

@@ -475,6 +475,32 @@
       "description": "考核评分-评分规则配置"
     },
     {
+      "seqId": "3-12",
+      "parentId": "3",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "巡查统计",
+      "icon": "menu-icon-6",
+      "url": "module/kaohepinggu/kaohepinggu-patrolMgt/patrolStatisic.html",
+      "requireJS": [
+        "module/kaohepinggu/kaohepinggu-patrolMgt/patrolStatisic.js"
+      ],
+      "description": "考核评分-巡查管理-巡查统计"
+    },
+    {
+      "seqId": "3-13",
+      "parentId": "3",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "巡查问题列表",
+      "icon": "menu-icon-6",
+      "url": "module/kaohepinggu/kaohepinggu-patrolMgt/problemList.html",
+      "requireJS": [
+        "module/kaohepinggu/kaohepinggu-patrolMgt/problemList.js"
+      ],
+      "description": "考核评分-巡查管理-问题列表"
+    },
+    {
       "seqId": "4",
       "parentId": "0",
       "isLeaf": false,

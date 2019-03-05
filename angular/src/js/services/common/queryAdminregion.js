@@ -299,7 +299,7 @@ angular.module('app')
             }
 
         };
-        this.isInArray = function (array, name) {debugger;
+        this.isInArray = function (array, name) {
             var index = array.length;
             while (index--) {
                 if (array[index] === name) {

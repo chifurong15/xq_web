@@ -42,7 +42,6 @@
                         method: "GET",
                         url:  $localStorage.serviceUrl + "/smMenu/queryMenuTreeByAppId"
                     }).success(function(res){
-                        debugger;
                         if(res.resCode == 1){
                             //循环删除,zTree问题, 循环删除, 删除不完全
                             while($scope.rightTreeObj.getNodes().length >0){
@@ -167,7 +166,6 @@
                 //左侧树的单击问题处理, 点击后 设置右侧对应的节点选中
                 $scope.leftTreeNodeClick = function(event, treeId, treeNode){
                     //
-                    debugger;
                     console.log("rightTreeNodeClick---treeId:"+treeId+", treeNode:"+treeNode);
                     var findNodeInLeftRight = false;
                     //如果是二级节点才处理
@@ -222,7 +220,6 @@
                 //添加左侧功能列表到右侧二级菜单
                 $scope.addLeftItemToRightTree = function(){
 
-                    debugger;
                     var leftSelectedNode = $scope.leftTreeObj.getCheckedNodes();
 
                     if(leftSelectedNode && leftSelectedNode.length>0){
@@ -399,7 +396,6 @@
 
                 //保存菜单操作
                 $scope.saveTreeMenu = function(){
-                    debugger;
                     var nodes = $scope.rightTreeObj.getNodes();  //获取节点数据
                     var postTree = [];
                     //获得平级节点 获取删除的节点信息，新增 修改的节点数据全部在节点树集合里面
@@ -454,7 +450,6 @@
                         data: JSON.stringify(params),
                         headers: { 'Content-Type': 'application/json' }
                     }).success(function(data){
-                        debugger;
 
                         if(data.resCode == 1){
                             alert("保存数据成功！");
