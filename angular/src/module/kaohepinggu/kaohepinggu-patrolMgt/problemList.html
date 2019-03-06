@@ -1,0 +1,146 @@
+<div ng-controller="patrolProblemMgtCtrl" ng-init="init()">
+
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">巡查问题</span><span class="tag-right"></span>
+            </div>
+        </div>
+
+        <div class="panel panel-default m-all-0">
+            <div class="panel-body">
+                <form class="form-patrolMgt form-inline" method="get">
+                    <div class="form-item">
+                        <label>所属区域</label>
+                        <select ng-model="regionName" id="region" ng-change="getChangeRegion(regionName)" class="form-control select-short">
+                            <option value="">请选择</option>
+                            <option value="{{item.areaCode}}" ng-repeat="item in regionList">{{item.areaName}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-item">
+                        <label>河道名称</label>
+                        <select ng-model="reachName" id="river" class="form-control select-short">
+                            <option value="">请选择</option>
+                            <option value="{{item.reachCode}}" ng-repeat="item in riverList">{{item.reachName}}</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <label>问题类型</label>
+                        <select ng-model="typeName" class="form-control select-short">
+                            <option value="">请选择</option>
+                            <option value="{{item.id}}" ng-repeat="item in typeList">{{item.typename}}</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <label>开始日期</label>
+                        <div class="input-group date date_picker date-tj" id="beginTime">
+                            <input type="text" class="form-control input-short-o" ng-model="beginTime" />
+                            <span class="input-group-addon">
+	                            <i class="fa fa-calendar"></i>
+	                        </span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>结束日期</label>
+                        <div class="input-group date date_picker date-tj" id="endTime">
+                            <input type="text" class="form-control input-short-o" ng-model="endTime" />
+                            <span class="input-group-addon">
+	                            <i class="fa fa-calendar"></i>
+	                        </span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>考核单位</label>
+                        <select ng-model="unitName" class="form-control select-short">
+                            <option value="">请选择</option>
+                            <option value="{{item.dict_name}}" ng-repeat="item in unitList">{{item.dict_name}}</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="getMdSearch()">
+                        <i class="fa fa-search"></i>搜索
+                    </button>
+                    <button type="button" class="btn btn-primary m-l-15" ng-click="getReSet()">
+                        <i class="fa fa-refresh"></i>重置
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-responsive table-jm">
+                    <table class="table table-bordered table-hover table-patrolMgt" data-filter="#filter">
+                        <thead>
+                        <tr>
+                            <th style="width: 5%">序号</th>
+                            <th style="width: 25%">问题</th>
+                            <th style="width: 10%">所属区域</th>
+                            <th style="width: 15%">河湖名称</th>
+                            <th style="width: 10%">考核单位</th>
+                            <th style="width: 10%">巡查日期</th>
+                            <th style="width: 5%">扣分分值</th>
+                            <th style="width: 10%">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="module in moduleList" ng-init="index=$index+1">
+                            <td>{{index}}</td>
+                            <td>{{module.riverQuestion}}</td>
+                            <td>{{module.region}}</td>
+                            <td>{{module.riverName}}</td>
+                            <td>{{module.unit}}</td>
+                            <td>{{module.patrolDate}}</td>
+                            <td>{{module.pointsType}}</td>
+                            <td class="td-tool">
+                                <a class="btn btn-primary btn-xs" ng-click="getHydrologicDetail(module.id)">
+                                    <i class="fa fa-info" title="查看"></i>
+                                </a>
+                                <!--<a class="btn btn-primary btn-xs" ng-click="getAccessoryDetail(module)">-->
+                                <!--<i class="fa fa-pencil" title="修改"></i>-->
+                                <!--</a>-->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <!--描述：所属区域树-->
+    <div class="modal fade" id="regionTreeModal" role="dialog_region" data-backdrop="static">
+        <div class="modal-dialog modal-jm " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">选择区域</h4>
+                </div>
+                <div class="modal-body">
+
+                    <ul id="regionTreeContainer" class="ztree regionTreeContent"></ul>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getModalOk()">
+                        <i class="fa fa-check"></i>
+                        <span>确 定</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //调用示例
+    layui.use('layer', function () {
+        layer.photos({
+            photos: '#layer-photos-check',
+            anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+        });
+    });
+
+</script>

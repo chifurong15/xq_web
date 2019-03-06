@@ -1,241 +1,104 @@
-<div ng-controller="patrolProblemMgtCtrl" ng-init="init()">
+<div ng-controller="patrolDetailMgtCtrl" ng-init="init()">
 
     <div class="wrapper-md">
-		<div class="panel panel-default m-n">
-			<div class="panel-body" style="position: relative;">
-				<span class="tag">巡查问题</span><span class="tag-right"></span>
-			</div>
-		</div>
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">巡查详情</span><span class="tag-right"></span>
+            </div>
+        </div>
+        <div class="panel panel-default m-all-0">
+            <div class="panel-body">
+                <div class="panel-content">
+                    <div class="patrolDetailContent">
+                        <div class="form-item">
+                            <label>河道名称：</label>
+                            <span ng-bind="problemList.riverName"></span>
+                        </div>
+                        <div class="form-item">
+                            <label>行政区域：</label>
+                            <span ng-bind="problemList.region"></span>
+                        </div>
+                        <br />
+                        <div class="form-item">
+                            <label>河道问题：</label>
+                            <span ng-bind="problemList.riverQuestion"></span>
+                        </div>
+                        <br />
+                        <div class="form-item">
+                            <label>扣分类型：</label>
+                            <span ng-bind="problemList.typeName"></span>
+                        </div>
+                        <br />
+                        <div class="form-item">
+                            <label>所扣分数：</label>
+                            <span ng-bind="problemList.buckleScores"></span>
+                        </div>
+                        <div class="form-item">
+                            <label>巡查人员：</label>
+                            <span ng-bind="problemList.patorPerson"></span>
+                        </div>
+                        <br />
+                        <div class="form-item">
+                            <label>巡查日期：</label>
+                            <span ng-bind="problemList.patrolDate"></span>
+                        </div>
+                        <div class="form-item">
+                            <label>所在位置：</label>
+                            <span ng-bind="problemList.location"></span>
+                        </div>
+                        <br />
+                        <div class="form-item">
+                            <label>问题照片：</label>
+                            <div id="layer-photos-before" class="layer-photos-demo" style="margin-left: 30px;">
+                                <div style="display: inline-block;" id="layer-photos-check">
+                                    <img style="margin: 0 5px;" ng-repeat="items in imgUrl"
+                                         layer-pid="" layer-src="{{fileUrl}}{{items}}"
+                                         src="{{fileUrl}}{{items}}" alt="问题照片" width="100px"
+                                         height="100px" key="{{$index}}">
+                                </div>
+                                <img ng-show="mp3Url.length > 0" ng-repeat="item in mp3Url"
+                                     style=" float: left; margin: 0 5px;width:60px; height:60px;}"
+                                     src="img/music_img.png" ng-click="playAudio(item)" alt="巡河录音">
+                                <img ng-show="mp4Url.length > 0" ng-repeat="item in mp4Url"
+                                     style="float: left;margin: 0 5px;width:60px; height:60px;}" src="img/audio_img.png"
+                                     ng-click="playVideo(item)"  alt="巡河视频">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-		<div class="panel panel-default m-all-0">
-			<div class="panel-body">
-				<form class="form-patrolMgt form-inline" method="get">
-					<div class="form-item">
-						<label>所属区域</label>
-						<select ng-model="regionName" id="region" ng-change="getChangeRegion(regionName)" class="form-control select-short">
-							<option value="">请选择</option>
-							<option value="{{item.areaCode}}" ng-repeat="item in regionList">{{item.areaName}}</option>
-						</select>
-					</div>
+            <div id="videoBox"
+                 style="position: absolute!important;;z-index: 99998!important;;left: 30%;top: 30%;display: none;background-color: #333;padding: 30px;">
+            <span style="position: absolute;z-index: 9991;top: 10px;right: 10px;color: #fff;padding: 2px 8px;cursor: pointer;"
+                  ng-click="closePlayer()">关闭</span>
+                <div id="videoPlayerBox">
+                    <video id="my-player" class="video-js" controls preload="auto" data-setup='{}'>
+                        <source class="source" src="" type="video/mp4"></source>
+                    </video>
+                </div>
+                <div id="audioPlayer">
+                    <audio controls src="" autoplay="true"></audio>
+                </div>
+            </div>
 
-					<div class="form-item">
-						<label>河道名称</label>
-						<select ng-model="reachName" id="river" class="form-control select-short">
-							<option value="">请选择</option>
-							<option value="{{item.reachCode}}" ng-repeat="item in riverList">{{item.reachName}}</option>
-						</select>
-					</div>
-					<div class="form-item">
-						<label>问题类型</label>
-						<select ng-model="typeName" class="form-control select-short">
-							<option value="">请选择</option>
-							<option value="{{item.id}}" ng-repeat="item in typeList">{{item.typename}}</option>
-						</select>
-					</div>
-					<div class="form-item">
-						<label>开始日期</label>
-						<div class="input-group date date_picker date-tj" id="beginTime">
-							<input type="text" class="form-control input-short-o" ng-model="beginTime" />
-							<span class="input-group-addon">
-	                            <i class="fa fa-calendar"></i>
-	                        </span>
-						</div>
-					</div>
-					<div class="form-item">
-						<label>结束日期</label>
-						<div class="input-group date date_picker date-tj" id="endTime">
-							<input type="text" class="form-control input-short-o" ng-model="endTime" />
-							<span class="input-group-addon">
-	                            <i class="fa fa-calendar"></i>
-	                        </span>
-						</div>
-					</div>
-					<div class="form-item">
-						<label>考核单位</label>
-						<select ng-model="unitName" class="form-control select-short">
-							<option value="">请选择</option>
-							<option value="{{item.dict_name}}" ng-repeat="item in unitList">{{item.dict_name}}</option>
-						</select>
-					</div>
-					<button type="submit" class="btn btn-primary" ng-click="getMdSearch()">
-						<i class="fa fa-search"></i>搜索
-					</button>
-					<button type="button" class="btn btn-primary m-l-15" ng-click="getReSet()">
-						<i class="fa fa-refresh"></i>重置
-					</button>
-				</form>
-			</div>
-		</div>
+            <div id="openImg"
+                 style="position: absolute!important;;z-index: 99998!important;display: none;top: 0;left: 0;width: 100%;height: 100%;">
+                <img src="" style="height: 50%;left: 30%;position: absolute;top: 20%; z-index: 100000">
+                <a ng-click="closeImg()" style="position: absolute; top: 15px; right: 15px; width: 30px; height: 30px; color: #fff; font-size: 20px;
+    z-index: 100000; text-align: center; line-height: 30px;"><i class="fa fa-close"></i></a>
+                <div id="imgShade" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;background: #000; opacity: 0.9"></div>
 
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<div class="table-responsive table-jm">
-					<table class="table table-bordered table-hover table-patrolMgt" data-filter="#filter">
-						<thead>
-							<tr>
-								<th style="width: 5%">序号</th>
-								<th style="width: 25%">问题</th>
-								<th style="width: 10%">所属区域</th>
-								<th style="width: 15%">河湖名称</th>
-								<th style="width: 10%">考核单位</th>
-								<th style="width: 10%">巡查日期</th>
-								<th style="width: 5%">扣分分值</th>
-								<th style="width: 10%">操作</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="module in moduleList" ng-init="index=$index+1">
-								<td>{{index}}</td>
-								<td>{{module.regionId}}</td>
-								<td>{{module.riverId}}</td>
-								<td>{{module.reachId}}</td>
-								<td>{{module.patrolDate}}</td>
-								<td>{{module.mileage.toFixed(3)}}</td>
-								<td>{{module.unit}}</td>
-								<td class="td-tool">
-									<!--<a class="btn btn-primary btn-xs" ng-click="getAccessoryDetail(module)">-->
-										<!--<i class="fa fa-pencil" title="修改"></i>-->
-									<!--</a>-->
-									<a class="btn btn-primary btn-xs" ng-click="getHydrologicDetail(module.id)">
-										<i class="fa fa-info" title="问题列表"></i>
-									</a>
-									<a class="btn btn-primary btn-xs" ng-click="getHydrologicDelete(module.id,module.name)">
-										<i class="fa fa-trash-o" title="删除"></i>
-									</a>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<tm-pagination conf="paginationConf"></tm-pagination>
-			</div>
-		</div>
-
-
-
-
-
-        <!--<div class="panel panel-default m-all-0">-->
-			<!--<div class="panel-body">-->
-				<!--<div class="panel-content">-->
-					<!--<div class="patrolDetailContent">-->
-						<!--<div class="form-item">-->
-							<!--<label>河道名称：</label>-->
-							<!--<span ng-bind="problemList.riverName"></span>-->
-						<!--</div>-->
-						<!--<div class="form-item">-->
-	                        <!--<label>行政区域：</label>-->
-							<!--<span ng-bind="problemList.region"></span>-->
-	                    <!--</div>-->
-						<!--<br />-->
-                      	<!--<div class="form-item">-->
-							<!--<label>河道问题：</label>-->
-							<!--<span ng-bind="problemList.riverQuestion"></span>-->
-						<!--</div>-->
-						<!--<br />-->
-						<!--<div class="form-item">-->
-							<!--<label>扣分类型：</label>-->
-							<!--<span ng-bind="problemList.typeName"></span>-->
-						<!--</div>-->
-						<!--<br />	-->
-						<!--<div class="form-item">-->
-							<!--<label>所扣分数：</label>-->
-							<!--<span ng-bind="problemList.buckleScores"></span>-->
-						<!--</div>-->
-						<!--<div class="form-item">-->
-							<!--<label>巡查人员：</label>-->
-							<!--<span ng-bind="problemList.patorPerson"></span>-->
-						<!--</div>-->
-						<!--<br />-->
-                        <!--<div class="form-item">-->
-                            <!--<label>巡查日期：</label>-->
-							<!--<span ng-bind="problemList.patrolDate"></span>-->
-                        <!--</div>-->
-                        <!--<div class="form-item">-->
-							<!--<label>所在位置：</label>-->
-							<!--<span ng-bind="problemList.location"></span>-->
-						<!--</div>-->
-						<!--<br />-->
-						<!--<div class="form-item">-->
-							<!--<label>问题照片：</label>-->
-		                	<!--<div id="layer-photos-before" class="layer-photos-demo" style="margin-left: 30px;">-->
-								<!--<div style="display: inline-block;" id="layer-photos-check">-->
-									<!--<img style="margin: 0 5px;" ng-repeat="items in imgUrl"-->
-										 <!--layer-pid="" layer-src="{{fileUrl}}{{items}}"-->
-										 <!--src="{{fileUrl}}{{items}}" alt="问题照片" width="100px"-->
-										 <!--height="100px" key="{{$index}}">-->
-								<!--</div>-->
-								<!--<img ng-show="mp3Url.length > 0" ng-repeat="item in mp3Url"-->
-									 <!--style=" float: left; margin: 0 5px;width:60px; height:60px;}"-->
-									 <!--src="img/music_img.png" ng-click="playAudio(item)" alt="巡河录音">-->
-								<!--<img ng-show="mp4Url.length > 0" ng-repeat="item in mp4Url"-->
-									 <!--style="float: left;margin: 0 5px;width:60px; height:60px;}" src="img/audio_img.png"-->
-									 <!--ng-click="playVideo(item)"  alt="巡河视频">-->
-							<!--</div>-->
-						<!--</div>-->
-					<!--</div>-->
-				<!--</div>-->
-			<!--</div>-->
-			<!---->
-			<!--<div id="videoBox"-->
-				 <!--style="position: absolute!important;;z-index: 99998!important;;left: 30%;top: 30%;display: none;background-color: #333;padding: 30px;">-->
-            <!--<span style="position: absolute;z-index: 9991;top: 10px;right: 10px;color: #fff;padding: 2px 8px;cursor: pointer;"-->
-				  <!--ng-click="closePlayer()">关闭</span>-->
-				<!--<div id="videoPlayerBox">-->
-					<!--<video id="my-player" class="video-js" controls preload="auto" data-setup='{}'>-->
-						<!--<source class="source" src="" type="video/mp4"></source>-->
-					<!--</video>-->
-				<!--</div>-->
-				<!--<div id="audioPlayer">-->
-					<!--<audio controls src="" autoplay="true"></audio>-->
-				<!--</div>-->
-			<!--</div>-->
-
-			<!--<div id="openImg"-->
-				 <!--style="position: absolute!important;;z-index: 99998!important;display: none;top: 0;left: 0;width: 100%;height: 100%;">-->
-				<!--<img src="" style="height: 50%;left: 30%;position: absolute;top: 20%; z-index: 100000">-->
-				<!--<a ng-click="closeImg()" style="position: absolute; top: 15px; right: 15px; width: 30px; height: 30px; color: #fff; font-size: 20px;-->
-    <!--z-index: 100000; text-align: center; line-height: 30px;"><i class="fa fa-close"></i></a>-->
-				<!--<div id="imgShade" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;background: #000; opacity: 0.9"></div>-->
-
-			<!--</div>-->
-			<!--<div class="panel-footer m-b-10">-->
-				<!--<div class="btn-box">-->
-					<!--<button type="submit" class="btn btn-default" ng-click="getBack()">-->
-						<!--<i class="fa fa-reply"></i>返回-->
-					<!--</button>-->
-				<!--</div>-->
-			<!--</div>-->
-		<!--</div>-->
-
-
-
-
-
-
-	</div>
-
-	<!--描述：所属区域树-->
-	<div class="modal fade" id="regionTreeModal" role="dialog_region" data-backdrop="static">
-		<div class="modal-dialog modal-jm " role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">选择区域</h4>
-				</div>
-				<div class="modal-body">
-
-					<ul id="regionTreeContainer" class="ztree regionTreeContent"></ul>
-				</div>
-				<div class="modal-footer">
-					<a href="javascript:;" class="btn btn-primary btn-o" ng-click="getModalOk()">
-						<i class="fa fa-check"></i>
-						<span>确 定</span>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
+            </div>
+            <div class="panel-footer m-b-10">
+                <div class="btn-box">
+                    <button type="submit" class="btn btn-default" ng-click="getBack()">
+                        <i class="fa fa-reply"></i>返回
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
     //调用示例

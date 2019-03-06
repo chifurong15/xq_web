@@ -23,8 +23,8 @@
 			'moduleService',
             function patrolMgtCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http, $ajaxhttp, moduleService) {
 
-        		// var apiPrefix = moduleService.getServiceUrl() + '/patrol';
-        		var apiPrefix = 'http://10.0.9.110:7027' + '/patrol';
+        		var apiPrefix = moduleService.getServiceUrl() + '/patrol';
+        		// var apiPrefix = 'http://10.0.9.110:7027' + '/patrol';
 
                 var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/list';
 
@@ -273,8 +273,8 @@
 				 * 查看巡查问题列表
 				 */
 				$scope.getHydrologicDetail = function(id){
-					localStorage.setItem('id',id);
-					routeService.route('3-6-1', false);
+					localStorage.setItem('listId',id);
+					routeService.route('3-13', true);
 				};
 				
 				
