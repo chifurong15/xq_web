@@ -24,9 +24,10 @@
             function superviseReportAddMgtCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http, $ajaxhttp, moduleService) {
 
         	    var apiPrefix = moduleService.getServiceUrl() + '/supervise';
-                //var apiPrefix = 'http://10.0.9.116:7023' + '/supervise';
+                // var apiPrefix = 'http://10.0.9.133:7023' + '/supervise';
 
-				/**
+
+                /**
 				 * ==============================================
 				 * @name  superviseReportAddMgtCtrl
 				 * @author  | 2018/10/25
@@ -40,6 +41,8 @@
 					 * 初始化行政区划树
 					 */
 					regionTreeList();
+
+                    getType ()
 					
 					/**
 					 * 处理状态
@@ -51,7 +54,23 @@
 					 */
 					getAssessList();
 				}
-				
+
+				//获取问题类型
+				function getType () {
+                    $ajaxhttp.myhttp({
+                        url: apiPrefix + '/v1/socialReport/eventType',
+                        method: 'get',
+                        callBack: function (res) {
+                            if(res.resCode == 1){
+                                $scope.typeList = res.data
+                            }
+                        }
+                    })
+				}
+
+
+
+
 				var jsname = /^[a-zA-Z0-9_-]{4,16}$/,
 					regionTree,
 					regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree';
@@ -316,6 +335,7 @@
                         	riverName: $scope.riverName,
 							reportor: $scope.reportor,
 							contactType: $scope.contactType,
+                        	eventType:$scope.problemType,
 							problemPosition: $scope.problemPosition,
 							reportProblem: $scope.reportProblem,
                         	processingStatus: $scope.status.name,
@@ -373,6 +393,7 @@
                     $scope.processingResults = '';
                     $scope.source = '';
                     $scope.overtime = '';
+                    $scope.problemType = '';
                 }
 				
 				

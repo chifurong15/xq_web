@@ -51,6 +51,13 @@
                         <input type="text" class="form-control input-short" ng-model="problemPosition"
                                lay-verify="required"/>
                     </div>
+                    <div class="form-item">
+                        <label>问题类型</label>
+                        <select ng-model="problemType" ng-options="st.id as st.typename for st in typeList"
+                                class="form-control select-short">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
                     <br/>
                     <div class="form-item remarkInfo">
                         <div class="dis-i-blc">
