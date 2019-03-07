@@ -86,6 +86,7 @@
                     console.log(treeNode);
                     $scope.regionId = treeNode.id;
                     $scope.regionName = treeNode.name;
+                    $scope.regionCode = treeNode.id;
                     $scope.grade = treeNode.grade;
                 }
 
@@ -311,7 +312,7 @@
 				$scope.getSubmit = function(){
 					var params = {
                             reportDate: $scope.beginTime,
-                        	regionName: $scope.regionName,
+                        	regionName: $scope.regionCode,
                         	riverName: $scope.riverName,
 							reportor: $scope.reportor,
 							contactType: $scope.contactType,

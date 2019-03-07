@@ -51,11 +51,11 @@
 					 */
 					getDealList();
 				}
-				
+
 				var jsname = /^[a-zA-Z0-9_-]{4,16}$/,
 					regionTree,
 					regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree';
-					
+
 				/**
 				 * 初始化行政区划树
 				 */
@@ -75,7 +75,7 @@
 	                    onClick: regionTreeOnClick
 	                }
 	            };
-				
+
 				/**
 				 * 捕获行政区域节点被点击
 				 * @param {Object} event
@@ -86,6 +86,8 @@
                     // console.log(treeNode);
                     $scope.regionId = treeNode.id;
                     $scope.regionName = treeNode.name;
+                    $scope.regionCode = treeNode.id;
+                    // console.log($scope.regionCode);
                     $scope.grade = treeNode.grade;
                 }
 
@@ -127,7 +129,7 @@
 	                }).error(function () {
 	                });
 	            };
-				
+
 				/**
                  * 区域树模态框
                  */
@@ -135,14 +137,14 @@
                 	$('#regionTreeModal').modal('show');
                     regionTreeList();
                 }
-				
+
 				/**
 				 * 区域树搜索
 				 */
 				$scope.getSelectRegion = function(){
 					// console.log('我是区域树搜索...')
 				}
-				
+
 				/**
 				 * 关闭模态框
 				 */
@@ -150,7 +152,7 @@
                 	$('#regionTreeModal').modal('hide');
 					// console.log('我是区域树关闭...')
 				}
-				
+
 				/**
 				 * 时间选择
 				 */
@@ -195,6 +197,7 @@
 				$scope.getReSet = function () {
                     $scope.reachName = '';
                     $scope.regionName = '';
+                    $scope.regionCode = '';
                     $scope.deal = '';
                     $scope.beginTime = '';
                     $scope.endTime = '';
@@ -210,7 +213,7 @@
                             pageNumber: $scope.paginationConf.currentPage,
                             pageSize: $scope.paginationConf.itemsPerPage,
                             contactType: $scope.reachName,
-                            regionName:$scope.regionName,
+                            regionName:$scope.regionCode,
                             processingStatus:$scope.deal,
                             startTime:$scope.beginTime,
                             endTime:$scope.endTime
