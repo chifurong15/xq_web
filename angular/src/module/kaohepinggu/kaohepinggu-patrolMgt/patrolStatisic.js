@@ -20,8 +20,8 @@
                                                $location, $log, $q, $rootScope, $window,
                                                routeService, $http, $ajaxhttp, moduleService) {
 
-                    // var apiPrefix = moduleService.getServiceUrl() + '/patrol';
-                    var apiPrefix = 'http://10.0.9.110:7027' + '/patrol';
+                    var apiPrefix = moduleService.getServiceUrl() + '/patrol';
+                    // var apiPrefix = 'http://10.0.9.110:7027' + '/patrol';
 
 
                     $scope.init= function () {
