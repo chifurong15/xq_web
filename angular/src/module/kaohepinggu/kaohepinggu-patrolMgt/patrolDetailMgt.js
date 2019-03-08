@@ -101,22 +101,32 @@
 
                 // 音视频播放
                 $scope.playVideo = function(item){
+
                     $('#videoBox').show();
                     $('#audioPlayer').css('display','none');
                     $("#videoPlayerBox").css('display','block');
                     $scope.videoUrl = $scope.fileUrl +  item;
-                    $("#videoPlayerBox source").attr("src", $scope.videoUrl);
-                    var myPlayer = videojs("videoPlayerBox")
-                    myPlayer.ready(function () {
-                        myPlayer.play()
-                    });
+
+                    var sourceDom = $("<video id=\"my-player\" class=\"video-js\"  controls preload=\"auto\" data-setup='{}'>\n" +
+                        "</video>");
+                    $("#videoPlayerBox #my-player").html('');
+                    $("#videoPlayerBox #my-player").append(sourceDom);
+
+                    $("#videoPlayerBox  video").attr("src", $scope.videoUrl);
+
+                    $("#videoPlayerBox  video").trigger("play");
+
+                    // var myPlayer = videojs("videoPlayerBox")
+                    // myPlayer.ready(function () {
+                    //     myPlayer.play()
+                    //
+                    // });
                 };
                 $scope.playAudio = function(item){
                     $('#videoBox').show();
                     $('#audioPlayer').css('display','block');
                     $("#videoPlayerBox").css('display','none');
                     $scope.videoUrl = $scope.fileUrl + item;
-                    // console.log($("#audioPlayer"))
                     $("#audioPlayer audio").attr("src", $scope.videoUrl);
                     // var myPlayer = $("#audioPlayer");
                     // myPlayer.play()

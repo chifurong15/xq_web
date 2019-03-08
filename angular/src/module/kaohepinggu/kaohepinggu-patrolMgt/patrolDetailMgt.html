@@ -28,6 +28,10 @@
                             <label>扣分类型：</label>
                             <span ng-bind="problemList.typeName"></span>
                         </div>
+                        <div class="form-item">
+                            <label>问题描述：</label>
+                            <span ng-bind="problemList.description"></span>
+                        </div>
                         <br />
                         <div class="form-item">
                             <label>所扣分数：</label>
@@ -73,8 +77,8 @@
             <span style="position: absolute;z-index: 9991;top: 10px;right: 10px;color: #fff;padding: 2px 8px;cursor: pointer;"
                   ng-click="closePlayer()">关闭</span>
                 <div id="videoPlayerBox">
-                    <video id="my-player" class="video-js" controls preload="auto" data-setup='{}'>
-                        <source class="source" src="" type="video/mp4"></source>
+                    <video id="my-player" class="video-js" controls preload="auto" data-setup='{"autoplay":"true"}'>
+                        <source class="source" src=""  type="video/mp4"></source>
                     </video>
                 </div>
                 <div id="audioPlayer">
