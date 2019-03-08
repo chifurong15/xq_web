@@ -93,8 +93,8 @@
 								<td>{{module.mileage.toFixed(3)}}</td>
 								<td>{{module.unit}}</td>
 								<td class="td-tool">
-                                    <a class="btn btn-primary btn-xs" ng-click="getRiverPatrolLocus(module.id)">
-                                        <i class="fa fa-pencil" title="巡查轨迹"></i>
+                                    <a class="btn btn-primary btn-xs" ng-click="getRiverPatrolLocus(module)">
+                                        <i class="fa fa-align-left" title="巡查轨迹"></i>
                                     </a>
 									<a class="btn btn-primary btn-xs" ng-click="getHydrologicDetail(module.id)">
 										<i class="fa fa-info" title="问题列表"></i>
@@ -116,14 +116,20 @@
     </div>
 
     <div class="modal fade" id="riverPatrolLocus" tabindex="-1">
-        <div class="modal-dialog modal-twoCol" role="document">
-            <div class="modal-content">
+        <div class="modal-dialog modal-twoCol" role="document" style="width: 850px">
+            <div class="modal-content" style="height: 600px;">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                     <h4 class="modal-title">巡查轨迹</h4>
                 </div>
-                <div class="modal-body" id="map">
-
+                <div class="modal-body" id="map" style="height: 480px;">
+                    <div id="topData">
+                        <span><b>区域</b>:{{topData.regionId}} </span>
+                        <span><b>河湖</b>: {{topData.riverId}}</span>
+                        <span><b>巡查时间</b>: {{topData.patrolDate}}</span>
+                        <span><b>里程</b>: {{topData.mileage.toFixed(3)}}里</span>
+                        <span><b>考核单位</b>: {{topData.unit}}</span>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

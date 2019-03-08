@@ -295,18 +295,18 @@
                  * 加载巡河轨迹
                  * @param id
                  */
-                $scope.getRiverPatrolLocus = function(id){
+                $scope.getRiverPatrolLocus = function(module){
 				    $("#riverPatrolLocus").modal('show');
+				    $scope.topData = module;
                     $http({
                         method: "GET",
                         url: moduleService.getServiceUrl() + '/patrol/v1/ExeAssPatrolRecord/getLocus',
                         cache:true,
                         params:{
-                            locusId:id
+                            locusId:module.id
                         }
                     }).success(
                         function(res) {
-                            debugger;
                             $scope.patrolLayer.clear();
                             $scope.markSymbolLayer.clear();
                             var patrolArr = res.data;
@@ -331,7 +331,9 @@
                                         continue;
                                     }
                                     if (j === 0) {
-                                        debugger;
+
+
+
                                         lineExtent = addGraphicToMap(coords, item);
                                     } else {
                                         lineExtent = lineExtent.union(addGraphicToMap(coords, item));
@@ -382,7 +384,6 @@
 
                     var coordsArr = [];
                     var lineSymbol = SymbolUtil.getLineSymbol("solid", [253, 1, 1], 3);
-                    debugger;
                     for(var i=0;i<tmpC.length;i++){
                         var point = new w.Point(parseFloat(tmpC[i].x), parseFloat(tmpC[i].y), $scope.map.spatialReference);
                         if(MapUtil.isCoordValid(point.x, point.y)){ //过滤为0的无效坐标
