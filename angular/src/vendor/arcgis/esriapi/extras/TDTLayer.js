@@ -129,10 +129,10 @@ define(["dojo/_base/declare",
                 var url = "";
                 switch (this.layertype) {
                     case "vec":
-                        url = "http://t" + col % 8 + ".tianditu.cn/vec_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" + (level + 1) + "&TILEROW=" + row + "&TILECOL=" + col + "&FORMAT=tiles";
+                        url = "http://t" + col % 8 + ".tianditu.gov.cn/vec_c/wmts?tk=ff19838854ae3d41e75b90bb56f0aed6&SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" + (level + 1) + "&TILEROW=" + row + "&TILECOL=" + col + "&FORMAT=tiles";
                         break;
                     case "cva":
-                        url = "http://t" + col % 8 + ".tianditu.cn/cva_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=cva&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" + (level + 1) + "&TILEROW=" + row + "&TILECOL=" + col + "&FORMAT=tiles";
+                        url = "http://t" + col % 8 + ".tianditu.gov.cn/cva_c/wmts?tk=ff19838854ae3d41e75b90bb56f0aed6&SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=cva&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" + (level + 1) + "&TILEROW=" + row + "&TILECOL=" + col + "&FORMAT=tiles";
                         break;
                     case "img":
                         url = "http://t" + col % 8 + ".tianditu.cn/img_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=img&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" + (level + 1) + "&TILEROW=" + row + "&TILECOL=" + col + "&FORMAT=tiles";
@@ -141,7 +141,7 @@ define(["dojo/_base/declare",
                         url = "http://t" + col % 8 + ".tianditu.cn/cia_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=cia&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" + (level + 1) + "&TILEROW=" + row + "&TILECOL=" + col + "&FORMAT=tiles";
                         break;
                     default:
-                        url = "http://t" + col % 8 + ".tianditu.cn/vec_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" + (level + 1) + "&TILEROW=" + row + "&TILECOL=" + col + "&FORMAT=tiles";
+                        url = "http://t" + col % 8 + ".tianditu.gov.cn/vec_c/wmts?tk=ff19838854ae3d41e75b90bb56f0aed6&SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" + (level + 1) + "&TILEROW=" + row + "&TILECOL=" + col + "&FORMAT=tiles";
                         break;
                 }
                 return url;

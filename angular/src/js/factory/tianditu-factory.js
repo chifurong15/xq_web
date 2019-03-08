@@ -166,18 +166,18 @@ angular.module('app')
 		            }*/
                     // 全国天地图 可以外网访问
                     if (this.type === 1) {
-                        return "http://t" + col % 8 + ".tianditu.cn/vec_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" + (level + 1) + "&TILEROW=" + row + "&TILECOL=" + col + "&FORMAT=tiles";
+                        return "http://t" + col % 8 + ".tianditu.gov.cn/vec_c/wmts?tk=ff19838854ae3d41e75b90bb56f0aed6&SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" + (level + 1) + "&TILEROW=" + row + "&TILECOL=" + col + "&FORMAT=tiles";
                     } else {
-                        return "http://t" + col % 8 + ".tianditu.cn/img_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=img&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" + (level + 1) + "&TILEROW=" + row + "&TILECOL=" + col + "&FORMAT=tiles";
+                        return "http://t" + col % 8 + ".tianditu.gov.cn/img_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=img&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" + (level + 1) + "&TILEROW=" + row + "&TILECOL=" + col + "&FORMAT=tiles";
                     }
 
                 }
             });
-            // 全国 文字标注
+            // 全国 文字标注s
             //可以外网访问
             dojo.declare("TianDiBiaoZhuMapServiceLayer", TianDiTiledMapServiceLayer, {
                 getTileUrl: function (level, row, col) {
-                    return "http://t" + col % 8 + ".tianditu.cn/cva_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=cva&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" + (level + 1) + "&TILEROW=" + row + "&TILECOL=" + col + "&FORMAT=tiles";
+                    return "http://t" + col % 8 + ".tianditu.gov.cn/cva_c/wmts?tk=ff19838854ae3d41e75b90bb56f0aed6&SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=cva&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" + (level + 1) + "&TILEROW=" + row + "&TILECOL=" + col + "&FORMAT=tiles";
                 }
             });
             // 全国影像 文字标注

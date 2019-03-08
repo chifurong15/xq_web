@@ -93,7 +93,9 @@
 								<td>{{module.mileage.toFixed(3)}}</td>
 								<td>{{module.unit}}</td>
 								<td class="td-tool">
-
+                                    <a class="btn btn-primary btn-xs" ng-click="getRiverPatrolLocus(module.id)">
+                                        <i class="fa fa-pencil" title="巡查轨迹"></i>
+                                    </a>
 									<a class="btn btn-primary btn-xs" ng-click="getHydrologicDetail(module.id)">
 										<i class="fa fa-info" title="问题列表"></i>
 									</a>
@@ -111,6 +113,23 @@
 				<tm-pagination conf="paginationConf"></tm-pagination>
 			</div>
 		</div>
+    </div>
+
+    <div class="modal fade" id="riverPatrolLocus" tabindex="-1">
+        <div class="modal-dialog modal-twoCol" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">巡查轨迹</h4>
+                </div>
+                <div class="modal-body" id="map">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 
