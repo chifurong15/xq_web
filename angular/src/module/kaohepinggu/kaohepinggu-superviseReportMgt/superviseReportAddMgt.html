@@ -88,7 +88,7 @@
                     <div class="form-item">
                         <label>处理状态</label>
                         <select ng-model="status" ng-options="st as st.name for st in statusList"
-                                ng-change="getStatusChange(status.id)" class="form-control select-short">
+                                ng-change="getStatusChange(status.name)" class="form-control select-short">
                             <option value="">请选择</option>
                         </select>
                     </div>

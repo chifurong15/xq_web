@@ -65,9 +65,16 @@
 							<button class="btn btn-success" ng-click="viewFile(3)"><i class="fa fa-css3"></i>查看附件</button>
 						</div>
 						<br />
+						<!--<div class="form-item">-->
+							<!--<label>处理状态：</label>-->
+							<!--<span ng-bind="reportList.processingStatus"></span>-->
+						<!--</div>-->
 						<div class="form-item">
-							<label>处理状态：</label>
-							<span ng-bind="reportList.processingStatus"></span>
+							<label>处理状态</label>
+							<select ng-model="status" class="form-control select-short" style="width:160px">
+								<option value="">请选择</option>
+								<option value="{{item.name}}" ng-repeat="item in statusList">{{item.name}}</option>
+							</select>
 						</div>
 						<div class="form-item">
 							<label>举报人评价：</label>
@@ -82,6 +89,9 @@
 			</div>
 			<div class="panel-footer m-b-10">
 				<div class="btn-box">
+					<button type="submit" class="btn btn-primary" ng-click="getSubmit()">
+						<i class="fa fa-check"></i>修改
+					</button>
 					<button type="submit" class="btn btn-default" ng-click="getBack()">
 						<i class="fa fa-reply"></i>返回
 					</button>

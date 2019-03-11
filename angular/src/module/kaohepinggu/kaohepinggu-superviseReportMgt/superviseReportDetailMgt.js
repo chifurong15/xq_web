@@ -53,7 +53,37 @@
 					 * 获取详情
 					 */
 					getDetalList();
+
+                    getStatusList()
 				}
+
+                /**
+                 * 处理状态
+                 */
+                function getStatusList(){
+                    $scope.statusList = [
+                        {
+                            'id':1,
+                            'name':'未处理'
+                        },
+                        {
+                            'id':2,
+                            'name':'处理完成'
+                        },
+                        {
+                            'id':3,
+                            'name':'处理中'
+                        },
+                        {
+                            'id':4,
+                            'name':'二次处理'
+                        },
+                        {
+                            'id':5,
+                            'name':'多次处理中'
+                        },
+                    ]
+                }
 				
 				/**
 				 * 获取详情
@@ -68,12 +98,39 @@
                         callBack: function (res) {
                         	if(res.data){
                                 $scope.reportList = res.data;
-                                //console.log($scope.imgList)
+                                $scope.status = $scope.reportList.processingStatus;
+                                console.log($scope.status)
 							}
 
                         }
                     })
 				}
+
+                $scope.getSubmit = function(){
+                    var params = {
+                        id: localStorage.getItem('id'),
+                        processingStatus: $scope.status,
+                    }
+                    if(!$scope.status){
+                        layer.alert("请选择处理状态", {
+                            skin: 'my-skin',
+                            closeBtn: 1,
+                            anim: 3
+                        });
+                    }else{
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/socialReport/updateReport',
+                            method: 'put',
+                            params: params,
+                            callBack: function (res) {
+                                if(res.resCode == 1){
+                                    layer.msg("修改成功！",{time:2000});
+                                    routeService.route('3-8', true);
+                                }
+                            }
+                        })
+                    }
+                }
 				
 				/**
 				 * 查看附件
