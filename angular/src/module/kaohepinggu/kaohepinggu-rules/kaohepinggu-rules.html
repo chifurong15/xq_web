@@ -198,6 +198,8 @@
                                 <option value="2">录入扣分</option>
                                 <option value="3">公式计算</option>
                             </select>
+                            <span class="required"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">*</font></font></span>
                         </div>
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font
@@ -209,10 +211,23 @@
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">处理时限</font></font></label>
-                            <input type="text" class="form-control input-short" ng-model="$parent.processLimitted">
+                            <input type="text" class="form-control input-short" id="processLimitted" ng-model="processLimitted">
                             <span class="required"><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">*</font></font></span>
                         </div>
+                        <div class="input-group form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">考核类型</font></font></label>
+                            <select ng-model="$parent.assesstype" class="form-control select-short" style="width: 160px;">
+                                <option value="">请选择</option>
+                                <option value="1">河道水质问题</option>
+                                <option value="2">岸线管理问题</option>
+                                <option value="3">河道排污问题</option>
+                            </select>
+                            <span class="required"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">*</font></font></span>
+                        </div>
+
                     </form>
                 </div>
                 <div class="modal-footer">

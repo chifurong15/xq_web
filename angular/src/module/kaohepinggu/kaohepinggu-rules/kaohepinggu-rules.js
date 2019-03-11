@@ -22,7 +22,7 @@
 						routeService, $http, $ajaxhttp, moduleService , globalParam) {
 					
 					var apiPrefix = moduleService.getServiceUrl() + '/assessment';
-					//var apiPrefix = 'http://10.0.9.116:7003' + '/assessment';
+					// var apiPrefix = 'http://10.0.9.133:7003' + '/assessment';
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
 					
 					$scope.init = function () {
@@ -72,7 +72,7 @@
 							$scope.index1 = index;
 							$scope.gradeIllegal1 = item.gradeillegal;
 							$scope.gradetype1 = item.childList[0].gradetype;
-							
+
 						}else if(id == 4){
 							//console.log(item)
 							$scope.id = 4;//修改评分细则
@@ -92,6 +92,8 @@
                                         $scope.gradeway = res.data.gradeway;
                                         $scope.deductMarks = res.data.deductMarks;
                                         $scope.processLimitted = res.data.processLimitted;
+                                        $scope.assesstype = res.data.assesstype;
+
                                     }else{
                                         layer.msg(res.resMsg, {time:2000});
                                     }
@@ -119,7 +121,7 @@
 						$scope.gradeway = '';
 						$scope.deductMarks = '';
 						$scope.processLimitted = '';
-						
+						$scope.assesstype = '';
 					}
 					
 					//保存条目
@@ -178,40 +180,47 @@
 							})							
 														
 						}else if($scope.id == 3){							
-							if (!$scope.gradedetailed) {
+                            if (!$scope.gradedetailed) {
 	                            layer.alert("请输入违规细则名称", {
 	                                skin: 'my-skin',
 	                                closeBtn: 1,
 	                                anim: 3
 	                            });
-							} else if (!$scope.gradeway) {
+                            } else if (!$scope.gradeway) {
 	                            layer.alert("请选择评分方式", {
 	                                skin: 'my-skin',
 	                                closeBtn: 1,
 	                                anim: 3
-	                            });                            
-							}else if (!$scope.deductMarks) {
+	                            });
+                            }else if (!$scope.deductMarks) {
 	                            layer.alert("请输入扣分", {
 	                                skin: 'my-skin',
 	                                closeBtn: 1,
 	                                anim: 3
-	                            });                            
-							}else if (!$scope.processLimited) {
+	                            });
+                            }else if (!$('#processLimitted').val()) {
 	                            layer.alert("请输入处理时限", {
 	                                skin: 'my-skin',
 	                                closeBtn: 1,
 	                                anim: 3
-	                            });                            
-							}						
-							
-							var params = {
+	                            });
+                            }else if (!$scope.assesstype) {
+                                layer.alert("请选择考核类型", {
+                                    skin: 'my-skin',
+                                    closeBtn: 1,
+                                    anim: 3
+                                });
+                            }
+
+                            var params = {
 								id: $scope.index1,
 								gradedetailed: $scope.gradedetailed,
 								gradeway: $scope.gradeway,
 								deductMarks: $scope.deductMarks,
-								processLimitted: $scope.processLimitted
+								processLimitted: $('#processLimitted').val(),
+                                assesstype:$scope.assesstype
 							}
-							//console.log($scope.processLimited)
+							// console.log(params)
 							$ajaxhttp.myhttp({
 								url: apiPrefix + '/v1/IllegalXize/add2',
 								method: 'POST',
@@ -260,10 +269,11 @@
 								gradedetailed: $scope.gradedetailed,
 								gradeway: $scope.gradeway,
 								deductMarks: $scope.deductMarks,
-								processLimitted: $scope.processLimitted
-							}							
+								processLimitted: $scope.processLimitted,
+                                assesstype:$scope.assesstype
+                            }
 							// console.log($scope.gradeIllegal1)
-							// console.log($scope.gradetype1)
+							// console.log(params)
 							$ajaxhttp.myhttp({
 								url: apiPrefix + '/v1/IllegalXize/update',
 								method: 'PUT',
