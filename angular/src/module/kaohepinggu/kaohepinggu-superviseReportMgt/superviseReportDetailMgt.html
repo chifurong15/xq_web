@@ -71,7 +71,7 @@
 						<!--</div>-->
 						<div class="form-item">
 							<label>处理状态</label>
-							<select ng-model="status" class="form-control select-short" style="width:160px">
+							<select ng-model="status" id="select" class="form-control select-short" style="width:160px">
 								<option value="">请选择</option>
 								<option value="{{item.name}}" ng-repeat="item in statusList">{{item.name}}</option>
 							</select>
@@ -89,7 +89,7 @@
 			</div>
 			<div class="panel-footer m-b-10">
 				<div class="btn-box">
-					<button type="submit" class="btn btn-primary" ng-click="getSubmit()">
+					<button type="submit" class="btn btn-primary" ng-click="getSubmit()" ng-show="showBut">
 						<i class="fa fa-check"></i>修改
 					</button>
 					<button type="submit" class="btn btn-default" ng-click="getBack()">

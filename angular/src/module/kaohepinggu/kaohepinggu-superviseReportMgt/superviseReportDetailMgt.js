@@ -55,7 +55,11 @@
 					getDetalList();
 
                     getStatusList()
-				}
+
+                    $scope.showBut = true;
+
+                    $('#select').attr('disabled',false);
+                }
 
                 /**
                  * 处理状态
@@ -99,7 +103,14 @@
                         	if(res.data){
                                 $scope.reportList = res.data;
                                 $scope.status = $scope.reportList.processingStatus;
-                                console.log($scope.status)
+                                if($scope.reportList.processingStatus == '处理完成'){
+                                    $scope.showBut = false;
+                                    $('#select').attr('disabled',true);
+                                }else{
+                                    $scope.showBut = true;
+                                    $('#select').attr('disabled',false);
+                                }
+                                // console.log($scope.status)
 							}
 
                         }
