@@ -1,0 +1,80 @@
+<div class="fenxintongji" ng-controller="riverPatrolCtrl" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">各级河湖长巡河人数统计</span><span class="tag-right"></span>
+
+            </div>
+        </div>
+        <div class="panel panel-default panel-m" style="border-top: none;">
+            <div class="panel-body">
+                <form class="form-inline" method="get">
+                    <div class="form-item">
+                        <label>开始时间</label>
+                        <div class="input-group date date_picker" id="startTime">
+                            <input type="text" class="form-control input-short-o" ng-model="startTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>结束时间</label>
+                        <div class="input-group date date_picker" id="endTime">
+                            <input type="text" class="form-control input-short-o" ng-model="endTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="search()"><i class="fa fa-search"></i>搜索</button>
+                </form>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover ">
+                                <tbody class="bTable">
+                                <tr class='tHeader'>
+                                    <th rowspan="2">序号</th>
+                                    <th rowspan="2">区域</th>
+
+                                    <th colspan="3">区级河长</th>
+                                    <th colspan="3">区级湖长</th>
+
+                                    <th colspan="3">镇街级河长</th>
+                                    <th colspan="3">镇街级湖长</th>
+
+                                    <th colspan="3">村级河长</th>
+                                    <th colspan="3">村级湖长</th>
+                                </tr>
+
+                                <tr class="box tHeader">
+                                    <td ng-repeat="lst in dataList[0].list">
+                                        <span ng-if="$index%3==0">巡河次数</span>
+                                        <span ng-if="$index%3==1">发现问题次数</span>
+                                        <span ng-if="$index%3==2">办结数量</span>
+                                    </td>
+
+                                    <td>
+                                        <span>巡河次数</span>
+                                    </td>
+                                    <td>
+                                        <span>发现问题次数</span>
+                                    </td>
+                                    <td>
+                                        <span>办结数量</span>
+                                    </td>
+                                </tr>
+
+                                <!--<tr ng-repeat="lst in dataList" >-->
+                                    <!--<td ng-init="arr = trans($index)">{{$index+1}}</td>-->
+                                    <!--<td>{{lst.regionName}}</td>-->
+                                    <!--<td ng-repeat="v in arr track by $index">{{v}}</td>-->
+                                    <!--<td ng-init="finishedTotal = add(lst.list)">{{finishedTotal}}</td>-->
+                                <!--</tr>-->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
