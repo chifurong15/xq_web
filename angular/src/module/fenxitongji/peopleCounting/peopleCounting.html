@@ -1,0 +1,69 @@
+<div class="fenxintongji" ng-controller="peopleCountingCtrl" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">各级河湖长人数统计</span><span class="tag-right"></span>
+
+            </div>
+        </div>
+        <div class="panel panel-default panel-m" style="border-top: none;">
+            <div class="panel-body">
+                <form class="form-inline clearfix" method="get">
+                    <!--<button type="submit" class="btn btn-primary fr" ng-click="export()"><i class="fa fa-sign-in"></i>导出</button>-->
+                </form>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover ">
+                                <tbody class="bTable">
+                                <tr class='tHeader'>
+                                    <th>序号</th>
+                                    <th>区名</th>
+
+                                    <th>区级河长总数</th>
+                                    <th>湖长总数</th>
+                                    <th>河长兼任湖长（包含总、副湖长）的人数</th>
+                                    <th>总计人数</th>
+
+                                    <th>镇街级河长总数</th>
+                                    <th>湖长总数</th>
+                                    <th>河长兼任湖长（包含总、副湖长）的人数</th>
+                                    <th>总计人数</th>
+
+                                    <th>村级河长总数</th>
+                                    <th>湖长总数</th>
+                                    <th>河长兼任湖长（包含总、副湖长）的人数</th>
+                                    <th>总计人数</th>
+
+                                </tr>
+                                <tr ng-repeat="lst in dataList" ng-init="index=$index+1">
+                                    <td>{{index}}</td>
+                                    <td>{{lst.regionName}}</td>
+
+
+                                    <td>{{lst.problemNumber[0].regionRiverNumber}}</td>
+                                    <td>{{lst.problemNumber[1].regionLakeNumber}}</td>
+                                    <td>{{lst.problemNumber[2].regionRiverLakeNumber}}</td>
+                                    <td style="font-weight: 600;">{{lst.problemNumber[0].regionRiverNumber + lst.problemNumber[1].regionLakeNumber + lst.problemNumber[2].regionRiverLakeNumber}}</td>
+
+
+                                    <td>{{lst.problemNumber[3].townRiverNumber}}</td>
+                                    <td>{{lst.problemNumber[4].townLakeNumber}}</td>
+                                    <td>{{lst.problemNumber[5].townRiverLakeNumber}}</td>
+                                    <td style="font-weight: 600;">{{lst.problemNumber[3].townRiverNumber + lst.problemNumber[4].townLakeNumber + lst.problemNumber[5].townRiverLakeNumber}}</td>
+
+                                    <td>{{lst.problemNumber[6].villageRiverNumber}}</td>
+                                    <td>{{lst.problemNumber[7].villageLakeNumber}}</td>
+                                    <td>{{lst.problemNumber[8].villageRiverLakeNumber}}</td>
+                                    <td style="font-weight: 600;">{{lst.problemNumber[6].villageRiverNumber + lst.problemNumber[7].villageLakeNumber + lst.problemNumber[8].villageRiverLakeNumber}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,186 @@
+<div class="fenxintongji" ng-controller="problemClassifyCtrl" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">问题分类统计情况</span><span class="tag-right"></span>
+
+            </div>
+        </div>
+        <div class="panel panel-default panel-m" style="border-top: none;">
+            <div class="panel-body">
+                <form class="form-inline" method="get">
+                    <div class="form-item">
+                        <label>开始时间</label>
+                        <div class="input-group date date_picker" id="startTime">
+                            <input type="text" class="form-control input-short-o" ng-model="startTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>结束时间</label>
+                        <div class="input-group date date_picker" id="endTime">
+                            <input type="text" class="form-control input-short-o" ng-model="endTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="search()"><i class="fa fa-search"></i>搜索</button>
+                    <button type="button" class="btn btn-primary" ng-click="reset()" style="margin: 0 5px;"><i class="fa fa-refresh"></i>重置</button>
+                    <button type="submit" class="btn btn-primary" ng-click="export()"><i class="fa fa-sign-in"></i>导出</button>
+                </form>
+
+                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this" ng-click="tabChange(3)">社会舆情与社会监督</li>
+                        <li ng-click="tabChange(2)">暗查暗访</li>
+                        <li ng-click="tabChange(1)">巡查问题</li>
+                        <li ng-click="tabChange(4)">巡河问题</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <!--社会舆情与社会监督-->
+                        <div class="layui-tab-item layui-show">
+                            <div class="panel-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane active">
+                                        <div class="table-responsive" style="margin-top: 20px;">
+                                            <table class="table table-bordered table-hover ">
+                                                <tbody class="bTable">
+                                                <tr class='tHeader'>
+                                                    <th>序号</th>
+                                                    <th>区名</th>
+                                                    <th ng-repeat="type in typeList3">{{type.typename}}</th>
+                                                    <th>合计</th>
+                                                </tr>
+                                                <tr ng-repeat="lst in dataList3" ng-init="index=$index+1">
+                                                    <td>{{index}}</td>
+                                                    <td>{{lst.regionName}}</td>
+                                                    <td ng-repeat="item in lst.oneLst" ng-init="i=$i+1">{{item.count}}</td>
+                                                    <td style="font-weight: 600;">{{lst.total}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--暗查暗访-->
+                        <div class="layui-tab-item">
+                            <div class="panel-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane active">
+                                        <div class="table-responsive" style="margin-top: 20px;">
+                                            <table class="table table-bordered table-hover ">
+                                                <tbody class="bTable">
+                                                <tr class='tHeader'>
+                                                    <th>序号</th>
+                                                    <th>区名</th>
+                                                    <th ng-repeat="type in typeList2">{{type.typename}}</th>
+                                                    <th>合计</th>
+                                                </tr>
+                                                <tr ng-repeat="lst in dataList2" ng-init="index=$index+1">
+                                                    <td>{{index}}</td>
+                                                    <td>{{lst.regionName}}</td>
+                                                    <td ng-repeat="item in lst.oneLst" ng-init="i=$i+1">{{item.count}}</td>
+                                                    <td style="font-weight: 600;">{{lst.total}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!--巡查问题-->
+                        <div class="layui-tab-item">
+                            <div class="panel-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane active">
+                                        <div class="table-responsive" style="margin-top: 20px;">
+                                            <table class="table table-bordered table-hover ">
+                                                <tbody class="bTable">
+                                                <tr class='tHeader'>
+                                                    <th>序号</th>
+                                                    <th>区名</th>
+                                                    <th ng-repeat="type in typeList1">{{type.typename}}</th>
+                                                    <th>合计</th>
+                                                </tr>
+                                                <tr ng-repeat="lst in dataList1" ng-init="index=$index+1">
+                                                    <td>{{index}}</td>
+                                                    <td>{{lst.regionName}}</td>
+                                                    <td ng-repeat="item in lst.oneLst" ng-init="i=$i+1">{{item.count}}</td>
+                                                    <td style="font-weight: 600;">{{lst.total}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--巡河问题-->
+                        <div class="layui-tab-item">
+                            <div class="panel-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane active">
+                                        <div class="table-responsive" style="margin-top: 20px;">
+                                            <table class="table table-bordered table-hover ">
+                                                <tbody class="bTable">
+                                                <tr class='tHeader'>
+                                                    <th>序号</th>
+                                                    <th>区名</th>
+                                                    <th ng-repeat="type in typeList4">{{type.typename}}</th>
+                                                    <th>合计</th>
+                                                </tr>
+                                                <tr ng-repeat="lst in dataList4" ng-init="index=$index+1">
+                                                    <td>{{index}}</td>
+                                                    <td>{{lst.regionName}}</td>
+                                                    <td ng-repeat="item in lst.oneLst" ng-init="i=$i+1">{{item.count}}</td>
+                                                    <td style="font-weight: 600;">{{lst.total}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    layui.use('element', function () {
+        var $ = layui.jquery
+            , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        //触发事件
+        var active = {
+            tabChange: function () {
+                //切换到指定Tab项
+                element.tabChange('demo', '22'); //切换到：用户管理
+            }
+        };
+
+        $('.site-demo-active').on('click', function () {
+            var othis = $(this), type = othis.data('type');
+            active[type] ? active[type].call(this, othis) : '';
+        });
+
+        element.on('tab(test)', function (elem) {
+            location.hash = 'test=' + $(this).attr('lay-id');
+        });
+
+    });
+
+
+
+</script>

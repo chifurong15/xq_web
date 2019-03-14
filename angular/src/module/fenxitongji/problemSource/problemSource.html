@@ -1,0 +1,70 @@
+<div class="fenxintongji" ng-controller="problemSourceCtrl" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">问题来源统计情况</span><span class="tag-right"></span>
+
+            </div>
+        </div>
+        <div class="panel panel-default panel-m" style="border-top: none;">
+            <div class="panel-body">
+                <form class="form-inline" method="get">
+                    <div class="form-item">
+                        <label>开始时间</label>
+                        <div class="input-group date date_picker" id="startTime">
+                            <input type="text" class="form-control input-short-o" ng-model="startTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>结束时间</label>
+                        <div class="input-group date date_picker" id="endTime">
+                            <input type="text" class="form-control input-short-o" ng-model="endTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="search()"><i class="fa fa-search"></i>搜索</button>
+                    <button type="button" class="btn btn-primary" ng-click="reset()" style="margin: 0 5px;">
+                        <i class="fa fa-refresh"></i>重置
+                    </button>
+                    <button type="submit" class="btn btn-primary" ng-click="export()"><i class="fa fa-sign-in"></i>导出</button>
+                </form>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover ">
+                                <tbody class="bTable">
+                                <tr class='tHeader'>
+                                    <th>序号</th>
+                                    <th>区名</th>
+                                    <th>河长巡河</th>
+                                    <th>督查</th>
+                                    <th>督办</th>
+                                    <th>暗查暗访</th>
+                                    <th>巡查</th>
+                                    <th>整改</th>
+                                    <th>举报电话</th>
+                                    <th>社会监督员</th>
+                                </tr>
+                                <tr ng-repeat="lst in dataList" ng-init="index=$index+1">
+                                    <td>{{index}}</td>
+                                    <td>{{lst.regionName}}</td>
+                                    <td>{{lst.problemNumber[7].chairmanpatrol}}</td>
+                                    <td>{{lst.problemNumber[2].ducha}}</td>
+                                    <td>{{lst.problemNumber[5].duban}}</td>
+                                    <td>{{lst.problemNumber[1].ancha}}</td>
+                                    <td>{{lst.problemNumber[0].patrol}}</td>
+                                    <td>{{lst.problemNumber[6].zhenggai}}</td>
+                                    <td>{{lst.problemNumber[4].jubao}}</td>
+                                    <td>{{lst.problemNumber[3].jiandu}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
