@@ -63,6 +63,9 @@
                         year = year - 1;
                     }
                     month =  month < 10 ? '0' + month : month
+                    $scope.year = year;
+                    $scope.month = month;
+
                     $scope.defaultTime = year + '-' + month ;//默认上个月
 
                     //自适应图表
@@ -125,7 +128,7 @@
                                 $scope.waterType2 = [ 'Ⅵ-Ⅶ类', 'Ⅷ-Ⅸ类','河干'];
 
                                 getInitCharts()
-                                console.log('dddd',$scope.waterList);
+                                // console.log('dddd',$scope.waterList);
                             }else{
                                 layer.msg(res.resMsg, {time:2000});
                             }
@@ -134,6 +137,7 @@
                 }
 
                 function getInitCharts(){
+
                     this.chartInstance = [];
                     var myChart = echarts.init(document.getElementById('main'));
                     var myChart1 = echarts.init(document.getElementById('main1'));
