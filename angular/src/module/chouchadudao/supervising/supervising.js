@@ -239,7 +239,8 @@
                                                 })
                                             })
                                         }
-                                   }else{
+
+                                    }else{
                                        layer.msg('暂无反馈结果',{times:500})
                                    }
 
@@ -618,7 +619,7 @@
                             btn: ['确定', '取消']
                         }, function () {
                             $ajaxhttp.myhttp({
-                                url:apiPrefix + '/duban/v1/msWeekDynamic/delete',
+                                url:apiPrefix + '/duban/v1/DubanSupervision/delete',
                                 method:'delete',
                                 params:{
                                     id:id
@@ -706,7 +707,7 @@
                         locale: moment.locale('zh-cn')
                     }).on('dp.change', function (c) {
                         var result = new moment(c.date).format('YYYY-MM-DD');
-                        // $scope.startTime1 = result;
+                        $scope.startTime1 = result;
                         $("#startTime1").find("input").val('');
                         $scope.$apply();
                     });
@@ -717,7 +718,7 @@
                         locale: moment.locale('zh-cn')
                     }).on('dp.change', function (c) {
                         var result = new moment(c.date).format('YYYY-MM-DD');
-                        // $scope.endTime1 = result;
+                        $scope.endTime1 = result;
                         $("#endTime1").find("input").val('');
                         $scope.$apply();
                     });
