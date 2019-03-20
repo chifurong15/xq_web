@@ -626,7 +626,7 @@
                                 },
                                 callBack:function (res) {
                                     if(res.resCode == 1){
-                                        layer.msg('删除成功',{times:500});
+                                        layer.msg(res.data,{times:500});
                                         getList();
                                     }else{
                                         layer.msg('服务器异常，请稍后再试',{times:500})

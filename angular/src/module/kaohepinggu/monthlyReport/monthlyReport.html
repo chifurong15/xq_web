@@ -30,8 +30,8 @@
                                         <a ng-if="lst.accessoryurl" ng-click="download(lst.accessoryurl)">{{fileUrl}}{{lst.accessoryurl}}</a>
                                     </td>
                                     <td>
-                                        <a class="btn btn-primary btn-xs" ng-click="autoCreate(lst)"><i class="fa fa-info" title="生成月报"></i></a>
-                                        <a class="btn btn-primary btn-xs" ng-click="getUploadFile(lst)"><i class="fa fa-arrow-up" title="上传月报"></i></a>
+                                        <a class="btn btn-primary btn-xs" ng-click="autoCreate(lst)" ng-if="!lst.accessoryurl"><i class="fa fa-info" title="生成月报"></i></a>
+                                        <a class="btn btn-primary btn-xs" ng-click="getUploadFile(lst)" ng-if="!lst.accessoryurl"><i class="fa fa-arrow-up" title="上传月报"></i></a>
                                     </td>
                                 </tr>
                                 </tbody>
