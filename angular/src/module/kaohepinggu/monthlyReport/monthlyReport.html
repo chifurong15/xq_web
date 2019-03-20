@@ -1,0 +1,97 @@
+<div class="fenxintongji" ng-controller="monthlyReportCtrl" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">考核月报</span><span class="tag-right"></span>
+
+            </div>
+        </div>
+        <div class="panel panel-default panel-m" style="border-top: none;">
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover ">
+                                <tbody class="bTable">
+                                <tr class='tHeader'>
+                                    <th style="width: 5%;">序号</th>
+                                    <th style="width: 10%;">月份</th>
+                                    <th style="width: 25%;">初稿</th>
+                                    <th style="width: 25%;">完整稿</th>
+                                    <th style="width: 15%;">操作</th>
+                                </tr>
+                                <tr ng-repeat="lst in dataList" ng-init="index=$index+1">
+                                    <td>{{index}}</td>
+                                    <td>{{lst.yearmonth}}</td>
+                                    <td>
+                                        <a ng-if="lst.accessory" ng-click="download1(lst.accessory)">{{lst.accessory}}</a>
+                                    </td>
+                                    <td>
+                                        <a ng-if="lst.accessoryurl" ng-click="download(lst.accessoryurl)">{{fileUrl}}{{lst.accessoryurl}}</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-primary btn-xs" ng-click="autoCreate(lst)"><i class="fa fa-info" title="生成月报"></i></a>
+                                        <a class="btn btn-primary btn-xs" ng-click="getUploadFile(lst)"><i class="fa fa-arrow-up" title="上传月报"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--附件上传-->
+        <div class="modal fade" id="coverModal" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <li class="fa fa-remove"></li>
+                        </button>
+                        <h4>上传附件</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <div class="wid-100 announcementCoverPanel">
+                                    <input class="uploadfile" id="problemFile" type="file" name="file">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload()">
+                            <i class="fa fa-check"></i>
+                            <span>确定</span>
+                        </a>
+                        <a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
+                            <i class="fa fa-reply"></i>
+                            <span>取消</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(".uploadfile").fileinput({
+        allowedFileExtensions: ['doc','docx'],
+        uploadAsync: true, //默认异步上传
+        showRemove: true, //显示移除按钮
+        maxFileCount: 1, //表示允许同时上传的最大文件个数
+        language: 'zh', //设置语言
+        uploadUrl: '#', //上传的地址
+        showUpload: false, //显示批量上传按钮
+        showCaption: true, //是否显示标题
+        browseClass: "btn btn-primary", //按钮样式
+        showPreview: true, //是否显示预览
+        dropZoneEnabled: false, //是否显示拖拽区域
+        validateInitialCount: true,
+        slugCallback: function (filename) {
+            return filename.replace('(', '_').replace(']', '_');
+        }
+    });
+</script>
+
