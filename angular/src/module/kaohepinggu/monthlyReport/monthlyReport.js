@@ -60,7 +60,7 @@
                     // 生成
                     $scope.autoCreate = function (lst) {
                         $ajaxhttp.myhttp({
-                            url: apiPrefix + '/v1/statistic/list',
+                            url: apiPrefix + '/v1/statistic/monthly',
                             method: 'get',
                             params: {
                                 id:lst.id,
