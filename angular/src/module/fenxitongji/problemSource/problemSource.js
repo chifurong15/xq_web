@@ -27,7 +27,8 @@
 
                     $scope.init = function () {
 
-                        getDataList();
+                        // getDataList();
+                        $scope.reset()
 
                     }
 
