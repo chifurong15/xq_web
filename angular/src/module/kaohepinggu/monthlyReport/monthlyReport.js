@@ -35,7 +35,7 @@
                         window.open($scope.fileUrl + path)
                     }
                     $scope.download1 = function (path) {
-                        window.open(path)
+                        window.open( '/fm/' + path)
                     }
 
 
