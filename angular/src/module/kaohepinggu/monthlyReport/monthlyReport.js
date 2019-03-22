@@ -31,11 +31,14 @@
 
                     }
 
+                    //下载完整稿
                     $scope.download = function (path) {
                         window.open($scope.fileUrl + path)
                     }
+
+                    //下载初稿
                     $scope.download1 = function (path) {
-                        window.open( '/fm/' + path)
+                        window.open( moduleService.getServiceUrl() + '/fm' + path)
                     }
 
 
