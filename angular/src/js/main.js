@@ -165,7 +165,7 @@ angular.module('app').controller('AppCtrl', ['$scope', 'routeService', '$locatio
             //routeService.route('/app/dashboard-v1', false)
             $('.navbar-right > li').removeClass('active');
         }
-
+        var searchMenuObj = {};
         $scope.getSecondMenu = function (menu) {
             if (!menu) {
                 return;
@@ -182,51 +182,36 @@ angular.module('app').controller('AppCtrl', ['$scope', 'routeService', '$locatio
             $scope.menuObj = childernList;
             $localStorage.currentMenu = childernList;
             clickFirst(menu);
+            if (searchMenuObj.menus) {
+                searchMenuObj = {};
+            }
         };
         var clickFirst = function (menu) {
+
             if (!menu) {
                 return;
             }
-
-            //有子节点，就点击第一个子节点
-            var menuId = '#menu_' + (menu.children ? menu.children[0].id : menu.id);
-
-            $timeout(function () {
-                angular.element(menuId).click();
-            }, 0, false);
-            if (menu.children) {
-                clickFirst(menu.children[0]);
-            }
-
-            /*if(menu.children){
-                $timeout(function () {
-                    angular.element("#menu_" + menu.children[0].id).click();
-                }, 0, false);
-            }else{
+            //一级菜单url不为空
+            if (menu.funcUrl && (!menu.children || menu.children.length == 0)) {
                 $timeout(function () {
                     angular.element("#menu_" + menu.id).click();
-                    // $state.go('app.index', {param: menu.moduleId + '_1_' + menu.seqId});
+                    $state.go('app.index', {param: menu.moduleId + '_1_' + menu.seqId});
                 }, 0, false);
-            }*/
+                return;
+            }
 
-            /* if (menu.funcUrl && (!menu.children || menu.children.length == 0)) {
-                 $timeout(function () {
-                     angular.element("#menu_" + menu.id).click();
-                     // $state.go('app.index', {param: menu.moduleId + '_1_' + menu.seqId});
-                 }, 0, false);
-                 return;
-             }
+            if (!menu.children || menu.children.length == 0) {
+                return;
+            }
+            //如果searchMenuObj不为空，则表示搜索
+            var targetMenu = (searchMenuObj.menus && searchMenuObj.menus.length > 0) ? searchMenuObj.menus.pop() : menu.children[0];
 
-             if (!menu.children || menu.children.length == 0) {
-                 return;
-             }
-             if (!menu.funcUrl && !menu.children[0].funcUrl) {
-                 $timeout(function () {
-                     angular.element("#menu_" + menu.children[0].id).click();
-                 }, 0, false);
-             }
-             clickFirst(menu.children[0]);*/
-
+            if (!menu.funcUrl && !targetMenu.funcUrl) {
+                $timeout(function () {
+                    angular.element("#menu_" + targetMenu.id).click();
+                }, 0, false);
+            }
+            clickFirst(targetMenu);
         }
         //解决刷新二级菜单丢失问题
         if ($localStorage.currentMenu != undefined) {

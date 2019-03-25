@@ -1,26 +1,32 @@
 <li ng-repeat="item in navData">
-      <!-- <a id="menu_{{item.id}}" href class="auto" ng-if="item.url==''">
-	       <span  class="pull-right text-muted">
-		        <i  class="fa fa-fw fa-angle-right text"></i>
-		        <i  class="fa fa-fw fa-angle-down text-active"></i>
-	       </span>
-           <i class="{{item.icon}}"></i>
-           <span class="font-bold" >{{item.name}}</span>
-       </a>-->
-       <a id="menu_{{item.id}}"   ng-if="!item.children" ui-sref=app.index({param:item.moduleId+'_1_'+item.seqId})>
-           		<i   ng-if="item.icon" class="{{item.icon}}"></i>
-           		<span class="font-bold">{{item.name}}</span>
-           </a>
-       <a id="menu_{{item.id}}" ng-if="item.children">
-           <i   ng-if="item.icon" class="{{item.icon}}"></i>
-           		<span class="font-bold">{{item.name}}</span>
-       </a>
-       <ul class="nav nav-sub dk"  ng-if="item.children">
-           <li ui-sref-active="active" ng-repeat="leaf in item.children">
-              <a id="menu_{{leaf.id}}" ui-sref=app.index({param:leaf.moduleId+'_1_'+leaf.seqId})>
-                     <span>{{leaf.name}}</span>
-              </a>
-           </li>
-       </ul>
-</li>
+    <!-- navData ���� �û��˵����� �����ڵ��б� -->
+    <a id="menu_{{item.id}}" href class="auto" ng-if="item.children && item.children.length>0">
+        <label class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+        </label>
+        <i ng-if="item.children!=''" class="{{item.icon}}"></i>
+        <span ng-if="item.children!=''">{{item.name}}</span>
 
+        <!-- <a ng-if="item.children" ui-sref=app.index({param:item.moduleId+'_1_'+item.seqId})> -->
+    </a>
+    <a id="menu_{{item.id}}" ui-sref-active="active" href class="auto" ng-if="!item.children"
+       ui-sref=app.index({param:item.moduleId+'_1_'+item.seqId})>
+
+        <span ng-if="item.children!=''">{{item.name}}</span>
+        <!-- <a ng-if="item.children" ui-sref=app.index({param:item.moduleId+'_1_'+item.seqId})> -->
+    </a>
+
+    <a id="menu_{{item.id}}" ng-if="item.children.length == 0"
+       ui-sref=app.index({param:item.moduleId+'_1_'+item.seqId})>
+        <i class="{{item.icon}}"></i>
+        <span>{{item.name}}</span>
+    </a>
+    <ul class="nav nav-sub dk" ng-if="item.children">
+        <li ui-sref-active="active" ng-repeat="leaf in item.children">
+            <a id="menu_{{leaf.id}}" ui-sref=app.index({param:leaf.moduleId+'_1_'+leaf.seqId})>
+                <span>{{leaf.name}}</span>
+            </a>
+        </li>
+    </ul>
+</li>
