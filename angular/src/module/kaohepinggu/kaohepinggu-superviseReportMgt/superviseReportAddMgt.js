@@ -36,6 +36,13 @@
 				 * ==============================================
 				 */
 				$scope.init = function(){
+
+                    $('.selectpicker').selectpicker({
+                        noneSelectedText : '请选择',
+                        dropupAuto: false,
+                        'deselectAllText':'取消全选',
+                        'selectAllText': '全选',
+                    });
 					
 					/**
 					 * 初始化行政区划树
@@ -53,7 +60,28 @@
 					 * 举报人评价
 					 */
 					getAssessList();
+
+                    getRegion ()
 				}
+
+                //获取行政区域
+                function getRegion (){
+                    $ajaxhttp.myhttp({
+                        url:apiPrefix + '/v1/socialReport/getHzb',
+                        method:'get',
+                        callBack:function (res) {
+                            $scope.regionList = res.data;
+                            console.log($scope.regionList);
+                            var select = $("#slpk");
+                            for (var i = 0; i < $scope.regionList.length; i++) {
+                                select.append("<option value='"+$scope.regionList[i].id+"'>"
+                                    + $scope.regionList[i].userName + "</option>");
+                            }
+                            $('.selectpicker').selectpicker('val', '');
+                            $('.selectpicker').selectpicker('refresh');
+                        }
+                    })
+                }
 
 				//获取问题类型
 				function getType () {
@@ -189,22 +217,53 @@
 				 * 时间选择
 				 */
                 var datepicker1 = $('#beginTime').datetimepicker({
-			        format: 'YYYY-MM-DD hh:mm',
+			        format: 'YYYY-MM-DD',
 			        locale: moment.locale('zh-cn')
 			    }).on('dp.change', function (e) {
-			        var result = new moment(e.date).format('YYYY-MM-DD hh:mm');
+			        var result = new moment(e.date).format('YYYY-MM-DD');
 			        $scope.beginTime = result;
 			        $scope.$apply();
     			});
                 var datepicker1 = $('#overtime').datetimepicker({
-                    format: 'YYYY-MM-DD hh:mm',
+                    format: 'YYYY-MM-DD',
                     locale: moment.locale('zh-cn')
                 }).on('dp.change', function (e) {
-                    var result = new moment(e.date).format('YYYY-MM-DD hh:mm');
+                    var result = new moment(e.date).format('YYYY-MM-DD');
                     $scope.overtime = result;
                     $scope.$apply();
                 });
-				
+
+                $('#finishReport').datetimepicker({
+                    format: 'YYYY-MM-DD hh:mm',
+                    locale: moment.locale('zh-cn')
+                }).on('dp.change', function (e) {
+                    var result = new moment(e.date).format('YYYY-MM-DD');
+                    $scope.finishReport = result;
+                    $scope.$apply();
+                });
+                $('#RequireReport').datetimepicker({
+                    format: 'YYYY-MM-DD',
+                    locale: moment.locale('zh-cn')
+                }).on('dp.change', function (e) {
+                    var result = new moment(e.date).format('YYYY-MM-DD');
+                    $scope.RequireReport = result;
+                    $scope.$apply();
+                });
+
+                $('#reportorTime').datetimepicker({
+                    format: 'YYYY-MM-DD',
+                    locale: moment.locale('zh-cn')
+                }).on('dp.change', function (e) {
+                    var result = new moment(e.date).format('YYYY-MM-DD');
+                    $scope.reportorTime = result;
+                    $scope.$apply();
+                });
+
+
+
+
+
+
 				/**
 				 * 处理状态
 				 */
@@ -291,6 +350,8 @@
                         }
                     ).success(function (res) {
                         if (res.resCode == 1) {
+                            layer.msg("上传成功！");
+
                             //console.log(res);
                             if(id == 1){
                                 $scope.problemAttant = res.data;
@@ -344,7 +405,14 @@
                         	proposedTreatment:$scope.proposedTreatment,
                             processingResults: $scope.processingResults,
                         	reportSource: $scope.source,
-							overTime: $scope.overtime
+							overTime: $scope.overtime,
+                        way: $scope.way,
+                        organizer: $scope.organizer ? $scope.organizer.join(',') : '',
+                        reportway: $scope.reportway,
+                        finishReport: $scope.finishReport,
+                        RequireReport: $scope.RequireReport,
+                        reportorTime: $scope.reportorTime,
+                        remark: $scope.remark,
 
 					}
                     if(params.contactType.length != 11 ){
