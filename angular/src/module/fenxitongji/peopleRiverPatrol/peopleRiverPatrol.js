@@ -21,14 +21,13 @@
                                                   $location, $log, $q, $rootScope, $window,
                                                   routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
-                    var apiPrefix = moduleService.getServiceUrl() + '/resumption';
-                    // var apiPrefix = 'http://10.0.9.116:8081/resumption';
+                    var apiPrefix = moduleService.getServiceUrl() + '/analysis';
+                    // var apiPrefix = 'http://10.0.9.133:7031/analysis';
 
                     $scope.init = function () {
 
-                        var params = globalParam.getter().fenxiParams || {};
-
                         getDataList();
+                        $scope.reset()
                     }
 
 
@@ -66,60 +65,50 @@
 
                     // 搜索
                     $scope.search = function () {
-                        getDataList(1);
+                        getDataList();
                     }
-                    $scope.add = function (list) {
-                        var total = 0;
-                        for (var i = 0; i < list.length; i++) {
-                            total += list[i].finishedNum * 1;
-                        }
-                        return total;
+
+                    //重置
+                    $scope.reset = function (){
+                        $scope.startTime = '';
+                        $scope.endTime = '';
                     }
-                    $scope.add2 = function (list) {
-                        var total = 0;
-                        for (var i = 0; i < list.length; i++) {
-                            total += list[i].unfinishedNum * 1;
-                        }
-                        return total;
-                    }
-                    $scope.trans = function (index) {
-                        var arr = [];
-                        for (var i = 0; i < $scope.dataList.length; i++) {
-                            if (i == index) {
-                                var item = $scope.dataList[i].list;
-                                for (var j = 0; j < item.length; j++) {
-                                    arr.push(item[j].finishedNum);
-                                    arr.push(item[j].unfinishedNum);
-                                }
-                                break;
-                            }
-                        }
-                        return arr;
+                    //导出
+                    $scope.export = function (){
+                        window.open(
+                            apiPrefix
+                            + '/v1/ProblemAnalysisController/createExcelXun?statTime='
+                            + $scope.startTime
+                            + '&endTime='
+                            + $scope.endTime
+                        )
                     }
 
                     // 获取列表
-                    function getDataList(isSearch) {
+                    function getDataList() {
                         var params = {
-                            regionId: $scope.regionId,
-                            grade: $scope.grade
+                            startTime: $scope.startTime,
+                            endTime: $scope.endTime
                         };
-                        if (isSearch) {
-                            params.startTime = $scope.startTime;
-                            params.endTime = $scope.endTime;
-                        }
 
                         $http({
-                            url: apiPrefix + '/v1/resumption/listProblemStatistic',
+                            url: apiPrefix + '/v1/ProblemAnalysisController/xunHeCount',
                             method: 'get',
                             params: params,
                         }).success(function (res) {
                             $scope.dataList = res.data;
-                            console.log($scope.dataList);
-                            $scope.regionName = res.regionName;
+
                         }).error(function (error) {
 
                         })
                     };
+
+                    //查看详情
+                    $scope.viewDetail = function (id , data) {
+                        routeService.route('5-8-1',true);
+                        localStorage.setItem('level',id);
+                        localStorage.setItem('staData',data);
+                    }
 
                 }]);
 })(window, angular);

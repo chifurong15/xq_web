@@ -1,0 +1,77 @@
+<div class="fenxintongji" ng-controller="peopleRiverPatrolDetail" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">各级河湖长巡河人数统计情况</span><span class="tag-right"></span>
+                <div style="overflow: hidden;">
+                    <button type="button" class="btn btn-primary" ng-click="goBack()"
+                            style="position: absolute;right: 20px;bottom: 20px;">返回
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        <div class="panel panel-default panel-m" style="border-top: none;">
+            <div class="panel-body">
+                <div class="tab-content" ng-show="level == 1">
+                    <div class="tab-pane active">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover ">
+                                <tbody class="bTable">
+                                    <tr class='tHeader'>
+                                        <th style="width: 5%;">序号</th>
+                                        <th style="width: 15%;">姓名</th>
+                                        <th style="width: 15%;">级别</th>
+                                        <th style="width: 15%;">应巡</th>
+                                        <th style="width: 15%;">已巡</th>
+                                        <th style="width: 15%;">达标率(%)</th>
+                                    </tr>
+                                    <tr ng-repeat="lst in staData" >
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{lst.reachmanName}}</td>
+                                        <td>{{lst.reachmanLevel}}</td>
+                                        <td>{{lst.needReachNum}}</td>
+                                        <td>{{lst.hadReachNum}}</td>
+                                        <td>{{lst.patrolRate}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" ng-show="level == 2">
+                    <div class="tab-pane active">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover ">
+                                <tbody class="bTable">
+                                    <tr class='tHeader'>
+                                        <th style="width: 5%;">序号</th>
+                                        <th style="width: 10%;">上报河(湖)长姓名</th>
+                                        <th style="width: 10%;">级别</th>
+                                        <th style="width: 15%;">问题点位</th>
+                                        <th style="width: 20%;">问题详情</th>
+                                        <th style="width: 15%;">上报问题时间</th>
+                                        <th style="width: 10%;">是否完结</th>
+                                    </tr>
+                                    <tr ng-repeat="lst in staData" >
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{lst.reachmanName}}</td>
+                                        <td>{{lst.reachmanLevel}}</td>
+                                        <td>{{lst.address}}</td>
+                                        <td>{{lst.concent}}</td>
+                                        <td>{{lst.reportTime}}</td>
+                                        <td>{{lst.statu}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
