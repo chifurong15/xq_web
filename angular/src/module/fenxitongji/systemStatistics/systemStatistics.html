@@ -1,0 +1,73 @@
+<div class="conferenceCtrl chouchadudao anchaanfang " ng-controller="systemStatistics" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">制度执行统计情况</span><span class="tag-right"></span>
+            </div>
+        </div>
+        <div class="panel panel-default panel-m" style="border-top: none;">
+            <div class="panel-body">
+                <form class="form-inline" method="get">
+                    <div class="form-item">
+                        <label>行政区域</label>
+                        <select class="form-control select-short" ng-model="regionName">
+                            <option value="">请选择</option>
+                            <option value="{{item.areaCode}}" ng-repeat="item in regionList">{{item.areaName}}</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <label>开始月份</label>
+                        <div class="input-group date date_picker" id="startTime">
+                            <input type="text" class="form-control input-short-o" ng-model="startTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>结束月份</label>
+                        <div class="input-group date date_picker" id="endTime">
+                            <input type="text" class="form-control input-short-o" ng-model="endTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="search()"><i class="fa fa-search"></i>搜索</button>
+                    <button type="button" class="btn btn-primary" ng-click="reset()" style="margin: 0 5px;">
+                        <i class="fa fa-refresh"></i>重置
+                    </button>
+                    <button type="submit" class="btn btn-primary" ng-click="export()"><i class="fa fa-sign-in"></i>导出</button>
+
+
+                </form>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                <tr class='tHeader'>
+                                    <th>行政区域</th>
+                                    <th>召开会议次数</th>
+                                    <th>报送工作简报次数</th>
+                                    <th>督查次数</th>
+                                    <th>问责次数</th>
+                                    <th>信息宣传次数</th>
+                                </tr>
+                                <tr ng-repeat="lst in dataList" ng-init="index = $index+1" style="cursor: pointer">
+                                    <td>{{lst.regionName}}</td>
+                                    <td>{{lst.meetingNum}}</td>
+                                    <td>{{lst.sentNum}}</td>
+                                    <td>{{lst.inspectionNum}}</td>
+                                    <td>{{lst.standingNum}}</td>
+                                    <td>{{lst.publicityNum}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
