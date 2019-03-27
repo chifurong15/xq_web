@@ -1,0 +1,87 @@
+<div class="conferenceCtrl chouchadudao anchaanfang " ng-controller="patrolStandingBook" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">河长巡河台账</span><span class="tag-right"></span>
+            </div>
+        </div>
+        <div class="panel panel-default panel-m" style="border-top: none;">
+            <div class="panel-body">
+                <form class="form-inline" method="get">
+                    <div class="form-item">
+                        <label>行政区域</label>
+                        <select class="form-control select-short" ng-model="regionName">
+                            <option value="">请选择</option>
+                            <option value="{{item.areaCode}}" ng-repeat="item in regionList">{{item.areaName}}</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <label class="near"><font style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">河长姓名</font></font></label>
+                        <input type="text" class="form-control input-short" ng-model="chairmanName">
+                    </div>
+                    <div class="form-item">
+                        <label>开始日期</label>
+                        <div class="input-group date date_picker" id="startTime">
+                            <input type="text" class="form-control input-short-o" ng-model="startTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>结束日期</label>
+                        <div class="input-group date date_picker" id="endTime">
+                            <input type="text" class="form-control input-short-o" ng-model="endTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="search()"><i class="fa fa-search"></i>搜索</button>
+                    <button type="button" class="btn btn-primary" ng-click="reset()" style="margin: 0 5px;">
+                        <i class="fa fa-refresh"></i>重置
+                    </button>
+                    <button type="submit" class="btn btn-primary" ng-click="export()"><i class="fa fa-sign-in"></i>导出</button>
+
+
+                </form>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                <tr class='tHeader'>
+                                    <th style="width: 5%;">序号</th>
+                                    <th style="width: 10%;">巡河日期</th>
+                                    <th style="width: 10%;">行政区域</th>
+                                    <th style="width: 10%;">河长姓名</th>
+                                    <th style="width: 5%;">级别</th>
+                                    <th style="width: 20%;">管辖河段名称</th>
+                                    <th style="width: 20%;">巡查河段名称</th>
+                                    <th style="width: 5%;">职务</th>
+                                    <th style="width: 5%;">电话</th>
+                                    <th style="width: 5%;">问题数</th>
+                                </tr>
+                                <tr ng-repeat="lst in dataList" ng-init="index = $index+1" style="cursor: pointer">
+                                    <td>{{index}}</td>
+                                    <td>{{lst.patrolDate}}</td>
+                                    <td>{{lst.regionName}}</td>
+                                    <td><a ng-click="viewDetail(1,lst)">{{lst.chairman_name}}</a></td>
+                                    <td>{{lst.chairmanLevelName}}</td>
+                                    <td>{{lst.reachName}}</td>
+                                    <td>{{lst.patrolReachName}}</td>
+                                    <td>{{lst.position}}</td>
+                                    <td>{{lst.unit_cellphone}}</td>
+                                    <td><a ng-click="viewDetail(2,lst)">{{lst.problemCount}}</a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <tm-pagination conf="paginationConf"></tm-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
