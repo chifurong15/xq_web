@@ -23,11 +23,12 @@
 
                     var apiPrefix = moduleService.getServiceUrl() + '/analysis';
                     // var apiPrefix = 'http://10.0.9.194:7031/analysis';
-
-                    var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/list';
+                    var regionTree;
+                    var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree';
+                    var regionTreeUrl1 = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/list';
 
                     $scope.init = function () {
-                        getRegion ()
+                        // getRegion ()
                         getList ()
                         $scope.reset ();
                     }
@@ -58,7 +59,7 @@
                         var params = {
                             beginDate: $scope.startTime,
                             endDate:$scope.endTime,
-                            regionId:$scope.regionName,
+                            regionId:$scope.regionId,
                             chairmanName:$scope.chairmanName,
                             pageNum: $scope.paginationConf.currentPage,
                             pageSize: $scope.paginationConf.itemsPerPage,
@@ -79,21 +80,21 @@
 
 
 
-                    //获取行政区域
-                    function getRegion (){
-                        $ajaxhttp.myhttp({
-                            url:regionTreeUrl,
-                            method:'get',
-                            params:{
-                                pageNum:-1,
-                                pageSize:-1,
-                                grade:3
-                            },
-                            callBack:function (res) {
-                                $scope.regionList = res.data.list;
-                            }
-                        })
-                    }
+                    // //获取行政区域
+                    // function getRegion (){
+                    //     $ajaxhttp.myhttp({
+                    //         url:regionTreeUrl1,
+                    //         method:'get',
+                    //         params:{
+                    //             pageNum:-1,
+                    //             pageSize:-1,
+                    //             grade:3
+                    //         },
+                    //         callBack:function (res) {
+                    //             $scope.regionList = res.data.list;
+                    //         }
+                    //     })
+                    // }
 
 
                     //导出
@@ -107,8 +108,103 @@
                             + '&chairmanName='
                             + $scope.chairmanName
                             + '&regionId='
-                            + $scope.regionName
+                            + $scope.regionId
                         )
+                    }
+
+                    /**
+                     * 初始化行政区划树
+                     */
+                    var regionTreeSetting = {
+                        data: {
+                            simpleData: {enable: true},
+                            keep: {parent: true}
+                        },
+                        view: {
+                            nameIsHTML: true,
+                            expandSpeed: 'slow',
+                            dblClickExpand: false,
+                            txtSelectedEnable: false
+                        },
+                        callback: {
+                            beforeExpand: regionTreeOnExpand,
+                            onClick: regionTreeOnClick
+                        }
+                    };
+
+
+                    /**
+                     * 生成区域树
+                     */
+                    function regionTreeList () {
+                        $http({
+                            method: 'get',
+                            url: regionTreeUrl
+                        }).success(function (res) {
+                            // console.log(res)
+                            if(res.resCode == 1){
+                                regionTree = $.fn.zTree.init($("#regionTreeContainer"), regionTreeSetting, res.data);
+                            }else{
+                            }
+                        }).error(function () {
+                        });
+                    };
+
+                    /**
+                     * 用于捕获行政区域父节点展开之前的问题回调函数，并且根据返回值确定是否允许展开操作
+                     * @param {Object} treeId
+                     * @param {Object} treeNode
+                     */
+                    function regionTreeOnExpand(treeId, treeNode) {
+                        var cnodes = treeNode.children;
+                        $http({
+                            method: 'get',
+                            url: regionTreeUrl,
+                            params: {
+                                parentCode: treeNode.id
+                            },
+                        }).success(
+                            function (res) {
+                                //console.log(res);
+                                regionTree.addNodes(treeNode, res.data, true);
+                            }
+                        );
+                    }
+
+                    /**
+                     * 捕获行政区域节点被点击
+                     * @param {Object} event
+                     * @param {Object} treeId
+                     * @param {Object} treeNode
+                     */
+                    function regionTreeOnClick(event, treeId, treeNode) {
+                        // console.log(treeNode);
+                        $scope.regionId = treeNode.id;
+                        $scope.regionName = treeNode.name;
+                        $scope.grade = treeNode.grade;
+                    }
+
+                    /**
+                     * 区域树模态框
+                     */
+                    $scope.getRegionShow = function () {
+                        $('#regionTreeModal').modal('show');
+                        regionTreeList();
+                    }
+
+                    /**
+                     * 区域树搜索
+                     */
+                    $scope.getSelectRegion = function(){
+                        //console.log('我是区域树搜索...')
+                    }
+
+                    /**
+                     * 关闭模态框
+                     */
+                    $scope.getModalOk = function(){
+                        $('#regionTreeModal').modal('hide');
+                        //console.log('我是区域树关闭...')
                     }
 
                     // 配置分页基本参数
