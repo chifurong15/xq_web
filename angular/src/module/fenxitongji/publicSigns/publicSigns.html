@@ -1,0 +1,42 @@
+<div class="conferenceCtrl chouchadudao anchaanfang " ng-controller="publicSigns" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">河(湖)长公示牌数量统计</span><span class="tag-right"></span>
+            </div>
+        </div>
+        <div class="panel panel-default panel-m" style="border-top: none;">
+            <div class="panel-body">
+                <form class="form-inline clearfix" method="get">
+                    <button type="submit" class="btn btn-primary fr" ng-click="export()"><i class="fa fa-sign-in"></i>导出</button>
+                </form>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                    <tr class='tHeader'>
+                                        <th>序号</th>
+                                        <th>区名</th>
+                                        <th>河长公示牌数</th>
+                                        <th>湖长公示牌数</th>
+                                        <th>河长、湖长公示牌总数</th>
+                                    </tr>
+                                    <tr ng-repeat="lst in dataList" ng-init="index = $index+1" style="cursor: pointer">
+                                        <td>{{index}}</td>
+                                        <td>{{lst.regionName}}</td>
+                                        <td>{{lst.num}}</td>
+                                        <td>{{lst.count}}</td>
+                                        <td>{{lst.total}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
