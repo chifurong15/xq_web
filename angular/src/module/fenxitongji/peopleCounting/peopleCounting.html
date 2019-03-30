@@ -9,7 +9,7 @@
         <div class="panel panel-default panel-m" style="border-top: none;">
             <div class="panel-body">
                 <form class="form-inline clearfix" method="get">
-                    <!--<button type="submit" class="btn btn-primary fr" ng-click="export()"><i class="fa fa-sign-in"></i>导出</button>-->
+                    <button type="submit" class="btn btn-primary fr" ng-click="export()"><i class="fa fa-sign-in"></i>导出</button>
                 </form>
                 <div class="tab-content">
                     <div class="tab-pane active" id="tableStatistics">
@@ -38,24 +38,24 @@
                                 </tr>
                                 <tr ng-repeat="lst in dataList" ng-init="index=$index+1">
                                     <td>{{index}}</td>
-                                    <td>{{lst.regionName}}</td>
+                                    <td><a href="">{{lst.regionName}}</a></td>
 
 
-                                    <td>{{lst.problemNumber[0].regionRiverNumber}}</td>
-                                    <td>{{lst.problemNumber[1].regionLakeNumber}}</td>
-                                    <td>{{lst.problemNumber[2].regionRiverLakeNumber}}</td>
-                                    <td style="font-weight: 600;">{{lst.problemNumber[0].regionRiverNumber + lst.problemNumber[1].regionLakeNumber + lst.problemNumber[2].regionRiverLakeNumber}}</td>
+                                    <td>{{lst.rivermanQNum}}</td>
+                                    <td>{{lst.lakemanQNum}}</td>
+                                    <td>{{lst.riverLakeQNum}}</td>
+                                    <td style="font-weight: 600;">{{lst.sumQ}}</td>
 
 
-                                    <td>{{lst.problemNumber[3].townRiverNumber}}</td>
-                                    <td>{{lst.problemNumber[4].townLakeNumber}}</td>
-                                    <td>{{lst.problemNumber[5].townRiverLakeNumber}}</td>
-                                    <td style="font-weight: 600;">{{lst.problemNumber[3].townRiverNumber + lst.problemNumber[4].townLakeNumber + lst.problemNumber[5].townRiverLakeNumber}}</td>
+                                    <td>{{lst.rivermanZNum}}</td>
+                                    <td>{{lst.lakemanZNum}}</td>
+                                    <td>{{lst.riverLakeZNum}}</td>
+                                    <td style="font-weight: 600;">{{sumZ}}</td>
 
-                                    <td>{{lst.problemNumber[6].villageRiverNumber}}</td>
-                                    <td>{{lst.problemNumber[7].villageLakeNumber}}</td>
-                                    <td>{{lst.problemNumber[8].villageRiverLakeNumber}}</td>
-                                    <td style="font-weight: 600;">{{lst.problemNumber[6].villageRiverNumber + lst.problemNumber[7].villageLakeNumber + lst.problemNumber[8].villageRiverLakeNumber}}</td>
+                                    <td>{{lst.rivermanCNum}}</td>
+                                    <td>{{lst.lakemanCNum}}</td>
+                                    <td>{{lst.riverLakeCNum}}</td>
+                                    <td style="font-weight: 600;">{{lst.sumC}}</td>
                                 </tr>
                                 </tbody>
                             </table>

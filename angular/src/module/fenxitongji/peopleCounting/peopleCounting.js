@@ -22,7 +22,7 @@
                                            routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl() + '/analysis';
-                    // var apiPrefix = 'http://10.0.9.110:7031' + '/analysis';
+                    var apiPrefix = 'http://10.0.9.133:7031' + '/analysis';
 
                     $scope.init = function () {
 
@@ -37,22 +37,18 @@
                             method: 'get',
                             callBack: function (res) {
                                 $scope.dataList = res.data;
-                                console.log($scope.dataList);
                             }
                         })
 
                     };
 
-                    // //导出
-                    // $scope.export = function (){
-                    //     window.open(
-                    //         apiPrefix
-                    //         + '/v1/ProblemAnalysisController/createExcel1?startTime='
-                    //         + $scope.startTime
-                    //         + '&endTime='
-                    //         + $scope.endTime
-                    //     )
-                    // }
+                    //导出
+                    $scope.export = function (){
+                        window.open(
+                            apiPrefix
+                            + '/v1/ProblemAnalysisController'
+                        )
+                    }
 
                 }]);
 })(window, angular);
