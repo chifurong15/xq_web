@@ -38,7 +38,7 @@
                                 </tr>
                                 <tr ng-repeat="lst in dataList" ng-init="index=$index+1">
                                     <td>{{index}}</td>
-                                    <td><a href="">{{lst.regionName}}</a></td>
+                                    <td><a ng-click="view(lst.regionId)">{{lst.regionName}}</a></td>
 
 
                                     <td>{{lst.rivermanQNum}}</td>

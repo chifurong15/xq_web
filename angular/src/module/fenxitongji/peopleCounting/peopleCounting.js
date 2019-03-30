@@ -22,7 +22,7 @@
                                            routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl() + '/analysis';
-                    var apiPrefix = 'http://10.0.9.133:7031' + '/analysis';
+                    // var apiPrefix = 'http://10.0.9.133:7031' + '/analysis';
 
                     $scope.init = function () {
 
@@ -41,6 +41,11 @@
                         })
 
                     };
+
+                    $scope.view = function (id) {
+                        localStorage.setItem('regionId',id);
+                        routeService.route('5-7-1',true);
+                    }
 
                     //导出
                     $scope.export = function (){
