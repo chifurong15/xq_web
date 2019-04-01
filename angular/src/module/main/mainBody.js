@@ -58,13 +58,17 @@
                     var date = new Date();
                     var year = date.getFullYear();
                     var month = date.getMonth();
+                    var day=date.getDay();
                     if(month == 0){
                         month = 12;
                         year = year - 1;
                     }
+
+                    $scope.month= day<15 ? month:month+1;
+                    console.log(day);
                     month =  month < 10 ? '0' + month : month
                     $scope.year = year;
-                    $scope.month = month;
+
 
                     $scope.defaultTime = year + '-' + month ;//默认上个月
 
@@ -89,7 +93,7 @@
                         url: apiPrefix2 + '/v1/statistic/regionStatistic',
                         method: 'get',
                         params:{
-                            date:$scope.defaultTime
+                            // date:$scope.defaultTime
                             // date:'2018-11'
                         },
                         callBack: function (res) {
