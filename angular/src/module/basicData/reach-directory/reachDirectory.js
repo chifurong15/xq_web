@@ -122,7 +122,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
 					}
 					params = $.param(params);
 					console.log(params,'params')
-					// window.location.href = moduleService.getServiceUrl() + reachUrl +'/export?'+params;
+					window.location.href = moduleService.getServiceUrl() + reachUrl +'/export?'+params;
 					layer.close(index);
 				});
             }
