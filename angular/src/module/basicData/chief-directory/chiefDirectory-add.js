@@ -17,6 +17,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                 $scope.chief = {};
                 $scope.doc = {};
                 $scope.file = {};
+                checkBoxInit();
             };
           
             $scope.checkBoxInit = function(){
