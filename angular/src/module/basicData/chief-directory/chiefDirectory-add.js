@@ -31,7 +31,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                     url: moduleService.getServiceUrl() + "watersource/v1/reachChairMan/roleList"
                 }).success(function (res) {
                     $scope.chiefRole = res.data.concat();
-                    let length = $scope.chiefRole.length;
+                    let length = $scope.chiefRole.length || '';
                     for(let i = 0; i <length ;i++){
                         $scope.chiefRole[i].state = false;
                     }
@@ -58,7 +58,8 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                 for(let i = 0 ; i< $scope.roleArr.length;i++){
                     $scope.roleId.push($scope.roleArr[i].id)
                 }
-                console.log($scope.roleId.join(),'roleIdroleId')
+                $scope.roleIdStr = $scope.roleId.join();
+                // console.log($scope.roleId.join(),'roleIdroleId')
             }
           
             var getOfficial = function(){
@@ -196,7 +197,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                         lakesIds: JSON.stringify($scope.chief.lakesIds),
                         pondIds: JSON.stringify($scope.chief.pondIds),
                         reservoirIds: JSON.stringify($scope.chief.reservoirIds),
-                        role:$scope.roleId.join()
+                        role: $scope.roleIdStr
 
                     },
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
