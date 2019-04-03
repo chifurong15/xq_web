@@ -1,0 +1,76 @@
+<div ng-controller="waterDetailCtrl">
+	<div class="wrapper-md">
+		<div class="panel panel-default m-all-0">
+			<div class="panel-body">
+				<!-- map -->
+				<div ng-init="mapMin = true; mapType = 'polygon'; objOpera = 'view'">
+					<basic-map obj="water" map-min="mapMin" map-type="mapType" obj-opera="objOpera"></basic-map>
+				</div>
+				<div class="m-t-20">
+					<div class="waterDetailContent m-t-20">
+						<div class="form-item">
+							<label>水系名称：</label>
+							<span ng-bind="water.waterName"></span>
+						</div>
+						<div class="form-item">
+							<label>所属流域：</label>
+							<span ng-bind="water.basinName"></span>
+						</div>
+						<br>
+	                    <div class="remark-panel">
+							<label>概述内容：</label>
+							<div class="remark-info">
+								<p ng-bind-html="water.overView|trustHtml"></p>
+							</div>
+						</div>
+						<div class="remark-panel">
+							<label>备注信息：</label>
+							<div class="remark-info">
+								<p ng-bind="water.remark"></p>
+							</div>
+						</div>
+						<div class="form-item">
+						<label>图片</label>
+						<div ng-repeat="img in water.jsonImages track by $index" class="file-thumbnail-block">
+                            <div ng-if="['png','jpg','jpeg','gif'].indexOf(img.extension) > -1" style="height: 100%">
+                                <a href="{{img.url}}" target="_blank" title="{{img.name}}">
+                                    <img width="100%" ng-src={{img.url}}>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-item">
+						<label>文件</label>
+						<div ng-repeat="file in water.jsonFiles track by $index" class="file-thumbnail-block">
+                            <div ng-if="['doc','docx'].indexOf(file.extension) > -1" style="height: 100%">
+                                <a href="{{file.url}}" title="{{file.name}}">
+                                    <img style="margin: 10px 0 3px" ng-src="img/word.png">
+                                    <p>{{file.name}}</p>
+                                </a>
+                            </div>
+                            <div ng-if="['xls','xlsx','xlsm'].indexOf(file.extension) > -1" style="height: 100%">
+                                <a href="{{file.url}}" title="{{file.name}}">
+                                    <img style="margin: 10px 0 3px" ng-src="img/excel.png">
+                                    <p>{{file.name}}</p>
+                                </a>
+                            </div>
+                            <div ng-if="['pdf'].indexOf(file.extension) > -1" style="height: 100%">
+                                <a href="{{file.url}}" title="{{file.name}}">
+                                    <img style="margin: 10px 0 3px" ng-src="img/pdf.png">
+                                    <p>{{file.name}}</p>
+                                </a>
+                            </div>
+                        </div>
+					</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel-footer m-b-10">
+				<div class="btn-box">
+					<button type="submit" class="btn btn-default" ng-click="back()">返回</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

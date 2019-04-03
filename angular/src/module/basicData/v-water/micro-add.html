@@ -1,0 +1,164 @@
+<div ng-controller="dataAddCtrl">
+	<!--<div class="bg-light lter b-b wrapper-md">
+		<h1 class="m-n font-thin h3">劣V类水体-新增</h1>
+	</div>-->
+	<div class="wrapper-md">
+		<div class="panel panel-default m-all-0">
+			<div class="panel-body">
+				<form id="hydroNetAddForm" class="form-inline" method="get" novalidate="novalidate">
+					<div class="form-item">
+						<label>水体名称</label>
+						<input id="microName" type="text" class="form-control input-short" ng-model="micro.name" ng-blur="repeatName()"/>
+							<span class="required">*</span>
+					</div>
+					<div class="form-item">
+                        <label>所属区域</label>
+						<input ng-model="micro.regionName" type="text" class="form-control input-short-o" ng-click="regionShow()" readonly>
+						<a class="input-group-addon" ng-click="regionShow()"><i class="icon-jx_search"></i></a>
+                    </div>
+                     <div class="form-item">
+                        <label>经度</label>
+                        <input type="text" class="form-control input-short" ng-model="micro.longitude">
+                    </div>
+                    <div class="form-item">
+                        <label>纬度</label>
+                        <input type="text" class="form-control input-short" ng-model="micro.latitude">
+                    </div>
+                    <br/>
+                    <div class="form-item">
+                        <label>控制级别</label>
+                        <select ng-init="getControlType()" ng-model="micro.control" ng-options="co.code as co.name for co in controls" class="form-control select-short">
+							<option value="">请选择</option>
+						</select>
+                    </div>
+					<div class="form-item">
+						<label>所属水系</label>
+                    	<input ng-model="micro.waterName" type="text" class="form-control input-short-o" ng-click="waterShow()" readonly>
+                    	<a class="input-group-addon" ng-click="waterShow()"><i class="icon-jx_search"></i></a>
+					</div>
+					<div class="form-item">
+						<label>所属河流</label>
+						<input ng-model="micro.riverName" type="text" class="form-control input-short-o" ng-click="riverShow()" readonly>
+                    	<a class="input-group-addon" ng-click="riverShow()"><i class="icon-jx_search"></i></a>
+					</div>
+					<div class="form-item">
+						<label>类型</label>
+						<select ng-init="getMicroType()" ng-model="micro.category" ng-options="ca.code as ca.name for ca in categorys"  class="form-control select-short">
+							<option value="">请选择</option>
+						</select>
+					</div>
+					<div class="form-item">
+						<label>责任河长</label>
+						<input ng-model="micro.chairmanName" type="text" class="form-control input-short-o" ng-click="chairmanShow()" readonly>
+						<a class="input-group-addon" ng-click="chairmanShow()"><i class="icon-jx_search"></i></a>
+					</div>
+					<div class="form-item">
+						<label>绑定断面</label>
+						<input ng-model="micro.sectionName" type="text" class="form-control input-short-o" ng-click="sectionShow()" readonly>
+                    	<a class="input-group-addon" ng-click="sectionShow()"><i class="icon-jx_search"></i></a>
+					</div>
+					<br/>
+					<div class="form-item">
+						<label>状态</label>
+						<label class="checkbox-inline"><input type="radio" ng-value="0" ng-model="micro.eliminateState" ng-checked="true" name="radio">未剿灭</label>
+						<label class="checkbox-inline"><input type="radio" ng-value="1" ng-model="micro.eliminateState" name="radio" disabled>已剿灭</label>
+					</div>
+					<br />
+					<div class="form-item">
+						<label>剿灭时限</label>
+		                <div class='input-group date date_picker' datetimepicker id='datetimepicker1'>
+		                    <input type='text' class="form-control input-short-o" ng-model="micro.complete">
+		                    <a class="input-group-addon"><i class="icon-jx_date"></i></a>
+		                </div>
+					</div>
+					<div class="form-item">
+						<label>劣V类指标</label>
+						<input type="text" class="form-control input-short" ng-model="micro.factor"/>
+							<span >浓度（mg/L）</span>
+					</div>
+					<br>
+					<div class="form-item">
+						<label>污染成因</label>
+						<textarea class="form-control textarea-long" rows="4" ng-model="micro.reason"></textarea>
+					</div>
+					<div class="form-item">
+						<label>项目清单</label>
+						<textarea class="form-control textarea-long" rows="4" ng-model="micro.plan"></textarea>
+					</div>
+					<br>
+			   		<div class="form-item">
+						<button type="button" class="btn btn-primary" ng-click="upload()">附件上传</button>
+						<div ng-repeat="file in files track by $index" class="file-thumbnail-block">
+							<div ng-if="['.png','.jpg','.jpeg'].indexOf(file.extension) > -1" style="height: 100%">
+								<a href="{{file.url}}" target="_blank" title="{{file.name}}">
+									<img width="100%" ng-src={{file.url}}>
+								</a>
+								<div class="thumbnail-block-close" ng-click="fileDelete($event,$index)"><i class="icon-jx_delete_image"></i></div>
+							</div>
+							<div ng-if="['.doc','.docx'].indexOf(file.extension) > -1" style="height: 100%">
+								<a href="{{file.url}}" title="{{file.name}}">
+									<img style="margin-top: 10px" ng-src='img/word.png'>
+									<span>{{file.name}}</span>
+								</a>
+								<div class="thumbnail-block-close" ng-click="fileDelete($event,$index)"><i class="icon-jx_delete_image"></i></div>
+							</div>
+							<div ng-if="['.xls','.xlsx','.xlsm'].indexOf(file.extension) > -1" style="height: 100%">
+								<a href="{{file.url}}" title="{{file.name}}">
+									<img style="margin-top: 10px" ng-src='img/excel.png'>
+									<span>{{file.name}}</span>
+								</a>
+								<div class="thumbnail-block-close" ng-click="fileDelete($event,$index)"><i class="icon-jx_delete_image"></i></div>
+							</div>
+							<div ng-if="['.pdf'].indexOf(file.extension) > -1" style="height: 100%">
+								<a href="{{file.url}}" title="{{file.name}}">
+									<img style="margin-top: 10px" ng-src='img/pdf.png'>
+									<span>{{file.name}}</span>
+								</a>
+								<div class="thumbnail-block-close" ng-click="fileDelete($event,$index)"><i class="icon-jx_delete_image"></i></div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="panel-footer m-b-10">
+				<div class="btn-box">
+					<button id="testButton" type="submit" class="btn btn-primary" ng-click="add()">保存</button>
+					<button type="submit" class="btn btn-default" ng-click="back()">返回</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<tree-modal modal-tree-info = "{{modalTreeInfo}}"></tree-modal>
+	<!--描述：文件上传-->
+	<div class="modal fade" id="imgBox" data-backdrop="static">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">附件上传</h4>
+				</div>
+				<div class="modal-body">
+					<form id="fileFrom" ng-model="filefrom" enctype="multipart/form-data">
+						<div class="form-group">
+							<div><input id="input-file" type="file" placeholder="请选择相关文件" /></div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" ng-click="fileInput()">确定</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$("#input-file").fileinput({
+		uploadAsync: true, //异步上传
+		language: "zh", //设置语言
+		showUpload: false,
+        showPreview :true //是否显示预览
+//		allowedFileExtensions: ["JPG", "JPEG",'PNG','BMP','GIF'] //接收的文件后缀
+	});
+</script>

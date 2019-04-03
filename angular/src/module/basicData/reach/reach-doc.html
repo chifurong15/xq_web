@@ -1,0 +1,137 @@
+<div ng-controller="reachDocCtrl" ng-init="init()">
+	<!--<div class="bg-light lter b-b wrapper-md">
+		<h1 class="m-n font-thin h3">一河一策（档）</h1>
+	</div>-->
+	<div class="wrapper-md">
+		<div class="panel panel-default">
+			<div class="panel panel-default p-l-15 p-r-15 p-t-15 p-b-15">
+				<div class="panel-body">
+					<div class="table-responsive">
+						<div class="table-bar">
+							<button type="button" class="btn btn-primary" ng-click="reachUploadDoc()">
+	                            <i class="icon-jx_add"></i> 上传文档
+	                        </button>
+						</div>
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th width="60">序号</th>
+									<th>文件名称</th>
+									<th>创建人</th>
+									<th>文档类别</th>
+									<th>创建时间</th>
+									<th>状态</th>
+									<th width="90">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="reachDoc in reachDocList" ng-init="index=$index+1">
+									<td>{{index + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
+									<td>{{reachDoc.filename}}</td>
+									<td>{{reachDoc.userName}}</td>
+									<td>{{reachDoc.typeName}}</td>
+									<td>{{reachDoc.createdate}}</td>
+									<td>{{reachDoc.statusName}}</td>
+									<td class="td-tool">
+										<a class="btn btn-xs" ng-click="reachDocEdit(reachDoc.id,reachDoc.name)" title="编辑"><i class="icon-jx_edit"></i></a>
+										<a class="btn btn-xs" ng-click="reachDocDelete(reachDoc.id,reachDoc.name)" title="删除"><i class="icon-jx_delete_form"></i></a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<tm-pagination conf="paginationConf"></tm-pagination>
+				</div>
+			</div>
+			<div class="panel-footer m-b-10">
+				<div class="btn-box">
+					<button type="submit" class="btn btn-default" ng-click="back()">返回</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--描述：一河一策（档）模态框-->
+	<div class="modal fade" id="reachDocModal" data-backdrop="static">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h5 class="modal-title">上传文档</h5>
+				</div>
+				<div class="modal-body">
+					<form method="post" enctype="multipart/form-data">
+						<div class="form-group">
+							<div>
+								<input id="uploadfile" type="file" name="file">
+							</div>
+							<label>文件格式： DOC、DOCX、PDF文件</label>
+						</div>
+						<div class="form-item">
+							<label>文件类别</label>
+							<select ng-model="fileType" ng-options="file.uid as file.name for file in fileData"  class="form-control select-short">
+								<option value="">请选择</option>
+							</select>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" ng-click="submit()">确定</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--描述：修改数据模态框-->
+	<div class="modal fade" id="editReachDocModal" data-backdrop="static">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h5 class="modal-title">数据修改</h5>
+				</div>
+				<div class="modal-body">
+					<form class="form-inline" method="post" enctype="multipart/form-data">
+						<div class="form-item">
+							<label>开始时间</label>
+							<div class="input-group date date_picker" id="beginTime">
+								<input type="text" class="form-control input-short-o" ng-model="beginTime">
+								<span class="input-group-addon"><i class="icon-jx_date"></i></span>
+								<span class="required">*</span>
+							</div>
+						</div>
+						<div class="form-item">
+							<label>文件状态</label>
+							<select ng-model="fileStatus" ng-options="fileStatus.num as fileStatus.name for fileStatus in fileStatusData" class="form-control select-short">
+								<option value="">请选择</option>
+							</select>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" ng-click="editReachDocSubmit()">确定</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$("#uploadfile").fileinput({
+		allowedFileExtensions: ['doc', 'docx', 'pdf'],
+		uploadAsync: true, //默认异步上传
+		showRemove: true, //显示移除按钮
+		maxFileCount: 1, //表示允许同时上传的最大文件个数
+		language: 'zh', //设置语言
+		uploadUrl: '#', //上传的地址
+		showUpload: false, //显示批量上传按钮
+		showCaption: true, //是否显示标题
+		browseClass: "btn btn-primary", //按钮样式
+		showPreview: true, //是否显示预览
+		dropZoneEnabled: false, //是否显示拖拽区域
+		validateInitialCount: true,
+		slugCallback: function(filename) {
+			return filename.replace('(', '_').replace(']', '_');
+		}
+	});
+</script>
