@@ -1,0 +1,246 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.app-content-body {
+    padding-bottom: 0;
+}
+
+.mainBody {
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #ebeeef;
+    overflow: hidden;
+    z-index: 1000;
+}
+.panel-h-4 {
+    height: 25%;
+    overflow: hidden;
+}
+
+.panel-h-3 {
+    height: 33.33%;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.panel-h-5 {
+    height: 50%;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.panel-h-2 {
+    height: 15%;
+    overflow: hidden;
+}
+
+.left-panel .panel-body, .right-panel .panel-body {
+    padding: 0;
+}
+
+#weather {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 25%;
+    height: 86px;
+    z-index: 100;
+    border: none;
+    overflow: hidden;
+}
+
+#weather .weather-panel {
+    height: 100%;
+    padding: 0;
+    background-color: #d0ebff;
+    /*box-shadow: 8px 7px 7px rgba(35, 4, 4, 0.78);*/
+}
+
+.weather-iframe {
+    float: left;
+    height: 86px;
+}
+
+.weather span {
+    font-size: 14px;
+}
+
+#weather .weather-date {
+    color: #333;
+    text-align: right;
+    margin: 10px 10px 10px 0;
+}
+
+#weather .weather-date .date {
+    font-size: 1.5rem;
+    line-height: 33px
+}
+
+#weather .weather-date .time {
+    font-size: 2.5rem;
+    line-height: 33px
+}
+
+.weather .cross-small {
+    padding: 0 0 0 94px;
+}
+
+.weather .cross-small dt {
+    top: 0;
+    margin-top: 7px;
+}
+
+.city {
+    color: #fff;
+}
+
+.weather dt .aqi a, .weather .cross-small dd .item .first, .weather .cross-small dd .item .second {
+    color: #fff;
+}
+
+.patr-count {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.33);
+    color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px rgba(35, 4, 4, 0.78);
+}
+
+.news-content {
+    width: 100%;
+    overflow-y: auto;
+}
+
+.news-content p {
+    width: 100%;
+    height: 28px;
+    text-indent: 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.news-content p a {
+    float: left;
+    width: 60%;
+    text-align: left;
+    color: #195b9e;
+    line-height: 28px;
+    padding-left: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.news-content p span {
+    float: right;
+    width: 40%;
+    font-size: 12px;
+    text-align: right;
+    color: #999;
+    line-height: 28px;
+    padding-right: 10px;
+}
+
+#mid-map {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+.mainbody-tips {
+    width: 100%;
+    height: 30px;
+    background: #338be4;
+}
+
+.mainbody-tips h4 {
+    display: inline-block;
+    padding-left: 15px;
+    font-weight: bold;
+    color: #fff;
+    margin: 0;
+    font-size: 14px;
+    line-height: 30px;
+}
+
+.right-panel .table-responsive {
+    padding: 5px;
+}
+
+.mainbody-Table {
+    margin: 0;
+}
+
+.city-select {
+    display: inline-flex;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.33);
+    color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px rgba(35, 4, 4, 0.78);
+    z-index: 1;
+}
+
+.city-select label {
+    width: 100px;
+    height: 34px;
+    line-height: 34px;
+    margin: 0;
+}
+
+.map-legend {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    z-index: 1;
+    background-color: #fff;
+    padding: 10px 20px;
+}
+
+.map-legend span {
+    margin: 0px 0px 10px -12px;
+    display: block;
+    border-left: solid 3px #9c9b9b;
+    padding-left: 10px;
+}
+
+.map-legend li {
+    font-size: 12px;
+}
+
+.map-legend .legendImg {
+    width: 20px;
+    height: 20px;
+}
+
+#mapTips {
+    position: absolute;
+    display: none;
+    top: 192px;
+    left: 315px;
+    z-index: 1;
+    background-color: rgb(79, 161, 132);
+    padding: 5px;
+    border-radius: 5px;
+    width: auto;
+    color: #fff;
+}
+
+.main-map {
+    height: 100%;
+}
+
+.modal-workbench {
+    margin-top: 60px;
+}

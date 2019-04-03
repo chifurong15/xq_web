@@ -230,7 +230,7 @@
 .proMgr-map-tool .drawTool li{
 	list-style: none;
 	float: left;
-    /*border: 1px solid #4c4949;*/
+    border-right: 1px solid #b9b7b7;
 }
 .proMgr-map-tool .drawTool li:hover{
     background-color: #e3e3e3;
@@ -238,10 +238,7 @@
 .proMgr-map-tool .drawTool li:active{
     background-color: #dedede;
 }
-.proMgr-map-tool .drawTool li:first-child{
-	border-right: 1px solid #b9b7b7;
-}
-.proMgr-map-tool .drawTool li:nth-child(2){
+.proMgr-map-tool .drawTool li:last-child{
 	border-right: 1px solid #b9b7b7;
 }
 .proMgr-map-tool .drawTool li a{
@@ -331,12 +328,27 @@
 	height: 100%;
 	overflow: hidden;
 }
+.file-thumbnail-block p {
+	word-break: break-all;
+	margin: 0px 2px;
+	line-height: 25px;
+}
 
 .ztree_box_modal {
-    height: 400px;
+    /*height: 400px;*/
     overflow: auto;
     overflow-x: hidden;
 }
 .ztree li ul {
     height: auto;
+}
+
+.wid-100{
+	width:100%;
+}
+.wid-70{
+	width:70%;
+}
+.wid-25{
+	width:25%;
 }

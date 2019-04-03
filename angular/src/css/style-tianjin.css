@@ -39,6 +39,27 @@ body {
 .blueActive{
     color: #3189e1!important;
 }
+#checkBox{
+    position: absolute;
+      width: 160px;
+    height: 120px;
+    margin-left: 95px;
+    margin-top: 30px;
+    z-index: 10;
+     background: #fff;
+    /*overflow-y: scroll;*/
+    overflow-x: hidden;
+}
+.checkBox_chief{
+       position: absolute;
+    width: 160px;
+    height: 90px;
+    background: #fff;
+    z-index: 10;
+    border: 1px solid #cfdadd;
+    border-top: none;
+    overflow-y: scroll;
+}
 
 .titleBg{
     background-color: #1192f6!important;
@@ -610,6 +631,53 @@ body .align-left .cross-simple-icon, body .align-left .cross-text{
     background: url("../img/navbar.png") -120px -80px no-repeat;
 }
 
+
+
+.menu-icon-17 {
+    background: url("../img/basin_icon.png") -6px 0 no-repeat;
+}
+.menu-icon-18 {
+    background: url("../img/lake_icon.png") -6px 0 no-repeat;
+}
+.menu-icon-19 {
+    background: url("../img/people_name_icon.png") -6px 0 no-repeat;
+}
+.menu-icon-20 {
+    background: url("../img/pond_icon.png") -6px 0 no-repeat;
+}
+.menu-icon-21 {
+    background: url("../img/reservoir_icon.png") -6px 0 no-repeat;
+}
+.menu-icon-22 {
+    background: url("../img/river_name_icon.png") -6px 0 no-repeat;
+}
+.menu-icon-23 {
+    background: url("../img/rivers_icon.png") -6px 0 no-repeat;
+}
+.menu-icon-24 {
+    background: url("../img/water_icon.png") -6px 0 no-repeat;
+}
+.menu-icon-25 {
+    background: url("../img/water_icon.png") -6px 0 no-repeat;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 二级菜单 */
 .app-content-body {
     /*padding-left: 200px;*/
@@ -1059,7 +1127,7 @@ body .align-left .cross-simple-icon, body .align-left .cross-text{
 
 .table > tbody > tr > th, .table > tbody > tr > td {
     border-top: 1px solid #ccc;
-    /*padding: 6px 0;*/
+    padding: 6px 0;
     text-align: center;
     display: table-cell;
     vertical-align: middle;
@@ -2320,7 +2388,8 @@ body .c-ffffff a {
 
 .dis-i-blc {
     width: 100%;
-    padding-right: 360px;
+    display: inline-block;
+    /*padding-right: 360px;*/
 }
 
 .reachDetailContent .form-item {
