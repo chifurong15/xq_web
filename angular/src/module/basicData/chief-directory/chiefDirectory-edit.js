@@ -17,7 +17,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                 return;
             }
             $scope.chief = $localStorage.chiefEditData;
-            console.log($scope.chief,'$scope.chief')
+            
             $scope.chief.doc ?  $scope.chief.docId = $scope.chief.doc.id : '';
             $scope.chief.doc ?  $scope.chief.docName = $scope.chief.doc.filename: '';
             // $scope.chief.docId = $scope.chief.doc.id;
