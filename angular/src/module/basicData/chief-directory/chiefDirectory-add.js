@@ -28,7 +28,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
 
                  $http({
                     method: "get",
-                    url: moduleService.getServiceUrl() + "watersource/v1/reachChairMan/roleList"
+                    url: moduleService.getServiceUrl() + "/watersource/v1/reachChairMan/roleList"
                 }).success(function (res) {
                     $scope.chiefRole = res.data.concat();
                     let length = $scope.chiefRole.length || '';
@@ -84,7 +84,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
             $scope.roleType = function () {
                 $http({
                     method: "get",
-                    url: moduleService.getServiceUrl() + 'watersource/v1/reachChairMan/roleList'
+                    url: moduleService.getServiceUrl() + '/watersource/v1/reachChairMan/roleList'
                 }).success(function (res) {
                     console.log(res,'角色类型')
                     // $scope.dutyTypeList = res.data;

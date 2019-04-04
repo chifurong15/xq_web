@@ -154,7 +154,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
 					btn: ['确定', '取消'] // 按钮
 				}, function() {
 					$http({
-						url: moduleService.getServiceUrl() +'watersource/v1/reachChairMan/delete',
+						url: moduleService.getServiceUrl() +'/watersource/v1/reachChairMan/delete',
 						method: "delete",
 						params: {
 							id: id

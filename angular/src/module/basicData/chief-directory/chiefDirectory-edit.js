@@ -39,7 +39,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                $scope.roles = $scope.chief.roles || '';
                $http({
                     method: "get",
-                    url: moduleService.getServiceUrl() + "watersource/v1/reachChairMan/roleList"
+                    url: moduleService.getServiceUrl() + "/watersource/v1/reachChairMan/roleList"
                 }).success(function (res) {
                     $scope.editChiefRole = res.data.concat();
                     let length = $scope.editChiefRole.length;
