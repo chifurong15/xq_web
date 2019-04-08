@@ -1,0 +1,180 @@
+<div class="conferenceCtrl" ng-controller="riverAndLakeQuality" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n" ng-show="!showDetail">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">河湖水质</span><span class="tag-right"></span>
+            </div>
+        </div>
+        <div class="panel panel-default" style="margin-top: -1px">
+            <div class="panel-body" style="position: relative;">
+                <div class="tab-content">
+                    <div class="tab-pane active" ng-show="!showDetail">
+                        <form class="form-inline" method="get">
+                            <div class="row">
+                                <div class="col-md-3 form-item">
+                                    断面归属：
+                                    <input type="radio" value="1" ng-model="sectionType"/><span
+                                        style="margin:0 20px 0 10px;">水利</span>
+                                    <input type="radio" value="2" ng-model="sectionType"/><span
+                                        style="margin-left: 10px">环保</span>
+                                </div>
+                                <div class="col-md-3 form-item" style="display: flex;align-items: center">
+                                    断面名称：
+                                    <div style="position: relative;display: inline-block;">
+                                        <input class="form-control input-short-o" placeholder="请输入断面名称"
+                                               style="width: 200px" ng-blur="showList=false" ng-model="sectionName"
+                                               ng-change="searchSectionNameList()"/>
+                                        <ul ng-show="showList" ng-model="sectionName"
+                                            style="position: absolute;top: 100%;left: 0;transition: ease .2s;z-index: 100;width: 100%;border: 1px solid #999999;border-top: none"
+                                            ng-click="selectSectionName($event.target.dataset.value)">
+                                            <li ng-show="sectionNameList.length===0"
+                                                style="cursor: not-allowed;padding: 4px 10px;width: 100%;">暂无匹配项
+                                            </li>
+                                            <li ng-repeat="item in sectionNameList" data-value="{{item.sectionName}}"
+                                                class="select-list-item">{{item.sectionName}}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+
+                                    <div class="form-item">
+                                        <label>检测周期：</label>
+                                        <div class="input-group date date_picker" id="startTime">
+                                            <input type="text" class="form-control input-short-o" placeholder="开始时间"
+                                                   ng-model="startTime">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-item">
+                                        <div class="input-group date date_picker" id="endTime">
+                                            <input type="text" class="form-control input-short-o" placeholder="结束时间"
+                                                   ng-model="endTime">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 10px">
+                                <div class="col-md-3 form-item">
+                                    监测来源：
+                                    <input type="radio" value="1" ng-model="sectionSource"/><span
+                                        style="margin:0 20px 0 10px;">水温导入</span>
+                                    <input type="radio" value="2" ng-model="sectionSource"/><span
+                                        style="margin-left: 10px">自动检测</span>
+                                </div>
+                                <div class="col-md-3 form-item">
+                                    是否为考核断面:
+                                    <input type="radio" value="1" ng-model="sectionAccess"/><span
+                                        style="margin:0 20px 0 10px;">是</span>
+                                    <input type="radio" value="2" ng-model="sectionAccess"/><span
+                                        style="margin-left: 10px">否</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary" type="submit" style="margin-left: 96px"
+                                            ng-click="search()"><i
+                                            class="fa fa-search"></i> 查询
+                                    </button>
+                                    <button class="btn btn-primary" ng-click="export()"><i class="fa fa-sign-in"></i> 导出
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                <tr class='tHeader'>
+                                    <th style="width: 4%;">序号</th>
+
+                                    <th style="width: 10%;">断面名称</th>
+                                    <th style="width: 8%;">目标等级</th>
+
+                                    <th style="width: 5%;">水质等级</th>
+                                    <th style="width: 6%;">河流名称</th>
+
+                                    <th style="width: 8%;">pH值</th>
+                                    <th style="width: 8%;">溶解氧</th>
+
+                                    <th style="width: 8%;">氨氮<br/>(mg/L)</th>
+                                    <th style="width: 8%;">化学需氧量<br/>(mg/L)</th>
+
+                                    <th style="width: 8%;">高锰酸钾<br/>(mg/L)</th>
+                                    <th style="width: 8%;">操作</th>
+                                </tr>
+                                <tr ng-repeat="lst in dataList" ng-init="index = $index+1">
+                                    <td>{{index}}</td>
+                                    <td>{{lst.sectionName}}</td>
+                                    <td>{{lst.unitLevel}}</td>
+                                    <td>{{lst.qualityLevel}}</td>
+                                    <td>{{lst.riverName}}</td>
+                                    <td>{{lst.pH}}</td>
+                                    <td>{{lst.DO}}</td>
+                                    <td>{{lst.COD}}</td>
+                                    <td>{{lst.ammonia}}</td>
+                                    <td>{{lst.permanganate}}</td>
+                                    <td>
+                                        <span style="color: #0a36e9;cursor: pointer"
+                                              ng-click="seeDetail(lst.sectionName)">查看</span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <tm-pagination conf="paginationConf"></tm-pagination>
+                        </div>
+                    </div>
+                    <div ng-show="showDetail">
+                        <div style="display: flex;align-items: center;flex-direction: column">
+                            <button class="btn btn-primary" ng-click="showDetail=false"
+                                    style="margin-bottom: 10px;align-self: flex-end">返回
+                            </button>
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                <tr class='tHeader'>
+                                    <th style="width: 4%;">序号</th>
+                                    <th style="width: 10%;">断面名称</th>
+                                    <th style="width: 8%;">目标等级</th>
+                                    <th style="width: 5%;">水质等级</th>
+                                    <th style="width: 6%;">河流名称</th>
+                                    <th style="width: 8%;">pH值</th>
+                                    <th style="width: 8%;">溶解氧</th>
+                                    <th style="width: 8%;">氨氮<br/>(mg/L)</th>
+                                    <th style="width: 8%;">化学需氧量<br/>(mg/L)</th>
+                                    <th style="width: 8%;">高锰酸钾<br/>(mg/L)</th>
+                                </tr>
+                                <tr ng-repeat="lst in detailList" ng-init="index = $index+1">
+                                    <td>{{index}}</td>
+                                    <td>{{lst.sectionName}}</td>
+                                    <td>{{lst.unitLevel}}</td>
+                                    <td>{{lst.qualityLevel}}</td>
+                                    <td>{{lst.riverName}}</td>
+                                    <td>{{lst.pH}}</td>
+                                    <td>{{lst.DO}}</td>
+                                    <td>{{lst.COD}}</td>
+                                    <td>{{lst.ammonia}}</td>
+                                    <td>{{lst.permanganate}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <p style="font-size: 24px;font-weight: 600;margin-bottom: -30px">
+                                {{dataKindEnum[currentKind]}} 实时监测趋势</p>
+                            <div style="align-self: flex-end">
+                                <form>
+                                    <select ng-model="currentKind" ng-change="changeChartData()">
+                                        <option value="qualityLevel">水质类别</option>
+                                        <option value="DO">溶解氧</option>
+                                        <option value="ammonia">氨氮</option>
+                                        <option value="totalphosphorus">总磷</option>
+                                        <option value="COD">化学需氧量</option>
+                                        <option value="permanganate">高锰酸盐</option>
+                                    </select>
+                                </form>
+                            </div>
+                            <div id="main" style="width: 800px;height:400px;"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

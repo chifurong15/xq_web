@@ -5355,3 +5355,14 @@ a.text-#000000:hover {
 .panel-group .panel-heading + .panel-collapse > .panel-body, .panel-group .panel-heading + .panel-collapse > .list-group{
     border-color: #fff!important;
 }
+.select-list-item{
+    cursor: pointer;
+    padding: 4px 10px;
+    width: 100%;
+    overflow: hidden;
+    background-color: #ffffff;
+    border-top:1px solid #F2F2F2;
+}
+.select-list-item:hover{
+    background-color: #f2f2f2;
+}
