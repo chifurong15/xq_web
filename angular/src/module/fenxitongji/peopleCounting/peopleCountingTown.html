@@ -1,0 +1,67 @@
+<div class="fenxintongji" ng-controller="peopleCountingTown" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">各级河湖长人数统计</span><span class="tag-right"></span>
+                <div style="overflow: hidden;">
+                    <button type="button" class="btn btn-primary" ng-click="goBack()"
+                            style="position: absolute;right: 20px;bottom: 20px;">返回
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default panel-m" style="border-top: none;">
+            <div class="panel-body">
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover ">
+                                <tbody class="bTable">
+                                <tr class='tHeader'>
+                                    <th>序号</th>
+                                    <th>区名</th>
+
+                                    <th>镇街级个数</th>
+                                    <th>街镇级总河长人数</th>
+                                    <th>分级分段河长（含总河长兼任分级分段河长）人数</th>
+                                    <th>总河长兼任分级分段河长人数</th>
+
+                                    <th>河长总数</th>
+                                    <th>总湖长人数</th>
+                                    <th>副湖长人数</th>
+                                    <th>湖长（不含总、副湖长）人数</th>
+
+                                    <th>湖长总数</th>
+                                    <th>河长兼任湖长（包含总、副湖长）的人数</th>
+
+                                </tr>
+                                <tr ng-init="index=$index+1">
+                                    <td>{{index}}</td>
+                                    <td><a ng-click="view(dataList.regionId)">{{dataList.regionName}}</a></td>
+
+
+                                    <td>{{dataList.regionNum}}</td>
+                                    <td>{{dataList.bigRiverNum}}</td>
+                                    <td>{{dataList.otherRiverNum}}</td>
+                                    <td>{{dataList.bigOtherRiverNum}}</td>
+
+
+                                    <td>{{dataList.sumRiverNum}}</td>
+                                    <td>{{dataList.bigLakeNum}}</td>
+                                    <td>{{dataList.smallLakeNum}}</td>
+                                    <td>{{dataList.otherLakeNum}}</td>
+
+                                    <td>{{dataList.sumLakeNum}}</td>
+                                    <td>{{dataList.riverLakeNum}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

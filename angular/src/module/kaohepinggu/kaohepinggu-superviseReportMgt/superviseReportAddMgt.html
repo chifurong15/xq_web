@@ -1,4 +1,4 @@
-<div ng-controller="superviseReportAddMgtCtrl" ng-init="init()">
+<div class="conferenceCtrl chouchadudao anchaanfang" ng-controller="superviseReportAddMgtCtrl" ng-init="init()">
 
     <div class="wrapper-md">
         <div class="panel panel-default m-n">
@@ -58,6 +58,57 @@
                             <option value="">请选择</option>
                         </select>
                     </div>
+                    <br>
+                    <div class="form-item">
+                        <label>转办方式</label>
+                        <select ng-model="way"  class="form-control select-short">
+                            <option value="">请选择</option>
+                            <option value="传真">传真</option>
+                            <option value="邮箱">邮箱</option>
+                            <option value="内网">内网</option>
+                        </select>
+                    </div>
+                    <div class="input-group form-item" style="z-index: 10;">
+                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">承办单位</font></font></label>
+                        <select id="slpk" class="form-control selectpicker" multiple data-actions-box="true" data-size="8"  style="width: 426px;z-index: 0;" ng-model="organizer">
+                        </select>
+                    </div>
+                    <div class="form-item" style="margin-left: 13px;">
+                        <label>回复方式</label>
+                        <select ng-model="reportway"  class="form-control select-short">
+                            <option value="">请选择</option>
+                            <option value="传真">传真</option>
+                            <option value="邮箱">邮箱</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="form-item">
+                        <label>实际回复日期</label>
+                        <div class="input-group date date_picker date-tj" id="finishReport">
+                            <input type="text" class="form-control input-short-o" ng-model="finishReport"/>
+                            <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>要求回复日期</label>
+                        <div class="input-group date date_picker date-tj" id="RequireReport">
+                            <input type="text" class="form-control input-short-o" ng-model="RequireReport"/>
+                            <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>回复举报人日期</label>
+                        <div class="input-group date date_picker date-tj" id="reportorTime">
+                            <input type="text" class="form-control input-short-o" ng-model="reportorTime"/>
+                            <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                        </div>
+                    </div>
                     <br/>
                     <div class="form-item remarkInfo">
                         <div class="dis-i-blc">
@@ -70,6 +121,16 @@
                         </div>
                     </div>
                     <br/>
+                    <div class="form-item">
+                        <div class="dis-i-blc">
+                            <label>备注</label>
+                            <textarea class="form-control textareaH" ng-model="remark"
+                                      rows="3" style="width: 440px;max-width: 440px"></textarea>
+                        </div>
+                    </div>
+
+                    <br>
+
                     <div class="form-item">
                         <label>问题附件：</label>
                         <button class="btn btn-info" ng-click="getUploadFile(1)"><i class="fa fa-css3"></i>查看附件</button>

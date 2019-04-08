@@ -1,0 +1,94 @@
+<div class="conferenceCtrl chouchadudao anchaanfang " ng-controller="swagNum" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">各区河段、湖泊、坑塘数量统计</span><span class="tag-right"></span>
+            </div>
+        </div>
+        <div class="panel panel-default panel-m" style="border-top: none;">
+            <div class="panel-body">
+                <form class="form-inline clearfix" method="get">
+                    <button type="submit" class="btn btn-primary fr" ng-click="export()"><i class="fa fa-sign-in"></i>导出</button>
+                </form>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                <tr class='tHeader'>
+                                    <th rowspan="3">序号</th>
+                                    <th rowspan="3">区域</th>
+
+                                    <th colspan="6">河流</th>
+                                    <th colspan="6">湖泊</th>
+                                    <th colspan="2" rowspan="2">坑塘及景观水体</th>
+                                    <!--<th>序号</th>-->
+                                    <!--<th>区名</th>-->
+                                    <!--<th>河长公示牌数</th>-->
+                                    <!--<th>湖长公示牌数</th>-->
+                                    <!--<th>河长、湖长公示牌总数</th>-->
+                                </tr>
+                                <tr class='tHeader'>
+                                    <th colspan="2">一级河流</th>
+                                    <th colspan="2">二级河流</th>
+                                    <th colspan="2">沟渠条数</th>
+
+                                    <th colspan="2">水库</th>
+                                    <th colspan="2">湿地</th>
+                                    <th colspan="2">湖泊</th>
+
+                                </tr>
+                                <tr class='tHeader'>
+                                    <th>条数</th>
+                                    <th>公里数(km)</th>
+                                    <th>条数</th>
+                                    <th>公里数(km)</th>
+                                    <th>条数</th>
+                                    <th>公里数(km)</th>
+
+                                    <th>个数</th>
+                                    <th>面积(㎡)</th>
+                                    <th>个数</th>
+                                    <th>面积(㎡)</th>
+                                    <th>个数</th>
+                                    <th>面积(㎡)</th>
+
+                                    <th>个数</th>
+                                    <th>面积(㎡)</th>
+                                </tr>
+                                <tr ng-repeat="lst in dataList" ng-init="index = $index+1" style="cursor: pointer">
+                                    <td>{{index}}</td>
+                                    <td>{{lst.regionName}}</td>
+
+                                    <td>{{lst.oneNum}}</td>
+                                    <td>{{lst.oneLength}}</td>
+
+                                    <td>{{lst.twoNum}}</td>
+                                    <td>{{lst.twoLength}}</td>
+
+                                    <td>{{lst.threeNum}}</td>
+                                    <td>{{lst.threeLength}}</td>
+
+                                    <td>{{lst.reservoirNum}}</td>
+                                    <td>{{lst.reservoirAcreage}}</td>
+
+                                    <td>{{lst.wetlandNum}}</td>
+                                    <td>{{lst.wetlandAcreage}}</td>
+
+                                    <td>{{lst.lakesNum}}</td>
+                                    <td>{{lst.lakesAcreage}}</td>
+
+                                    <td>{{lst.pondNum}}</td>
+                                    <td>{{lst.pondAcreage}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

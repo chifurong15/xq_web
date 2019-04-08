@@ -58,11 +58,18 @@
                     var date = new Date();
                     var year = date.getFullYear();
                     var month = date.getMonth();
+                    var day=date.getDay();
                     if(month == 0){
                         month = 12;
                         year = year - 1;
                     }
+
+                    $scope.month= day<15 ? month:month+1;
+                    console.log(day);
                     month =  month < 10 ? '0' + month : month
+                    $scope.year = year;
+
+
                     $scope.defaultTime = year + '-' + month ;//默认上个月
 
                     //自适应图表
@@ -86,7 +93,7 @@
                         url: apiPrefix2 + '/v1/statistic/regionStatistic',
                         method: 'get',
                         params:{
-                            date:$scope.defaultTime
+                            // date:$scope.defaultTime
                             // date:'2018-11'
                         },
                         callBack: function (res) {
@@ -125,7 +132,7 @@
                                 $scope.waterType2 = [ 'Ⅵ-Ⅶ类', 'Ⅷ-Ⅸ类','河干'];
 
                                 getInitCharts()
-                                console.log('dddd',$scope.waterList);
+                                // console.log('dddd',$scope.waterList);
                             }else{
                                 layer.msg(res.resMsg, {time:2000});
                             }
@@ -134,6 +141,7 @@
                 }
 
                 function getInitCharts(){
+
                     this.chartInstance = [];
                     var myChart = echarts.init(document.getElementById('main'));
                     var myChart1 = echarts.init(document.getElementById('main1'));

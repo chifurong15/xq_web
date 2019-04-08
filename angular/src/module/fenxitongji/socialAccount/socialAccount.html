@@ -1,0 +1,113 @@
+<div class="conferenceCtrl chouchadudao anchaanfang " ng-controller="socialAccount" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">社会监督举报台账</span><span class="tag-right"></span>
+            </div>
+        </div>
+        <div class="panel panel-default panel-m" style="border-top: none;">
+            <div class="panel-body">
+                <form class="form-inline" method="get">
+                    <div class="form-item">
+                        <label>是否办结</label>
+                        <select ng-model="status" id="select" class="form-control select-short" style="width:160px">
+                            <option value="">全部</option>
+                            <option value="{{item.name}}" ng-repeat="item in statusList">{{item.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <label>开始时间</label>
+                        <div class="input-group date date_picker" id="startTime">
+                            <input type="text" class="form-control input-short-o" ng-model="startTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>结束时间</label>
+                        <div class="input-group date date_picker" id="endTime">
+                            <input type="text" class="form-control input-short-o" ng-model="endTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="search()"><i class="fa fa-search"></i>搜索</button>
+                    <button type="button" class="btn btn-primary" ng-click="reset()" style="margin: 0 5px;">
+                        <i class="fa fa-refresh"></i>重置
+                    </button>
+                    <button type="submit" class="btn btn-primary" ng-click="export()"><i class="fa fa-sign-in"></i>导出</button>
+
+
+                </form>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                <tr class='tHeader'>
+                                    <th style="width: 4%;">序号</th>
+
+                                    <th style="width: 5%;">举报时间</th>
+                                    <th style="width: 6%;">举报方式</th>
+
+                                    <th style="width: 5%;">举报人姓名</th>
+                                    <th style="width: 6%;">举报人联系方式</th>
+
+                                    <th style="width: 8%;">转办方式</th>
+                                    <th style="width: 8%;">行政区域</th>
+
+                                    <th style="width: 8%;">反映问题</th>
+                                    <th style="width: 8%;">承办单位</th>
+
+                                    <th style="width: 10%;">承办单位回复内容</th>
+                                    <th style="width: 5%;">要求回复日期</th>
+
+                                    <th style="width: 5%;">实际回复日期</th>
+                                    <th style="width: 5%;">回复方式</th>
+
+                                    <th style="width: 5%;">回复举报日期</th>
+                                    <th style="width: 5%;">是否办结</th>
+
+                                    <th style="width: 10%;">备注</th>
+                                </tr>
+                                <tr ng-repeat="lst in moduleList" ng-init="index = $index+1" style="cursor: pointer">
+                                    <td>{{index}}</td>
+
+                                    <td>{{lst.reportDate}}</td>
+                                    <td>{{lst.reportSource}}</td>
+
+                                    <td>{{lst.reportor}}</td>
+                                    <td>{{lst.contactType}}</td>
+
+                                    <td>{{lst.way}}</td>
+                                    <td>{{lst.regionName}}</td>
+
+                                    <td>{{lst.reportProblem}}</td>
+                                    <td>{{lst.organizer}}</td>
+
+                                    <td>
+                                        <a ng-if="lst.processingResults" ng-click="download(lst.processingResults)">{{fileUrl}}{{lst.processingResults}}</a>
+                                    </td>
+                                    <td>{{lst.RequireReport}}</td>
+
+                                    <td>{{lst.finishReport}}</td>
+                                    <td>{{lst.reportway}}</td>
+
+                                    <td>{{lst.reportorTime}}</td>
+                                    <td>{{lst.processingStatus}}</td>
+
+                                    <td>{{lst.remark}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <tm-pagination conf="paginationConf"></tm-pagination>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

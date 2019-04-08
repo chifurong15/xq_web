@@ -1,0 +1,69 @@
+<div class="fenxintongji" ng-controller="peopleCountingCtrl" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">各级河湖长人数统计</span><span class="tag-right"></span>
+
+            </div>
+        </div>
+        <div class="panel panel-default panel-m" style="border-top: none;">
+            <div class="panel-body">
+                <form class="form-inline clearfix" method="get">
+                    <button type="submit" class="btn btn-primary fr" ng-click="export()"><i class="fa fa-sign-in"></i>导出</button>
+                </form>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover ">
+                                <tbody class="bTable">
+                                <tr class='tHeader'>
+                                    <th>序号</th>
+                                    <th>区名</th>
+
+                                    <th>区级河长总数</th>
+                                    <th>湖长总数</th>
+                                    <th>河长兼任湖长（包含总、副湖长）的人数</th>
+                                    <th>总计人数</th>
+
+                                    <th>镇街级河长总数</th>
+                                    <th>湖长总数</th>
+                                    <th>河长兼任湖长（包含总、副湖长）的人数</th>
+                                    <th>总计人数</th>
+
+                                    <th>村级河长总数</th>
+                                    <th>湖长总数</th>
+                                    <th>河长兼任湖长（包含总、副湖长）的人数</th>
+                                    <th>总计人数</th>
+
+                                </tr>
+                                <tr ng-repeat="lst in dataList" ng-init="index=$index+1">
+                                    <td>{{index}}</td>
+                                    <td><a ng-click="view(lst.regionId)">{{lst.regionName}}</a></td>
+
+
+                                    <td>{{lst.rivermanQNum}}</td>
+                                    <td>{{lst.lakemanQNum}}</td>
+                                    <td>{{lst.riverLakeQNum}}</td>
+                                    <td style="font-weight: 600;">{{lst.sumQ}}</td>
+
+
+                                    <td>{{lst.rivermanZNum}}</td>
+                                    <td>{{lst.lakemanZNum}}</td>
+                                    <td>{{lst.riverLakeZNum}}</td>
+                                    <td style="font-weight: 600;">{{sumZ}}</td>
+
+                                    <td>{{lst.rivermanCNum}}</td>
+                                    <td>{{lst.lakemanCNum}}</td>
+                                    <td>{{lst.riverLakeCNum}}</td>
+                                    <td style="font-weight: 600;">{{lst.sumC}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

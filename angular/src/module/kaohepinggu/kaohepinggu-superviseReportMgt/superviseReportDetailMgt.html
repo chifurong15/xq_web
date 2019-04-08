@@ -51,6 +51,41 @@
 						</div>
 						<br>
 						<div class="form-item">
+							<label>转办方式：</label>
+							<span ng-bind="reportList.way"></span>
+						</div>
+						<div class="form-item">
+							<label>承办单位：</label>
+							<span ng-bind="reportList.organizer"></span>
+						</div>
+						<div class="form-item">
+							<label>回复方式：</label>
+							<span ng-bind="reportList.reportway"></span>
+						</div>
+
+						<br>
+						<div class="form-item">
+							<label>实际回复日期：</label>
+							<span ng-bind="reportList.finishReport"></span>
+						</div>
+						<div class="form-item">
+							<label>要求回复日期：</label>
+							<span ng-bind="reportList.RequireReport"></span>
+						</div>
+						<div class="form-item">
+							<label>回复举报人日期：</label>
+							<span ng-bind="reportList.reportorTime"></span>
+						</div>
+
+						<br>
+						<div class="form-item">
+							<label>备注：</label>
+							<span ng-bind="reportList.remark"></span>
+						</div>
+
+						<br>
+
+						<div class="form-item">
 							<label>问题附件：</label>
 							<button class="btn btn-info" ng-click="viewFile(1)"><i class="fa fa-css3"></i>查看附件</button>
 						</div>

@@ -1,0 +1,45 @@
+<div class="fenxintongji" ng-controller="patrolProblemStandingBookDetail" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">河长巡河问题台账</span><span class="tag-right"></span>
+                <div style="overflow: hidden;">
+                    <button type="button" class="btn btn-primary" ng-click="goBack()"
+                            style="position: absolute;right: 20px;bottom: 20px;">返回
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default panel-m" style="border-top: none;">
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover ">
+                                <tbody class="bTable">
+                                <tr class='tHeader'>
+                                    <th>序号</th>
+                                    <th>村名</th>
+                                    <th>问题总计</th>
+                                    <th>未处理</th>
+                                    <th>处理中</th>
+                                    <th>已结案</th>
+                                </tr>
+                                <tr ng-repeat="lst in villageList" ng-init="index=$index+1">
+                                    <td>{{index}}</td>
+                                    <td>{{lst.eventBelongVillage}}</td>
+                                    <td>{{lst.totalCount}}</td>
+                                    <td>{{lst.beginCount}}</td>
+                                    <td>{{lst.processCount}}</td>
+                                    <td>{{lst.endCount}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

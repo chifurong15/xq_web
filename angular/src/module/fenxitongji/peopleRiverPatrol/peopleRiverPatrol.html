@@ -1,0 +1,161 @@
+<div class="fenxintongji" ng-controller="riverPatrolCtrl" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">各级河湖长巡河人数统计情况</span><span class="tag-right"></span>
+
+            </div>
+        </div>
+        <div class="panel panel-default panel-m" style="border-top: none;">
+            <div class="panel-body">
+                <form class="form-inline" method="get">
+                    <div class="form-item">
+                        <label>开始时间</label>
+                        <div class="input-group date date_picker" id="startTime">
+                            <input type="text" class="form-control input-short-o" ng-model="startTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>结束时间</label>
+                        <div class="input-group date date_picker" id="endTime">
+                            <input type="text" class="form-control input-short-o" ng-model="endTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="search()"><i class="fa fa-search"></i>搜索</button>
+                    <button type="button" class="btn btn-primary" ng-click="reset()" style="margin: 0 5px;">
+                        <i class="fa fa-refresh"></i>重置
+                    </button>
+                    <button type="submit" class="btn btn-primary" ng-click="export()"><i class="fa fa-sign-in"></i>导出</button>
+                </form>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover ">
+                                <tbody class="bTable">
+                                <tr class='tHeader'>
+                                    <th rowspan="2">序号</th>
+                                    <th rowspan="2">区域</th>
+
+                                    <th colspan="3">区级河长</th>
+                                    <th colspan="3">区级湖长</th>
+
+                                    <th colspan="3">镇街级河长</th>
+                                    <th colspan="3">镇街级湖长</th>
+
+                                    <th colspan="3">村级河长</th>
+                                    <th colspan="3">村级湖长</th>
+                                </tr>
+                                <tr>
+
+                                    <td>
+                                        <span>巡河次数</span>
+                                    </td>
+                                    <td>
+                                        <span>发现问题次数</span>
+                                    </td>
+                                    <td>
+                                        <span>办结数量</span>
+                                    </td>
+
+                                    <td>
+                                        <span>巡河次数</span>
+                                    </td>
+                                    <td>
+                                        <span>发现问题次数</span>
+                                    </td>
+                                    <td>
+                                        <span>办结数量</span>
+                                    </td>
+
+                                    <td>
+                                        <span>巡河次数</span>
+                                    </td>
+                                    <td>
+                                        <span>发现问题次数</span>
+                                    </td>
+                                    <td>
+                                        <span>办结数量</span>
+                                    </td>
+
+                                    <td>
+                                        <span>巡河次数</span>
+                                    </td>
+                                    <td>
+                                        <span>发现问题次数</span>
+                                    </td>
+                                    <td>
+                                        <span>办结数量</span>
+                                    </td>
+
+                                    <td>
+                                        <span>巡河次数</span>
+                                    </td>
+                                    <td>
+                                        <span>发现问题次数</span>
+                                    </td>
+                                    <td>
+                                        <span>办结数量</span>
+                                    </td>
+
+                                    <td>
+                                        <span>巡河次数</span>
+                                    </td>
+                                    <td>
+                                        <span>发现问题次数</span>
+                                    </td>
+                                    <td>
+                                        <span>办结数量</span>
+                                    </td>
+
+                                </tr>
+
+                                <tr ng-repeat="lst in dataList" >
+                                    <td ng-init="arr = trans($index)">{{$index+1}}</td>
+                                    <td>{{lst.regionName}}</td>
+                                    <!--区级河长-->
+                                    <td><a ng-click="viewDetail(1 , lst.reachPatrolQuList)">{{lst.reachPatrolQuNum}}</a></td>
+                                    <td><a ng-click="viewDetail(2, lst.findProblemQuList)">{{lst.findProblemQuNum}}</a></td>
+                                    <td><a ng-click="viewDetail(2 , lst.overProblemQuList)">{{lst.overProblemQuNum}}</a></td>
+
+
+                                    <!--区级湖长-->
+                                    <td><a ng-click="viewDetail(1 , lst.lokePatrolQuList)">{{lst.lokePatrolQuNum}}</a></td>
+                                    <td><a ng-click="viewDetail(2 , lst.lokeFindProblemQuList)">{{lst.lokeFindProblemQuNum}}</a></td>
+                                    <td><a ng-click="viewDetail(2 , lst.lokeOverProblemQuList)">{{lst.lokeOverProblemQuNum}}</a></td>
+
+
+                                    <!--镇街级河长-->
+                                    <td><a ng-click="viewDetail(1 , lst.reachPatrolZList)">{{lst.reachPatrolZNum}}</a></td>
+                                    <td><a ng-click="viewDetail(2 , lst.findProblemZList)">{{lst.findProblemZNum}}</a></td>
+                                    <td><a ng-click="viewDetail(2 , lst.overProblemZList)">{{lst.overProblemZNum}}</a></td>
+
+
+                                    <!--镇街级湖长-->
+                                    <td><a ng-click="viewDetail(1 , lst.lokePatrolZList)">{{lst.reachPatrolZNum}}</a></td>
+                                    <td><a ng-click="viewDetail(2 , lst.lokeFindProblemZList)">{{lst.lokeFindProblemZNum}}</a></td>
+                                    <td><a ng-click="viewDetail(2 , lst.lokeOverProblemZList)">{{lst.lokeOverProblemZNum}}</a></td>
+
+
+                                    <!--村级河长-->
+                                    <td><a ng-click="viewDetail(1 , lst.reachPatrolCList)">{{lst.reachPatrolCNum}}</a></td>
+                                    <td><a ng-click="viewDetail(2 , lst.findProblemCList)">{{lst.findProblemCNum}}</a></td>
+                                    <td><a ng-click="viewDetail(2 , lst.overProblemCList)">{{lst.overProblemCNum}}</a></td>
+
+
+                                    <!--村级湖长-->
+                                    <td><a ng-click="viewDetail(1 , lst.lokePatrolCList)">{{lst.lokePatrolCNum}}</a></td>
+                                    <td><a ng-click="viewDetail(2 , lst.lokeFindProblemCList)">{{lst.lokeFindProblemCNum}}</a></td>
+                                    <td><a ng-click="viewDetail(2 , lst.lokeOverProblemCList)">{{lst.lokeOverProblemCNum}}</a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

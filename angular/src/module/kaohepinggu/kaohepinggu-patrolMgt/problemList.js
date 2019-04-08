@@ -55,6 +55,11 @@
 
                 }
 
+                //返回
+                $scope.goBack=function(){
+                    routeService.route('3-6',true)
+                }
+
                 //搜索
                 $scope.getMdSearch = function () {
                     getModuleList();
