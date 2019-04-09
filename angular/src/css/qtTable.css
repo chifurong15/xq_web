@@ -1,0 +1,247 @@
+.qtZwTd{
+	border-right: none;
+}
+.qtTableBox{
+	padding: 0 !important;
+}
+#childrenTable{
+	margin-bottom: 0;
+}
+#childrenTable td{
+	border-right: none;
+	border-left: none;
+	border-top: none;
+}
+.progressBox{
+	height: 8px;
+	background-color: #dddddd;
+	border-radius: 8px;
+	position: relative;
+	width: 200px;
+}
+.progressBar{
+	height: 8px;
+	width: 40px;
+	background-color: #1890ff;
+	border-radius: 8px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.indexQt{
+	position: relative;
+}
+.indexQt span{
+	display: block;
+	text-align: center;
+}
+.indexQt .indexValue{
+	width: 24px;
+	line-height: 24px;
+	border-radius: 3px;
+	background-color: #fff;
+  border: 1px solid #597ef7;
+}
+.indexQt .jbBag{
+	position: absolute;
+	width: 16px;
+	line-height: 16px;
+	border-radius: 16px;
+	background-color: #f8203a;
+	color: #fff;
+	top: 3px;
+	left: 72px;
+}
+.taskBag span{
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	background-color: #f8203a;
+	border-radius: 10px;
+	position: relative;
+	top: -2px;
+}
+.subForm label{
+	/*float: none;*/
+	padding: 0;
+}
+.subForm .form-item{
+	min-width: 0;
+}
+.subAddItemTitle{
+	border-bottom: 1px solid #ddd;
+    height: 30px;
+}
+.fjlistBox{
+	display: flex;
+	flex: 1;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	padding: 20px 0;
+}
+.fjList{
+	text-align: center;
+	width: 150px;
+	height: 116px;
+	background-color: #fafafa;
+	border:1px solid #d9d9d9;
+	border-radius:10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	margin-right: 15px;
+}
+.fjList img{
+	width: 40px;
+	height: 33px;
+}
+.downBox{
+	margin-left: 20px;
+}
+.downBox span{
+	padding: 5px;
+	color: #5c77e6;
+}
+.downBox a{
+	padding: 5px;
+	color: #5c77e6;
+}
+.form-item span.deleteIcon{
+	display: block;
+	font-size: 22px;
+	margin-top: 0;
+	/*width: 22px;
+	height: 22px;
+	background-image: url('../img/delete.png');
+	background-position: center;
+	background-size: 100%;
+	background-repeat: no-repeat;*/
+}
+.form-item span.addIcon{
+	display: block;
+	font-size: 22px;
+	margin-top: 0;
+	/*width: 22px;
+	height: 22px;
+	background-image: url('../img/add.png');
+	background-position: center;
+	background-size: 100%;
+	background-repeat: no-repeat;*/
+}
+.taskTitleBox{
+	display: flex;
+	flex: 1;
+}
+.taskTitleBox h1{
+	flex-basis: 20%;
+}
+.taskTitleBox .rightCon{
+	flex-basis: 80%;
+	display: flex;
+	flex: 1;
+	align-items: center;
+	justify-content: space-between;
+}
+.taskTitleBox .rightCon section{
+	flex-basis: 30%;
+	height: 94px;
+	background-color: #f9f9f9;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.taskTitleBox .rightCon section img{
+	width: 56px;
+	height: 56px;
+	margin-right: 34px;
+}
+.taskTitleBox .rightCon section i{
+	font-size: 24px;
+	font-weight: bold;
+	font-style: normal;
+}
+.taskTitleBox .rightCon section .secI{
+	font-size: 14px;
+	color: #999999;
+}
+.zt_box header{
+	line-height: 54px;
+	background-color: #fafafa;
+	font-size: 16px;
+	border-bottom: 1px solid #e6e6e6;
+}
+.zt_box ul{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.zt_name{
+	font-weight: bold;
+}
+.check_zt{
+	font-size: 14px;
+	color: #5c77e6;
+	margin-left: 55px;
+	cursor: pointer;
+}
+.zt_box ul li{
+	display: flex;
+	flex: 1;
+	justify-content: space-between;
+	line-height: 54px;
+	border-bottom: 1px solid #e6e6e6;
+}
+.projerss_sec{
+	width: 200px;
+	padding-top: 23px;
+}
+.cz_box span{
+	color: #1890ff;
+	cursor: pointer;
+	padding: 0 5px;
+}
+.taskList .desc_box{
+	max-width: 250px;
+	overflow-x: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.warnDot{
+	display: inline-block;
+	vertical-align: middle;
+	width: 8px;
+	height: 8px;
+	border-radius: 8px;
+}
+.warnDot.warnDot1{
+	background-color: #f8203a;
+}
+.warnDot.warnDot2{
+	background-color: #fdbe21;
+}
+.warnDot.warnDot3{
+	background-color: #52c41a;
+}
+.warnDot.warnDot4{
+	background-color: #cccccc;
+
+}
+.deletefile{
+	position: absolute;
+	top: -10px;
+	right: -10px;
+	display: block;
+	width: 22px;
+	height: 22px;
+	background-image: url('../img/deleteFile.png');
+	background-position: center;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+.taskList li section{
+	display: inline-block;
+	vertical-align: bottom;
+}

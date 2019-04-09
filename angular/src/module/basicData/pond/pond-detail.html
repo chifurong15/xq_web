@@ -1,0 +1,56 @@
+<div ng-controller="pondDetailCtrl" ng-init="init()">
+	<div class="wrapper-md">
+		<div class="panel panel-default m-all-0">
+			<div class="panel-body pos-rlt panel-map">
+				<!-- map -->
+                <div ng-init="mapMin = true; mapType = 'polygon'; objOpera = 'view'">
+					<basic-map obj="pond" map-min="mapMin" map-type="mapType" obj-opera="objOpera"></basic-map>
+				</div>
+				<div class="m-t-20">
+					<div class="form-item">
+						<label>坑塘名称：</label>
+						<span ng-bind="pond.pondName"></span>
+					</div>
+					<div class="form-item">
+                        <label>所属区域：</label>
+						<span ng-bind="pond.regionName"></span>
+                    </div>
+					<div class="form-item">
+						<label>坑塘类型：</label>
+						<span ng-bind="pond.pondTypeName"></span>
+					</div>
+					<div class="form-item">
+						<label>坑塘面积：</label>
+						<span ng-bind="pond.acreage"></span> km<sup>2</sup>
+					</div>
+					<div class="form-item">
+                        <label>经度：</label>
+						<span ng-bind="pond.longitude"></span>
+                    </div>
+                    <div class="form-item">
+                        <label>纬度：</label>
+						<span ng-bind="pond.latitude"></span>
+                    </div>
+					<br/>
+                    <div class="remark-panel">
+						<label>概述内容：</label>
+						<div class="remark-info">
+							<p ng-bind-html="pond.overView|trustHtml"></p>
+						</div>
+					</div>
+					<div class="remark-panel">
+						<label>备注信息：</label>
+						<div class="remark-info">
+							<p ng-bind="pond.remark"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel-footer m-b-10">
+				<div class="btn-box">
+					<button type="submit" class="btn btn-default" ng-click="back()">返回</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

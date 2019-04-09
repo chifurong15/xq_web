@@ -1,0 +1,95 @@
+*{
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+.warn_box{
+	position: absolute;
+	right: 10px;
+	bottom: 0;
+	width: 350px;
+	max-height: 350px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	background-color: rgba(248,250,251,1);
+	z-index: 1999;
+}
+.headerTitle{
+	width: 100%;
+	padding: 0 10px;
+	line-height: 40px;
+	display: flex;
+	-webkit-display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.right_float{
+	cursor: pointer;
+	font-weight: bold;
+}
+.chiefInfo{
+	width: 100%;
+	padding: 0 10px;
+}
+.chiefInfo ul{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.chiefInfo ul li{
+	height: 80px;
+	background-color: #fff;
+	border-radius: 5px;
+	display: flex;
+	-webkit-display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 8px;
+	padding-right: 3px;
+	margin-bottom: 10px;
+}
+.chiefInfo ul li img{
+	width: 60px;
+	height: 60px;
+	margin-right: 10px;
+}
+.chiefInfo ul li .chiefBox{
+	display: flex;
+	flex: 1;
+	-webkit-display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.chiefInfo ul li p{
+	margin: 0;
+}
+.left_float{
+	
+}
+.chiefInfo ul li .chiefName{
+	font-size: 14px;
+	color: #333;
+}
+.chiefInfo ul li .chiefName span{
+	font-weight: bold;
+	margin-left: 10px;
+}
+.chiefInfo ul li .upLineTime{
+	font-size: 12px;
+}
+.chiefInfo ul li .chiefOnlineDetail p{
+	height: 30px;
+}
+.chiefInfo ul li .chiefBox .deleteIconBox{
+	padding: 15px 0;
+	cursor: pointer;
+}
+.chiefInfo ul li .chiefBox .deleteIcon{
+	display: block;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-image: url('close.png');
+	background-position: center;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}

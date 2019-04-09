@@ -1,0 +1,83 @@
+<div ng-controller="chairmanTreeCtrl" ng-init="init()" class="wrapper-md rel">
+	<div class="panel-tree">
+        <div class="ztree-block tree-content">
+			<ul class="nav nav-tabs">
+				<li class="active">
+					<a href="#regionTree" onclick="return false;" data-toggle="tab" style="padding: 10px 0; text-align: center">行政区域</a>
+				</li>
+				<li>
+					<a href="#reachTree" onclick="return false;" data-toggle="tab" style="padding: 10px 0; text-align: center">河长树</a>
+				</li>
+			</ul>
+			<div class="tab-content" style="margin: 0">
+				<div role="tabpanel" class="tab-pane active" id="regionTree">
+					<ul id="regionTreeContainer" class="ztree"></ul>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="reachTree">
+					<div style="overflow: hidden;">
+						<div style="margin: 0;">
+							<label style="color: gray;">当前区域：</label>
+							<span style="color: #7266ba;font-weight: bolder;">{{regionName}}</span>
+							<input type="text" id="reachConditionContent" ng-model="reachConditionContent" ng-show="conditionInputVisible" class="form-control input-short" placeholder="名称快速检索" />
+						</div>
+						<div style="overflow: auto;width: 100%;height: 100%;">
+							<ul id="riverDutyTreeContainer" class="ztree"></ul>
+							<ul id="reachTreeConditionContainer" style="display: none;" class="ztree"></ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel-wrapper">
+		<!-- <div class="panel panel-default m-n">
+			<div class="panel-body">
+				<form class="form-inline" method="get" style="padding-right: 240px">
+					<div class="form-item">
+						<label>河长名称</label>
+						<input type="text" class="form-control input-short" ng-value="reachInfo.name" disabled>
+					</div>
+					<div class="form-item">
+						<label>创建时间</label>
+						<input type="text" class="form-control input-short" ng-value="reachInfo.createTime" disabled>
+					</div>
+					<div class="form-item">
+						<label>联系电话</label>
+						<input type="text" class="form-control input-short" ng-value="reachInfo.cellphone" disabled>
+					</div>
+				</form>
+			</div>
+		</div> -->
+		<div class="panel panel-default m-n panel-m">
+			<div class="panel-heading">
+				<i class="icon-jx_riverchief"></i> 履职人员
+			</div>
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover">
+						<tr>
+							<th>序号</th>
+							<th>河长名称</th>
+							<th>河长级别</th>
+							<th>河段名称</th>
+							<th>行政区域</th>
+							<th>上任时间</th>
+							<th>河长电话</th>
+						</tr>
+						<tr ng-repeat="list in reachDutyList" ng-init="index = $index + 1">
+							<td>{{index}}</td>
+							<td>{{list.chairmanName}}</td>
+							<td>{{list.chairmanLevelName}}</td>
+							<td>{{list.reachName}}</td>
+							<td>{{list.regionName}}</td>
+							<td>{{list.createTime}}</td>
+							<td>{{list.userPhone}}</td>
+						</tr>
+					</table>
+				</div>
+            	<tm-pagination conf="paginationConf"></tm-pagination>
+			</div>
+		</div>
+	</div>
+</div>
+	

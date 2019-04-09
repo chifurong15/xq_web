@@ -1,0 +1,75 @@
+<div ng-controller="reachDirectory">
+    <div class="wrapper-md rel">
+        <div class="panel panel-default m-all-0 border-bottom-n">
+            <div class="panel-body">
+                <form class="form-inline query-conditions-form" method="get">
+                    <div class="form-item">
+                        <label>河段名称</label>
+                        <input type="text" class="form-control input-short" ng-model="reachName"/>
+                    </div>
+                    <div class="form-item">
+                        <label>河长姓名</label>
+                        <input type="text" class="form-control input-short" ng-model="chairmanName"/>
+                    </div>
+                    <div class="form-item">
+                        <label>所属区域</label>
+                        <input ng-model="regionName" type="text" class="form-control input-short-o" ng-click="regionShow()" readonly>
+                        <a class="input-group-addon" ng-click="regionShow()"><i class="icon-jx_search"></i></a>
+                    </div>
+                    <div class="form-item">
+                        <label>河段级别</label>
+                        <select ng-init="riverLevel()" ng-model="grade" ng-options="rp.typeValue as rp.typeName for rp in riveLevelList" class="form-control select-short">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-search" ng-click="find()">搜 索</button>
+                    <button type="button" class="btn btn-reset" ng-click="reSet()">重 置</button>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <div class="table-bar">
+                        <button class="btn btn-primary" ng-click="dataExport()">
+                            <i class="icon-jx_export"></i> 导出
+                        </button>
+                    </div>
+                    <table class="table table-bordered table-hover text-center" data-filter="#filter">
+                        <thead>
+                            <tr>
+                                <th width="60">序号</th>
+                                <th>河段名称</th>
+                                <th>行政区域</th>
+                                <th>管理级别</th>
+                                <th>起点</th>
+                                <th>终点</th>
+                                <th>河长姓名</th>
+                                <th>河长职务</th>
+                                <th>河长级别</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="module in moduleList track by $index" ng-init="index=$index+1">
+                                <td>{{index + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
+                                <td>{{module.reachName}}</td>
+                                <td>{{module.regionName}}</td>
+                                <td>{{module.gradeName}}</td>
+                                <td>{{module.startPoint}}</td>
+                                <td>{{module.endPoint}}</td>
+                                <td>{{module.chairmanName}}</td>
+                                <td>{{module.position}}</td>
+                                <td>{{module.chairmanLevelName}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+        </div>
+        <div ng-show="toFileUpload" style="position:absolute; z-index:100; top:0; width: 100%; height: 100%; background-color: #fff">
+            <div ng-if="toFileUpload" ng-include="'rl-basicdata/module/basicData/fileUpload.html'"></div>
+        </div>
+    </div>
+    <tree-modal modal-tree-info = "{{modalTreeInfo}}"></tree-modal>
+</div>

@@ -1,0 +1,60 @@
+<div ng-controller="drainageCtrl" ng-init="init()">
+    <div id="drainageWrapper" class="wrapper-md">
+        <div class="panel panel-default m-all-0 border-bottom-n">
+            <div class="panel-body">
+                <form class="form-inline query-conditions-form" method="get">
+                    <div class="form-item">
+                        <label>流域名称</label>
+                        <input type="text" class="form-control input-short" ng-model="basinName"/>
+                    </div>
+                    <button type="button" class="btn btn-search" ng-click="getSearch()">搜 索</button>
+                    <button type="button" class="btn btn-reset" ng-click="reSet()">重 置</button>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <div class="table-bar">
+                        <button class="btn btn-primary" ng-click="drainageAdd()">
+                            <i class="icon-jx_add"></i> 新增
+                        </button>
+                       <!--  <button class="btn btn-default">
+                            <a href="#/app/index/9805804528df43cebebad36098a44a70_1_537"><i class="icon-jx_import"></i> 导入</a>
+                        </button> -->
+                      <!--   <button class="btn btn-default" ng-click="dataExport()">
+                            <i class="icon-jx_export"></i> 导出
+                        </button> -->
+                    </div>
+                    <table class="table table-bordered table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th width="90">序号</th>
+                                <th width="350">流域代码</th>
+                                <th>流域名称</th>
+                                <th>备注</th>
+                                <th width="180">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="module in moduleList" ng-init="index=$index+1">
+                                <td>{{index + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
+                                <td>{{module.basinCode}}</td>
+                                <td>{{module.basinName}}</td>
+                                <td class="remark">{{module.remark}}</td>
+                                <td class="td-tool">
+                                    <a class="btn btn-primary btn-xs" ng-click="drainageDetail(module.id)" title="详细"><i class="fa fa-info"></i></a>
+                                    <a class="btn btn-primary btn-xs" ng-click="drainageEdit(module.id)" title="修改"><i class="fa fa-edit"></i></a>
+                                    <a class="btn btn-primary btn-xs" ng-click="drainageMoveUp(module.id)" ng-if="moveIcon" title="上移"><i class="fa fa-chevron-up"></i></a>
+                                    <a class="btn btn-primary btn-xs" ng-click="drainageDown(module.id)" ng-if="moveIcon" title="下移"><i class="fa fa-chevron-down"></i></a>
+                                    <a class="btn btn-primary btn-xs" ng-click="drainageDelete(module.id,module.name)" title="删除"><i class="fa fa-trash-o"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+        </div>
+    </div>
+</div>

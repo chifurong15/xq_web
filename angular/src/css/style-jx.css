@@ -1,0 +1,92 @@
+.form-inline .form-control {
+    margin-right: 5px;
+}
+
+.form-inline .input-short {
+    float: left;
+    width: 160px;
+}
+
+.form-inline .input-long {
+    float: left;
+    width: 453px;
+}
+
+.form-inline .input-short-o {
+    float: left;
+    width: 130px;
+    margin: 0;
+}
+
+.form-inline .input-long-o {
+    float: left;
+    width: 423px;
+    margin: 0;
+}
+
+.form-inline .textarea-long {
+    float: left;
+    width: 453px;
+}
+
+.form-inline .select-short {
+    float: left;
+    width: 160px;
+}
+
+/* ��  */
+.form-item {
+    position: relative;
+    display: inline-block;
+    min-width: 290px;
+    margin: 5px 0;
+    padding-right: 15px;
+    vertical-align: middle;
+}
+
+.form-item label {
+    float: left;
+    line-height: 24px;
+    color: #555;
+    width: 95px;
+    font-size: 14px;
+    text-align: left;
+    font-weight: normal;
+    padding: 5px;
+    margin: 0;
+}
+
+.form-item span {
+    display: inline-block;
+    color: #666;
+    font-size: 14px;
+    font-weight: normal;
+    margin-top: 8px;
+}
+
+.form-item span.required {
+    color: #f00;
+    line-height: 34px;
+    font-weight: bold;
+    margin: 0
+}
+
+.form-item .input-group-addon {
+    float: left;
+    width: 30px;
+    height: 34px;
+    padding: 0;
+    border-left: none;
+    margin-top: 0;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.form-item .input-group-addon i {
+    line-height: 34px;
+    text-align: center;
+}
+
+.form-item .radio input[type="radio"], .form-item .checkbox input[type="checkbox"] {
+    margin-right: 5px;
+}

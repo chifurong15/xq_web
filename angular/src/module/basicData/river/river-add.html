@@ -1,0 +1,101 @@
+<div ng-controller="imRiverAdd" ng-init="init()">
+	<div id="wrapperMd" class="wrapper-md">
+		<div class="panel panel-default m-all-0">
+			<div class="panel-body pos-rlt">
+				<form id="riverAddForm" class="form-inline" method="get" novalidate="novalidate">
+					<div id="left" class="left-panel wid-70 dis-i-blc">
+						<div class="form-item">
+							<label>河流名称</label>
+							<input type="text" class="form-control input-short" ng-model="river.riverName" ng-blur="isRepeat()">
+                            <span class="required">*</span>
+						</div>
+						<div class="form-item">
+							<label>河流编码</label>
+							<input type="text" class="form-control input-short" ng-model="river.riverCode">
+						</div>
+						<div class="form-item">
+	                        <label>所属区域</label>
+							<input ng-model="river.regionName" type="text" class="form-control input-short-o" ng-click="regionShow()" readonly>
+							<a class="input-group-addon" ng-click="regionShow()"><i class="icon-jx_search"></i></a>
+                            <span class="required">*</span>
+	                    </div>
+	                    <div class="form-item">
+	                        <label>河流类型</label>
+							<select ng-init="riverTypeList()" ng-model="river.riverType" ng-options="rv.typeValue as rv.typeName for rv in riverTypes" class="form-control select-short">
+	                            <option value="">请选择</option>
+	                        </select>
+	                    </div>
+	                    <div class="form-item">
+	                        <label>河流功能</label>
+							<select ng-init="riverFeatureList()" ng-model="river.feature" ng-options="rv.typeValue as rv.typeName for rv in riverFeatureList" class="form-control select-short">
+	                            <option value="">请选择</option>
+	                        </select>
+	                    </div>
+	                    <div class="form-item">
+                            <label>河流长度</label>
+                            <input type="text" class="form-control input-short-o" ng-model="river.length" maxlength="10" >
+                            <a class="input-group-addon"><i>km</i></a>
+                            <span class="required">*</span>
+                        </div>
+                        <div class="form-item">
+							<label>河流经度</label>
+							<input type="text" class="form-control input-short" ng-model="river.midPointLongitude" >
+						</div>
+						<div class="form-item">
+							<label>河流纬度</label>
+							<input type="text" class="form-control input-short" ng-model="river.midPointLatitude" >
+						</div>
+						<div class="form-item">
+                            <label>流域面积</label>
+                            <input type="text" class="form-control input-short-o" ng-model="river.area" maxlength="10">
+                            <a class="input-group-addon"><i>km<sup>2</sup></i></a>
+                        </div>
+						<div class="form-item">
+							<label>所属水系</label>
+							<input ng-model="river.waterName" type="text" class="form-control input-short-o" ng-click="waterShow()" readonly>
+							<a class="input-group-addon" ng-click="waterShow()"><i class="icon-jx_search"></i></a>
+                            <span class="required">*</span>
+						</div>
+						<div class="form-item">
+                            <label>河流起点</label>
+                            <input type="text" class="form-control input-short" ng-model="river.startPoint">
+                        </div>
+                        <div class="form-item">
+                            <label>起点断面</label>
+                            <input type="text" class="form-control input-short-o" ng-model="river.startSectionName" ng-click="sectionShow(1)" readonly>
+                            <a class="input-group-addon" ng-click="sectionShow(1)"><i class="icon-jx_search"></i></a>
+                        </div>
+                        <div class="form-item">
+                            <label>河流终点</label>
+                            <input type="text" class="form-control input-short" ng-model="river.endPoint">
+                        </div>
+                        <div class="form-item">
+                            <label>终点断面</label>
+                            <input type="text" class="form-control input-short-o" ng-model="river.endSectionName" ng-click="sectionShow(2)" readonly>
+                            <a class="input-group-addon" ng-click="sectionShow(2)"><i class="icon-jx_search"></i></a>
+                        </div>
+                        <br>
+                        <div class="form-item">
+                            <label>流经区域</label>
+                            <input type="text" class="form-control input-long-o" ng-model="river.throughAreaName" ng-click="regionShow('multiple')">
+                            <a class="input-group-addon" ng-click="regionShow('multiple')"><i class="icon-jx_search"></i></a>
+                        </div>
+						<br/>
+						<remark-edit obj="river"></remark-edit>
+						<file-upload imgblock="true" fileblock="true" imgs="river.jsonImages" files="river.jsonFiles"></file-upload>
+					</div>
+					<div class="float-right-panel wid-25 dis-i-blc" ng-class="{true:'expandMap', false:'compressMap'}[mapMin]" ng-init="mapMin = true; mapType = 'line'; objOpera = 'add'">
+	                    <basic-map obj="river" map-min="mapMin" map-type="mapType" obj-opera="objOpera"></basic-map>
+                    </div>
+				</form>
+			</div>
+			<div class="panel-footer m-b-10">
+				<div class="btn-box">
+					<button type="submit" class="btn btn-primary" ng-click="submit()">保存</button>
+					<button type="submit" class="btn btn-default" ng-click="back()">返回</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<tree-modal modal-tree-info = "{{modalTreeInfo}}"></tree-modal>
+</div>

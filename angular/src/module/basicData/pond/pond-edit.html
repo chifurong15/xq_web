@@ -1,0 +1,64 @@
+<div ng-controller="pondEditCtrl" ng-init="init()">
+	<div id="wrapperMd" class="wrapper-md">
+		<div class="panel panel-default m-all-0 border-bottom-n">
+			<div class="panel-body pos-rlt">
+				<form class="form-inline" novalidate="novalidate">
+					<div id="left" class="left-panel wid-70 dis-i-blc">
+						<div class="form-item">
+							<label>坑塘名称</label>
+							<input type="text" class="form-control input-short" ng-model="pond.pondName">
+                            <span class="required">*</span>
+						</div>
+						<div class="form-item">
+	                        <label>所属区域</label>
+							<input ng-model="pond.regionName" type="text" class="form-control input-short-o" ng-click="regionShow()" readonly>
+							<a class="input-group-addon" ng-click="regionShow()"><i class="icon-jx_search"></i></a>
+                            <span class="required">*</span>
+	                    </div>
+	                    <div class="form-item">
+	                        <label>坑塘类型</label>
+							<select ng-init="pondTypeList()" ng-model="pond.pondType" ng-options="pd.typeValue as pd.typeName for pd in pondTypes" class="form-control select-short">
+	                            <option value="">请选择</option>
+	                        </select>
+	                    </div>
+						<div class="form-item">
+							<label>坑塘面积</label>
+							<input type="text" class="form-control input-short-o" ng-model="pond.acreage" >
+                            <span class="input-group-addon"><i>km<sup>2</sup></i></span>
+						</div>
+						<div class="form-item">
+                            <label>坑塘经度</label>
+                            <input type="text" class="form-control input-short" ng-model="pond.longitude" >
+                        </div>
+                        <div class="form-item">
+                            <label>坑塘纬度</label>
+                            <input type="text" class="form-control input-short" ng-model="pond.latitude"  >
+                        </div>
+                        <div class="form-item">
+                            <label>位置描述</label>
+                            <input type="text" class="form-control input-long" ng-model="pond.location">
+                        </div>
+                        <br/>
+						<remark-edit obj="pond"></remark-edit>
+					</div>
+					<!-- map -->
+					<div class="float-right-panel wid-25 dis-i-blc" ng-class="{true:'expandMap', false:'compressMap'}[mapMin]" ng-init="mapMin = true; mapType = 'polygon'; objOpera = 'edit'">
+	                    <basic-map obj="pond" map-min="mapMin" map-type="mapType" obj-opera="objOpera"></basic-map>
+                    </div>
+				</form>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<related-chief obj="pond" watertype="lake"></related-chief>
+			</div>
+			<div class="panel-footer m-b-10">
+				<div class="btn-box">
+					<button type="submit" class="btn btn-primary" ng-click="submit()">保存</button>
+					<button type="submit" class="btn btn-default" ng-click="back()">返回</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<tree-modal modal-tree-info = "{{modalTreeInfo}}"></tree-modal>
+</div>

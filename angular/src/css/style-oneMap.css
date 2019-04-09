@@ -1,0 +1,1104 @@
+/**
+ * ================================
+ * 描述说明
+ * @author YuanHT</br>2018/05/21
+ * @version 1.0.0
+ * ================================
+ */
+
+
+/*公共动画样式*/
+
+[ui-view].ng-enter,
+[ui-view].ng-leave {
+	box-sizing: border-box;
+	position: absolute;
+	transition: all .3s ease-in-out;
+}
+
+[ui-view].ng-enter {
+	opacity: 0;
+	transform: scale3d(.6, .6, .6);
+}
+
+[ui-view].ng-enter-active {
+	opacity: 1;
+	transform: scale3d(1, 1, 1);
+}
+
+[ui-view].ng-leave {
+	opacity: 1;
+	transform: scale3d(1, 1, 1);
+}
+
+[ui-view].ng-leave-active {
+	opacity: 0;
+	transform: scale3d(.6, .6, .6);
+}
+
+
+/*部件*/
+
+.ztree-search {
+	padding: 15px;
+}
+
+.ztree-md {
+	position: absolute;
+	top: 50px;
+	bottom: 0;
+	padding: 0;
+	width: 199px;
+	background-color: #fff;
+	border-right: 1px solid #e3e3e3;
+	overflow: auto;
+}
+
+.gis-md {
+	position: absolute;
+	top: 50px;
+	bottom: 0;
+	width: 100%;
+}
+
+.ztree-body {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	padding: 0;
+	width: 199px;
+	background-color: #fff;
+	border-right: 1px solid #e3e3e3;
+}
+
+.mapPanel {
+	position: absolute;
+	left: 200px;
+	height: 100%;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	overflow: hidden;
+	background: #f0f3f4;
+}
+
+#map {
+	height: 100%;
+}
+
+.handle-md {
+	position: absolute;
+	top: 50%;
+	left: 200px;
+	bottom: 0;
+	padding: 0;
+	background-color: #fff;
+	border-right: 1px solid #e3e3e3;
+}
+
+.handle {
+	position: absolute;
+	top: 50%;
+	right: -15px;
+	z-index: 1;
+}
+
+.handle i {
+	padding: 10px 5px;
+	border-radius: 2px;
+	background-color: #328be4;
+	color: #fff;
+	/*-moz-box-shadow: 5px 0px 3px #333333;
+	-webkit-box-shadow: 5px 0px 3px #333333;
+	box-shadow: 5px 0px 3px #333333;*/
+}
+
+.handle i:hover {
+	background-color: #1e76c2;
+	color: #fff;
+	/*-moz-box-shadow: 5px 0px 3px #4e4e4e;
+	-webkit-box-shadow: 5px 0px 3px #4e4e4e;
+	box-shadow: 5px 0px 3px #4e4e4e;*/
+}
+
+.tools {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	width: auto;
+	height: 36px;
+	z-index: 1000;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, .2);
+}
+
+.tools a {
+	float: left;
+	width: 50px;
+	height: 36px;
+	background: #fff;
+	text-align: center;
+}
+
+.tools i.layer ,
+.tools i.maplayer,
+.tools i.mapInfo,
+.tools i.mapZoom {
+	width: 30px;
+	line-height: 36px;
+	font-size: 22px;
+	color: #666;
+}
+.tools a:hover i.layer ,
+.tools a:hover i.maplayer,
+.tools a:hover i.mapInfo,
+.tools a:hover i.mapZoom,
+.tools a.active i.layer ,
+.tools a.active i.maplayer,
+.tools a.active i.mapInfo,
+.tools a.active i.mapZoom {
+	color: #2d3e50;
+}
+
+/*河道信息栏*/
+
+.river_toolbar {
+	position: absolute;
+	top: 64px;
+	/*bottom: 20px;*/
+	right: 120px;
+	width: 120px;
+	overflow: hidden;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, .2);
+}
+
+.toolbar_wrapper {
+	float: left;
+	padding: 0;
+	width: 120%;
+	background: #fff;
+	overflow: hidden;
+	overflow-y: auto;
+}
+
+.toolbar_wrapper ul {
+	float: left;
+	margin: 0;
+	padding: 4px 0 4px 4px;
+	width: 100%;
+	overflow: hidden;
+	overflow-y: auto;
+}
+
+.toolbar_wrapper li {
+	float: left;
+	width: 56px;
+	height: 60px;
+	margin: 0;
+	overflow: hidden;
+	text-align: center;
+	font-size: 12px;
+}
+
+.toolbar_wrapper li a {
+	float: left;
+	width: 38px;
+	height: 38px;
+	margin: 4px 9px 0;
+	overflow: hidden;
+}
+
+.toolbar_wrapper li i {
+	float: left;
+	width: 36px;
+	height: 36px;
+	margin: 0;
+}
+
+.map_layer_2 {
+	background: url(../img/esri-map-icon/map_layer.png) -36px -108px;
+}
+
+.map_layer_6 {
+	background: url(../img/esri-map-icon/map_layer.png) -180px -108px;
+}
+
+.map_layer_3 {
+	background: url(../img/esri-map-icon/map_layer.png) -72px -108px;
+}
+
+.map_layer_5 {
+	background: url(../img/esri-map-icon/map_layer.png) -144px -108px;
+}
+
+.map_layer_4 {
+	background: url(../img/esri-map-icon/map_layer.png) -108px -108px;
+}
+
+.map_layer_8 {
+	background: url(../img/esri-map-icon/map_layer.png) -252px -108px;
+}
+
+.map_layer_7 {
+	background: url(../img/esri-map-icon/map_layer.png) -216px -108px;
+}
+
+.map_layer_10 {
+	background: url(../img/esri-map-icon/map_layer.png) -324px -108px;
+}
+
+.map_layer_9 {
+	background: url(../img/esri-map-icon/map_layer.png) -288px -108px;
+}
+
+.map_layer_11 {
+	background: url(../img/esri-map-icon/map_layer.png) -360px -108px;
+}
+
+.map_layer_12 {
+	background: url(../img/esri-map-icon/map_layer.png) -396px -108px;
+}
+
+.map_layer_13 {
+	background: url(../img/esri-map-icon/map_layer.png) -432px -108px;
+}
+
+.map_layer_14 {
+	background: url(../img/esri-map-icon/map_layer.png) -468px -108px;
+}
+
+.map_layer_15 {
+	background: url(../img/esri-map-icon/map_layer.png) -72px -144px;
+}
+
+.map_layer_16 {
+	background: url(../img/esri-map-icon/map_layer.png) -108px -144px;
+}
+
+.map_layer_19 {
+	background: url(../img/esri-map-icon/map_layer.png) -216px -144px;
+}
+
+.map_layer_20 {
+	background: url(../img/esri-map-icon/map_layer.png) -252px -144px;
+}
+
+.map_layer_21 {
+	background: url(../img/esri-map-icon/map_layer.png) -288px -144px;
+}
+.map_layer_22 {
+	background: url(../img/esri-map-icon/map_layer.png) -324px -144px;
+}
+.map_layer_23{
+	background: url(../img/esri-map-icon/sign/shuili/shuidianzhan.png)
+}
+.map_layer_24{
+	background: url(../img/esri-map-icon/sign/shuili/xiangjiaoba.png)
+}
+.map_layer_25{
+	background: url(../img/esri-map-icon/sign/shuili/shuiwenzhan.png)
+}
+
+
+/*
+ * 部件子模块
+ */
+
+.toolbar_child_wrapper {
+	position: absolute;
+	top: 64px;
+	bottom: 20px;
+	right: 242px;
+	width: 140px;
+	background-color: #fff;
+	overflow: hidden;
+	height: max-content;
+	padding: 0 10px;
+	font-size: 12px;
+}
+
+
+/*
+ *底图资源
+ */
+.layer-tab-block .layui-tab-title .layui-this {
+	background-color: #428bca;
+}
+
+/*.layui-tab-title .layui-this*/
+.layui-tab-brief>.layui-tab-title .layui-this{
+	color: #fff;
+	background-color: #428bca;
+}
+.layui-tab-title .layui-this{
+	color: #fff;
+}
+.layui-tab-brief > .layui-tab-title .layui-this:after,
+.layui-tab-brief > .layui-tab-more li.layui-this:after {
+	border-bottom: none ;
+}
+
+.base-map-card {
+	display: inline-block;
+    width: 147px;
+    height: auto;
+    cursor: pointer;
+    padding: 10px 0;
+}
+
+.base-map-card p {
+	text-align: center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.base-map-hd {
+	width: 100%;
+	height: 90px;
+	overflow: hidden;
+}
+
+.base-map-hd img {
+	width: 100%;
+}
+
+
+/**
+ *图表选中事件 
+ */
+
+.sectionUnFocus {
+	background-color: #d8d8d8;
+}
+
+.sectionFocus {
+	background-color: #23b7e5;
+}
+
+#mapResourceDiv {
+	overflow: hidden;
+}
+
+.layui-layer1 {
+	overflow: hidden;
+}
+
+.coverage-content {
+	height: 380px;
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+
+/**
+ * 专题信息 => 项目分布
+ */
+
+ul li {
+	list-style: none;
+}
+
+.project_tools {
+	position: absolute;
+	top: 30px;
+	left: 100px;
+	padding: 10px;
+	background-color: #bcbcbc;
+	box-shadow: 1px 1px 50px rgba(0, 0, 0, .3);
+}
+
+.project_tools ul li {
+	float: left;
+}
+
+.city_tool_con {
+	background: #fff url(../img/esri-map-icon/down.png) no-repeat;
+	background-position: 220px 2px;
+	background-size: 30px;
+}
+
+.tool_con {
+	width: 250px;
+}
+
+.cityPanel {
+	position: absolute;
+	width: 250px;
+	background-color: #fff;
+	word-wrap: break-word;
+}
+
+.clear {
+	clear: both;
+}
+
+.cityList {
+	margin: 5px 10px;
+	/*color: #0060ad;*/
+	cursor: pointer;
+}
+
+.choseCity {
+	color: #82417e;
+}
+
+.defaultClass {
+	color: #0060ad;
+}
+
+
+/**
+ * 项目详情Table
+ */
+
+#proView {
+	position: absolute;
+	top: 115px;
+	right: 200px;
+}
+
+.project_table {
+	width: 1px;
+}
+
+.proLrBtn {
+	position: absolute;
+	top: 15px;
+	left: -53px;
+	background-color: #428bca;
+	color: #fff;
+	padding: 5px 20px;
+	font-size: 25px;
+}
+
+/**
+ * 图例经纬度
+ */
+
+.geographicPanel {
+    height: 32px;
+    line-height: 32px;
+    width: 170px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    right: 50px;
+    z-index: 2;
+    color: #fff;
+    /*background-color: rgba(0, 0, 0, .3);*/
+    background-color: rgb(199, 198, 198);
+    border-radius: 2px;
+    box-shadow: 1px 1px 50px rgba(0, 0, 0, .3);
+}
+
+.pntL{
+	color: #1f0801;
+}
+.pntY{
+	color: #1f0801;
+}
+.pntL,.pntY{
+	padding: 0 5px;
+}
+
+.geographicPanel ul{
+	float: left;
+}
+.geographicPanel li{
+	width: 50%;
+}
+/**
+ * 图例说明
+ */
+
+.legendPanel {
+	height: 310px;
+	width: 450px;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	z-index: 1;
+	background-color: #f3f3f3;
+	border-radius: 8px;
+	box-shadow: 1px 1px 50px rgba(0, 0, 0, .3);
+}
+
+.legendTab ul,
+.legendTab li {
+	float: right;
+}
+
+.legendTab .sectionUnFocus {
+	width: 20px;
+	height: 20px;
+	margin: 5px;
+	cursor: pointer;
+	border-radius: 50%;
+}
+
+.legendTab li span {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	background-color: #fff;
+	border-radius: 50%;
+	margin: 0 5px;
+}
+
+.legendContent {
+	padding-left: 10px;
+}
+
+.legendContent ul,
+.legendContent li {
+	float: left;
+	padding: 5px 10px;
+	height: 34px;
+}
+
+.waterType {
+	width: 24px;
+	height: 24px;
+	display: inline-block;
+}
+
+.type-name {
+	line-height: 24px;
+	padding-left: 10px;
+}
+
+.type-one {
+	background-color: #59d6ff;
+}
+
+.type-two {
+	background-color: #15aaf1;
+}
+
+.type-three {
+	background-color: #5ed522;
+}
+
+.type-four {
+	background-color: #24b462;
+}
+
+.type-five {
+	background-color: #ffc20d;
+}
+
+.type-badfive {
+	background-color: #ff5605;
+}
+
+.type-six {
+	background-color: #ab7df6;
+}
+
+.legendExtend {
+	position: fixed;
+	bottom: 0px;
+	width: 40px;
+	right: 0;
+	z-index: 2;
+	border: solid 1px #e3e3e3;
+	padding: 5px;
+	color: #15aaf1;
+	font-size: 20px;
+	margin: 0 auto;
+	text-align: center;
+	background-color: #fff;
+	box-shadow: 1px 1px 50px rgba(0, 0, 0, .3);
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.riverSec {
+	position: absolute;
+	max-width: 650px;
+	height: 450px;
+	display: block;
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
+	background-color: #fff;
+}
+
+.riverSec ul li {
+	word-break: break-all;
+}
+
+.componentPanel table tbody tr th,
+.componentPanel table tbody tr td {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+/**
+ * 省级区域地图点位弹窗
+ */
+.regionBtn-box{
+	margin: 40px 0;
+}
+
+.regionBtn-box ul{
+	text-align: center;
+}
+
+.regionBtn-box li{
+    display: inline-block;
+    width: 20%;
+    margin: 0 10px;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    background-color: #428bca;
+    border-color: #357ebd;
+    cursor: pointer;
+}
+
+.regionBtn-box li:hover{
+    background-color: #3071a9;
+    border-color: #285e8e;
+}
+
+.proTable{
+	display: block;
+    height: 450px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.componentPanel .layui-table tr {
+	transition:unset;
+    -webkit-transition: unset;
+}
+
+.proTable table tr:active {
+	background-color: #eaeff0;
+}
+
+.border-select{
+    border: solid 1px #e06f0e;
+    box-shadow: 3px 4px 2px #e06f0e;
+}
+
+#layer-albumPhotos-demo .albumImg{
+	display: inline-block;
+    padding: 10px;
+    width: 210px;
+    height: auto;
+}
+
+.albumImgBox{
+    height: 450px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+/**
+ * 专题信息 => 事件专题
+ */
+.periodId ul li {
+	cursor: pointer;
+}
+.legendPanel .periodType {
+	width: 30px;
+	height: 20px;
+	line-height: 20px;
+	margin: 5px 0;
+	border-radius: 50%;
+}
+.periodTitle {
+	height: 30px;
+	line-height: 30px;
+	margin: 5px 10px;
+}
+.suppression_child_wrapper{
+	position: absolute;
+    top: 20px;
+    bottom: 20px;
+    right: 150px;
+    width: 140px;
+    background-color: #fff;
+    overflow: hidden;
+    height: max-content;
+    padding: 0 10px;
+}
+
+.suppressionAction{
+	position: absolute;
+	max-width: 400px;
+	height: 400px;
+	display: block;
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
+	background-color: #fff;
+}
+.suppression-title{
+    height: 30px;
+    line-height: 30px;
+    background-color: #dcdcdc;
+}
+.suppression-tab ul{
+	display: flex;
+	text-align: center;
+	background-color: #f2f2f2;
+    margin-bottom:15px;
+}
+.suppressionAction .suppression-tab ul li{
+	display: inline-block;
+    height: 30px;
+    line-height: 30px;
+}
+.suppress-active{
+	background-color:#428bca;
+    color: #fff;
+}
+.suppression-tab .table > tbody > tr > th,
+.suppression-tab .table > tfoot > tr > th,
+.suppression-tab .table > tbody > tr > td,
+.suppression-tab .table > tfoot > tr > td {
+    padding:8px;
+ 	border-top: 1px solid #eaeff0;
+}
+
+/**
+ * 专题信息 => 水质变化
+ */
+#bottomPanel {
+    left: 30%;
+    position: fixed;
+    bottom: 2.5rem;
+}
+
+#timeInfo {
+    border-radius: 12px;
+    border: solid 1px #ccc;
+    background-color: #fff;
+    padding: 15px 0;
+    position: relative;
+    text-align: center;
+    width: 1000px;
+    z-index: 99;
+    box-shadow: 1px 1px 50px rgba(0, 0, 0, .3);
+}
+
+.layui-table-fixed-lb{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+/*arcGis Loading*/
+
+#arcgisLoading{
+	position: fixed;
+	bottom: 0;
+	left: 50%;
+}
+#arcgisLoading span{
+	color: #000000;
+}
+.spinner {
+  margin: 100px auto;
+  width: 50px;
+  height: 60px;
+  text-align: center;
+  font-size: 10px;
+}
+ 
+.spinner > div {
+  background-color: #67CF22;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+   
+  -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+  animation: stretchdelay 1.2s infinite ease-in-out;
+}
+ 
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+ 
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+ 
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+ 
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+ 
+@-webkit-keyframes stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) } 
+  20% { -webkit-transform: scaleY(1.0) }
+}
+ 
+@keyframes stretchdelay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }  20% {
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}
+
+/*系统配置*/
+.colpick-content{
+	margin-top: 20px;
+}
+.colpick-content li{
+	float: left;
+	display: inline-block;
+	background-color: #fff;
+    box-shadow: 1px 1px 50px rgba(0, 0, 0, .3);
+    padding: 10px;
+    margin: 10px;
+    border-radius:12px ;
+}
+.colpick-title{
+	width: 100%;
+	border-bottom: solid 2px #37b94d;
+}
+.colpick-title h3{
+	padding-bottom: 5px;
+}
+
+/*SWITCH*/
+.form-switch{
+	display: flex;
+	margin-top: 20px;
+}
+.form-switch .control-label{
+	height: 25px;
+    line-height: 25px;
+    padding-right: 20px;
+}
+.color-title{
+    font-size: 16px;
+    padding-bottom: 10px;
+    border-bottom: solid 1px #37b94d;
+    margin-bottom: 10px;
+}
+.line-box input{
+	border-radius: 4px;
+}
+.videoPanel{
+	width: 500px;
+	font-size: 24px;
+	padding-top: 150px;
+	text-align: center;
+	margin: 0 auto;
+}
+.layer-footer-content{
+	position: absolute;
+    left: 10px;
+}
+
+/**
+ *部件信息 => 河长履职 Loading 
+ */
+.tableloading{
+    position: absolute;
+    top: 0;
+    left: 47%;	
+}
+.spinner {
+  width: 40px;
+  height: 40px;
+  margin: 100px auto;
+  background-color: #333;
+ 
+  border-radius: 100%; 
+  -webkit-animation: scaleout 1.0s infinite ease-in-out;
+  animation: scaleout 1.0s infinite ease-in-out;
+}
+ 
+@-webkit-keyframes scaleout {
+  0% { -webkit-transform: scale(0.0) }
+  100% {
+    -webkit-transform: scale(1.0);
+    opacity: 0;
+  }
+}
+ 
+@keyframes scaleout {
+  0% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 100% {
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+    opacity: 0;
+  }
+}
+.coverGround{
+	background: #e8e696!important;
+}
+
+
+/* 底图资源管理 */
+/*.btn-primary {
+    color: #fff;
+    background-color: #428bca;
+    border-color: #357ebd;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #3071a9;
+    border-color: #285e8e;
+}*/
+
+.baseMap-tree {
+	position: absolute;
+	left: 160px;
+	top: 80px;
+	bottom: 0;
+	width: 200px;
+	background-color: #fff;
+	-webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+	-moz-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+	overflow: auto;
+}
+
+.baseMap-b-n {
+	border-bottom: none;
+    margin-left: 200px;
+}
+.form-item span.baseMap-star {
+    color: red;
+}
+
+#riverToolCount {
+	position: absolute;
+	left: 25px;
+	bottom: 70px;
+	width: 196px;
+	padding: 5px 0 5px 10px;
+	background: #fff;
+	overflow: auto;
+	color: #333;
+	line-height: 30px;
+	font-size: 12px;
+	box-shadow: 2px 2px 2px rgba(0, 0, 0, .2);
+}
+#riverToolCount .title {
+	font-size: 16px;
+	padding-right: 5px;
+}
+#riverToolCount .table_block {
+	max-height: 400px;
+	overflow-y: auto;
+}
+#riverToolCount .icon_block {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 16px;
+}
+#riverToolCount .name {
+	color: #999;
+}
+
+/*河道水质*/
+#riverToolCount .map_layer_2 {
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/hedaoshuizhi.png);
+}
+/*排污(水)口*/
+#riverToolCount .map_layer_6 {
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/paiwukou.png);
+}
+/*监控视频*/
+#riverToolCount .map_layer_3 {
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/jiankongshipin.png);
+}
+/*饮用水源地*/
+#riverToolCount .map_layer_5 {
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/yinyongshuiyuandi.png);
+}
+/*公示牌*/
+#riverToolCount .map_layer_8 {
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/gongshipai.png);
+}
+/*污水处理*/
+#riverToolCount .map_layer_7 {
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/wushuichuli.png);
+}
+/*事件*/
+#riverToolCount .map_layer_9 {
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/shijian.png);
+}
+/*泵站*/
+#riverToolCount .map_layer_11 {
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/bengzhan.png);
+}
+/*水闸*/
+#riverToolCount .map_layer_12 {
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/shuizha.png);
+}
+/*取水口*/
+#riverToolCount .map_layer_13 {
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/qushuikou.png);
+}
+/*水库*/
+#riverToolCount .map_layer_21 {
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/shuiku.png);
+}
+/*湖泊*/
+#riverToolCount .map_layer_22 {
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/hupo.png);
+}
+/*水电站*/
+#riverToolCount .map_layer_23{
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/shuidianzhan.png);
+}
+/*橡胶坝*/
+#riverToolCount .map_layer_24{
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/xiangjiaoba.png);
+}
+/*水文站*/
+#riverToolCount .map_layer_25{
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/shuiwenzhan.png);
+}
+
+
+#riverToolCount .map_layer_4 {
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/hedaoshuizhi.png);
+}
+#riverToolCount .map_layer_10 {
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/hedaoshuizhi.png);
+}
+#riverToolCount .map_layer_14 {
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/hedaoshuizhi.png);
+}
+#riverToolCount .map_layer_15 {
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/hedaoshuizhi.png);
+}
+#riverToolCount .map_layer_16 {
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/hedaoshuizhi.png);
+}
+#riverToolCount .map_layer_19 {
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/hedaoshuizhi.png);
+}
+#riverToolCount .map_layer_20 {
+	background-image: url(../img/esri-map-icon/sign/riverToolCount/hedaoshuizhi.png);
+}
+
