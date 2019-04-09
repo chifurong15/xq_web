@@ -1,0 +1,70 @@
+<div class="conferenceCtrl" ng-controller="supervisionStatistics" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">督办统计</span><span class="tag-right"></span>
+            </div>
+        </div>
+        <div class="panel panel-default" style="margin-top: -1px">
+            <div class="panel-body" style="position: relative;">
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <form class="form-inline" method="get">
+                            <div class="form-item">
+                                <label>行政区域：</label>
+                                <select class="form-control select-short" ng-model="regionId">
+                                    <option value="">请选择</option>
+                                    <option value="{{item.areaCode}}" ng-repeat="item in regionList">{{item.areaName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-item">
+                                <label>检测周期：</label>
+                                <div class="input-group date date_picker" id="startTime">
+                                    <input type="text" class="form-control input-short-o" placeholder="开始时间"
+                                           ng-model="startTime">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                            <div class="form-item">
+                                <div class="input-group date date_picker" id="endTime">
+                                    <input type="text" class="form-control input-short-o" placeholder="结束时间"
+                                           ng-model="endTime">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" type="submit" style="margin-left: 10px"
+                                    ng-click="search()"><i
+                                    class="fa fa-search"></i> 查询
+                            </button>
+                            <button class="btn btn-primary" ng-click="export()"><i class="fa fa-sign-in"></i> 导出
+                            </button>
+                        </form>
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                <tr class='tHeader'>
+                                    <th>行政区</th>
+                                    <th>督办统计个数</th>
+                                    <th>办结率</th>
+                                    <th>已办结数量</th>
+                                    <th>未办结数量</th>
+                                    <th>未按时报送数</th>
+                                </tr>
+                                <tr ng-repeat="item in dataList">
+                                    <td>{{item.regionName}}</td>
+                                    <td>{{item.dubanNum}}</td>
+                                    <td>{{item.lv}}</td>
+                                    <td>{{item.overNum}}</td>
+                                    <td>{{item.noNum}}</td>
+                                    <td>{{item.noTimeNum}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1056,6 +1056,19 @@
       "description": "分析统计-河湖水质"
     },
     {
+      "seqId": "5-22",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "督办统计",
+      "icon": "menu-icon-6",
+      "url": "module/fenxitongji/supervision-statistics/supervision-statistics.html",
+      "requireJS": [
+        "module/fenxitongji/supervision-statistics/supervision-statistics.js"
+      ],
+      "description": "分析统计-督办统计"
+    },
+    {
       "seqId": "1003",
       "name": "流域新增",
       "url": "src/module/drainage/drainage-add.html",
