@@ -872,6 +872,20 @@
       "description": "二级菜单-督导检查情况"
     },
     {
+      "seqId": "8-7",
+      "parentId": "8",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "协调解决问题",
+      "menuType": 1,
+      "icon": "fa fa-building",
+      "url": "module/info-submitted/coordinate-solve-problem/coordinate-solve-problem.html",
+      "requireJS": [
+        "module/info-submitted/coordinate-solve-problem/coordinate-solve-problem.js"
+      ],
+      "description": "二级菜单-协调解决问题"
+    },
+    {
       "seqId": "8-4",
       "parentId": "8",
       "isLeaf": false,
