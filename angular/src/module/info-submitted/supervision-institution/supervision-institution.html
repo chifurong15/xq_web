@@ -1,0 +1,103 @@
+<div class="conferenceCtrl" ng-controller="supervisionInstitution" ng-init="init()">
+    <div class="wrapper-md ">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">监督管理职责履职不到位情况</span><span class="tag-right"></span>
+            </div>
+        </div>
+        <div class="panel panel-default m-all-0" style="margin: -1px 0">
+            <div class="panel-body">
+                <form method="get">
+                    <div class="form-inline">
+                        <div class="form-item">
+                            <label>行政区域：</label>
+                            <select class="form-control select-short" ng-model="countryName">
+                                <option value="">全部</option>
+                                <option value="{{item.areaName}}" ng-repeat="item in regionList">{{item.areaName}}</option>
+                            </select>
+                        </div>
+                        <div class="form-item">
+                            <label>河湖名称：</label>
+                            <select class="form-control select-short" disabled="disabled">
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
+                        <div class="form-item">
+                            <label>开始时间</label>
+                            <div class="input-group date date_picker" id="startTime">
+                                <input type="text" class="form-control input-short-o" ng-model="startTime">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <label>结束时间</label>
+                            <div class="input-group date date_picker" id="endTime">
+                                <input type="text" class="form-control input-short-o" ng-model="endTime">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <label>行政区域：</label>
+                            <select class="form-control select-short" ng-model="problemResource">
+                                <option value="">请选择</option>
+                                <option value="1">巡查</option>
+                                <option value="2">暗查暗访</option>
+                                <option value="3">整改</option>
+                                <option value="4">督查</option>
+                                <option value="5">社会监督员</option>
+                                <option value="6">社会举报</option>
+                            </select>
+                        </div>
+                        <button type="submit" ng-click="searchData()" class="btn btn-primary">
+                            <i class="fa fa-search"></i> 搜索
+                        </button>
+                        <button type="reset" class="btn btn-primary" ng-click="reset()" style="margin: 0 5px;">
+                            <i class="fa fa-refresh"></i> 重置
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <div class="form-inline">
+                        <div class="input-group fr">
+                            <button type="button" class="btn btn-primary btn-sm" ng-click="download()">
+                                <i class="fa fa-download"></i> 导出
+                            </button>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th style="width: 5%;">序号</th>
+                            <th style="width: 15%">区名</th>
+                            <th style="width: 10%">河湖名称</th>
+                            <th style="width: 10%">河长</th>
+                            <th style="width: 10%">问题来源</th>
+                            <th style="width: 10%">问题点位</th>
+                            <th style="width: 10%">存在问题</th>
+                            <th style="width: 10%">检查时间</th>
+                            <th style="width: 15%">上报人员</th>
+                        </tr>
+                        <tr ng-repeat="item in dataList">
+                            <td>{{$index+1}}</td>
+                            <td>{{item.address}}</td>
+                            <td>{{item.riverName}}</td>
+                            <td>{{item.chairmanName}}</td>
+                            <td>{{item.problemSource}}</td>
+                            <td>{{item.coordinationDepartment}}</td>
+                            <td>{{item.coordinationDepardtment}}</td>
+                            <td>{{item.coordinationDepardtment}}</td>
+                            <td>{{item.reportPerson}}</td>
+
+
+                    </table>
+
+                </div>
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+        </div>
+
+    </div>
+</div>
