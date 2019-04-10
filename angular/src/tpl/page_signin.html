@@ -1,122 +1,348 @@
-<div class="container w-auto-xs login-con" ng-controller="SigninFormController"
-     ng-init="app.settings.container = false;initPlatformInfo()" ng-cloak>
+<div class="container w-auto-xs login-con" ng-controller="SigninFormController" style="overflow: auto; "
+     ng-init="app.settings.container = false;initPlatformInfo();" ng-cloak>
 
-    <div id="loginCarousel">
-        <carousel interval="myInterval" no-wrap="noWrapSlides" style="height: 100%">
-            <slide ng-repeat="slide in slides" active="slide.active">
-                <img ng-src="{{slide.image}}"/>
-            </slide>
-        </carousel>
-    </div>
+    <!--    登陆页面-->
+    <div ng-show="!isPortals" style="overflow-y: hidden;width: 100%;height: 100%;">
+        <div id="loginCarousel">
+            <carousel interval="myInterval" no-wrap="noWrapSlides" style="height: 100%">
+                <slide ng-repeat="slide in slides" active="slide.active">
+                    <img ng-src="{{slide.image}}"/>
+                </slide>
+            </carousel>
+        </div>
 
-    <header class="login-header">
-        <div class="navbar-brand block" style="position: absolute; left: 0;">
+        <header class="login-header">
+            <div class="navbar-brand block" style="position: absolute; left: 0;cursor: pointer"
+                 ng-click="portalsInit()">
             <span class="imgBox">
                 <img ng-src="{{app.logo}}" src="img/logo.png" ng-class="{'hide':noblock}"/>
             </span>
-            <span class="hidden-folded m-l-xs login-logoTitle" ng-bind="app.name"></span>
-        </div>
-    </header>
-
-    <div class="login-main">
-
-        <div class="login-wrap">
-            <!-- 登录选项 -->
-            <ul id="login_tab">
-                <li class="active"><a onclick="login_tab('login_tab_con0',this)" href="javascript:void(0)">密码登录</a></li>
-                <li class=""><a onclick="login_tab('login_tab_con1',this)" href="javascript:void(0)">验证码登录</a>
-                </li>
-            </ul>
-            <div id="login_tab_con">
-                <!--用户名密码登录-->
-                <div style="display: block;" id="login_tab_con0" class="login_tab_con">
-                    <form name="form" class="form-validation">
-                        <div class="text-danger wrapper text-center" ng-show="authError">
-                            {{authError}}
-                        </div>
-                        <div class="list-group list-group-sm login-list-group">
-                            <div class="list-group-item">
-                                <input id="username" type="text" placeholder="用户名/手机号码" class="form-control no-border"
-                                       ng-model="user.username" required>
-                                <i class="fa fa-user"></i>
-                            </div>
-                            <div class="list-group-item">
-                                <input id="password" type="password" placeholder="请输入密码" class="form-control no-border"
-                                       ng-model="user.password" required>
-                                <i class="fa fa-lock"></i>
-                            </div>
-                            <div class="list-group-item">
-                                <input id="code" type="text" placeholder="请输入验证码" class="form-control no-border"
-                                       ng-model="user.code" required>
-                                <i class="fa fa-key"></i>
-                                <div class="code" title="点击刷新验证码" ng-style="validecode" ng-click="freshCode()"></div>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="login()"
-                                ng-disabled='form.$invalid'>登 录
-                        </button>
-                        <div class="login-other text-center m-t m-b">
-                            <label class="checkbox-inline i-checks">
-                                <input type="checkbox" value="option1"><i></i> 记住密码
-                            </label>
-
-                            <a ui-sref="access.forgotpwd">忘记密码?</a>
-                        </div>
-                    </form>
-                </div>
-                <!--手机验证码登录-->
-                <div style="display: none;" id="login_tab_con1" class="login_tab_con">
-                    <form name="form" class="form-validation">
-                        <div class="text-danger wrapper text-center" ng-show="authError">
-                            {{authError}}
-                        </div>
-                        <div class="list-group list-group-sm login-list-group">
-                            <div class="list-group-item">
-                                <input type="tel" placeholder="请输入手机号码" class="form-control no-border"
-                                       ng-model="user.phone">
-                                <i class="fa fa-tablet"></i>
-                            </div>
-                            <div class="list-group-item">
-                                <input type="password" placeholder="请输入验证码" class="form-control no-border"
-                                       ng-model="user.phoneCode">
-                                <i class="fa fa-key"></i>
-                                <button type="button" class="btn btn-default" ng-click="code()"
-                                        style="position: absolute; top: 6px; right: 10px;">
-                                    发送验证码
-                                </button>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="login()"
-                                ng-disabled='form.$invalid'>登 录
-                        </button>
-                    </form>
-                </div>
+                <span class="hidden-folded m-l-xs login-logoTitle" ng-bind="app.name"></span>
             </div>
+        </header>
 
+
+        <div class="login-main">
+
+            <div class="login-wrap">
+                <!-- 登录选项 -->
+                <ul id="login_tab">
+                    <li class="active"><a onclick="login_tab('login_tab_con0',this)" href="javascript:void(0)">密码登录</a>
+                    </li>
+                    <li class=""><a onclick="login_tab('login_tab_con1',this)" href="javascript:void(0)">验证码登录</a>
+                    </li>
+                </ul>
+                <div id="login_tab_con">
+                    <!--用户名密码登录-->
+                    <div style="display: block;" id="login_tab_con0" class="login_tab_con">
+                        <form name="form" class="form-validation">
+                            <div class="text-danger wrapper text-center" ng-show="authError">
+                                {{authError}}
+                            </div>
+                            <div class="list-group list-group-sm login-list-group">
+                                <div class="list-group-item">
+                                    <input id="username" type="text" placeholder="用户名/手机号码"
+                                           class="form-control no-border"
+                                           ng-model="user.username" required>
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <div class="list-group-item">
+                                    <input id="password" type="password" placeholder="请输入密码"
+                                           class="form-control no-border"
+                                           ng-model="user.password" required>
+                                    <i class="fa fa-lock"></i>
+                                </div>
+                                <div class="list-group-item">
+                                    <input id="code" type="text" placeholder="请输入验证码" class="form-control no-border"
+                                           ng-model="user.code" required>
+                                    <i class="fa fa-key"></i>
+                                    <div class="code" title="点击刷新验证码" ng-style="validecode"
+                                         ng-click="freshCode()"></div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="login()"
+                                    ng-disabled='form.$invalid'>登 录
+                            </button>
+                            <div class="login-other text-center m-t m-b">
+                                <label class="checkbox-inline i-checks">
+                                    <input type="checkbox" value="option1"><i></i> 记住密码
+                                </label>
+
+                                <a ui-sref="access.forgotpwd">忘记密码?</a>
+                            </div>
+                        </form>
+                    </div>
+                    <!--手机验证码登录-->
+                    <div style="display: none;" id="login_tab_con1" class="login_tab_con">
+                        <form name="form" class="form-validation">
+                            <div class="text-danger wrapper text-center" ng-show="authError">
+                                {{authError}}
+                            </div>
+                            <div class="list-group list-group-sm login-list-group">
+                                <div class="list-group-item">
+                                    <input type="tel" placeholder="请输入手机号码" class="form-control no-border"
+                                           ng-model="user.phone">
+                                    <i class="fa fa-tablet"></i>
+                                </div>
+                                <div class="list-group-item">
+                                    <input type="password" placeholder="请输入验证码" class="form-control no-border"
+                                           ng-model="user.phoneCode">
+                                    <i class="fa fa-key"></i>
+                                    <button type="button" class="btn btn-default" ng-click="code()"
+                                            style="position: absolute; top: 6px; right: 10px;">
+                                        发送验证码
+                                    </button>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="login()"
+                                    ng-disabled='form.$invalid'>登 录
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
-    <!--技术支持和服务热线-->
-    <!--<div class="text-center page-footer" ng-include="'tpl/blocks/page_footer.html'">-->
+        <!--技术支持和服务热线-->
+        <!--<div class="text-center page-footer" ng-include="'tpl/blocks/page_footer.html'">-->
         <!--{% include 'blocks/page_footer.html' %}-->
-    <!--</div>-->
+        <!--</div>-->
 
-    <!--建议提醒-->
-    <div class="alert alert-info alert-suggest alert-dismissible fade in" role="alert" style="width: 30%; right: 0">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="right: 0"><span
-                aria-hidden="true">×</span></button>
-        <i class="fa fa-warning"></i>本系统建议使用谷歌浏览器，分辨率1366*768以上使用。
+        <!--建议提醒-->
+        <div class="alert alert-info alert-suggest alert-dismissible fade in" role="alert" style="width: 30%; right: 0">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="right: 0"><span
+                    aria-hidden="true">×</span></button>
+            <i class="fa fa-warning"></i>本系统建议使用谷歌浏览器，分辨率1366*768以上使用。
+        </div>
+
+        <!--二维码-->
+        <div class="qr-code">
+            <div class="qr-code-item" ng-repeat="code in codeList">
+                <div class="code-item" ng-mouseenter="codeImg = true" ng-mouseleave="codeImg = false">
+                    <span>{{code.name}}</span>
+                </div>
+                <div class="code_img" ng-show="codeImg">
+                    <h4>扫描二维码</h4>
+                    <p>{{code.scan}}</p>
+                    <img ng-src="{{code.src}}">
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!--二维码-->
-    <div class="qr-code">
-        <div class="qr-code-item" ng-repeat="code in codeList">
-            <div class="code-item" ng-mouseenter="codeImg = true" ng-mouseleave="codeImg = false">
-                <span>{{code.name}}</span>
+    <!--门户网站页面-->
+    <div ng-show="isPortals">
+        <header class="login-header">
+            <div class="navbar-brand block" style="position: absolute; left: 0;cursor: pointer"
+                 ng-click="isPortals=false">
+            <span class="imgBox">
+                <img ng-src="{{app.logo}}" src="img/logo.png" ng-class="{'hide':noblock}"/>
+            </span>
+                <span class="hidden-folded m-l-xs login-logoTitle">天津市河长制门户</span>
             </div>
-            <div class="code_img" ng-show="codeImg">
-                <h4>扫描二维码</h4>
-                <p>{{code.scan}}</p>
-                <img ng-src="{{code.src}}">
+        </header>
+        <div style="padding: 0 10%">
+            <div class="layui-row" style="margin-top: 60px">
+                <div class="layui-col-md6" style="padding: 0 3%;">
+                    <div id="portalCarousel" class="layui-carousel">
+                        <div carousel-item>
+                            <div><img src="img/login/1.jpg"/></div>
+                            <div><img src="img/login/2.jpg"/></div>
+                            <div><img src="img/login/3.jpg"/></div>
+                            <div><img src="img/login/4.jpg"/></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6"
+                     style="padding:0 3%;position: relative;z-index: 100;background-color: #ffffff;min-height: 400px">
+                    <div class="layui-tab layui-tab-card">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this" style="font-weight: bold;font-size: 16px">工作简报</li>
+                            <li style="border-bottom: 1px solid #f2f2f2;font-weight: bold;font-size: 16px">督导检查</li>
+                        </ul>
+                        <div class="layui-tab-content" style="padding: 0">
+                            <div class="layui-tab-item layui-show">
+                                <div class="panel panel-default m-all-0">
+                                <div class="panel-body" style="min-height: 350px">
+                                    <div ng-repeat="list in bulletin3" class="titleAndTime">
+                                        <a href="javascript:void(0);" ng-click="viewBulletin(list.id)">
+                                            <span>{{list.title.length > 18 ? list.title.substring(0,15) + "..." : list.title }}</span>
+                                            <span>{{list.post_time}}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="layui-tab-item">
+                                <div class="panel panel-default m-all-0">
+                                    <div class="panel-body" style="min-height: 350px">
+                                        <div ng-repeat="list in bulletin4" class="titleAndTime">
+                                            <a href="javascript:void(0);" ng-click="viewBulletin(list.id)">
+                                                <span>{{list.title.length > 18 ? list.title.substring(0,15) + "..." : list.title }}</span>
+                                                <span>{{list.post_time}}</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row" style="margin-top: 30px">
+                <div class="layui-col-md6" style="padding:0 3%">
+                    <div id="cityRank" class="panel panel-default m-all-0">
+                        <div class="panel-body">
+                            <div class="mainbody-tips" style="margin-bottom: 5px">
+						<span>
+	        				月度考核排名({{month}}月)
+	        			</span>
+                            </div>
+                            <div id="main1" style="width:500px;height:200px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6" style="padding: 0 3%">
+                    <div id="water-quality" class="panel panel-default m-all-0 m-t-10">
+                        <div class="panel-body" style="margin: 0 auto">
+                            <div class="mainbody-tips" style="margin-bottom: 5px">
+						<span>
+							水质情况({{month}}月)
+						</span>
+                            </div>
+                            <div id="main" style="width: 500px;height: 200px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md12" style="padding: 0 3%;margin-top: 30px">
+                    <div id="cityRank" class="panel panel-default m-all-0">
+                        <div class="panel-body">
+                            <div class="mainbody-tips" style="margin-bottom: 5px">
+						<span>
+	        				我身边的水环境
+	        			</span>
+                            </div>
+                            <div style="white-space: nowrap;overflow-x: scroll">
+                                <img height="250" width="250" src="img/portals/water-enviroment-1.jpg"/>
+                                <img height="250" width="250" src="img/portals/water-enviroment-2.jpg"/>
+                                <img height="250" width="250" src="img/portals/water-enviroment-3.jpg"/>
+                                <img height="250" width="250" src="img/portals/water-enviroment-4.jpg"/>
+                                <img height="250" width="250" src="img/portals/water-enviroment-5.jpg"/>
+                                <img height="250" width="250" src="img/portals/water-enviroment-6.jpg"/>
+                                <img height="250" width="250" src="img/portals/water-enviroment-7.jpg"/>
+                                <img height="250" width="250" src="img/portals/water-enviroment-8.jpg"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md12" style="padding: 0 3%;margin-top: 30px">
+                    <div id="cityRank" class="panel panel-default m-all-0">
+                        <div class="panel-body">
+                            <div class="mainbody-tips" style="margin-bottom: 5px">
+						<span>
+	        				友情链接
+	        			</span>
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-md3">
+                                  <span class="friendly-link">
+                                      <a href="http://www.mwr.gov.cn/" target="_blank">水利网</a>
+                                  </span>
+                                </div>
+                                <div class="layui-col-md3">
+                                  <span class="friendly-link">
+                                      <a href="http://www.mee.gov.cn/" target="_blank">生态环境部</a>
+                                  </span>
+                                </div>
+                                <div class="layui-col-md3">
+                                  <span class="friendly-link">
+                                      <a href="http://www.mohurd.gov.cn/" target="_blank">住建部</a>
+                                  </span>
+                                </div>
+                                <div class="layui-col-md3">
+                                  <span class="friendly-link">
+                                      <a href="http://www.waterinfo.com.cn/special/327/index.html" target="_blank">水利部发展研究中心河长制专栏</a>
+                                  </span>
+                                </div>
+                                <div class="layui-col-md3">
+                                  <span class="friendly-link">
+                                      <a href="http://www.mwr.gov.cn/ztpd/gzzt/hzz/" target="_blank">水利部河长制专栏</a>
+                                  </span>
+                                </div>
+                                <div class="layui-col-md3">
+                                  <span class="friendly-link">
+                                      <a href="http://www.craes.cn/" target="_blank">中国环境科学研究院</a>
+                                  </span>
+                                </div>
+                                <div class="layui-col-md3">
+                                  <span class="friendly-link">
+                                      <a href="http://www.zjwater.com/pages/category/0b5/index_1.htm" target="_blank">浙江省河长制专栏</a>
+                                  </span>
+                                </div>
+                                <div class="layui-col-md3">
+                                  <span class="friendly-link">
+                                      <a href="http://www.ahsl.gov.cn/index.php?c=topicHz&_id=59013387fd6f36042d000002"
+                                         target="_blank">安徽省河长制专栏</a>
+                                  </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md12"
+                     style="padding: 20px 3%;color: #ffffff;margin: 30px 3% 0 3%;width: 94%;background-color: #0c90d0;display: flex;justify-content: space-between;align-items: center">
+                    <div>
+                        <p>Copyright © 2017 http://www.riverchief.com All rights reserved.</p>
+                        <p>浙ICP备10202982号-1</p>
+                        <p>
+                            <span>电话：0571-88859092</span>
+                            <span style="margin-left: 10px">邮箱：1713618846@qq.com</span>
+                        </p>
+                    </div>
+                    <div style="display: flex">
+                        <img height="44" width="44" src="img/portals/put-on-record-image.png"/>
+                        <div style="margin-left: 10px">
+                            <p>浙公网安备 33010802008795号</p>
+                            <p>网站建设：中企动力 南京</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">
+                            &times;
+                        </button>
+                        <button type="button" class="close" aria-hidden="true" ng-click="enlarge()" style="margin: 0 20px;">
+                            <i class="fa fa-square-o" aria-hidden="true" style="font-size: 15px;position: relative;top: -1px;"></i>
+                        </button>
+                        <button type="button" class="close" aria-hidden="true" ng-click="shrink()">
+                            <i class="fa fa-minus" aria-hidden="true" style="font-size: 15px;position: relative;top: -1px;"></i>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            {{bulletin.title}}
+                        </h4>
+                    </div>
+                    <div class="modal-body" style="overflow-x: hidden">
+                        <p ng-bind-html="bulletin.detail"></p>
+                        <img src="{{bulletin.attand_url}}" alt="" ng-if="showImg">
+                        <div id="pdfOb" ng-if="!showImg" style="margin:10px 0;height: 300px;"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="cancel()">取消</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -140,5 +366,17 @@
 
         document.getElementById(login_tab_con_container).style.display = "block";
     }
+
+    layui.use(['element', 'carousel'], function () {
+        var element = layui.element;
+        var carousel = layui.carousel;
+
+        carousel.render({
+            elem: '#portalCarousel',
+            width: '720px',
+            height: '400px'
+        });
+
+    });
 
 </script>

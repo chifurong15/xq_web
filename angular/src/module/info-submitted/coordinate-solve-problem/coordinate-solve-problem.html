@@ -39,10 +39,10 @@
                     <div class="form-inline">
                         <div class="input-group fr">
                             <button type="button" class="btn btn-primary btn-sm" ng-click="add()" style="margin: 0 5px;">
-                                <i class="fa fa-pie-chart"></i> 新增
+                                <i class="fa fa-plus"></i> 新增
                             </button>
                             <button type="button" class="btn btn-primary btn-sm" ng-click="download()">
-                                <i class="fa fa-download"></i> 导出
+                                <i class="fa fa-sign-in"></i> 导出
                             </button>
                         </div>
                     </div>
@@ -70,10 +70,9 @@
                                 <a>{{problem.accessory}}</a>
                             </td>
                             <td>
-                                <a class="btn btn-primary btn-xs" ng-click="view(module.id)"><i class="fa fa-info" title="查看"></i></a>
-                                <a class="btn btn-primary btn-xs" ng-click="report(module.id)" ng-if="num == 5 && module.sentState == 2"><i class="fa fa-level-up" title="上报"></i></a>
-                                <!--<a class="btn btn-primary btn-xs" ng-if="num == 2 && module.sentState == 1"ng-click="sendBack(module.id)"><i class="fa fa-stop" title="退回"></i></a>-->
-                                <a class="btn btn-primary btn-xs" ng-click="delete(module.id)"><i class="fa fa-trash-o" title="删除"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-click="view(problem.id)">详情</a>
+                                <a class="btn btn-primary btn-xs" ng-click="edit(problem.id)">编辑</a>
+                                <a class="btn btn-danger btn-xs" ng-click="delete(problem.id)">删除</a>
 
                             </td>
                         </tr>
@@ -164,7 +163,7 @@
             </div>
         </div>
 
-        <!-- 督导检查情况add（Modal） -->
+        <!-- 新增协调解决问题（Modal） -->
         <div class="modal fade" id="addMyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -173,25 +172,31 @@
                             &times;
                         </button>
                         <h4 class="modal-title" id="addMyModalLabel1">
-                            新增督导检查情况
+                            新增协调解决问题
                         </h4>
                     </div>
                     <div class="modal-body">
                         <form class="form-inline">
                             <div class="form-item">
-                                <label>开始时间</label>
+                                <label>解决问题日期</label>
                                 <div class="input-group date date_picker" id="superviseTime">
-                                    <input type="text" class="form-control input-short-o" ng-model="superviseTime">
+                                    <input type="text" class="form-control input-short-o" ng-model="solutionTime">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <span class="required">*</span>
                                 </div>
                             </div>
                             <div class="form-item">
-                                <label>检查方式</label>
-                                <input type="text" class="form-control input-short"  ng-model="superviseWay"/>
+                                <label>协调部门</label>
+                                <input type="text" class="form-control input-short"  ng-model="coordinationDepartment"/>
+                                <span class="required">*</span>
                             </div>
                             <div class="form-item">
-                                <label>督导人员</label>
-                                <input type="text" class="form-control input-long"  ng-model="leadName"/>
+                                <label>解决问题区域</label>
+                                <input type="text" class="form-control"  ng-model="countyCode"/>
+                            </div>
+                            <div class="form-item">
+                                <label>记录人</label>
+                                <input type="text" class="form-control"  ng-model="notekeeper"/>
                             </div>
                             <div class="form-item">
                                 <label>是否整改完成</label>
@@ -211,14 +216,10 @@
                                         class="fa fa-css3"></i>上传附件
                                 </button>
                             </div>
-                            <!--<div class="form-item" style="position: relative;top: -44px;left: 90px;width: 446px;">-->
-                            <!--<span ng-repeat="item in fileUrlList" style="color: #3189e1;cursor: pointer;margin: 8px 10px;" ng-click="viewFile(item)">{{item}}</span>-->
-                            <!--</div>-->
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" ng-click="save(1)">保存</button>
-                        <button type="button" class="btn btn-primary" ng-click="save(2)">确认上报</button>
+                        <button type="button" class="btn btn-primary" ng-click="save()">保存</button>
                         <button type="button" class="btn btn-primary" ng-click="closeAddModal()">取消</button>
                     </div>
                 </div>

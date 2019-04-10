@@ -1,4 +1,4 @@
-(function(window, angular) {
+(function (window, angular) {
     'use strict';
     angular
         .module("app")
@@ -18,8 +18,8 @@
                 'moduleService',
                 'globalParam',
                 function coordinateSolveProblem($localStorage, $scope,
-                                         $location, $log, $q, $rootScope, $window,
-                                         routeService, $http, $ajaxhttp, moduleService, globalParam) {
+                                                $location, $log, $q, $rootScope, $window,
+                                                routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     // var apiPrefix = moduleService.getServiceUrl() + '/analysis';
                     var apiPrefix = 'http://192.168.2.100:7031' + '/analysis';
@@ -27,37 +27,34 @@
                     var regionTree;
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree';
 
+                    //区域列表
+                    $scope.regionList=[];
+
+                    $scope.startTime = '';
+                    $scope.endTime = '';
+                    $scope.problemList = [];
+
+
                     $scope.init = function () {
-                        $scope.startTime = '';
-                        $scope.endTime = '';
-                        $scope.problemList=[];
-
-                        $ajaxhttp.myhttp({
-                            url:apiPrefix + '/v1/msSupervisionCondition/userinfo',
-                            method:'get',
-                            callBack:function (res) {
-                                $scope.num = res.data;
-                                getList();
-                            }
-                        })
+                        getList();
                     };
 
-                    $scope.searchData=function(){
-                      getList();
+                    $scope.searchData = function () {
+                        getList();
                     };
 
-                    function getList () {
+                    function getList() {
                         $ajaxhttp.myhttp({
-                            url:apiPrefix + '/v1/saCoordinateSolution/list',
-                            method:'get',
-                            params:{
+                            url: apiPrefix + '/v1/saCoordinateSolution/list',
+                            method: 'get',
+                            params: {
                                 pageNumber: $scope.paginationConf.currentPage,
                                 pageSize: $scope.paginationConf.itemsPerPage,
-                                startTime:$scope.startTime,
-                                endTime:$scope.endTime,
+                                startTime: $scope.startTime,
+                                endTime: $scope.endTime,
                             },
-                            callBack:function (res) {
-                                if(res.data){
+                            callBack: function (res) {
+                                if (res.data) {
                                     $scope.problemList = res.data.list;
                                     $scope.paginationConf.totalItems = res.data.total;
                                 }
@@ -66,13 +63,13 @@
                     }
 
                     // 表格排序
-                    $scope.sort = function (id , name) {
+                    $scope.sort = function (id, name) {
                         $scope.column = name;
                         $scope.order = id;
-                        getList ();
+                        getList();
                     };
                     //搜索
-                    $scope.searchData = function (){
+                    $scope.searchData = function () {
                         getList();
                     };
 
@@ -80,9 +77,9 @@
                     $scope.reset = function () {
                         $scope.startTime = '';
                         $scope.endTime = '';
-                    }
+                    };
                     //查看  下载附件
-                    $scope.downFile = function (path){
+                    $scope.downFile = function (path) {
                         window.open($scope.fileUrl + path);
                     }
 
@@ -93,29 +90,29 @@
                     }
 
                     //获取工作间报详情
-                    function getDetail (id){
+                    function getDetail(id) {
                         $ajaxhttp.myhttp({
-                            url:apiPrefix + '/v1/msSupervisionCondition/detail',
-                            method:'get',
-                            params:{
-                                id:id
+                            url: apiPrefix + '/v1/msSupervisionCondition/detail',
+                            method: 'get',
+                            params: {
+                                id: id
                             },
-                            callBack:function (res) {
-                                if(res.resCode == 1){
+                            callBack: function (res) {
+                                if (res.resCode == 1) {
                                     $scope.detailData = res.data;
                                     $scope.ReportTime = $scope.detailData.superviseTime;
-                                    if(res.data.fileList){
+                                    if (res.data.fileList) {
                                         $scope.accessoryURL = [];
-                                        res.data.fileList.map(function (item){
+                                        res.data.fileList.map(function (item) {
                                             // console.log(item.substring(item.lastIndexOf('/')+1));
                                             $scope.accessoryURL.push({
-                                                name:item.downloadURL.substring(item.previewURL.lastIndexOf('/')+1),
-                                                previewURL:item.previewURL,
-                                                downloadURL:item.downloadURL
+                                                name: item.downloadURL.substring(item.previewURL.lastIndexOf('/') + 1),
+                                                previewURL: item.previewURL,
+                                                downloadURL: item.downloadURL
                                             })
                                         })
                                     }
-                                }else{
+                                } else {
                                     layer.msg('服务器异常，请稍后再试')
                                 }
                             }
@@ -123,78 +120,60 @@
                     }
 
                     //新增
-                    $scope.add = function (){
+                    $scope.add = function () {
                         $scope.assessory = [];
                         $('#addMyModal').modal('show')
-                    }
-                    function clear (){
-                        $scope.superviseTime = '';
-                        $scope.superviseWay = '';
-                        $scope.leadName = '';
+                    };
+
+                    function clear() {
+                        $scope.solutionTime = '';
+                        $scope.coordinationDepartment = '';
+                        $scope.countyCode = '';
                         $scope.rectifyState = '';
                         $scope.superviseContent = ''
                     }
 
                     //新增 保存 上报
-                    $scope.save = function (id){
-                        if($scope.superviseTime && $scope.leadName && $scope.superviseContent){
+                    $scope.save = function () {
+                        if ($scope.solutionTime && $scope.countyCode && $scope.superviseContent) {
                             var params = {
-                                superviseTime:$scope.superviseTime,
-                                superviseWay:$scope.superviseWay,
-                                leadName:$scope.leadName,
-                                rectifyState:$scope.rectifyState,
-                                superviseContent:$scope.superviseContent,
-                                accessoryUrl:$scope.assessory ? $scope.assessory.join(',') : ''
+                                solutionTime: $scope.solutionTime,
+                                coordinationDepartment: $scope.coordinationDepartment,
+                                countyCode: $scope.countyCode,
+                                rectifyState: $scope.rectifyState,
+                                superviseContent: $scope.superviseContent,
+                                accessoryUrl: $scope.assessory ? $scope.assessory.join(',') : ''
 
-                            }
-                            // console.log(params);
-                            if(id == 1){//保存
-                                $ajaxhttp.myhttp({
-                                    url:apiPrefix + '/v1/msSupervisionCondition/addTwo',
-                                    method:'post',
-                                    params:params,
-                                    callBack:function (res) {
-                                        if(res.resCode == 1){
-                                            layer.msg('保存成功',{times:500});
-                                            getList();
-                                            clear();
-                                            $('#addMyModal').modal('hide')
-                                        }else{
-                                            layer.msg('服务器异常，请稍后再试')
-                                        }
+                            };
+                            $ajaxhttp.myhttp({
+                                url: apiPrefix + '/v1/msSupervisionCondition/add',
+                                method: 'post',
+                                params: params,
+                                callBack: function (res) {
+                                    if (res.resCode == 1) {
+                                        layer.msg('上报成功', {times: 500});
+                                        getList();
+                                        clear();
+                                        $('#addMyModal').modal('hide')
+                                    } else {
+                                        layer.msg('服务器异常，请稍后再试')
                                     }
-                                })
-                            }else if (id == 2){//上报
-                                $ajaxhttp.myhttp({
-                                    url:apiPrefix + '/v1/msSupervisionCondition/add',
-                                    method:'post',
-                                    params:params,
-                                    callBack:function (res) {
-                                        if(res.resCode == 1){
-                                            layer.msg('上报成功',{times:500});
-                                            getList();
-                                            clear();
-                                            $('#addMyModal').modal('hide')
-                                        }else{
-                                            layer.msg('服务器异常，请稍后再试')
-                                        }
-                                    }
-                                })
-                            }
-                        }else if (!$scope.superviseTime) {
-                            layer.alert("请选择督导时间", {
+                                }
+                            })
+                        } else if (!$scope.solutionTime) {
+                            layer.alert("请选择解决问题时间", {
                                 skin: 'my-skin',
                                 closeBtn: 1,
                                 anim: 3
                             });
-                        }else if (!$scope.leadName) {
-                            layer.alert("请输入督导人员", {
+                        } else if (!$scope.coordinationDepartment) {
+                            layer.alert("请输入协调部门", {
                                 skin: 'my-skin',
                                 closeBtn: 1,
                                 anim: 3
                             });
-                        }else if (!$scope.superviseContent) {
-                            layer.alert("请输入督导检查内容", {
+                        } else if (!$scope.countyCode) {
+                            layer.alert("请选择解决问题区域", {
                                 skin: 'my-skin',
                                 closeBtn: 1,
                                 anim: 3
@@ -204,41 +183,41 @@
                     }
 
                     //上报
-                    $scope.report = function (id){
+                    $scope.report = function (id) {
                         $ajaxhttp.myhttp({
-                            url:apiPrefix + '/v1/msSupervisionCondition/updateSentState',
-                            method:'put',
-                            params:{
-                                id:id,
+                            url: apiPrefix + '/v1/msSupervisionCondition/updateSentState',
+                            method: 'put',
+                            params: {
+                                id: id,
                                 sentState: 1
                             },
-                            callBack:function (res) {
-                                if(res.resCode == 1){
-                                    layer.msg('上报成功',{times:500});
+                            callBack: function (res) {
+                                if (res.resCode == 1) {
+                                    layer.msg('上报成功', {times: 500});
                                     getList();
-                                }else{
+                                } else {
                                     layer.msg('服务器异常，请稍后再试')
                                 }
                             }
                         })
                     }
                     //删除
-                    $scope.delete =  function (id) {
+                    $scope.delete = function (id) {
                         var layerIndex = layer.confirm('确定删除本条数据吗？', {
                             btn: ['确定', '取消']
                         }, function () {
                             $ajaxhttp.myhttp({
-                                url:apiPrefix + '/v1/msSupervisionCondition/delete',
-                                method:'delete',
-                                params:{
-                                    id:id
+                                url: apiPrefix + '/v1/msSupervisionCondition/delete',
+                                method: 'delete',
+                                params: {
+                                    id: id
                                 },
-                                callBack:function (res) {
-                                    if(res.resCode == 1){
-                                        layer.msg('删除成功',{times:500});
+                                callBack: function (res) {
+                                    if (res.resCode == 1) {
+                                        layer.msg('删除成功', {times: 500});
                                         getList();
-                                    }else{
-                                        layer.msg('服务器异常，请稍后再试',{times:500})
+                                    } else {
+                                        layer.msg('服务器异常，请稍后再试', {times: 500})
                                     }
                                 }
                             })
@@ -249,27 +228,17 @@
                     }
 
                     //导出
-                    $scope.download = function (){
-                        window.open(
-                            apiPrefix
-                            + '/v1/msSupervisionCondition/createExcel?superviseTimeStart='
+                    $scope.download = function () {
+                        window.location.href= apiPrefix
+                            + '/v1/saCoordinateSolution/createExcel?startTime='
                             + $scope.startTime
-                            + '&superviseTimeEnd='
-                            + $scope.endTime
-                            + '&region='
-                            + $scope.regionName
-                            + '&rectifyState='
-                            + $scope.status
-                            + '&userId='
-                            + $scope.userInfo.id
-                            + '&regionId='
-                            + $scope.userInfo.regionId
-                        )
-                    }
+                            + '&endTime='
+                            + $scope.endTime;
+                    };
 
 
                     //关闭新增窗口
-                    $scope.closeAddModal = function (){
+                    $scope.closeAddModal = function () {
                         clear();
                         $('#addMyModal').modal('hide')
                     }
@@ -322,7 +291,7 @@
 
 
                     //返回
-                    $scope.goBack=function(){
+                    $scope.goBack = function () {
                         history.back(-1);
                     }
 
@@ -389,15 +358,15 @@
                     /**
                      * 生成区域树
                      */
-                    function regionTreeList () {
+                    function regionTreeList() {
                         $http({
                             method: 'get',
                             url: regionTreeUrl
                         }).success(function (res) {
                             // console.log(res)
-                            if(res.resCode == 1){
+                            if (res.resCode == 1) {
                                 regionTree = $.fn.zTree.init($("#regionTreeContainer"), regionTreeSetting, res.data);
-                            }else{
+                            } else {
                             }
                         }).error(function () {
                         });
@@ -448,14 +417,14 @@
                     /**
                      * 区域树搜索
                      */
-                    $scope.getSelectRegion = function(){
+                    $scope.getSelectRegion = function () {
                         //console.log('我是区域树搜索...')
                     }
 
                     /**
                      * 关闭模态框
                      */
-                    $scope.getModalOk = function(){
+                    $scope.getModalOk = function () {
                         $('#regionTreeModal').modal('hide');
                         //console.log('我是区域树关闭...')
                     }
@@ -475,5 +444,5 @@
 
                     // 当他们一变化的时候，重新获取数据条目
                     $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', getList);
-                } ]);
+                }]);
 })(window, angular);
