@@ -38,7 +38,8 @@
                 <div class="table-responsive">
                     <div class="form-inline">
                         <div class="input-group fr">
-                            <button type="button" class="btn btn-primary btn-sm" ng-click="add()" style="margin: 0 5px;">
+                            <button type="button" class="btn btn-primary btn-sm" ng-click="add()"
+                                    style="margin: 0 5px;">
                                 <i class="fa fa-plus"></i> 新增
                             </button>
                             <button type="button" class="btn btn-primary btn-sm" ng-click="download()">
@@ -67,10 +68,10 @@
                             <td>{{problem.coordinationDepartment}}</td>
                             <td>{{problem.problemSituation}}</td>
                             <td>
-                                <a>{{problem.accessory}}</a>
+                                <a ng-click="preview(problem.accessory)">{{problem.accessory}}</a>
                             </td>
                             <td>
-                                <a class="btn btn-primary btn-xs" ng-click="view(problem.id)">详情</a>
+                                <a class="btn btn-primary btn-xs" ng-click="detail(problem.id)">详情</a>
                                 <a class="btn btn-primary btn-xs" ng-click="edit(problem.id)">编辑</a>
                                 <a class="btn btn-danger btn-xs" ng-click="delete(problem.id)">删除</a>
 
@@ -84,11 +85,13 @@
         </div>
 
         <!--描述：所属区域树-->
-        <div class="modal fade" id="regionTreeModal" role="dialog_region" data-backdrop="static" style="z-index: 99999;">
+        <div class="modal fade" id="regionTreeModal" role="dialog_region" data-backdrop="static"
+             style="z-index: 99999;">
             <div class="modal-dialog modal-jm " role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel">选择区域</h4>
                     </div>
                     <div class="modal-body">
@@ -105,73 +108,77 @@
             </div>
         </div>
 
-        <!-- 查看督导检查情况详情（Modal） -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+        <!--        详情-->
+        <div class="modal fade" id="detailMyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             data-backdrop="static" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="closeDetailModal()">
                             &times;
                         </button>
-                        <h4 class="modal-title" id="myModalLabel1">
-                            督导检查情况详情
+                        <h4 class="modal-title">
+                            详情
                         </h4>
                     </div>
                     <div class="modal-body">
-                        <form class="form-inline">
-                            <div class="form-item">
-                                <label>督导日期</label>
-                                <div class="input-group date date_picker">
-                                    <input type="text" class="form-control input-short-o" readonly ng-model="ReportTime">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                </div>
-                            </div>
-                            <div class="form-item">
-                                <label>检查方式</label>
-                                <input type="text" class="form-control input-short" readonly ng-model="detailData.superviseWay"/>
-                            </div>
-                            <div class="form-item">
-                                <label>督导人员</label>
-                                <input type="text" class="form-control input-long" readonly ng-model="detailData.leadName"/>
-                            </div>
-                            <div class="form-item">
-                                <label>是否整改完成</label>
-                                <select class="form-control select-short" disabled ng-model="detailData.rectifyState">
-                                    <option value="">全部</option>
-                                    <option value="1">是</option>
-                                    <option value="2">否</option>
-                                </select>
-                            </div>
-                            <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督导检查内容</font></font></label>
-                                <textarea class="form-control" rows="3" readonly ng-model="detailData.superviseContent"></textarea>
-                            </div>
-                            <div class="form-item" ng-if="detailData.fileList.length != 0">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">附件</font></font></label>
-                            </div>
-                            <div class="form-item" style="position: relative;left: -20px;width: 446px;">
-                                <span ng-repeat="item in accessoryURL" style="color: #333;cursor: pointer;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
-                                   <span style="color: #3189e1;" ng-click="downFile(item.downloadURL)">下载</span>
-                                </span>
-                            </div>
-                        </form>
+                        <div style="padding: 5px">
+                            <label style="width: 150px">解决问题日期</label>
+                            <span>{{solutionTime}}</span>
+                        </div>
+                        <div style="padding: 5px">
+                            <label style="width: 150px">协调部门</label>
+                            <span>{{coordinationDepartment}}</span>
+                        </div>
+                        <div style="padding: 5px">
+                            <label style="width: 150px">解决问题区域</label>
+                            <span>{{countyName}}</span>
+                            <span>{{townName}}</span>
+                        </div>
+                        <div style="padding: 5px">
+                            <label style="width: 150px">记录人</label>
+                            <span>{{recorder}}</span>
+                        </div>
+                        <div style="padding: 5px">
+                            <label style="width: 150px">河湖长姓名</label>
+                            <span>{{captainName}}</span>
+                        </div>
+                        <div style="padding: 5px">
+                            <label style="width: 150px">职务</label>
+                            <span>{{job}}</span>
+                        </div>
+                        <div style="padding: 5px">
+                            <label style="width: 150px">解决问题情况</label>
+                            <span>{{problemSituation}}</span>
+                        </div>
+                        <div style="padding: 5px">
+                            <label style="width: 150px">备注</label>
+                            <span>{{remark}}</span>
+                        </div>
+                        <div style="padding: 5px">
+                            <label style="width: 150px">附件</label>
+                            <span ng-repeat="item in assessory">{{item}}</span>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" ng-click="closeDetailModal()">取消</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- 新增协调解决问题（Modal） -->
-        <div class="modal fade" id="addMyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+        <div class="modal fade" id="addMyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             data-backdrop="static" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="closeAddModal()">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="closeAddModal()">
                             &times;
                         </button>
-                        <h4 class="modal-title" id="addMyModalLabel1">
+                        <h4 class="modal-title">
                             新增协调解决问题
                         </h4>
                     </div>
@@ -179,7 +186,7 @@
                         <form class="form-inline">
                             <div class="form-item">
                                 <label>解决问题日期</label>
-                                <div class="input-group date date_picker" id="superviseTime">
+                                <div class="input-group date date_picker" id="solutionTime">
                                     <input type="text" class="form-control input-short-o" ng-model="solutionTime">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                     <span class="required">*</span>
@@ -187,31 +194,47 @@
                             </div>
                             <div class="form-item">
                                 <label>协调部门</label>
-                                <input type="text" class="form-control input-short"  ng-model="coordinationDepartment"/>
+                                <input type="text" class="form-control input-short" ng-model="coordinationDepartment"/>
                                 <span class="required">*</span>
                             </div>
                             <div class="form-item">
                                 <label>解决问题区域</label>
-                                <input type="text" class="form-control"  ng-model="countyCode"/>
+                                <select class="form-control select-short" ng-model="countyCode"
+                                        ng-click="selectCounty()">
+                                    <option value="">请选择行政区</option>
+                                    <option value="{{item.areaCode}}" ng-repeat="item in regionList">{{item.areaName}}
+                                    </option>
+                                </select>
+                                <select class="form-control select-short" ng-model="townCode">
+                                    <option value="">请选择乡镇街道</option>
+                                    <option value="{{item.id}}" ng-repeat="item in townList">{{item.name}}</option>
+                                </select>
+                                <span class="required">*</span>
                             </div>
                             <div class="form-item">
                                 <label>记录人</label>
-                                <input type="text" class="form-control"  ng-model="notekeeper"/>
+                                <input type="text" class="form-control input-short" ng-model="recorder"/>
                             </div>
                             <div class="form-item">
-                                <label>是否整改完成</label>
-                                <select class="form-control select-short"  ng-model="rectifyState">
-                                    <option value="">请选择</option>
-                                    <option value="1">是</option>
-                                    <option value="2">否</option>
-                                </select>
+                                <label>河湖长姓名</label>
+                                <input type="text" class="form-control input-short" ng-model="captainName"/>
+                                <span class="required">*</span>
                             </div>
                             <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">督导检查内容</font></font></label>
-                                <textarea class="form-control" rows="3"  ng-model="superviseContent"></textarea>
+                                <label>职务</label>
+                                <input type="text" class="form-control input-short" ng-model="job"/>
                             </div>
                             <div class="form-item">
-                                <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">附件</font></font></label>
+                                <label>解决问题情况</label>
+                                <textarea class="form-control" rows="3" ng-model="problemSituation"></textarea>
+                                <span class="required">*</span>
+                            </div>
+                            <div class="form-item">
+                                <label>备注</label>
+                                <input type="text" class="form-control" ng-model="remark"/>
+                            </div>
+                            <div class="form-item">
+                                <label>附件</label>
                                 <button class="btn btn-info" ng-click="getUploadFile()"><i
                                         class="fa fa-css3"></i>上传附件
                                 </button>
@@ -221,6 +244,87 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" ng-click="save()">保存</button>
                         <button type="button" class="btn btn-primary" ng-click="closeAddModal()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        编辑-->
+        <div class="modal fade" id="editMyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="closeEditModal()">
+                            &times;
+                        </button>
+                        <h4 class="modal-title">
+                            编辑
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-inline">
+                            <div class="form-item">
+                                <label>解决问题日期</label>
+                                <div class="input-group date date_picker" id="solutionTime">
+                                    <input type="text" class="form-control input-short-o" ng-model="solutionTime">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <span class="required">*</span>
+                                </div>
+                            </div>
+                            <div class="form-item">
+                                <label>协调部门</label>
+                                <input type="text" class="form-control input-short" ng-model="coordinationDepartment"/>
+                                <span class="required">*</span>
+                            </div>
+                            <div class="form-item">
+                                <label>解决问题区域</label>
+                                <select class="form-control select-short" ng-model="countyCode"
+                                        ng-click="selectCounty()">
+                                    <option value="">请选择行政区</option>
+                                    <option value="{{item.areaCode}}" ng-repeat="item in regionList">{{item.areaName}}
+                                    </option>
+                                </select>
+                                <select class="form-control select-short" ng-model="townCode">
+                                    <option value="">请选择乡镇街道</option>
+                                    <option value="{{item.id}}" ng-repeat="item in townList">{{item.name}}</option>
+                                </select>
+                                <span class="required">*</span>
+                            </div>
+                            <div class="form-item">
+                                <label>记录人</label>
+                                <input type="text" class="form-control input-short" ng-model="recorder"/>
+                            </div>
+                            <div class="form-item">
+                                <label>河湖长姓名</label>
+                                <input type="text" class="form-control input-short" ng-model="captainName"/>
+                                <span class="required">*</span>
+                            </div>
+                            <div class="form-item">
+                                <label>职务</label>
+                                <input type="text" class="form-control input-short" ng-model="job"/>
+                            </div>
+                            <div class="form-item">
+                                <label>解决问题情况</label>
+                                <textarea class="form-control" rows="3" ng-model="problemSituation"></textarea>
+                                <span class="required">*</span>
+                            </div>
+                            <div class="form-item">
+                                <label>备注</label>
+                                <input type="text" class="form-control" ng-model="remark"/>
+                            </div>
+                            <div class="form-item">
+                                <label>附件</label>
+                                <button class="btn btn-info" ng-click="getUploadFile()"><i
+                                        class="fa fa-css3"></i>上传附件
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="update()">保存</button>
+                        <button type="button" class="btn btn-primary" ng-click="closeEditModal()">取消</button>
                     </div>
                 </div>
             </div>
