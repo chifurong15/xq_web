@@ -1,0 +1,89 @@
+<div class="conferenceCtrl" ng-controller="superviseLedger" ng-init="init()">
+    <div class="wrapper-md ">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">协调解决问题</span><span class="tag-right"></span>
+            </div>
+        </div>
+        <div class="panel panel-default m-all-0" style="margin: -1px 0">
+            <div class="panel-body">
+                <form method="get">
+                    <div class="form-inline">
+                        <div class="form-item">
+                            <label>开始时间</label>
+                            <div class="input-group date date_picker" id="startTime">
+                                <input type="text" class="form-control input-short-o" ng-model="startTime">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <label>结束时间</label>
+                            <div class="input-group date date_picker" id="endTime">
+                                <input type="text" class="form-control input-short-o" ng-model="endTime">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                        <button type="submit" ng-click="searchData()" class="btn btn-primary">
+                            <i class="fa fa-search"></i> 搜索
+                        </button>
+                        <button type="reset" class="btn btn-primary" ng-click="reset()" style="margin: 0 5px;">
+                            <i class="fa fa-refresh"></i> 重置
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <div class="form-inline">
+                        <div class="input-group fr">
+                            <button type="button" class="btn btn-primary btn-sm" ng-click="add()"
+                                    style="margin: 0 5px;">
+                                <i class="fa fa-plus"></i> 新增
+                            </button>
+                            <button type="button" class="btn btn-primary btn-sm" ng-click="download()">
+                                <i class="fa fa-sign-in"></i> 导出
+                            </button>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th style="width: 5%;">序号</th>
+                            <th style="width: 15%">解决时间</th>
+                            <th style="width: 10%">行政区</th>
+                            <th style="width: 10%">乡镇（街道）</th>
+                            <th style="width: 10%">河（湖）长姓名</th>
+                            <th style="width: 10%">协调部门</th>
+                            <th style="width: 10%">解决问题情况</th>
+                            <th style="width: 10%">附件</th>
+                            <th style="width: 15%">操作</th>
+                        </tr>
+                        <tr ng-repeat="problem in problemList">
+                            <td>{{$index+1}}</td>
+                            <td>{{problem.solutionTime}}</td>
+                            <td>{{problem.countyCode}}</td>
+                            <td>{{problem.townCode}}</td>
+                            <td>{{problem.captainName}}</td>
+                            <td>{{problem.coordinationDepartment}}</td>
+                            <td>{{problem.problemSituation}}</td>
+                            <td>
+                                <a ng-click="preview(problem.accessory)">{{problem.accessory}}</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary btn-xs" ng-click="detail(problem.id)">详情</a>
+                                <a class="btn btn-primary btn-xs" ng-click="edit(problem.id)">编辑</a>
+                                <a class="btn btn-danger btn-xs" ng-click="delete(problem.id)">删除</a>
+
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+        </div>
+
+
+    </div>
+</div>

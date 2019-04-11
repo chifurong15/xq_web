@@ -900,6 +900,20 @@
       "description": "二级菜单-监督管理不到位情况"
     },
     {
+      "seqId": "8-9",
+      "parentId": "8",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "督办台账",
+      "menuType": 1,
+      "icon": "fa fa-building",
+      "url": "module/info-submitted/supervise-ledger/supervise-ledger.html",
+      "requireJS": [
+        "module/info-submitted/supervise-ledger/supervise-ledger.js"
+      ],
+      "description": "二级菜单- 市河长办督办工作台账"
+    },
+    {
       "seqId": "8-4",
       "parentId": "8",
       "isLeaf": false,

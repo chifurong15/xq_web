@@ -21,8 +21,8 @@
                                                 $location, $log, $q, $rootScope, $window,
                                                 routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
-                    // var apiPrefix = moduleService.getServiceUrl() + '/analysis';
-                    var apiPrefix = 'http://192.168.2.100:7031' + '/analysis';
+                    var apiPrefix = moduleService.getServiceUrl() + '/analysis';
+                    // var apiPrefix = 'http://192.168.2.100:7031' + '/analysis';
 
                     var regionTree;
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/list';
