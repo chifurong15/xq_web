@@ -18,31 +18,27 @@
                 'moduleService',
                 'globalParam',
                 function ($localStorage, $scope,
-                                                $location, $log, $q, $rootScope, $window,
-                                                routeService, $http, $ajaxhttp, moduleService, globalParam) {
+                          $location, $log, $q, $rootScope, $window,
+                          routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
-                    // var apiPrefix = moduleService.getServiceUrl() + '/analysis';
-                    var apiPrefix = 'http://192.168.2.100:7031' + '/analysis';
+                    var apiPrefix = moduleService.getServiceUrl() + '/analysis';
+                    // var apiPrefix = 'http://10.0.9.133:7031' + '/analysis';
 
 
                     //区域列表
-                    $scope.regionList=[];
+                    $scope.regionList = [];
                     //村镇列表
-                    $scope.townList=[];
+                    $scope.townList = [];
 
                     $scope.startTime = '';
                     $scope.endTime = '';
-                    $scope.problemList = [];
+                    $scope.dataList = [];
 
-                    $scope.solutionTime = '';
-                    $scope.coordinationDepartment = '';
-                    $scope.countyCode = '';
-                    $scope.townCode = '';
-                    $scope.recorder = '';
-                    $scope.captainName = '';
-                    $scope.job = '';
-                    $scope.problemSituation = '';
+                    $scope.problemnum = '';
+                    $scope.phonenum = '';
+                    $scope.dubannum = '';
                     $scope.remark = '';
+
 
                     $scope.init = function () {
                         getList();
@@ -59,73 +55,64 @@
                         $scope.endTime = '';
                     };
 
-                    //新增
-                    $scope.add = function () {
-                        $('#addMyModal').modal('show')
-                    };
-
-
-
-                    function clear() {
-                        $scope.solutionTime = '';
-                        $scope.coordinationDepartment = '';
-                        $scope.countyCode = '';
-                        $scope.townCode = '';
-                        $scope.recorder = '';
-                        $scope.captainName = '';
-                        $scope.job = '';
-                        $scope.problemSituation = '';
-                        $scope.remark = '';
-                        $scope.assessory = [];
-                    }
-
-
                     //导出
                     $scope.download = function () {
-                        window.location.href= apiPrefix
-                            + '/v1/saCoordinateSolution/createExcel?startTime='
+                        window.location.href = apiPrefix
+                            + '/v1/DubanAnalysis/createExcel1?startTime='
                             + $scope.startTime
                             + '&endTime='
                             + $scope.endTime;
                     };
 
+                    $scope.edit = function (id) {
+                        $scope.id = id;
+                        $('#editMyModal').modal('show')
+                    };
+
+                    $scope.save = function () {
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/DubanAnalysis/updateDuban',
+                            method: 'put',
+                            params: {
+                                id: $scope.id,
+                                problemnum: $scope.problemnum,
+                                phonenum: $scope.phonenum,
+                                dubannum: $scope.dubannum,
+                                remark: $scope.remark,
+                            },
+                            callBack: function (res) {
+                                if (res.resCode===1) {
+                                    getList();
+                                    layer.msg('修改成功',{time:1000});
+                                    setTimeout(function () {
+                                        $('#editMyModal').modal('hide');
+                                    },1000)
+                                }
+                            }
+                        })
+                    };
 
                     function getList() {
                         $ajaxhttp.myhttp({
-                            url: apiPrefix + '/v1/saCoordinateSolution/list',
+                            url: apiPrefix + '/v1/DubanAnalysis/dubanStandingBook',
                             method: 'get',
                             params: {
-                                pageNumber: $scope.paginationConf.currentPage,
-                                pageSize: $scope.paginationConf.itemsPerPage,
                                 startTime: $scope.startTime,
                                 endTime: $scope.endTime,
                             },
                             callBack: function (res) {
-                                if (res.data) {
-                                    $scope.problemList = res.data.list;
-                                    $scope.paginationConf.totalItems = res.data.total;
+                                if (res.resCode===1) {
+                                    $scope.dataList = res.data;
                                 }
                             }
                         })
                     }
 
-
-
-
-                    //获取行政区域
-                    function getRegion (){
-                        $ajaxhttp.myhttp({
-                            url:regionTreeUrl,
-                            method:'get',
-                            params:{
-                                pageNum:-1,
-                                pageSize:-1,
-                                grade:3
-                            },
-                            callBack:function (res) {
-                                $scope.regionList = res.data.list;
-                            }
-                        })
+                    function clear() {
+                        $scope.problemnum = '';
+                        $scope.phonenum = '';
+                        $scope.dubannum = '';
+                        $scope.remark = '';
                     }
 
 
@@ -157,26 +144,5 @@
                     endTime.on('dp.change', function (e) {
                         startTime.data('DateTimePicker').maxDate(e.date);
                     });
-
-
-
-
-
-
-
-                    // 配置分页基本参数
-                    $scope.paginationConf = {
-                        currentPage: $location.search().currentPage ? $location.search().currentPage : 1,
-                        itemsPerPage: 10,
-                        pagesLength: 10,
-                        perPageOptions: [1, 2, 3, 4, 5, 10],
-                        onChange: function () {
-                            //console.log($scope.paginationConf.currentPage);
-                            $location.search('currentPage', $scope.paginationConf.currentPage);
-                        }
-                    };
-
-                    // 当他们一变化的时候，重新获取数据条目
-                    $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', getList);
                 }]);
 })(window, angular);
