@@ -1076,7 +1076,7 @@
       "isLeaf": true,
       "isRoot": false,
       "name": "河湖水质",
-      "icon": "menu-icon-6",
+      "icon": "fa fa-signal",
       "url": "module/fenxitongji/riverAndLakeQuality/riverAndLakeQuality.html",
       "requireJS": [
         "module/fenxitongji/riverAndLakeQuality/riverAndLakeQuality.js"

@@ -197,7 +197,7 @@ app.controller('SigninFormController', ['$scope', '$http', '$state','$localStora
         var date = new Date();
         var year = date.getFullYear();
         var month = date.getMonth();
-        var day=date.getDay();
+        var day=date.getDate();
         if(month == 0){
             month = 12;
             year = year - 1;

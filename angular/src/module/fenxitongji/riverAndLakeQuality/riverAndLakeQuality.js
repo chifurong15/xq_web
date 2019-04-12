@@ -57,12 +57,12 @@
                         'totalphosphorus':'总磷',
                         'COD':'化学需氧量',
                         'permanganate':'高锰酸盐'
-                    }
+                    };
 
                     var chartOption = {
                         xAxis: {
                             type: 'category',
-                            data:['2018-8','2018-1']
+                            data:[]
                         },
                         yAxis: {
                             type: 'value'
@@ -72,20 +72,24 @@
                             type: 'line'
                         }],
                         toolTip: {
-                            formatter: '{c0}'
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'shadow',
+                            },
+                            formatter:'{b0}: {c0}<br />{b1}: {c1}'
                         }
                     };
 
-                    var chart
+                    var chart;
 
 
                     $scope.init = function () {
                         getList();
-                    }
+                    };
 
                     $scope.search = function () {
                         getList();
-                    }
+                    };
 
                     $scope.searchSectionNameList = function () {
                         var sectionName = $scope.sectionName;
@@ -93,7 +97,7 @@
                             $scope.showList = true;
                             var params = {
                                 sectionName: sectionName
-                            }
+                            };
                             $ajaxhttp.myhttp({
                                 url: apiPrefix + '/v1/WaterQuality/getSection',
                                 method: 'get',
@@ -131,10 +135,13 @@
 
                     $scope.changeChartData= function() {
                         var dataList=[];
+                        var timeList=[];
                         $scope.detailList.forEach(function (item) {
                             dataList.push(item[$scope.currentKind]);
-                        })
+                            timeList.push(item.samplingTime);
+                        });
                         chartOption.series[0].data=dataList;
+                        chartOption.xAxis.data=timeList;
                         chart.setOption(chartOption);
                     }
 

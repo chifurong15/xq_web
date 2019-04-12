@@ -58,7 +58,7 @@
                     var date = new Date();
                     var year = date.getFullYear();
                     var month = date.getMonth();
-                    var day=date.getDay();
+                    var day=date.getDate();
                     if(month == 0){
                         month = 12;
                         year = year - 1;
@@ -66,7 +66,7 @@
 
                     $scope.month= day<15 ? month:month+1;
                     console.log(day);
-                    month =  month < 10 ? '0' + month : month
+                    month =  month < 10 ? '0' + month : month;
                     $scope.year = year;
 
 
