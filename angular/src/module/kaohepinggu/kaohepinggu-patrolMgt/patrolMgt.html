@@ -53,7 +53,7 @@
 						<label>考核单位</label>
 						<select ng-model="unitName" class="form-control select-short">
 							<option value="">请选择</option>
-                            <option value="{{item.dict_name}}" ng-repeat="item in unitList">{{item.dict_name}}</option>
+                            <option value="{{item.dict_value}}" ng-repeat="item in unitList">{{item.dict_name}}</option>
                         </select>
 					</div>
 					<button type="submit" class="btn btn-primary" ng-click="getMdSearch()">
