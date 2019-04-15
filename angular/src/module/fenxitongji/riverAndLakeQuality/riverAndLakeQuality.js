@@ -52,10 +52,10 @@
 
                     $scope.dataKindEnum={
                         'qualityLevel':'水质类别',
-                        'DO':'溶解氧',
+                        'dO':'溶解氧',
                         'ammonia':'氨氮',
                         'totalphosphorus':'总磷',
-                        'COD':'化学需氧量',
+                        'cOD':'化学需氧量',
                         'permanganate':'高锰酸盐'
                     };
 

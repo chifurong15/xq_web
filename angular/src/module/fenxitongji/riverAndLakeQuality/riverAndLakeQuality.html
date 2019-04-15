@@ -96,6 +96,7 @@
                                     <th style="width: 8%;">溶解氧</th>
 
                                     <th style="width: 8%;">氨氮<br/>(mg/L)</th>
+                                    <th style="width: 8%;">总磷<br/>(mg/L)</th>
                                     <th style="width: 8%;">化学需氧量<br/>(mg/L)</th>
 
                                     <th style="width: 8%;">高锰酸钾<br/>(mg/L)</th>
@@ -108,9 +109,10 @@
                                     <td>{{lst.qualityLevel}}</td>
                                     <td>{{lst.riverName}}</td>
                                     <td>{{lst.pH}}</td>
-                                    <td>{{lst.DO}}</td>
-                                    <td>{{lst.COD}}</td>
+                                    <td>{{lst.dO}}</td>
                                     <td>{{lst.ammonia}}</td>
+                                    <td>{{lst.totalphosphorus}}</td>
+                                    <td>{{lst.cOD}}</td>
                                     <td>{{lst.permanganate}}</td>
                                     <td>
                                         <button ng-click="seeDetail(lst.sectionName)" class="btn btn-xs btn-primary">查看</button>
@@ -137,6 +139,7 @@
                                     <th style="width: 8%;">pH值</th>
                                     <th style="width: 8%;">溶解氧</th>
                                     <th style="width: 8%;">氨氮<br/>(mg/L)</th>
+                                    <th style="width: 8%;">总磷<br/>(mg/L)</th>
                                     <th style="width: 8%;">化学需氧量<br/>(mg/L)</th>
                                     <th style="width: 8%;">高锰酸钾<br/>(mg/L)</th>
                                 </tr>
@@ -147,9 +150,10 @@
                                     <td>{{lst.qualityLevel}}</td>
                                     <td>{{lst.riverName}}</td>
                                     <td>{{lst.pH}}</td>
-                                    <td>{{lst.DO}}</td>
-                                    <td>{{lst.COD}}</td>
+                                    <td>{{lst.dO}}</td>
                                     <td>{{lst.ammonia}}</td>
+                                    <td>{{lst.totalphosphorus}}</td>
+                                    <td>{{lst.cOD}}</td>
                                     <td>{{lst.permanganate}}</td>
                                 </tr>
                                 </tbody>
@@ -160,10 +164,10 @@
                                 <form>
                                     <select ng-model="currentKind" ng-change="changeChartData()">
                                         <option value="qualityLevel">水质类别</option>
-                                        <option value="DO">溶解氧</option>
+                                        <option value="dO">溶解氧</option>
                                         <option value="ammonia">氨氮</option>
                                         <option value="totalphosphorus">总磷</option>
-                                        <option value="COD">化学需氧量</option>
+                                        <option value="cOD">化学需氧量</option>
                                         <option value="permanganate">高锰酸盐</option>
                                     </select>
                                 </form>

@@ -63,9 +63,7 @@
                         month = 12;
                         year = year - 1;
                     }
-
-                    $scope.month= day<15 ? month:month+1;
-                    console.log(day);
+                    $scope.month= day<16 ? month:month+1;
                     month =  month < 10 ? '0' + month : month;
                     $scope.year = year;
 
