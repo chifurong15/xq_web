@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         <div class="form-item">
-                            <label>行政区域：</label>
+                            <label>问题来源：</label>
                             <select class="form-control select-short" ng-model="problemResource">
                                 <option value="">请选择</option>
                                 <option value="1">巡查</option>
@@ -73,11 +73,11 @@
                             <th style="width: 5%;">序号</th>
                             <th style="width: 15%">区名</th>
                             <th style="width: 10%">河湖名称</th>
-                            <th style="width: 10%">河长</th>
-                            <th style="width: 10%">问题来源</th>
-                            <th style="width: 10%">问题点位</th>
-                            <th style="width: 10%">存在问题</th>
-                            <th style="width: 10%">检查时间</th>
+                            <th style="width: 8%">河长</th>
+                            <th style="width: 8%">问题来源</th>
+                            <th style="width: 8%">问题点位</th>
+                            <th style="width: 20%">存在问题</th>
+                            <th style="width: 8%">检查时间</th>
                             <th style="width: 15%">上报人员</th>
                         </tr>
                         <tr ng-repeat="item in dataList">
@@ -87,8 +87,8 @@
                             <td>{{item.chairmanName}}</td>
                             <td>{{item.problemSource}}</td>
                             <td>{{item.coordinationDepartment}}</td>
-                            <td>{{item.coordinationDepardtment}}</td>
-                            <td>{{item.coordinationDepardtment}}</td>
+                            <td>{{item.typeName}}</td>
+                            <td>{{item.inspectTime}}</td>
                             <td>{{item.reportPerson}}</td>
 
 
