@@ -202,7 +202,7 @@ app.controller('SigninFormController', ['$scope', '$http', '$state','$localStora
             month = 12;
             year = year - 1;
         }
-        $scope.month= day<16 ? month:month+1;
+        $scope.month= day<16 ? month-1:month;
         $scope.month =  month < 10 ? '0' + month : month;
         $scope.year = year;
     };
