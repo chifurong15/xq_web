@@ -462,6 +462,19 @@
       "description": "考核评分-河段排名"
     },
     {
+      "seqId": "3-14",
+      "parentId": "3",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "巡查河段考核配置",
+      "icon": "menu-icon-6",
+      "url": "module/kaohepinggu/inspection-river-config/inspection-river-config.html",
+      "requireJS": [
+        "module/kaohepinggu/inspection-river-config/inspection-river-config.js"
+      ],
+      "description": "系统管理-考核设置"
+    },
+    {
       "seqId": "3-11",
       "parentId": "3",
       "isLeaf": true,

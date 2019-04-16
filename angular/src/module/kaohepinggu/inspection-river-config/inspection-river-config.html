@@ -1,0 +1,166 @@
+<div class="anchaanfang" ng-controller="inspectionRiverConfig" ng-init="init()">
+    <div class="wrapper-md ">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">巡查河段考核配置</span><span class="tag-right"></span>
+
+            </div>
+        </div>
+        <div class="panel panel-default" style="margin: -1px 0">
+            <div class="panel-body">
+                <div class="table-bar">
+                    <form class="form-inline" method="get">
+                        <div class="row">
+                            <div class="col-md-2" style="display: flex;align-items: center;">
+                                <label>河流名称</label>
+                                <div style="position: relative;display: inline-block; margin-left: 20px;width: 160px">
+                                    <input class="form-control input-short-o" placeholder="河流名称"
+                                           style="width: 100%" ng-blur="showRiverList=false" ng-model="riverName"
+                                           ng-change="searchRiverList()"/>
+                                    <ul ng-show="showRiverList"
+                                        style="position: absolute;top: 100%;left: 0;transition: height .2s;z-index: 100;width: 100%;border: 1px solid #999999;border-top: none"
+                                        ng-click="selectRiverId($event.target.dataset.value)">
+                                        <li ng-show="riverList.length===0"
+                                            style="cursor: not-allowed;padding: 4px 10px;width: 100%;">暂无匹配项
+                                        </li>
+                                        <li ng-repeat="item in riverList" data-value="{{item.id}}"
+                                            class="select-list-item">{{item.riverName}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-2" style="display: flex;align-items: center;">
+                                <label>考核单位</label>
+                                <div style="position: relative;display: inline-block; margin-left: 20px;width: 160px">
+                                    <select class="form-control input-short-o"
+                                            style="width: 100%" ng-model="region">
+                                        <option value="">请选择</option>
+                                        <option ng-repeat="region in regionList" value="{{region.areaCode}}">
+                                            {{region.areaName}}
+                                        </option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <button type="submit" ng-click="search()" class="btn btn-primary">
+                                <i class="fa fa-search"></i> 搜索
+                            </button>
+                            <button type="reset" class="btn btn-primary" ng-click="reset()" style="margin: 0 5px;">
+                                <i class="fa fa-refresh"></i> 重置
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover" ng-click="handleTableOperation($event.target.dataset.method,$event.target.dataset.id)">
+                        <tr>
+                            <th>序号</th>
+                            <th>区名</th>
+                            <th>河湖名称</th>
+                            <th  style="width: 20%">河段名称</th>
+                            <th>河段长度</th>
+                            <th style="width: 15%">是否中心城区市管河道/市管水库</th>
+                            <th>是否引滦明渠</th>
+                            <th>是否考核</th>
+                            <th>每月应巡</th>
+                            <th>考核单位</th>
+                            <th style="width: 120px">操作</th>
+                        </tr>
+                        <tr ng-repeat="item in dataList">
+                            <td>{{$index+1}}</td>
+                            <td>{{item.regionName}}</td>
+                            <td>{{item.riverName}}</td>
+                            <td>{{item.reachName}}</td>
+                            <td>{{item.length}}</td>
+                            <td>{{item.typeone}}</td>
+                            <td>{{item.typetwo}}</td>
+                            <td>{{item.assessStatus}}</td>
+                            <td>{{item.patrolNumber}}</td>
+                            <td>{{item.patrolUnitName}}</td>
+                            <td>
+<!--                                <button class="btn btn-primary btn-xs" data-method="detail" data-id="{{item.id}}">详情</button>-->
+                                <button class="btn btn-primary btn-xs" data-method="edit" data-id="{{item.id}}">修改</button>
+                            </td>
+                    </table>
+                </div>
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+        </div>
+    </div>
+
+<!--    修改 -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog"
+         data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                            ng-click="closeEditModal()">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        修改
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-inline">
+                        <div class="form-item" style="display: flex;align-items: center">
+                            <label>水质考核</label>
+                            <input type="radio" value="1" ng-model="isWaterQualityAssess"><span style="margin: 0 20px 0 10px">考核</span>
+                            <input type="radio" value="0" ng-model="isWaterQualityAssess"><span style="margin: 0 0 0 10px">暂不考核</span>
+                        </div>
+                        <div class="form-item" style="display: flex;align-items: center">
+                            <label>河段类型</label>
+                            <input type="radio" value="1" ng-model="riverType"><span style="margin: 0 20px 0 10px"> 普通河道</span>
+                            <input type="radio" value="2" ng-model="riverType"><span style="margin: 0 20px 0 10px">是中心城区市管河道/市管水库</span>
+                            <input type="radio" value="3" ng-model="riverType"><span style="margin: 0 0 0 10px">是否引滦明渠</span>
+                        </div>
+                        <div class="form-item">
+                            <label>巡查次数</label>
+                            <input type="number" class="form-control input-short" ng-model="patrolNumber" style="margin-right: 100px"/>
+                        </div>
+                        <div class="form-item">
+                            <label>考核单位</label>
+                            <select class="form-control input-short" ng-model="patrolUnitName">
+                                <option value="">请选择</option>
+                                <option ng-repeat="unit in unitList" value="{{unit.dictValue}}">
+                                    {{unit.dictName}}
+                                </option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="save()">保存</button>
+                    <button type="button" class="btn btn-primary" ng-click="closeEditModal()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 详情 -->
+    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog" style="width: 600px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        详情
+                    </h4>
+                </div>
+                <div class="modal-body" style="text-align: center;">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
