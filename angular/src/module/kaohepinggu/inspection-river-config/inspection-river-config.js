@@ -134,14 +134,14 @@
 
                     $scope.save=function () {
                         $ajaxhttp.myhttp({
-                            url: apiPrefix + '/v1/reachAssess/updateReachAssess',
+                            url: apiPrefix + '/v1/reachAssess/updateReachAssessPatrol',
                             method: 'put',
                             params:{
                                 id:$scope.currentRecord.id,
                                 isWaterQualityAssess:$scope.isWaterQualityAssess,
                                 riverType:$scope.riverType,
                                 patrolNumber:$scope.patrolNumber,
-                                patrolUnitName:$scope.patrolUnitName
+                                patrolUnit:$scope.patrolUnitName
                             },
                             callBack: function (res) {
                                 if (res.resCode === 1) {
