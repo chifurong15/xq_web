@@ -143,33 +143,28 @@
         </header>
         <div style="padding: 0 10%">
             <div class="layui-row" style="margin-top: 60px">
-                <div class="layui-col-md6" style="padding: 0 3%;">
+                <div class="layui-col-md6" style="padding: 0 1%;overflow: hidden">
                     <div id="portalCarousel" class="layui-carousel">
                         <div carousel-item>
-                            <div><img src="img/login/1.jpg"/></div>
-                            <div><img src="img/login/2.jpg"/></div>
-                            <div><img src="img/login/3.jpg"/></div>
-                            <div><img src="img/login/4.jpg"/></div>
+                            <a href="http://swj.tj.gov.cn/swj/xwzx/tpxw/201904/t20190401_13683.html" target="_blank" title="水利部召开河湖管理工作会议"><img style="height: 100%;width: 100%" src="img/portals/carousel1.jpg"/></a>
+                            <a href="http://swj.tj.gov.cn/swj/xwzx/tpxw/201902/t20190226_13549.html" target="_blank" title="市水务局启动海河破冰打捞行动"><img style="height: 100%;width: 100%" src="img/portals/carousel2.jpg"/></a>
+                            <a href="http://swj.tj.gov.cn/swj/xwzx/tpxw/201903/t20190322_13633.html" target="_blank" title="我市举办“节约保护水资源，推进生态文明建设”主题节水宣传活动"><img style="height: 100%;width: 100%" src="img/portals/carousel3.jpg"/></a>
+                            <a href="http://swj.tj.gov.cn/swj/xwzx/tpxw/201903/t20190313_13607.html" target="_blank" title="鄂竟平部长在“部长通道”答记者问"><img style="height: 100%;width: 100%" src="img/portals/carousel4.jpg"/></a>
                         </div>
                     </div>
                 </div>
                 <div class="layui-col-md6"
-                     style="padding:0 3%;position: relative;z-index: 100;background-color: #ffffff;min-height: 400px">
-                    <div class="layui-tab layui-tab-card">
+                     style="padding:0 1%;position: relative;z-index: 100;background-color: #ffffff;height: 405px">
+                    <div class="layui-tab layui-tab-card" style="margin:0">
                         <ul class="layui-tab-title">
-                            <li class="layui-this" style="font-weight: bold;font-size: 16px">工作简报</li>
-                            <li style="border-bottom: 1px solid #f2f2f2;font-weight: bold;font-size: 16px">督导检查</li>
+                            <li class="layui-this" style="font-weight: bold;font-size: 16px">通知公告</li>
+                            <li style="font-weight: bold;font-size: 16px">工作简报</li>
+                            <li style="font-weight: bold;font-size: 16px">督导检查</li>
                         </ul>
                         <div class="layui-tab-content" style="padding: 0">
                             <div class="layui-tab-item layui-show">
                                 <div class="panel panel-default m-all-0">
                                 <div class="panel-body" style="min-height: 350px">
-                                    <div ng-repeat="list in bulletin3" class="titleAndTime">
-                                        <a href="javascript:void(0);" ng-click="viewBulletin(list.id)">
-                                            <span>{{list.title.length > 18 ? list.title.substring(0,15) + "..." : list.title }}</span>
-                                            <span>{{list.post_time}}</span>
-                                        </a>
-                                    </div>
                                     <div class="titleAndTime">
                                         <a href="http://swj.tj.gov.cn/swj/zwgk/gkml/tzgg/201904/t20190401_13679.html" target="_blank">
                                             <span>天津市开通扫黑除恶专项斗争举报渠道的公告</span>
@@ -200,7 +195,49 @@
                                             <span>2019-03-13</span>
                                         </a>
                                     </div>
+                                    <div class="titleAndTime">
+                                        <a href="http://swj.tj.gov.cn/swj/zwgk/gkml/tzgg/201902/t20190218_13521.html" target="_blank">
+                                            <span>2019年度市级河（湖）长制社会义务监督员名单</span>
+                                            <span>2019-02-18</span>
+                                        </a>
+                                    </div>
+                                    <div class="titleAndTime">
+                                        <a href="http://swj.tj.gov.cn/swj/zwgk/gkml/tzgg/201901/t20190115_13367.html" target="_blank">
+                                            <span>天津市第十四环境保护督察组向市水务局反馈督察情况</span>
+                                            <span>2019-01-15</span>
+                                        </a>
+                                    </div>
+                                    <div class="titleAndTime">
+                                        <a href="http://swj.tj.gov.cn/swj/zwgk/gkml/tzgg/201901/t20190102_13333.html" target="_blank">
+                                            <span>天津市水务局安全生产标准化达标单位名单公示</span>
+                                            <span>2019-01-02</span>
+                                        </a>
+                                    </div>
+                                    <div class="titleAndTime">
+                                        <a href="http://swj.tj.gov.cn/swj/zwgk/gkml/tzgg/201812/t20181229_13327.html" target="_blank">
+                                            <span>天津市河长制工作领导小组关于公布市、区级总湖长名单及...</span>
+                                            <span>2018-12-29</span>
+                                        </a>
+                                    </div>
+                                    <div class="titleAndTime">
+                                        <a href="http://swj.tj.gov.cn/swj/zwgk/gkml/tzgg/201812/t20181228_13325.html" target="_blank">
+                                            <span>天津市水务局水行政执法人员公示</span>
+                                            <span>2018-12-28</span>
+                                        </a>
+                                    </div>
                                 </div>
+                                </div>
+                            </div>
+                            <div class="layui-tab-item">
+                                <div class="panel panel-default m-all-0">
+                                    <div class="panel-body" style="min-height: 350px">
+                                        <div ng-repeat="list in bulletin3" class="titleAndTime">
+                                            <a href="javascript:void(0);" ng-click="viewBulletin(list.id)">
+                                                <span>{{list.title.length > 18 ? list.title.substring(0,15) + "..." : list.title }}</span>
+                                                <span>{{list.post_time}}</span>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="layui-tab-item">
@@ -219,8 +256,8 @@
                     </div>
                 </div>
             </div>
-            <div class="layui-row" style="margin-top: 30px">
-                <div class="layui-col-md6" style="padding:0 3%">
+            <div class="layui-row" style="margin-top: 6px">
+                <div class="layui-col-md6" style="padding:0 1%;">
                     <div id="cityRank" class="panel panel-default m-all-0">
                         <div class="panel-body">
                             <div class="mainbody-tips" style="margin-bottom: 5px">
@@ -232,7 +269,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="layui-col-md6" style="padding: 0 3%">
+                <div class="layui-col-md6" style="padding: 0 1%">
                     <div id="water-quality" class="panel panel-default m-all-0 m-t-10">
                         <div class="panel-body" style="margin: 0 auto">
                             <div class="mainbody-tips" style="margin-bottom: 5px">
@@ -246,7 +283,7 @@
                 </div>
             </div>
             <div class="layui-row">
-                <div class="layui-col-md12" style="padding: 0 3%;margin-top: 30px">
+                <div class="layui-col-md12" style="padding: 0 1%;margin-top: 15px">
                     <div id="cityRank" class="panel panel-default m-all-0">
                         <div class="panel-body">
                             <div class="mainbody-tips" style="margin-bottom: 5px">
@@ -269,7 +306,7 @@
                 </div>
             </div>
             <div class="layui-row">
-                <div class="layui-col-md12" style="padding: 0 3%;margin-top: 30px">
+                <div class="layui-col-md12" style="padding: 0 1%;margin-top: 15px">
                     <div id="cityRank" class="panel panel-default m-all-0">
                         <div class="panel-body">
                             <div class="mainbody-tips" style="margin-bottom: 5px">
@@ -325,7 +362,7 @@
                 </div>
             </div>
         </div>
-        <div class="layui-row" style="margin-top: 30px">
+        <div class="layui-row" style="margin-top: 15px">
             <div class="layui-col-md12"
                  style="padding: 30px 5%;color: #ffffff;background-color: #0c90d0;display: flex;justify-content: space-between;align-items: center">
                 <div>
@@ -399,8 +436,8 @@
 
         carousel.render({
             elem: '#portalCarousel',
-            width: '720px',
-            height: '400px'
+            width: '730px',
+            height: '393px'
         });
 
     });

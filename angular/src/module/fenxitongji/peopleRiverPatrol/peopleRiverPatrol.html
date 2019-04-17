@@ -115,39 +115,39 @@
                                     <td ng-init="arr = trans($index)">{{$index+1}}</td>
                                     <td>{{lst.regionName}}</td>
                                     <!--区级河长-->
-                                    <td><a ng-click="viewDetail(1 , lst.reachPatrolQuList)">{{lst.reachPatrolQuNum}}</a></td>
-                                    <td><a ng-click="viewDetail(2, lst.findProblemQuList)">{{lst.findProblemQuNum}}</a></td>
-                                    <td><a ng-click="viewDetail(2 , lst.overProblemQuList)">{{lst.overProblemQuNum}}</a></td>
+                                    <td><a ng-click="viewDetail(lst.regionId , 1)">{{lst.reachPatrolQuNum}}</a></td>
+                                    <td><a ng-click="viewDetail(lst.regionId, 2)">{{lst.findProblemQuNum}}</a></td>
+                                    <td><a ng-click="viewDetail(lst.regionId , 3)">{{lst.overProblemQuNum}}</a></td>
 
 
                                     <!--区级湖长-->
-                                    <td><a ng-click="viewDetail(1 , lst.lokePatrolQuList)">{{lst.lokePatrolQuNum}}</a></td>
-                                    <td><a ng-click="viewDetail(2 , lst.lokeFindProblemQuList)">{{lst.lokeFindProblemQuNum}}</a></td>
-                                    <td><a ng-click="viewDetail(2 , lst.lokeOverProblemQuList)">{{lst.lokeOverProblemQuNum}}</a></td>
+                                    <td><a ng-click="viewDetail(lst.regionId , 4)">{{lst.lokePatrolQuNum}}</a></td>
+                                    <td><a ng-click="viewDetail(lst.regionId , 5)">{{lst.lokeFindProblemQuNum}}</a></td>
+                                    <td><a ng-click="viewDetail(lst.regionId , 6)">{{lst.lokeOverProblemQuNum}}</a></td>
 
 
                                     <!--镇街级河长-->
-                                    <td><a ng-click="viewDetail(1 , lst.reachPatrolZList)">{{lst.reachPatrolZNum}}</a></td>
-                                    <td><a ng-click="viewDetail(2 , lst.findProblemZList)">{{lst.findProblemZNum}}</a></td>
-                                    <td><a ng-click="viewDetail(2 , lst.overProblemZList)">{{lst.overProblemZNum}}</a></td>
+                                    <td><a ng-click="viewDetail(lst.regionId , 7)">{{lst.reachPatrolZNum}}</a></td>
+                                    <td><a ng-click="viewDetail(lst.regionId , 8)">{{lst.findProblemZNum}}</a></td>
+                                    <td><a ng-click="viewDetail(lst.regionId , 9)">{{lst.overProblemZNum}}</a></td>
 
 
                                     <!--镇街级湖长-->
-                                    <td><a ng-click="viewDetail(1 , lst.lokePatrolZList)">{{lst.reachPatrolZNum}}</a></td>
-                                    <td><a ng-click="viewDetail(2 , lst.lokeFindProblemZList)">{{lst.lokeFindProblemZNum}}</a></td>
-                                    <td><a ng-click="viewDetail(2 , lst.lokeOverProblemZList)">{{lst.lokeOverProblemZNum}}</a></td>
+                                    <td><a ng-click="viewDetail(lst.regionId , 10)">{{lst.reachPatrolZNum}}</a></td>
+                                    <td><a ng-click="viewDetail(lst.regionId , 11)">{{lst.lokeFindProblemZNum}}</a></td>
+                                    <td><a ng-click="viewDetail(lst.regionId , 12)">{{lst.lokeOverProblemZNum}}</a></td>
 
 
                                     <!--村级河长-->
-                                    <td><a ng-click="viewDetail(1 , lst.reachPatrolCList)">{{lst.reachPatrolCNum}}</a></td>
-                                    <td><a ng-click="viewDetail(2 , lst.findProblemCList)">{{lst.findProblemCNum}}</a></td>
-                                    <td><a ng-click="viewDetail(2 , lst.overProblemCList)">{{lst.overProblemCNum}}</a></td>
+                                    <td><a ng-click="viewDetail(lst.regionId , 13)">{{lst.reachPatrolCNum}}</a></td>
+                                    <td><a ng-click="viewDetail(lst.regionId , 14)">{{lst.findProblemCNum}}</a></td>
+                                    <td><a ng-click="viewDetail(lst.regionId , 15)">{{lst.overProblemCNum}}</a></td>
 
 
                                     <!--村级湖长-->
-                                    <td><a ng-click="viewDetail(1 , lst.lokePatrolCList)">{{lst.lokePatrolCNum}}</a></td>
-                                    <td><a ng-click="viewDetail(2 , lst.lokeFindProblemCList)">{{lst.lokeFindProblemCNum}}</a></td>
-                                    <td><a ng-click="viewDetail(2 , lst.lokeOverProblemCList)">{{lst.lokeOverProblemCNum}}</a></td>
+                                    <td><a ng-click="viewDetail(lst.regionId , 16)">{{lst.lokePatrolCNum}}</a></td>
+                                    <td><a ng-click="viewDetail(lst.regionId , 17)">{{lst.lokeFindProblemCNum}}</a></td>
+                                    <td><a ng-click="viewDetail(lst.regionId , 18)">{{lst.lokeOverProblemCNum}}</a></td>
                                 </tr>
                                 </tbody>
                             </table>

@@ -21,9 +21,9 @@
                           $location, $log, $q, $rootScope, $window,
                           routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
-                    // var apiPrefix = moduleService.getServiceUrl() + '/analysis';
+                    var apiPrefix = moduleService.getServiceUrl() + '/analysis';
 
-                    var apiPrefix = ' http://10.0.9.133:7031/analysis';
+                    // var apiPrefix = ' http://10.0.9.133:7031/analysis';
 
                     $scope.sectionType = 1;
                     $scope.sectionName = '';
