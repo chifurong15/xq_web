@@ -927,6 +927,20 @@
       "description": "二级菜单- 市河长办督办工作台账"
     },
     {
+      "seqId": "8-10",
+      "parentId": "8",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "帮扶困难村工作进展情况",
+      "menuType": 1,
+      "icon": "fa fa-building",
+      "url": "module/info-submitted/poverty-alleviation/poverty-alleviation.html",
+      "requireJS": [
+        "module/info-submitted/poverty-alleviation/poverty-alleviation.js"
+      ],
+      "description": "二级菜单- 天津市帮扶困难村工作进展情况工作台账"
+    },
+    {
       "seqId": "8-4",
       "parentId": "8",
       "isLeaf": false,
