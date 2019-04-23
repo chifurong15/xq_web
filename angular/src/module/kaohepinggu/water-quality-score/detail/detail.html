@@ -1,0 +1,165 @@
+<div class="" ng-controller="shuizhiUpdateCtrl" ng-init="init()">
+    <div class="wrapper-md ">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">水质评分报告</span><span class="tag-right"></span><span class="tag-right tag-left"></span><span class="tag tag1">详情</span><span class="tag-right"></span>
+                <div style="overflow: hidden;"><button type="button" class="btn btn-primary" ng-click="goBack()" style="position: absolute;right: 20px;bottom: 20px;">返回</button></div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form class="form-inline clearfix">
+                    <div class=" form-item" >
+                        <label>行政区域</label>
+                        <select ng-model="region" class="form-control select-short" style="width: 160px;z-index: 0;">
+                            <option value="">请选择</option>
+                            <option value="{{item.areaName}}" ng-repeat="item in regionList">{{item.areaName}}</option>
+                        </select>
+                    </div>
+                    <div class="input-group form-item" >
+                        <label>河道</label>
+                        <select ng-model="river" class="form-control select-short" style="width: 160px;z-index: 0;">
+                            <option value="">请选择</option>
+                            <option value="{{item.riverName}}" ng-repeat="item in riverOption">{{item.riverName}}</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <button class="btn btn-primary" ng-click="search()">
+                            <i class="fa fa-search"></i>搜索
+                        </button>
+                    </div>
+                    <div class="form-item" style="float: right">
+                        <button type="button" style="float: right" class="btn btn-primary" ng-click="download()">
+                            <i class="fa fa-sign-in"></i> 导出
+                        </button>
+                    </div>
+                </form>
+
+                <div class="tab-content" style="margin-top: -10px">
+                    <div class="tab-pane active">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                <tr class='tHeader'>
+                                    <th>分析编号</th>
+                                    <th>行政区域</th>
+                                    <th>河道</th>
+                                    <th style="width: 400px">河段</th>
+                                    <th>入境断面</th>
+                                    <th>出境断面</th>
+                                    <th>评分</th>
+                                    <th>排水口评分</th>
+                                    <th>总分</th>
+                                    <th>是否含污水处理厂</th>
+                                    <th>出境断面水质</th>
+                                    <th>水质目标</th>
+                                    <th>备注</th>
+                                </tr>
+                                <tr ng-repeat="item in detailList">
+                                    <td>{{$index + 1 + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
+                                    <td>{{item.region}}</td>
+                                    <td>{{item.river}}</td>
+                                    <td>{{item.reach}}</td>
+                                    <td>{{item.insection}}</td>
+                                    <td>{{item.outsection}}</td>
+                                    <td>{{item.grade}}</td>
+                                    <td>{{item.outfallgrade}}</td>
+                                    <td>{{item.total}}</td>
+                                    <td>{{item.whether}}</td>
+                                    <td>{{item.outsectiongrade}}</td>
+                                    <td>{{item.target}}</td>
+                                    <td>{{item.remark}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <tm-pagination conf="paginationConf"></tm-pagination>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="chartStatistics">
+                        <div id="patrolChart" class="tj-chart-con"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog" style="width: 610px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        {{type == 1 ? "修改" : "新增"}}条目
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-inline">
+
+                        <div class="input-group form-item" ng-if="type == 2">
+                            <label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">断面名称</font></font></label>
+                            <select ng-model="section" ng-options="s.id as s.name for s in nameOption" ng-change="getSectionChange(section)" class="form-control select-short" style="width: 160px;">
+                                <option value="">请选择</option>
+                            </select>
+                            <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                        </div>
+
+                        <div class="form-item" ng-if="type == 2">
+                            <label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">河流</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="riverName" readonly="">
+                            <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                        </div>
+
+                        <div class="form-item">
+                            <label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">采样日期</font></font></label>
+                            <div class="input-group date date_picker" id="samplingTime">
+                                <input type="text" class="form-control input-short-o" ng-model="samplingTime">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="form-item">
+                            <label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">水温(℃)</font></font></label>
+                            <input name="number" min="0" max="100" onkeyup="value=value.replace(/[^\d]/g,'')" class="form-control input-short" ng-model="water_temperature">
+                            <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                        </div>
+
+                        <div class="form-item">
+                            <label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">总磷(mg/L)</font></font></label>
+                            <input name="number" min="0" max="100" onkeyup="value=value.replace(/[^\d]/g,'')" class="form-control input-short" ng-model="total_phosphorus">
+                            <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                        </div>
+
+                        <div class="form-item">
+                            <label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">氨氮(mg/L)</font></font></label>
+                            <input name="number" min="0" max="100" onkeyup="value=value.replace(/[^\d]/g,'')" class="form-control input-short" ng-model="ammonia_nitrogen">
+                            <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                        </div>
+
+                        <div class="form-item">
+                            <label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">高锰酸盐指数(mg/L)</font></font></label>
+                            <input name="number" min="0" max="100" onkeyup="value=value.replace(/[^\d]/g,'')" class="form-control input-short" ng-model="permanganate_index">
+                            <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                        </div>
+
+                        <div class="form-item">
+                            <label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">溶解氧(mg/L)</font></font></label>
+                            <input name="number" min="0" max="100" onkeyup="value=value.replace(/[^\d]/g,'')" class="form-control input-short" ng-model="DO">
+                            <span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="save()">保存</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+

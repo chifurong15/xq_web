@@ -345,6 +345,19 @@
       "description": "水质数据"
     },
     {
+      "seqId": "3-16",
+      "parentId": "3-0",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "水质评分报告",
+      "icon": "fa fa-lemon-o",
+      "url": "module/kaohepinggu/water-quality-score/water-quality-score.html",
+      "requireJS": [
+        "module/kaohepinggu/water-quality-score/water-quality-score.js"
+      ],
+      "description": "水质数据"
+    },
+    {
       "seqId": "3-2-4",
       "parentId": "3-0",
       "isLeaf": true,
@@ -1195,6 +1208,19 @@
         "module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-update/kaohepinggu-update.js"
       ],
       "description": "水质管理-修改"
+    },
+    {
+      "seqId": "3-16-5",
+      "parentId": "3-0",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "水质评分报告详情",
+      "icon": "fa fa-lemon-o",
+      "url": "module/kaohepinggu/water-quality-score/detail/detail.html",
+      "requireJS": [
+        "module/kaohepinggu/water-quality-score/detail/detail.js"
+      ],
+      "description": "水质评分报告详情"
     },
     {
       "seqId": "3-3-2",
