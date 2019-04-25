@@ -24,8 +24,6 @@
                     var apiPrefix = moduleService.getServiceUrl() + '/messageSent';
                     // var apiPrefix = 'http://10.0.9.110:7028' + '/messageSent';
 
-                    $scope.direction=localStorage.getItem('direction');
-
 
                     var regionTree;
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/regionTree';

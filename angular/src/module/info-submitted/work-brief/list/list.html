@@ -120,7 +120,7 @@
                                 <span ng-if="module.weatherAccept != 2 &&  module.weatherAccept != 1">-</span>
                             </td>
                             <td>
-                                <a class="btn btn-primary btn-xs" ng-click="view(module.id,module.direction)"><i class="fa fa-info" title="查看"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-click="view(module.id)"><i class="fa fa-info" title="查看"></i></a>
                                 <a class="btn btn-primary btn-xs" ng-if="module.direction==='报送'&&module.replyState == 2" ng-click="answer(module)"><i class="fa fa-bullhorn" title="答复"></i></a>
                                 <a class="btn btn-primary btn-xs" ng-if="module.direction==='报送'&&module.replyState == 1" ng-click="report(module.id)"><i class="fa fa-level-up" title="上报"></i></a>
 <!--                                <a class="btn btn-primary btn-xs" ng-if="num == 2 && module.initiator == userInfo.id" ng-click="delete(module.id)"><i class="fa fa-trash-o" title="删除"></i></a>-->
