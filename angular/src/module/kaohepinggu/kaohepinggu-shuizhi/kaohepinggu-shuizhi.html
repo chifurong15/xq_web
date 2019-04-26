@@ -87,8 +87,9 @@
 										<td>{{item.createuser}}</td>
 										<td>{{item.remark.length > 18 ? item.remark.substring(0,18) + '...' : item.remark}}</td>
 										<td style="text-align: left;">
-											<button type="button" class="btn btn-success" ng-click="view(item.id,item.status)">查看</button>
-											<button type="button" class="btn btn-primary" ng-if="item.status==0" ng-click="sendBack(item.id)">退回</button>
+											<button type="button" class="btn btn-xs btn-success" ng-click="view(item.id,item.status)">查看</button>
+											<button type="button" class="btn btn-xs btn-primary" ng-click="generate(item.id)">生成评分报告</button>
+											<button type="button" class="btn btn-xs btn-primary" ng-if="item.status==0" ng-click="sendBack(item.id)">退回</button>
 										</td>
 									</tr>
 									<tr ng-repeat="item in waterQualityList" ng-if="num != 2">
