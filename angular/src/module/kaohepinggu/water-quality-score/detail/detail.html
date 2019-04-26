@@ -65,9 +65,27 @@
                                     <td>{{item.grade}}</td>
                                     <td>{{item.outfallgrade}}</td>
                                     <td>{{item.total}}</td>
-                                    <td>{{item.whether}}</td>
-                                    <td>{{item.outsectiongrade}}</td>
-                                    <td>{{item.target}}</td>
+                                    <td>{{item.whether==1?'是':'否'}}</td>
+                                    <td>
+                                        <span ng-if="item.outsectiongrade == 1">Ⅰ</span>
+                                        <span ng-if="item.outsectiongrade == 2">Ⅱ</span>
+                                        <span ng-if="item.outsectiongrade == 3">Ⅲ</span>
+                                        <span ng-if="item.outsectiongrade == 4">Ⅳ</span>
+                                        <span ng-if="item.outsectiongrade == 5">Ⅴ</span>
+                                        <span ng-if="item.outsectiongrade == 6">Ⅵ</span>
+                                        <span ng-if="item.outsectiongrade == 7">Ⅶ</span>
+                                        <span ng-if="item.outsectiongrade == 8">Ⅷ</span>
+                                    </td>
+                                    <td>
+                                        <span ng-if="item.target == 1">Ⅰ</span>
+                                        <span ng-if="item.target == 2">Ⅱ</span>
+                                        <span ng-if="item.target == 3">Ⅲ</span>
+                                        <span ng-if="item.target == 4">Ⅳ</span>
+                                        <span ng-if="item.target == 5">Ⅴ</span>
+                                        <span ng-if="item.target == 6">Ⅵ</span>
+                                        <span ng-if="item.target == 7">Ⅶ</span>
+                                        <span ng-if="item.target == 8">Ⅷ</span>
+                                    </td>
                                     <td>{{item.remark}}</td>
                                 </tr>
                                 </tbody>
