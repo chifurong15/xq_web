@@ -21,8 +21,8 @@
                           $location, $log, $q, $rootScope, $window,
                           routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
-                    var apiPrefix = moduleService.getServiceUrl() + '/analysis';
-                    // var apiPrefix = 'http://10.0.9.133:7031' + '/analysis';
+                    // var apiPrefix = moduleService.getServiceUrl() + '/analysis';
+                    var apiPrefix = 'http://10.0.9.133:7031' + '/analysis';
 
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/list';
 
@@ -48,6 +48,7 @@
                         $scope.userLevel = currentUser.userLevel;
                         getList();
                         getRegion();
+                        getAuthCode();
                     };
 
                     $scope.searchData = function () {
@@ -168,6 +169,18 @@
                             },
                             callBack: function (res) {
                                 $scope.regionList = res.data.list;
+                            }
+                        })
+                    }
+                    
+                    function getAuthCode() {
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/saHelpVillage/userinfo',
+                            method: 'get',
+                            callBack: function (res) {
+                                if (res.resCode === 1) {
+                                    $scope.authCode=res.data
+                                }
                             }
                         })
                     }

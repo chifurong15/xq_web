@@ -38,7 +38,7 @@
                 <div class="table-responsive">
                     <div class="form-inline">
                         <div class="fr">
-                            <button type="button" class="btn btn-primary btn-sm" ng-click="add()">
+                            <button type="button" class="btn btn-primary btn-sm" ng-click="add()" ng-if="authCode==='05'||authCode==='06'">
                                 <i class="fa fa-plus"></i> 新增
                             </button>
                             <button type="button" class="btn btn-primary btn-sm" ng-click="download()">
@@ -79,37 +79,26 @@
                             <td>{{item.totalThree}}</td>
                         </tr>
                     </table>
-                    <tm-pagination conf="paginationConf"></tm-pagination>
+                    <tm-pagination conf="paginationConf" ng-show="userLevel===2"></tm-pagination>
                     <table class="table table-bordered table-hover" ng-show="userLevel!==2">
                         <tr class="tHeader">
-                            <th rowspan="2">序号</th>
-                            <th rowspan="2">日期</th>
-                            <th rowspan="2">行政区</th>
-                            <th colspan="0">河长巡河次数</th>
-                            <th colspan="2">巡河发现并解决问题次数</th>
-                            <th colspan="2">召开会议次数</th>
-                        </tr>
-                        <tr class="tHeader">
-                            <th>区级</th>
-                            <th>镇街级</th>
-                            <th>区级</th>
-                            <th>镇街级</th>
-                            <th>区级</th>
-                            <th>镇街级</th>
+                            <th>序号</th>
+                            <th>日期</th>
+                            <th>行政区</th>
+                            <th>河长巡河次数</th>
+                            <th>巡河发现并解决问题次数</th>
+                            <th>召开会议次数</th>
                         </tr>
                         <tr ng-repeat="item in dataList">
                             <td>{{$index+1}}</td>
                             <td>{{item.issued}}</td>
                             <td>{{item.regionName}}</td>
-                            <td>{{item.riverpatrolnumQ}}</td>
-                            <td>{{item.riverpatrolnumZ}}</td>
-                            <td>{{item.findproblemnumQ}}</td>
-                            <td>{{item.findproblemnumZ}}</td>
-                            <td>{{item.convokemeetingnumQ}}</td>
-                            <td>{{item.convokemeetingnumZ}}</td>
+                            <td>{{item.riverpatrolnum}}</td>
+                            <td>{{item.findproblemnum}}</td>
+                            <td>{{item.convokemeetingnum}}</td>
                         </tr>
                     </table>
-                    <tm-pagination conf="paginationConf"></tm-pagination>
+                    <tm-pagination conf="paginationConf" ng-show="userLevel!==2"></tm-pagination>
                 </div>
 
             </div>
