@@ -32,6 +32,8 @@
 
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
                     $scope.detailId = localStorage.getItem('id');
+                    $scope.direction = localStorage.getItem('direction');
+                    console.log($scope.direction);
                     $scope.init = function () {
                         $scope.author = $scope.userInfo.name;
 
