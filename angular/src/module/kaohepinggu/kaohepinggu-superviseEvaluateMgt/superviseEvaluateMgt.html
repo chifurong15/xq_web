@@ -81,7 +81,7 @@
                                 <a class="btn btn-primary btn-xs" ng-click="getHydrologicDetail(module.id)">
                                     <i class="fa fa-info" title="查看"></i>
                                 </a>
-                                <a class="btn btn-primary btn-xs" ng-click="edit(module)">
+                                <a class="btn btn-primary btn-xs" ng-click="edit(module)" ng-if="module.status != 3">
                                     <i class="fa fa-pencil" title="修改"></i>
                                 </a>
                                 <a class="btn btn-primary btn-xs" ng-click="getHydrologicDelete(module.id,module.name)">
@@ -105,7 +105,7 @@
                         &times;
                     </button>
                     <h4 class="modal-title" id="myModalLabel1">
-                       修改社会监督员满意度
+                        修改社会监督员满意度
                     </h4>
                 </div>
                 <div class="modal-body">
@@ -137,10 +137,16 @@
                         </div>
                         <div class="form-item">
                             <label>满意度</label>
-                            <select ng-model="assess1" ng-options="ai.id as ai.name for ai in assessList"
+                            <select ng-model="assess1" ng-options="ai.id as ai.name for ai in assessList" disabled
                                     ng-change="getAssessChange(assess1)" class="form-control select-short">
                                 <option value="">请选择</option>
                             </select>
+                        </div>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理状态</font></font></label>
+                            <label ng-if="status == 1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">待受理</font></font></label>
+                            <label ng-if="status == 2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理中</font></font></label>
+                            <label ng-if="status == 3"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">已办结</font></font></label>
                         </div>
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">其它说明</font></font></label>
@@ -152,7 +158,7 @@
                             <label>不满意原因</label>
                             <div class="clearfix reasonList" style="margin: 0 110px;">
                                 <label class="checkbox-inline" ng-repeat="item in reasonList" style="width: auto;display: block;float: inherit;">
-                                    <input type="checkbox" value="{{item}}">{{item}}
+                                    <input type="checkbox" disabled value="{{item}}">{{item}}
                                 </label>
                             </div>
 

@@ -133,7 +133,10 @@
                 function regionTreeList() {
                     $http({
                         method: 'get',
-                        url: regionTreeUrl
+                        url: regionTreeUrl,
+                        params:{
+                            parentCode:120103000000
+                        }
                     }).success(function (res) {
                         // console.log(res)
                         if (res.resCode == 1) {
@@ -142,7 +145,7 @@
                         }
                     }).error(function () {
                     });
-                };
+                }
 
                 /**
                  * 区域树模态框
@@ -199,10 +202,10 @@
                 }
 
                 //满意度监听
-                $scope.getAssessChange = function (id){
-                    if(id == 0){
+                $scope.getAssessChange = function (id) {
+                    if (id == 0) {
                         $scope.showInput = true;
-                    }else {
+                    } else {
                         $scope.showInput = false;
                     }
                 }
@@ -224,10 +227,10 @@
                             supervisor: $scope.patrolperson,
                             regionName: $scope.regionName,
                             isSatisfied: $scope.assess,
-                            problemPosition:$scope.problemPosition
+                            problemPosition: $scope.problemPosition
                         },
                         callBack: function (res) {
-                            if(res.data){
+                            if (res.data) {
                                 $scope.moduleList = res.data.list;
                                 $scope.paginationConf.totalItems = res.data.total;
                             }
@@ -248,45 +251,44 @@
                     $scope.supervisor = module.supervisor;
                     $scope.otherReason = module.otherReason;
                     $scope.assess1 = module.isSatisfied;
+                    $scope.status = module.status;
                     $scope.reason = module.dissatisfiedReason.split('|');
-                    $.each($scope.reason,function(i,item){
-                        $("input[type='checkbox'][value="+item+"]").attr("checked","checked");
+                    $.each($scope.reason, function (i, item) {
+                        $("input[type='checkbox'][value=" + item + "]").attr("checked", "checked");
                     });
-                    if($scope.assess1 == 0){
+                    if ($scope.assess1 == 0) {
                         $scope.showInput = true;
-                    }else{
+                    } else {
                         $scope.showInput = false;
                     }
                 }
 
 
-
                 //修改评价满意度
-                $scope.submit = function (){
-                    $('input[type="checkbox"]:checked').each(function(){
+                $scope.submit = function () {
+                    $('input[type="checkbox"]:checked').each(function () {
                         $scope.checkList.push($(this).val());
                     });
                     var params = {
                         id: $scope.editId,
                         termNumber: $scope.evaluationDate,
-                        riverName: $scope.riverName1 ,
-                        problemPosition: $scope.problemPosition1 ,
+                        riverName: $scope.riverName1,
+                        problemPosition: $scope.problemPosition1,
                         districtChairman: $scope.districtChairman,
                         townChairman: $scope.townChairman,
                         supervisor: $scope.supervisor,
                         otherReason: $scope.otherReason,
-                        isSatisfied:$scope.assess1,
-                        dissatisfiedReason:$scope.checkList ? $scope.checkList.join('|') : ''
+                        isSatisfied: $scope.assess1,
+                        dissatisfiedReason: $scope.checkList ? $scope.checkList.join('|') : ''
                     }
-                    if(
+                    if (
                         $scope.evaluationDate && $scope.riverName1 && $scope.problemPosition1 && $scope.districtChairman && $scope.townChairman
                         && $scope.supervisor && $scope.otherReason && $scope.assess1 && $scope.checkList
-                    )
-                    {
+                    ) {
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/SocialEvaluation/updateEvaluation',
                             method: 'put',
-                            params:params,
+                            params: params,
                             callBack: function (res) {
                                 if (res.resCode == 1) {
                                     layer.msg("修改成功！", {time: 2000});
@@ -295,7 +297,7 @@
                                 }
                             }
                         })
-                    }else{
+                    } else {
                         layer.alert("输入项不允许为空", {
                             skin: 'my-skin',
                             closeBtn: 1,
