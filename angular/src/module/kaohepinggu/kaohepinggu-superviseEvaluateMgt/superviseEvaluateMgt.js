@@ -288,30 +288,19 @@
                         status:$scope.status,
                         dissatisfiedReason: $scope.checkList ? $scope.checkList.join('|') : ''
                     }
-                    if (
-                        $scope.evaluationDate && $scope.riverName1 && $scope.problemPosition1 && $scope.districtChairman && $scope.townChairman
-                        && $scope.supervisor && $scope.otherReason && $scope.assess1 && $scope.checkList
-                    ) {
-                        $ajaxhttp.myhttp({
-                            url: apiPrefix + '/v1/SocialEvaluation/updateEvaluation',
-                            method: 'put',
-                            params: params,
-                            callBack: function (res) {
-                                if (res.resCode == 1) {
-                                    layer.msg("修改成功！", {time: 2000});
-                                    $('#myModal').modal('hide')
-                                    getModuleList();
-                                }
+                    // console.log(params);
+                    $ajaxhttp.myhttp({
+                        url: apiPrefix + '/v1/SocialEvaluation/updateEvaluation',
+                        method: 'put',
+                        params: params,
+                        callBack: function (res) {
+                            if (res.resCode == 1) {
+                                layer.msg("修改成功！", {time: 2000});
+                                $('#myModal').modal('hide')
+                                getModuleList();
                             }
-                        })
-                    } else {
-                        layer.alert("输入项不允许为空", {
-                            skin: 'my-skin',
-                            closeBtn: 1,
-                            anim: 3
-                        });
-                    }
-
+                        }
+                    })
                 }
 
                 /**
