@@ -172,10 +172,10 @@
 
 
                 $('#J-searchTime').datetimepicker({
-                    format: 'YYYY-MM-DD',
+                    format: 'YYYY-MM',
                     locale: moment.locale('zh-cn')
                 }).on('dp.change', function (c) {
-                    $scope.searchTime = new moment(c.date).format('YYYY-MM-DD');
+                    $scope.searchTime = new moment(c.date).format('YYYY-MM');
                     $scope.$apply();
                 });
                 $('#J-searchTime1').datetimepicker({
@@ -240,6 +240,8 @@
 
                 //修改
                 $scope.edit = function (module) {
+                    $scope.isDisabled = false;
+
                     $('#myModal').modal('show');
 
                     $scope.editId = module.id;
@@ -252,6 +254,10 @@
                     $scope.otherReason = module.otherReason;
                     $scope.assess1 = module.isSatisfied;
                     $scope.status = module.status;
+                    if($scope.status == 3){
+                        $scope.isDisabled = true;
+                    }
+
                     $scope.reason = module.dissatisfiedReason.split('|');
                     $.each($scope.reason, function (i, item) {
                         $("input[type='checkbox'][value=" + item + "]").attr("checked", "checked");
@@ -279,6 +285,7 @@
                         supervisor: $scope.supervisor,
                         otherReason: $scope.otherReason,
                         isSatisfied: $scope.assess1,
+                        status:$scope.status,
                         dissatisfiedReason: $scope.checkList ? $scope.checkList.join('|') : ''
                     }
                     if (

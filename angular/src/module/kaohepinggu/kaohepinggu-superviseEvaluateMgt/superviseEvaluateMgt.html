@@ -81,7 +81,7 @@
                                 <a class="btn btn-primary btn-xs" ng-click="getHydrologicDetail(module.id)">
                                     <i class="fa fa-info" title="查看"></i>
                                 </a>
-                                <a class="btn btn-primary btn-xs" ng-click="edit(module)" ng-if="module.status != 3">
+                                <a class="btn btn-primary btn-xs" ng-click="edit(module)">
                                     <i class="fa fa-pencil" title="修改"></i>
                                 </a>
                                 <a class="btn btn-primary btn-xs" ng-click="getHydrologicDelete(module.id,module.name)">
@@ -144,9 +144,12 @@
                         </div>
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理状态</font></font></label>
-                            <label ng-if="status == 1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">待受理</font></font></label>
-                            <label ng-if="status == 2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理中</font></font></label>
-                            <label ng-if="status == 3"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">已办结</font></font></label>
+                            <select ng-model="status" class="form-control select-short" ng-disabled="isDisabled">
+                                <option value="">请选择</option>
+                                <option value="1">待受理</option>
+                                <option value="2">处理中</option>
+                                <option value="3">已办结</option>
+                            </select>
                         </div>
                         <div class="form-item">
                             <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">其它说明</font></font></label>

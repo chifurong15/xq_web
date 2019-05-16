@@ -50,6 +50,12 @@
                             <label>是否满意：</label>
                             <span>{{superviseList.isSatisfied == 0 ? '不满意' : '满意'}}</span>
                         </div>
+                        <div class="form-item">
+                            <label>处理状态：</label>
+                            <span ng-if="superviseList.status == 1">待受理</span>
+                            <span ng-if="superviseList.status == 2">处理中</span>
+                            <span ng-if="superviseList.status == 3">已办结</span>
+                        </div>
                         <br>
                         <div class="form-item" ng-show="showInput">
                             <label>不满意原因：</label>
