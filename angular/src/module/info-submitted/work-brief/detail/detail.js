@@ -32,6 +32,8 @@
 
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
                     $scope.detailId = localStorage.getItem('id');
+                    $scope.direction = localStorage.getItem('direction');
+                    console.log($scope.direction);
                     $scope.init = function () {
                         $scope.author = $scope.userInfo.name;
 
@@ -94,7 +96,7 @@
                             params:{
                                 pageNum:-1,
                                 pageSize:-1,
-                                grade:3
+                                parentCode:JSON.parse(localStorage.getItem('ngStorage-userLoginInfo')).userInfo.regionId
                             },
                             callBack:function (res) {
                                 $scope.regionList = res.data.list;

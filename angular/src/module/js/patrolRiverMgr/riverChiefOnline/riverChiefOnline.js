@@ -31,10 +31,10 @@
             'ReachService',
             'GeometryUtil',
             'queryAdminregion',
-            'WorkbenchService',
+            // 'WorkbenchService',
             function riverChiefOnlineCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http,
                                           wish, esriApiDeps, tiandituFactory, MapTool, MapUtil, EventService, PatrolRiverService, RiverChiefOnlineService,
-                                          ReachService, GeometryUtil, queryAdminregion,WorkbenchService) {
+                                          ReachService, GeometryUtil, queryAdminregion) {
 
                 var promise = esriApiDeps.query();
                 var w = wish.get();
@@ -52,7 +52,7 @@
                     PatrolRiverService.init($scope.map, "patrolRiverLayer");
                     ReachService.init($scope.map, $scope.checkRegionId);
                     RiverChiefOnlineService.init($scope.map, "riverChiefOnlineLayer");
-                    WorkbenchService.init($scope.map, "workbenchLayer");
+                    // WorkbenchService.init($scope.map, "workbenchLayer");
                     //自适应模态框
                     modalContainer();
                 };
@@ -225,10 +225,10 @@
                             if (treeNode["spatialData"] && treeNode["spatialData"] !== null && treeNode["spatialData"] !== "") {
                                 var regionLayer = $scope.map.getLayer("adminregionLayer");
                                 regionLayer.clear();
-                                WorkbenchService.addParentGraphic(treeNode["spatialData"], true);
+                                // WorkbenchService.addParentGraphic(treeNode["spatialData"], true);
                             }else {
-                                WorkbenchService.clearReginLayer();
-                                console.warn("spatialData is null");
+                                // WorkbenchService.clearReginLayer();
+                                // console.warn("spatialData is null");
                             }
                         }
                     }else{

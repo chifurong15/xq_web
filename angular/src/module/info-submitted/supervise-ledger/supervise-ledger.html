@@ -1,0 +1,123 @@
+<div class="conferenceCtrl" ng-controller="superviseLedger" ng-init="init()">
+    <div class="wrapper-md ">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">督办工作台账</span><span class="tag-right"></span>
+            </div>
+        </div>
+        <div class="panel panel-default m-all-0" style="margin: -1px 0">
+            <div class="panel-body">
+                <form method="get">
+                    <div class="form-inline">
+                        <div class="form-item">
+                            <label>开始时间</label>
+                            <div class="input-group date date_picker" id="startTime">
+                                <input type="text" class="form-control input-short-o" ng-model="startTime">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <label>结束时间</label>
+                            <div class="input-group date date_picker" id="endTime">
+                                <input type="text" class="form-control input-short-o" ng-model="endTime">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                        <button type="submit" ng-click="searchData()" class="btn btn-primary">
+                            <i class="fa fa-search"></i> 搜索
+                        </button>
+                        <button type="reset" class="btn btn-primary" ng-click="reset()" style="margin: 0 5px;">
+                            <i class="fa fa-refresh"></i> 重置
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <div class="form-inline">
+                        <div class="input-group fr">
+                            <button type="button" class="btn btn-primary btn-sm" ng-click="download()">
+                                <i class="fa fa-sign-in"></i> 导出
+                            </button>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th>序号</th>
+                            <th>是否挂牌</th>
+                            <th>文件文号</th>
+                            <th>文件题目</th>
+                            <th>督办日期</th>
+                            <th >督办问题个数</th>
+                            <th>要求上报日期</th>
+                            <th >实际上报日期</th>
+                            <th >电话催办次数</th>
+                            <th >督办次数</th>
+                            <th >备注</th>
+                            <th style="width: 8%">操作</th>
+                        </tr>
+                        <tr ng-repeat="item in dataList">
+                            <td>{{$index+1}}</td>
+                            <td>{{item.type}}</td>
+                            <td>{{item.proof}}</td>
+                            <td>{{item.title}}</td>
+                            <td>{{item.issuedtime}}</td>
+                            <td>{{item.problemnum}}</td>
+                            <td>{{item.deadlinedate}}</td>
+                            <td>{{item.replydate}}</td>
+                            <td>{{item.phonenum}}</td>
+                            <td>{{item.dubannum}}</td>
+                            <td>{{item.remark}}</td>
+                            <td ng-click="edit(item.id)"><button class="btn btn-primary btn-xs">修改</button></td>
+                        </tr>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal fade" id="editMyModal" tabindex="-1" role="dialog"
+             data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="closeModal()">
+                            &times;
+                        </button>
+                        <h4 class="modal-title">
+                            修改
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-inline">
+                            <div class="form-item">
+                                <label>督办问题个数</label>
+                                <input type="number" class="form-control input-short" ng-model="problemnum"/>
+                            </div>
+                            <div class="form-item">
+                                <label>电话催办次数</label>
+                                <input type="number" class="form-control input-short" ng-model="phonenum"/>
+                            </div>
+                            <div class="form-item">
+                                <label>督办次数</label>
+                                <input type="number" class="form-control input-short" ng-model="dubannum"/>
+                            </div>
+                            <div class="form-item">
+                                <label>备注</label>
+                                <textarea class="form-control" rows="3" ng-model="remark"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="save()">保存</button>
+                        <button type="button" class="btn btn-primary" ng-click="closeModal()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

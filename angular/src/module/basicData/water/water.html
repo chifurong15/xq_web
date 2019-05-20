@@ -1,0 +1,80 @@
+<div ng-controller="waterCtrl" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-all-0 border-bottom-n">
+            <div class="panel-body">
+                <form class="form-inline query-conditions-form" method="get">
+                    <div class="form-item">
+                        <label>水系名称</label>
+                        <input type="text" class="form-control input-short" ng-model="water_name">
+                    </div>
+                    <div class="form-item">
+                        <label>所属流域</label>
+						<select ng-init="belongDrainage()" ng-model="b_Water" ng-options="pm.id as pm.basinName for pm in belongDrainages" class="form-control select-short">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-search" ng-click="find()">搜 索</button>
+					<button type="button" class="btn btn-reset" ng-click="reSet()">重 置</button>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <div class="table-bar">
+                        <button class="btn btn-primary" ng-click="waterAdd()">
+                            <i class="icon-jx_add"></i> 新增
+                        </button>
+                       <!--  <button class="btn btn-default">
+                            <a href="#/app/index/9805804528df43cebebad36098a44a70_1_537"><i class="icon-jx_import"></i> 导入</a>
+                        </button> -->
+                      <!--   <button class="btn btn-default" ng-click="dataExport()">
+                            <i class="icon-jx_export"></i> 导出
+                        </button> -->
+                    </div>
+                    <table class="table table-bordered table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th width="90">序号</th>
+                                <th width="350">水系代码</th>
+                                <th>水系名称</th>
+                                <th>所属流域</th>
+                                <th>备注</th>
+                                <th width="180">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="module in moduleList | filter:{catchment:selectedCatchment}" ng-init="index=$index+1">
+                                <td>{{index + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
+                                <td>{{module.waterCode}}</td>
+                                <td>{{module.waterName}}</td>
+                                <td>{{module.basinName}}</td>
+                                <td class="remark">{{module.remark}}</td>
+                                <td class="td-tool">
+
+                                    <a class="btn btn-primary btn-xs" ng-click="waterDetail(module.id)" title="详细"><i class="fa fa-info"></i></a>
+                                    <a class="btn btn-primary btn-xs" ng-click="waterEdit(module.id)" title="修改"><i class="fa fa-edit"></i></a>
+                                    <a class="btn btn-primary btn-xs" ng-click="moveUp(module.id)" ng-if="moveIcon" title="上移"><i class="fa fa-chevron-up"></i></a>
+                                    <a class="btn btn-primary btn-xs" ng-click="moveDown(module.id)" ng-if="moveIcon" title="下移"><i class="fa fa-chevron-down"></i></a>
+                                    <a class="btn btn-primary btn-xs" ng-click="moduleDelete(module.id,module.name)" title="删除"><i class="fa fa-trash-o"></i></a>
+
+
+
+
+
+
+                                  <!--   <a class="btn btn-xs" ng-click="waterDetail(module.id)" title="详细"><i class="icon-jx_info"></i></a>
+                                    <a class="btn btn-xs" ng-click="waterEdit(module.id)" title="修改"><i class="icon-jx_edit"></i></a>
+                                    <a class="btn btn-xs" ng-click="moveUp(module.id)" ng-if="moveIcon" title="上移"><i class="icon-jx_up"></i></a>
+                                    <a class="btn btn-xs" ng-click="moveDown(module.id)" ng-if="moveIcon" title="下移"><i class="icon-jx_down"></i></a>
+                                    <a class="btn btn-xs" ng-click="moduleDelete(module.id,module.name)" title="删除"><i class="icon-jx_delete_form"></i></a> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+        </div>
+    </div>
+</div>

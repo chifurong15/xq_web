@@ -1,0 +1,29 @@
+#myTab .active, #myTabContent .active {
+    background: #ffffff;
+    color: #000000;
+}
+
+#home .form-group {
+    margin: 10px;
+}
+
+/*必填项*/
+.form-item font {
+    color: red;
+    font-size: 14px;
+    line-height: 34px;
+}
+
+
+.rl-tab-content {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-top: none;
+    height: 400px;
+    overflow: auto;
+    margin: 0
+}
+
+.pdfobject-container {
+    height: 370px;
+}

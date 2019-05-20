@@ -345,6 +345,19 @@
       "description": "水质数据"
     },
     {
+      "seqId": "3-16",
+      "parentId": "3-0",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "水质评分报告",
+      "icon": "fa fa-lemon-o",
+      "url": "module/kaohepinggu/water-quality-score/water-quality-score.html",
+      "requireJS": [
+        "module/kaohepinggu/water-quality-score/water-quality-score.js"
+      ],
+      "description": "水质数据"
+    },
+    {
       "seqId": "3-2-4",
       "parentId": "3-0",
       "isLeaf": true,
@@ -460,6 +473,19 @@
         "module/kaohepinggu/kaohepinggu-riverRanking/kaohepinggu-riverRanking.js"
       ],
       "description": "考核评分-河段排名"
+    },
+    {
+      "seqId": "3-14",
+      "parentId": "3",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "巡查河段考核配置",
+      "icon": "menu-icon-6",
+      "url": "module/kaohepinggu/inspection-river-config/inspection-river-config.html",
+      "requireJS": [
+        "module/kaohepinggu/inspection-river-config/inspection-river-config.js"
+      ],
+      "description": "系统管理-考核设置"
     },
     {
       "seqId": "3-11",
@@ -1164,6 +1190,62 @@
       "description": "二级菜单-督导检查情况"
     },
     {
+      "seqId": "8-7",
+      "parentId": "8",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "协调解决问题",
+      "menuType": 1,
+      "icon": "fa fa-building",
+      "url": "module/info-submitted/coordinate-solve-problem/coordinate-solve-problem.html",
+      "requireJS": [
+        "module/info-submitted/coordinate-solve-problem/coordinate-solve-problem.js"
+      ],
+      "description": "二级菜单-协调解决问题"
+    },
+    {
+      "seqId": "8-8",
+      "parentId": "8",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "监督管理不到位情况",
+      "menuType": 1,
+      "icon": "fa fa-building",
+      "url": "module/info-submitted/supervision-institution/supervision-institution.html",
+      "requireJS": [
+        "module/info-submitted/supervision-institution/supervision-institution.js"
+      ],
+      "description": "二级菜单-监督管理不到位情况"
+    },
+    {
+      "seqId": "8-9",
+      "parentId": "8",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "督办台账",
+      "menuType": 1,
+      "icon": "fa fa-building",
+      "url": "module/info-submitted/supervise-ledger/supervise-ledger.html",
+      "requireJS": [
+        "module/info-submitted/supervise-ledger/supervise-ledger.js"
+      ],
+      "description": "二级菜单- 市河长办督办工作台账"
+    },
+    {
+      "seqId": "8-10",
+      "parentId": "8",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "帮扶困难村工作进展情况",
+      "menuType": 1,
+      "icon": "fa fa-building",
+      "url": "module/info-submitted/poverty-alleviation/poverty-alleviation.html",
+      "requireJS": [
+        "module/info-submitted/poverty-alleviation/poverty-alleviation.js"
+      ],
+      "description": "二级菜单- 天津市帮扶困难村工作进展情况工作台账"
+    },
+    {
       "seqId": "8-4",
       "parentId": "8",
       "isLeaf": false,
@@ -1348,6 +1430,32 @@
       "description": "分析统计-河长的巡河情况"
     },
     {
+      "seqId": "5-21",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "河湖水质",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/riverAndLakeQuality/riverAndLakeQuality.html",
+      "requireJS": [
+        "module/fenxitongji/riverAndLakeQuality/riverAndLakeQuality.js"
+      ],
+      "description": "分析统计-河湖水质"
+    },
+    {
+      "seqId": "5-22",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "督办统计",
+      "icon": "menu-icon-6",
+      "url": "module/fenxitongji/supervision-statistics/supervision-statistics.html",
+      "requireJS": [
+        "module/fenxitongji/supervision-statistics/supervision-statistics.js"
+      ],
+      "description": "分析统计-督办统计"
+    },
+    {
       "seqId": "1003",
       "name": "流域新增",
       "url": "src/module/drainage/drainage-add.html",
@@ -1419,6 +1527,19 @@
         "module/kaohepinggu/kaohepinggu-shuizhi/koahepinggu-update/kaohepinggu-update.js"
       ],
       "description": "水质管理-修改"
+    },
+    {
+      "seqId": "3-16-5",
+      "parentId": "3-0",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "水质评分报告详情",
+      "icon": "fa fa-lemon-o",
+      "url": "module/kaohepinggu/water-quality-score/detail/detail.html",
+      "requireJS": [
+        "module/kaohepinggu/water-quality-score/detail/detail.js"
+      ],
+      "description": "水质评分报告详情"
     },
     {
       "seqId": "3-3-2",

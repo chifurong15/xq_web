@@ -38,24 +38,58 @@
                                 <tr ng-init="index=$index+1">
                                     <td>{{index}}</td>
                                     <td><a ng-click="view(dataList.regionId)">{{dataList.regionName}}</a></td>
-
-
-                                    <td>{{dataList.bigRiverNum}}</td>
-                                    <td>{{dataList.otherRiverNum}}</td>
-                                    <td>{{dataList.bigOtherRiverNum}}</td>
-                                    <td>{{dataList.sumRiverNum}}</td>
-
-
-                                    <td>{{dataList.bigLakeNum}}</td>
-                                    <td>{{dataList.smallLakeNum}}</td>
-                                    <td>{{dataList.otherLakeNum}}</td>
-                                    <td>{{dataList.sumLakeNum}}</td>
-
-                                    <td>{{dataList.riverLakeNum}}</td>
+                                    <td><a ng-click="getPeopleList(dataList.regionId,1)">{{dataList.bigRiverNum}}</a></td>
+                                    <td><a ng-click="getPeopleList(dataList.regionId,2)">{{dataList.otherRiverNum}}</a></td>
+                                    <td><a ng-click="getPeopleList(dataList.regionId,3)">{{dataList.bigOtherRiverNum}}</a></td>
+                                    <td><a ng-click="getPeopleList(dataList.regionId,4)">{{dataList.sumRiverNum}}</a></td>
+                                    <td><a ng-click="getPeopleList(dataList.regionId,5)">{{dataList.bigLakeNum}}</a></td>
+                                    <td><a ng-click="getPeopleList(dataList.regionId,6)">{{dataList.smallLakeNum}}</a></td>
+                                    <td><a ng-click="getPeopleList(dataList.regionId,7)">{{dataList.otherLakeNum}}</a></td>
+                                    <td><a ng-click="getPeopleList(dataList.regionId,8)">{{dataList.sumLakeNum}}</a></td>
+                                    <td><a ng-click="getPeopleList(dataList.regionId,9)">{{dataList.riverLakeNum}}</a></td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="peopleModal" tabindex="-1" role="dialog"
+             data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="closeModal()">
+                            &times;
+                        </button>
+                        <h4 class="modal-title">
+                            详情
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered table-hover ">
+                            <tbody class="bTable">
+                            <tr class='tHeader'>
+                                <th>序号</th>
+                                <th>河长姓名</th>
+                                <th>区域</th>
+                                <th>类型</th>
+                                <th>职务</th>
+                                <th>联系电话</th>
+                            </tr>
+                            <tr ng-repeat="people in peopleList" ng-init="index=$index+1">
+                                <td>{{index}}</td>
+                                <td>{{people.userName}}</td>
+                                <td>{{people.regionName}}</td>
+                                <td>{{people.type}}</td>
+                                <td>{{people.position}}</td>
+                                <td>{{people.telphone}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <tm-pagination conf="paginationConf"></tm-pagination>
                     </div>
                 </div>
             </div>

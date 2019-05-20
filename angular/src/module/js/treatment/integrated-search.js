@@ -61,6 +61,7 @@
 											regionId: $scope.regionId,
 											status: $scope.status,
 											reportPhone: $scope.eventTel,
+											problemSources:$scope.problemSources,
 											pageNum: $scope.paginationConf.currentPage,
                     						pageSize: $scope.paginationConf.itemsPerPage
 										},

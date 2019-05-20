@@ -1,0 +1,22 @@
+.roleBox li{
+	padding: 10px 15px;
+}
+.roleBox li.afterClick{
+	background-color: #DEECF8;
+	color: #3B86FF;
+}
+.roleBox li .menuAuthcheckBox{
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	background-image: url('../img/roleNoCheck.png');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+.roleBox li .menuAuthcheckBox.menuIsCheck{
+	background-image: url('../img/roleCheck.png');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}

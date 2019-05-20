@@ -1,0 +1,129 @@
+.navbar-nav > li.navbar-li a i {
+    width: 28px;
+    height: 28px;
+    margin: 0 17px;
+}
+
+/* 河长门户 */
+.nav-1 {
+    background: url("../img/nav/nav-1.png");
+}
+
+/* 一张图 */
+.nav-2 {
+    background: url("../img/nav/nav-2.png");
+}
+
+/* 治河专题 */
+.nav-3 {
+    background: url("../img/nav/nav-3.png");
+}
+
+/* 协同办公 */
+.nav-4 {
+    background: url("../img/nav/nav-4.png");
+}
+
+/* 大数据应用 */
+.nav-5 {
+    background: url("../img/nav/nav-5.png");
+}
+
+/* 应急会商 */
+.nav-6 {
+    background: url("../img/nav/nav-6.png");
+}
+
+/* 信息管理 */
+.nav-7 {
+    background: url("../img/nav/nav-7.png");
+}
+
+/* 系统管理 */
+.nav-8 {
+    background: url("../img/nav/nav-8.png");
+}
+
+/* 河湖监管 */
+.nav-9 {
+    background: url("../img/nav/nav-9.png");
+}
+
+/* 公众信息 */
+.nav-10 {
+    background: url("../img/nav/nav-10.png");
+}
+
+/* 视频监控 */
+.nav-11 {
+    background: url("../img/nav/nav-11.png");
+}
+
+/* 数据管理 */
+.nav-12 {
+    background: url("../img/nav/nav-12.png");
+}
+
+.navbar-tool {
+    position: absolute;
+    right: 0;
+    width: 16px;
+    height: 80px;
+    padding: 20px 0;
+    display: none;
+}
+.grandeur #navbar-nav .navbar-tool a {
+    float: left;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    line-height: 16px;
+    margin: 2px 0;
+}
+/*头部导航*/
+@media (max-width: 1425px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-toggle {
+        display: block;
+        float: right;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: right!important;
+        /*background: #f8f8f8;*/
+        width: 75px;
+        /*border: 1px solid #ddd;*/
+        border-top: none;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .collapse.in{
+        display:block !important;
+    }
+}
+
+/*
+!*修改*!
+@media (min-width: 768px) {
+    .navbar-header {
+        width: 0px !important;
+    }
+}
+*/

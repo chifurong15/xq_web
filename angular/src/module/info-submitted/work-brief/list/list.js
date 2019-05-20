@@ -22,7 +22,7 @@
                                         routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl() + '/messageSent';
-                    // var apiPrefix = 'http://10.0.9.110:7028' + '/messageSent';
+                    // var apiPrefix = 'http://10.0.9.133:7028' + '/messageSent';
 
 
                     var regionTree;
@@ -131,7 +131,7 @@
                             params:{
                                 pageNum:-1,
                                 pageSize:-1,
-                                grade:3
+                                parentCode:JSON.parse(localStorage.getItem('ngStorage-userLoginInfo')).userInfo.regionId
                             },
                             callBack:function (res) {
                                 $scope.regionList = res.data.list;
@@ -182,8 +182,9 @@
                     }
 
                     // 查看
-                    $scope.view = function (id) {
+                    $scope.view = function (id,direction) {
                         localStorage.setItem('id',id);
+                        localStorage.setItem('direction',direction);
                         routeService.route('8-1-1', true);
                         changeState(id);
                     }

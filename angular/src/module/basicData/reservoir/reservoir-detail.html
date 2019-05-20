@@ -1,0 +1,107 @@
+<div ng-controller="reservoirDetailCtrl" ng-init="init()">
+	<div class="wrapper-md">
+		<div class="panel panel-default m-all-0">
+			<div class="panel-body pos-rlt panel-map">
+	                <div ng-init="mapMin = true; mapType = 'polygon'; objOpera = 'view'">
+					<basic-map obj="reservoir" map-min="mapMin" map-type="mapType" obj-opera="objOpera"></basic-map>
+				</div>
+					<div class="reservoirDetailContent m-t-20">
+						<div class="form-item">
+							<label>水库名称：</label>
+							<span ng-bind="reservoir.reservoirName"></span>
+						</div>
+						<div class="form-item">
+	                        <label>所属区域：</label>
+							<span ng-bind="reservoir.regionName"></span>
+	                    </div>
+						<div class="form-item">
+							<label>所属水系：</label>
+							<span ng-bind="reservoir.waterName"></span>
+						</div>
+						<div class="form-item">
+							<label>水库类型：</label>
+							<span ng-bind="reservoir.reservoirTypeName"></span>
+						</div>
+						<div class="form-item">
+							<label>水库面积：</label>
+							<span ng-bind="reservoir.acreage"></span>
+                            <span>km</span>
+						</div>
+						<div class="form-item">
+							<label>水库岸别：</label>
+							<span ng-bind="reservoir.reservoirShoreName"></span>
+						</div>
+                        <div class="form-item">
+                            <label>管理单位：</label>
+							<span ng-bind="reservoir.managementUnit"></span>
+                        </div>
+						<div class="form-item">
+							<label>水库库容：</label>
+							<span ng-bind="reservoir.capacity"></span> km<sup>3</sup>
+						</div>
+						<div class="form-item">
+							<label>位置描述：</label>
+							<span ng-bind="reservoir.location"></span>
+						</div>
+						 <div class="form-item">
+							<label>所跨区域：</label>
+							<span ng-bind="reservoir.throughAreaName"></span>
+						</div>
+						<br>
+	                    <div class="remark-panel">
+							<label>概述内容：</label>
+							<div class="remark-info">
+								<p ng-bind-html="reservoir.overView|trustHtml"></p>
+							</div>
+						</div>
+						<div class="remark-panel">
+							<label>备注信息：</label>
+							<div class="remark-info">
+								<p ng-bind="reservoir.remark"></p>
+							</div>
+						</div>
+						<div class="form-item">
+						<label>图片</label>
+							<div ng-repeat="img in reservoir.jsonImages track by $index" class="file-thumbnail-block">
+	                            <div ng-if="['png','jpg','jpeg','gif'].indexOf(img.extension) > -1" style="height: 100%">
+	                                <a href="{{img.url}}" target="_blank" title="{{img.name}}">
+	                                    <img width="100%" ng-src={{img.url}}>
+	                                </a>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <br>
+	                    <div class="form-item">
+							<label>文件</label>
+							<div ng-repeat="file in reservoir.jsonFiles track by $index" class="file-thumbnail-block">
+	                            <div ng-if="['doc','docx'].indexOf(file.extension) > -1" style="height: 100%">
+	                                <a href="{{file.url}}" title="{{file.name}}">
+	                                    <img style="margin: 10px 0 3px" ng-src="img/word.png">
+	                                    <p>{{file.name}}</p>
+	                                </a>
+	                            </div>
+	                            <div ng-if="['xls','xlsx','xlsm'].indexOf(file.extension) > -1" style="height: 100%">
+	                                <a href="{{file.url}}" title="{{file.name}}">
+	                                    <img style="margin: 10px 0 3px" ng-src="img/excel.png">
+	                                    <p>{{file.name}}</p>
+	                                </a>
+	                            </div>
+	                            <div ng-if="['pdf'].indexOf(file.extension) > -1" style="height: 100%">
+	                                <a href="{{file.url}}" title="{{file.name}}">
+	                                    <img style="margin: 10px 0 3px" ng-src="img/pdf.png">
+	                                    <p>{{file.name}}</p>
+	                                </a>
+	                            </div>
+	                        </div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="panel-footer m-b-10">
+				<div class="btn-box">
+					<button type="submit" class="btn btn-default" ng-click="back()">返回</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

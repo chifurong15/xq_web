@@ -122,10 +122,10 @@ angular.module('app')
                         //_that._dataSource = data.data;
                         _that.addGraphic(data.data);
                     }else{
-                        console.warn("data is null");
+                        console.log("data is null");
                     }
                 }).error(function(){
-                    console.error("data query error");
+                    console.log("data query error");
                 });
 
 
@@ -263,10 +263,10 @@ angular.module('app')
                         //查询巡河河道信息
                         _that.getReachLineByPatrolId(patrolId);
                     }else{
-                        console.error("PatrolLine data is null");
+                        console.log("PatrolLine data is null");
                     }
                 }).error(function(){
-                    console.error("data query error");
+                    console.log("data query error");
                 });
 
                 //实时轨迹测试数据
@@ -414,10 +414,10 @@ angular.module('app')
                             _that._oldCoords = coordsArr;
                         }
                     }else{
-                        console.error("data is null");
+                        console.log("data is null");
                     }
                 }).error(function(){
-                    console.error("data query error");
+                    console.log("data query error");
                 });
 
             };
@@ -510,7 +510,7 @@ angular.module('app')
                         _path = "img/esri-icon/patrol/walkNE.gif";
                     }
                 }else {
-                    _path = "img/esri-icon/patrol/walkL.gif";
+                    _path = "img/esri-icon/patrol/walkR.gif";
                 }
                 return _path;
             };
@@ -589,7 +589,7 @@ angular.module('app')
                         break;
                     case 2: //巡河中
                         //iconObject.path = "img/esri-icon/hzstatus/riverChief-patrol.png";
-                        iconObject.path = "img/esri-icon/patrol/walkL.gif";
+                        iconObject.path = "img/esri-icon/patrol/walkR.gif";
                         iconObject.sizeX = 36;
                         iconObject.sizeY = 36;
 
@@ -983,7 +983,7 @@ angular.module('app')
                                 console.warn("event data is null");
                             }
                         }).error(function(){
-                            console.error("event data query error");
+                            console.log("event data query error");
                         });
 
                         //事件测试
@@ -1071,7 +1071,7 @@ angular.module('app')
                                 console.warn("event data is null");
                             }
                         }).error(function(){
-                            console.error("event data query error");
+                            console.log("event data query error");
                         });
 
 
@@ -1310,10 +1310,10 @@ angular.module('app')
                     if(data.data && data.resCode == 1){
                         _that.addReachLineToMap(data.data, true);
                     }else{
-                        console.error("data is null");
+                        console.log("data is null");
                     }
                 }).error(function(){
-                    console.error("data query error");
+                    console.log("data query error");
                 });
             };
             this.addReachLineToMap = function (data, isVisible) {
@@ -1498,7 +1498,7 @@ angular.module('app')
                 var coordsArr = [];
 
                 startImgPath = "img/esri-icon/patrol/start.png";
-                walkImgPath = "img/esri-icon/patrol/walkL.gif";
+                walkImgPath = "img/esri-icon/patrol/walkR.gif";
                 endImgPath = "img/esri-icon/patrol/end.png";
                 var startPoint, endPoint, startSymbol, endSymbol;
 

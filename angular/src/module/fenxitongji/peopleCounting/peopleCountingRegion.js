@@ -56,7 +56,54 @@
 
                         routeService.route('5-7', true);
 
+                    };
+                    $scope.getPeopleList=function (regionId,index) {
+                        $scope.regionId=regionId;
+                        $scope.currentIndex=index;
+                        requestPeopleList();
+                        $('#peopleModal').modal('show')
+                    };
+
+                    $scope.closeModal=function () {
+                        $scope.peopleList =[];
+                        $scope.paginationConf.totalItems=0;
+                        $scope.paginationConf.currentPage=1;
+                        $scope.paginationConf.itemsPerPage=10;
+                        $('#peopleModal').modal('hide')
+                    };
+
+                    function requestPeopleList(){
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/ProblemAnalysisController/selectUserRoleByQDetail',
+                            method: 'get',
+                            params:{
+                                regionId:$scope.regionId,
+                                type:3,
+                                typeNum:$scope.currentIndex,
+                                pageNumber: $scope.paginationConf.currentPage,
+                                pageSize: $scope.paginationConf.itemsPerPage
+                            },
+                            callBack: function (res) {
+                                if(res.resCode===1){
+                                    $scope.peopleList = res.data.list;
+                                    $scope.paginationConf.totalItems=res.data.total;
+                                }
+                            }
+                        })
                     }
+
+                    // 配置分页基本参数
+                    $scope.paginationConf = {
+                        currentPage: 1,
+                        itemsPerPage: 10,
+                        pagesLength: 10,
+                        perPageOptions: [1, 2, 3, 4, 5, 10],
+                        onChange: function () {
+                            if ($scope.paginationConf.totalItems) {
+                                requestPeopleList();
+                            }
+                        }
+                    };
 
 
                 }]);

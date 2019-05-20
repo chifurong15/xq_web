@@ -79,6 +79,22 @@
                             <label>上报号码</label>
                             <input type="text" class="form-control input-short" ng-model="eventTel"/>
                         </div>
+                        <div class="form-item">
+                            <label>来源问题</label>
+                            <select class="form-control select-short" ng-change="selectChange();"
+                                    ng-model="problemSources">
+                                <option value="">请选择</option>
+                                <option value="1">巡查</option>
+                                <option value="2">暗查</option>
+                                <option value="3">督查</option>
+                                <option value="4">监督评价</option>
+                                <option value="5">监督举报</option>
+                                <option value="6">督办</option>
+                                <option value="7">整改</option>
+                                <option value="8">河长巡河</option>
+                                <option value="9">抽查</option>
+                            </select>
+                        </div>
                         <button type="submit" ng-click="searchData()" class="btn btn-primary">
                             <i class="fa fa-search"></i>搜索
                         </button>

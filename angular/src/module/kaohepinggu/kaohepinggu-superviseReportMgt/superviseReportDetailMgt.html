@@ -1,11 +1,11 @@
 <div ng-controller="superviseReportDetailMgtCtrl" ng-init="init()">
-    <div class="wrapper-md">
+	<div class="wrapper-md">
 		<div class="panel panel-default m-n">
 			<div class="panel-body" style="position: relative;">
 				<span class="tag">社会监督举报详情</span><span class="tag-right"></span>
 			</div>
 		</div>
-        <div class="panel panel-default m-all-0">
+		<div class="panel panel-default m-all-0">
 			<div class="panel-body">
 				<div class="panel-content">
 					<div class="patrolDetailContent">
@@ -14,11 +14,11 @@
 							<span ng-bind="reportList.reportDate"></span>
 						</div>
 						<div class="form-item">
-	                        <label>行政区域：</label>
+							<label>行政区域：</label>
 							<span ng-bind="reportList.regionName"></span>
-	                    </div>
+						</div>
 						<br />
-                      	<div class="form-item">
+						<div class="form-item">
 							<label>河段名称：</label>
 							<span ng-bind="reportList.riverName"></span>
 						</div>
@@ -35,13 +35,13 @@
 							<label>举报问题：</label>
 							<span ng-bind="reportList.reportProblem"></span>
 						</div>
-						<br />	
+						<br />
 						<div class="form-item">
 							<label>问题位置：</label>
 							<span ng-bind="reportList.problemPosition"></span>
 						</div>
 						<div class="form-item">
-							<label>限制日期：</label>
+							<label>办结日期：</label>
 							<span ng-bind="reportList.overTime"></span>
 						</div>
 						<br />
@@ -90,7 +90,7 @@
 							<button class="btn btn-info" ng-click="viewFile(1)"><i class="fa fa-css3"></i>查看附件</button>
 						</div>
 						<br />
-                        <div class="form-item">
+						<div class="form-item">
 							<label>批处理意见：</label>
 							<button class="btn btn-primary" ng-click="viewFile(2)"><i class="fa fa-css3"></i>查看附件</button>
 						</div>
@@ -101,8 +101,8 @@
 						</div>
 						<br />
 						<!--<div class="form-item">-->
-							<!--<label>处理状态：</label>-->
-							<!--<span ng-bind="reportList.processingStatus"></span>-->
+						<!--<label>处理状态：</label>-->
+						<!--<span ng-bind="reportList.processingStatus"></span>-->
 						<!--</div>-->
 						<div class="form-item">
 							<label>处理状态</label>

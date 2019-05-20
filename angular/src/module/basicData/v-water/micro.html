@@ -1,0 +1,89 @@
+<div ng-controller="dataController">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-all-0 border-bottom-n">
+            <div class="panel-body">
+                <form id="formId" class="form-inline query-conditions-form" method="get">
+                    <div class="form-item">
+                        <label>水体名称</label>
+                        <input type="text" class="form-control input-short" ng-model="find_name"/>
+                    </div>
+                    <div class="form-item">
+                        <label>水体状态</label>
+                        <select ng-init="getStateType()" ng-model="stateType" ng-options="lk.code as lk.name for lk in states"  class="form-control select-short">
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                	<div class="form-item">
+                        <label>所属区域</label>
+						<input ng-model="regionName" type="text" class="form-control input-short-o" ng-click="regionShow()" readonly>
+						<a class="input-group-addon" ng-click="regionShow()"><i class="icon-jx_search"></i></a>
+                    </div>
+					<button type="button" class="btn btn-search" ng-click="find()">搜 索</button>
+                    <button type="button" class="btn btn-reset" ng-click="reSet()">重 置</button>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <div class="table-bar">
+                        <button type="button" class="btn btn-primary" ng-click="add()">
+                            <i class="icon-jx_add"></i> 新增
+                        </button>
+                         <button type="button" class="btn btn-default" ng-click="deleteList()">
+                            <i class="icon-jx_delete"></i> 批量删除
+                        </button>
+                          <button type="button" class="btn btn-default" ng-click="editList()">
+                            <i class="icon-jx_close"></i> 批量剿灭
+                        </button>
+                    </div>
+                    <table class="table table-bordered table-hover text-center">
+                        <thead>
+                            <tr>
+                        	    <th width="60"><input type="checkbox" ng-model="allChecked" ng-click="selectAll(allChecked)"/></th>
+                                <th>名称</th>
+                                <th>控制级别</th>
+                                <th>所属区域</th>
+                                <th>责任河长</th>
+                                <th>水系名称</th>
+                                <th>河流名称</th>
+                                <th>类型</th>
+                                <th>状态</th>
+                                <th width="180">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="module in moduleList | filter:{catchment:selectedCatchment}" ng-init="index=$index+1">
+                            	<td><input type="checkbox" ng-model="module.checked" ng-click="selectOne(module.checked,module.id)"></td>
+    							<td>{{module.name}}</td>
+                                <td>{{module.controlName}}</td>
+                                <td>{{module.regionName}}</td>
+                                <td>{{module.userName}}</td>
+                                <td>{{module.basinname}}</td>
+                                <td>{{module.rivername}}</td>
+                                <td>{{module.typeName}}</td>
+                                <td>{{module.stateName}}</td>
+                                <td class="td-tool">
+
+                                    <a class="btn btn-primary btn-xs" ng-click="detail(module.id)" title="详细"><i class="fa fa-info"></i></a>
+                                    <a class="btn btn-primary btn-xs" ng-click="update(module.id)" title="修改"><i class="fa fa-edit"></i></a>
+                                    <a class="btn btn-primary btn-xs" ng-click="deleteOne(module.id)" title="删除"><i class="fa fa-trash-o"></i></a>
+
+
+
+                                    <!-- 
+                                    <a class="btn btn-xs" ng-click="detail(module.id)" title="详情"><i class="icon-jx_info"></i></a>
+                                    <a class="btn btn-xs" ng-click="update(module.id)" title="修改"><i class="icon-jx_edit"></i></a>
+                                    <a class="btn btn-xs" ng-click="deleteOne(module.id)" title="删除"><i class="icon-jx_delete_form"></i></a> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+        </div>
+    </div>
+    <tree-modal modal-tree-info = "{{modalTreeInfo}}"></tree-modal>
+</div>

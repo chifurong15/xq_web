@@ -1,0 +1,386 @@
+<!-- 部署时请注意文件路径 -->
+<div ng-controller="docCtrl" ng-init="init()">
+	<div class="wrapper-md">
+		<div class="panel panel-default">
+			<div class="panel panel-default p-l-15 p-r-15 p-t-15 p-b-15">
+				<div class="panel-body">
+					<div class="table-responsive">
+						<div class="table-bar">
+							<button type="button" class="btn btn-primary" ng-click="uploadDoc()">
+	                            <i class="icon-jx_add"></i> 上传文档
+	                        </button>
+						</div>
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th width="60">序号</th>
+									<th>文件名称</th>
+									<th>创建人</th>
+									<th>文档类别</th>
+									<th>创建时间</th>
+									<th>状态</th>
+									<th width="120">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="doc in docList track by $index" ng-init="index=$index+1">
+									<td>{{index + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
+									<td>{{doc.filename}}</td>
+									<td>{{doc.userName}}</td>
+									<td>{{doc.typeName}}</td>
+									<td>{{doc.createdate}}</td>
+									<td>{{doc.statusName}}</td>
+									<td class="td-tool">
+
+										<a class="btn btn-primary btn-xs" ng-click='docView(doc.swfpath)' title="详细"><i class="fa fa-info"></i></a>
+                            			<a class="btn btn-primary btn-xs" ng-click='docDownload(doc.filepath)' title="下载"><i class="icon-jx_download"></i></a>
+										<a class="btn btn-primary btn-xs" ng-click="docEdit(doc.id)" title="编辑"><i class="fa fa-edit"></i></a>
+										<a class="btn btn-primary btn-xs" ng-click="docDelete(doc.id)" title="删除"><i class="fa fa-trash-o"></i></a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<tm-pagination conf="paginationConf"></tm-pagination>
+				</div>
+			</div>
+			<div class="panel-footer m-b-10">
+				<div class="btn-box">
+					<button type="submit" class="btn btn-default" ng-click="back()">返回</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--描述：一河一策（档）模态框-->
+	<div class="modal fade" id="docModal" data-backdrop="static">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h5 class="modal-title">上传文档</h5>
+				</div>
+				<div class="modal-body">
+					<form method="post" enctype="multipart/form-data">
+						<div class="form-group">
+							<div>
+								<input id="uploadfile" type="file" name="file">
+							</div>
+							<label>文件格式： DOC、DOCX、PDF文件</label>
+						</div>
+						<div class="form-item">
+							<label>文件类别</label>
+							<select ng-model="fileType" ng-options="file.uid as file.name for file in fileData"  class="form-control select-short">
+								<option value="">请选择</option>
+							</select>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" ng-click="submit()">确定</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--描述：修改数据模态框-->
+	<div class="modal fade" id="editDocModal" data-backdrop="static">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h5 class="modal-title">数据修改</h5>
+				</div>
+				<div class="modal-body">
+					<form class="form-inline" method="post" enctype="multipart/form-data">
+						<div class="form-item">
+							<label>开始时间</label>
+							<div class="input-group date date_picker" id="beginTime">
+								<input type="text" class="form-control input-short-o" ng-model="beginTime">
+								<span class="input-group-addon"><i class="icon-jx_date"></i></span>
+								<span class="required">*</span>
+							</div>
+						</div>
+						<div class="form-item">
+							<label>文件状态</label>
+							<select ng-model="fileStatus" ng-options="fileStatus.num as fileStatus.name for fileStatus in fileStatusData" class="form-control select-short">
+								<option value="">请选择</option>
+							</select>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" ng-click="editDocSubmit()">确定</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+var modulePrefix = "/watersource";
+(function(window, angular) {
+	'use strict';
+	angular.module("app").controller('docCtrl', ['$localStorage','$scope','$rootScope','routeService','moduleService','$http',
+		function docCtrl($localStorage, $scope, $rootScope,routeService,moduleService, $http) {
+			$scope.init = function(){
+				/*文件类型*/
+				getFileData();
+				/*文件状态*/
+				getFileStatusData();
+			}
+			$("#uploadfile").fileinput({
+				allowedFileExtensions: ['doc', 'docx', 'pdf'],
+				uploadAsync: true, //默认异步上传
+				showRemove: true, //显示移除按钮
+				maxFileCount: 1, //表示允许同时上传的最大文件个数
+				language: 'zh', //设置语言
+				uploadUrl: '#', //上传的地址
+				showUpload: false, //显示批量上传按钮
+				showCaption: true, //是否显示标题
+				browseClass: "btn btn-primary", //按钮样式
+				showPreview: true, //是否显示预览
+				dropZoneEnabled: false, //是否显示拖拽区域
+			});
+
+			/**
+			 * 初始化表单
+			 */
+			var getDocList = function (){
+				$http({
+					method: "get",
+					url: moduleService.getServiceUrl() + modulePrefix + "/v1/doc/list",
+					params:{
+						pageNumber: $scope.paginationConf.currentPage,
+						pageSize: $scope.paginationConf.itemsPerPage,
+						reachId: $scope.objId
+					}
+				}).success(function(res) {
+					if(res.resCode == 1){
+						
+						// console.log( res.data.total,' res.data.total')
+						$scope.paginationConf.totalItems = res.data.total;
+						$scope.docList = res.data.list;
+						
+					}else{
+            			layer.msg("服务器异常，请稍后再试");
+					}
+				}).error(function(res){
+	                layer.msg('服务器异常，请稍后再试');
+	            });
+			}
+
+			/**
+			 * 配置分页基本参数
+			 */
+			$scope.paginationConf = {
+				currentPage: 1,
+				itemsPerPage: $rootScope.tempSize == null ? 10 : $rootScope.tempSize,
+				pagesLength: 5,
+				perPageOptions: [5, 10, 20, 50],
+			};
+			$scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', getDocList);
+
+			/**
+			 * 文件类型
+			 */
+			function getFileData (){
+				$http({
+					method: "get",
+					url: moduleService.getServiceUrl() + modulePrefix +"/v1/doctype/types",
+					params: {
+						type: $scope.waterType,
+					}
+				}).success(function(res) {
+					if(res.resCode == 1){
+						$scope.fileData = res.data;
+					}else{
+            			layer.msg("服务器异常，请稍后再试");
+					}
+				}).error(function(res){
+	                layer.msg('服务器异常，请稍后再试');
+	            });
+			}
+
+			/**
+			 * 上传文档模态框
+			 */
+			$scope.uploadDoc = function(){
+				$("#docModal").modal('show');
+			}
+
+			/**
+			 * 文件上传
+			 */
+			var isSubmitting = false;
+			$scope.submit = function(){
+				var formFile = new FormData();
+				var fileObj = $('#uploadfile').prop('files')[0];
+				if(!fileObj){
+					layer.msg("请选择文件");
+					return ;
+				}else if(!$scope.fileType){
+					layer.msg("请选择文件类别");
+					return ;
+				}
+				if(isSubmitting){
+					return;
+				}else{
+					isSubmitting = true;
+				}
+                formFile.append("filePath", fileObj); //加入文件对象
+				var data = formFile;
+				$http({
+					method: 'post',
+					url: moduleService.getServiceUrl() + modulePrefix +"/v1/doc/upload",
+					data: data,
+					headers: {'Content-Type': undefined},
+					transformRequest: angular.identity
+				}).success(function(res) {
+					if(res.resCode == 1){
+						var jsonFile = [{'name':res.data.name, 'path':res.data.virtualPath, 'type':res.data.extension}];
+                        jsonFile = JSON.stringify(jsonFile)
+                        $http({
+                            url: moduleService.getServiceUrl() +'/watersource/v1/doc/add',
+                            method: 'POST',
+                            params: {
+                                type: $scope.fileType,
+                                jsonFile: jsonFile,
+                                reachId: $scope.objId,
+                            }
+                        }).success(function(res){
+                        	if(res.resCode == 1){
+                                layer.msg('新增成功',{shift:-1},function(){
+                                	getDocList();
+                                    isSubmitting = false;
+                                    $scope.fileType = '';
+                                    $("#uploadfile").fileinput('refresh');
+                                    $('#docModal').find('.file-preview .close').trigger('click');
+                                    $('#docModal').modal('hide');
+                                })
+                            }else{
+                                layer.msg(res.msg || '提交失败，请重试');
+                                isSubmitting = false;
+                            }
+                        }).error(function(){isSubmitting = false;});
+					}else{
+            			layer.msg(res.msg || '提交失败，请重试');
+                        isSubmitting = false;
+					}
+				}).error(function(res){
+	                layer.msg('服务器异常，请稍后再试');
+	                isSubmitting = false;
+	            });
+			}
+
+			/**
+			 * 文件状态
+			 */
+			function getFileStatusData (){
+				$http({
+					method: "get",
+					url: moduleService.getServiceUrl() + modulePrefix + "/v1/doc/docStatus"
+				}).success(function(res) {
+					if(res.resCode == 1){
+						$scope.fileStatusData = res.data;
+					}else{
+            			layer.msg("服务器异常，请稍后再试");
+					}
+				}).error(function(res){
+	                layer.msg('服务器异常，请稍后再试');
+	            });
+			}
+
+			/**
+			 * 时间选择
+			 */
+            var datepicker1 = $('#beginTime').datetimepicker({
+		        format: 'YYYY-MM-DD',
+		        locale: moment.locale('zh-cn')
+		    }).on('dp.change', function (e) {
+		        var result = new moment(e.date).format('YYYY-MM-DD');
+		        $scope.beginTime = result;
+		        $scope.$apply();
+			});
+
+			$scope.docView = function(path){
+                window.open(path, "_blank");
+            }
+            $scope.docDownload= function(path) {
+                var $form = $('<form method="GET"></form>');
+                $form.attr('action', path);
+                $form.appendTo($('body'));
+                $form.submit().remove();
+            }
+
+			$scope.docEdit = function(id){
+				$scope.docId = id;
+				$("#editDocModal").modal('show');
+			}
+
+			/**
+			 * 提交修改
+			 */
+			$scope.editDocSubmit = function(){
+				console.log(1)
+				if(!$scope.beginTime){
+					layer.msg('请选择开始时间')
+					return;
+				}
+				$http({
+					method: "put",
+					url: moduleService.getServiceUrl() +modulePrefix + "/v1/doc/update",
+					params:{
+						docId:$scope.docId,
+						status:$scope.fileStatus,
+						effectiveTime:$scope.beginTime
+					}
+				}).success(function(res) {
+					if(res.resCode == 1){
+						$("#editDocModal").modal('hide');
+						layer.msg("数据更新成功!");
+            			getDocList();
+					}else{
+            			layer.msg("服务器异常，请稍后再试");
+					}
+				}).error(function(res){
+	                layer.msg('服务器异常，请稍后再试');
+	            });
+			}
+
+			/**
+			 * 删除一河一策（档）
+			 */
+			$scope.docDelete = function(id){
+				var layerIndex = layer.confirm('确定删除本条数据吗？', {
+					btn: ['确定', '取消']
+				}, function() {
+					$http({
+						method: "delete",
+						url: moduleService.getServiceUrl() +modulePrefix + "/v1/doc/delete",
+						params:{
+							id:id
+						}
+					}).success(function(res) {
+						if(res.resCode == 1){
+	            			getDocList();
+						}else{
+	            			layer.msg("服务器异常，请稍后再试");
+						}
+					}).error(function(res){
+		                layer.msg('服务器异常，请稍后再试');
+		            });
+					layer.close(layerIndex);
+				}, function() {});
+			}
+
+			/**
+			 * 返回按钮
+			 */
+			$scope.back = function(){
+				$scope.$emit('toFileUpload', false);
+			}
+		}
+	]);
+})(window, angular)
+</script>

@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     <div class="form-item">
-                        <label>限制日期</label>
+                        <label>办结日期</label>
                         <div class="input-group date date_picker date-tj" id="overtime">
                             <input type="text" class="form-control input-short-o" ng-model="overtime"/>
                             <span class="input-group-addon">
@@ -70,8 +70,10 @@
                     </div>
                     <div class="input-group form-item" style="z-index: 10;">
                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">承办单位</font></font></label>
-                        <select id="slpk" class="form-control selectpicker" multiple data-actions-box="true" data-size="8"  style="width: 426px;z-index: 0;" ng-model="organizer">
-                        </select>
+                        <input type="text" class="form-control input-short" ng-model="organizer"
+                               lay-verify="required"/>
+                        <!--                        <select id="slpk" class="form-control selectpicker" multiple data-actions-box="true" data-size="8"  style="width: 426px;z-index: 0;" ng-model="organizer">-->
+                        <!--                        </select>-->
                     </div>
                     <div class="form-item" style="margin-left: 13px;">
                         <label>回复方式</label>
@@ -162,7 +164,13 @@
                     </div>
                     <div class="form-item">
                         <label>举报来源</label>
-                        <input type="text" class="form-control input-short" ng-model="source" lay-verify="required"/>
+                        <!--                        <input type="text" class="form-control input-short" ng-model="source" lay-verify="required"/>-->
+                        <select ng-model="source" class="form-control select-short">
+                            <option value="">请选择</option>
+                            <option value="电话">电话</option>
+                            <option value="网络">网络</option>
+                            <option value="其他">其他</option>
+                        </select>
                     </div>
                 </form>
             </div>
