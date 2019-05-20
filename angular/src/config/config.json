@@ -500,6 +500,22 @@
       ],
       "description": "考核评分-巡查管理-问题列表"
     },
+
+    {
+      "seqId": "3-14",
+      "parentId": "3",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "考核月报",
+      "icon": "fa fa-envelope",
+      "url": "module/kaohepinggu/monthlyReport/monthlyReport.html",
+      "requireJS": [
+        "module/kaohepinggu/monthlyReport/monthlyReport.js"
+      ],
+      "description": "考核月报"
+    },
+
+
     {
       "seqId": "4",
       "parentId": "0",
@@ -578,6 +594,282 @@
       ],
       "description": "分析统计-问题统计"
     },
+    {
+      "seqId": "5-4",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "整改统计情况",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/rectificationStatistics/rectificationStatistics.html",
+      "requireJS": [
+        "module/fenxitongji/rectificationStatistics/rectificationStatistics.js"
+      ],
+      "description": "分析统计-整改统计"
+    },
+    {
+      "seqId": "5-5",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "问题来源统计情况",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/problemSource/problemSource.html",
+      "requireJS": [
+        "module/fenxitongji/problemSource/problemSource.js"
+      ],
+      "description": "分析统计-问题来源统计"
+    },
+    {
+      "seqId": "5-6",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "问题分类统计情况",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/problemClassify/problemClassify.html",
+      "requireJS": [
+        "module/fenxitongji/problemClassify/problemClassify.js"
+      ],
+      "description": "分析统计-问题分类统计"
+    },
+    {
+      "seqId": "5-7",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "河（湖）长人数统计",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/peopleCounting/peopleCounting.html",
+      "requireJS": [
+        "module/fenxitongji/peopleCounting/peopleCounting.js"
+      ],
+      "description": "分析统计-河湖长人数统计"
+    },
+
+
+    {
+      "seqId": "5-7-1",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "河（湖）长人数统计",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/peopleCounting/peopleCountingRegion.html",
+      "requireJS": [
+        "module/fenxitongji/peopleCounting/peopleCountingRegion.js"
+      ],
+      "description": "分析统计-河湖长人数统计"
+    },
+
+    {
+      "seqId": "5-7-2",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "河（湖）长人数统计",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/peopleCounting/peopleCountingTown.html",
+      "requireJS": [
+        "module/fenxitongji/peopleCounting/peopleCountingTown.js"
+      ],
+      "description": "分析统计-河湖长人数统计"
+    },
+    {
+      "seqId": "5-7-3",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "河（湖）长人数统计",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/peopleCounting/peopleCountingVillage.html",
+      "requireJS": [
+        "module/fenxitongji/peopleCounting/peopleCountingVillage.js"
+      ],
+      "description": "分析统计-河湖长人数统计"
+    },
+
+
+
+
+
+    {
+      "seqId": "5-8",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "河（湖）长巡河统计",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/peopleRiverPatrol/peopleRiverPatrol.html",
+      "requireJS": [
+        "module/fenxitongji/peopleRiverPatrol/peopleRiverPatrol.js"
+      ],
+      "description": "分析统计-河湖长巡河统计"
+    },
+    {
+      "seqId": "5-9",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "社会监督举报统计",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/reportStatistics/reportStatistics.html",
+      "requireJS": [
+        "module/fenxitongji/reportStatistics/reportStatistics.js"
+      ],
+      "description": "分析统计-社会监督举报统计"
+    },
+    {
+      "seqId": "5-10",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "社会义务监督员上报问题统计",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/reportProblemStatistics/reportProblemStatistics.html",
+      "requireJS": [
+        "module/fenxitongji/reportProblemStatistics/reportProblemStatistics.js"
+      ],
+      "description": "分析统计-社会义务监督员上报问题统计"
+    },
+    {
+      "seqId": "5-11",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "督查统计",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/overseerStatistics/overseerStatistics.html",
+      "requireJS": [
+        "module/fenxitongji/overseerStatistics/overseerStatistics.js"
+      ],
+      "description": "分析统计-督查统计"
+    },
+    {
+      "seqId": "5-12",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "社会监督举报台账",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/socialAccount/socialAccount.html",
+      "requireJS": [
+        "module/fenxitongji/socialAccount/socialAccount.js"
+      ],
+      "description": "分析统计-社会监督举报台账"
+    },
+
+    {
+      "seqId": "5-13",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "制度执行统计",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/systemStatistics/systemStatistics.html",
+      "requireJS": [
+        "module/fenxitongji/systemStatistics/systemStatistics.js"
+      ],
+      "description": "分析统计-制度执行统计"
+    },
+
+    {
+      "seqId": "5-14",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "河长巡河台账",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/patrolStandingBook/patrolStandingBook.html",
+      "requireJS": [
+        "module/fenxitongji/patrolStandingBook/patrolStandingBook.js"
+      ],
+      "description": "分析统计-河长巡河台账"
+    },
+    {
+      "seqId": "5-15",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "河(湖)长公示牌数量统计",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/publicSigns/publicSigns.html",
+      "requireJS": [
+        "module/fenxitongji/publicSigns/publicSigns.js"
+      ],
+      "description": "分析统计-河(湖)长公示牌数量统计"
+    },
+
+    {
+      "seqId": "5-16",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "各区河段、湖泊、坑塘数量统计",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/swagNum/swagNum.html",
+      "requireJS": [
+        "module/fenxitongji/swagNum/swagNum.js"
+      ],
+      "description": "分析统计-各区河段、湖泊、坑塘数量统计"
+    },
+    {
+      "seqId": "5-17",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "河长巡河问题台账",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/patrolProblemStandingBook/patrolProblemStandingBook.html",
+      "requireJS": [
+        "module/fenxitongji/patrolProblemStandingBook/patrolProblemStandingBook.js"
+      ],
+      "description": "分析统计-河长巡河问题台账"
+    },
+    {
+      "seqId": "5-17-1",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "河长巡河问题台账-详情",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/patrolProblemStandingBook/patrolProblemStandingBookDetail.html",
+      "requireJS": [
+        "module/fenxitongji/patrolProblemStandingBook/patrolProblemStandingBookDetail.js"
+      ],
+      "description": "分析统计-河长巡河问题台账-详情"
+    },
+    {
+      "seqId": "5-17-2",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "河长巡河问题台账-村",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/patrolProblemStandingBook/patrolProblemStandingBookVillage.html",
+      "requireJS": [
+        "module/fenxitongji/patrolProblemStandingBook/patrolProblemStandingBookVillage.js"
+      ],
+      "description": "分析统计-河长巡河问题台账-详情-村"
+    },
+
+
+    {
+      "seqId": "5-18",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "信息宣传情况",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/infoPublicity/infoPublicity.html",
+      "requireJS": [
+        "module/fenxitongji/infoPublicity/infoPublicity.js"
+      ],
+      "description": "分析统计-信息宣传情况"
+    },
+
+
+
     {
       "seqId": "61",
       "parentId": "0",
@@ -928,6 +1220,33 @@
     }
   ],
   "pages": [
+    {
+      "seqId": "5-8-1",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "河（湖）长巡河统计",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/peopleRiverPatrol/peopleRiverPatrolDetail.html",
+      "requireJS": [
+        "module/fenxitongji/peopleRiverPatrol/peopleRiverPatrolDetail.js"
+      ],
+      "description": "分析统计-河湖长巡河统计-详情"
+    },
+
+    {
+      "seqId": "5-14-1",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "河长巡河台账详情",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/patrolStandingBook/patrolStandingBookDetail.html",
+      "requireJS": [
+        "module/fenxitongji/patrolStandingBook/patrolStandingBookDetail.js"
+      ],
+      "description": "分析统计-河长巡河台账-详情"
+    },
     {
       "seqId": "3-11-1",
       "parentId": "3",
