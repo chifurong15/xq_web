@@ -1,0 +1,232 @@
+<div class="fenxintongji outputCompareInput" ng-controller="outputCompareInput" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">现状与对比出入境水质变化</span><span class="tag-right"></span>
+            </div>
+        </div>
+        <div class="panel panel-default" style="margin-top: -1px">
+            <div class="panel-body" style="position: relative;">
+                <form class="form-inline" method="get">
+
+                    <div class="form-item">
+                        <label>区县名称</label>
+                        <select class="form-control select-short" ng-model="regionName" ng-change="selectSectionName(regionName)">
+                            <option value="">全部</option>
+                            <option value="{{item.areaName}}" ng-repeat="item in regionList">{{item.areaName}}</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <label>河道名称</label>
+                        <select class="form-control select-short" ng-model="reachName">
+                            <option value="">全部</option>
+                            <option value="{{item}}" ng-repeat="item in riverList track by item">{{item}}</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <label>河道分类</label>
+                        <select class="form-control select-short" ng-model="reachType">
+                            <option value="">全部</option>
+                            <option value="{{item}}" ng-repeat="item in reachTypeList">{{item}}</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="form-item">
+                        <label>现状</label>
+                        <div class="input-group date date_picker" id="startTime">
+                            <input type="text" class="form-control input-short-o" placeholder="现状月份"
+                                   ng-model="startTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>对比</label>
+                        <div class="input-group date date_picker" id="endTime">
+                            <input type="text" class="form-control input-short-o" placeholder="对比月份"
+                                   ng-model="endTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <!--<div class="form-item">-->
+                        <!--<label>按年份统计</label>-->
+                        <!--<input type="radio" value="1" ng-model="sectionAccess"/><span-->
+                            <!--style="margin:0 20px 0 10px;">是</span>-->
+                        <!--<input type="radio" value="2" ng-model="sectionAccess"/><span-->
+                            <!--style="margin-left: 10px">否</span>-->
+                    <!--</div>-->
+                    <button class="btn btn-primary" type="submit" style="margin-left: 96px"
+                            ng-click="search()"><i
+                            class="fa fa-search"></i> 查询
+                    </button>
+                    <!--<button class="btn btn-primary" ng-click="export()"><i class="fa fa-sign-in"></i> 导出-->
+                    <!--</button>-->
+                </form>
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover">
+
+                                <thead class="tHeader">
+                                    <tr>
+                                        <th rowspan="4">序号</th>
+                                        <th rowspan="4">区县</th>
+                                        <th rowspan="4">河道</th>
+                                        <th rowspan="4">河道分类</th>
+                                        <th colspan="17">入境断面水质变化</th>
+                                        <th colspan="17">出境断面水质变化</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="4">监测项目水质变化</th>
+                                        <th rowspan="3">现状月入境断面名称</th>
+                                        <th colspan="4">现状月入境断面监测项目水质</th>
+                                        <th rowspan="3">现状月入境断面水质类别</th>
+                                        <th rowspan="3">对比月入境断面名称</th>
+                                        <th colspan="4">对比月入境断面监测项目水质</th>
+                                        <th rowspan="3">对比月入境断面水质类别</th>
+                                        <th rowspan="3">总评</th>
+                                        <th colspan="4">监测项目水质变化</th>
+                                        <th rowspan="3">现状月出境断面名称</th>
+                                        <th colspan="4">现状月出境断面监测项目水质</th>
+                                        <th rowspan="3">现状月出境断面水质类别</th>
+                                        <th rowspan="3">对比月出境断面名称</th>
+                                        <th colspan="4">对比月出境断面监测项目水质</th>
+                                        <th rowspan="3">对比月出境断面水质类别</th>
+                                        <th rowspan="3">总评</th>
+                                    </tr>
+                                    <tr>
+                                        <th>总磷</th>
+                                        <th>氨氮</th>
+                                        <th>高锰酸盐指数</th>
+                                        <th>溶解氧</th>
+
+                                        <th>总磷</th>
+                                        <th>氨氮</th>
+                                        <th>高锰酸盐指数</th>
+                                        <th>溶解氧</th>
+
+                                        <th>总磷</th>
+                                        <th>氨氮</th>
+                                        <th>高锰酸盐指数</th>
+                                        <th>溶解氧</th>
+
+                                        <th>总磷</th>
+                                        <th>氨氮</th>
+                                        <th>高锰酸盐指数</th>
+                                        <th>溶解氧</th>
+
+                                        <th>总磷</th>
+                                        <th>氨氮</th>
+                                        <th>高锰酸盐指数</th>
+                                        <th>溶解氧</th>
+
+                                        <th>总磷</th>
+                                        <th>氨氮</th>
+                                        <th>高锰酸盐指数</th>
+                                        <th>溶解氧</th>
+                                    </tr>
+                                    <tr>
+                                        <th ng-repeat="i in list">（mg/L）</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr ng-repeat="lst in dataList" ng-init="index = $index+1">
+                                        <td>{{index}}</td>
+                                        <td>{{lst.areaName}}</td>
+                                        <td>{{lst.riverName}}</td>
+                                        <td>{{lst.riverType}}</td>
+
+
+                                        <!--入境断面水质变化----监测项目水质变化-->
+                                        <td>{{lst.inputtotalphosphorusDifference != 0 ? lst.inputtotalphosphorusDifference.toFixed(3) : lst.inputtotalphosphorusDifference}}</td>
+                                        <td>{{lst.inputammoniaDifference != 0 ? lst.inputammoniaDifference.toFixed(3) : lst.inputammoniaDifference }}</td>
+                                        <td>{{lst.inputpermanganateDifference != 0 ? lst.inputpermanganateDifference.toFixed(3) : lst.inputpermanganateDifference}}</td>
+                                        <td>{{lst.inputDODifference != 0 ? lst.inputDODifference.toFixed(3) : lst.inputDODifference}}</td>
+
+
+                                        <!--入境断面水质变化----现状月入境断面名称-->
+                                        <td>{{lst.inputSectionName}}</td>
+
+                                        <!--入境断面水质变化----现状月入境断面监测项目水质-->
+                                        <td>{{lst.inputtotalphosphorusBegin != 0 ? lst.inputtotalphosphorusBegin.toFixed(3) : lst.inputtotalphosphorusBegin}}</td>
+                                        <td>{{lst.inputammoniaBegin != 0 ? lst.inputammoniaBegin.toFixed(3) : lst.inputammoniaBegin}}</td>
+                                        <td>{{lst.inputpermanganateBegin != 0 ? lst.inputpermanganateBegin.toFixed(3) : lst.inputpermanganateBegin  }}</td>
+                                        <td>{{lst.inputDOBegin != 0 ? lst.inputDOBegin.toFixed(3) : lst.inputDOBegin}}</td>
+
+                                        <!--入境断面水质变化----现状月入境断面水质类别-->
+                                        <td>{{lst.inputQualityLevelBegin}}</td>
+
+                                        <!--入境断面水质变化----对比月入境断面名称-->
+                                        <td>{{lst.inputSectionName}}</td>
+
+                                        <!--入境断面水质变化----对比月入境断面监测项目水质-->
+                                        <td>{{lst.inputtotalphosphorusEnd != 0 ? lst.inputtotalphosphorusEnd.toFixed(3) : lst.inputtotalphosphorusEnd}}</td>
+                                        <td>{{lst.inputammoniaEnd != 0 ? lst.inputammoniaEnd.toFixed(3) : lst.inputammoniaEnd}}</td>
+                                        <td>{{lst.inputpermanganateEnd != 0 ? lst.inputpermanganateEnd.toFixed(3) : lst.inputpermanganateEnd}}</td>
+                                        <td>{{lst.inputDOEnd != 0 ? lst.inputDOEnd.toFixed(3) : lst.inputDOEnd}}</td>
+
+                                        <!--入境断面水质变化----对比月入境断面水质类别-->
+                                        <td>{{lst.inputQualityLevelEnd}}</td>
+
+
+                                        <!--入境断面水质变化----总评-->
+                                        <td ng-if="lst.inputResult == 1">下降，水质变好，等级变低</td>
+                                        <td ng-if="lst.inputResult == 2">上升，水质变差，等级升高</td>
+                                        <td ng-if="lst.inputResult == 3">持平</td>
+
+
+                                        <!--出境断面水质变化----监测项目水质变化-->
+                                        <td>{{lst.outputtotalphosphorusDifference != 0 ? lst.outputtotalphosphorusDifference.toFixed(3) : lst.outputtotalphosphorusDifference }}</td>
+                                        <td>{{lst.outputammoniaDifference != 0 ? lst.outputammoniaDifference.toFixed(3) : lst.outputammoniaDifference}}</td>
+                                        <td>{{lst.outputpermanganateDifference != 0 ? lst.outputpermanganateDifference.toFixed(3) : lst.outputpermanganateDifference}}</td>
+                                        <td>{{lst.outputDODifference != 0 ? lst.outputDODifference.toFixed(3) : lst.outputDODifference}}</td>
+
+
+                                        <!--出境断面水质变化----现状月出境断面名称-->
+                                        <td>{{lst.outputSectionName}}</td>
+
+                                        <!--出境断面水质变化----现状月出境断面监测项目水质-->
+                                        <td>{{lst.outputtotalphosphorusBegin != 0 ? lst.outputtotalphosphorusBegin.toFixed(3) : lst.outputtotalphosphorusBegin}}</td>
+                                        <td>{{lst.outputammoniaBegin != 0 ? lst.outputammoniaBegin.toFixed(3) : lst.outputammoniaBegin}}</td>
+                                        <td>{{lst.outputpermanganateBegin != 0 ? lst.outputpermanganateBegin.toFixed(3) : lst.outputpermanganateBegin}}</td>
+                                        <td>{{lst.outputDOBegin != 0 ? lst.outputDOBegin.toFixed(3) : lst.outputDOBegin }}</td>
+
+                                        <!--出境断面水质变化----现状月出境断面水质类别-->
+                                        <td>{{lst.outputQualityLevelBegin}}</td>
+
+                                        <!--出境断面水质变化----对比月出境断面名称-->
+                                        <td>{{lst.outputSectionName}}</td>
+
+
+
+
+
+                                        <!--出境断面水质变化----对比月出境断面监测项目水质-->
+                                        <td>{{lst.outputtotalphosphorusEnd != 0 ? lst.outputtotalphosphorusEnd.toFixed(3) : lst.outputtotalphosphorusEnd}}</td>
+                                        <td>{{lst.outputammoniaEnd != 0 ? lst.outputammoniaEnd.toFixed(3) : lst.outputammoniaEnd}}</td>
+                                        <td>{{lst.outputpermanganateEnd != 0 ? lst.outputpermanganateEnd.toFixed(3) : lst.outputpermanganateEnd }}</td>
+                                        <td>{{lst.outputDOEnd != 0 ? lst.outputDOEnd.toFixed(3) : lst.outputDOEnd}}</td>
+
+                                        <!--出境断面水质变化----对比月出境断面水质类别-->
+                                        <td>{{lst.outputQualityLevelEnd}}</td>
+
+
+                                        <!--出境断面水质变化----总评-->
+                                        <td ng-if="lst.outputResult == 1">下降，水质变好，等级变低</td>
+                                        <td ng-if="lst.outputResult == 2">上升，水质变差，等级升高</td>
+                                        <td ng-if="lst.outputResult == 3">持平</td>
+
+
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                <!--<tm-pagination conf="paginationConf" style="margin-top: 20px"></tm-pagination>-->
+
+            </div>
+        </div>
+    </div>
+</div>

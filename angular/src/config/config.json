@@ -1455,6 +1455,21 @@
       ],
       "description": "分析统计-督办统计"
     },
+
+    {
+      "seqId": "5-23",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "现状与对比出入境水质变化",
+      "icon": "menu-icon-6",
+      "url": "module/fenxitongji/outputCompareInput/outputCompareInput.html",
+      "requireJS": [
+        "module/fenxitongji/outputCompareInput/outputCompareInput.js"
+      ],
+      "description": "分析统计-现状与对比出入境水质变化"
+    },
+
     {
       "seqId": "1003",
       "name": "流域新增",

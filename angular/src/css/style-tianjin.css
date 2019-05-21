@@ -2449,3 +2449,9 @@ body .c-ffffff a {
 #riverPatrolLocus #topData span{
     padding: 0 5px;
 }
+
+.outputCompareInput .tHeader th{
+    display: table-cell ;
+    text-align: center;
+    vertical-align: middle;
+}
