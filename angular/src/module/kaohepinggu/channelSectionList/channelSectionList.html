@@ -1,0 +1,359 @@
+<div class="kaohepingfen" ng-controller="channelSectionList" ng-init="init()">
+    <div class="wrapper-md ">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">河道断面列表</span><span class="tag-right"></span>
+
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-bar">
+                    <form class="form-inline clearfix">
+                        <div class="input-group form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">行政区</font></font></label>
+                            <select ng-model="regionName" class="form-control select-short"
+                                    style="width: 160px;z-index: 0;">
+                                <option value="">全部</option>
+                                <option value="{{item.areaCode}}" ng-repeat="item in regionList">{{item.areaName}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">断面编号</font></font></label>
+                            <input type="text" class="form-control input-short" placeholder="请输入断面编号" ng-model="code">
+                        </div>
+
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">断面名称</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="name" placeholder="请输入断面名称">
+                        </div>
+
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">备注</font></font></label>
+                            <input type="text" class="form-control input-short" placeholder="请输入备注" ng-model="descirption">
+                        </div>
+
+                        <div class="input-group form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">河道</font></font></label>
+                            <div style="position: relative;display: inline-block;">
+                                <input class="form-control input-short-o" placeholder="请输入河道名称"
+                                       style="width: 160px" ng-blur="showList=false" ng-model="river"
+                                       ng-change="getRiver(river)"/>
+                                <ul ng-show="showList" ng-model="river"
+                                    style="position: absolute;top: 100%;left: 0;transition: ease .2s;z-index: 100;width: 100%;border: 1px solid #999999;border-top: none;"
+                                    ng-click="selectRiverName($event.target.dataset.value)">
+                                    <li ng-show="riverList.length===0"
+                                        style="cursor: not-allowed;padding: 4px 10px;width: 100%;">暂无匹配项
+                                    </li>
+                                    <li ng-repeat="item in riverList" data-value="{{item.riverName}}"
+                                        class="select-list-item">{{item.riverName}}
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="table-bar clearfix">
+
+                    <button type="button" class="btn btn-danger" ng-click="delete()" style="float: right;">
+                        全删
+                    </button>
+
+                    <button type="button" class="btn btn-primary" ng-click="getRiverAdd(1)" style="float: right;margin: 0 5px;">
+                        新增
+                    </button>
+                    <button type="button" class="btn btn-info" ng-click="getUploadFile(1)" style="float: right;">
+                        导入
+                    </button>
+
+                    <button type="button" class="btn btn-reset" ng-click="reset()" style=" float: right;margin: 0 5px;">
+                        <i class="fa fa-refresh"></i>重置
+                    </button>
+
+                    <button class="btn btn-primary" ng-click="search()" style="float: right;">
+                        <i class="fa fa-search"></i>搜索
+                    </button>
+
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                <tr class='tHeader'>
+                                    <th width="5%">行政区</th>
+                                    <th width="5%">断面编号</th>
+                                    <th width="10%">断面名称</th>
+                                    <th width="5%">断面类别</th>
+                                    <th width="10%">年度水质目标</th>
+                                    <th width="10%">断面经度</th>
+                                    <th width="10%">断面纬度</th>
+                                    <th width="10%">河道名称</th>
+                                    <th width="10%">代表河道长度</th>
+                                    <th width="10%">操作</th>
+                                </tr>
+                                <tr ng-repeat="item in moduleList">
+                                    <!--&lt;!&ndash;&ndash;&gt;<td>{{$index + 1 + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>-->
+                                    <td>{{item.countyid}}</td>
+
+                                    <td>{{item.code}}</td>
+
+                                    <td>{{item.name}}</td>
+
+                                    <td>
+                                        <span ng-if="item.category == 1">出境</span>
+                                        <span ng-if="item.category == 2">入境</span>
+                                        <span ng-if="item.category == 3">代表断面</span>
+                                        <span ng-if="item.category == 4">出入境断面</span>
+                                    </td>
+
+                                    <td>
+                                        <span ng-if="item.targetquality == 1">Ⅰ</span>
+                                        <span ng-if="item.targetquality == 2">Ⅱ</span>
+                                        <span ng-if="item.targetquality == 3">Ⅲ</span>
+                                        <span ng-if="item.targetquality == 4">Ⅳ</span>
+                                        <span ng-if="item.targetquality == 5">Ⅴ</span>
+                                        <span ng-if="item.targetquality == 6">Ⅵ</span>
+                                        <span ng-if="item.targetquality == 7">Ⅶ</span>
+                                        <span ng-if="item.targetquality == 8">Ⅷ</span>
+                                        <span ng-if="item.targetquality == 9">Ⅸ</span>
+                                    </td>
+
+                                    <td>{{item.longitude}}</td>
+                                    <td>{{item.latitude}}</td>
+                                    <td>{{item.rivername}}</td>
+                                    <td>{{item.length}}</td>
+
+                                    <td style="text-align: center;">
+                                        <button type="button"  class="btn btn-warning btn-xs"
+                                                ng-click="getRiverAdd(2,item.id)">修改
+                                        </button>
+                                        <button type="button"  class="btn btn-danger btn-xs"
+                                                ng-click="delete (item.id)">删除
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                            <tm-pagination conf="paginationConf"></tm-pagination>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="chartStatistics">
+                        <div id="patrolChart" class="tj-chart-con"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 新增or修改 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"  ng-click="cancel()">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        {{id == 1 ? '新增' : '修改'}}河道断面
+                    </h4>
+                </div>
+                <div class="modal-body" style="height:450px">
+                    <form class="form-inline">
+
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">断面编号</font></font></label>
+                            <input type="text" class="form-control input-short" placeholder="请输入断面编号" ng-disabled="isUpdate" ng-model="sectionCode">
+                        </div>
+
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">断面名称</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="sectionName" placeholder="请输入断面名称">
+                        </div>
+
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">经纬度</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="longitude" placeholder="如：经度117.11,纬度34.78">
+                        </div>
+
+                        <div class="input-group form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">行政区</font></font></label>
+                            <select ng-model="region" class="form-control select-short"
+                                    style="width: 160px;z-index: 0;">
+                                <option value="">请选择</option>
+                                <option value="{{item.areaCode}}" ng-repeat="item in regionList">{{item.areaName}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="input-group form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">河道</font></font></label>
+                            <div style="position: relative;display: inline-block;">
+                                <input class="form-control input-short-o" placeholder="请输入河道名称"
+                                       style="width: 160px" ng-blur="showList1=false" ng-model="river1"
+                                       ng-change="getRiver1(river1)"/>
+                                <ul ng-show="showList1" ng-model="river1"
+                                    style="position: absolute;top: 100%;left: 0;transition: ease .2s;z-index: 100;width: 100%;border: 1px solid #999999;border-top: none;"
+                                    ng-click="selectRiverName1($event.target.dataset.value)">
+                                    <li ng-show="riverList1.length===0"
+                                        style="cursor: not-allowed;padding: 4px 10px;width: 100%;">暂无匹配项
+                                    </li>
+                                    <li ng-repeat="item in riverList1" data-value="{{item.riverName}}"
+                                        class="select-list-item">{{item.riverName}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">断面代表河长</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="chairman" placeholder="请输入断面代表河长">
+                        </div>
+
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">断面类别</font></font></label>
+                            <select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="category">
+                                <option value="">请选择</option>
+                                <option value="1">出境</option>
+                                <option value="2">入境</option>
+                                <option value="3">代表断面</option>
+                                <option value="4">出入境断面</option>
+                            </select>
+                        </div>
+
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">年度水质类别</font></font></label>
+                            <select class="form-control select-short" style="width: 160px;z-index: 0;" ng-model="targetquality">
+                                <option value="">请选择</option>
+                                <option value="1">Ⅰ</option>
+                                <option value="2">Ⅱ</option>
+                                <option value="3">Ⅲ</option>
+                                <option value="4">Ⅳ</option>
+                                <option value="5">Ⅴ</option>
+                                <option value="6">Ⅵ</option>
+                                <option value="7">Ⅶ</option>
+                                <option value="8">Ⅷ</option>
+                                <option value="9">Ⅸ</option>
+                            </select>
+                        </div>
+
+
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">备注</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="desc" placeholder="请输入备注">
+                        </div>
+
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">排序</font></font></label>
+                            <input type="text" class="form-control input-short" ng-model="sort" placeholder="请输入排序">
+                        </div>
+
+
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="addSave()">保存</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 导入 模态框（Modal） -->
+    <div class="modal fade" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"   ng-click="getUploadFile(2)">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="exportModalLabel">
+                        导入断面表
+                    </h4>
+                </div>
+                <div class="modal-body" style="height:250px">
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="confirmExport()">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="getUploadFile(2)">取消</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--附件上传-->
+    <div class="modal fade" id="coverModal" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="getUploadFile(1)">
+                        <li class="fa fa-remove"></li>
+                    </button>
+                    <h4>导入断面表</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="wid-100 announcementCoverPanel">
+                                <input class="uploadfile" id="problemFile" type="file" name="file">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="getUpload()">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="getUploadFile(2)">取消</button>
+                    <button type="button" class="btn btn-primary" ng-click="downTemplate()">下载模版</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(".uploadfile").fileinput({
+        allowedFileExtensions: ['xls','xlsx'],
+        uploadAsync: true, //默认异步上传
+        showRemove: true, //显示移除按钮
+        maxFileCount: 1, //表示允许同时上传的最大文件个数
+        language: 'zh', //设置语言
+        uploadUrl: '#', //上传的地址
+        showUpload: false, //显示批量上传按钮
+        showCaption: true, //是否显示标题
+        browseClass: "btn btn-primary", //按钮样式
+        showPreview: true, //是否显示预览
+        dropZoneEnabled: false, //是否显示拖拽区域
+        validateInitialCount: true,
+        slugCallback: function (filename) {
+            return filename.replace('(', '_').replace(']', '_');
+        }
+    });
+</script>
