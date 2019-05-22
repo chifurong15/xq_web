@@ -44,6 +44,171 @@
                         $scope.list.push(i)
                     }
 
+                    $scope.init = function () {
+                        getList();
+                        getRegion ()
+                        getReachType ()
+                        getPieData ()
+
+
+
+                    };
+
+                    $scope.search = function () {
+                        getList();
+                        getPieData ()
+
+
+                    };
+
+
+
+                    //初始化echarts图表
+                    function getInitCharts() {
+
+                        var myInputChart = echarts.init(document.getElementById('inputPie'));
+                        var myOutputChart = echarts.init(document.getElementById('outputPie'));
+
+                        //入境水质变化
+                        var inputOption = {
+                            title : {
+                                text: '基准时间:' + $scope.startTime + '月-对比时间:' + $scope.endTime + '月基准与对比入境水质变化',
+                                x:'center',
+                                textStyle:{
+                                    color:'#42a2fd'
+                                }
+                            },
+                            tooltip : {
+                                trigger: 'item',
+                                formatter: function (params) {
+                                    return '类别:' + params.name  + ' </br> ' + '个数:' + params.value + ' </br> ' + '占比:' + params.percent + '%';
+                                }
+                            },
+                            color: ['#02659f', '#258916', '#c12a0b'],
+                            legend: {
+                                orient: 'horizontal',
+                                left: '21%',
+                                bottom:'7%',
+                                itemGap:95,
+                                data: ['上升','下降','持平']
+                            },
+                            series : [
+                                {
+                                    name: '访问来源',
+                                    type: 'pie',
+                                    radius : '55%',
+                                    center: ['50%', '50%'],
+                                    data:[
+                                        {
+                                            value: $scope.pieData.inputUpNumber,
+                                            name:'上升',
+                                            percent: $scope.pieData.inputUpNumber / ($scope.pieData.inputUpNumber + $scope.pieData.inputDownNumber + $scope.pieData.inputHoldNumber)
+                                        },
+                                        {
+                                            value:$scope.pieData.inputDownNumber,
+                                            name:'下降',
+                                            percent:0
+
+                                        },
+                                        {
+                                            value:$scope.pieData.inputHoldNumber,
+                                            name:'持平',
+                                            percent:0
+                                        },
+                                    ],
+                                    itemStyle: {
+                                        emphasis: {
+                                            shadowBlur: 10,
+                                            shadowOffsetX: 0,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                }
+                            ]
+                        };
+
+                        //出境水质变化
+                        var outputOption = {
+                            title : {
+                                text: '基准时间:' + $scope.startTime + '月-对比时间:' + $scope.endTime + '月基准与对比出境水质变化',
+                                x:'center',
+                                textStyle:{
+                                    color:'#42a2fd'
+                                }
+                            },
+                            tooltip : {
+                                trigger: 'item',
+                                formatter: function (params) {
+                                    return '类别:' + params.name  + ' </br> ' + '个数:' + params.value + ' </br> ' + '占比:' + params.percent + '%';
+                               }
+                            },
+                            color: ['#02659f', '#258916', '#c12a0b'],
+                            legend: {
+                                orient: 'horizontal',
+                                left: '21%',
+                                bottom:'7%',
+                                itemGap:95,
+                                data: ['上升','下降','持平']
+                            },
+                            series : [
+                                {
+                                    name: '访问来源',
+                                    type: 'pie',
+                                    radius : '55%',
+                                    center: ['50%', '50%'],
+                                    data:[
+                                        {
+                                            value: $scope.pieData.outputUpNumber,
+                                            name:'上升',
+                                            percent: $scope.pieData.outputUpNumber / ($scope.pieData.outputUpNumber + $scope.pieData.outputDownNumber + $scope.pieData.outputHoldNumber)
+                                        },
+                                        {
+                                            value:$scope.pieData.outputDownNumber,
+                                            name:'下降',
+                                            percent:0
+
+                                        },
+                                        {
+                                            value:$scope.pieData.outputHoldNumber,
+                                            name:'持平',
+                                            percent:0
+                                        },
+                                    ],
+                                    itemStyle: {
+                                        emphasis: {
+                                            shadowBlur: 10,
+                                            shadowOffsetX: 0,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                }
+                            ]
+                        };
+
+                        myInputChart.setOption(inputOption);
+                        myOutputChart.setOption(outputOption);
+                    }
+
+
+                    //获取饼图数据
+                    function getPieData () {
+                        $ajaxhttp.myhttp({
+                            url:apiPrefix + '/v1/WaterQualityGrade/pie',
+                            method:'get',
+                            params:{
+                                beginTime:$scope.startTime,
+                                endTime:$scope.endTime
+                            },
+                            callBack:function (res) {
+                                if(res.resCode == 1){
+                                    $scope.pieData = res.data;
+                                    getInitCharts();
+                                }
+                            }
+                        })
+                    }
+
+
                     //获取行政区域
                     function getRegion (){
                         $ajaxhttp.myhttp({
@@ -86,16 +251,6 @@
                     }
 
 
-                    $scope.init = function () {
-                        getList();
-                        getRegion ()
-                        getReachType ()
-
-                    };
-
-                    $scope.search = function () {
-                        getList();
-                    };
 
                     //监听区域选择
                     $scope.selectSectionName = function (code) {
@@ -146,6 +301,7 @@
                         $scope.endTime = result;
                         $scope.$apply();
                     });
+
 
 
                     // 配置分页基本参数

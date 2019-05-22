@@ -540,7 +540,19 @@
       ],
       "description": "考核月报"
     },
-
+    {
+      "seqId": "3-15",
+      "parentId": "3",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "河道断面列表",
+      "icon": "menu-icon-6",
+      "url": "module/kaohepinggu/channelSectionList/channelSectionList.html",
+      "requireJS": [
+        "module/kaohepinggu/channelSectionList/channelSectionList.js"
+      ],
+      "description": "系统管理-河道断面列表"
+    },
 
     {
       "seqId": "4",
