@@ -22,7 +22,7 @@
                                              routeService, $http, $ajaxhttp, moduleService, globalParam) {
 
                     var apiPrefix = moduleService.getServiceUrl() + '/statistic';
-                    //var apiPrefix = 'http://10.0.9.116:7024' + '/statistic';
+                    // var apiPrefix = 'http://10.0.9.133:7024' + '/statistic';
 
                     $scope.init = function () {
                         var date = new Date();
@@ -35,8 +35,10 @@
                         month =  month < 10 ? '0' + month : month
                         $scope.searchTime1 = year + '-' + month ;
                         $scope.searchTime2 = year + '-' + month ;
+                        $scope.searchTime3 = year + '-' + month ;
                         getList1();
                         getList2();
+                        getList3();
                     }
 
                     // 区考核排名列表
@@ -75,26 +77,44 @@
                         })
                     }
 
-                    //区考核排名搜索
-                    $scope.search1 = function(){
-                        getList1 ();
+                    // 其他扣分项排名
+                    function getList3 () {
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/statistic/otherStatistic',
+                            method: 'get',
+                            params:{
+                                date:$scope.searchTime3
+                            },
+                            callBack: function (res) {
+                                if(res.resCode == 1){
+                                    $scope.otherSortList = res.data;
+                                }else{
+                                    layer.msg(res.resMsg, {time:2000});
+                                }
+                            }
+                        })
                     }
 
-                    //河湖水生态环境质量排名
-                    $scope.search2 = function(){
-                        getList2 ();
+
+                    $scope.search = function(id){
+
+                        if(id == 1){ ////区考核排名搜索
+
+                            getList1 ();
+
+                        }else if (id == 2){//河湖水生态环境质量排名
+
+                            getList2 ();
+
+                        }else if (id == 3){// 其他扣分项排名
+
+                            getList3 ();
+
+                        }
                     }
 
 
-                    //tab栏切换
-                    $('.js-tab li').on("click",function (){
-                        var index = $(this).index();
-                        $(this).addClass('tab-active').siblings().removeClass('tab-active');
-                        $(".js-con").find('.con').hide().eq(index).show();
-                    });
                     //默认上个月
-
-
 
                     $('#J-searchTime1').datetimepicker({
                         format: 'YYYY-MM',
@@ -110,6 +130,14 @@
                         locale: moment.locale('zh-cn')
                     }).on('dp.change', function (c) {
                         $scope.searchTime2 = new moment(c.date).format('YYYY-MM');
+                        $scope.$apply();
+                    });
+
+                    $('#J-searchTime3').datetimepicker({
+                        format: 'YYYY-MM',
+                        locale: moment.locale('zh-cn')
+                    }).on('dp.change', function (c) {
+                        $scope.searchTime3 = new moment(c.date).format('YYYY-MM');
                         $scope.$apply();
                     });
 

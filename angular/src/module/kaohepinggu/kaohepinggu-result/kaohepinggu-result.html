@@ -12,6 +12,7 @@
                     <ul class="layui-tab-title">
                         <li class="layui-this">区考核排名</li>
                         <li>河湖水生态环境质量排名</li>
+                        <li>其他扣分项排名</li>
                     </ul>
                     <div class="layui-tab-content">
                         <!--区考核排名-->
@@ -24,7 +25,7 @@
                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                     </div>
                                     <div class="input-group">
-                                        <button class="btn btn-primary" ng-click="search1()">
+                                        <button class="btn btn-primary" ng-click="search(1)">
                                             <i class="fa fa-search"></i>搜索
                                         </button>
                                     </div>
@@ -71,7 +72,7 @@
                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                     </div>
                                     <div class="input-group">
-                                        <button class="btn btn-primary" ng-click="search2()">
+                                        <button class="btn btn-primary" ng-click="search(2)">
                                             <i class="fa fa-search"></i>搜索
                                         </button>
                                     </div>
@@ -110,6 +111,58 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!--其他扣分项排名-->
+                        <div class="layui-tab-item">
+                            <div class="panel-body">
+                                <form class="form-inline clearfix">
+                                    <div class="input-group date date_picker form-item" id="J-searchTime3">
+                                        <label class="near"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">月份</font></font></label>
+                                        <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime3">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                    <div class="input-group">
+                                        <button class="btn btn-primary" ng-click="search(3)">
+                                            <i class="fa fa-search"></i>搜索
+                                        </button>
+                                    </div>
+                                </form>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tableStatistics3">
+                                        <div class="table-responsive" style="margin-top: 20px;">
+                                            <table class="table table-bordered table-hover">
+                                                <tbody>
+                                                <tr class='tHeader'>
+                                                    <th width="5%">排名</th>
+                                                    <th width="10%">区</th>
+                                                    <th width="10%">河（湖）长巡河（湖）情况</th>
+                                                    <th width="15%">河湖长履职不到位情况</th>
+                                                    <th width="15%">重点工作完成情况</th>
+                                                    <th width="15%">日常工作完成情况</th>
+                                                    <th width="15%">月度考核成绩</th>
+                                                </tr>
+                                                <tr ng-repeat="item in otherSortList">
+                                                    <td>{{$index+1}}</td>
+                                                    <td>{{item.area_name}}</td>
+                                                    <td>{{item.oneNum}}</td>
+                                                    <td>{{item.twoNum}}</td>
+                                                    <td>{{item.threeNum}}</td>
+                                                    <td>{{item.fourNum}}</td>
+                                                    <td>{{item.totalNum}}</td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="chartStatistics3">
+                                        <div id="patrolChart3" class="tj-chart-con"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
