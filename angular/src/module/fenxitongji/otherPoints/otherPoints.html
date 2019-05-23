@@ -1,0 +1,414 @@
+<div class="conferenceCtrl" ng-controller="otherPoints" ng-init="init()">
+    <div class="wrapper-md ">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">其它扣分项台账</span><span class="tag-right"></span>
+            </div>
+        </div>
+        <div class="panel panel-default m-all-0">
+            <div class="panel-body">
+                <form method="get">
+                    <div class="form-inline">
+
+                        <div class="form-item">
+                            <label>行政区域</label>
+                            <select class="form-control select-short" ng-model="regionName">
+                                <option value="">请选择</option>
+                                <option value="{{item.areaCode}}" ng-repeat="item in regionList">{{item.areaName}}</option>
+                            </select>
+                        </div>
+
+                        <div class="form-item">
+                            <label>扣分类型</label>
+                            <select class="form-control select-short" ng-model="type">
+                                <option value="">请选择</option>
+                                <option value="{{item.id}}" ng-repeat="item in typeList">{{item.typeName}}</option>
+                            </select>
+                        </div>
+
+                        <div class="form-item">
+                            <label>详细扣分项</label>
+                            <select class="form-control select-short" ng-model="typeDetail">
+                                <option value="">请选择</option>
+                                <option value="{{item.id}}" ng-repeat="item in typeDetailList">{{item.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-item">
+                            <label>月份</label>
+                            <div class="input-group date date_picker" id="month">
+                                <input type="text" class="form-control input-short-o" ng-model="month">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                        <button type="submit" ng-click="searchData()" class="btn btn-primary">
+                            <i class="fa fa-search"></i>搜索
+                        </button>
+                        <button type="button" class="btn btn-primary" ng-click="reset()" style="margin: 0 5px;">
+                            <i class="fa fa-refresh"></i>重置
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <div class="form-inline">
+                        <div class="input-group fr">
+                            <button type="button" class="btn btn-primary btn-sm" ng-click="add(1)" style="margin: 0 5px;">
+                                <i class="fa fa-plus"></i> 新增扣分项
+                            </button>
+                            <!--<button type="submit" class="btn btn-primary" ng-click="export()"><i class="fa fa-sign-in"></i>导出</button>-->
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-hover" data-filter="#filter">
+                        <tr>
+                            <th style="width: 5%;">序号</th>
+                            <th style="width: 10%">行政区域</th>
+                            <th style="width: 10%">扣分类型</th>
+                            <th style="width: 10%">详细扣分项</th>
+                            <th style="width: 5%">扣分分值</th>
+                            <th style="width: 10%">日期</th>
+                            <th style="width: 5%">佐证材料文号</th>
+                            <th style="width: 10%">佐证材料附件</th>
+                            <th style="width: 10%">录入人</th>
+                            <th style="width: 10%">备注</th>
+                            <th style="width: 10%">操作</th>
+                        </tr>
+                        <tr ng-repeat="module in moduleList" style="cursor:pointer;">
+                            <td>{{$index + 1 + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
+                            <td>{{module.regionid}}</td>
+                            <td>
+                                <span ng-if="module.type == 1">河湖长履职不到位情况</span>
+                                <span ng-if="module.type == 2">重点工作完成情况</span>
+                                <span ng-if="module.type == 3">日常工作完成情况</span>
+                            </td>
+                            <td>{{module.choice}}</td>
+
+                            <td>{{module.score}}</td>
+                            <td>{{module.issue}}</td>
+                            <td>{{module.proof}}</td>
+                            <td>
+                                <a ng-if="module.accessoryyuan" ng-repeat="item in module.fileList" ng-click="downFile(item)" style="display: block;margin: 12px 0;">{{item}}</a>
+                            </td>
+                            <td>{{module.recordman}}</td>
+                            <td>{{module.remark.length > 20 ? module.remark.substring(0,20) + '...' : module.remark}}</td>
+                            <td>
+                                <a class="btn btn-primary btn-xs" ng-click="view(module.id)"><i class="fa fa-info" title="查看"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-click="add(2,module.id)" ><i class="fa fa-edit" title="修改"></i></a>
+                                <a class="btn btn-primary btn-xs" ng-click="delete(module.id)"><i class="fa fa-trash-o" title="删除"></i></a>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                <tm-pagination conf="paginationConf"></tm-pagination>
+            </div>
+        </div>
+
+
+        <!-- 其它扣分项台账（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="closeModal()">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel1">
+                            {{id == 1 ? '新增' : '修改'}}扣分项
+                        </h4>
+                    </div>
+                    <div class="modal-body" style="height: 450px;">
+                        <form class="form-inline">
+                            <div class="form-item">
+                                <div class="form-item">
+                                    <label>行政区域</label>
+                                    <select class="form-control select-short" ng-model="region">
+                                        <option value="">请选择</option>
+                                        <option value="{{item.areaCode}}" ng-repeat="item in regionList">{{item.areaName}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-item">
+                                    <label>扣分类型</label>
+                                    <select class="form-control select-short" ng-model="addType">
+                                        <option value="">请选择</option>
+                                        <option value="{{item.id}}" ng-repeat="item in typeList">{{item.typeName}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-item">
+                                    <label>扣分日期</label>
+                                    <div class="input-group date date_picker" id="pointsDate">
+                                        <input type="text" class="form-control input-short-o" ng-model="pointsDate">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-item">
+                                    <label>详细扣分项</label>
+                                    <select class="form-control select-short" ng-model="addTypeDetail">
+                                        <option value="">请选择</option>
+                                        <option value="{{item.id}}" ng-repeat="item in typeDetailList">{{item.name}}</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="form-item">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">扣分分值</font></font></label>
+                                    <input type="number" min="0" max="100" class="form-control input-short" ng-model="score">
+                                </div>
+
+                                <div class="form-item">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">录入人</font></font></label>
+                                    <input type="text" class="form-control input-short" ng-model="recordman">
+                                </div>
+
+                                <div class="form-item">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">佐证材料文号</font></font></label>
+                                    <input type="text" class="form-control input-short"  ng-model="proof">
+                                </div>
+
+
+                                <div class="form-item">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">备注</font></font></label>
+                                    <textarea class="form-control" rows="3" ng-model="remark" style="width: 410px;max-width: 410px"></textarea>
+                                </div>
+                                <div class="form-item">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">佐证材料</font></font></label>
+                                    <button class="btn btn-info" ng-click="getUploadFile()"><i
+                                            class="fa fa-css3"></i>上传附件
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="addSave()">保存</button>
+                        <button type="button" class="btn btn-primary" ng-click="closeModal()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--&lt;!&ndash; 修改扣分项（Modal） &ndash;&gt;-->
+        <!--<div class="modal fade" id="myModaledit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">-->
+            <!--<div class="modal-dialog">-->
+                <!--<div class="modal-content">-->
+                    <!--<div class="modal-header">-->
+                        <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">-->
+                            <!--&times;-->
+                        <!--</button>-->
+                        <!--<h4 class="modal-title" id="myModalLabel1edit">-->
+                            <!--修改扣分项-->
+                        <!--</h4>-->
+                    <!--</div>-->
+                    <!--<div class="modal-body" style="height: 500px;">-->
+                        <!--<form class="form-inline">-->
+                            <!--<div class="form-item">-->
+                                <!--<div class="form-item">-->
+                                    <!--<label>报道时间</label>-->
+                                    <!--<div class="input-group date date_picker" id="J-editTime">-->
+                                        <!--<input type="text" class="form-control input-short-o" ng-model="editTime">-->
+                                        <!--<span class="input-group-addon"><i class="fa fa-calendar"></i></span>-->
+                                    <!--</div>-->
+                                    <!--<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>-->
+                                <!--</div>-->
+                                <!--<div class="form-item">-->
+                                    <!--<label>区域</label>-->
+                                    <!--<select class="form-control select-short" ng-model="editRegion">-->
+                                        <!--<option value="">请选择</option>-->
+                                        <!--<option value="{{item.areaCode}}" ng-repeat="item in regionList">{{item.areaName}}</option>-->
+                                    <!--</select>-->
+                                    <!--<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>-->
+                                <!--</div>-->
+                                <!--<div class="form-item">-->
+                                    <!--<label>是否新媒体</label>-->
+                                    <!--<select class="form-control select-short" ng-model="isNewMediaEdit">-->
+                                        <!--<option value="">请选择</option>-->
+                                        <!--<option value="1">是</option>-->
+                                        <!--<option value="2">否</option>-->
+                                    <!--</select>-->
+                                    <!--<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>-->
+                                <!--</div>-->
+                                <!--<div class="form-item">-->
+                                    <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">信息报道媒体</font></font></label>-->
+                                    <!--<input type="text" class="form-control input-long" style="float: inherit;width: 410px;" ng-model="infoReportMediaEdit">-->
+                                    <!--<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>-->
+                                <!--</div>-->
+
+                                <!--<div class="form-item">-->
+                                    <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">信息报道内容</font></font></label>-->
+                                    <!--<textarea class="form-control" rows="5" ng-model="infoReportContentEdit" style="width: 410px;max-width: 410px"></textarea>-->
+                                    <!--<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>-->
+
+                                <!--</div>-->
+                                <!--<div class="form-item">-->
+                                    <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">备注</font></font></label>-->
+                                    <!--<textarea class="form-control" rows="3" ng-model="remarkEdit" style="width: 410px;max-width: 410px"></textarea>-->
+                                <!--</div>-->
+                                <!--<div class="form-item">-->
+                                    <!--<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">附件</font></font></label>-->
+                                    <!--<button class="btn btn-info" ng-click="getUploadFile()"><i-->
+                                            <!--class="fa fa-css3"></i>上传附件-->
+                                    <!--</button>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</form>-->
+                    <!--</div>-->
+                    <!--<div class="modal-footer">-->
+                        <!--<button type="button" class="btn btn-primary" ng-click="updateSave()">保存</button>-->
+                        <!--<button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+
+        <!-- 扣分项详情（Modal） -->
+        <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabelview">
+                            扣分项详情
+                        </h4>
+                    </div>
+                    <div class="modal-body" style="height: 500px;">
+                        <form class="form-inline">
+                            <div class="form-item">
+
+                                <div class="form-item">
+                                    <label>行政区域</label>
+                                    <select class="form-control select-short" ng-model="detail.regionid" disabled>
+                                        <option value="">请选择</option>
+                                        <option value="{{item.areaCode}}" ng-repeat="item in regionList">{{item.areaName}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-item">
+                                    <label>扣分类型</label>
+                                    <select class="form-control select-short" ng-model="detail.type">
+                                        <option value="">请选择</option>
+                                        <option value="{{item.id}}" ng-repeat="item in typeList">{{item.typeName}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-item">
+                                    <label>扣分日期</label>
+                                    <div class="input-group date date_picker">
+                                        <input type="text" class="form-control input-short-o" readonly ng-model="detail.issue">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-item">
+                                    <label>详细扣分项</label>
+                                    <select class="form-control select-short" ng-model="detail.choice" disabled style="width: 430px;">
+                                        <option value="">请选择</option>
+                                        <option value="{{item.id}}" ng-repeat="item in typeDetailList">{{item.name}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-item">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">扣分分值</font></font></label>
+                                    <input type="number" min="0" max="100" class="form-control input-short" readonly ng-model="detail.score">
+                                </div>
+
+                                <div class="form-item">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">录入人</font></font></label>
+                                    <input type="text" class="form-control input-short" readonly ng-model="detail.recordman">
+                                </div>
+
+                                <div class="form-item">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">佐证材料文号</font></font></label>
+                                    <input type="text" class="form-control input-short" readonly ng-model="detail.proof">
+                                </div>
+
+
+                                <div class="form-item">
+                                    <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">备注</font></font></label>
+                                    <textarea class="form-control" rows="3" ng-model="detail.remark" readonly style="width: 410px;max-width: 410px"></textarea>
+                                </div>
+
+
+                                <div class="form-item" ng-if="fileList.length != 0">
+                                    <label><font style="vertical-align: inherit;"><font
+                                            style="vertical-align: inherit;">附件</font></font></label>
+                                </div>
+                                <div class="form-item" style="position: relative;width: 426px;">
+                                <span ng-repeat="item in fileList" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
+                                    <!--<span style="color: #3189e1;" ng-click="downFile(item.downloadURL)">下载</span>-->
+                                </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--附件上传-->
+        <div class="modal fade" id="coverModal" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <li class="fa fa-remove"></li>
+                        </button>
+                        <h4>上传附件</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <div class="wid-100 announcementCoverPanel">
+                                    <input class="uploadfile" id="problemFile" type="file" name="file">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    .
+                    <div class="modal-footer">
+                        <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload()">
+                            <i class="fa fa-check"></i>
+                            <span>确定</span>
+                        </a>
+                        <a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
+                            <i class="fa fa-reply"></i>
+                            <span>取消</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $(".uploadfile").fileinput({
+        allowedFileExtensions: ['doc','docx','pdf','png','jpg','jpeg'],
+        uploadAsync: true, //默认异步上传
+        showRemove: true, //显示移除按钮
+        maxFileCount: 5, //表示允许同时上传的最大文件个数
+        language: 'zh', //设置语言
+        uploadUrl: '#', //上传的地址
+        showUpload: false, //显示批量上传按钮
+        showCaption: true, //是否显示标题
+        browseClass: "btn btn-primary", //按钮样式
+        showPreview: true, //是否显示预览
+        dropZoneEnabled: false, //是否显示拖拽区域
+        validateInitialCount: true,
+        slugCallback: function (filename) {
+            return filename.replace('(', '_').replace(']', '_');
+        }
+    });
+</script>

@@ -906,6 +906,20 @@
       "description": "分析统计-信息宣传情况"
     },
 
+    {
+      "seqId": "5-19",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "其它扣分项台账",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/otherPoints/otherPoints.html",
+      "requireJS": [
+        "module/fenxitongji/otherPoints/otherPoints.js"
+      ],
+      "description": "分析统计-其它扣分项台账"
+    },
+
 
 
     {
