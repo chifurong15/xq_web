@@ -1,0 +1,440 @@
+<div class="conferenceCtrl chouchadudao anchaanfang " ng-controller="riverCruiseCollection" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">河长巡河补录</span><span class="tag-right"></span>
+            </div>
+        </div>
+        <div class="panel panel-default panel-m" style="border-top: none;">
+            <div class="panel-body">
+                <form class="form-inline" method="get">
+                    <div class="form-item">
+                        <label>行政区域</label>
+                        <select class="form-control select-short" ng-model="regionName">
+                            <option value="">请选择</option>
+                            <option value="{{item.areaCode}}" ng-repeat="item in regionList">{{item.areaName}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-item">
+                        <label><font style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">河长姓名</font></font></label>
+                        <input type="text" class="form-control input-short" ng-model="chairmanName">
+                    </div>
+
+                    <div class="form-item">
+                        <label class="near"><font style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">河段</font></font></label>
+                        <input type="text" class="form-control input-short" ng-model="reachname">
+                    </div>
+
+                    <div class="form-item">
+                        <label>河长级别</label>
+                        <select class="form-control select-short" ng-model="level">
+                            <option value="">请选择</option>
+                            <option value="{{item.id}}" ng-repeat="item in riverLevel">{{item.level}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-item">
+                        <label>开始日期</label>
+                        <div class="input-group date date_picker" id="startTime">
+                            <input type="text" class="form-control input-short-o" ng-model="startTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>结束日期</label>
+                        <div class="input-group date date_picker" id="endTime">
+                            <input type="text" class="form-control input-short-o" ng-model="endTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="search()"><i class="fa fa-search"></i>搜索</button>
+                    <button type="button" class="btn btn-primary" ng-click="reset()" style="margin: 0 5px;">
+                        <i class="fa fa-refresh"></i>重置
+                    </button>
+
+                </form>
+
+                <div class="table-bar clearfix">
+
+                    <button type="button" class="btn btn-primary" ng-click="add(1)" style="float: right;margin: 0 5px;">
+                        新增记录
+                    </button>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                <tr class='tHeader'>
+                                    <th style="width: 5%;">序号</th>
+                                    <th style="width: 10%;">河长姓名</th>
+                                    <th style="width: 5%;">河长级别</th>
+                                    <th style="width: 10%;">河段名称</th>
+                                    <th style="width: 10%;">巡河日期</th>
+                                    <th style="width: 10%;">巡河时间(分钟)</th>
+                                    <th style="width: 10%;">巡河里程(km)</th>
+                                    <th style="width: 5%;">问题数量</th>
+                                    <th style="width: 15%;">巡河内容</th>
+                                    <th style="width: 10%;">操作</th>
+                                </tr>
+                                <tr ng-repeat="lst in dataList" ng-init="index = $index+1" style="cursor: pointer">
+                                    <td>{{$index + 1 + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
+                                    <td>{{lst.chairmanname}}</td>
+                                    <td>
+                                        <span ng-if="lst.chairmanlevel == 1">市级</span>
+                                        <span ng-if="lst.chairmanlevel == 2">区级</span>
+                                        <span ng-if="lst.chairmanlevel == 3">镇级</span>
+                                        <span ng-if="lst.chairmanlevel == 4">村级</span>
+                                    </td>
+                                    <td>{{lst.reachname}}</td>
+                                    <td>{{lst.patroltime}}</td>
+                                    <td>{{lst.duration}}</td>
+                                    <td>{{lst.mileage}}</td>
+                                    <td>{{lst.problemnum}}</td>
+                                    <td>{{lst.content}}</td>
+                                    <td>
+                                        <a class="btn btn-primary btn-xs" ng-click="view(lst.id)"><i class="fa fa-info" title="查看"></i></a>
+                                        <a class="btn btn-primary btn-xs" ng-click="add(2,lst.id)" ><i class="fa fa-edit" title="修改"></i></a>
+                                        <a class="btn btn-primary btn-xs" ng-click="delete(lst.id)"><i class="fa fa-trash-o" title="删除"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <tm-pagination conf="paginationConf"></tm-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- 新增or修改 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"  ng-click="cancel()">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel1">
+                        {{id == 1 ? '新增' : '修改'}}巡河记录
+                    </h4>
+                </div>
+                <div class="modal-body" style="height:450px">
+                    <form class="form-inline">
+
+                        <div class="form-item">
+                            <label>行政区域</label>
+                            <select class="form-control select-short" ng-model="region" ng-change="regionListener(region)">
+                                <option value="">请选择</option>
+                                <option value="{{item.areaCode}}" ng-repeat="item in regionList">{{item.areaName}}</option>
+                            </select>
+                        </div>
+                        <div class="form-item">
+                            <label>河长姓名</label>
+                            <select class="form-control select-short" ng-model="manName" ng-change="chairmanListener(manName)">
+                                <option value="">请选择</option>
+                                <option value="{{item.chairmanid}}" ng-repeat="item in manList">{{item.chairmanName}}</option>
+                            </select>
+                        </div>
+
+                        <div class="form-item">
+                            <label>河段名称</label>
+                            <select class="form-control select-short" ng-model="riverName" ng-change="reachListener(riverName)">
+                                <option value="">请选择</option>
+                                <option value="{{item.reachid}}" ng-repeat="item in reachList">{{item.reachName}}</option>
+                            </select>
+                        </div>
+
+
+                        <!--<div class="form-item">-->
+                            <!--<label>河长级别</label>-->
+                            <!--<select class="form-control select-short" ng-model="LevelRiver">-->
+                                <!--<option value="">请选择</option>-->
+                                <!--<option value="{{item.id}}" ng-repeat="item in riverLevel">{{item.level}}</option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+
+                        <div class="form-item">
+                            <label>巡河日期</label>
+                            <div class="input-group date date_picker" id="patrolDate">
+                                <input type="text" class="form-control input-short-o" ng-model="patrolDate" style="width: 160px;">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">巡河区域</font></font></label>
+                            <input type="text" class="form-control input-long" ng-model="patrolArea"  style="width: 435px;">
+                        </div>
+
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">巡河时长</font></font></label>
+                            <input type="number" min="1" class="form-control input-short"
+                                   ng-model="patrolTime" style="width: 125px;"
+                            /><span>分钟</span>
+                        </div>
+
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">巡河里程</font></font></label>
+                            <input type="number" min="0" class="form-control input-short" ng-model="mileage" style="width: 125px;"><span>公里</span>
+                        </div>
+
+
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">问题数量</font></font></label>
+                            <input type="number" min="1" max="5" class="form-control input-long" ng-model="problemnum" style="width: 418px">
+                        </div>
+
+                        <div class="form-item">
+                            <div ng-repeat="reply in fchat.replies">
+                                <div class="form-group">
+                                    <div class="form-item">
+                                        <label for="reply{{$index + 1}}">问题点位</label>
+                                        <input type="text" class="form-control input-long" ng-model="reply.position"
+                                               id="reply{{$index + 1}}" name="reply{{$index + 1}}" style="width: 418px;"/>
+                                    </div>
+
+                                    <div class="form-item">
+                                        <label for="reply{{$index + 1}}">问题描述</label>
+                                        <textarea type="text" class="form-control input-long" ng-model="reply.desc"
+                                                  id="reply{{$index + 2}}" name="reply{{$index + 2}}" style="width: 418px;"></textarea>
+                                    </div>
+
+                                    <div style="margin-left: 95px;">
+                                        <button class="btn btn-info btn-xs" ng-click="fchat.incrReply($index)" title="增加问题">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                        </button>
+                                        <button class="btn btn-danger btn-xs" ng-click="fchat.decrReply($index)" title="删除问题">
+                                            <i class="fa fa-minus" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="replies" name="replies" value="{{fchat.combineReplies()}}" />
+                        </div>
+
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">巡河内容</font></font></label>
+                            <textarea type="text" class="form-control input-short" ng-model="content"></textarea>
+                        </div>
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">附件</font></font></label>
+                            <button class="btn btn-info" ng-click="getUploadFile()"><i
+                                    class="fa fa-css3"></i>上传附件
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="addSave()">保存</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 查看巡河记录模态框（Modal） -->
+    <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"  ng-click="cancel()">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="view">
+                        查看巡河记录
+                    </h4>
+                </div>
+                <div class="modal-body" style="height:450px">
+                    <form class="form-inline">
+
+                        <div class="form-item">
+                            <label>行政区域</label>
+                            <select class="form-control select-short" ng-model="detail.regionid" disabled>
+                                <option value="">请选择</option>
+                                <option value="{{item.areaCode}}" ng-repeat="item in regionList">{{item.areaName}}</option>
+                            </select>
+                        </div>
+                        <div class="form-item">
+                            <label>河长姓名</label>
+                            <input type="text" class="form-control input-short" ng-model="detail.chairmanname" readonly>
+                        </div>
+
+                        <div class="form-item">
+                            <label>河段名称</label>
+                            <input type="text" class="form-control input-long" ng-model="detail.reachname" readonly style="width: 435px;">
+                        </div>
+
+
+                        <div class="form-item">
+                            <label>河长级别</label>
+                            <select class="form-control select-short" ng-model="detail.chairmanlevel" disabled>
+                                <option value="">请选择</option>
+                                <option value="{{item.id}}" ng-repeat="item in riverLevel">{{item.level}}</option>
+                            </select>
+                        </div>
+
+                        <div class="form-item">
+                            <label>巡河日期</label>
+                            <div class="input-group date date_picker">
+                                <input type="text" class="form-control input-short-o" ng-model="detail.patroltime" readonly style="width: 160px;">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">巡河区域</font></font></label>
+                            <input type="text" class="form-control input-long" ng-model="detail.address" readonly style="width: 435px;">
+                        </div>
+
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">巡河时长</font></font></label>
+                            <input type="number" min="1" class="form-control input-short" readonly
+                                   ng-model="detail.duration" style="width: 125px;"
+                            /><span>分钟</span>
+                        </div>
+
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">巡河里程</font></font></label>
+                            <input type="number" min="0" class="form-control input-short" readonly ng-model="detail.mileage" style="width: 125px;"><span>公里</span>
+                        </div>
+
+
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">问题数量</font></font></label>
+                            <input type="number" min="1" max="5" class="form-control input-long" readonly ng-model="detail.problemnum" style="width: 418px">
+                        </div>
+
+
+                        <div class="form-item" ng-show="detail.list[0]" ng-repeat="val in detail.list[0] track by val.id" key="{{val.id}}" >
+                            <div class="form-item">
+                                <label>问题点位</label>
+                                <input type="text" class="form-control input-long" readonly ng-model="val.position" style="width: 418px;"/>
+                            </div>
+                            <div class="form-item">
+                                <label>问题描述</label>
+                                <textarea type="text" class="form-control input-long" readonly ng-model="val.desc" style="width: 418px;"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-item">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">巡河内容</font></font></label>
+                            <textarea type="text" class="form-control input-short" readonly ng-model="detail.content"></textarea>
+                        </div>
+                        <div class="form-item" ng-if="fileList.length != 0">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">附件</font></font></label>
+                        </div>
+                        <div class="form-item" style="position: relative;width: 426px;">
+                                <span ng-repeat="item in fileList" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
+                                </span>
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="addSave()">保存</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--附件上传-->
+    <div class="modal fade" id="coverModal" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="getUploadFile(1)">
+                        <li class="fa fa-remove"></li>
+                    </button>
+                    <h4>上传附件</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="wid-100 announcementCoverPanel">
+                                <input class="uploadfile" id="problemFile" type="file" name="file">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="getUpload()">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="getUploadFile()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--描述：所属区域树-->
+    <div class="modal fade" id="regionTreeModal" role="dialog_region" data-backdrop="static" style="z-index: 99999;">
+        <div class="modal-dialog modal-jm " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">选择区域</h4>
+                </div>
+                <div class="modal-body">
+
+                    <ul id="regionTreeContainer" class="ztree regionTreeContent"></ul>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getModalOk()">
+                        <i class="fa fa-check"></i>
+                        <span>确 定</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+    $(".uploadfile").fileinput({
+        allowedFileExtensions: ['doc','docx','pdf','png','jpg','jpeg'],
+        uploadAsync: true, //默认异步上传
+        showRemove: true, //显示移除按钮
+        maxFileCount: 5, //表示允许同时上传的最大文件个数
+        language: 'zh', //设置语言
+        uploadUrl: '#', //上传的地址
+        showUpload: false, //显示批量上传按钮
+        showCaption: true, //是否显示标题
+        browseClass: "btn btn-primary", //按钮样式
+        showPreview: true, //是否显示预览
+        dropZoneEnabled: false, //是否显示拖拽区域
+        validateInitialCount: true,
+        slugCallback: function (filename) {
+            return filename.replace('(', '_').replace(']', '_');
+        }
+    });
+</script>

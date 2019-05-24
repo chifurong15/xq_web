@@ -920,6 +920,19 @@
       "description": "分析统计-其它扣分项台账"
     },
 
+    {
+      "seqId": "5-20",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "巡河补录",
+      "icon": "fa fa-signal",
+      "url": "module/fenxitongji/riverCruiseCollection/riverCruiseCollection.html",
+      "requireJS": [
+        "module/fenxitongji/riverCruiseCollection/riverCruiseCollection.js"
+      ],
+      "description": "分析统计-巡河补录"
+    },
 
 
     {
@@ -1494,6 +1507,19 @@
         "module/fenxitongji/outputCompareInput/outputCompareInput.js"
       ],
       "description": "分析统计-现状与对比出入境水质变化"
+    },
+    {
+      "seqId": "5-24",
+      "parentId": "5",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "全市水质比例图",
+      "icon": "menu-icon-6",
+      "url": "module/fenxitongji/cityWidePie/cityWidePie.html",
+      "requireJS": [
+        "module/fenxitongji/cityWidePie/cityWidePie.js"
+      ],
+      "description": "分析统计-全市水质比例图"
     },
 
     {
