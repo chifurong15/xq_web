@@ -22,7 +22,7 @@
                                        routeService, $http, $ajaxhttp, moduleService , globalParam) {
 
 
-                    //var apiPrefix = moduleService.getServiceUrl() + '/statistic';
+                    var apiPrefix = moduleService.getServiceUrl() + '/statistic';
 
                     // var apiPrefix = 'http://10.0.9.133:7024' + '/statistic';
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/list';
