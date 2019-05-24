@@ -1,0 +1,57 @@
+<div class="fenxintongji" ng-controller="cityWidePie" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">全市水质比例图</span><span class="tag-right"></span>
+            </div>
+        </div>
+        <div class="panel panel-default" style="margin-top: -1px">
+            <div class="panel-body" style="position: relative;">
+                <form class="form-inline" method="get">
+
+
+
+                    <div class="form-item">
+                        <label>行政区域</label>
+                        <select class="form-control select-short" ng-model="regionName" ng-change="selectSectionName(regionName)">
+                            <option value="">全部</option>
+                            <option value="{{item.areaName}}" ng-repeat="item in regionList">{{item.areaName}}</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <label>河道名称</label>
+                        <select class="form-control select-short" ng-model="reachName">
+                            <option value="">全部</option>
+                            <option value="{{item}}" ng-repeat="item in riverList track by item">{{item}}</option>
+                        </select>
+                    </div>
+                    <!--<div class="form-item">-->
+                        <!--<label>河道分类</label>-->
+                        <!--<select class="form-control select-short" ng-model="reachType">-->
+                            <!--<option value="">全部</option>-->
+                            <!--<option value="{{item}}" ng-repeat="item in reachTypeList">{{item}}</option>-->
+                        <!--</select>-->
+                    <!--</div>-->
+                    <div class="form-item">
+                        <label>期号</label>
+                        <div class="input-group date date_picker" id="startTime">
+                            <input type="text" class="form-control input-short-o"
+                                   ng-model="startTime">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" type="submit" style="margin-left: 96px"
+                            ng-click="search()"><i
+                            class="fa fa-search"></i> 查询
+                    </button>
+                </form>
+
+                <div class="clearfix" style="margin-top: 30px;">
+                    <div id="inputPie" class="tj-chart-con" style="width: 100%;"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
