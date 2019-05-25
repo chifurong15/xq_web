@@ -39,7 +39,7 @@
                 var apiPrefix1 = moduleService.getServiceUrl() + '/resumption';
                 var apiPrefix2 = moduleService.getServiceUrl() + '/statistic';
                 var apiPrefix3 = moduleService.getServiceUrl() + '/quality';
-                // var apiPrefix3 = "http://10.0.9.133:7004" + '/quality';
+                // var apiPrefix2 = "http://10.0.9.133:7024" + '/statistic';
 
 
                 var promise = esriApiDeps.query();
@@ -180,7 +180,7 @@
                             name: '',
                             type: 'pie',
                             radius: ['30%', '50%'],
-                            center: ['30%', '35%'],
+                            center: ['30%', '40%'],
                             data: [
                                 {
                                     value: $scope.waterList ? $scope.waterList.one : 0,
