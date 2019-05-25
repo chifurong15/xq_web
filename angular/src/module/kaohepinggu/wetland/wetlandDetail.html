@@ -12,7 +12,7 @@
                 <div>
                     <h3 style="font-size: 16px;font-weight: 700;display: inline-block;">{{surTitle}}</h3>
                     <div style="display: inline-block;float: right;">
-                        <button type="button" class="btn btn-info" ng-click="add()" ng-if="num == 1">新增</button>
+                        <button type="button" class="btn btn-info" ng-click="add()" ng-if="num == 6">新增</button>
                         <!--<input type="file" class="hidden" id="J-attandUploader" ng-model="attandUrl" onchange="angular.element(this).scope().uploadFile(this)"/>-->
                         <!--<button class="btn btn-success" onclick="document.getElementById('J-attandUploader').click()" ng-if="num == 1">导入(.xls)</button>-->
                         <!--<a class="btn btn-info" ng-if="num == 1" ng-href="http://10.0.0.196/api/download/uhope/infomation/20181102145942915_地表水.xlsx" target="_blank"  class="downOrLook">下载导入模板</a>-->
@@ -32,7 +32,7 @@
                                     <th width="15%">生态系统状况得分</th>
                                     <th width="20%">湿地保护特色工作得分</th>
                                     <th width="10%">总分</th>
-                                    <th width="20%" ng-if="num == 1">操作</th>
+                                    <th width="20%" ng-if="num == 6">操作</th>
                                 </tr>
                                 <tr ng-repeat="item in detailList">
                                     <td>{{$index+1}}</td>
@@ -42,7 +42,7 @@
                                     <td>{{item.ecosystemgrade}}</td>
                                     <td>{{item.protectgrade}}</td>
                                     <td>{{item.totalgrade}}</td>
-                                    <td ng-if="num == 1">
+                                    <td ng-if="num == 6">
                                         <button type="button" class="btn btn-primary btn-sm" ng-if="status != 0" ng-click="edit(item)">修改</button>
                                         <button type="button" class="btn btn-danger btn-sm" ng-if="status != 0" ng-click="delete(item.id)">删除</button>
                                     </td>
