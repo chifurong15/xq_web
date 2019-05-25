@@ -44,7 +44,7 @@
                     </div>
                     <div class="form-item">
                         <label>联系电话</label>
-                        <input type="text" name="tel" onkeyup="this.value=this.value.replace(/[^-\d、/\s]/g, '')" class="form-control input-short" ng-model="contactType" lay-verify="required"/>
+                        <input type="text" name="tel" maxlength="11" onkeyup="this.value=this.value.replace(/[^-\d、/\s]/g, '')" class="form-control input-short" ng-model="contactType" lay-verify="required"/>
                     </div>
                     <div class="form-item">
                         <label>举报位置</label>
@@ -71,11 +71,11 @@
                     <div class="input-group form-item" style="z-index: 10;">
                         <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">承办单位</font></font></label>
                         <input type="text" class="form-control input-short" ng-model="organizer"
-                               lay-verify="required"/>
+                               lay-verify="required" style="width: 160px"/>
                         <!--                        <select id="slpk" class="form-control selectpicker" multiple data-actions-box="true" data-size="8"  style="width: 426px;z-index: 0;" ng-model="organizer">-->
                         <!--                        </select>-->
                     </div>
-                    <div class="form-item" style="margin-left: 13px;">
+                    <div class="form-item">
                         <label>回复方式</label>
                         <select ng-model="reportway"  class="form-control select-short">
                             <option value="">请选择</option>
@@ -83,6 +83,12 @@
                             <option value="邮箱">邮箱</option>
                         </select>
                     </div>
+                    <div class="input-group form-item" style="z-index: 10;">
+                        <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">分数</font></font></label>
+                        <input name="number" class="form-control input-short" ng-model="score"
+                               lay-verify="required" style="width: 160px" min="0" max="100" onkeyup="value=value.replace(/[^\d]/g,'')"/>
+                    </div>
+
                     <br>
                     <div class="form-item">
                         <label>实际回复日期</label>
@@ -115,12 +121,13 @@
                     <div class="form-item remarkInfo">
                         <div class="dis-i-blc">
                             <label>举报问题</label>
+                            <div class="p-l-0 wid-100" style="margin-left: 95px">
+                            <textarea class="form-control textareaH" ng-model="reportProblem" ng-change="checkRemark()"
+                                      rows="8" maxlength="512"></textarea>
+                                <p class="m-t-10">还可输入{{countNum}}个字</p>
+                            </div>
                         </div>
-                        <div class="p-l-0 wid-100" style="margin-left: 95px">
-                        <textarea class="form-control textareaH" ng-model="reportProblem" ng-change="checkRemark()"
-                                  rows="8" maxlength="512"></textarea>
-                            <p class="m-t-10">还可输入{{countNum}}个字</p>
-                        </div>
+
                     </div>
                     <br/>
                     <div class="form-item">

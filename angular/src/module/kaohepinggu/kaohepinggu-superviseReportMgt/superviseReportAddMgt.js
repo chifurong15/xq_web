@@ -71,7 +71,7 @@
                         method:'get',
                         callBack:function (res) {
                             $scope.regionList = res.data;
-                            console.log($scope.regionList);
+                            // console.log($scope.regionList);
                             var select = $("#slpk");
                             for (var i = 0; i < $scope.regionList.length; i++) {
                                 select.append("<option value='"+$scope.regionList[i].id+"'>"
@@ -153,7 +153,7 @@
 	                    },
 	                }).success(
 	                    function (res) {
-	                        console.log(res);
+	                        // console.log(res);
 	                        regionTree.addNodes(treeNode, res.data, true);
 	                    }
 	                );
@@ -406,13 +406,14 @@
                             processingResults: $scope.processingResults,
                         	reportSource: $scope.source,
 							overTime: $scope.overtime,
-                        way: $scope.way,
-                        organizer: $scope.organizer ? $scope.organizer.join(',') : '',
-                        reportway: $scope.reportway,
-                        finishReport: $scope.finishReport,
-                        RequireReport: $scope.RequireReport,
-                        reportorTime: $scope.reportorTime,
-                        remark: $scope.remark,
+							score: $scope.score,
+                            way: $scope.way,
+                            organizer: $scope.organizer,
+                            reportway: $scope.reportway,
+                            finishReport: $scope.finishReport,
+                            RequireReport: $scope.RequireReport,
+                            reportorTime: $scope.reportorTime,
+                            remark: $scope.remark,
 
 					}
                     if(params.contactType.length != 11 ){
