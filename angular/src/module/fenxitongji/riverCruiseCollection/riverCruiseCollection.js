@@ -161,6 +161,7 @@
 
                     //新增河道断面窗口
                     $scope.add = function (id,detailId) {
+                        clear()
                         $('#myModal').modal('show');
                         $scope.id = id ;
                         $scope.detailId = detailId ;

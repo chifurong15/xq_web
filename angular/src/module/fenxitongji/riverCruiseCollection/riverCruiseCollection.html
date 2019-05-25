@@ -140,17 +140,15 @@
                         </div>
                         <div class="form-item">
                             <label>河长姓名</label>
-                            <select class="form-control select-short" ng-model="manName" ng-change="chairmanListener(manName)">
-                                <option value="">请选择</option>
-                                <option value="{{item.chairmanid}}" ng-repeat="item in manList">{{item.chairmanName}}</option>
+                            <select class="form-control select-short" ng-model="manName"
+                                    ng-options="s.chairmanid as s.chairmanName for s in manList" ng-change="chairmanListener(manName)">
                             </select>
                         </div>
 
                         <div class="form-item">
                             <label>河段名称</label>
-                            <select class="form-control select-short" ng-model="riverName" ng-change="reachListener(riverName)">
-                                <option value="">请选择</option>
-                                <option value="{{item.reachid}}" ng-repeat="item in reachList">{{item.reachName}}</option>
+                            <select class="form-control select-short" ng-model="riverName"
+                                    ng-options="r.reachid as r.reachName for r in reachList" ng-change="reachListener(riverName)">
                             </select>
                         </div>
 
