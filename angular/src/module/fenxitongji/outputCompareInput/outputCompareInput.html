@@ -170,9 +170,11 @@
 
 
                                         <!--入境断面水质变化----总评-->
-                                        <td ng-if="lst.inputResult == 1">下降，水质变好，等级变低</td>
-                                        <td ng-if="lst.inputResult == 2">上升，水质变差，等级升高</td>
-                                        <td ng-if="lst.inputResult == 3">持平</td>
+                                        <td>
+                                            <span ng-if="lst.inputResult == 1">下降，水质变好，等级变低</span>
+                                            <span ng-if="lst.inputResult == 2">上升，水质变差，等级升高</span>
+                                            <span ng-if="lst.inputResult == 3">持平</span>
+                                        </td>
 
 
                                         <!--出境断面水质变化----监测项目水质变化-->
@@ -212,10 +214,11 @@
 
 
                                         <!--出境断面水质变化----总评-->
-                                        <td ng-if="lst.outputResult == 1">下降，水质变好，等级变低</td>
-                                        <td ng-if="lst.outputResult == 2">上升，水质变差，等级升高</td>
-                                        <td ng-if="lst.outputResult == 3">持平</td>
-
+                                        <td>
+                                            <span ng-if="lst.outputResult == 1">下降，水质变好，等级变低</span>
+                                            <span ng-if="lst.outputResult == 2">上升，水质变差，等级升高</span>
+                                            <span ng-if="lst.outputResult == 3">持平</span>
+                                        </td>
 
                                     </tr>
                                 </tbody>
