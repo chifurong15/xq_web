@@ -25,19 +25,21 @@
                     // var apiPrefix = 'http://10.0.9.133:7024' + '/statistic';
 
                     $scope.init = function () {
-                        var date = new Date();
-                        var year = date.getFullYear();
-                        var month = date.getMonth();
-                        if(month == 0){
-                            month = 12;
-                            year = year - 1;
-                        }
-                        month =  month < 10 ? '0' + month : month
-                        $scope.searchTime1 = year + '-' + month ;
-                        $scope.searchTime2 = year + '-' + month ;
-                        $scope.searchTime3 = year + '-' + month ;
+                        $scope.searchTime1 = ''
+                        $scope.searchTime3 = ''
+                        // var date = new Date();
+                        // var year = date.getFullYear();
+                        // var month = date.getMonth();
+                        // if(month == 0){
+                        //     month = 12;
+                        //     year = year - 1;
+                        // }
+                        // month =  month < 10 ? '0' + month : month
+                        // $scope.searchTime1 = year + '-' + month ;
+                        // $scope.searchTime2 = year + '-' + month ;
+                        // $scope.searchTime3 = year + '-' + month ;
                         getList1();
-                        getList2();
+                        // getList2();
                         getList3();
                     }
 
@@ -52,6 +54,8 @@
                             callBack: function (res) {
                                 if(res.resCode == 1){
                                     $scope.regionSortList = res.data;
+                                    $scope.searchTime1 = res.data[0].issue
+
                                 }else{
                                     layer.msg(res.resMsg, {time:2000});
                                 }
@@ -88,6 +92,7 @@
                             callBack: function (res) {
                                 if(res.resCode == 1){
                                     $scope.otherSortList = res.data;
+                                    $scope.searchTime3 = res.data[0].issue
                                 }else{
                                     layer.msg(res.resMsg, {time:2000});
                                 }
