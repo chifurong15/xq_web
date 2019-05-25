@@ -32,7 +32,7 @@
                                    esriApiDeps, wish,tiandituFactory,MapUtil, SymbolUtil, GeometryUtil,MapTool) {
 
         		var apiPrefix = moduleService.getServiceUrl() + '/patrol';
-        		// var apiPrefix = 'http://10.0.9.110:7027' + '/patrol';
+        		// var apiPrefix = 'http://10.0.9.203:7027' + '/patrol';
                 var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/list';
 
                 var promise = esriApiDeps.query();
@@ -161,7 +161,7 @@
                 //查询河湖
                 function getRiver(r) {
                     $ajaxhttp.myhttp({
-                        url: apiPrefix + '/v1/ExeAssPatrol/selectReach',
+                        url: apiPrefix + '/v1/ExeAssPatrol/selectRiver',
                         method: 'get',
                         params:{
                             regionId:r
