@@ -27,6 +27,8 @@
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/list';
 
 
+                    $scope.userInfo = $localStorage.userLoginInfo.userInfo;
+
 
 
                     $scope.fchat = new Object();
@@ -71,9 +73,6 @@
                         return cr;
                     }
 
-
-
-
                     // $scope.getData = function () {
                     //     $scope.fchat.replies = [{key: 1, position: "111",desc:"1111111"},{key: 2, position: "2222",desc:"22222222222"}]
                     //     console.log($scope.fchat.combineReplies());
@@ -81,42 +80,29 @@
 
 
 
-
-
-
-
                     //河长级别
                     $scope.riverLevel = [
                         {
                             id:1,
-                            level:'市级'
+                            level:'省级'
                         },
                         {
                             id:2,
-                            level:'区级'
+                            level:'市级'
                         },
                         {
                             id:3,
-                            level:'镇级'
+                            level:'区级'
                         },
                         {
                             id:4,
-                            level:'村级'
+                            level:'镇级'
                         },
+                        {
+                            id:5,
+                            level:'村级'
+                        }
                     ]
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -459,7 +445,7 @@
                             params:{
                                 pageNum:-1,
                                 pageSize:-1,
-                                grade:3
+                                parents:$scope.userInfo.regionId
                             },
                             callBack:function (res) {
                                 $scope.regionList = res.data.list;

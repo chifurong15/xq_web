@@ -85,10 +85,11 @@
                                     <td>{{$index + 1 + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
                                     <td>{{lst.chairmanname}}</td>
                                     <td>
-                                        <span ng-if="lst.chairmanlevel == 1">市级</span>
-                                        <span ng-if="lst.chairmanlevel == 2">区级</span>
-                                        <span ng-if="lst.chairmanlevel == 3">镇级</span>
-                                        <span ng-if="lst.chairmanlevel == 4">村级</span>
+                                        <span ng-if="lst.chairmanlevel == 1">省级</span>
+                                        <span ng-if="lst.chairmanlevel == 2">市级</span>
+                                        <span ng-if="lst.chairmanlevel == 3">区级</span>
+                                        <span ng-if="lst.chairmanlevel == 4">镇级</span>
+                                        <span ng-if="lst.chairmanlevel == 5">村级</span>
                                     </td>
                                     <td>{{lst.reachname}}</td>
                                     <td>{{lst.patroltime}}</td>
