@@ -1673,6 +1673,38 @@
       ],
       "description": "考核评分-评分规则配置-水质评分变化细则新增"
     },
+
+    {
+      "seqId": "3-18",
+      "parentId": "3",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "湿地",
+      "icon": "fa fa-bug",
+      "url": "module/kaohepinggu/wetland/wetland.html",
+      "requireJS": [
+        "module/kaohepinggu/wetland/wetland.js"
+      ],
+      "description": "考核评估-湿地"
+    },
+
+
+    {
+      "seqId": "3-18-1",
+      "parentId": "3",
+      "isLeaf": true,
+      "isRoot": false,
+      "name": "湿地",
+      "icon": "fa fa-bug",
+      "url": "module/kaohepinggu/wetland/wetlandDetail.html",
+      "requireJS": [
+        "module/kaohepinggu/wetland/wetlandDetail.js"
+      ],
+      "description": "考核评估-湿地详情"
+    },
+
+
+
     {
       "seqId": "2-1-1",
       "parentId": "2",
