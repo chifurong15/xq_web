@@ -10,21 +10,21 @@
                 <form class="form-inline" method="get">
 
                     <div class="form-item">
-                        <label>区县名称</label>
+                        <label>行政区域</label>
                         <select class="form-control select-short" ng-model="regionName" ng-change="selectSectionName(regionName)">
                             <option value="">全部</option>
                             <option value="{{item.areaName}}" ng-repeat="item in regionList">{{item.areaName}}</option>
                         </select>
                     </div>
                     <div class="form-item">
-                        <label>河道名称</label>
+                        <label>河湖名称</label>
                         <select class="form-control select-short" ng-model="reachName">
                             <option value="">全部</option>
                             <option value="{{item}}" ng-repeat="item in riverList track by item">{{item}}</option>
                         </select>
                     </div>
                     <div class="form-item">
-                        <label>河道分类</label>
+                        <label>河湖分类</label>
                         <select class="form-control select-short" ng-model="reachType">
                             <option value="">全部</option>
                             <option value="{{item}}" ng-repeat="item in reachTypeList">{{item}}</option>
@@ -69,9 +69,9 @@
                                 <thead class="tHeader">
                                     <tr>
                                         <th rowspan="4">序号</th>
-                                        <th rowspan="4">区县</th>
-                                        <th rowspan="4">河道</th>
-                                        <th rowspan="4">河道分类</th>
+                                        <th rowspan="4">行政区域</th>
+                                        <th rowspan="4">河湖</th>
+                                        <th rowspan="4">河湖分类</th>
                                         <th colspan="17">入境断面水质变化</th>
                                         <th colspan="17">出境断面水质变化</th>
                                     </tr>
