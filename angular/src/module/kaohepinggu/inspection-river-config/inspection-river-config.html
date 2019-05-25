@@ -29,19 +29,28 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-md-2" style="display: flex;align-items: center;">
+                            <div class="form-item">
                                 <label>考核单位</label>
-                                <div style="position: relative;display: inline-block; margin-left: 20px;width: 160px">
-                                    <select class="form-control input-short-o"
-                                            style="width: 100%" ng-model="region">
-                                        <option value="">请选择</option>
-                                        <option ng-repeat="region in regionList" value="{{region.areaCode}}">
-                                            {{region.areaName}}
-                                        </option>
-                                    </select>
-
-                                </div>
+                                <select class="form-control input-short" ng-model="region">
+                                    <option value="">请选择</option>
+                                    <option ng-repeat="unit in unitList" value="{{unit.dictValue}}">
+                                        {{unit.dictName}}
+                                    </option>
+                                </select>
                             </div>
+                            <!--<div class="col-md-2" style="display: flex;align-items: center;">-->
+                                <!--<label>考核单位</label>                                -->
+                                <!--<div style="position: relative;display: inline-block; margin-left: 20px;width: 160px">-->
+                                    <!--<select class="form-control input-short-o"-->
+                                            <!--style="width: 100%" ng-model="region">-->
+                                        <!--<option value="">请选择</option>-->
+                                        <!--<option ng-repeat="region in regionList" value="{{region.areaCode}}">-->
+                                            <!--{{region.areaName}}-->
+                                        <!--</option>-->
+                                    <!--</select>-->
+
+                                <!--</div>-->
+                            <!--</div>-->
                             <button type="submit" ng-click="search()" class="btn btn-primary">
                                 <i class="fa fa-search"></i> 搜索
                             </button>

@@ -192,7 +192,7 @@
                     //获取行政区域
                     function getRegion (){
                         $ajaxhttp.myhttp({
-                            url:regionTreeUrl,
+                            url:apiPrefix + '/v1/ExeAssPatrolRecord/selectUnit',
                             method:'get',
                             params:{
                                 pageNum:-1,
