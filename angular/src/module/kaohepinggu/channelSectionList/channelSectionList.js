@@ -17,9 +17,17 @@
                 '$ajaxhttp',
                 'moduleService',
                 'globalParam',
+                'esriApiDeps',
+                'wish',
+                'tiandituFactory',
+                'MapUtil',
+                'SymbolUtil',
+                'GeometryUtil',
+                'MapTool',
+                'ComponentManagerService',
                 function channelSectionList($localStorage, $scope,
                                        $location, $log, $q, $rootScope, $window,
-                                       routeService, $http, $ajaxhttp, moduleService , globalParam) {
+                                       routeService, $http, $ajaxhttp, moduleService , globalParam, esriApiDeps, wish,tiandituFactory, MapUtil, SymbolUtil, GeometryUtil,MapTool,ComponentManagerService) {
 
 
                     var apiPrefix = moduleService.getServiceUrl() + '/statistic';
@@ -27,7 +35,25 @@
                     // var apiPrefix = 'http://10.0.9.133:7024' + '/statistic';
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/list';
 
+                    var promise = esriApiDeps.query();
+                    var w = wish.get();
+
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
+
+                    this.markSymbolLayer = "markSymbolLayer";
+                    var that = this;
+
+                    //初始化地图对象
+                    $scope.map = new w.Map('map', {
+                        // extent: initExtent,
+                        fadeOnZoom: true,
+                        Zoom:11,
+                        extent: new w.Extent(-180, -90, 180, 90, new w.SpatialReference({"wkid":4326})),
+                        logo:false,
+                        minZoom:3,
+                        maxZoom:17
+                    });
+
                     $scope.init = function () {
 
                         //是否展示选择河道列表
@@ -35,12 +61,53 @@
                         $scope.showList1 = false;
 
                         $scope.isUpdate = false;//默认新增可输入断面编号
-
                         getList ();
                         getRegion ();
+                        loadGisModuls();
 
+                    };
 
+                    //加载GIS模块
+                    function loadGisModuls() {
+                        if (typeof $scope.map !== 'undefined') {
+                            MapUtil.init($scope.map);
+                            SymbolUtil.init($scope.map);
+                            GeometryUtil.init($scope.map);
+                            ComponentManagerService.init($scope.map,that.markSymbolLayer);
+                        } else {
+                            // console.error('error： $scope.map 未定义')
+                        }
                     }
+
+                    //地图点击事件
+                    $scope.map.on("click",function (e) {
+                        ComponentManagerService.clear();
+                        ComponentManagerService.drawPointMarker();
+                        ComponentManagerService._drawTool.on("draw-end", function(){
+                            $scope.drawPoint = {
+                                longitude:ComponentManagerService.pointXY[0].toFixed(4),
+                                latitude:ComponentManagerService.pointXY[1].toFixed(4)
+                            }
+                        });
+                    });
+
+                    //地图弹窗
+                    $scope.loadMap = function(){
+                        $('#coods').modal('show');
+                        tiandituFactory.initTianditu($scope.map);
+                        MapUtil.center2LongLat(
+                            $localStorage.userLoginInfo.userInfo.longitude,
+                            $localStorage.userLoginInfo.userInfo.latitude,
+                            $localStorage.userLoginInfo.userInfo.userLevel
+                        );
+                    };
+
+                    //关闭地图弹窗
+                    $scope.closeMap = function () {
+                        $('#coods').modal('hide');
+                        $scope.longitude = $scope.drawPoint.longitude + "," + $scope.drawPoint.latitude;
+                    };
+
 
                     // 获取数据列表
                     function getList () {
@@ -79,8 +146,7 @@
                     $scope.cancel = function () {
                         $('#myModal').modal('hide');
                         clear();
-                    }
-
+                    };
 
 
                     //新增河道断面窗口

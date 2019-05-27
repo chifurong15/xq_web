@@ -14,10 +14,11 @@ angular.module('app')
             var _that= this;
 
             this.init = function(map, layerId){
+                debugger;
                 this._map = map;
                 this._layerId = layerId;
                 this._layer = _w.GraphicsLayer({id: this._layerId});
-                this._map.addLayer(this._layer, 0);
+                // this._map.addLayer(this._layer);
             };
             /**
              * 画点
@@ -51,6 +52,7 @@ angular.module('app')
                 this._drawTool.on("draw-end", dojo.hitch(this, this.addLineToMap));
             };
             this.addPointToMap = function (evt) {
+                debugger;
                 this.clear();
                 if(this._drawTool!=null){
                     this._drawTool.deactivate();
@@ -64,6 +66,7 @@ angular.module('app')
                 //this.addCenterPointToMap(evt.geometry);
 
                 this.pointXY = [evt.geometry.x,evt.geometry.y];
+                this._map.addLayer(this._layer);
             };
             this.addLineToMap = function(evt){
                 if(this._drawTool!=null){
@@ -74,6 +77,7 @@ angular.module('app')
                 var g = new _w.Graphic(evt.geometry, symbol);
                 this._layer.add(g);
                 this.addCenterPointToMap(evt.geometry);
+                this._map.addLayer(this._layer);
             };
             this.addCenterPointToMap = function(polyline){
                 if(polyline && polyline.paths[0].length >= 2){
@@ -92,6 +96,7 @@ angular.module('app')
                     var imgPath = "img/esri-icon/patrol/event.png";
                     var symbol = SymbolUtil.getPictureMarkerSymbol(imgPath, 25, 36);
                     this._layer.add(new _w.Graphic(geometry, symbol));
+                    this._map.addLayer(this._layer);
                 }else {
                     console.warn("坐标为空");
                     layer.msg('坐标为空！绘制失败...',{time:2000});
@@ -113,6 +118,7 @@ angular.module('app')
                 var extent = geometry.getExtent();
                 this._map.centerAt(extent.getCenter());
                 this._map.setExtent(extent.expand(2));
+                this._map.addLayer(this._layer);
 
                 MapTool.graphicflashing(geometry, "polygon");
 

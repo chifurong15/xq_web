@@ -188,7 +188,7 @@
                             <label><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">经纬度</font></font></label>
                             <input type="text" class="form-control input-long" ng-model="longitude" placeholder="如：经度117.11,纬度34.78" style="width: 375px">
-                            <button class="btn btn-info">地图</button>
+                            <button class="btn btn-info" ng-click="loadMap()">地图</button>
                         </div>
 
                         <div class="input-group form-item">
@@ -332,6 +332,23 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="getUploadFile(2)">取消</button>
                     <button type="button" class="btn btn-primary" ng-click="downTemplate()">下载模版</button>
 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="coods" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span style="color: #fff;" aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">地图</h4>
+                </div>
+                <div class="modal-body" id="map">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="closeMap()">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 </div>
             </div>
         </div>
