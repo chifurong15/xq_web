@@ -253,7 +253,8 @@
 
                     //查看  下载附件
                     $scope.downFile = function (path){
-                        window.open($scope.fileUrl + path);
+                        // window.open($scope.fileUrl + path);
+                        window.open( moduleService.getServiceUrl() + '/fm' + path)
                     }
 
                     //关闭新增模态窗
