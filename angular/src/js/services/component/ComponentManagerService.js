@@ -14,7 +14,6 @@ angular.module('app')
             var _that= this;
 
             this.init = function(map, layerId){
-                debugger;
                 this._map = map;
                 this._layerId = layerId;
                 this._layer = _w.GraphicsLayer({id: this._layerId});
