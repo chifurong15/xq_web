@@ -27,7 +27,7 @@
                         <label>河湖分类</label>
                         <select class="form-control select-short" ng-model="reachType">
                             <option value="">全部</option>
-                            <option value="{{item}}" ng-repeat="item in reachTypeList">{{item}}</option>
+                            <option value="{{item.dict_value}}" ng-repeat="item in reachTypeList">{{item.dict_name}}</option>
                         </select>
                     </div>
                     <br>

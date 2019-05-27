@@ -23,7 +23,7 @@
 
                     var apiPrefix = moduleService.getServiceUrl() + '/analysis';
 
-                    // var apiPrefix = ' http://10.0.9.203:8888/analysis';
+                    // var apiPrefix = ' http://10.0.9.133:7031/analysis';
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/list';
 
                     var date = new Date();

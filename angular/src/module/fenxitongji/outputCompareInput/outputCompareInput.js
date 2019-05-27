@@ -23,7 +23,7 @@
 
                     var apiPrefix = moduleService.getServiceUrl() + '/analysis';
 
-                    // var apiPrefix = ' http://10.0.9.203:8888/analysis';
+                    // var apiPrefix = ' http://10.0.9.133:7031/analysis';
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/list';
 
                     var date = new Date();
@@ -75,7 +75,8 @@
                                 text: '基准时间:' + $scope.startTime + '月-对比时间:' + $scope.endTime + '月基准与对比入境水质变化',
                                 x:'center',
                                 textStyle:{
-                                    color:'#42a2fd'
+                                    color:'#42a2fd',
+                                    fontSize:'15'
                                 }
                             },
                             tooltip : {
@@ -133,7 +134,8 @@
                                 text: '基准时间:' + $scope.startTime + '月-对比时间:' + $scope.endTime + '月基准与对比出境水质变化',
                                 x:'center',
                                 textStyle:{
-                                    color:'#42a2fd'
+                                    color:'#42a2fd',
+                                    fontSize:'15'
                                 }
                             },
                             tooltip : {
