@@ -51,7 +51,6 @@ angular.module('app')
                 this._drawTool.on("draw-end", dojo.hitch(this, this.addLineToMap));
             };
             this.addPointToMap = function (evt) {
-                debugger;
                 this.clear();
                 if(this._drawTool!=null){
                     this._drawTool.deactivate();

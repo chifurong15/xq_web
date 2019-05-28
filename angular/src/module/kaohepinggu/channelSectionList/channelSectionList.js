@@ -106,6 +106,7 @@
                     $scope.closeMap = function () {
                         $('#coods').modal('hide');
                         $scope.longitude = $scope.drawPoint.longitude + "," + $scope.drawPoint.latitude;
+                        console.log($scope.longitude);
                     };
 
 
@@ -164,11 +165,13 @@
                                 },
                                 callBack: function (res) {
                                     if (res.resCode == 1) {
-                                        console.log(res.data);
+                                        // console.log(res.data);
                                         $scope.sectionCode = res.data.code;
                                         $scope.sectionName = res.data.name;
                                         $scope.region = res.data.countyid;
-                                        $scope.longitude = res.data.longitude;
+
+                                        $scope.longitude = res.data.longitude + "," + res.data.latitude;
+
                                         $scope.river1 = res.data.rivername;
                                         $scope.category = res.data.category;
                                         $scope.targetquality = res.data.targetquality;
@@ -188,7 +191,8 @@
                             code:$scope.sectionCode,
                             name:$scope.sectionName,
                             countyid:$scope.region,
-                            longitude:$scope.longitude,
+                            longitude:$scope.drawPoint.longitude,
+                            latitude:$scope.drawPoint.latitude,
                             rivername:$scope.river1,
                             category:$scope.category,
                             targetquality:$scope.targetquality,
