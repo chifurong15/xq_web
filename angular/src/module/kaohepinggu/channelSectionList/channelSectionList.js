@@ -252,7 +252,8 @@
 
                     //下载导出模板
                     $scope.downTemplate = function (){
-                        window.open($scope.fileUrl + '/uhope/infomation/20190522175144992_河道断面表(1)(3).xls')
+                        // window.open($scope.fileUrl + '/uhope/infomation/20190522175144992_河道断面表(1)(3).xls')
+                        window.open($scope.fileUrl + '/uhope/infomation/20190528185621662_河道断面表(1)(3).xls')
                     }
 
 
