@@ -163,6 +163,8 @@
                     $scope.add = function (id,detailId) {
                         clear()
                         $('#myModal').modal('show');
+                        $scope.fchat.replies = [{key: 1, position: "",desc:""}]
+
                         $scope.id = id ;
                         $scope.detailId = detailId ;
                         if( $scope.id == 2 && detailId){
