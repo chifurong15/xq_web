@@ -134,9 +134,9 @@
                     $http({
                         method: 'get',
                         url: regionTreeUrl,
-                        params:{
-                            parentCode:120103000000
-                        }
+                        // params:{
+                        //     parentCode:120103000000
+                        // }
                     }).success(function (res) {
                         // console.log(res)
                         if (res.resCode == 1) {
