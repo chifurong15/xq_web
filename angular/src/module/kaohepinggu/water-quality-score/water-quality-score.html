@@ -73,7 +73,21 @@
                                     <th width="15%">备注</th>
                                     <th width="15%">操作</th>
                                 </tr>
-                                <tr ng-repeat="item in waterQualityList">
+                                <tr ng-repeat="item in waterQualityList" ng-if="num == 2">
+                                    <td>{{$index + 1 + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
+                                    <td>{{item.title.length > 20 ? item.title.substring(0,20) + '...' : item.title}}</td>
+                                    <td>{{item.issue}}</td>
+                                    <td>
+                                        <span ng-if="item.state==1" class="label label-danger">已上报</span>
+                                    </td>
+                                    <td>{{item.createtime}}</td>
+                                    <td>{{item.createuser}}</td>
+                                    <td>{{item.remark.length > 18 ? item.remark.substring(0,18) + '...' : item.remark}}</td>
+                                    <td style="text-align: center;">
+                                        <button type="button" class="btn btn-xs btn-primary" ng-click="view(item.id,item.status)">查看</button>
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="item in waterQualityList" ng-if="num != 2">
                                     <td>{{$index + 1 + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
                                     <td>{{item.title.length > 20 ? item.title.substring(0,20) + '...' : item.title}}</td>
                                     <td>{{item.issue}}</td>
@@ -87,7 +101,7 @@
                                     <td style="text-align: center;">
                                         <button type="button" class="btn btn-xs btn-primary" ng-click="view(item.id,item.status)">查看</button>
                                         <button type="button" class="btn btn-xs btn-primary" ng-if="item.state==2" ng-click="edit(item.id,item.status)">上报</button>
-                                        <button type="button" class="btn btn-xs btn-danger" ng-click="delete(item.id)">删除</button>
+                                        <button type="button" class="btn btn-xs btn-danger" ng-if="item.state==2" ng-click="delete(item.id)">删除</button>
                                     </td>
                                 </tr>
                                 </tbody>
