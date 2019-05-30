@@ -8,14 +8,18 @@
         <div class="panel panel-default panel-m" style="border-top: none;">
             <div class="panel-body">
                 <form class="form-inline" method="get">
+                    <!--<div class="form-item">-->
+                        <!--<label>行政区域</label>-->
+                        <!--<select class="form-control select-short" ng-model="regionName">-->
+                            <!--<option value="">请选择</option>-->
+                            <!--<option value="{{item.areaCode}}" ng-repeat="item in regionList">{{item.areaName}}</option>-->
+                        <!--</select>-->
+                    <!--</div>-->
                     <div class="form-item">
                         <label>行政区域</label>
-                        <select class="form-control select-short" ng-model="regionName">
-                            <option value="">请选择</option>
-                            <option value="{{item.areaCode}}" ng-repeat="item in regionList">{{item.areaName}}</option>
-                        </select>
+                        <input ng-model="regionName" type="text" class="form-control input-short-o" readonly="readonly" ng-click="getRegionShow()">
+                        <a class="input-group-addon" ng-click="getRegionShow()"><i class="fa fa-search"></i></a>
                     </div>
-
                     <div class="form-item">
                         <label><font style="vertical-align: inherit;"><font
                                 style="vertical-align: inherit;">河长姓名</font></font></label>
@@ -23,7 +27,7 @@
                     </div>
 
                     <div class="form-item">
-                        <label class="near"><font style="vertical-align: inherit;"><font
+                        <label><font style="vertical-align: inherit;"><font
                                 style="vertical-align: inherit;">河段</font></font></label>
                         <input type="text" class="form-control input-short" ng-model="reachname">
                     </div>
@@ -113,6 +117,28 @@
 
         </div>
 
+    </div>
+
+    <!--描述：所属区域树-->
+    <div class="modal fade" id="regionTreeModal" role="dialog_region" data-backdrop="static" style="z-index: 99999;">
+        <div class="modal-dialog modal-jm " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">选择区域</h4>
+                </div>
+                <div class="modal-body">
+
+                    <ul id="regionTreeContainer" class="ztree regionTreeContent"></ul>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getModalOk()">
+                        <i class="fa fa-check"></i>
+                        <span>确 定</span>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- 新增or修改 模态框（Modal） -->
@@ -388,30 +414,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" ng-click="getUpload()">确定</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="getUploadFile()">取消</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    <!--描述：所属区域树-->
-    <div class="modal fade" id="regionTreeModal" role="dialog_region" data-backdrop="static" style="z-index: 99999;">
-        <div class="modal-dialog modal-jm " role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">选择区域</h4>
-                </div>
-                <div class="modal-body">
-
-                    <ul id="regionTreeContainer" class="ztree regionTreeContent"></ul>
-                </div>
-                <div class="modal-footer">
-                    <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getModalOk()">
-                        <i class="fa fa-check"></i>
-                        <span>确 定</span>
-                    </a>
                 </div>
             </div>
         </div>
