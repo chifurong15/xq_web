@@ -21,7 +21,8 @@
             '$http',
             '$ajaxhttp',
             'moduleService',
-            function patrolProblemMgtCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http, $ajaxhttp, moduleService) {
+            'myStorage',
+            function patrolProblemMgtCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http, $ajaxhttp, moduleService ,myStorage) {
 
                 var apiPrefix = moduleService.getServiceUrl() + '/patrol';
                 // var apiPrefix = 'http://10.0.9.110:7027' + '/patrol';
@@ -178,8 +179,10 @@
                  * 查看巡查问题详情
                  */
                 $scope.getHydrologicDetail = function(id){
-                    localStorage.setItem('detailId',id);
-                    routeService.route('3-6-1', false);
+                    myStorage._setLocal('id',id);
+                    routeService.route(69, false);
+                    // localStorage.setItem('detailId',id);
+                    // routeService.route('3-6-1', false);
                 };
 
 
