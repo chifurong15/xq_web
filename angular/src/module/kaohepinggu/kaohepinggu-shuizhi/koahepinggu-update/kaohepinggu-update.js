@@ -31,9 +31,14 @@
                         $scope.id = localStorage.getItem('id');
                         $scope.status = localStorage.getItem('status');
 
+
+                        $scope.showSectionList = false;
+                        $scope.showRiverList = false;
+
+
                         getData(getQueryString('id'));
 						getDate ();
-						getAllName();
+
                         //$scope.num = 1;
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/WaterQuality/userinfo1',
@@ -49,17 +54,18 @@
 					
 					//搜索
 					$scope.search = function () {
-//						console.log($scope.section+'-----'+$scope.riverName)
-						getData();
+                        getData(getQueryString('id'));
 					}
-					
+
+
+
 					// 数据详情
 					function getData () {
 						$ajaxhttp.myhttp({
 							url: apiPrefix + '/v1/WaterQualityGrade/list?parentid=' + $scope.id,
 							method: 'get',
-							params: {								
-								name:$scope.section1,
+							params: {
+                                name:$scope.section1,
 								riverName:$scope.riverName1,
 								pageNumber: $scope.paginationConf.currentPage,
 								pageSize: $scope.paginationConf.itemsPerPage
@@ -70,26 +76,73 @@
 							}
 						})
 					}
+
+					//断面
+                    $scope.selectSectionId = function (name) {
+                        if (name) {
+                            $scope.showSectionList = false;
+                            $scope.section1 = $scope.sectionList.filter(function (item) {
+                                return item === name
+                            })[0]
+
+                        }
+                    };
+
 					
-					//获取所有的断面  河流
-					function getAllName () {
-						$http({
-			                method: 'GET',
-			                url: apiPrefix + '/v1/WaterQualityGrade/selectCascade',				               
-			            }).success(function (res) {
-		                	
-		                	var data = res.data;
-		                	//断面
-		                	$scope.nameOption = [] ;
-		                	//河流
-		                	$scope.riverOption = [] ;
-		                	data.map(function(item , index){
-		                		$scope.nameOption.push({id:index,name:item.name});
-		                		$scope.riverOption.push({id:index,riverName:item.mdSection.riverName})
-		                	})		                	
-//		                	console.log('断面list:', $scope.nameOption);
-			            })
+					//获取所有的断面
+					$scope.searchSectionList = function () {
+                        $scope.showSectionList = true;
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/WaterQualityGrade/selectSection',
+                            method: 'get',
+                            params: {
+                                sectionName: $scope.section1
+                            },
+                            callBack: function (res) {
+                                if (res.resCode === 1) {
+                                    var list = res.data;
+                                    if (list.length > 10) {
+                                        list.length = 10;
+                                    }
+                                    $scope.sectionList = list;
+                                }
+                            }
+                        })
 					}
+
+                    //河流
+                    $scope.selectRiverId = function (name) {
+                        if (name) {
+                            $scope.showRiverList = false;
+                            $scope.riverName1 = $scope.riverList.filter(function (item) {
+                                return item === name
+                            })[0]
+
+                        }
+                    };
+
+                    //获取所有的河流
+                    $scope.searchRiverList = function () {
+                        $scope.showRiverList = true;
+                        $ajaxhttp.myhttp({
+                            url: apiPrefix + '/v1/WaterQualityGrade/selectRiver',
+                            method: 'get',
+                            params: {
+                                name: $scope.riverName1
+                            },
+                            callBack: function (res) {
+                                if (res.resCode === 1) {
+                                    var list = res.data;
+                                    if (list.length > 10) {
+                                        list.length = 10;
+                                    }
+                                    $scope.riverList = list;
+                                }
+                            }
+                        })
+                    }
+
+
 					
 					
 					//监听断面

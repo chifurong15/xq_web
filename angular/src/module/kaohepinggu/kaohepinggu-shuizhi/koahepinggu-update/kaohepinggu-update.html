@@ -10,18 +10,50 @@
     		<div class="panel-body">
     			<form class="form-inline clearfix">
         			<div class="input-group form-item" >
-                        <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">断面</font></font></label>
-						<select ng-model="section1"  ng-change="getSectionChange()" class="form-control select-short" style="width: 160px;z-index: 0;">
-							<option value="">请选择</option>
-							<option value="{{item.name}}" ng-repeat="item in nameOption">{{item.name}}</option>
-						</select>
+						<label>断面</label>
+						<div style="position: relative;display: inline-block;">
+							<input class="form-control input-short-o" placeholder="断面名称"
+								   style="width: 100%" ng-blur="showSectionList=false" ng-model="section1"
+								   ng-change="searchSectionList()"/>
+							<ul ng-show="showSectionList"
+								style="position: absolute;top: 100%;left: 0;transition: height .2s;z-index: 100;width: 100%;border: 1px solid #999999;border-top: none"
+								ng-click="selectSectionId($event.target.dataset.value)">
+								<li ng-show="sectionList.length===0"
+									style="cursor: not-allowed;padding: 4px 10px;width: 100%;">暂无匹配项
+								</li>
+								<li ng-repeat="item in sectionList" data-value="{{item}}"
+									class="select-list-item">{{item}}
+								</li>
+							</ul>
+						</div>
+                        <!--<label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">断面</font></font></label>-->
+						<!--<select ng-model="section1"  ng-change="getSectionChange()" class="form-control select-short" style="width: 160px;z-index: 0;">-->
+							<!--<option value="">请选择</option>-->
+							<!--<option value="{{item.name}}" ng-repeat="item in nameOption">{{item.name}}</option>-->
+						<!--</select>-->
                     </div>
                     <div class="input-group form-item" >
-                        <label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">河流</font></font></label>
-        				<select ng-model="riverName1" ng-change="getRiverChange()" class="form-control select-short" style="width: 160px;z-index: 0;">
-							<option value="">请选择</option>
-							<option value="{{item.riverName}}" ng-repeat="item in riverOption">{{item.riverName}}</option>
-						</select>						
+						<label>河流</label>
+						<div style="position: relative;display: inline-block;">
+							<input class="form-control input-short-o" placeholder="河流名称"
+								   style="width: 100%" ng-blur="showRiverList=false" ng-model="riverName1"
+								   ng-change="searchRiverList()"/>
+							<ul ng-show="showRiverList"
+								style="position: absolute;top: 100%;left: 0;transition: height .2s;z-index: 100;width: 100%;border: 1px solid #999999;border-top: none"
+								ng-click="selectRiverId($event.target.dataset.value)">
+								<li ng-show="riverList.length===0"
+									style="cursor: not-allowed;padding: 4px 10px;width: 100%;">暂无匹配项
+								</li>
+								<li ng-repeat="item in riverList" data-value="{{item}}"
+									class="select-list-item">{{item}}
+								</li>
+							</ul>
+						</div>
+                        <!--<label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">河流</font></font></label>-->
+        				<!--<select ng-model="riverName1" ng-change="getRiverChange()" class="form-control select-short" style="width: 160px;z-index: 0;">-->
+							<!--<option value="">请选择</option>-->
+							<!--<option value="{{item.riverName}}" ng-repeat="item in riverOption">{{item.riverName}}</option>-->
+						<!--</select>						-->
                     </div>                    
     				<div class="input-group">
 	                    <button class="btn btn-primary" ng-click="search()">
