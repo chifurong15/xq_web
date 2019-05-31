@@ -26,11 +26,6 @@
 								</li>
 							</ul>
 						</div>
-                        <!--<label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">断面</font></font></label>-->
-						<!--<select ng-model="section1"  ng-change="getSectionChange()" class="form-control select-short" style="width: 160px;z-index: 0;">-->
-							<!--<option value="">请选择</option>-->
-							<!--<option value="{{item.name}}" ng-repeat="item in nameOption">{{item.name}}</option>-->
-						<!--</select>-->
                     </div>
                     <div class="input-group form-item" >
 						<label>河流</label>
@@ -49,11 +44,6 @@
 								</li>
 							</ul>
 						</div>
-                        <!--<label class="near n"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">河流</font></font></label>-->
-        				<!--<select ng-model="riverName1" ng-change="getRiverChange()" class="form-control select-short" style="width: 160px;z-index: 0;">-->
-							<!--<option value="">请选择</option>-->
-							<!--<option value="{{item.riverName}}" ng-repeat="item in riverOption">{{item.riverName}}</option>-->
-						<!--</select>						-->
                     </div>                    
     				<div class="input-group">
 	                    <button class="btn btn-primary" ng-click="search()">
@@ -61,7 +51,7 @@
 	                    </button>
                    </div>
 					<div class="form-item" style="float: right;: right;height: 34px;">
-						<button type="button" class="btn btn-primary" ng-click="add()" ng-if="num == 1">新增条目</button>
+						<button type="button" class="btn btn-primary" ng-click="add()" ng-if="num == 1">新增</button>
 						<input type="file" class="hidden" id="J-attandUploader" ng-model="attandUrl" onchange="angular.element(this).scope().uploadFile(this)"/>
 						<button class="btn btn-default" onclick="document.getElementById('J-attandUploader').click()" ng-if="num == 1">导入(.xls)</button>
 						<!--<a class="btn btn-info" ng-if="num == 1" ng-href="http://10.0.0.196/api/download/uhope/infomation/20190109144516283_2018年12月份河道水质评分报告.xlsx" target="_blank"  class="downOrLook">下载导入模板</a>-->
@@ -123,7 +113,7 @@
 		<div class="modal-dialog" style="width: 610px;">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">
 						&times;
 					</button>
 					<h4 class="modal-title" id="myModalLabel">
@@ -131,21 +121,58 @@
 					</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-inline">
-
-						<div class="input-group form-item" ng-if="type == 2">
-							<label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">断面名称</font></font></label>
-							<select ng-model="section" ng-options="s.id as s.name for s in nameOption" ng-change="getSectionChange(section)" class="form-control select-short" style="width: 160px;">
-								<option value="">请选择</option>
-							</select>
-							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+					<form class="form-inline" >
+						<div class="input-group form-item" ng-show="type == 2">
+							<label>断面</label>
+							<div style="position: relative;display: inline-block;margin-left: -15px">
+								<input class="form-control input-short-o" placeholder="断面名称"
+									   ng-blur="showSectionList1=false" ng-model="section"
+									   ng-change="searchSectionList()" style="width: 160px!important;"/>
+								<ul ng-show="showSectionList1"
+									style="position: absolute;top: 100%;left: 0;transition: height .2s;z-index: 100;width: 100%;border: 1px solid #999999;border-top: none"
+									ng-click="selectSectionId($event.target.dataset.value)">
+									<li ng-show="sectionList1.length===0"
+										style="cursor: not-allowed;padding: 4px 10px;width: 100%;">暂无匹配项
+									</li>
+									<li ng-repeat="item in sectionList1" data-value="{{item}}"
+										class="select-list-item">{{item}}
+									</li>
+								</ul>
+							</div>
 						</div>
 
-						<div class="form-item" ng-if="type == 2">
-							<label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">河流</font></font></label>
-							<input type="text" class="form-control input-short" ng-model="riverName" readonly="">
-							<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
+						<div class="input-group form-item" ng-show="type == 2">
+							<label>河流</label>
+							<div style="position: relative;display: inline-block;margin-left: -15px">
+								<input class="form-control input-short-o" placeholder="河流名称"
+									   ng-blur="showRiverList1=false" ng-model="riverName"
+									   ng-change="searchRiverList()" style="width: 160px!important;"/>
+								<ul ng-show="showRiverList1"
+									style="position: absolute;top: 100%;left: 0;transition: height .2s;z-index: 100;width: 100%;border: 1px solid #999999;border-top: none"
+									ng-click="selectRiverId($event.target.dataset.value)">
+									<li ng-show="riverList1.length===0"
+										style="cursor: not-allowed;padding: 4px 10px;width: 100%;">暂无匹配项
+									</li>
+									<li ng-repeat="item in riverList1" data-value="{{item}}"
+										class="select-list-item">{{item}}
+									</li>
+								</ul>
+							</div>
 						</div>
+
+						<!--<div class="input-group form-item" >-->
+							<!--<label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">断面名称</font></font></label>-->
+							<!--<select ng-model="section" ng-options="s.id as s.name for s in nameOption" ng-change="getSectionChange(section)" class="form-control select-short" style="width: 160px;">-->
+								<!--<option value="">请选择</option>-->
+							<!--</select>-->
+							<!--<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>-->
+						<!--</div>-->
+
+						<!--<div class="form-item" ng-if="type == 2">-->
+							<!--<label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">河流</font></font></label>-->
+							<!--<input type="text" class="form-control input-short" ng-model="riverName" readonly="">-->
+							<!--<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>-->
+						<!--</div>-->
 
 						<div class="form-item">
 							<label style="width: 80px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">采样日期</font></font></label>

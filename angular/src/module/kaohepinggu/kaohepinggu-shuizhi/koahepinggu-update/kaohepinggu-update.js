@@ -31,10 +31,19 @@
                         $scope.id = localStorage.getItem('id');
                         $scope.status = localStorage.getItem('status');
 
+                        $scope.type = '';
 
-                        $scope.showSectionList = false;
-                        $scope.showRiverList = false;
+                        if($scope.type == 2){
+                            $scope.showSectionList1 = false;
+                            $scope.showRiverList1 = false;
+                        }else{
+                            $scope.showSectionList = false;
+                            $scope.showRiverList = false;
+                        }
 
+                        getSection ()
+
+                        getRiver ()
 
                         getData(getQueryString('id'));
 						getDate ();
@@ -80,10 +89,19 @@
 					//断面
                     $scope.selectSectionId = function (name) {
                         if (name) {
-                            $scope.showSectionList = false;
-                            $scope.section1 = $scope.sectionList.filter(function (item) {
-                                return item === name
-                            })[0]
+                            if($scope.type == 2){
+
+                                $scope.showSectionList1 = false;
+                                $scope.section = $scope.sectionList1.filter(function (item) {
+                                    return item === name
+                                })[0]
+
+                            }else{
+                                $scope.showSectionList = false;
+                                $scope.section1 = $scope.sectionList.filter(function (item) {
+                                    return item === name
+                                })[0]
+                            }
 
                         }
                     };
@@ -91,52 +109,102 @@
 					
 					//获取所有的断面
 					$scope.searchSectionList = function () {
-                        $scope.showSectionList = true;
+                        if($scope.type == 2){
+
+                            $scope.showSectionList1 = true;
+                        }else{
+                            $scope.showSectionList = true;
+                        }
+                        getSection ()
+                    }
+					function getSection () {
+                        var params;
+					    if($scope.type == 2){
+                            params = {
+                                sectionName: $scope.section ? $scope.section  : ''
+                            }
+                        }else{
+                            params ={
+                                sectionName: $scope.section1 ? $scope.section1  : ''
+                            };
+                        }
+
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/WaterQualityGrade/selectSection',
                             method: 'get',
-                            params: {
-                                sectionName: $scope.section1
-                            },
+                            params: params,
                             callBack: function (res) {
                                 if (res.resCode === 1) {
                                     var list = res.data;
                                     if (list.length > 10) {
                                         list.length = 10;
                                     }
-                                    $scope.sectionList = list;
+                                    if($scope.type == 2){
+                                        $scope.sectionList1 = list;
+                                    }else{
+                                        $scope.sectionList = list;
+                                    }
                                 }
                             }
                         })
-					}
+                    }
 
                     //河流
                     $scope.selectRiverId = function (name) {
                         if (name) {
-                            $scope.showRiverList = false;
-                            $scope.riverName1 = $scope.riverList.filter(function (item) {
-                                return item === name
-                            })[0]
+                            if($scope.type == 2){
+
+                                $scope.showRiverList1 = false;
+                                $scope.riverName = $scope.riverList1.filter(function (item) {
+                                    return item === name
+                                })[0]
+                            }else{
+                                $scope.showRiverList = false;
+                                $scope.riverName1 = $scope.riverList.filter(function (item) {
+                                    return item === name
+                                })[0]
+                            }
 
                         }
                     };
 
                     //获取所有的河流
                     $scope.searchRiverList = function () {
-                        $scope.showRiverList = true;
+                        if($scope.type == 2){
+
+                            $scope.showRiverList1 = true;
+                        }else{
+                            $scope.showRiverList = true;
+                        }
+                        getRiver ()
+                    }
+
+                    function getRiver () {
+                        var params;
+                        if($scope.type == 2){
+                            params = {
+                                name: $scope.riverName ? $scope.riverName  : ''
+                            }
+                        }else{
+                            params ={
+                                name: $scope.riverName1 ? $scope.riverName1 : ''
+                            };
+                        }
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/WaterQualityGrade/selectRiver',
                             method: 'get',
-                            params: {
-                                name: $scope.riverName1
-                            },
+                            params: params,
                             callBack: function (res) {
                                 if (res.resCode === 1) {
                                     var list = res.data;
                                     if (list.length > 10) {
                                         list.length = 10;
                                     }
-                                    $scope.riverList = list;
+                                    if($scope.type == 2){
+                                        $scope.riverList1 = list;
+                                    }else{
+                                        $scope.riverList = list;
+                                    }
                                 }
                             }
                         })
@@ -144,15 +212,6 @@
 
 
 					
-					
-					//监听断面
-					$scope.getSectionChange = function(){
-						//console.log('断面---',$scope.section + "----河流----"+ $scope.riverName);
-					}
-					//监听河流					
-					$scope.getRiverChange = function(){
-						//console.log('断面---',$scope.section + "----和流----"+ $scope.riverName);
-					}
 
                     //新增得分条目
                     $scope.add = function () {
@@ -177,58 +236,15 @@
                     }
 
                     $scope.cancel = function () {
+                        $scope.type = ''
                         $('#myModal').modal('hide');
                         clear();
                     }
-                    //监听断面
-                    $scope.getSectionChange = function(id){
-                        //$scope.riverName = $scope.riverOption[$scope.section].riverName ;
-                         $scope.sectionType = $scope.nameOption[id].name ;
-                         $scope.riverName = $scope.riverOption[id].riverName ;
-                        // console.log('断面---',$scope.nameOption[id].name );
-                        console.log(id);
-                        //console.log('河流---',$scope.riverOption[id].riverName );
-                    }
+
 
                     //保存条目
                     $scope.save = function () {
-                        // if (!$scope.samplingTime) {
-                        //     layer.alert("请选择日期", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // } else if (!$scope.water_temperature) {
-                        //     layer.alert("请输入水温", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // }else if (!$scope.total_phosphorus) {
-                        //     layer.alert("请输入总磷", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // }else if (!$scope.ammonia_nitrogen) {
-                        //     layer.alert("请输入氨氮", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // }else if (!$scope.permanganate_index) {
-                        //     layer.alert("请输入高锰酸盐指数", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // }else if (!$scope.DO) {
-                        //     layer.alert("请输入溶解氧", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // }
+
                         if($scope.samplingTime && $scope.water_temperature && $scope.total_phosphorus && $scope.ammonia_nitrogen && $scope.permanganate_index && $scope.DO){
                             if ($scope.water_temperature >= 0 && $scope.water_temperature <= 100
                                 && $scope.total_phosphorus >= 0 && $scope.total_phosphorus <= 100
@@ -245,7 +261,7 @@
                                         method: 'get',
                                         params: {
                                             parentid: $scope.id,
-                                            name: $scope.sectionType
+                                            name: $scope.section
                                         },
                                         callBack: function (res) {
                                             if(res.data == 10){
@@ -255,7 +271,7 @@
                                                     method: 'POST',
                                                     params: {
                                                         parentid: $scope.id,
-                                                        name: $scope.sectionType,
+                                                        name: $scope.section,
                                                         riverName: $scope.riverName,
                                                         samplingTime: $scope.samplingTime,
                                                         water_temperature: $scope.water_temperature,
