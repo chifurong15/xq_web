@@ -21,7 +21,7 @@
                                                routeService, $http, $ajaxhttp, moduleService) {
 
                     var apiPrefix = moduleService.getServiceUrl() + '/patrol';
-                    var apiPrefix = 'http://10.0.9.133:7027' + '/patrol';
+                    // var apiPrefix = 'http://10.0.9.133:7027' + '/patrol';
 
 
                     $scope.init= function () {
