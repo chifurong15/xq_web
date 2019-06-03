@@ -41,7 +41,7 @@
                                 <tbody>
                                 <tr class='tHeader'>
                                     <th>序号</th>
-                                    <th>巡查月份</th>
+                                    <!--<th>巡查月份</th>-->
                                     <th>行政区</th>
                                     <th>河湖名称</th>
                                     <th>河段名称</th>
@@ -56,15 +56,15 @@
                                 <!--</tr>-->
                                 <tr ng-repeat="item in moduleList" ng-init="index = $index+1">
                                     <td>{{index}}</td>
-                                    <td>{{item.month}}</td>
-                                    <td>{{item.regionId}}</td>
-                                    <td>{{item.riverId}}</td>
-                                    <td>{{item.reachId}}</td>
-                                    <td>{{item.unit}}</td>
-                                    <td>{{item.patrolCount}}</td>
-                                    <td>{{item.realPatrolCount}}</td>
-                                    <td>{{item.finishRate}}</td>
-                                    <td>{{item.problemCount}}</td>
+                                    <!--<td>{{item.month}}</td>-->
+                                    <td>{{item.areaName}}</td>
+                                    <td>{{item.riverName}}</td>
+                                    <td>{{item.reachName}}</td>
+                                    <td>{{item.dictName}}</td>
+                                    <td>{{item.patrolNumber}}</td>
+                                    <td>{{item.shijiPatrol}}</td>
+                                    <td>{{item.result}}</td>
+                                    <td>{{item.problem}}</td>
                                 </tr>
                                 </tbody>
                             </table>
