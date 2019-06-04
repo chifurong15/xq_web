@@ -130,38 +130,8 @@
 
                     //保存条目
                     $scope.save = function () {
-                        // if (!$scope.name) {
-                        //     layer.alert("请输入名称", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // } else if (!$scope.region) {
-                        //     layer.alert("请选择行政区", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // }else if (!$scope.assess) {
-                        //     layer.alert("请选择考核区", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // }else if (!$scope.status1) {
-                        //     layer.alert("请选择是否达标", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // }else if (!$scope.reason) {
-                        //     layer.alert("请输入不达标原因", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // }
-                        if($scope.name && $scope.region && $scope.assess && $scope.status1 && $scope.reason){
+
+                        if($scope.name && $scope.region && $scope.assess && $scope.status1){
                             if($scope.type == 2){ //新增
                                 $ajaxhttp.myhttp({
                                     url: apiPrefix + '/v1/SewageDisposeReport/haveSewage',
