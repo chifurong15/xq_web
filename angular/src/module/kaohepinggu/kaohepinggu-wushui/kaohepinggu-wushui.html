@@ -85,10 +85,10 @@
 	                                    <td>{{item.createuser}}</td>
 										<td>{{item.remark.length > 18 ? item.remark.substring(0,18) + '...' : item.remark}}</td>
 										<td style="text-align: left;">
-	                                    	<button type="button" class="btn btn-success" ng-click="view(item.id , item.title ,item.issue ,item.status)">查看</button>
-	                                    	<button ng-if="item.status == 2" type="button" class="btn btn-warning" ng-click="edit(item.id)">修改</button>
-	                                    	<button ng-if="item.status == 2" type="button" class="btn btn-info" ng-click="report(item.id)">上报</button>
-											<button ng-if="item.status!=0" type="button" class="btn btn-danger"
+	                                    	<button type="button" class="btn btn-success btn-xs" ng-click="view(item.id , item.title ,item.issue ,item.status)">查看</button>
+	                                    	<button ng-if="item.status == 2" type="button" class="btn btn-warning btn-xs" ng-click="edit(item.id)">修改</button>
+	                                    	<button ng-if="item.status == 2" type="button" class="btn btn-info btn-xs" ng-click="report(item.id)">上报</button>
+											<button ng-if="item.status!=0" type="button" class="btn btn-danger btn-xs"
 													ng-click="delete (item.id)">删除
 											</button>
 	                                    </td>
@@ -105,10 +105,10 @@
 	                                    <td>{{item.createuser}}</td>
 	                                    <td>{{item.remark}}</td>
 	                                    <td style="text-align: left;">
-	                                    	<button type="button" class="btn btn-success" ng-click="view(item.id , item.title ,item.issue,item.status)">查看</button>
-	                                    	<button ng-if="item.status == 0" type="button" class="btn btn-primary" ng-click="sendBack(item.id)">退回</button>
-	                                    	<button ng-if="item.status == 2" type="button" class="btn btn-info" ng-click="report(item.id)">上报</button>
-											<button ng-if="item.status!=0" type="button" class="btn btn-danger"
+	                                    	<button type="button" class="btn btn-success btn-xs" ng-click="view(item.id , item.title ,item.issue,item.status)">查看</button>
+	                                    	<button ng-if="item.status == 0" type="button" class="btn btn-primary btn-xs" ng-click="sendBack(item.id)">退回</button>
+	                                    	<button ng-if="item.status == 2" type="button" class="btn btn-info btn-xs" ng-click="report(item.id)">上报</button>
+											<button ng-if="item.status!=0" type="button" class="btn btn-danger btn-xs"
 													ng-click="delete (item.id)">删除
 											</button>
 	                                    </td>

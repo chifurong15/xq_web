@@ -90,7 +90,7 @@
 											<button type="button" class="btn btn-xs btn-success" ng-click="view(item.id,item.status)">查看</button>
 											<button type="button" ng-if="item.status!=0" class="btn btn-xs btn-primary" ng-click="generate(item.id)">生成评分报告</button>
 											<button type="button" class="btn btn-xs btn-primary" ng-if="item.status==0" ng-click="sendBack(item.id)">退回</button>
-											<button ng-if="item.status!=0" type="button" class="btn btn-danger"
+											<button ng-if="item.status!=0" type="button" class="btn btn-danger btn-xs"
 													ng-click="delete (item.id)">删除
 											</button>
 										</td>
@@ -113,7 +113,7 @@
 											<button type="button" ng-if="item.status!=0" class="btn btn-xs btn-primary" ng-click="generate(item.id)">生成评分报告</button>
 											<button ng-if=" num== 1 && item.status==2" type="button" class="btn btn-xs btn-warning" ng-click="edit(item.id)">修改</button>
 											<button ng-if=" num== 1 && item.status==2" type="button" class="btn btn-xs btn-info" ng-click="report(item.id)">上报</button>
-											<button ng-if="item.status!=0" type="button" class="btn btn-danger"
+											<button ng-if="item.status!=0" type="button" class="btn btn-danger btn-xs"
 													ng-click="delete (item.id)">删除
 											</button>
 										</td>
