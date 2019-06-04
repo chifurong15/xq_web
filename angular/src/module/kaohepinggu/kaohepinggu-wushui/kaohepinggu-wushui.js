@@ -129,7 +129,7 @@
                             remark: $scope.issuer
                         }
 
-                        if($scope.title && $scope.author && $scope.issuer && $("#J-searchTime1").find("input").val()){
+                        if($scope.title && $scope.author && $("#J-searchTime1").find("input").val()){
                             if (!$scope.id) {
                                 $ajaxhttp.myhttp({
                                     url: apiPrefix + '/v1/SewageDispose/add',
@@ -208,7 +208,35 @@
 							}
 						})						
 	                }
-	                
+
+                    $scope.delete = function (id) {
+                        var layerIndex = layer.confirm('确定删除本条数据吗？', {
+                            btn: ['确定', '取消']
+                        }, function () {
+                            $ajaxhttp.myhttp({
+                                url: apiPrefix + '/v1/SewageDispose/delete',
+                                method: 'DELETE',
+                                params: {
+                                    id: id
+                                },
+                                callBack: function (res) {
+                                    if(res.resCode == 1) {
+                                        getList();
+                                        layer.msg('删除成功！', {time:1000});
+                                    } else {
+                                        layer.msg(res.resMsg,{time:1000});
+                                    }
+                                }
+                            })
+                            layer.close(layerIndex);
+                        }, function () {
+
+                        });
+                    }
+
+
+
+
 	                 // 查看
 	                $scope.view = function (id , title , issue ,status) {
 	                	localStorage.setItem('id',id);

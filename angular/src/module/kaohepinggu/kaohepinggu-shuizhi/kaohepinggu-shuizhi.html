@@ -90,6 +90,9 @@
 											<button type="button" class="btn btn-xs btn-success" ng-click="view(item.id,item.status)">查看</button>
 											<button type="button" ng-if="item.status!=0" class="btn btn-xs btn-primary" ng-click="generate(item.id)">生成评分报告</button>
 											<button type="button" class="btn btn-xs btn-primary" ng-if="item.status==0" ng-click="sendBack(item.id)">退回</button>
+											<button ng-if="item.status!=0" type="button" class="btn btn-danger"
+													ng-click="delete (item.id)">删除
+											</button>
 										</td>
 									</tr>
 									<tr ng-repeat="item in waterQualityList" ng-if="num != 2">
@@ -108,8 +111,11 @@
 										<td style="text-align: center;">
 											<button type="button" class="btn btn-xs btn-success" ng-click="view(item.id,item.status)">查看</button>
 											<button type="button" ng-if="item.status!=0" class="btn btn-xs btn-primary" ng-click="generate(item.id)">生成评分报告</button>
-											<button ng-if=" num== 1 && item.status==1" type="button" class="btn btn-xs btn-warning" ng-click="edit(item.id)">修改</button>
-											<button ng-if=" num== 1 && item.status==2" type="button" class="btn btn-xs btn-danger" ng-click="report(item.id)">上报</button>
+											<button ng-if=" num== 1 && item.status==2" type="button" class="btn btn-xs btn-warning" ng-click="edit(item.id)">修改</button>
+											<button ng-if=" num== 1 && item.status==2" type="button" class="btn btn-xs btn-info" ng-click="report(item.id)">上报</button>
+											<button ng-if="item.status!=0" type="button" class="btn btn-danger"
+													ng-click="delete (item.id)">删除
+											</button>
 										</td>
 									</tr>
 								</tbody>
@@ -164,7 +170,6 @@
 								<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">备注</font></font></label>
 								<!--<input type="text" class="form-control input-short" ng-model="issuer">-->
 								<textarea class="form-control" id="deblock_udid" name="deblock_udid" ng-model="issuer" rows="3" style="width: 440px;max-width: 440px;"></textarea>
-								<span class="required"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">*</font></font></span>
 							</div>
 						</form>
 

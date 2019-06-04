@@ -133,7 +133,7 @@
                             remark: $scope.issuer
                         }
 
-                        if($scope.title && $scope.author && $scope.issuer && $("#J-searchTime1").find("input").val()){
+                        if($scope.title && $scope.author && $("#J-searchTime1").find("input").val()){
                             if(!$scope.id){//新增报告
                                 $ajaxhttp.myhttp({
                                     url: apiPrefix + '/v1/SurfaceWater/add',
@@ -205,6 +205,32 @@
 						})						
 						//routeService.route('3-1-2', false);
 	                }
+
+
+	                $scope.delete = function (id) {
+                        var layerIndex = layer.confirm('确定删除本条数据吗？', {
+                            btn: ['确定', '取消']
+                        }, function () {
+                            $ajaxhttp.myhttp({
+                                url: apiPrefix + '/v1/SurfaceWater/deleteWater',
+                                method: 'DELETE',
+                                params: {
+                                    id: id
+                                },
+                                callBack: function (res) {
+                                    if(res.resCode == 1) {
+                                        getList();
+                                        layer.msg('删除成功！', {time:1000});
+                                    } else {
+                                        layer.msg(res.resMsg,{time:1000});
+                                    }
+                                }
+                            })
+                            layer.close(layerIndex);
+                        }, function () {
+
+                        });
+                    }
 
                     //清空表单
                     var clear = function () {
