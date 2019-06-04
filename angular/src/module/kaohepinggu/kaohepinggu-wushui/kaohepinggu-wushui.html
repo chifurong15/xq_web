@@ -108,9 +108,7 @@
 	                                    	<button type="button" class="btn btn-success btn-xs" ng-click="view(item.id , item.title ,item.issue,item.status)">查看</button>
 	                                    	<button ng-if="item.status == 0" type="button" class="btn btn-primary btn-xs" ng-click="sendBack(item.id)">退回</button>
 	                                    	<button ng-if="item.status == 2" type="button" class="btn btn-info btn-xs" ng-click="report(item.id)">上报</button>
-											<button ng-if="item.status!=0" type="button" class="btn btn-danger btn-xs"
-													ng-click="delete (item.id)">删除
-											</button>
+
 	                                    </td>
 	                                </tr>
                             	</tbody>
