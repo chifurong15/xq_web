@@ -32,7 +32,7 @@
                                    esriApiDeps, wish,tiandituFactory,MapUtil, SymbolUtil, GeometryUtil,MapTool) {
 
         		var apiPrefix = moduleService.getServiceUrl() + '/patrol';
-        		// var apiPrefix = 'http://10.0.9.203:7027' + '/patrol';
+        		// var apiPrefix = 'http://10.0.9.133:7027' + '/patrol';
                 var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/list';
 
                 var promise = esriApiDeps.query();
@@ -139,7 +139,7 @@
 				 */
 				function getModuleList(){
                     $ajaxhttp.myhttp({
-                        url: apiPrefix + '/v1/ExeAssPatrolRecord/selectList',
+                        url: apiPrefix + '/v1/ExeAssPatrolRecord/selectList2',
                         method: 'get',
                         params: {
                             pageNumber: $scope.paginationConf.currentPage,
