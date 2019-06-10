@@ -54,7 +54,6 @@
 											<i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','title')"></i>
 											<i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','title')"></i>
 										</th>
-										<th width="5%">批号</th>
 										<th width="10%">期号
 											<i class="fa fa-caret-up thSort" aria-hidden="true" title="升序" ng-click="sort('asc','issue')"></i>
 											<i class="fa fa-caret-down thSort" aria-hidden="true" title="降序" ng-click="sort('desc','issue')"></i>
@@ -77,7 +76,6 @@
 									<tr ng-repeat="item in waterQualityList" ng-if="num == 2">
 										<td>{{$index + 1 + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
 										<td>{{item.title.length > 20 ? item.title.substring(0,20) + '...' : item.title}}</td>
-										<td>{{item.bATCHNumber}}</td>
 										<td>{{item.issue}}</td>
 										<td>
 	                                    	<span ng-if="item.status==0" class="label label-danger">已上报</span>
@@ -98,7 +96,6 @@
 									<tr ng-repeat="item in waterQualityList" ng-if="num != 2">
 										<td>{{$index + 1 + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
 										<td>{{item.title}}</td>
-										<td>{{item.bATCHNumber}}</td>										
 										<td>{{item.issue}}</td>
 										<td>
 	                                    	<span ng-if="item.status==0" class="label label-danger">已上报</span>
@@ -155,7 +152,9 @@
 							<br />
 							<div class="input-group date date_picker form-item" id="J-searchTime1">
 								<label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">期号</font></font></label>
-								<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime1">
+								<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime1" ng-show="!id">
+								<input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched" placeholder="请选择日期" ng-model="searchTime1" ng-show="id" readonly>
+
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 							</div>
 							<div class="form-item" style="margin-left: 10px;">

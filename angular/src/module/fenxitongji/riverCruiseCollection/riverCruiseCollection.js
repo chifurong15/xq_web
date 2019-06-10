@@ -223,28 +223,33 @@
                         }
                         console.log(params);
                         if($scope.id == 1){//新增
-                            var reg = /^[0-9]*[1-9][0-9]*$/;
-                            if($scope.patrolTime > 0 && reg.test($scope.patrolTime) && $scope.problemnum > 0 && reg.test($scope.problemnum)){
-                                $ajaxhttp.myhttp({
-                                    url: apiPrefix + '/v1/saXunhe/add',
-                                    method: 'post',
-                                    params: params,
-                                    callBack: function (res) {
-                                        if (res.resCode == 1) {
-                                            layer.msg('新增成功！', {time:1000});
-                                            getList();
-                                            $('#myModal').modal('hide');
-                                            clear();
-                                        }
+                            // var reg = /^[0-9]*[1-9][0-9]*$/;
+                            $ajaxhttp.myhttp({
+                                url: apiPrefix + '/v1/saXunhe/add',
+                                method: 'post',
+                                params: params,
+                                callBack: function (res) {
+                                    if (res.resCode == 1) {
+                                        layer.msg('新增成功！', {time:1000});
+                                        getList();
+                                        $('#myModal').modal('hide');
+                                        clear();
                                     }
-                                })
-                            }else{
-                                layer.alert("巡河时长和巡河数量只能输入正整数", {
-                                   skin: 'my-skin',
-                                   closeBtn: 1,
-                                   anim: 3
-                                });
-                            }
+                                }
+                            })
+
+                                // if( $scope.patrolTime > 0
+                                //     && reg.test($scope.patrolTime) && $scope.problemnum > 0 && reg.test($scope.problemnum))
+                                // {
+                                //
+                                // }else{
+                                //     layer.alert("巡河时长和巡河数量只能输入正整数", {
+                                //         skin: 'my-skin',
+                                //         closeBtn: 1,
+                                //         anim: 3
+                                //     });
+                                // }
+
 
                         }else{//修改
                             params.id = $scope.detailId

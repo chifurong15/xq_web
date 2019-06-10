@@ -165,7 +165,9 @@
                             <label><font style="vertical-align: inherit;"><font
                                     style="vertical-align: inherit;">期号</font></font></label>
                             <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched"
-                                   placeholder="请选择日期" ng-model="searchTime1">
+                                   placeholder="请选择日期" ng-model="searchTime1" ng-show="!id">
+                            <input type="text" class="form-control input-short-o ng-pristine ng-valid ng-touched"
+                                   placeholder="请选择日期" ng-model="searchTime1" ng-show="id" readonly>
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         </div>
                         <div class="form-item" style="margin-left: 10px;">
