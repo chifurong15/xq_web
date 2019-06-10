@@ -183,26 +183,26 @@
                         <!--地图部件操作-->
                         <div class="unitCtrl">
                             <ul>
+                                <!--<li>-->
+                                    <!--<a href="javascript:void(0);" id="outfall" ng-click="loadComponent('1');">-->
+                                        <!--<img src="img/unitIcon-1.png"/>-->
+                                        <!--<span>入河排污口</span>-->
+                                    <!--</a>-->
+                                <!--</li>-->
                                 <li>
-                                    <a href="javascript:void(0);">
-                                        <img src="img/unitIcon-1.png"/>
-                                        <span>入河排污口</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">
+                                    <a href="javascript:void(0);" id="wsclc" ng-click="loadComponent('2');">
                                         <img src="img/unitIcon-2.png"/>
                                         <span>污水处理厂</span>
                                     </a>
                                 </li>
+                                <!--<li>-->
+                                    <!--<a href="javascript:void(0);" id="billboard" ng-click="loadComponent('3');">-->
+                                        <!--<img src="img/unitIcon-3.png"/>-->
+                                        <!--<span>公示牌</span>-->
+                                    <!--</a>-->
+                                <!--</li>-->
                                 <li>
-                                    <a href="javascript:void(0);">
-                                        <img src="img/unitIcon-3.png"/>
-                                        <span>公示牌</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">
+                                    <a href="javascript:void(0);" id="section" ng-click="loadComponent('4');">
                                         <img src="img/unitIcon-4.png"/>
                                         <span>监测断面</span>
                                     </a>
@@ -210,8 +210,66 @@
                             </ul>
                         </div>
 
+                        <!--水质断面弹窗-->
+                        <div id="layui-section-form" style="display: none;">
+                            <table class="table table-bordered">
+                                <colgroup>
+                                    <col width="150" style="background-color: #f5f5f5"></col>
+                                    <col width="350"></col>
+                                </colgroup>
+                                <tr>
+                                    <td>采样日期</td>
+                                    <td>{{sectionData.samplingtime}}</td>
+                                </tr>
+                                <tr>
+                                    <td>断面名称</td>
+                                    <td>{{sectionData.name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>河流</td>
+                                    <td>{{sectionData.rivername}}</td>
+                                </tr>
+                                <tr>
+                                    <td>所属区县</td>
+                                    <td>{{sectionData.regionName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>目标水质</td>
+                                    <td>{{sectionData.targetquality}}</td>
+                                </tr>
+                                <tr>
+                                    <td>水质成绩</td>
+                                    <td>{{sectionData.grade}}</td>
+                                </tr>
+                            </table>
+                        </div>
 
-                        <div id="mapTips"></div>
+
+                        <div id="layui-section1-form" style="display: none;">
+                            <table class="table table-bordered">
+                                <colgroup>
+                                    <col width="150" style="background-color: #f5f5f5"></col>
+                                    <col width="350"></col>
+                                </colgroup>
+                                <tr>
+                                    <td>断面名称</td>
+                                    <td>{{sectionData.name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>河流</td>
+                                    <td>{{sectionData.rivername}}</td>
+                                </tr>
+                                <tr>
+                                    <td>所属区县</td>
+                                    <td>{{sectionData.regionname}}</td>
+                                </tr>
+                            </table>
+                        </div>
+
+
+
+                        <!--地图点位名称弹窗-->
+                        <div id="mapTips" class="mapTips" style="display: none;"></div>
 
                         <div class="city-select form-group">
                             <label class="label-tittle">区域选择</label>

@@ -45,6 +45,12 @@
                 var promise = esriApiDeps.query();
                 var w = wish.get();
                 $scope.showImg = false;
+
+                this.wsclcLayer = null;
+                this.sectionLayer = null;
+
+                var that = this;
+
                 // 初始化
                 $scope.eventImgUrl = $localStorage.serviceUrl_fileService;
                 $scope.init = function () {
@@ -69,6 +75,20 @@
 
 
                     $scope.defaultTime = year + '-' + month ;//默认上个月
+
+                    that.wsclcLayer = new w.GraphicsLayer({id:"80000000000000000000000000000000"});
+                    that.sectionLayer = new w.GraphicsLayer({id:"30000000000000000000000000000000"});
+                    $scope.map.addLayer(that.wsclcLayer);
+                    $scope.map.addLayer(that.sectionLayer);
+
+                    // dojo.connect(that.outfallLayer,"onClick",dojo.hitch(that,that.showInfoWindow));
+                    dojo.connect(that.wsclcLayer,"onMouseOver",dojo.hitch(that,that.showComponentName));
+                    dojo.connect(that.wsclcLayer,"onMouseOut",dojo.hitch(that,that.hideComponentName));
+
+                    dojo.connect(that.sectionLayer,"onMouseOver",dojo.hitch(that,that.showComponentName));
+                    dojo.connect(that.sectionLayer,"onMouseOut",dojo.hitch(that,that.hideComponentName));
+                    dojo.connect(that.sectionLayer,"onClick",dojo.hitch(that,that.showSectionInfoWindow));
+
 
                     //自适应图表
                     chartContainer();
@@ -371,8 +391,269 @@
                     }
                     $('#fullScreen').css("display", "block");
                     $('#exitScreen').css("display", "none");
+                };
+
+                // 判断部件显隐
+                $scope.isHoverWsclc = false;
+                $scope.isHoverFirstClickWsclc = true;
+
+                $scope.isHoverSection = false;
+                $scope.isHoverFirstClickSection = true;
+
+                //加载部件
+                $scope.loadComponent = function (type) {
+                    var params = getParams(type);
+                    if (params == "80000000000000000000000000000000"){
+                        var layer = $scope.map.getLayer(params);
+                        if ($scope.isHoverFirstClickWsclc){
+                            loadComponent(params);
+                            $scope.isHoverFirstClickWsclc = !$scope.isHoverFirstClickWsclc;
+                        }else {
+                            if (!$scope.isHoverWsclc){
+                                layer.hide();
+                                $scope.isHoverWsclc = !$scope.isHoverWsclc;
+                            }else {
+                                layer.show();
+                                $scope.isHoverWsclc = !$scope.isHoverWsclc;
+                            }
+                        }
+                    }else if (params == "30000000000000000000000000000000"){
+                        var layer = $scope.map.getLayer(params);
+                        if ($scope.isHoverFirstClickSection){
+                            loadComponent(params);
+                            $scope.isHoverFirstClickSection = !$scope.isHoverFirstClickSection;
+                        }else {
+                            if (!$scope.isHoverSection){
+                                layer.hide();
+                                $scope.isHoverSection = !$scope.isHoverSection;
+                            }else {
+                                layer.show();
+                                $scope.isHoverSection = !$scope.isHoverSection;
+                            }
+                        }
+                    }
+                };
+
+                //设置部件参数
+                function getParams(type) {
+                    var params = null;
+                    switch (type) {
+                        case "1":
+                            params = "20000000000000000000000000000000";
+                            break;
+                        case "2":
+                            params = "80000000000000000000000000000000";
+                            break;
+                        case "3":
+                            params = "70000000000000000000000000000000";
+                            break;
+                        case "4":
+                            params = "30000000000000000000000000000000";
+                            break;
+                    }
+                    return params;
                 }
 
+                // 加载部件数据
+                var loadComponent = function (params) {
+                    $http({
+                        method: 'GET',
+                        params: {
+                            areaCode: $localStorage.userLoginInfo.userInfo.regionId,
+                            mainclassid: params
+                        },
+                        // url: $localStorage.gwUrl + '/component/v1/component/list'
+                        url:"http://10.0.9.124:8088/gismap/component/List"
+                    }).success(function (res) {
+                        if (res.resCode == 1) {
+                            if (params == "80000000000000000000000000000000") {
+                                loadWsclcComponent(res);
+                            }else if (params == "30000000000000000000000000000000"){
+                                loadSectionComponent(res);
+                            }
+                        }
+                    }).error(function (res) {
+                        layer.msg('服务器异常，请稍后再试');
+                    });
+                };
+
+                // 加载污水处理厂数据
+                var loadWsclcComponent = function (res) {
+                    $.each(res.data,function (i,val) {
+                        var point = new w.Point(val.longitude,val.latitude);
+                        var symbolpath = "";
+                        var template = "";
+                        if (val.assessstatus == 1){
+                            if (val.status == 0){
+                                symbolpath = "/src/img/esri-icon/component/wsclc.png";
+                            }else {
+                                symbolpath = "/src/img/esri-icon/component/wsclc_weidabiao.png";
+                            }
+                            // 判断同期是否达标
+                            if (val.status == 0){
+                                val.status = "达标";
+                            }else if (val.status == 1){
+                                val.status = "不达标";
+                            }
+                            // 判断上期是否达标
+                            if (val.monthStatus == 0){
+                                val.monthStatus = "达标";
+                            }else if (val.monthStatus == 1){
+                                val.monthStatus = "不达标";
+                            }
+                            // 判断同期是否达标
+                            if (val.yearStatus == 0){
+                                val.yearStatus = "达标";
+                            }else if (val.yearStatus == 1){
+                                val.yearStatus = "不达标";
+                            }
+                            template = new w.PopupTemplate({
+                                title:val.sewageworks,
+                                fieldInfos: [
+                                    { fieldName: "所属区县：" + val.areaName, visible: true,format: { places: 0 } },
+                                    { fieldName: "排水去向：" + val.remark, visible: true,format: { places: 0 } },
+                                    { fieldName: "本期(" + val.time + "):" + val.status, visible: true, format: { places: 0 } },
+                                    { fieldName: "上期(" + val.monthTime + "):" + val.monthStatus, visible: true, format: { places: 0 } },
+                                    { fieldName: "同期(" + val.yearTime + "):" + val.yearStatus, visible: true, format: { places: 0 } },
+
+                                ],
+                            });
+                        }else {
+                            symbolpath = "/src/img/esri-icon/component/wsclcs.png";
+                            template = new w.PopupTemplate({
+                                title:val.sewageworks,
+                                fieldInfos: [
+                                    { fieldName: "所属区县：" + val.areaName, visible: true,format: { places: 0 } },
+                                    { fieldName: "排水去向：" + val.remark, visible: true,format: { places: 0 } },
+                                ],
+                            });
+                        }
+                        var picMarkerSymbol = SymbolUtil.getPictureMarkerSymbol(symbolpath, 35, 35);
+                        var graphic = new w.Graphic(point, picMarkerSymbol);
+                        graphic.infoTemplate = template;
+                        graphic.attributes = val;
+                        graphic.attributes.name = val.sewageworks;
+                        that.wsclcLayer.add(graphic);
+                    });
+                };
+
+                // 加载断面数据
+                var loadSectionComponent = function(res){
+                    $.each(res.data,function (i,val) {
+                        var point = new w.Point(val.longitude,val.latitude);
+                        var symbolpath = "/src/img/esri-icon/component/jcdm.png";
+                        var picMarkerSymbol = SymbolUtil.getPictureMarkerSymbol(symbolpath, 35, 35);
+                        var graphic = new w.Graphic(point, picMarkerSymbol);
+                        graphic.attributes = val;
+                        that.sectionLayer.add(graphic);
+                    });
+
+                };
+
+                // 显示小标签
+                that.showComponentName = function(evt){
+                    $("#title_event").remove();
+                    var vGraphic = evt.graphic;
+                    if (vGraphic == null || vGraphic == undefined) {
+                        return;
+                    }
+                    var point = $scope.map.toScreen(vGraphic.geometry);
+                    var symbol = vGraphic.symbol;
+                    var styleStr = 'color:#fff;width:auto;height:30px;padding-left:10px;padding-right:10px;position: absolute;top:'+(point.y+8)+'px;left:'+(point.x+8)+'px;background:#4fa184';
+                    var title = vGraphic.attributes.name;
+                    var html = '<div id="title_event" style="'+styleStr+'">'+title+'<br/></div>';
+                    $(".map").append(html);
+                    if(symbol.url.toString().indexOf("1.png") == -1){
+                        var newUrl = symbol.url.replace(".png", "1.png");
+                        vGraphic.setSymbol(new w.PictureMarkerSymbol(newUrl, 35, 35).setOffset(0, 15));
+                    }
+                };
+
+                // 隐藏小标签
+                that.hideComponentName = function (evt) {
+                    var g = evt.graphic;
+                    var symbol = g.symbol;
+                    var newUrl = symbol.url.replace("1.png", ".png");
+                    g.setSymbol(new w.PictureMarkerSymbol(newUrl, 35, 35).setOffset(0, 15));
+                    $("#title_event").remove();
+                };
+
+                // 监测断面弹窗
+                that.showSectionInfoWindow = function (evt) {
+                    var attributes = evt.graphic.attributes;
+                    $http({
+                        method: 'GET',
+                        params: {
+                            id: attributes.id,
+                        },
+                        url:"http://10.0.9.124:8088/gismap/component/detail"
+                    }).success(function (res) {
+                        if (res.resCode == 1) {
+                            var data = res.data[0];
+                            if (data.sectionType == 1){
+                                if (data.targetquality == 1){
+                                    data.targetquality = "Ⅰ";
+                                }else if (data.targetquality == 2){
+                                    data.targetquality = "Ⅱ";
+                                }else if (data.targetquality == 3){
+                                    data.targetquality = "III";
+                                }else if (data.targetquality == 4){
+                                    data.targetquality = "IV";
+                                }else if (data.targetquality == 5){
+                                    data.targetquality = "V";
+                                }else {
+                                    data.targetquality = "-";
+                                }
+                                layui.use('layer', function() {
+                                    var layer = layui.layer;
+                                    layer.open({
+                                        id: "2001",
+                                        type: 1,
+                                        anim: 1,
+                                        title: '断面信息',
+                                        shade: 0,
+                                        area: ['500px'],
+                                        offset: 'auto',
+                                        content: $("#layui-section-form"),
+                                        scrollbar: false,
+                                        cancel: function() {
+                                            $("#layui-section-form").css("display", "none");
+                                        }
+                                    });
+                                });
+                            } else {
+                                layui.use('layer', function() {
+                                    var layer = layui.layer;
+                                    layer.open({
+                                        id: "2001",
+                                        type: 1,
+                                        anim: 1,
+                                        title: '断面信息',
+                                        shade: 0,
+                                        area: ['500px'],
+                                        offset: 'auto',
+                                        content: $("#layui-section1-form"),
+                                        scrollbar: false,
+                                        cancel: function() {
+                                            $("#layui-section1-form").css("display", "none");
+                                        }
+                                    });
+                                });
+                            }
+                            $scope.sectionData = data;
+                        }
+                    }).error(function (res) {
+                        layer.msg('服务器异常，请稍后再试');
+                    });
+
+                };
+
+                //弹窗
+                // this.showInfoWindow = function (e) {
+                //     console.log(e)
+                //
+                // };
+                
                 //ie低版本的全屏，退出全屏都这个方法
                 function iefull() {
                     var el = document.documentElement;
