@@ -463,7 +463,8 @@
                             mainclassid: params
                         },
                         // url: $localStorage.gwUrl + '/component/v1/component/list'
-                        url:"http://10.0.9.124:8088/gismap/component/List"
+                        // url:"http://10.0.9.124:8088/gismap/component/List"
+                        url:apiPrefix + "/gismap/component/List"
                     }).success(function (res) {
                         if (res.resCode == 1) {
                             if (params == "80000000000000000000000000000000") {
@@ -481,7 +482,7 @@
                 var loadWsclcComponent = function (res) {
                     $.each(res.data,function (i,val) {
                         var point = new w.Point(val.longitude,val.latitude);
-                        var symbolpath = "";
+                        var symbolpath = moduleService.getServiceUrl();
                         var template = "";
                         if (val.assessstatus == 1){
                             if (val.status == 0){
