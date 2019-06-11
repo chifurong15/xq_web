@@ -591,7 +591,7 @@
                         if (res.resCode == 1) {
                             var data = res.data[0];
                             if (data.sectionType == 1){
-                                if (data.targetquality == 1){
+                                if (data.targetquality == 1 || data.levelLastMonth == 1 || data.levelThisMonth == 1){
                                     data.targetquality = "Ⅰ";
                                 }else if (data.targetquality == 2){
                                     data.targetquality = "Ⅱ";
@@ -604,6 +604,35 @@
                                 }else {
                                     data.targetquality = "-";
                                 }
+
+                                if (data.levelLastMonth == 1){
+                                    data.levelLastMonth = "Ⅰ";
+                                }else if (data.levelLastMonth == 2){
+                                    data.levelLastMonth = "Ⅱ";
+                                }else if (data.levelLastMonth == 3){
+                                    data.levelLastMonth = "III";
+                                }else if (data.levelLastMonth == 4){
+                                    data.levelLastMonth = "IV";
+                                }else if (data.levelLastMonth == 5){
+                                    data.levelLastMonth = "V";
+                                }else {
+                                    data.levelLastMonth = "-";
+                                }
+
+                                if (data.levelThisMonth == 1){
+                                    data.levelThisMonth = "Ⅰ";
+                                }else if (data.levelThisMonth == 2){
+                                    data.levelThisMonth = "Ⅱ";
+                                }else if (data.levelThisMonth == 3){
+                                    data.levelThisMonth = "III";
+                                }else if (data.levelThisMonth == 4){
+                                    data.levelThisMonth = "IV";
+                                }else if (data.levelThisMonth == 5){
+                                    data.levelThisMonth = "V";
+                                }else {
+                                    data.levelThisMonth = "-";
+                                }
+
                                 layui.use('layer', function() {
                                     var layer = layui.layer;
                                     layer.open({
