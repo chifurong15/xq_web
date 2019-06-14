@@ -1,8 +1,8 @@
 'use strict';
 
 /* Controllers */
-angular.module('app').controller('AppCtrl', ['$scope', 'routeService', '$location', '$translate', '$localStorage', '$rootScope', 'globaltree', '$window', 'moduleService', '$http', '$timeout',
-    function ($scope, routeService, $location, $translate, $localStorage, $rootScope, globaltree, $window, moduleService, $http, $timeout) {
+angular.module('app').controller('AppCtrl', ['$scope', 'routeService', '$location', '$translate', '$localStorage', '$rootScope', 'globaltree', '$window', 'moduleService', '$http', '$timeout', '$ajaxhttp',
+    function ($scope, routeService, $location, $translate, $localStorage, $rootScope, globaltree, $window, moduleService, $http, $timeout ,$ajaxhttp) {
         // add 'ie' classes to html
         var isIE = !!navigator.userAgent.match(/MSIE/i);
         isIE && angular.element($window.document.body).addClass('ie');
@@ -59,6 +59,7 @@ angular.module('app').controller('AppCtrl', ['$scope', 'routeService', '$locatio
             //获取用户信息
             $scope.userInfo = {};
             if ($localStorage.userLoginInfo != undefined) {
+                getMessage ()
                 $scope.userInfo.username = $localStorage.userLoginInfo.userInfo.name;
                 $scope.userInfo = $localStorage.userLoginInfo.userInfo;
             } else {
@@ -253,6 +254,30 @@ angular.module('app').controller('AppCtrl', ['$scope', 'routeService', '$locatio
             var ua = $window['navigator']['userAgent'] || $window['navigator']['vendor'] || $window['opera'];
             // Checks for iOs, Android, Blackberry, Opera Mini, and Windows mobile devices
             return (/iPhone|iPod|iPad|Silk|Android|BlackBerry|Opera Mini|IEMobile/).test(ua);
+        }
+
+        //我的消息弹窗
+        $scope.myMessageInfoModal = function () {
+            // $('#myMessageInfo_modal').modal('show');
+            routeService.route('64',true);
+        }
+        function getMessage () {
+            $ajaxhttp.myhttp({
+                //url: 'http://10.0.9.133:20001/v1/event/toDoTasks',
+                url: $localStorage.serviceUrl_eventMgr + '/v1/event/toDoTasks',
+                method: 'get',
+                params: {
+                    userId: $localStorage.userLoginInfo.userInfo.id,
+
+                    pageNum: 0,
+                    pageSize: 0
+                },
+                callBack: function(resp){
+                    //$scope.paginationConf.totalItems = 1;
+                    $scope.myMessageTotal = resp.data.total;
+                    $scope.moduleList = resp.data.list;
+                }
+            });
         }
 
         //个人信息弹窗

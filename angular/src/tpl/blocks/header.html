@@ -50,6 +50,14 @@
             <!-- dropdown -->
             <ul class="dropdown-menu animated w">
                 <li>
+                    <a href="javascript:void(0);" ng-click="myMessageInfoModal()">
+                        我的消息
+                        <b style="margin: 0 15px;display: inline-block;height: 20px;
+                        text-align:center;border-radius: 50%;background: red; font-size: 12px;
+                        line-height: 20px;padding: 0 6px;color: #fff;">{{myMessageTotal}}</b>
+                    </a>
+                </li>
+                <li>
                     <a href="javascript:void(0);" ng-click="editUserInfoModal()">个人信息</a>
                 </li>
                 <li>
@@ -171,6 +179,8 @@
         </div>
     </div>
 </div>
+
+
 
 <script>
     $('#logo').mouseout(function (){
