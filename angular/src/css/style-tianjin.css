@@ -2455,3 +2455,21 @@ body .c-ffffff a {
     text-align: center;
     vertical-align: middle;
 }
+
+.dis-none {
+    display: none;
+}
+
+.form-item span.text-short {
+    color: #666;
+    margin: 0;
+    line-height: 34px;
+    width: 160px;
+}
+
+.form-item span.text-long {
+    color: #666;
+    margin: 0;
+    line-height: 34px;
+    width: 450px;
+}
