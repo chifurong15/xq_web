@@ -1,12 +1,13 @@
 angular.module('app')
     .service('moduleService', ['$localStorage', '$document', '$q', '$timeout', '$http', '$state', function ($localStorage, $document, $q, $timeout, $http, $state) {
 
+        var _menusLimit;
 
         function findRoot(menus) {
             if (menus) {
                 var root = [];
                 for (var i = 0; i < menus.length; i++) {
-                    if (menus[i].isRoot == true) {
+                    if (menus[i].isRoot == true && !isLimitMenu(menus[i])) {
                         root.push(menus[i]);
                     }
                 }
@@ -49,6 +50,9 @@ angular.module('app')
             }
         };
         function pushItem(node, ele) {
+            if (isLimitMenu(ele)) {
+                return;
+            }
             if (node.children && node.children.length > 0) {
                 node.children.push(ele);
             }
@@ -57,12 +61,40 @@ angular.module('app')
                 node.children.push(ele);
             }
         };
+        /**
+         * 是否对该菜单进行限制
+         * @param menu
+         * @returns {boolean}
+         */
+        function isLimitMenu(menu) {
+            var menusLimit = _getMenusLimit();
+            if (!menusLimit.enabled || !menusLimit.menus) {
+                return false;
+            }
+            for (var j = 0; j < menusLimit.menus.length; j++) {
+                if (menu.id == menusLimit.menus[j].id) {
+                    return true;
+                }
+            }
+            return false;
+
+        };
+        function _getMenusLimit() {
+            if (!_menusLimit || _menusLimit == undefined) {
+                console.warn("未配置menusLimit!");
+                _menusLimit = {};
+                _menusLimit.menusLimit.enabled = false;
+            }
+            return _menusLimit;
+        }
+
         return {
             menus: '',
             htmlAndJs: '',
             serviceUrl: '',
             htmlUrl: '',
             fileUrl: '',
+            menusLimit: _menusLimit,
             getConfig: function () {
                 var _this = this;
                 if (!_this.htmlUrl) {
@@ -79,6 +111,7 @@ angular.module('app')
                     async: false
                 }).done(function (data) {
                     _this.menus = data.data;
+                    //_this.menus = _this.filterByMenusLimit(data.data);
                 }).error(function (errordata) {
                     //console.log(errordata);
                 });
@@ -92,6 +125,7 @@ angular.module('app')
                 }).done(function (data) {
                     _this.serviceUrl = data['serviceUrl'];
                     _this.htmlUrl = data['htmlUrl'];
+                    _menusLimit = data['menusLimit'];
                 }).error(function (errordata) {
 
                 });
@@ -120,7 +154,8 @@ angular.module('app')
                     // 请求成功执行代码
                     if (resp.resCode == 1) {
                         //这里保存当前App挂载的用户角色 模块和功能列表
-                        _this.htmlAndJs = resp.data;
+                        //_this.htmlAndJs = resp.data;
+                        _this.htmlAndJs = _this.filterByMenusLimit(resp.data);
                     }
                 }).error(function (errorData) {
 
@@ -166,6 +201,20 @@ angular.module('app')
                 });
                 this.fileUrl = _fileUrl;
                 return this.fileUrl + fileUri;
+            },
+            getMenusLimit: _getMenusLimit,
+            filterByMenusLimit: function (originMenus) {
+                if (!originMenus || originMenus.length == 0) {
+                    return [];
+                }
+                var newMenus = [];
+                for (var i = 0; i < originMenus.length; i++) {
+                    if (isLimitMenu(originMenus[i])) {
+                        continue;
+                    }
+                    newMenus.push(originMenus[i]);
+                }
+                return newMenus;
             }
         }
 

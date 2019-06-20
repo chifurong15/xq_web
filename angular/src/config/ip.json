@@ -1,7 +1,21 @@
 {
-  "htmlUrl":"http://127.0.0.1:8080/src",
+  "htmlUrl": "http://127.0.0.1:8080/src",
   "serviceUrl": "http://10.0.9.105",
   "enabledDebug": true,
   "type": "1",
-  "description": "1.htmlUrl表示前端服务地址; 2.serviceUrl表示后台服务URL; 3.enabledDebug为false时,htmlUrl会从数据库中读取,反之,则从ip.json里面读取"
+  "description": "1.htmlUrl表示前端服务地址; 2.serviceUrl表示后台服务URL; 3.enabledDebug为false时,htmlUrl会从数据库中读取,反之,则从ip.json里面读取",
+  "menusLimit": {
+    "enabled": false,
+    "menus": [
+      {
+        "id": "test_id1",
+        "description": "测试菜单1"
+      },
+      {
+        "id":"test_id2",
+        "description":"测试菜单2"
+      }
+    ],
+    "remark": "该配置项的作用在于:在特定环境下，前端不渲染menus里面配置的菜单,可通过enabled确定是否开启"
+  }
 }

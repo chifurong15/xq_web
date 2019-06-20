@@ -2,7 +2,7 @@
 
 /* Controllers */
 angular.module('app').controller('AppCtrl', ['$scope', 'routeService', '$location', '$translate', '$localStorage', '$rootScope', 'globaltree', '$window', 'moduleService', '$http', '$timeout', '$ajaxhttp',
-    function ($scope, routeService, $location, $translate, $localStorage, $rootScope, globaltree, $window, moduleService, $http, $timeout ,$ajaxhttp) {
+    function ($scope, routeService, $location, $translate, $localStorage, $rootScope, globaltree, $window, moduleService, $http, $timeout, $ajaxhttp) {
         // add 'ie' classes to html
         var isIE = !!navigator.userAgent.match(/MSIE/i);
         isIE && angular.element($window.document.body).addClass('ie');
@@ -59,7 +59,7 @@ angular.module('app').controller('AppCtrl', ['$scope', 'routeService', '$locatio
             //获取用户信息
             $scope.userInfo = {};
             if ($localStorage.userLoginInfo != undefined) {
-                getMessage ()
+                getMessage()
                 $scope.userInfo.username = $localStorage.userLoginInfo.userInfo.name;
                 $scope.userInfo = $localStorage.userLoginInfo.userInfo;
             } else {
@@ -177,7 +177,7 @@ angular.module('app').controller('AppCtrl', ['$scope', 'routeService', '$locatio
             $(eleId).parent().siblings().removeClass('active');
 
 
-            var childernList = menu.children;
+            var childernList = moduleService.filterByMenusLimit(menu.children);
             showLeft();
             //设置二级菜单：menuObj在页面指令中被引用
             $scope.menuObj = childernList;
@@ -232,13 +232,11 @@ angular.module('app').controller('AppCtrl', ['$scope', 'routeService', '$locatio
             isopen: false
         };
         $scope.langs =
-            {
-                en: 'English',
-                de_DE:
-                    'German',
-                it_IT:
-                    'Italian'
-            }
+        {
+            en: 'English',
+            de_DE: 'German',
+            it_IT: 'Italian'
+        }
         ;
         $scope.selectLang = $scope.langs[$translate.proposedLanguage()] || "English";
         $scope.setLang = function (langKey, $event) {
@@ -259,9 +257,9 @@ angular.module('app').controller('AppCtrl', ['$scope', 'routeService', '$locatio
         //我的消息弹窗
         $scope.myMessageInfoModal = function () {
             // $('#myMessageInfo_modal').modal('show');
-            routeService.route('64',true);
+            routeService.route('64', true);
         }
-        function getMessage () {
+        function getMessage() {
             $ajaxhttp.myhttp({
                 //url: 'http://10.0.9.133:20001/v1/event/toDoTasks',
                 url: $localStorage.serviceUrl_eventMgr + '/v1/event/toDoTasks',
@@ -272,7 +270,7 @@ angular.module('app').controller('AppCtrl', ['$scope', 'routeService', '$locatio
                     pageNum: 0,
                     pageSize: 0
                 },
-                callBack: function(resp){
+                callBack: function (resp) {
                     //$scope.paginationConf.totalItems = 1;
                     $scope.myMessageTotal = resp.data.total;
                     $scope.moduleList = resp.data.list;
