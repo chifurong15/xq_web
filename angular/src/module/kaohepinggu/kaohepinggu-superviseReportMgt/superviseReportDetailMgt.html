@@ -91,17 +91,30 @@
 
 						<div class="form-item">
 							<label>问题附件：</label>
-							<button class="btn btn-info" ng-click="viewFile(1)"><i class="fa fa-css3"></i>查看附件</button>
+							<div class="form-item" style="position: relative;width: 426px;top: -10px;">
+                                <span ng-repeat="item in fileList" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
+                                </span>
+							</div>
+							<!--<button class="btn btn-info" ng-click="viewFile(1)"><i class="fa fa-css3"></i>查看附件</button>-->
 						</div>
+
 						<br />
 						<div class="form-item">
 							<label>批处理意见：</label>
-							<button class="btn btn-primary" ng-click="viewFile(2)"><i class="fa fa-css3"></i>查看附件</button>
+							<div class="form-item" style="position: relative;width: 426px;top: -10px;">
+                                <span ng-repeat="item in fileList1" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
+                                </span>
+							</div>
+							<!--<button class="btn btn-primary" ng-click="viewFile(2)"><i class="fa fa-css3"></i>查看附件</button>-->
 						</div>
 						<br />
 						<div class="form-item">
 							<label>处理结果：</label>
-							<button class="btn btn-success" ng-click="viewFile(3)"><i class="fa fa-css3"></i>查看附件</button>
+							<div class="form-item" style="position: relative;width: 426px;top: -10px;">
+                                <span ng-repeat="item in fileList2" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
+                                </span>
+							</div>
+							<!--<button class="btn btn-success" ng-click="viewFile(3)"><i class="fa fa-css3"></i>查看附件</button>-->
 						</div>
 						<br />
 						<!--<div class="form-item">-->

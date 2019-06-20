@@ -88,6 +88,11 @@
                         },
                     ]
                 }
+
+                //查看  下载附件
+                $scope.downFile = function (path){
+                    window.open(path);
+                }
 				
 				/**
 				 * 获取详情
@@ -102,6 +107,44 @@
                         callBack: function (res) {
                         	if(res.data){
                                 $scope.reportList = res.data;
+                                $scope.fileList = [] , $scope.fileList1 = [], $scope.fileList2 = [];
+                                if(res.data.problemAttant) {
+                                    var downUrl = [] ;
+                                    downUrl = res.data.problemAttant.split(',');
+                                    downUrl.map((item, i) => {
+                                        $scope.fileList.push({
+                                            name: downUrl[i].substring(downUrl[i].lastIndexOf('/') + 1),
+                                            previewURL: item,
+                                            downloadURL: downUrl[i]
+                                        })
+                                    })
+                                }
+
+                                if(res.data.proposedTreatment) {
+                                    var downUrl = [];
+                                    downUrl = res.data.proposedTreatment.split(',');
+                                    downUrl.map((item, i) => {
+                                        $scope.fileList1.push({
+                                            name: downUrl[i].substring(downUrl[i].lastIndexOf('/') + 1),
+                                            previewURL: item,
+                                            downloadURL: downUrl[i]
+                                        })
+                                    })
+                                }
+
+                                if(res.data.processingResults) {
+                                    var downUrl = [];
+                                    downUrl = res.data.processingResults.split(',');
+                                    downUrl.map((item, i) => {
+                                        $scope.fileList2.push({
+                                            name: downUrl[i].substring(downUrl[i].lastIndexOf('/') + 1),
+                                            previewURL: item,
+                                            downloadURL: downUrl[i]
+                                        })
+                                    })
+                                }
+
+
                                 $scope.status = $scope.reportList.processingStatus;
                                 if($scope.reportList.processingStatus == '处理完成'){
                                     $scope.showBut = false;
