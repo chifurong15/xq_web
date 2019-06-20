@@ -464,7 +464,7 @@
                         },
                         // url: $localStorage.gwUrl + '/component/v1/component/list'
                         // url:"http://10.0.9.124:8088/gismap/component/List"
-                        url:apiPrefix + "/gismap/component/List"
+                        url:moduleService.getServiceUrl() + "/gismap/component/List"
                     }).success(function (res) {
                         if (res.resCode == 1) {
                             if (params == "80000000000000000000000000000000") {
