@@ -198,12 +198,13 @@
                                 <tbody>
                                 <tr class='tHeader'>
                                     <th width="5%">序号</th>
-                                    <th width="50%">问题内容</th>
+                                    <th width="30%">问题内容</th>
+									<th width="25%">问题时间</th>
                                 </tr>
                                 <tr ng-repeat="val in moduleList" ng-click="skipProblem()" style="cursor: pointer">
                                     <td>{{$index+1}}</td>
-                                    <td>{{val.content.length > 30 ? val.content + '...' : val.content}}</td>
-
+                                    <td>{{val.content.length > 10 ? val.content + '...' : val.content}}</td>
+									<td>{{val.arrivalTime}}</td>
                                 </tr>
                                 </tbody>
                             </table>
