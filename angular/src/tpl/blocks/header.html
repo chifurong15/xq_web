@@ -51,7 +51,7 @@
             <ul class="dropdown-menu animated w">
                 <li>
                     <a href="javascript:void(0);" ng-click="myMessageInfoModal()">
-                        我的消息
+                        我的待办
                         <b style="margin: 0 15px;display: inline-block;height: 20px;
                         text-align:center;border-radius: 50%;background: red; font-size: 12px;
                         line-height: 20px;padding: 0 6px;color: #fff;">{{myMessageTotal}}</b>
@@ -180,7 +180,46 @@
     </div>
 </div>
 
+<!--描述：我的消息弹窗-->
+<div class="modal fade" id="myMsg_modal" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="opacity: .8"><span
+                        aria-hidden="true" style="color:#000">&times;</span></button>
+                <h4 class="modal-title">我的待办</h4>
 
+            </div>
+            <div class="modal-body" style="height: 450px">
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tableStatistics1">
+                        <div class="table-responsive" style="margin-top: 20px;">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                <tr class='tHeader'>
+                                    <th width="5%">序号</th>
+                                    <th width="50%">问题内容</th>
+                                </tr>
+                                <tr ng-repeat="val in moduleList" ng-click="skipProblem()" style="cursor: pointer">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{val.content.length > 30 ? val.content + '...' : val.content}}</td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="chartStatistics1">
+                        <div id="patrolChart1" class="tj-chart-con"></div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     $('#logo').mouseout(function (){

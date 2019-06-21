@@ -256,7 +256,12 @@ angular.module('app').controller('AppCtrl', ['$scope', 'routeService', '$locatio
 
         //我的消息弹窗
         $scope.myMessageInfoModal = function () {
-            // $('#myMessageInfo_modal').modal('show');
+            $('#myMsg_modal').modal('show');
+            // routeService.route('64', true);
+        }
+        $scope.skipProblem = function () {
+            $('#myMsg_modal').modal('hide');
+
             routeService.route('64', true);
         }
         function getMessage() {
