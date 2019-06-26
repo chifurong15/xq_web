@@ -10,10 +10,10 @@
         <div class="panel panel-default m-all-0">
 			<div class="panel-body">
 				<form class="form-patrolMgt form-inline" method="get">
-					<div class="form-item">
-						<label>举报人电话</label>
-						<input type="text" class="form-control input-short" ng-model="reachName" />
-					</div>
+					<!--<div class="form-item">-->
+						<!--<label>举报人电话</label>-->
+						<!--<input type="text" class="form-control input-short" ng-model="reachName" />-->
+					<!--</div>-->
 					<!--<div class="form-item">-->
 						<!--<label>所属区域</label>-->
 						<!--<select ng-model="regionName" class="form-control select-short">-->
@@ -81,6 +81,8 @@
 								<th class="wid-25">联系方式</th>
 								<th class="wid-25">举报日期</th>
 								<th class="wid-10">扣分项</th>
+								<th class="wid-25">处理状态</th>
+								<th class="wid-25">是否反馈</th>
 								<th>操作</th>
 							</tr>
 						</thead>
@@ -94,6 +96,8 @@
 								<td>{{module.contactType}}</td>
 								<td>{{module.reportDate}}</td>
 								<td>{{module.score}}</td>
+								<td>{{module.processingStatus}}</td>
+								<td>{{module.feedback == 2 ? '是' : '否'}}</td>
 								<td class="td-tool">
 									<!--<a class="btn btn-primary btn-xs" ng-click="getAccessoryDetail(module)">
 										<i class="fa fa-pencil" title="修改"></i>
@@ -103,6 +107,12 @@
 									</a>
 									<a class="btn btn-primary btn-xs" ng-click="getHydrologicDelete(module.id,module.name)">
 										<i class="fa fa-trash-o" title="删除"></i>
+									</a>
+									<a ng-if="!module.feedback" class="btn btn-primary btn-xs" ng-click="examine(module.id)">
+										<i class="fa fa-eye" title="审核"></i>
+									</a>
+									<a ng-if="module.feedback==1" class="btn btn-primary btn-xs" ng-click="replay(module.id)">
+										<i class="fa fa-reply" title="回复"></i>
 									</a>
 								</td>
 							</tr>

@@ -69,12 +69,8 @@
 
 						<br>
 						<div class="form-item">
-							<label>实际回复日期：</label>
-							<span ng-bind="reportList.finishReport"></span>
-						</div>
-						<div class="form-item">
 							<label>要求回复日期：</label>
-							<span ng-bind="reportList.RequireReport"></span>
+							<span ng-bind="reportList.requireReport"></span>
 						</div>
 						<div class="form-item">
 							<label>回复举报人日期：</label>
@@ -97,36 +93,52 @@
 							</div>
 							<!--<button class="btn btn-info" ng-click="viewFile(1)"><i class="fa fa-css3"></i>查看附件</button>-->
 						</div>
+						<br>
 
-						<br />
 						<div class="form-item">
-							<label>批处理意见：</label>
-							<div class="form-item" style="position: relative;width: 426px;top: -10px;">
-                                <span ng-repeat="item in fileList1" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
+							<label>拟处理意见：</label>
+							<span>{{reportList.processingContent}}</span>
+							<br/>
+							<div class="form-item" style="position: relative;width: 426px;margin-left: 95px">
+                                <span ng-repeat="item in fileList3" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
                                 </span>
 							</div>
-							<!--<button class="btn btn-primary" ng-click="viewFile(2)"><i class="fa fa-css3"></i>查看附件</button>-->
+							<!--<button class="btn btn-info" ng-click="viewFile(1)"><i class="fa fa-css3"></i>查看附件</button>-->
 						</div>
-						<br />
+
+						<br>
+						<div class="form-item">
+							<label>回复时间：</label>
+							<span ng-bind="reportList.requireReport"></span>
+						</div>
+						<div class="form-item">
+							<label>回复人：</label>
+							<span ng-bind="reportList.replier"></span>
+						</div>
+						<div class="form-item">
+							<label>回复人联系方式：</label>
+							<span ng-bind="reportList.replierPhone"></span>
+						</div>
+
+						<br>
+						<div class="form-item">
+							<label>回复内容：</label>
+							<span ng-bind="reportList.replierContent"></span>
+						</div>
+						<br>
+
 						<div class="form-item">
 							<label>处理结果：</label>
 							<div class="form-item" style="position: relative;width: 426px;top: -10px;">
-                                <span ng-repeat="item in fileList2" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
+                                <span ng-repeat="item in fileList4" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
                                 </span>
 							</div>
-							<!--<button class="btn btn-success" ng-click="viewFile(3)"><i class="fa fa-css3"></i>查看附件</button>-->
+							<!--<button class="btn btn-info" ng-click="viewFile(1)"><i class="fa fa-css3"></i>查看附件</button>-->
 						</div>
-						<br />
-						<!--<div class="form-item">-->
-						<!--<label>处理状态：</label>-->
-						<!--<span ng-bind="reportList.processingStatus"></span>-->
-						<!--</div>-->
+						<br>
 						<div class="form-item">
-							<label>处理状态</label>
-							<select ng-model="status" id="select" class="form-control select-short" style="width:160px">
-								<option value="">请选择</option>
-								<option value="{{item.name}}" ng-repeat="item in statusList">{{item.name}}</option>
-							</select>
+							<label>处理状态：</label>
+							<span ng-bind="reportList.processingStatus"></span>
 						</div>
 						<div class="form-item">
 							<label>举报人评价：</label>
@@ -141,9 +153,9 @@
 			</div>
 			<div class="panel-footer m-b-10">
 				<div class="btn-box">
-					<button type="submit" class="btn btn-primary" ng-click="getSubmit()" ng-show="showBut">
-						<i class="fa fa-check"></i>修改
-					</button>
+					<!--<button type="submit" class="btn btn-primary" ng-click="getSubmit()" ng-show="showBut">-->
+					<!--<i class="fa fa-check"></i>修改-->
+					<!--</button>-->
 					<button type="submit" class="btn btn-default" ng-click="getBack()">
 						<i class="fa fa-reply"></i>返回
 					</button>

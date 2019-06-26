@@ -8,7 +8,7 @@
         }
     });
     app.controller(
-        'superviseReportDetailMgtCtrl', [
+        'superviseReportExamineMgtCtrl', [
             '$localStorage',
             '$scope',
             '$location',
@@ -19,21 +19,21 @@
             '$window',
             'routeService',
             '$http',
-			'$ajaxhttp',
-			'moduleService',
+            '$ajaxhttp',
+            'moduleService',
             function superviseReportDetailMgtCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http, $ajaxhttp, moduleService) {
 
                 var apiPrefix = moduleService.getServiceUrl() + '/supervise';
                 // var apiPrefix = 'http://10.0.9.133:7023' + '/supervise';
 
                 /**
-				 * ==============================================
-				 * @name  superviseReportDetailMgtCtrl
-				 * @author  | 2018/10/25
-				 * @version 
-				 * @desc  社会监督举报详情
-				 * ==============================================
-				 */
+                 * ==============================================
+                 * @name  superviseReportDetailMgtCtrl
+                 * @author  | 2018/10/25
+                 * @version
+                 * @desc  社会监督举报详情
+                 * ==============================================
+                 */
 
                 var options = {
                     pdfOpenParams: {
@@ -46,13 +46,13 @@
                 };
 
 
-				$scope.init = function(){
+                $scope.init = function(){
                     $scope.eventImgUrl = 'http://10.0.0.196/api/download' ;
                     $scope.showImg = false;
-					/**
-					 * 获取详情
-					 */
-					getDetalList();
+                    /**
+                     * 获取详情
+                     */
+                    getDetalList();
 
                     getStatusList()
 
@@ -91,13 +91,13 @@
 
                 //查看  下载附件
                 $scope.downFile = function (path){
-                    window.open($scope.fileUrl + path);
+                    window.open(path);
                 }
-				
-				/**
-				 * 获取详情
-				 */
-				function getDetalList(){
+
+                /**
+                 * 获取详情
+                 */
+                function getDetalList(){
                     $ajaxhttp.myhttp({
                         url: apiPrefix + '/v1/socialReport/detailReport',
                         method: 'get',
@@ -105,13 +105,9 @@
                             id: localStorage.getItem('id')
                         },
                         callBack: function (res) {
-                        	if(res.data){
+                            if(res.data){
                                 $scope.reportList = res.data;
-                                $scope.fileList = [] ,
-                                $scope.fileList1 = [],
-                                $scope.fileList2 = [],
-                                $scope.fileList3 = [],
-                                $scope.fileList4 = [];
+                                $scope.fileList = [] , $scope.fileList1 = [], $scope.fileList2 = [];
                                 if(res.data.problemAttant) {
                                     var downUrl = [] ;
                                     downUrl = res.data.problemAttant.split(',');
@@ -148,30 +144,6 @@
                                     })
                                 }
 
-                                if(res.data.proposedTreatment) {
-                                    var downUrl = [];
-                                    downUrl = res.data.proposedTreatment.split(',');
-                                    downUrl.map((item, i) => {
-                                        $scope.fileList3.push({
-                                            name: downUrl[i].substring(downUrl[i].lastIndexOf('/') + 1),
-                                            previewURL: item,
-                                            downloadURL: downUrl[i]
-                                        })
-                                    })
-                                }
-
-                                if(res.data.processingResults) {
-                                    var downUrl = [];
-                                    downUrl = res.data.processingResults.split(',');
-                                    downUrl.map((item, i) => {
-                                        $scope.fileList4.push({
-                                            name: downUrl[i].substring(downUrl[i].lastIndexOf('/') + 1),
-                                            previewURL: item,
-                                            downloadURL: downUrl[i]
-                                        })
-                                    })
-                                }
-
 
                                 $scope.status = $scope.reportList.processingStatus;
                                 if($scope.reportList.processingStatus == '处理完成'){
@@ -182,44 +154,82 @@
                                     $('#select').attr('disabled',false);
                                 }
                                 // console.log($scope.status)
-							}
+                            }
 
                         }
                     })
-				}
+                }
 
-                $scope.getSubmit = function(){
-                    var params = {
-                        id: localStorage.getItem('id'),
-                        processingStatus: $scope.status,
-                    }
-                    if(!$scope.status){
-                        layer.alert("请选择处理状态", {
-                            skin: 'my-skin',
-                            closeBtn: 1,
-                            anim: 3
+                /*批处理意见*/
+                $scope.countNum = 512;
+                $scope.checkRemark = function () {
+                    $scope.countNum = 512 - $scope.processingContent.length;
+                    if ($scope.processingContent.length >= 512) {
+                        layui.use('layer', function(){
+                            var layer = layui.layer //获得layer模块
+                            layer.msg("你好，描述字数控制在255字以内！",{time:2000});
                         });
-                    }else{
-                        $ajaxhttp.myhttp({
-                            url: apiPrefix + '/v1/socialReport/updateReport',
-                            method: 'put',
-                            params: params,
-                            callBack: function (res) {
-                                if(res.resCode == 1){
-                                    layer.msg("修改成功！",{time:2000});
-                                    routeService.route('3-8', true);
-                                }
-                            }
-                        })
+                        $scope.processingContent = $scope.processingContent.substr(0, 512);
+                        $scope.countNum = 0;
+                    }
+                };
+
+                /**
+                 * 上传附件
+                 */
+                $scope.getUploadFile = function(id){
+                    if( id == 1 ){
+                        $('#coverModal1').modal('show');
                     }
                 }
-				
-				/**
-				 * 查看附件
-				 */
-				$scope.viewFile = function(id){
-                 	$('#myModal').modal('show');
-                 	if(id ==1){
+
+                //查看  下载附件
+                $scope.downFile = function (path){
+                    window.open($scope.fileUrl + path);
+                }
+
+                /**
+                 * 关闭上传附件
+                 */
+                $scope.getUpload = function(id){
+                    var formFile = new FormData();
+                    if( id == 1 ){
+                        $('#coverModal1').modal('hide');
+                        var domFiles = document.querySelector('#uploadfile1').files;
+                        for (var i = 0; i < domFiles.length; i ++) {
+                            formFile.append("file", domFiles[i]);
+                        }
+                    }
+
+                    $http({
+                            method: 'post',
+                            url: apiPrefix + '/v1/socialReport/upload',
+                            data:formFile,
+                            headers: {'Content-Type': undefined},
+                            transformRequest: angular.identity
+                        }
+                    ).success(function (res) {
+                        if (res.resCode == 1) {
+                            layer.msg("上传成功！");
+
+                            //console.log(res);
+                            if(id == 1){
+                                $scope.proposedTreatment = res.data;
+                            }
+                        } else {
+                            layer.msg("服务器异常，请稍后再试");
+                        }
+                    }).error(function (res) {
+                        layer.msg('服务器异常，请稍后再试');
+                    });
+                }
+
+                /**
+                 * 查看附件
+                 */
+                $scope.viewFile = function(id){
+                    $('#myModal').modal('show');
+                    if(id ==1){
                         if($scope.reportList.problemAttant){
                             var str = $scope.reportList.problemAttant.substring($scope.reportList.problemAttant.length-3);
                             var str1 = $scope.reportList.problemAttant.substring($scope.reportList.problemAttant.length-4);
@@ -258,22 +268,43 @@
                         }
                         PDFObject.embed($scope.reportList.processingResults, "#file", options);
                     }
-				}
+                }
 
                 //取消查看
                 $scope.cancel = function () {
                     $('#myModal').modal('hide');
                 }
-				
-				/**
-				 * 返回
-				 */
-				$scope.getBack = function(){
-					routeService.route('3-8', true);
-				}
-				
-				
-				
+
+                $scope.getSubmit = function(){
+                    var params = {
+                        id: localStorage.getItem('id'),
+                        processingContent: $scope.processingContent,
+                        proposedTreatment: $scope.proposedTreatment.join(','),
+                        feedback: 1,
+                        processingStatus: 3,
+                    }
+                    $ajaxhttp.myhttp({
+                        url: apiPrefix + '/v1/socialReport/updateReport',
+                        method: 'put',
+                        params: params,
+                        callBack: function (res) {
+                            if(res.resCode == 1){
+                                layer.msg("审核成功！",{time:2000});
+                                routeService.route('3-8', true);
+                            }
+                        }
+                    })
+                }
+
+                /**
+                 * 返回
+                 */
+                $scope.getBack = function(){
+                    routeService.route('3-8', true);
+                }
+
+
+
             }
         ]);
 

@@ -24,7 +24,7 @@
             function superviseReportMgtCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http, $ajaxhttp, moduleService) {
 
                 var apiPrefix = moduleService.getServiceUrl() + '/supervise';
-                // var apiPrefix = 'http://10.0.9.133:7023' + '/supervise';
+                //var apiPrefix = 'http://10.0.9.133:7023' + '/supervise';
 
 
                 /**
@@ -262,14 +262,30 @@
 				$scope.getReachAdd = function(){
 					routeService.route('3-6-3', false);
 				}
-				
-				/**
-				 * 查看当前列表详情
-				 */
-				$scope.getHydrologicDetail = function(id){
-					localStorage.setItem('id',id);
-					routeService.route('3-6-4', false);
-				};
+
+                /**
+                 * 查看当前列表详情
+                 */
+                $scope.getHydrologicDetail = function(id){
+                    localStorage.setItem('id',id);
+                    routeService.route('3-6-4', false);
+                };
+
+                /**
+                 * 查看审核
+                 */
+                $scope.examine = function(id){
+                    localStorage.setItem('id',id);
+                    routeService.route('3-6-5', false);
+                };
+
+                /**
+                 * 审核回复
+                 */
+                $scope.replay = function(id){
+                    localStorage.setItem('id',id);
+                    routeService.route('3-6-6', false);
+                };
 				
 				
 				/**

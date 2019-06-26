@@ -1,0 +1,175 @@
+<div ng-controller="superviseReportExamineMgtCtrl" ng-init="init()">
+    <div class="wrapper-md">
+        <div class="panel panel-default m-n">
+            <div class="panel-body" style="position: relative;">
+                <span class="tag">社会监督举报审核</span><span class="tag-right"></span>
+            </div>
+        </div>
+        <div class="panel panel-default m-all-0">
+            <div class="panel-body">
+                <div class="panel-content">
+                    <div class="patrolDetailContent">
+                        <div class="form-item">
+                            <label>举报日期：</label>
+                            <span ng-bind="reportList.reportDate"></span>
+                        </div>
+                        <div class="form-item">
+                            <label>举报人员：</label>
+                            <span ng-bind="reportList.reportor"></span>
+                        </div>
+                        <br />
+                        <div class="form-item">
+                            <label>联系电话：</label>
+                            <span ng-bind="reportList.contactType"></span>
+                        </div>
+                        <br />
+                        <div class="form-item">
+                            <label>河湖名称：</label>
+                            <span ng-bind="reportList.riverName"></span>
+                        </div>
+                        <div class="form-item">
+                            <label>问题类型：</label>
+                            <span ng-bind="reportList.eventType"></span>
+                        </div>
+                        <br />
+                        <div class="form-item">
+                            <label>处理状态</label>
+                            <span ng-bind="reportList.processingStatus"></span>
+                        </div>
+                        <div class="form-item">
+                            <label>所在区域：</label>
+                            <span ng-bind="reportList.regionName"></span>
+                        </div>
+                        <br />
+                        <div class="form-item">
+                            <label>所在位置：</label>
+                            <span ng-bind="reportList.problemPosition"></span>
+                        </div>
+                        <div class="form-item">
+                            <label>问题描述：</label>
+                            <span ng-bind="reportList.reportProblem"></span>
+                        </div>
+                        <br>
+                        <div class="form-item">
+                            <label>问题附件：</label>
+                            <div class="form-item" style="position: relative;width: 426px;top: -10px;">
+                                <span ng-repeat="item in fileList" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
+                                </span>
+                            </div>
+                            <!--<button class="btn btn-info" ng-click="viewFile(1)"><i class="fa fa-css3"></i>查看附件</button>-->
+                        </div>
+
+                        <br />
+                        <div class="form-item remarkInfo">
+                            <div class="dis-i-blc">
+                                <label>批处理意见：</label>
+                                <div class="p-l-0 wid-100" style="margin-left: 95px">
+                            <textarea class="form-control textareaH" ng-model="processingContent" ng-change="checkRemark()"
+                                      rows="8" maxlength="512"></textarea>
+                                    <p class="m-t-10">还可输入{{countNum}}个字</p>
+                                    <div>
+                                        <span
+                                                ng-repeat="item in proposedTreatment"
+                                              style="color: #333;cursor: pointer;margin: 8px 10px;"
+                                              ng-click="downFile(item)">{{item.split('/')[item.split('/').length - 1]}}
+                                        </span>
+                                        <button class="btn btn-info" ng-click="getUploadFile(1)"><i class="fa fa-css3"></i>附件</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer m-b-10">
+                <div class="btn-box">
+                    <button type="submit" class="btn btn-primary" ng-click="getSubmit()" ng-show="showBut">
+                        <i class="fa fa-check"></i>保存
+                    </button>
+                    <button type="submit" class="btn btn-default" ng-click="getBack()">
+                        <i class="fa fa-reply"></i>取消
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--查看附件-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        查看附件
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div style="margin: 10px 0;" ng-show="showImg" >
+                        <img src="{{imgUrl}}" alt="">
+                    </div>
+                    <div id="file" style="height: 400px;" ng-show="!showImg"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--描述：附件-->
+    <div class="modal fade" id="coverModal1" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <li class="fa fa-remove"></li>
+                    </button>
+                    <h4>上传附件</h4>
+
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="wid-100 announcementCoverPanel">
+                                <input class="uploadfile" id="uploadfile1" type="file" name="file" multiple="multiple">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                .
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload(1)">
+                        <i class="fa fa-check"></i>
+                        <span>确定</span>
+                    </a>
+                    <a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
+                        <i class="fa fa-reply"></i>
+                        <span>取消</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(".uploadfile").fileinput({
+        allowedFileExtensions: ['doc','docx','png','jpeg'],
+        uploadAsync: true, //默认异步上传
+        showRemove: true, //显示移除按钮
+        // maxFileCount: 1, //表示允许同时上传的最大文件个数
+        language: 'zh', //设置语言
+        uploadUrl: '#', //上传的地址
+        showUpload: false, //显示批量上传按钮
+        showCaption: true, //是否显示标题
+        browseClass: "btn btn-primary", //按钮样式
+        showPreview: true, //是否显示预览
+        dropZoneEnabled: true, //是否显示拖拽区域
+        validateInitialCount: true,
+        slugCallback: function (filename) {
+            return filename.replace('(', '_').replace(']', '_');
+        }
+    });
+</script>

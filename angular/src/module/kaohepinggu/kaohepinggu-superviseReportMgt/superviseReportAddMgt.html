@@ -34,7 +34,7 @@
                         <a class="input-group-addon" ng-click="getRegionShow()"><i class="fa fa-search"></i></a>
                     </div>
                     <div class="form-item">
-                        <label>河段名称</label>
+                        <label>河湖名称</label>
                         <input type="text" class="form-control input-short" ng-model="riverName" lay-verify="required"/>
                     </div>
                     <br/>
@@ -47,7 +47,7 @@
                         <input type="text" name="tel" maxlength="11" onkeyup="this.value=this.value.replace(/[^-\d、/\s]/g, '')" class="form-control input-short" ng-model="contactType" lay-verify="required"/>
                     </div>
                     <div class="form-item">
-                        <label>举报位置</label>
+                        <label>问题位置</label>
                         <input type="text" class="form-control input-short" ng-model="problemPosition"
                                lay-verify="required"/>
                     </div>
@@ -90,15 +90,15 @@
                     </div>
 
                     <br>
-                    <div class="form-item">
-                        <label>实际回复日期</label>
-                        <div class="input-group date date_picker date-tj" id="finishReport">
-                            <input type="text" class="form-control input-short-o" ng-model="finishReport"/>
-                            <span class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </span>
-                        </div>
-                    </div>
+                    <!--<div class="form-item">-->
+                        <!--<label>实际回复日期</label>-->
+                        <!--<div class="input-group date date_picker date-tj" id="finishReport">-->
+                            <!--<input type="text" class="form-control input-short-o" ng-model="finishReport"/>-->
+                            <!--<span class="input-group-addon">-->
+                            <!--<i class="fa fa-calendar"></i>-->
+                        <!--</span>-->
+                        <!--</div>-->
+                    <!--</div>-->
                     <div class="form-item">
                         <label>要求回复日期</label>
                         <div class="input-group date date_picker date-tj" id="RequireReport">
@@ -127,7 +127,6 @@
                                 <p class="m-t-10">还可输入{{countNum}}个字</p>
                             </div>
                         </div>
-
                     </div>
                     <br/>
                     <div class="form-item">
@@ -143,32 +142,36 @@
                     <div class="form-item">
                         <label>问题附件：</label>
                         <button class="btn btn-info" ng-click="getUploadFile(1)"><i class="fa fa-css3"></i>查看附件</button>
+                        <div class="form-item" style="position: relative;width: 426px;top: -10px;">
+                                <span ng-repeat="item in problemAttant" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item)">{{item.split('/')[item.split('/').length - 1]}}
+                                </span>
+                        </div>
                     </div>
                     <br/>
-                    <div class="form-item">
-                        <label>处理意见：</label>
-                        <button class="btn btn-primary" ng-click="getUploadFile(2)"><i class="fa fa-css3"></i>查看附件</button>
-                    </div>
+                    <!--<div class="form-item">-->
+                        <!--<label>处理意见：</label>-->
+                        <!--<button class="btn btn-primary" ng-click="getUploadFile(2)"><i class="fa fa-css3"></i>查看附件</button>-->
+                    <!--</div>-->
                     <br/>
-                    <div class="form-item">
-                        <label>处理结果：</label>
-                        <button class="btn btn-success" ng-click="getUploadFile(3)"><i class="fa fa-css3"></i>查看附件</button>
-                    </div>
+                    <!--<div class="form-item">-->
+                        <!--<label>处理结果：</label>-->
+                        <!--<button class="btn btn-success" ng-click="getUploadFile(3)"><i class="fa fa-css3"></i>查看附件</button>-->
+                    <!--</div>-->
                     <br/>
-                    <div class="form-item">
-                        <label>处理状态</label>
-                        <select ng-model="status" ng-options="st as st.name for st in statusList"
-                                ng-change="getStatusChange(status.name)" class="form-control select-short">
-                            <option value="">请选择</option>
-                        </select>
-                    </div>
-                    <div class="form-item">
-                        <label>举报人评价</label>
-                        <select ng-model="assess" ng-options="se.id as se.name for se in assessList"
-                                ng-change="getAssessChange(assess.id)" class="form-control select-short">
-                            <option value="">请选择</option>
-                        </select>
-                    </div>
+                    <!--<div class="form-item">-->
+                        <!--<label>处理状态</label>-->
+                        <!--<select ng-model="status" ng-options="st as st.name for st in statusList"-->
+                                <!--ng-change="getAssessChange(status.name)" class="form-control select-short">-->
+                            <!--<option value="">请选择</option>-->
+                        <!--</select>-->
+                    <!--</div>-->
+                    <!--<div class="form-item">-->
+                        <!--<label>举报人评价</label>-->
+                        <!--<select ng-model="assess" ng-options="se.id as se.name for se in assessList"-->
+                                <!--ng-change="getAssessChange(assess.id)" class="form-control select-short">-->
+                            <!--<option value="">请选择</option>-->
+                        <!--</select>-->
+                    <!--</div>-->
                     <div class="form-item">
                         <label>举报来源</label>
                         <!--                        <input type="text" class="form-control input-short" ng-model="source" lay-verify="required"/>-->
@@ -228,8 +231,8 @@
                         <form class="form-horizontal">
                             <div class="form-group">
                                 <div class="wid-100 announcementCoverPanel">
-                                    <input class="uploadfile" id="uploadfile1" type="file" name="file">
-                                </div>
+                                    <input class="uploadfile" id="uploadfile1" type="file" name="file" multiple="multiple">
+                               </div>
                             </div>
                         </form>
                     </div>
@@ -323,7 +326,7 @@
         allowedFileExtensions: ['doc','docx','png','jpeg'],
         uploadAsync: true, //默认异步上传
         showRemove: true, //显示移除按钮
-        maxFileCount: 1, //表示允许同时上传的最大文件个数
+        // maxFileCount: 1, //表示允许同时上传的最大文件个数
         language: 'zh', //设置语言
         uploadUrl: '#', //上传的地址
         showUpload: false, //显示批量上传按钮

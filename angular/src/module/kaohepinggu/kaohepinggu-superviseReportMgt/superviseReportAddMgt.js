@@ -23,7 +23,7 @@
 			'moduleService',
             function superviseReportAddMgtCtrl($localStorage, $scope, $location, $log, $q, $rootScope, globalParam, $window, routeService, $http, $ajaxhttp, moduleService) {
 
-        	    var apiPrefix = moduleService.getServiceUrl() + '/supervise';
+                var apiPrefix = moduleService.getServiceUrl() + '/supervise';
                 // var apiPrefix = 'http://10.0.9.133:7023' + '/supervise';
 
 
@@ -233,14 +233,14 @@
                     $scope.$apply();
                 });
 
-                $('#finishReport').datetimepicker({
-                    format: 'YYYY-MM-DD hh:mm',
-                    locale: moment.locale('zh-cn')
-                }).on('dp.change', function (e) {
-                    var result = new moment(e.date).format('YYYY-MM-DD');
-                    $scope.finishReport = result;
-                    $scope.$apply();
-                });
+                // $('#finishReport').datetimepicker({
+                //     format: 'YYYY-MM-DD hh:mm',
+                //     locale: moment.locale('zh-cn')
+                // }).on('dp.change', function (e) {
+                //     var result = new moment(e.date).format('YYYY-MM-DD');
+                //     $scope.finishReport = result;
+                //     $scope.$apply();
+                // });
                 $('#RequireReport').datetimepicker({
                     format: 'YYYY-MM-DD',
                     locale: moment.locale('zh-cn')
@@ -320,6 +320,11 @@
                         $('#coverModal3').modal('show');
 					}
 				}
+
+                //查看  下载附件
+                $scope.downFile = function (path){
+                    window.open($scope.fileUrl + path);
+                }
 				
 				/**
 				 * 关闭上传附件
@@ -329,8 +334,12 @@
                     if( id == 1 ){
                         $('#coverModal1').modal('hide');
                         // var fileObj = document.querySelector('input[type=file]').files[0];
-                        var fileObj = document.querySelector('#uploadfile1').files[0];
-                        formFile.append("file", fileObj); //加入文件对象
+                        // var fileObj = document.querySelector('#uploadfile1').files[0];
+                        // formFile.append("file", fileObj); //加入文件对象
+                        var domFiles = document.querySelector('#uploadfile1').files;
+                        for (var i = 0; i < domFiles.length; i ++) {
+                            formFile.append("file", domFiles[i]);
+                        }
                     }else if( id == 2 ) {
                         $('#coverModal2').modal('hide');
                         var fileObj = document.querySelector('#uploadfile2').files[0];
@@ -399,18 +408,18 @@
                         	eventType:$scope.problemType,
 							problemPosition: $scope.problemPosition,
 							reportProblem: $scope.reportProblem,
-                        	processingStatus: $scope.status.name,
-							reportEvaluate:$scope.assess,
-                        	problemAttant:$scope.problemAttant,
-                        	proposedTreatment:$scope.proposedTreatment,
-                            processingResults: $scope.processingResults,
+                        	// processingStatus: $scope.status.name,
+							// reportEvaluate:$scope.assess,
+                        	problemAttant:$scope.problemAttant.join(','),
+                        	// proposedTreatment:$scope.proposedTreatment,
+                            // processingResults: $scope.processingResults,
                         	reportSource: $scope.source,
 							overTime: $scope.overtime,
 							score: $scope.score,
                             way: $scope.way,
                             organizer: $scope.organizer,
                             reportway: $scope.reportway,
-                            finishReport: $scope.finishReport,
+                            // finishReport: $scope.finishReport,
                             RequireReport: $scope.RequireReport,
                             reportorTime: $scope.reportorTime,
                             remark: $scope.remark,
