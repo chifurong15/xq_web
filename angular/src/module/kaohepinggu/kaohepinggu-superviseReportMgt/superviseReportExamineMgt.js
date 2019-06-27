@@ -279,7 +279,7 @@
                     var params = {
                         id: localStorage.getItem('id'),
                         processingContent: $scope.processingContent,
-                        proposedTreatment: $scope.proposedTreatment.join(','),
+                        proposedTreatment: $scope.proposedTreatment ? $scope.proposedTreatment.join(',') : '',
                         feedback: 1,
                         processingStatus: 3,
                     }
