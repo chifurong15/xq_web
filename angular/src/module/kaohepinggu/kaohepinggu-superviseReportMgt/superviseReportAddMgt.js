@@ -410,7 +410,7 @@
 							reportProblem: $scope.reportProblem,
                         	// processingStatus: $scope.status.name,
 							// reportEvaluate:$scope.assess,
-                        	problemAttant:$scope.problemAttant.join(','),
+                        	problemAttant:$scope.problemAttant ? $scope.problemAttant.join(',') : '',
                         	// proposedTreatment:$scope.proposedTreatment,
                             // processingResults: $scope.processingResults,
                         	reportSource: $scope.source,
