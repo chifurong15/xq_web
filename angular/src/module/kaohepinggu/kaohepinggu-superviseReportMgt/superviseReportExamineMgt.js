@@ -203,7 +203,7 @@
 
                     $http({
                             method: 'post',
-                            url: apiPrefix + '/v1/socialReport/upload',
+                            url: apiPrefix + '/v1/socialReport/uploadWeb',
                             data:formFile,
                             headers: {'Content-Type': undefined},
                             transformRequest: angular.identity
@@ -279,7 +279,7 @@
                     var params = {
                         id: localStorage.getItem('id'),
                         processingContent: $scope.processingContent,
-                        proposedTreatment: $scope.proposedTreatment ? $scope.proposedTreatment.join(',') : '',
+                        proposedTreatment: $scope.proposedTreatment ? $scope.proposedTreatment.join(',') : 'f',
                         feedback: 1,
                         processingStatus: 3,
                     }

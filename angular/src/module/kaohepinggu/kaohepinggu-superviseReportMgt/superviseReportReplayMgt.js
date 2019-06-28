@@ -230,7 +230,7 @@
 
                     $http({
                             method: 'post',
-                            url: apiPrefix + '/v1/socialReport/upload',
+                            url: apiPrefix + '/v1/socialReport/uploadWeb',
                             data:formFile,
                             headers: {'Content-Type': undefined},
                             transformRequest: angular.identity
