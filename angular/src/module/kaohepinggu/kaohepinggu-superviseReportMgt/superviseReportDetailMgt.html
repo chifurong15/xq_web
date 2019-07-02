@@ -1,4 +1,4 @@
-<div ng-controller="superviseReportDetailMgtCtrl" ng-init="init()">
+<div ng-controller="superviseReportDetailMgtCtrl" ng-init="init()" class="superviseReportDetailMgtCtrl">
 	<div class="wrapper-md">
 		<div class="panel panel-default m-n">
 			<div class="panel-body" style="position: relative;">
@@ -9,145 +9,207 @@
 			<div class="panel-body">
 				<div class="panel-content">
 					<div class="patrolDetailContent">
-						<div class="form-item">
-							<label>举报日期：</label>
-							<span ng-bind="reportList.reportDate"></span>
-						</div>
-						<div class="form-item">
-							<label>行政区域：</label>
-							<span ng-bind="reportList.regionName"></span>
-						</div>
-						<br />
-						<div class="form-item">
-							<label>河段名称：</label>
-							<span ng-bind="reportList.riverName"></span>
-						</div>
-						<div class="form-item">
-							<label>举报人员：</label>
-							<span ng-bind="reportList.reportor"></span>
-						</div>
-						<br />
-						<div class="form-item">
-							<label>联系电话：</label>
-							<span ng-bind="reportList.contactType"></span>
-						</div>
-						<div class="form-item">
-							<label>举报问题：</label>
-							<span ng-bind="reportList.reportProblem"></span>
-						</div>
-						<br />
-						<div class="form-item">
-							<label>问题位置：</label>
-							<span ng-bind="reportList.problemPosition"></span>
-						</div>
-						<div class="form-item">
-							<label>办结日期：</label>
-							<span ng-bind="reportList.overTime"></span>
-						</div>
-						<br />
-						<div class="form-item">
-							<label>问题类型：</label>
-							<span ng-bind="reportList.eventType"></span>
-						</div>
-						<div class="form-item">
-							<label>分数：</label>
-							<span ng-bind="reportList.score"></span>
-						</div>
-						<br>
-						<div class="form-item">
-							<label>转办方式：</label>
-							<span ng-bind="reportList.way"></span>
-						</div>
-						<div class="form-item">
-							<label>承办单位：</label>
-							<span ng-bind="reportList.organizer"></span>
-						</div>
-						<div class="form-item">
-							<label>回复方式：</label>
-							<span ng-bind="reportList.reportway"></span>
-						</div>
 
-						<br>
-						<div class="form-item">
-							<label>要求回复日期：</label>
-							<span ng-bind="reportList.requireReport"></span>
-						</div>
-						<div class="form-item">
-							<label>回复举报人日期：</label>
-							<span ng-bind="reportList.reportorTime"></span>
-						</div>
 
-						<br>
-						<div class="form-item">
-							<label>备注：</label>
-							<span ng-bind="reportList.remark"></span>
-						</div>
-
-						<br>
-
-						<div class="form-item">
-							<label>问题附件：</label>
-							<div class="form-item" style="position: relative;width: 426px;top: -10px;">
-                                <span ng-repeat="item in fileList" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
-                                </span>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-item">
+									<label>举报日期：</label>
+									<span ng-bind="reportList.reportDate"></span>
+								</div>
+								<div class="form-item">
+									<label>行政区域：</label>
+									<span ng-bind="reportList.regionName"></span>
+								</div>
+								<div class="form-item">
+									<label>举报人员：</label>
+									<span ng-bind="reportList.reportor"></span>
+								</div>
 							</div>
-							<!--<button class="btn btn-info" ng-click="viewFile(1)"><i class="fa fa-css3"></i>查看附件</button>-->
 						</div>
-						<br>
 
-						<div class="form-item">
-							<label>拟处理意见：</label>
-							<span>{{reportList.processingContent}}</span>
-							<br/>
-							<div class="form-item" style="position: relative;width: 426px;margin-left: 95px">
-                                <span ng-repeat="item in fileList3" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
-                                </span>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-item">
+									<label>办结日期：</label>
+									<span ng-bind="reportList.overTime"></span>
+								</div>
+								<div class="form-item">
+									<label>转办方式：</label>
+									<span ng-bind="reportList.way"></span>
+								</div>
+								<div class="form-item">
+									<label>承办单位：</label>
+									<span ng-bind="reportList.organizer"></span>
+								</div>
+
 							</div>
-							<!--<button class="btn btn-info" ng-click="viewFile(1)"><i class="fa fa-css3"></i>查看附件</button>-->
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-item">
+									<label>河段名称：</label>
+									<span ng-bind="reportList.riverName"></span>
+								</div>
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-item">
+									<label>联系电话：</label>
+									<span ng-bind="reportList.contactType"></span>
+								</div>
+								<div class="form-item">
+									<label>回复人联系方式：</label>
+									<span ng-bind="reportList.replierPhone"></span>
+								</div>
+							</div>
 						</div>
 
-						<br>
-						<div class="form-item">
-							<label>回复时间：</label>
-							<span ng-bind="reportList.requireReport"></span>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-item">
+									<label>举报问题：</label>
+									<span ng-bind="reportList.reportProblem"></span>
+								</div>
+							</div>
 						</div>
-						<div class="form-item">
-							<label>回复人：</label>
-							<span ng-bind="reportList.replier"></span>
-						</div>
-						<div class="form-item">
-							<label>回复人联系方式：</label>
-							<span ng-bind="reportList.replierPhone"></span>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-item">
+									<label>问题位置：</label>
+									<span ng-bind="reportList.problemPosition"></span>
+								</div>
+							</div>
 						</div>
 
-						<br>
-						<div class="form-item">
-							<label>回复内容：</label>
-							<span ng-bind="reportList.replierContent"></span>
-						</div>
-						<br>
+						<div class="row">
 
-						<div class="form-item">
-							<label>处理结果：</label>
-							<div class="form-item" style="position: relative;width: 426px;top: -10px;">
+							<div class="col-md-12">
+								<div class="form-item">
+									<label>分数：</label>
+									<span ng-bind="reportList.score"></span>
+								</div>
+								<div class="form-item">
+									<label>回复方式：</label>
+									<span ng-bind="reportList.reportway"></span>
+								</div>
+								<div class="form-item">
+									<label>要求回复日期：</label>
+									<span ng-bind="reportList.requireReport"></span>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-item">
+									<label>回复举报人日期：</label>
+									<span ng-bind="reportList.reportorTime"></span>
+								</div>
+								<div class="form-item">
+									<label>回复时间：</label>
+									<span ng-bind="reportList.requireReport"></span>
+								</div>
+								<div class="form-item">
+									<label>回复人：</label>
+									<span ng-bind="reportList.replier"></span>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-item">
+									<label>处理状态：</label>
+									<span ng-bind="reportList.processingStatus"></span>
+								</div>
+								<div class="form-item">
+									<label>举报人评价：</label>
+									<span>{{reportList.reportEvaluate == 1 ? '满意' : '不满意'}}</span>
+								</div>
+								<div class="form-item">
+									<label>举报来源：</label>
+									<span ng-bind="reportList.reportSource"></span>
+								</div>
+							</div>
+
+						</div>
+
+
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-item">
+									<label>问题类型：</label>
+									<span ng-bind="reportList.eventType"></span>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-item">
+									<label>备注：</label>
+									<span ng-bind="reportList.remark"></span>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-item">
+									<label>回复内容：</label>
+									<span ng-bind="reportList.replierContent"></span>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-item">
+									<label>问题附件：</label>
+									<div class="form-item" style="position: relative;width: 426px;top: -10px;">
+										<span ng-repeat="item in fileList" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
+										</span>
+									</div>
+									<!--<button class="btn btn-info" ng-click="viewFile(1)"><i class="fa fa-css3"></i>查看附件</button>-->
+								</div>
+							</div>
+
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-item">
+									<label>拟处理意见：</label>
+									<span ng-show="reportList.processingContent">{{reportList.processingContent}}</span>
+									<br  ng-show="reportList.processingContent" />
+									<div class="form-item" style="position: relative;width: 426px;top: -13px;">
+										<span ng-repeat="item in fileList3" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
+										</span>
+									</div>
+									<!--<button class="btn btn-info" ng-click="viewFile(1)"><i class="fa fa-css3"></i>查看附件</button>-->
+								</div>
+							</div>
+						</div>
+
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-item">
+									<label>处理结果：</label>
+									<div class="form-item" style="position: relative;width: 426px;top: -10px;">
                                 <span ng-repeat="item in fileList4" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item.previewURL)">{{item.name}}
                                 </span>
+									</div>
+									<!--<button class="btn btn-info" ng-click="viewFile(1)"><i class="fa fa-css3"></i>查看附件</button>-->
+								</div>
 							</div>
-							<!--<button class="btn btn-info" ng-click="viewFile(1)"><i class="fa fa-css3"></i>查看附件</button>-->
 						</div>
-						<br>
-						<div class="form-item">
-							<label>处理状态：</label>
-							<span ng-bind="reportList.processingStatus"></span>
-						</div>
-						<div class="form-item">
-							<label>举报人评价：</label>
-							<span>{{reportList.reportEvaluate == 1 ? '满意' : '不满意'}}</span>
-						</div>
-						<div class="form-item">
-							<label>举报来源：</label>
-							<span ng-bind="reportList.reportSource"></span>
-						</div>
+
+
+
 					</div>
 				</div>
 			</div>

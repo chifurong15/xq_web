@@ -2473,3 +2473,7 @@ body .c-ffffff a {
     line-height: 34px;
     width: 450px;
 }
+
+.superviseReportDetailMgtCtrl .form-item label{
+    width: 127px!important;
+}
