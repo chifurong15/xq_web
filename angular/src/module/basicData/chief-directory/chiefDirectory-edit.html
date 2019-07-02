@@ -26,7 +26,9 @@
                     </div>
                     <div class="form-item">
                         <label>河长类型</label>
-                        <input type="text" class="form-control input-short" ng-model="chief.chairmanRole" >
+                        <select ng-init="dutyType()" ng-model="chief.chairmanRole" ng-options="dt.typeValue as dt.typeName for dt in dutyTypeList" class="form-control select-short">
+                            <option value="">请选择</option>
+                        </select>
                     </div>
                     <div class="form-item">
                         <label>角色</label>
