@@ -263,6 +263,7 @@
                         finishReport: $scope.finishReport,
                         replier: $scope.replier,
                         replierPhone: $scope.replierPhone,
+                        score: $scope.score,
                         replierContent: $scope.replierContent,
                         processingResults: ($scope.processingResults||[]).join(','),
                         processingStatus: $scope.processingStatus.name,

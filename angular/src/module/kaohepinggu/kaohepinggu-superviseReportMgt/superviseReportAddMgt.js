@@ -415,7 +415,6 @@
                             // processingResults: $scope.processingResults,
                         	reportSource: $scope.source,
 							overTime: $scope.overtime,
-							score: $scope.score,
                             way: $scope.way,
                             organizer: $scope.organizer,
                             reportway: $scope.reportway,
