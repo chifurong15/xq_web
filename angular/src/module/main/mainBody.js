@@ -486,9 +486,9 @@
                         var template = "";
                         if (val.assessstatus == 1){
                             if (val.status == 0){
-                                symbolpath = "/src/img/esri-icon/component/wsclc.png";
+                                symbolpath = "/hzz/img/esri-icon/component/wsclc.png";
                             }else {
-                                symbolpath = "/src/img/esri-icon/component/wsclc_weidabiao.png";
+                                symbolpath = "/hzz/img/esri-icon/component/wsclc_weidabiao.png";
                             }
                             // 判断同期是否达标
                             if (val.status == 0){
@@ -520,7 +520,7 @@
                                 ],
                             });
                         }else {
-                            symbolpath = "/src/img/esri-icon/component/wsclcs.png";
+                            symbolpath = "/hzz/img/esri-icon/component/wsclcs.png";
                             template = new w.PopupTemplate({
                                 title:val.sewageworks,
                                 fieldInfos: [
@@ -542,7 +542,7 @@
                 var loadSectionComponent = function(res){
                     $.each(res.data,function (i,val) {
                         var point = new w.Point(val.longitude,val.latitude);
-                        var symbolpath = "/src/img/esri-icon/component/jcdm.png";
+                        var symbolpath = "/hzz/img/esri-icon/component/jcdm.png";
                         var picMarkerSymbol = SymbolUtil.getPictureMarkerSymbol(symbolpath, 35, 35);
                         var graphic = new w.Graphic(point, picMarkerSymbol);
                         graphic.attributes = val;
