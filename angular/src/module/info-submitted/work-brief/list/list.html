@@ -315,7 +315,7 @@
                 </div>
             </div>
         </div>
-        <!--描述：回复附件-->
+        <!--描述：回复附件  附件上传-->
         <div class="modal fade" id="coverModal" data-backdrop="static">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -326,15 +326,26 @@
                         <h4>上传附件</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal">
-                            <div class="form-group">
-                                <div class="wid-100 announcementCoverPanel">
-                                    <input class="uploadfile" id="problemFile" type="file" name="file">
-                                </div>
+
+                        <div>
+                            <input type="file" class="hidden" id="J-attandUploader" ng-model="attandUrl"
+                                   onchange="angular.element(this).scope().uploadFile(this)"/>
+                            <input type="hidden" ng-model="attandName" value=""/>
+                            <button class="btn btn-default" onclick="document.getElementById('J-attandUploader').click()">
+                                选择文件
+                            </button>
+                        </div>
+
+
+                        <div class="file-list-show">
+                            <div class="file-list-content" ng-repeat="(index,item) in fileUploadList">
+                                <span class="file-list-title">{{item.fileName}}</span>
+                                <span class="file-list-delete" ng-click="deleteFile(index)">删除</span>
                             </div>
-                        </form>
+                        </div>
+
                     </div>
-                    .
+
                     <div class="modal-footer">
                         <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload()">
                             <i class="fa fa-check"></i>
@@ -375,23 +386,7 @@
     </div>
 </div>
 <script>
-    $(".uploadfile").fileinput({
-        allowedFileExtensions: ['doc','docx','pdf','png','jpg','jpeg','xlsx','xls'],
-        uploadAsync: true, //默认异步上传
-        showRemove: true, //显示移除按钮
-        maxFileCount: 5, //表示允许同时上传的最大文件个数
-        language: 'zh', //设置语言
-        uploadUrl: '#', //上传的地址
-        showUpload: false, //显示批量上传按钮
-        showCaption: true, //是否显示标题
-        browseClass: "btn btn-primary", //按钮样式
-        showPreview: true, //是否显示预览
-        dropZoneEnabled: false, //是否显示拖拽区域
-        validateInitialCount: true,
-        slugCallback: function (filename) {
-            return filename.replace('(', '_').replace(']', '_');
-        }
-    });
+
     layui.use('element', function () {
         var $ = layui.jquery
             , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块

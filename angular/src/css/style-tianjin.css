@@ -2477,3 +2477,18 @@ body .c-ffffff a {
 .superviseReportDetailMgtCtrl .form-item label{
     width: 127px!important;
 }
+
+
+.modal-body .file-list-show{
+    margin: 20px!important;
+    font-size: 18px;
+}
+
+.modal-body .file-list-content{
+    display: flex;
+    justify-content: space-between;
+}
+.modal-body .file-list-delete{
+    cursor: pointer;
+    color: #f00;
+}

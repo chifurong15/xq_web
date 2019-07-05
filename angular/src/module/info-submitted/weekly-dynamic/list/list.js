@@ -59,6 +59,16 @@
                         getList();
                         getAllRegion ();
                     }
+
+                    $scope.fileList = [];
+
+                    //删除附件
+                    $scope.deleteFile = function (i) {
+                        $scope.fileList.splice(i,1);
+                        // console.log($scope.fileList);
+                    }
+
+
                     // 获取数据列表
                     function getList () {
                         $ajaxhttp.myhttp({
@@ -266,25 +276,7 @@
                     }
                     //保存/上报 答复
                     $scope.save = function (id) {
-                        // if (!$scope.patrolCondition) {
-                        //     layer.alert("请输入河长湖长巡河巡湖情况", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // }else if ($scope.meetingCondition) {
-                        //     layer.alert("请输入会议情况", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // }if ($scope.problemSolvingCondition) {
-                        //     layer.alert("请输入河长协调解决水环境问题情况", {
-                        //         skin: 'my-skin',
-                        //         closeBtn: 1,
-                        //         anim: 3
-                        //     });
-                        // }
+
                         var params = {
                             title:$scope.answerTitle,
                             weekId: $scope.answerId,
@@ -306,6 +298,7 @@
                                         layer.msg('保存成功',{times:2000});
                                         $scope.saveId = res.data.id;
                                         $('#myModal2').modal('hide');
+                                        $scope.assessory = []
                                         getList();
                                         clear();
                                     }else{
@@ -322,6 +315,7 @@
                                     if(res.resCode == 1){
                                         layer.msg('上报成功',{times:2000});
                                         $('#myModal2').modal('hide');
+                                        $scope.assessory = []
                                         getList();
                                         clear();
                                     }else{
@@ -354,31 +348,46 @@
                      */
                     $scope.getUpload = function () {
                         $('#coverModal').modal('hide');
-                        var formFile = new FormData();
+                        $scope.fileList.map(function (item) {
+                            $scope.assessory.push(item.fileUrl)
+                        })
+                        console.log($scope.assessory);
+                    }
 
-                        var fileObj = document.querySelector('input[type=file]').files[0];
-                        formFile.append("files", fileObj); //加入文件对象
 
-                        $http({
-                                method: 'post',
+                    // 上传文件
+                    $scope.uploadFile = function (e) {
+
+                        for (var i = 0; i < e.files.length; i++) {
+                            var form = new FormData();
+                            var file = e.files[i];
+                            $scope.attandName = file.name;
+                            form.append('files', file);
+                            $http({
+                                method: 'POST',
                                 url: apiPrefix + '/v1/msSentReports/upload',
-                                data: formFile,
+                                data: form,
                                 headers: {'Content-Type': undefined},
                                 transformRequest: angular.identity
-                            }
-                        ).success(function (res) {
-                            if (res.resCode == 1) {
-                                layer.msg("上传成功");
-                                $scope.assessory.push(res.data[0]);
-                                $('#problemFile').fileinput('clear');
+                            }).success(function (res) {
+                                if(res.resCode == 1){
+                                    layer.msg('上传成功',{times:2000})
+                                    $scope.attandUrl = res.data[0];
+                                    $scope.fileList.push({
+                                        fileName:$scope.attandName,
+                                        fileUrl:$scope.attandUrl
+                                    });
+                                    console.log($scope.fileList);
+                                }else{
+                                    layer.msg('上传失败',{times:2000})
+                                }
 
-                            } else {
-                                layer.msg("服务器异常，请稍后再试");
-                            }
-                        }).error(function (res) {
-                            layer.msg('服务器异常，请稍后再试');
-                        });
+                            }).error(function (data) {
+                                console.log('upload fail');
+                            })
+                        }
                     }
+
 
 
 
@@ -526,7 +535,7 @@
                      * @param {Object} treeNode
                      */
                     function regionTreeOnClick(event, treeId, treeNode) {
-                        console.log(treeNode);
+                        // console.log(treeNode);
                         $scope.regionId = treeNode.id;
                         $scope.regionName = treeNode.name;
                         $scope.grade = treeNode.grade;
