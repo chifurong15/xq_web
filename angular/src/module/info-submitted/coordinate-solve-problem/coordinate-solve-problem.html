@@ -68,7 +68,7 @@
                             <td>{{problem.coordinationDepartment}}</td>
                             <td>{{problem.problemSituation}}</td>
                             <td>
-                                <a ng-click="preview(problem.accessory)">{{problem.accessory}}</a>
+                                <a ng-click="preview(item)" ng-repeat="item in problem.file">{{item}}<br></a>
                             </td>
                             <td>
                                 <a class="btn btn-primary btn-xs" ng-click="detail(problem.id)">详情</a>
@@ -156,10 +156,18 @@
                             <label style="width: 150px">备注</label>
                             <span>{{remark}}</span>
                         </div>
-                        <div style="padding: 5px">
-                            <label style="width: 150px">附件</label>
-                            <span ng-repeat="item in assessory">{{item}}</span>
+                        <div class="form-item" ng-if="fileList.length != 0">
+                            <label><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">附件</font></font></label>
                         </div>
+                        <div class="form-item" style="position: relative;width: 426px;">
+                                <span ng-repeat="item in fileList" style="color: #333;display: block;margin: 8px 10px;">{{item.name}}
+                                </span>
+                        </div>
+                        <!--<div style="padding: 5px">-->
+                            <!--<label style="width: 150px">附件</label>-->
+                            <!--<span ng-repeat="item in assessory">{{item}}</span>-->
+                        <!--</div>-->
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" ng-click="closeDetailModal()">取消</button>
@@ -249,7 +257,7 @@
             </div>
         </div>
 
-        <!--        编辑-->
+        <!--编辑-->
         <div class="modal fade" id="editMyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              data-backdrop="static" aria-hidden="true">
             <div class="modal-dialog">
@@ -342,15 +350,26 @@
                         <h4>上传附件</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal">
-                            <div class="form-group">
-                                <div class="wid-100 announcementCoverPanel">
-                                    <input class="uploadfile" id="problemFile" type="file" name="file">
-                                </div>
+
+                        <div>
+                            <input type="file" class="hidden" id="J-attandUploader" ng-model="attandUrl"
+                                   onchange="angular.element(this).scope().uploadFile(this)"/>
+                            <input type="hidden" ng-model="attandName" value=""/>
+                            <button class="btn btn-default" onclick="document.getElementById('J-attandUploader').click()">
+                                选择文件
+                            </button>
+                        </div>
+
+
+                        <div class="file-list-show">
+                            <div class="file-list-content" ng-repeat="(index,item) in fileUploadList">
+                                <span class="file-list-title">{{item.fileName}}</span>
+                                <span class="file-list-delete" ng-click="deleteFile(index)">删除</span>
                             </div>
-                        </form>
+                        </div>
+
                     </div>
-                    .
+
                     <div class="modal-footer">
                         <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload()">
                             <i class="fa fa-check"></i>
@@ -364,5 +383,9 @@
                 </div>
             </div>
         </div>
+
+
+
+
     </div>
 </div>

@@ -27,12 +27,20 @@
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/list';
 
 
+                    $scope.fileUploadList = [];
 
 
                     $scope.init = function () {
                         getRegion ()
 
                         $scope.reset();
+                    }
+
+
+                    //删除附件
+                    $scope.deleteFile = function (i) {
+                        $scope.fileUploadList.splice(i,1);
+                        // console.log($scope.fileUploadList);
                     }
 
                     //获取行政区域
@@ -79,6 +87,11 @@
                             callBack:function (res) {
                                 if(res.data){
                                     $scope.moduleList = res.data.list
+                                    $scope.moduleList.map(function (item) {
+                                        if(item.accessory){
+                                            item.file = item.accessory.split(',')
+                                        }
+                                    })
                                     $scope.paginationConf.totalItems = res.data.total;
                                 }
                             }
@@ -115,6 +128,7 @@
                                     if(res.resCode == 1){
                                         layer.msg("新增成功！");
                                         $('#myModal').modal('hide');
+                                        $scope.fileUploadList = [];
                                         clear();
                                         getList();
                                     }else{
@@ -136,6 +150,9 @@
                     //修改
                     $scope.edit = function (id) {
                         $scope.id = id
+                        $scope.assessory = [];
+                        $scope.fileUploadList = []
+
                         $('#myModaledit').modal('show');
                         $ajaxhttp.myhttp({
                             url:apiPrefix + '/v1/saInfoPublicity/detail',
@@ -153,6 +170,21 @@
                                     $scope.infoReportContentEdit = res.data.infoReportContent;
                                     $scope.remarkEdit = res.data.remark;
                                     $scope.accessoryDetail = res.data.accessory;
+
+                                    if(res.data.accessory){
+                                        var downUrl = [];
+                                        downUrl = res.data.accessory.split(',');
+                                        downUrl.map(function (item,i) {
+                                            $scope.fileUploadList.push({
+                                                fileName:item.substring(item.lastIndexOf('/')+1),
+                                                fileUrl:item
+                                            });
+                                        })
+
+                                    }
+
+                                    // console.log($scope.fileUploadList);
+
                                 }
                             }
                         })
@@ -181,6 +213,7 @@
                                     $('#myModaledit').modal('hide');
                                     clear();
                                     getList();
+                                    $scope.fileUploadList = [];
                                 }else{
                                     layer.msg("服务器异常，请稍后再试");
                                 }
@@ -204,17 +237,18 @@
                                     $scope.detail = res.data;
                                     $scope.fileList = [];
                                     $scope.accessoryURL = [];
-                                    if(res.data.assessoryyuan){
-                                        var viewUrl = [] ,downUrl = [];
-                                        viewUrl = res.data.assessory.split(',');
-                                        downUrl = res.data.assessoryyuan.split(',');
+                                    if(res.data.accessory){
 
-                                        if(viewUrl.length == downUrl.length){
+                                        var viewUrl = [] ,downUrl = [];
+                                        viewUrl = res.data.accessory.split(',');
+                                        // downUrl = res.data.accessoryYuan.split(',');
+
+                                        if(viewUrl){
                                             viewUrl.map((item,i)=>{
                                                 $scope.fileList.push({
-                                                    name:downUrl[i].substring(downUrl[i].lastIndexOf('/')+1),
+                                                    name:viewUrl[i].substring(viewUrl[i].lastIndexOf('/')+1),
                                                     previewURL:item,
-                                                    downloadURL:downUrl[i]
+                                                    downloadURL:viewUrl[i]
                                                 })
                                             })
                                         }
@@ -305,31 +339,46 @@
                      */
                     $scope.getUpload = function () {
                         $('#coverModal').modal('hide');
-                        var formFile = new FormData();
+                        $scope.fileUploadList.map(function (item) {
+                            $scope.assessory.push(item.fileUrl)
+                        })
+                        // console.log($scope.assessory);
+                    }
 
-                        var fileObj = document.querySelector('input[type=file]').files[0];
-                        formFile.append("files", fileObj); //加入文件对象
 
-                        $http({
-                                method: 'post',
+                    // 上传文件
+                    $scope.uploadFile = function (e) {
+
+                        for (var i = 0; i < e.files.length; i++) {
+                            var form = new FormData();
+                            var file = e.files[i];
+                            $scope.attandName = file.name;
+                            form.append('files', file);
+                            $http({
+                                method: 'POST',
                                 url: apiPrefix + '/v1/saInfoPublicity/upload',
-                                data: formFile,
+                                data: form,
                                 headers: {'Content-Type': undefined},
                                 transformRequest: angular.identity
-                            }
-                        ).success(function (res) {
-                            if (res.resCode == 1) {
-                                layer.msg("上传成功");
-                                $scope.assessory.push(res.data[0]);
-                                $('#problemFile').fileinput('clear');
+                            }).success(function (res) {
+                                if(res.resCode == 1){
+                                    layer.msg('上传成功',{times:2000})
+                                    $scope.attandUrl = res.data[0];
+                                    $scope.fileUploadList.push({
+                                        fileName:$scope.attandName,
+                                        fileUrl:$scope.attandUrl
+                                    });
+                                    // console.log($scope.fileUploadList);
+                                }else{
+                                    layer.msg('上传失败',{times:2000})
+                                }
 
-                            } else {
-                                layer.msg("服务器异常，请稍后再试");
-                            }
-                        }).error(function (res) {
-                            layer.msg('服务器异常，请稍后再试');
-                        });
+                            }).error(function (data) {
+                                console.log('upload fail');
+                            })
+                        }
                     }
+
 
                     // 报道时间
                     $('#J-Time').datetimepicker({

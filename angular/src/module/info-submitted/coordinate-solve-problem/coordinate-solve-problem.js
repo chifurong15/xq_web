@@ -28,6 +28,8 @@
                     var regionTreeUrl = moduleService.getServiceUrl() + '/information/v1/administrativeRegion/list';
                     var townListUrl = moduleService.getServiceUrl() + '/patrolMgr/chairmanOnline/v1/loadRegion';
 
+                    $scope.fileUploadList = [];
+
                     //区域列表
                     $scope.regionList=[];
                     //村镇列表
@@ -64,6 +66,9 @@
 
                     //新增
                     $scope.add = function () {
+                        $scope.assessory = []
+                        $scope.fileUploadList = [];
+
                         $('#addMyModal').modal('show')
                     };
 
@@ -75,6 +80,9 @@
 
                     //编辑
                     $scope.edit = function (id) {
+                        $scope.assessory = []
+                        $scope.editId = id;
+
                         getDetail(id);
                         $('#editMyModal').modal('show')
                     };
@@ -163,6 +171,7 @@
                                 callBack: function (res) {
                                     if (res.resCode == 1) {
                                         layer.msg('新增成功', {times: 500});
+
                                         getList();
                                         clear();
                                         $('#addMyModal').modal('hide')
@@ -204,6 +213,7 @@
                             });
                         }else {
                             var params = {
+                                id:$scope.editId,
                                 solutionTime:$scope.solutionTime,
                                 coordinationDepartment:$scope.coordinationDepartment ,
                                 countyCode: $scope.countyCode ,
@@ -213,7 +223,7 @@
                                 job:$scope.job ,
                                 problemSituation:$scope.problemSituation ,
                                 remark:$scope.remark ,
-                                accessoryYuan: $scope.assessory ? $scope.assessory.join(',') : ''
+                                accessoryYuan: $scope.assessory ? $scope.assessory.join(',') : $scope.accessoryDetail
                             };
                             $ajaxhttp.myhttp({
                                 url: apiPrefix + '/v1/saCoordinateSolution/update',
@@ -224,6 +234,8 @@
                                         layer.msg('编辑成功', {times: 500});
                                         getList();
                                         clear();
+                                        $scope.fileUploadList = []
+
                                         $('#editMyModal').modal('hide')
                                     } else {
                                         layer.msg('服务器异常，请稍后再试')
@@ -270,6 +282,13 @@
                     };
 
 
+                    //删除附件
+                    $scope.deleteFile = function (i) {
+                        $scope.fileUploadList.splice(i,1);
+                        //console.log($scope.fileUploadList);
+                    }
+
+
                     /**
                      * 上传附件
                      */
@@ -283,31 +302,48 @@
                      */
                     $scope.getUpload = function () {
                         $('#coverModal').modal('hide');
-                        var formFile = new FormData();
+                        $scope.fileUploadList.map(function (item) {
+                            $scope.assessory.push(item.fileUrl)
+                        })
+                        // console.log($scope.assessory);
+                    }
 
-                        var fileObj = document.querySelector('input[type=file]').files[0];
-                        formFile.append("files", fileObj); //加入文件对象
 
-                        $http({
-                                method: 'post',
+                    // 上传文件
+                    $scope.uploadFile = function (e) {
+
+                        for (var i = 0; i < e.files.length; i++) {
+                            var form = new FormData();
+                            var file = e.files[i];
+                            $scope.attandName = file.name;
+                            form.append('files', file);
+                            $http({
+                                method: 'POST',
                                 url: apiPrefix + '/v1/saCoordinateSolution/upload',
-                                data: formFile,
+                                data: form,
                                 headers: {'Content-Type': undefined},
                                 transformRequest: angular.identity
-                            }
-                        ).success(function (res) {
-                            if (res.resCode == 1) {
-                                layer.msg("上传成功");
-                                $scope.assessory.push(res.data[0]);
-                                $('#problemFile').fileinput('clear');
+                            }).success(function (res) {
+                                if(res.resCode == 1){
+                                    layer.msg('上传成功',{times:2000})
+                                    $scope.attandUrl = res.data[0];
+                                    $scope.fileUploadList.push({
+                                        fileName:$scope.attandName,
+                                        fileUrl:$scope.attandUrl
+                                    });
+                                    // console.log($scope.fileUploadList);
+                                }else{
+                                    layer.msg('上传失败',{times:2000})
+                                }
 
-                            } else {
-                                layer.msg("服务器异常，请稍后再试");
-                            }
-                        }).error(function (res) {
-                            layer.msg('服务器异常，请稍后再试');
-                        });
+                            }).error(function (data) {
+                                console.log('upload fail');
+                            })
+                        }
                     }
+
+
+
 
 
                     //查看附件
@@ -328,6 +364,11 @@
                             callBack: function (res) {
                                 if (res.data) {
                                     $scope.problemList = res.data.list;
+                                    $scope.problemList.map(function (item) {
+                                        if(item.accessoryYuan){
+                                            item.file = item.accessoryYuan.split(',')
+                                        }
+                                    })
                                     $scope.paginationConf.totalItems = res.data.total;
                                 }
                             }
@@ -338,6 +379,8 @@
 
                     //获取工作间报详情
                     function getDetail(id) {
+                        $scope.fileUploadList = []
+
                         $ajaxhttp.myhttp({
                             url: apiPrefix + '/v1/saCoordinateSolution/detail',
                             method: 'get',
@@ -357,13 +400,41 @@
                                     $scope.job = res.data.job;
                                     $scope.problemSituation = res.data.problemSituation;
                                     $scope.remark = res.data.remark;
-                                    $scope.assessory = [res.data.accessoryYuan];
+                                    $scope.accessoryDetail = res.data.accessoryYuan;
+
+                                    $scope.fileList = [];
+
+                                    if(res.data.accessoryYuan){
+                                        var viewUrl = [] ,downUrl = [];
+                                        viewUrl = res.data.accessoryYuan.split(',');
+                                        // downUrl = res.data.accessoryYuan.split(',');
+
+                                        if(viewUrl){
+                                            viewUrl.map((item,i)=>{
+                                                $scope.fileList.push({
+                                                    name:viewUrl[i].substring(viewUrl[i].lastIndexOf('/')+1),
+                                                    previewURL:item,
+                                                    downloadURL:viewUrl[i]
+                                                })
+
+                                                $scope.fileUploadList.push({
+                                                    fileName:item.substring(item.lastIndexOf('/')+1),
+                                                    fileUrl:item
+                                                });
+                                            })
+                                        }
+                                    }
+
+                                    // console.log($scope.fileUploadList);
+
+
                                 } else {
                                     layer.msg('服务器异常，请稍后再试')
                                 }
                             }
                         })
                     }
+
 
                     //获取行政区域
                     function getRegion (){

@@ -106,6 +106,13 @@
                     ]
 
 
+                    $scope.fileUploadList = [];
+
+                    //删除附件
+                    $scope.deleteFile = function (i) {
+                        $scope.fileUploadList.splice(i,1);
+                        // console.log($scope.fileUploadList);
+                    }
 
 
 
@@ -194,6 +201,27 @@
                                         $scope.fchat.replies = JSON.parse(res.data.problemaddress);
                                         $scope.accessoryyuan = res.data.accessoryyuan;
 
+                                        $scope.fileList = [];
+
+                                        if(res.data.accessoryyuan){
+                                            var viewUrl = [] ,downUrl = [];
+                                            viewUrl = res.data.accessoryyuan.split(',');
+                                            // downUrl = res.data.accessoryYuan.split(',');
+
+                                            if(viewUrl){
+                                                viewUrl.map((item,i)=>{
+                                                    $scope.fileList.push({
+                                                        name:viewUrl[i].substring(viewUrl[i].lastIndexOf('/')+1),
+                                                        previewURL:item,
+                                                        downloadURL:viewUrl[i]
+                                                    })
+                                                    $scope.fileUploadList.push({
+                                                        fileName:item.substring(item.lastIndexOf('/')+1),
+                                                        fileUrl:item
+                                                    });
+                                                })
+                                            }
+                                        }
                                     }
                                 }
                             })
@@ -221,7 +249,7 @@
                             problemaddress:JSON.stringify($scope.fchat.combineReplies()),
                             accessoryyuan:$scope.assessory ? $scope.assessory.join(',') : ''
                         }
-                        console.log(params);
+                        // console.log(params);
                         if($scope.id == 1){//新增
                             // var reg = /^[0-9]*[1-9][0-9]*$/;
                             $ajaxhttp.myhttp({
@@ -237,18 +265,6 @@
                                     }
                                 }
                             })
-
-                                // if( $scope.patrolTime > 0
-                                //     && reg.test($scope.patrolTime) && $scope.problemnum > 0 && reg.test($scope.problemnum))
-                                // {
-                                //
-                                // }else{
-                                //     layer.alert("巡河时长和巡河数量只能输入正整数", {
-                                //         skin: 'my-skin',
-                                //         closeBtn: 1,
-                                //         anim: 3
-                                //     });
-                                // }
 
 
                         }else{//修改
@@ -282,6 +298,7 @@
                         $scope.content = '';
                         $scope.fchat.replies = []
                         $scope.assessory = [];
+                        $scope.fileUploadList = []
                     }
 
                     //查看
@@ -301,18 +318,22 @@
 
                                     $scope.fileList = [];
                                     $scope.accessoryURL = [];
+
+                                    $scope.fileList = [];
+
                                     if(res.data.accessoryyuan){
                                         var viewUrl = [] ,downUrl = [];
-                                        viewUrl = res.data.accessory.split(',');
-                                        downUrl = res.data.accessoryyuan.split(',');
+                                        viewUrl = res.data.accessoryyuan.split(',');
+                                        // downUrl = res.data.accessoryYuan.split(',');
 
-                                        if(viewUrl.length == downUrl.length){
+                                        if(viewUrl){
                                             viewUrl.map((item,i)=>{
                                                 $scope.fileList.push({
-                                                    name:downUrl[i].substring(downUrl[i].lastIndexOf('/')+1),
+                                                    name:viewUrl[i].substring(viewUrl[i].lastIndexOf('/')+1),
                                                     previewURL:item,
-                                                    downloadURL:downUrl[i]
+                                                    downloadURL:viewUrl[i]
                                                 })
+
                                             })
                                         }
                                     }
@@ -397,14 +418,11 @@
 
 
 
-
                     /**
                      * 上传附件
                      */
                     $scope.getUploadFile = function () {
-                        $scope.assessory = [];
-                        $('#coverModal').modal('show')
-
+                        $('#coverModal').modal('show');
                     }
 
 
@@ -413,31 +431,46 @@
                      */
                     $scope.getUpload = function () {
                         $('#coverModal').modal('hide');
-                        var formFile = new FormData();
+                        $scope.fileUploadList.map(function (item) {
+                            $scope.assessory.push(item.fileUrl)
+                        })
+                        // console.log($scope.assessory);
+                    }
 
-                        var fileObj = document.querySelector('input[type=file]').files[0];
-                        formFile.append("files", fileObj); //加入文件对象
 
-                        $http({
-                                method: 'post',
+                    // 上传文件
+                    $scope.uploadFile = function (e) {
+
+                        for (var i = 0; i < e.files.length; i++) {
+                            var form = new FormData();
+                            var file = e.files[i];
+                            $scope.attandName = file.name;
+                            form.append('files', file);
+                            $http({
+                                method: 'POST',
                                 url: apiPrefix + '/v1/saAbarbeitung/upload',
-                                data: formFile,
+                                data: form,
                                 headers: {'Content-Type': undefined},
                                 transformRequest: angular.identity
-                            }
-                        ).success(function (res) {
-                            if (res.resCode == 1) {
-                                layer.msg("上传成功");
-                                $scope.assessory.push(res.data[0]);
-                                $('#problemFile').fileinput('clear');
+                            }).success(function (res) {
+                                if(res.resCode == 1){
+                                    layer.msg('上传成功',{times:2000})
+                                    $scope.attandUrl = res.data[0];
+                                    $scope.fileUploadList.push({
+                                        fileName:$scope.attandName,
+                                        fileUrl:$scope.attandUrl
+                                    });
+                                    // console.log($scope.fileUploadList);
+                                }else{
+                                    layer.msg('上传失败',{times:2000})
+                                }
 
-                            } else {
-                                layer.msg(res.resMsg);
-                            }
-                        }).error(function (res) {
-                            layer.msg('服务器异常，请稍后再试');
-                        });
+                            }).error(function (data) {
+                                console.log('upload fail');
+                            })
+                        }
                     }
+
 
 
                     /**
