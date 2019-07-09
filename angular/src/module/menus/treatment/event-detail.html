@@ -212,6 +212,14 @@
                                     <span class="required">*</span>
                                 </div>
                             </form>
+                            <form class="form-inline" method="get" ng-show="typeModule != 'sendOrder' && typeModule != 'delegate'">
+                                <div class="form-item">
+                                    <label>附件</label>
+                                    <button type="button" class="btn btn-primary btn-xs" style="margin: 6px 0;" data-toggle="modal" data-target="#docList">
+                                        <i class="fa fa-plus"></i> 新增
+                                    </button>
+                                </div>
+                            </form>
                             <form class="form-inline" method="get" ng-show="moudleLength>0">
                                 <div class="form-item">
                                     <label>{{commendName}}意见</label>
@@ -257,6 +265,27 @@
                     </div>
                 </div>
             </div>
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="docList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                            <h4 class="modal-title">附件上传</h4>
+                        </div>
+                        <div class="modal-body" style=" height: auto;">
+                            <form class="form-inline" method="get">
+                                <input id="input-file" name="input-file" type="file" placeholder="请选择相关文件" multiple>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" ng-click="fileInput()" data-dismiss="modal">确定</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <div id="videoBox"
              style="position: absolute!important;;z-index: 99998!important;;left: 30%;top: 30%;display: none;background-color: #333;padding: 30px;">
@@ -282,6 +311,7 @@
         </div>
     </div>
 </div>
+<script src="vendor/fileinput/fileinput.min.js"></script>
 <script>
 
     layui.use('layer', function () {
