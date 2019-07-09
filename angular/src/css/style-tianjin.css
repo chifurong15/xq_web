@@ -2492,3 +2492,7 @@ body .c-ffffff a {
     cursor: pointer;
     color: #f00;
 }
+
+table thead tr th{
+    text-align: center;
+}
