@@ -1133,7 +1133,7 @@ var photosUrl = modulePrefix + '/v1/photos';
         }).success(function (res) {
           if (res.resCode === 1) {
             layer.msg('修改成功', {time: 2000});
-            routeService.route(109, true);
+            routeService.route(110, true);
           } else {
             layer.msg('服务器异常，请稍后重试！', {time: 2000});
           }
