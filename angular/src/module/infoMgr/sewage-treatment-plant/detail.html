@@ -1,205 +1,171 @@
 <div ng-controller="sewageTreatmentDetail" ng-init="init()">
-  <div id="wrapperMd" class="wrapper-md">
+  <div class="wrapper-md">
     <div class="panel panel-default m-all-0 border-bottom-n" style="min-height: 430px;">
       <div class="panel-body pos-rlt">
         <!-- map -->
-        <div class="basicMap" ng-init="mapZoom = true; mapOpera = 'edit'">
+        <div class="basicMap" ng-init="mapZoom = true; mapOpera = 'view'">
           <obj-map map-data="point" map-zoom="mapZoom" map-opera="mapOpera"></obj-map>
         </div>
 
         <div class="form-inline">
           <div class="form-item">
-            <label>部件名称</label>
-            <input type="text" class="form-control input-long" ng-model="componentName" ng-init="changeBox()" ng-blur="repeatName()"
-                   input-limit="99" />
-            <span class="required">*</span>
-            <span ng-if="isRepeat">部件名称重复，请重新输入！</span>
+            <label>名称：</label>
+            <span class="text-long">{{componentName}}</span>
           </div>
         </div>
         <div class="form-inline">
           <div class="form-item">
-            <label>部件大类</label>
-            <input type="text" class="form-control select-short" ng-model="big_type" readonly>
+            <label>部件大类：</label>
+            <span class="text-short">{{mainclassname}}</span>
           </div>
           <div class="form-item">
-            <label>部件小类</label>
-            <input type="text" class="form-control select-short" ng-model="small_type" readonly>
-          </div>
-        </div>
-        <div class="form-inline">
-          <div class="form-item">
-            <label>所属区域</label>
-            <input type="text" class="form-control input-short-o" ng-init="initRegion()" ng-model="regionName" ng-click="regionShow()"
-                   readonly>
-            <a class="input-group-addon" ng-click="regionShow()"><i class="icon-jx_search"></i></a>
-            <span class="required">*</span>
-          </div>
-          <div class="form-item">
-            <label>所属河湖库段</label>
-            <input type="text" class="form-control input-short-o" ng-model="reachName" ng-click="reachShow()" readonly>
-            <a class="input-group-addon" ng-click="reachShow()"><i class="icon-jx_search"></i></a>
+            <label>部件小类：</label>
+            <span class="text-short">{{subclassname}}</span>
           </div>
         </div>
         <div class="form-inline">
           <div class="form-item">
-            <label>部件等级</label>
-            <select ng-init="componentGrade()" ng-model="component_grade" ng-options="lk.typeValue as lk.typeName for lk in componentGrades"
-                    ng-change="grade_change(component_grade)" class="form-control select-short">
-              <option value="">请选择</option>
-            </select>
+            <label>部件等级：</label>
+            <span class="text-short">{{complevelName}}</span>
           </div>
           <div class="form-item">
-            <label>部件来源</label>
-            <select class="form-control select-short" ng_init="componentSource()" ng-change="source_change(component_source)"
-                    ng-model="component_source" ng-options="lk.typeValue as lk.typeName for lk in componentSources">
-              <option value="">请选择</option>
-            </select>
+            <label>部件来源：</label>
+            <span class="text-short">{{sourceName}}</span>
           </div>
         </div>
         <div class="form-inline">
           <div class="form-item">
-            <label>经度</label>
-            <input type="text" class="form-control input-short" ng-model="point.longitude" ng-blur="coordCheck(point.longitude)" />
+            <label>所属区域：</label>
+            <span class="text-short">{{regionName}}</span>
           </div>
           <div class="form-item">
-            <label>纬度</label>
-            <input type="text" class="form-control input-short" ng-model="point.latitude" ng-blur="coordCheck(point.latitude)" />
+            <label>河湖库段：</label>
+            <span class="text-short">{{reachName}}</span>
+          </div>
+        </div>
+        <div class="form-inline">
+          <div class="form-item">
+            <label>经度：</label>
+            <span class="text-short">{{longitude}}</span>
+          </div>
+          <div class="form-item">
+            <label>纬度：</label>
+            <span class="text-short">{{latitude}}</span>
           </div>
         </div>
 
         <div id="MdAgripollutionBox" class="dis-none">
           <div class="form-inline">
             <div class="form-item">
-              <label>养殖场名</label>
-              <input type="text" class="form-control input-short" ng-model="agripollution_farmname" />
+              <label>养殖场名：</label>
+              <span class="text-short">{{agripollution_farmname}}</span>
             </div>
             <div class="form-item">
-              <label>养殖规模</label>
-              <input type="text" class="form-control input-short" ng-model="agripollution_yield" />
-            </div>
-          </div>
-          <div class="form-inline">
-            <div class="form-item">
-              <label>养殖场主</label>
-              <input type="text" class="form-control input-short" ng-model="agripollution_chairman" />
-            </div>
-            <div class="form-item">
-              <label>联系方式</label>
-              <input type="text" class="form-control input-short" ng-model="agripollution_telephone" />
+              <label>养殖规模：</label>
+              <span class="text-short">{{agripollution_yield}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>占地面积</label>
-              <input type="text" class="form-control input-short-o" ng-model="agripollution_floorspace" />
-              <span class="input-group-addon"><i>m²</i></span>
+              <label>养殖场主：</label>
+              <span class="text-short">{{agripollution_chairman}}</span>
             </div>
             <div class="form-item">
-              <label>建筑面积</label>
-              <input type="text" class="form-control input-short-o" ng-model="agripollution_buildingspace" />
-              <span class="input-group-addon"><i>m²</i></span>
+              <label>联系方式：</label>
+              <span class="text-short">{{agripollution_telephone}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>养殖类型</label>
-              <select class="form-control select-short" ng-change="cultivation_change(cultivation_type)" ng-model="cultivation_type"
-                      ng-options="lk.typeValue as lk.typeName for lk in cultivation_types">
-                <option value="">请选择</option>
-              </select>
+              <label>占地面积：</label>
+              <span class="text-short">{{agripollution_floorspace}}m²</span>
             </div>
             <div class="form-item">
-              <label>农场设施</label>
-              <select class="form-control select-short" ng-change="farmfacility_change(farmfacility)" ng-model="farmfacility"
-                      ng-options="lk.typeValue as lk.typeName for lk in farmfacilitys">
-                <option value="">请选择</option>
-              </select>
+              <label>建筑面积：</label>
+              <span class="text-short">{{agripollution_buildingspace}}m²</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>污水排量</label>
-              <input type="text" class="form-control input-short-o" ng-model="agripollution_capofpollution" />
-              <span class="input-group-addon"><i>吨</i></span>
+              <label>养殖类型：</label>
+              <span class="text-short">{{cultivation_type}}</span>
             </div>
             <div class="form-item">
-              <label>处理方式</label>
-              <select class="form-control select-short" ng-change="treatmentid_change(treatmentid)" ng-model="treatmentid"
-                      ng-options="lk.typeValue as lk.typeName for lk in treatmentids">
-                <option value="">请选择</option>
-              </select>
+              <label>农场设施：</label>
+              <span class="text-short">{{farmfacility}}</span>
+            </div>
+          </div>
+          <div class="form-inline">
+            <div class="form-item">
+              <label>污水排量：</label>
+              <span class="text-short">{{agripollution_capofpollution}}吨</span>
+            </div>
+            <div class="form-item">
+              <label>处理方式：</label>
+              <span class="text-short">{{treatmentid}}</span>
             </div>
           </div>
         </div>
+
         <div id="MdInduspollutionBox" class="dis-none">
           <div class="form-inline">
             <div class="form-item">
-              <label>占地面积</label>
-              <input type="text" class="form-control input-short-o" ng-model="induspollution_floorspace" />
-              <span class="input-group-addon"><i>m²</i></span>
+              <label>占地面积：</label>
+              <span class="text-short">{{induspollution_floorspace}}m²</span>
             </div>
             <div class="form-item">
-              <label>建筑面积</label>
-              <input type="text" class="form-control input-short-o" ng-model="induspollution_buildingspace" />
-              <span class="input-group-addon"><i>m²</i></span>
+              <label>建筑面积：</label>
+              <span class="text-short">{{induspollution_buildingspace}}m²</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>所属公司</label>
-              <input type="text" class="form-control input-short" ng-model="induspollution_companyname" />
+              <label>所属公司：</label>
+              <span class="text-short">{{induspollution_companyname}}</span>
             </div>
             <div class="form-item">
-              <label>联系人员</label>
-              <input type="text" class="form-control input-short" ng-model="induspollution_chairman" />
-            </div>
-          </div>
-          <div class="form-inline">
-            <div class="form-item">
-              <label>电话</label>
-              <input type="text" class="form-control input-short" ng-model="induspollution_cellphone" />
-            </div>
-            <div class="form-item">
-              <label>手机号码</label>
-              <input type="text" class="form-control input-short" ng-model="induspollution_telephone" />
+              <label>联系人员：</label>
+              <span class="text-short">{{induspollution_chairman}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>主要产品</label>
-              <input type="text" class="form-control input-short" ng-model="induspollution_product" />
+              <label>电话：</label>
+              <span class="text-short">{{induspollution_cellphone}}</span>
             </div>
             <div class="form-item">
-              <label>年产量</label>
-              <input type="text" class="form-control input-short" ng-model="induspollution_yearlycapacity" />
-            </div>
-          </div>
-          <div class="form-inline">
-            <div class="form-item">
-              <label>月用水量</label>
-              <input type="text" class="form-control input-short-o" ng-model="induspollution_waterconsumption" />
-              <span class="input-group-addon"><i>吨</i></span>
-            </div>
-            <div class="form-item">
-              <label>污水排量</label>
-              <input type="text" class="form-control input-short-o" ng-model="induspollution_capofwateraftertreat" />
-              <span class="input-group-addon"><i>吨</i></span>
+              <label>手机号码：</label>
+              <span class="text-short">{{induspollution_telephone}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>是否入网</label>
-              <select class="form-control select-short" ng-change="isinternetwork_change(isinternetwork)" ng-model="isinternetwork"
-                      ng-options="lk.typeValue as lk.typeName for lk in isinternetworks">
-                <option value="">请选择</option>
-              </select>
+              <label>主要产品：</label>
+              <span class="text-short">{{induspollution_product}}</span>
             </div>
             <div class="form-item">
-              <label>处理方式</label>
-              <select class="form-control select-short" ng-change="treatmentid_change(treatmentid)" ng-model="treatmentid"
-                      ng-options="lk.typeValue as lk.typeName for lk in treatmentids">
-                <option value="">请选择</option>
-              </select>
+              <label>年产量：</label>
+              <span class="text-short">{{induspollution_yearlycapacity}}</span>
+            </div>
+          </div>
+          <div class="form-inline">
+            <div class="form-item">
+              <label>月用水量：</label>
+              <span class="text-short">{{induspollution_waterconsumption}}吨</span>
+            </div>
+            <div class="form-item">
+              <label>污水排量：</label>
+              <span class="text-short">{{induspollution_capofwateraftertreat}}吨</span>
+            </div>
+          </div>
+          <div class="form-inline">
+            <div class="form-item">
+              <label>是否入网：</label>
+              <span class="text-short">{{isinternetwork}}</span>
+            </div>
+            <div class="form-item">
+              <label>处理方式：</label>
+              <span class="text-short">{{treatmentid}}</span>
             </div>
           </div>
         </div>
@@ -207,45 +173,38 @@
         <div id="MdLifepollutionBox" class="dis-none">
           <div class="form-inline">
             <div class="form-item">
-              <label>占地面积</label>
-              <input type="text" class="form-control input-short-o" ng-model="lifepollution_floorspace" />
-              <span class="input-group-addon"><i>m²</i></span>
+              <label>占地面积：</label>
+              <span class="text-short">{{lifepollution_floorspace}}m²</span>
             </div>
             <div class="form-item">
-              <label>建筑面积</label>
-              <input type="text" class="form-control input-short-o" ng-model="lifepollution_buildingspace" />
-              <span class="input-group-addon"><i>m²</i></span>
+              <label>建筑面积：</label>
+              <span class="text-short">{{lifepollution_buildingspace}}m²</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>户数</label>
-              <input type="text" class="form-control input-short" ng-model="lifepollution_familynum" />
+              <label>户数：</label>
+              <span class="text-short">{{lifepollution_familynum}}</span>
             </div>
             <div class="form-item">
-              <label>人口</label>
-              <input type="text" class="form-control input-short" ng-model="lifepollution_population" />
-            </div>
-          </div>
-          <div class="form-inline">
-            <div class="form-item">
-              <label>用水量</label>
-              <input type="text" class="form-control input-short-o" ng-model="lifepollution_waterconsumption" />
-              <span class="input-group-addon"><i>吨</i></span>
-            </div>
-            <div class="form-item">
-              <label>排放量</label>
-              <input type="text" class="form-control input-short-o" ng-model="lifepollution_capofpollution" />
-              <span class="input-group-addon"><i>吨</i></span>
+              <label>人口：</label>
+              <span class="text-short">{{lifepollution_population}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>处理方式</label>
-              <select class="form-control select-short" ng-change="treatmentid_change(treatmentid)" ng-model="treatmentid"
-                      ng-options="lk.typeValue as lk.typeName for lk in treatmentids">
-                <option value="">请选择</option>
-              </select>
+              <label>用水量：</label>
+              <span class="text-short">{{lifepollution_waterconsumption}}吨</span>
+            </div>
+            <div class="form-item">
+              <label>排放量：</label>
+              <span class="text-short">{{lifepollution_capofpollution}}吨</span>
+            </div>
+          </div>
+          <div class="form-inline">
+            <div class="form-item">
+              <label>处理方式：</label>
+              <span class="text-short">{{treatmentid}}</span>
             </div>
           </div>
         </div>
@@ -253,40 +212,28 @@
         <div id="MdSectionBox" class="dis-none">
           <div class="form-inline">
             <div class="form-item">
-              <label>河流名称</label>
-              <input type="text" class="form-control input-short" ng-model="section_rivername" />
+              <label>河流名称：</label>
+              <span class="text-short">{{section_rivername}}</span>
             </div>
             <div class="form-item">
-              <label>断面级别</label>
-              <select class="form-control select-short" ng-change="sectionlevel_change(sectionlevel)" ng-model="sectionlevel"
-                      ng-options="lk.typeValue as lk.typeName for lk in sectionlevels">
-                <option value="">请选择</option>
-              </select>
+              <label>断面级别：</label>
+              <span class="text-short">{{sectionlevel}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>显示优先级</label>
-              <select class="form-control select-short" ng-change="showlevel_change(showlevel)" ng-model="showlevel"
-                      ng-options="lk.typeValue as lk.typeName for lk in showlevels">
-                <option value="">请选择</option>
-              </select>
+              <label>显示优先级：</label>
+              <span class="text-short">{{showlevel}}</span>
             </div>
             <div class="form-item">
-              <label>当前水质</label>
-              <select class="form-control select-short" ng-change="nowquality_change(nowquality)" ng-model="nowquality"
-                      ng-options="lk.typeValue as lk.typeName for lk in nowqualitys">
-                <option value="">请选择</option>
-              </select>
+              <label>当前水质：</label>
+              <span class="text-short">{{nowquality}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>目标水质</label>
-              <select class="form-control select-short" ng-change="targetquality_change(targetquality)" ng-model="targetquality"
-                      ng-options="lk.typeValue as lk.typeName for lk in targetqualitys">
-                <option value="">请选择</option>
-              </select>
+              <label>目标水质：</label>
+              <span class="text-short">{{targetquality}}</span>
             </div>
           </div>
         </div>
@@ -294,29 +241,28 @@
         <div id="MdPumpstationBox" class="dis-none">
           <div class="form-inline">
             <div class="form-item">
-              <label>泵站名称</label>
-              <input type="text" class="form-control input-short" ng-model="pumpstation_ennmnm" />
+              <label>泵站名称：</label>
+              <span class="text-short">{{pumpstation_ennmnm}}</span>
             </div>
             <div class="form-item">
-              <label>水泵型号</label>
-              <input type="text" class="form-control input-short" ng-model="pumpstation_model" />
-            </div>
-          </div>
-          <div class="form-inline">
-            <div class="form-item">
-              <label>水泵数量</label>
-              <input type="text" class="form-control input-short" ng-model="pumpstation_pumpnum" />
-            </div>
-            <div class="form-item">
-              <label>占地面积</label>
-              <input type="text" class="form-control input-short-o" ng-model="pumpstation_areacover" />
-              <span class="input-group-addon"><i>m²</i></span>
+              <label>水泵型号：</label>
+              <span class="text-short">{{pumpstation_model}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>管辖单位</label>
-              <input type="text" class="form-control input-short" ng-model="pumpstation_adunnm" />
+              <label>水泵数量：</label>
+              <span class="text-short">{{pumpstation_pumpnum}}</span>
+            </div>
+            <div class="form-item">
+              <label>占地面积：</label>
+              <span class="text-short">{{pumpstation_areacover}}m²</span>
+            </div>
+          </div>
+          <div class="form-inline">
+            <div class="form-item">
+              <label>管辖单位：</label>
+              <span class="text-short">{{pumpstation_adunnm}}</span>
             </div>
           </div>
         </div>
@@ -324,23 +270,22 @@
         <div id="MdWatergateBox" class="dis-none">
           <div class="form-inline">
             <div class="form-item">
-              <label>水闸名称</label>
-              <input type="text" class="form-control input-short" ng-model="watergate_ennmnm" />
+              <label>水闸名称：</label>
+              <span class="text-short">{{watergate_ennmnm}}</span>
             </div>
             <div class="form-item">
-              <label>闸门数量</label>
-              <input type="text" class="form-control input-short" ng-model="watergate_gateFormNum" />
+              <label>闸门数量：</label>
+              <span class="text-short">{{watergate_gateFormNum}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>占地面积</label>
-              <input type="text" class="form-control input-short-o" ng-model="watergate_areacover" />
-              <span class="input-group-addon"><i>m²</i></span>
+              <label>占地面积：</label>
+              <span class="text-short">{{watergate_areacover}}m²</span>
             </div>
             <div class="form-item">
-              <label>管辖单位</label>
-              <input type="text" class="form-control input-short" ng-model="watergate_adunnm" />
+              <label>管辖单位：</label>
+              <span class="text-short">{{watergate_adunnm}}</span>
             </div>
           </div>
         </div>
@@ -348,81 +293,72 @@
         <div id="MdRivervideoBox" class="dis-none">
           <div class="form-inline">
             <div class="form-item">
-              <label>视频状态</label>
-              <select class="form-control select-short" ng-change="status_change(status)" ng-model="status" ng-options="lk.typeValue as lk.typeName for lk in statuss">
-                <option value="">请选择</option>
-              </select>
+              <label>视频状态：</label>
+              <span class="text-short">{{status}}</span>
             </div>
             <div class="form-item">
-              <label>视频服务器IP</label>
-              <input type="text" class="form-control input-short" ng-model="rivervideo_serverip" />
+              <label>视频服务器IP：</label>
+              <span class="text-short">{{rivervideo_serverip}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>端口</label>
-              <input type="text" class="form-control input-short" ng-model="rivervideo_serverport" />
+              <label>端口：</label>
+              <span class="text-short">{{rivervideo_serverport}}</span>
             </div>
             <div class="form-item">
-              <label>用户名</label>
-              <input type="text" class="form-control input-short" ng-model="rivervideo_serveradminname" />
-            </div>
-          </div>
-          <div class="form-inline">
-            <div class="form-item">
-              <label>密码</label>
-              <input type="text" class="form-control input-short" ng-model="rivervideo_serveradminpwd" />
-            </div>
-            <div class="form-item">
-              <label>通道号</label>
-              <input type="text" class="form-control input-short" ng-model="rivervideo_chn" />
+              <label>用户名：</label>
+              <span class="text-short">{{rivervideo_serveradminname}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>通道名称</label>
-              <input type="text" class="form-control input-short" ng-model="rivervideo_chnname" />
+              <label>密码：</label>
+              <span class="text-short">{{rivervideo_serveradminpwd}}</span>
             </div>
             <div class="form-item">
-              <label>流媒体服务器IP</label>
-              <input type="text" class="form-control input-short" ng-model="rivervideo_streamip" />
-            </div>
-          </div>
-          <div class="form-inline">
-            <div class="form-item">
-              <label>端口</label>
-              <input type="text" class="form-control input-short" ng-model="rivervideo_streamport" />
-            </div>
-            <div class="form-item">
-              <label>设备ID</label>
-              <input type="text" class="form-control input-short" ng-model="rivervideo_deviceid" />
+              <label>通道号：</label>
+              <span class="text-short">{{rivervideo_chn}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>自定义内容</label>
-              <input type="text" class="form-control input-short" ng-model="rivervideo_vcontent" />
+              <label>通道名称：</label>
+              <span class="text-short">{{rivervideo_chnname}}</span>
             </div>
             <div class="form-item">
-              <label>设备平台</label>
-              <select class="form-control select-short" ng-change="company_change(company)" ng-model="company" ng-options="lk.typeValue as lk.typeName for lk in companys">
-                <option value="">请选择</option>
-              </select>
+              <label>流媒体服务器IP：</label>
+              <span class="text-short">{{rivervideo_streamip}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>网络协议</label>
-              <select class="form-control select-short" ng-change="protocol_change(protocol)" ng-model="protocol" ng-options="lk.typeValue as lk.typeName for lk in protocols">
-                <option value="">请选择</option>
-              </select>
+              <label>端口：</label>
+              <span class="text-short">{{rivervideo_streamport}}</span>
             </div>
             <div class="form-item">
-              <label>连接方式</label>
-              <select class="form-control select-short" ng-change="connecttype_change(connecttype)" ng-model="connecttype"
-                      ng-options="lk.typeValue as lk.typeName for lk in connecttypes">
-                <option value="">请选择</option>
-              </select>
+              <label>设备ID：</label>
+              <span class="text-short">{{rivervideo_deviceid}}</span>
+            </div>
+          </div>
+          <div class="form-inline">
+            <div class="form-item">
+              <label>自定义内容：</label>
+              <span class="text-short">{{rivervideo_vcontent}}</span>
+            </div>
+            <div class="form-item">
+              <label>设备平台：</label>
+              <span class="text-short">{{company}}</span>
+            </div>
+          </div>
+          <div class="form-inline">
+            <div class="form-item">
+              <label>网络协议：</label>
+              <span class="text-short">{{protocol}}</span>
+            </div>
+            <div class="form-item">
+              <label>连接方式：</label>
+              <span class="text-short">{{connecttype}}</span>
             </div>
           </div>
         </div>
@@ -430,94 +366,73 @@
         <div id="MdOutfallBox" class="dis-none">
           <div class="form-inline">
             <div class="form-item">
-              <label>所属污染源</label>
-              <input ng-model="pollutionName" type="text" class="form-control input-short-o" ng-click="pollutionShow()"
-                     readonly>
-              <a class="input-group-addon" ng-click="pollutionShow()"><i class="icon-jx_search"></i></a>
+              <label>所属污染源：</label>
+              <span class="text-short">{{belongPollution}}</span>
             </div>
             <div class="form-item">
-              <label>绑定监控摄像</label>
-              <input ng-model="videoName" type="text" class="form-control input-short-o" ng-click="videoShow()" readonly>
-              <a class="input-group-addon" ng-click="videoShow()"><i class="icon-jx_search"></i></a>
+              <label>绑定监控摄像：</label>
+              <span class="text-short">{{belongVideo}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>入河方式</label>
-              <select class="form-control select-short" ng-change="intorivermode_change(intorivermode)" ng-model="intorivermode"
-                      ng-options="lk.typeValue as lk.typeName for lk in intorivermodes">
-                <option value="">请选择</option>
-              </select>
+              <label>入河方式：</label>
+              <span class="text-short">{{intorivermode}}</span>
             </div>
             <div class="form-item">
-              <label>排放方式</label>
-              <select class="form-control select-short" ng-change="dischargemode_change(dischargemode)" ng-model="dischargemode"
-                      ng-options="lk.typeValue as lk.typeName for lk in dischargemodes">
-                <option value="">请选择</option>
-              </select>
+              <label>排放方式：</label>
+              <span class="text-short">{{dischargemode}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>污染物</label>
-              <select class="form-control select-short" ng-change="pollutant_change(pollutant)" ng-model="pollutant"
-                      ng-options="lk.typeValue as lk.typeName for lk in pollutants">
-                <option value="">请选择</option>
-              </select>
+              <label>污染物：</label>
+              <span class="text-short">{{pollutant}}</span>
             </div>
             <div class="form-item">
-              <label>污染处理量</label>
-              <input type="text" class="form-control input-short-o" ng-model="outfall_capofpollution" />
-              <span class="input-group-addon"><i>吨</i></span>
+              <label>污染处理量：</label>
+              <span class="text-short">{{outfall_capofpollution}}吨</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>排污单位污染物种类</label>
-              <select class="form-control select-short" ng-change="unitPollutantType_change(unitPollutantType)" ng-model="unitPollutantType"
-                      ng-options="lk.typeValue as lk.typeName for lk in unitPollutantTypes">
-                <option value="">请选择</option>
-              </select>
+              <label>排污单位污染物种类：</label>
+              <span class="text-short">{{unitPollutantType}}</span>
             </div>
             <div class="form-item">
-              <label>排污口单位名称</label>
-              <input type="text" class="form-control input-short" ng-model="outfall_unitName" />
+              <label>排污口单位名称：</label>
+              <span class="text-short">{{outfall_unitName}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>排污单位联系电话</label>
-              <input type="text" class="form-control input-short" ng-model="outfall_unitCellphone" />
+              <label>排污单位联系电话：</label>
+              <span class="text-short">{{outfall_unitCellphone}}</span>
             </div>
             <div class="form-item">
-              <label>排污单位批准的废污水年排放量</label>
-              <input type="text" class="form-control input-short-o" ng-model="outfall_dischargeWasteWater" />
-              <span class="input-group-addon"><i>吨</i></span>
-            </div>
-          </div>
-          <div class="form-inline">
-            <div class="form-item">
-              <label>排污单位经度</label>
-              <input type="text" class="form-control input-short" ng-model="outfall_unitLongitude" />
-            </div>
-            <div class="form-item">
-              <label>排污单位纬度</label>
-              <input type="text" class="form-control input-short" ng-model="outfall_unitLatitude" />
+              <label>排污单位批准的废污水年排放量：</label>
+              <span class="text-short">{{outfall_dischargeWasteWater}}吨</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>排污单位所在位置</label>
-              <input type="text" class="form-control input-short" ng-model="outfall_unitAddress" />
+              <label>排污单位经度：</label>
+              <span class="text-short">{{outfall_unitLongitude}}</span>
             </div>
             <div class="form-item">
-              <label>公示牌照片</label>
-              <button ng-show="!hasImg" type="button" class="btn btn-primary btn-xs" ng-click="imgUpload()">
-                <i class="icon-jx_upload"></i> 上传
-              </button>
-              <div ng-show="hasImg" class="thumbnail-block" data-toggle="modal" data-target="#imgBox">
+              <label>排污单位纬度：</label>
+              <span class="text-short">{{outfall_unitLatitude}}</span>
+            </div>
+          </div>
+          <div class="form-inline">
+            <div class="form-item">
+              <label>排污单位所在位置：</label>
+              <span class="text-short">{{outfall_unitAddress}}</span>
+            </div>
+            <div class="form-item">
+              <label>公示牌照片：</label>
+              <div ng-show="hasImg" class="thumbnail-block no-mask">
                 <img ng-src={{imgObj.url}}>
-                <div class="thumbnail-block-close" ng-click="imgDelete($event)"><i class="icon-jx_delete_image"></i></div>
               </div>
             </div>
           </div>
@@ -526,17 +441,12 @@
         <div id="MdWaterBox" class="dis-none">
           <div class="form-inline">
             <div class="form-item">
-              <label>水质等级</label>
-              <select class="form-control select-short" ng-change="waterlevel_change(waterlevel)" ng-model="waterlevel"
-                      ng-options="lk.typeValue as lk.typeName for lk in waterlevels">
-                <option value="">请选择</option>
-              </select>
+              <label>水质等级：</label>
+              <span class="text-short">{{waterlevel}}</span>
             </div>
             <div class="form-item">
-              <label>控制级别</label>
-              <select class="form-control select-short" ng-change="control_change(control)" ng-model="control" ng-options="lk.typeValue as lk.typeName for lk in controls">
-                <option value="">请选择</option>
-              </select>
+              <label>控制级别：</label>
+              <span class="text-short">{{control}}</span>
             </div>
           </div>
         </div>
@@ -544,38 +454,32 @@
         <div id="GrSewageTreatmentFacilitiesBox" class="dis-none">
           <div class="form-inline">
             <div class="form-item">
-              <label>处理设施名称</label>
-              <input type="text" class="form-control input-short" ng-model="sewageTreatmentFacilities_facilityName" />
+              <label>处理设施名称：</label>
+              <span class="text-short">{{sewageTreatmentFacilities_facilityName}}</span>
             </div>
             <div class="form-item">
-              <label>处理方式</label>
-              <select class="form-control select-short" ng-change="treatmentid_change(treatmentid)" ng-model="treatmentid"
-                      ng-options="lk.typeValue as lk.typeName for lk in treatmentids">
-                <option value="">请选择</option>
-              </select>
+              <label>处理方式：</label>
+              <span class="text-short">{{treatmentid}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>责任人</label>
-              <input type="text" class="form-control input-short" ng-model="sewageTreatmentFacilities_principal" />
+              <label>责任人：</label>
+              <span class="text-short">{{sewageTreatmentFacilities_principal}}</span>
             </div>
             <div class="form-item">
-              <label>责任单位</label>
-              <input type="text" class="form-control input-short" ng-model="sewageTreatmentFacilities_dutyunit" />
+              <label>责任单位：</label>
+              <span class="text-short">{{sewageTreatmentFacilities_dutyunit}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>联系电话</label>
-              <input type="text" class="form-control input-short" ng-model="sewageTreatmentFacilities_celphone" />
+              <label>联系电话：</label>
+              <span class="text-short">{{sewageTreatmentFacilities_celphone}}</span>
             </div>
             <div class="form-item">
-              <label>关注级别</label>
-              <select class="form-control select-short" ng-change="attentionLevel_change(attentionLevel)" ng-model="attentionLevel"
-                      ng-options="lk.typeValue as lk.typeName for lk in attentionLevels">
-                <option value="">请选择</option>
-              </select>
+              <label>关注级别：</label>
+              <span class="text-short">{{attentionLevel}}</span>
             </div>
           </div>
         </div>
@@ -583,52 +487,38 @@
         <div id="MdMonitorBox" class="dis-none">
           <div class="form-inline">
             <div class="form-item">
-              <label>来源单位</label>
-              <input type="text" class="form-control input-short" ng-model="monitor_sourceunit" />
+              <label>来源单位：</label>
+              <span class="text-short">{{monitor_sourceunit}}</span>
             </div>
             <div class="form-item">
-              <label>控制级别</label>
-              <select class="form-control select-short" ng-change="control_change(control)" ng-model="control" ng-options="lk.typeValue as lk.typeName for lk in controls">
-                <option value="">请选择</option>
-              </select>
+              <label>控制级别：</label>
+              <span class="text-short">{{control}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>记录方式</label>
-              <select class="form-control select-short" ng-change="recordtype_change(recordtype)" ng-model="recordtype"
-                      ng-options="lk.typeValue as lk.typeName for lk in recordtypes">
-                <option value="">请选择</option>
-              </select>
+              <label>记录方式：</label>
+              <span class="text-short">{{recordtype}}</span>
             </div>
             <div class="form-item">
-              <label>现状水质</label>
-              <select class="form-control select-short" ng-change="nowquality_change(nowquality)" ng-model="nowquality"
-                      ng-options="lk.typeValue as lk.typeName for lk in nowqualitys">
-                <option value="">请选择</option>
-              </select>
+              <label>现状水质：</label>
+              <span class="text-short">{{nowquality}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>目标水质</label>
-              <select class="form-control select-short" ng-change="targetquality_change(targetquality)" ng-model="targetquality"
-                      ng-options="lk.typeValue as lk.typeName for lk in targetqualitys">
-                <option value="">请选择</option>
-              </select>
+              <label>目标水质：</label>
+              <span class="text-short">{{targetquality}}</span>
             </div>
             <div class="form-item">
-              <label>监测站数据类型</label>
-              <select class="form-control select-short" ng-change="monitortype_change(monitortype)" ng-model="monitortype"
-                      ng-options="lk.typeValue as lk.typeName for lk in monitortypes">
-                <option value="">请选择</option>
-              </select>
+              <label>监测站数据类型：</label>
+              <span class="text-short">{{monitortype}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>责任单位</label>
-              <input type="text" class="form-control input-short" ng-model="monitor_responseunit" />
+              <label>责任单位：</label>
+              <span class="text-short">{{monitor_responseunit}}</span>
             </div>
           </div>
         </div>
@@ -636,25 +526,22 @@
         <div id="MdWaterFunctionalAreaBox" class="dis-none">
           <div class="form-inline">
             <div class="form-item">
-              <label>目标水质</label>
-              <select class="form-control select-short" ng-change="targetquality_change(targetquality)" ng-model="targetquality"
-                      ng-options="lk.typeValue as lk.typeName for lk in targetqualitys">
-                <option value="">请选择</option>
-              </select>
+              <label>目标水质：</label>
+              <span class="text-short">{{targetquality}}</span>
             </div>
             <div class="form-item">
-              <label>责任单位</label>
-              <input type="text" class="form-control input-short" ng-model="functionalArea_dutyunit" />
+              <label>责任单位：</label>
+              <span class="text-short">{{functionalArea_dutyunit}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>联系电话</label>
-              <input type="text" class="form-control input-short" ng-model="functionalArea_phone" />
+              <label>联系电话：</label>
+              <span class="text-short">{{functionalArea_phone}}</span>
             </div>
             <div class="form-item">
-              <label>归口管理单位</label>
-              <input type="text" class="form-control input-short" ng-model="functionalArea_undercentralizedunit" />
+              <label>归口管理单位：</label>
+              <span class="text-short">{{functionalArea_undercentralizedunit}}</span>
             </div>
           </div>
         </div>
@@ -662,125 +549,86 @@
         <div id="MdIntakeBox" class="dis-none">
           <div class="form-inline">
             <div class="form-item">
-              <label>取水方式</label>
-              <input type="text" class="form-control input-short" ng-model="intake_watermode" />
+              <label>取水方式：</label>
+              <span class="text-short">{{intake_watermode}}</span>
             </div>
             <div class="form-item">
-              <label>日取水量</label>
-              <input type="text" class="form-control input-short-o" ng-model="intake_watercapacity" />
-              <span class="input-group-addon"><i>吨</i></span>
-            </div>
-          </div>
-          <div class="form-inline">
-            <div class="form-item">
-              <label>取水用途</label>
-              <input type="text" class="form-control input-short" ng-model="intake_wateruse" />
-            </div>
-            <div class="form-item">
-              <label>取水单位</label>
-              <input type="text" class="form-control input-short" ng-model="intake_waterunit" />
+              <label>日取水量：</label>
+              <span class="text-short">{{intake_watercapacity}}吨</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>取水单位责任人</label>
-              <input type="text" class="form-control input-short" ng-model="intake_waterunitperson" />
+              <label>取水用途：</label>
+              <span class="text-short">{{intake_wateruse}}</span>
             </div>
             <div class="form-item">
-              <label>联系电话</label>
-              <input type="text" class="form-control input-short" ng-model="intake_phone" />
+              <label>取水单位：</label>
+              <span class="text-short">{{intake_waterunit}}</span>
             </div>
           </div>
           <div class="form-inline">
             <div class="form-item">
-              <label>归口管理单位</label>
-              <input type="text" class="form-control input-short" ng-model="intake_undercentralizedunit" />
+              <label>取水单位责任人：</label>
+              <span class="text-short">{{intake_waterunitperson}}</span>
+            </div>
+            <div class="form-item">
+              <label>联系电话：</label>
+              <span class="text-short">{{intake_phone}}</span>
+            </div>
+          </div>
+          <div class="form-inline">
+            <div class="form-item">
+              <label>归口管理单位：</label>
+              <span class="text-short">{{intake_undercentralizedunit}}</span>
             </div>
           </div>
         </div>
 
         <div id="MdWaterOutputBox" class="dis-none">
         </div>
-
         <div id="MdWaterCardBox" class="dis-none">
-          <div class="form-item">
-            <label>公示牌照片</label>
-            <button ng-show="!hasImg" type="button" class="btn btn-primary btn-xs" ng-click="imgUpload()">
-              <i class="icon-jx_upload"></i> 上传
-            </button>
-            <div ng-show="hasImg" class="thumbnail-block" data-toggle="modal" data-target="#imgBox">
-              <img ng-src={{imgObj.url}}>
-              <div class="thumbnail-block-close" ng-click="imgDelete($event)"><i class="icon-jx_delete_image"></i></div>
+          <div class="form-inline">
+            <div class="form-item">
+              <label>公示牌照片：</label>
+              <div ng-show="hasImg" class="thumbnail-block no-mask">
+                <img ng-src={{imgObj.url}}>
+              </div>
             </div>
           </div>
         </div>
+
         <div id="MdreachImgBox" class="dis-none">
-          <div class="form-item">
-            <label>河道照片</label>
-            <button ng-show="!hasImg" type="button" class="btn btn-primary btn-xs" ng-click="imgUpload()">
-              <i class="icon-jx_upload"></i> 上传
-            </button>
-            <div ng-show="hasImg" class="thumbnail-block" data-toggle="modal" data-target="#imgBox">
-              <img ng-src={{imgObj.url}}>
-              <div class="thumbnail-block-close" ng-click="imgDelete($event)"><i class="icon-jx_delete_image"></i></div>
+          <div class="form-inline">
+            <div class="form-item">
+              <label>河道照片：</label>
+              <div ng-show="hasImg" class="thumbnail-block no-mask">
+                <img ng-src={{imgObj.url}}>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="form-inline">
           <div class="form-item">
-            <label>备注信息</label>
-            <textarea class="form-control textarea-long" rows="5" ng-model="component_remark" input-limit="499"></textarea>
+            <label>处理规模：</label>
+            <span class="text-long">{{remark?remove+'万立方米/日':''}}</span>
           </div>
         </div>
       </div>
     </div>
     <div class="panel panel-default m-all-0" style="padding: 10px;">
       <div class="btn-box">
-        <button class="btn btn-primary" ng-click="edit()">确定</button>
         <button class="btn btn-default" ng-click="back()">返回</button>
       </div>
     </div>
   </div>
-  <tree-modal modal-tree-info="{{modalTreeInfo}}"></tree-modal>
-  <!--描述：文件上传-->
-  <div class="modal fade" id="imgBox" role="dialog_region" data-backdrop="static">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">公示牌照片</h4>
-        </div>
-        <div class="modal-body">
-          <form id="fileFrom" ng-model="filefrom" enctype="multipart/form-data">
-            <div class="form-group">
-              <div>
-                <input ng-init="initFile()" id="input-file" type="file" class="file" file-model="myFile" data-show-preview="true"
-                       name="fileExcel" placeholder="请选择相关文件" />
-              </div>
-              <label>文件格式： JPG、JPEG、PNG文件</label>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" ng-click="fileInput()">上传</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        </div>
-      </div>
-    </div>
+  <div id="layer-photos-demo" ng-show="false">
+    <img id="image" layer-src="{{imageUrl}}" src="{{imageUrl}}" alt="上传照片" style="width:100px;height:80px">
   </div>
-
 </div>
 
 <script type="text/javascript">
-  $("#input-file").fileinput({
-    uploadAsync: true, //异步上传
-    language: "zh", //设置语言
-    showUpload: false,
-    showPreview: true, //是否显示预览
-    allowedFileExtensions: ["JPG", "JPEG", 'PNG', 'BMP', 'GIF'] //接收的文件后缀
-  });
-
   layer.photos({
     photos: '#layer-photos-demo',
     anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）

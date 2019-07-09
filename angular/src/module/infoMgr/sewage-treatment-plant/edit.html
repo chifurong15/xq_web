@@ -1,4 +1,4 @@
-<div ng-controller="sewageTreatmentEdit" ng-init="init()">
+<div ng-controller="imComponentEdit" ng-init="init()">
   <div id="wrapperMd" class="wrapper-md">
     <div class="panel panel-default m-all-0 border-bottom-n" style="min-height: 430px;">
       <div class="panel-body pos-rlt">
@@ -9,7 +9,7 @@
 
         <div class="form-inline">
           <div class="form-item">
-            <label>部件名称</label>
+            <label>名称</label>
             <input type="text" class="form-control input-long" ng-model="componentName" ng-init="changeBox()" ng-blur="repeatName()"
                    input-limit="99" />
             <span class="required">*</span>
@@ -729,8 +729,9 @@
 
         <div class="form-inline">
           <div class="form-item">
-            <label>备注信息</label>
-            <textarea class="form-control textarea-long" rows="5" ng-model="component_remark" input-limit="499"></textarea>
+            <label>处理规模</label>
+            <input class="form-control input-short" ng-model="component_remark"/>
+            <span>万立方米/日</span>
           </div>
         </div>
       </div>
