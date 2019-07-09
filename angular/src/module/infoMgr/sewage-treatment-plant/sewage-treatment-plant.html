@@ -40,7 +40,7 @@
               <th width="90">序号</th>
               <th width="200">污水处理厂名称</th>
               <th>所属区域</th>
-              <th>部件类型</th>
+              <th>处理规模 (万立方米/日)</th>
               <th>部件等级</th>
               <th width="180">操作</th>
             </tr>
@@ -56,7 +56,7 @@
               <td>{{index + (paginationConf.currentPage-1)*paginationConf.itemsPerPage}}</td>
               <td class="td-ellipsis" ng-attr-title="{{module.name}}">{{module.name}}</td>
               <td>{{module.regionName}}</td>
-              <td>{{module.subclassname}}</td>
+              <td>{{module.remark}}</td>
               <td>{{module.complevelName}}</td>
               <td class="td-tool">
                 <a class="btn btn-primary btn-xs" ng-click="componentDetail(module.id)" title="详细"><i class="fa fa-info"></i></a>
