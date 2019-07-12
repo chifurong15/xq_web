@@ -43,7 +43,9 @@
                         'deselectAllText':'取消全选',
                         'selectAllText': '全选',
                     });
-					
+
+
+
 					/**
 					 * 初始化行政区划树
 					 */
@@ -63,6 +65,17 @@
 
                     getRegion ()
 				}
+
+                $scope.assessory = [];
+                $scope.fileUploadList = [];
+
+                //删除附件
+                $scope.deleteFile = function (i) {
+                    $scope.fileUploadList.splice(i,1);
+                    console.log($scope.fileUploadList);
+                }
+
+
 
                 //获取行政区域
                 function getRegion (){
@@ -307,29 +320,71 @@
 						}
 					]
 				}
-				
-				/**
-				 * 上传附件
-				 */
-				$scope.getUploadFile = function(id){
-					if( id == 1 ){
-                        $('#coverModal1').modal('show');
-                    }else if( id == 2 ) {
-                        $('#coverModal2').modal('show');
-					}else if ( id == 3 ) {
-                        $('#coverModal3').modal('show');
-					}
-				}
+
 
                 //查看  下载附件
                 $scope.downFile = function (path){
                     window.open($scope.fileUrl + path);
                 }
-				
-				/**
+
+                /**
+                 * 上传附件
+                 */
+                $scope.getUploadFile = function () {
+                    $('#coverModal').modal('show');
+                }
+
+                /**
+                 * 关闭上传附件
+                 */
+                $scope.getUpload = function () {
+                    $('#coverModal').modal('hide');
+                    $scope.fileUploadList.map(function (item) {
+                        $scope.assessory.push(item.fileUrl)
+                    })
+                    console.log($scope.assessory);
+                }
+
+
+                // 上传文件
+                $scope.uploadFile = function (e) {
+
+                    for (var i = 0; i < e.files.length; i++) {
+                        var form = new FormData();
+                        var file = e.files[i];
+                        $scope.attandName = file.name;
+                        form.append('files', file);
+                        $http({
+                            method: 'POST',
+                            url: apiPrefix + '/v1/socialReport/uploadWeb',
+                            data: form,
+                            headers: {'Content-Type': undefined},
+                            transformRequest: angular.identity
+                        }).success(function (res) {
+                            if(res.resCode == 1){
+                                layer.msg('上传成功',{times:2000});
+
+                                $scope.attandUrl = res.data;
+                                $scope.fileUploadList.push({
+                                    fileName:$scope.attandName,
+                                    fileUrl:$scope.attandUrl
+                                });
+                                console.log($scope.fileUploadList);
+                            }else{
+                                layer.msg('上传失败',{times:2000})
+                            }
+
+                        }).error(function (data) {
+                            console.log('upload fail');
+                        })
+                    }
+                }
+
+
+                /**
 				 * 关闭上传附件
 				 */
-				$scope.getUpload = function(id){
+				/*$scope.getUpload = function(id){
                     var formFile = new FormData();
                     if( id == 1 ){
                         $('#coverModal1').modal('hide');
@@ -376,7 +431,7 @@
                     }).error(function (res) {
                         layer.msg('服务器异常，请稍后再试');
                     });
-                }
+                }*/
 
                 /**
                  验证手机号码是否输入合法
@@ -410,7 +465,7 @@
 							reportProblem: $scope.reportProblem,
                         	// processingStatus: $scope.status.name,
 							// reportEvaluate:$scope.assess,
-                        	problemAttant:$scope.problemAttant ? $scope.problemAttant.join(',') : '',
+                        	problemAttant:$scope.assessory ? $scope.assessory.join(',') : '',
                         	// proposedTreatment:$scope.proposedTreatment,
                             // processingResults: $scope.processingResults,
                         	reportSource: $scope.source,
@@ -465,7 +520,8 @@
 				}
 
 				function clear() {
-                    $scope.problemAttant = '';
+                    $scope.assessory = [];
+                    $scope.fileUploadList = [];
                     $scope.proposedTreatment = '';
                     $scope.processingResults = '';
                     $scope.source = '';

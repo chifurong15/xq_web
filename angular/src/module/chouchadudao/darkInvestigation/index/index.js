@@ -26,6 +26,14 @@
 
                     $scope.userInfo = $localStorage.userLoginInfo.userInfo;
 
+                    $scope.fileUploadList = [];
+
+                    //删除附件
+                    $scope.deleteFile = function (i) {
+                        $scope.fileUploadList.splice(i,1);
+                        // console.log($scope.fileUploadList);
+                    }
+
                     $scope.init = function () {
                         $scope.createUser = $scope.userInfo.name;
 
@@ -77,6 +85,7 @@
                     //显示新增模态框
                     $scope.add = function () {
                         $scope.assessory = [];
+                        $scope.fileUploadList = [];
                         $('#myModal').modal('show');
                     }
                     //保存新增方案
@@ -136,7 +145,23 @@
                                     $('#editTime').find('input').val(res.data.issue);
                                     $scope.editUser = res.data.createuser;
                                     $scope.editContent = res.data.content;
-                                    $scope.assessoryEdit = res.data.accessory
+                                    $scope.assessoryEdit = res.data.assessoryyuan;
+
+                                    if(res.data.assessoryyuan){
+                                        var viewUrl = [];
+                                        viewUrl = res.data.assessoryyuan.split(',');
+
+                                        if(viewUrl){
+                                            viewUrl.map((item,i)=>{
+                                                $scope.fileUploadList.push({
+                                                    fileName:item.substring(item.lastIndexOf('/')+1),
+                                                    fileUrl:item
+                                                });
+                                            })
+                                        }
+                                    }
+
+
                                 }
                             }
                         })
@@ -167,6 +192,8 @@
                                         layer.msg('修改成功',{times:2000});
                                         getList();
                                         $('#myModaledit').modal('hide');
+                                        $scope.fileUploadList = [];
+
                                     }else{
                                         layer.msg('服务器异常，请稍后再试',{times:500})
                                     }
@@ -193,6 +220,7 @@
                         $scope.title = '';
                         $('#Time').find('input').val('');
                         $scope.content = '';
+                        $scope.fileUploadList = [];
                     }
 
 
@@ -240,30 +268,44 @@
                      */
                     $scope.getUpload = function () {
                         $('#coverModal').modal('hide');
-                        var formFile = new FormData();
+                        $scope.fileUploadList.map(function (item) {
+                            $scope.assessory.push(item.fileUrl)
+                        })
+                        // console.log($scope.assessory);
+                    }
 
-                        var fileObj = document.querySelector('input[type=file]').files[0];
-                        formFile.append("files", fileObj); //加入文件对象
 
-                        $http({
-                                method: 'post',
+                    // 上传文件
+                    $scope.uploadFile = function (e) {
+
+                        for (var i = 0; i < e.files.length; i++) {
+                            var form = new FormData();
+                            var file = e.files[i];
+                            $scope.attandName = file.name;
+                            form.append('files', file);
+                            $http({
+                                method: 'POST',
                                 url: apiPrefix + '/ancha/v1/AnzhaReport/upload',
-                                data: formFile,
+                                data: form,
                                 headers: {'Content-Type': undefined},
                                 transformRequest: angular.identity
-                            }
-                        ).success(function (res) {
-                            if (res.resCode == 1) {
-                                layer.msg("上传成功");
-                                $scope.assessory.push(res.data[0]);
-                                $('#problemFile').fileinput('clear');
+                            }).success(function (res) {
+                                if(res.resCode == 1){
+                                    layer.msg('上传成功',{times:2000})
+                                    $scope.attandUrl = res.data[0];
+                                    $scope.fileUploadList.push({
+                                        fileName:$scope.attandName,
+                                        fileUrl:$scope.attandUrl
+                                    });
+                                    // console.log($scope.fileUploadList);
+                                }else{
+                                    layer.msg('上传失败',{times:2000})
+                                }
 
-                            } else {
-                                layer.msg("服务器异常，请稍后再试");
-                            }
-                        }).error(function (res) {
-                            layer.msg('服务器异常，请稍后再试');
-                        });
+                            }).error(function (data) {
+                                console.log('upload fail');
+                            })
+                        }
                     }
 
 

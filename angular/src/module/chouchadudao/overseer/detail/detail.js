@@ -73,13 +73,7 @@
                             },
                             callBack:function (res) {
                                 $scope.regionAllList = res.data.list;
-                                // var select = $("#slpk3");
-                                // for (var i = 0; i < $scope.regionAllList.length; i++) {
-                                //     select.append("<option value='"+$scope.regionAllList[i].areaName+"'>"
-                                //         + $scope.regionAllList[i].areaName + "</option>");
-                                // }
-                                // $('.selectpicker3').selectpicker('val', '');
-                                // $('.selectpicker3').selectpicker('refresh');
+
                             }
                         })
                     }
@@ -238,60 +232,50 @@
                         };
                         // console.log(params);
 
-                        if(
-                            $scope.type && $scope.name && $scope.duty && $scope.phone && $scope.region && $scope.fillUnit
-                        ){
-                            var re=/^1\d{10}$/;
-                            if(re.test($scope.phone)) {
-                                if(id == 1) {//新增联络员
-                                    $ajaxhttp.myhttp({
-                                        url: apiPrefix + '/inspection/v1/ComtactPerson/add',
-                                        method: 'POST',
-                                        params: params,
-                                        callBack: function (res) {
-                                            if(res.resCode == 1){
-                                                layer.msg("新增成功！",{time:2000});
-                                                $scope.closeContact();
-                                                getContactList ();
-                                            }else{
-                                                layer.msg('服务器异常，请稍后再试',{times:500})
-                                            }
+                        var re=/^1([38]\d|5[0-35-9]|7[3678])\d{8}$/;
+                        if(re.test($scope.phone)) {
+                            if(id == 1) {//新增联络员
+                                $ajaxhttp.myhttp({
+                                    url: apiPrefix + '/inspection/v1/ComtactPerson/add',
+                                    method: 'POST',
+                                    params: params,
+                                    callBack: function (res) {
+                                        if(res.resCode == 1){
+                                            layer.msg("新增成功！",{time:2000});
+                                            $scope.closeContact();
+                                            getContactList ();
+                                        }else{
+                                            layer.msg('服务器异常，请稍后再试',{times:500})
                                         }
-                                    })
-                                }else if(id == 2){//修改联络员
-                                    $ajaxhttp.myhttp({
-                                        url: apiPrefix + '/inspection/v1/ComtactPerson/update',
-                                        method: 'put',
-                                        params: {
-                                             id:$scope.editContactId,
-                                                type:$scope.type,
-                                                name:$scope.name,
-                                                duty:$scope.duty,
-                                                phone:$scope.phone,
-                                                region:$scope.region,
-                                                fillUnit:$scope.fillUnit
-                                        },
-                                        callBack: function (res) {
-                                            if(res.resCode == 1){
-                                                layer.msg("修改成功！",{time:2000});
-                                                $scope.closeContact();
-                                                getContactList ();
-                                            }else{
-                                                layer.msg('服务器异常，请稍后再试',{times:500})
-                                            }
+                                    }
+                                })
+                            }else if(id == 2){//修改联络员
+                                $ajaxhttp.myhttp({
+                                    url: apiPrefix + '/inspection/v1/ComtactPerson/update',
+                                    method: 'put',
+                                    params: {
+                                        id:$scope.editContactId,
+                                        type:$scope.type,
+                                        name:$scope.name,
+                                        duty:$scope.duty,
+                                        phone:$scope.phone,
+                                        region:$scope.region,
+                                        fillUnit:$scope.fillUnit
+                                    },
+                                    callBack: function (res) {
+                                        if(res.resCode == 1){
+                                            layer.msg("修改成功！",{time:2000});
+                                            $scope.closeContact();
+                                            getContactList ();
+                                        }else{
+                                            layer.msg('服务器异常，请稍后再试',{times:500})
                                         }
-                                    })
-                                }
-
-                            }else {
-                                layer.alert("请输入合法的手机号", {
-                                    skin: 'my-skin',
-                                    closeBtn: 1,
-                                    anim: 3
-                                });
+                                    }
+                                })
                             }
-                        }else{
-                            layer.alert("输入的信息不全", {
+
+                        }else {
+                            layer.alert("请输入合法的手机号", {
                                 skin: 'my-skin',
                                 closeBtn: 1,
                                 anim: 3
@@ -568,16 +552,24 @@
                                 if(res.resCode == 1){
                                     if(res.data){
                                         $scope.noticeData = res.data;
-                                        if(res.data.fileList){
+                                        if(res.data.accessoryUrl){
                                             $scope.accessoryURL1 = [];
-                                            res.data.fileList.map(function (item){
-                                                $scope.accessoryURL1.push({
-                                                    name:item.downloadURL.substring(item.previewURL.lastIndexOf('/')+1),
-                                                    previewURL:item.previewURL,
-                                                    downloadURL:item.downloadURL
+
+                                            var viewUrl = [];
+                                            viewUrl = res.data.accessoryUrl.split(',');
+                                            if(viewUrl){
+                                                viewUrl.map((item,i)=>{
+                                                    $scope.accessoryURL1.push({
+                                                        name:viewUrl[i].substring(viewUrl[i].lastIndexOf('/')+1),
+                                                        previewURL:item,
+                                                        downloadURL:viewUrl[i]
+                                                    })
                                                 })
-                                            })
+                                            }
+
                                         }
+
+
                                     }
 
 
@@ -817,15 +809,21 @@
                                 if(res.resCode == 1){
                                     if(res.data){
                                         $scope.reportData = res.data;
-                                        if(res.data.fileList){
+                                        if(res.data.accessoryUrl){
                                             $scope.accessoryURL2 = [];
-                                            res.data.fileList.map(function (item){
-                                                $scope.accessoryURL2.push({
-                                                    name:item.downloadURL.substring(item.previewURL.lastIndexOf('/')+1),
-                                                    previewURL:item.previewURL,
-                                                    downloadURL:item.downloadURL
+
+                                            var viewUrl = [];
+                                            viewUrl = res.data.accessoryUrl.split(',');
+                                            if(viewUrl){
+                                                viewUrl.map((item,i)=>{
+                                                    $scope.accessoryURL2.push({
+                                                        name:viewUrl[i].substring(viewUrl[i].lastIndexOf('/')+1),
+                                                        previewURL:item,
+                                                        downloadURL:viewUrl[i]
+                                                    })
                                                 })
-                                            })
+                                            }
+
                                         }
                                     }
 
@@ -851,16 +849,23 @@
                                     if(res.data){
                                         $scope.reportBackRegion = item.region_name;
                                         $scope.reportBackData = res.data[0];
-                                        if(res.data[0].fileList){
+
+                                        if($scope.reportBackData.accessoryURL){
                                             $scope.accessoryURL3 = [];
-                                            res.data[0].fileList.map(function (item){
-                                                $scope.accessoryURL3.push({
-                                                    name:item.downloadURL.substring(item.previewURL.lastIndexOf('/')+1),
-                                                    previewURL:item.previewURL,
-                                                    downloadURL:item.downloadURL
+
+                                            var viewUrl = [];
+                                            viewUrl = $scope.reportBackData.accessoryURL.split(',');
+                                            if(viewUrl){
+                                                viewUrl.map((item,i)=>{
+                                                    $scope.accessoryURL3.push({
+                                                        name:viewUrl[i].substring(viewUrl[i].lastIndexOf('/')+1),
+                                                        previewURL:item,
+                                                        downloadURL:viewUrl[i]
+                                                    })
                                                 })
-                                            })
+                                            }
                                         }
+
                                     }
                                 }else{
                                     layer.msg('服务器异常，请稍后再试',{times:500})
@@ -979,15 +984,22 @@
                                 if(res.resCode == 1){
                                     if(res.data){
                                         $scope.oneRegionData = res.data;
-                                        if(res.data.fileList){
+
+                                        if(res.data.accessoryUrl){
                                             $scope.accessoryURL4 = [];
-                                            res.data.fileList.map(function (item){
-                                                $scope.accessoryURL4.push({
-                                                    name:item.downloadURL.substring(item.previewURL.lastIndexOf('/')+1),
-                                                    previewURL:item.previewURL,
-                                                    downloadURL:item.downloadURL
+
+                                            var viewUrl = [];
+                                            viewUrl = res.data.accessoryUrl.split(',');
+                                            if(viewUrl){
+                                                viewUrl.map((item,i)=>{
+                                                    $scope.accessoryURL4.push({
+                                                        name:viewUrl[i].substring(viewUrl[i].lastIndexOf('/')+1),
+                                                        previewURL:item,
+                                                        downloadURL:viewUrl[i]
+                                                    })
                                                 })
-                                            })
+                                            }
+
                                         }
                                     }
 
@@ -1014,16 +1026,24 @@
                                     if(res.data){
                                         $scope.oneRegionBackRegion = item.region_name;
                                         $scope.oneRegionBackData = res.data[0];
-                                        if(res.data[0].fileList){
+
+                                        if(res.data[0].accessoryURL){
                                             $scope.accessoryURL5 = [];
-                                            res.data[0].fileList.map(function (item){
-                                                $scope.accessoryURL5.push({
-                                                    name:item.downloadURL.substring(item.previewURL.lastIndexOf('/')+1),
-                                                    previewURL:item.previewURL,
-                                                    downloadURL:item.downloadURL
+
+                                            var viewUrl = [];
+                                            viewUrl = res.data[0].accessoryURL.split(',');
+                                            if(viewUrl){
+                                                viewUrl.map((item,i)=>{
+                                                    $scope.accessoryURL5.push({
+                                                        name:viewUrl[i].substring(viewUrl[i].lastIndexOf('/')+1),
+                                                        previewURL:item,
+                                                        downloadURL:viewUrl[i]
+                                                    })
                                                 })
-                                            })
+                                            }
+
                                         }
+
                                     }
                                 }else{
                                     layer.msg('服务器异常，请稍后再试',{times:500})
@@ -1040,6 +1060,15 @@
                     }
 
 
+                    $scope.fileUploadList = [];
+
+                    //删除附件
+                    $scope.deleteFile = function (i) {
+                        $scope.fileUploadList.splice(i,1);
+                        // console.log($scope.fileUploadList);
+                    }
+
+
                     /**
                      * 上传附件
                      */
@@ -1053,31 +1082,46 @@
                      */
                     $scope.getUpload = function () {
                         $('#coverModal').modal('hide');
-                        var formFile = new FormData();
+                        $scope.fileUploadList.map(function (item) {
+                            $scope.assessory.push(item.fileUrl)
+                        })
+                        // console.log($scope.assessory);
+                    }
 
-                        var fileObj = document.querySelector('input[type=file]').files[0];
-                        formFile.append("files", fileObj); //加入文件对象
 
-                        $http({
-                                method: 'post',
+                    // 上传文件
+                    $scope.uploadFile = function (e) {
+
+                        for (var i = 0; i < e.files.length; i++) {
+                            var form = new FormData();
+                            var file = e.files[i];
+                            $scope.attandName = file.name;
+                            form.append('files', file);
+                            $http({
+                                method: 'POST',
                                 url: apiPrefix + '/inspection/v1/Inspection/upload',
-                                data: formFile,
+                                data: form,
                                 headers: {'Content-Type': undefined},
                                 transformRequest: angular.identity
-                            }
-                        ).success(function (res) {
-                            if (res.resCode == 1) {
-                                layer.msg("上传成功");
-                                $scope.assessory.push(res.data[0]);
-                                $('#problemFile').fileinput('clear');
+                            }).success(function (res) {
+                                if(res.resCode == 1){
+                                    layer.msg('上传成功',{times:2000})
+                                    $scope.attandUrl = res.data[0];
+                                    $scope.fileUploadList.push({
+                                        fileName:$scope.attandName,
+                                        fileUrl:$scope.attandUrl
+                                    });
+                                    // console.log($scope.fileUploadList);
+                                }else{
+                                    layer.msg('上传失败',{times:2000})
+                                }
 
-                            } else {
-                                layer.msg("服务器异常，请稍后再试");
-                            }
-                        }).error(function (res) {
-                            layer.msg('服务器异常，请稍后再试');
-                        });
+                            }).error(function (data) {
+                                console.log('upload fail');
+                            })
+                        }
                     }
+
 
                     // 期号
                     var startTime = $('#startTime').datetimepicker({

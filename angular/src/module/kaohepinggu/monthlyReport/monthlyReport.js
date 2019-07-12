@@ -31,6 +31,15 @@
 
                     }
 
+                    $scope.fileUploadList = [];
+
+                    //删除附件
+                    $scope.deleteFile = function (i) {
+                        $scope.fileUploadList.splice(i,1);
+                        // console.log($scope.fileUploadList);
+                    }
+
+
                     //下载完整稿
                     $scope.download = function (path) {
                         window.open($scope.fileUrl + path)
@@ -92,36 +101,47 @@
                         $scope.id = lst.id;
                     }
 
-
                     /**
                      * 关闭上传附件
                      */
                     $scope.getUpload = function () {
                         $('#coverModal').modal('hide');
-                        var formFile = new FormData();
+                    }
 
-                        var fileObj = document.querySelector('input[type=file]').files[0];
-                        formFile.append("file", fileObj); //加入文件对象
-                        // console.log(formFile.files);
-                        $http({
-                                method: 'post',
+                    // 上传文件
+                    $scope.uploadFile = function (e) {
+
+                        for (var i = 0; i < e.files.length; i++) {
+                            var form = new FormData();
+                            var file = e.files[i];
+                            $scope.attandName = file.name;
+                            form.append('file', file);
+                            $http({
+                                method: 'POST',
                                 url: apiPrefix + '/v1/statistic/upload',
-                                data: formFile,
+                                data: form,
                                 headers: {'Content-Type': undefined},
                                 transformRequest: angular.identity
-                            }
-                        ).success(function (res) {
-                            if (res.resCode == 1) {
-                                $scope.assessory = res.data;
-                                $('#problemFile').fileinput('clear');
-                                layer.msg("上传成功");
-                                monthlyReport ($scope.id,res.data);
-                            } else {
-                                layer.msg("服务器异常，请稍后再试");
-                            }
-                        }).error(function (res) {
-                            layer.msg('服务器异常，请稍后再试');
-                        });
+                            }).success(function (res) {
+                                if(res.resCode == 1){
+                                    layer.msg('上传成功',{times:2000})
+                                    $scope.assessory = res.data;
+                                    $scope.fileUploadList = [{
+                                        fileName:$scope.attandName,
+                                        fileUrl:$scope.attandUrl
+                                    }]
+
+
+                                    monthlyReport ($scope.id,res.data);
+
+                                }else{
+                                    layer.msg('上传失败',{times:2000})
+                                }
+
+                            }).error(function (data) {
+                                console.log('upload fail');
+                            })
+                        }
                     }
 
 

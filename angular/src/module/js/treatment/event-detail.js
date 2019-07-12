@@ -339,7 +339,7 @@
                             };
                             roleIds = 'fca74e7d677111e7968ef01fafcf3a37';
                         }else{
-                            roleIds = 'cb0a5c20b4b811e88338fa163e29a9e1';
+                            roleIds = 'cb0a5c20b4b811e88338fa163e29a9e1,b0fd96d8a54e4f0fab16d27199888107';
                         };
                         $ajaxhttp.myhttp({
                             url: $localStorage.serviceUrl_eventMgr + 'v1/event/loadUser?roleIds=' + roleIds + '&regionId=' + regionIdScope,
@@ -541,6 +541,47 @@
                         $('#videoBox').hide();
                     };
 
+                    $("#input-file").fileinput({
+                        uploadUrl: '#', //上传的地址
+                        showUpload: false, //显示批量上传按钮
+                        showCaption: true, //是否显示标题
+                        showPreview: false, //是否显示预览
+                        language: "zh", //设置语言
+                        maxFileCount: 1,
+                        dropZoneEnabled: true,
+                        allowedFileExtensions: ['doc', 'docx', 'pdf']
+                    });
+
+                    $scope.fileInput = function () {
+                        var fd = new FormData();
+                        var files = $('#input-file').prop('files');
+                        if (files.length == 0) {
+                            layer.msg("请选择文件");
+                            return;
+                        }
+                        angular.forEach(files, function (each, index) {
+                            fd.append('files', each);
+                        })
+                        fd.append('eventId', $scope.detailId);
+                        fd.append('tacheId', '1');
+                        $http({
+                            method: 'POST',
+                            url: $localStorage.serviceUrl_eventMgr + '/v1/event/uploadFiles',
+                            data: fd,
+                            headers: {'Content-Type': undefined},
+                            transformRequest: angular.identity
+                        }).success(function (res) {
+                            if (res.resCode === 1) {
+                                $scope.file.documents = res.data;
+                                $scope.file.docName = $scope.file.documents[0].name;
+                                $("#attachBox").modal('hide');
+                            } else {
+                                layer.msg(res.resMsg || "上传失败，请重试！");
+                            }
+                        }).error(function (error) {
+                            layer.msg("服务器异常，请稍后重试！");
+                        });
+                    };
 
     }]);
 })(window, angular);

@@ -175,10 +175,9 @@
                                     $scope.accessoryURL = [];
                                     if(res.data.assessoryyuan){
                                         var viewUrl = [] ,downUrl = [];
-                                        viewUrl = res.data.assessory.split(',');
                                         downUrl = res.data.assessoryyuan.split(',');
-                                        if(viewUrl.length == downUrl.length){
-                                            viewUrl.map((item,i)=>{
+                                        if(downUrl){
+                                            downUrl.map((item,i)=>{
                                                 $scope.fileList.push({
                                                     name:downUrl[i].substring(downUrl[i].lastIndexOf('/')+1),
                                                     previewURL:item,
@@ -502,38 +501,6 @@
                         }
                     }
 
-                    // //核查重新办理
-                    // $scope.reStartCheck = function (){
-                    //     var params = {
-                    //         supervisionid:$scope.checkData.id,
-                    //         status:$scope.checkStatus
-                    //     }
-                    //     if($scope.checkStatus){
-                    //         $ajaxhttp.myhttp({
-                    //             url:apiPrefix + '/duban/v1/DubanSupervision/update',
-                    //             method:'put',
-                    //             params:params,
-                    //             callBack:function (res) {
-                    //                 if(res.resCode == 1){
-                    //                     layer.msg('已重新办理',{times:2000});
-                    //                     getList();
-                    //                     $('#myModal3').modal('hide');
-                    //                     $scope.checkStatus = '';
-                    //                 }else{
-                    //                     layer.msg('服务器异常，请稍后再试',{times:500})
-                    //                 }
-                    //             }
-                    //         })
-                    //
-                    //     }else{
-                    //         layer.alert("请选择督办结果", {
-                    //             skin: 'my-skin',
-                    //             closeBtn: 1,
-                    //             anim: 3
-                    //         })
-                    //     }
-                    // }
-
                     //确认发起
                     $scope.submit =  function () {
                         var params = {
@@ -639,6 +606,14 @@
                         });
                     }
 
+                    $scope.fileUploadList = [];
+
+                    //删除附件
+                    $scope.deleteFile = function (i) {
+                        $scope.fileUploadList.splice(i,1);
+                        // console.log($scope.fileUploadList);
+                    }
+
 
 
                     /**
@@ -654,30 +629,75 @@
                      */
                     $scope.getUpload = function () {
                         $('#coverModal').modal('hide');
-                        var formFile = new FormData();
+                        $scope.fileUploadList.map(function (item) {
+                            $scope.assessory.push(item.fileUrl)
+                        })
+                        // console.log($scope.assessory);
+                    }
 
-                        var fileObj = document.querySelector('input[type=file]').files[0];
-                        formFile.append("files", fileObj); //加入文件对象
 
-                        $http({
-                                method: 'post',
+                    // 上传文件
+                    $scope.uploadFile = function (e) {
+
+                        for (var i = 0; i < e.files.length; i++) {
+                            var form = new FormData();
+                            var file = e.files[i];
+                            $scope.attandName = file.name;
+                            form.append('files', file);
+                            $http({
+                                method: 'POST',
                                 url: apiPrefix + '/duban/v1/DubanSupervision/upload',
-                                data: formFile,
+                                data: form,
                                 headers: {'Content-Type': undefined},
                                 transformRequest: angular.identity
-                            }
-                        ).success(function (res) {
-                            if (res.resCode == 1) {
-                                layer.msg("上传成功");
-                                $scope.assessory.push(res.data[0]);
-                                $('#problemFile').fileinput('clear');
-                            } else {
-                                layer.msg("服务器异常，请稍后再试");
-                            }
-                        }).error(function (res) {
-                            layer.msg('服务器异常，请稍后再试');
-                        });
+                            }).success(function (res) {
+                                if(res.resCode == 1){
+                                    layer.msg('上传成功',{times:2000})
+                                    $scope.attandUrl = res.data[0];
+                                    $scope.fileUploadList.push({
+                                        fileName:$scope.attandName,
+                                        fileUrl:$scope.attandUrl
+                                    });
+                                    // console.log($scope.fileUploadList);
+                                }else{
+                                    layer.msg('上传失败',{times:2000})
+                                }
+
+                            }).error(function (data) {
+                                console.log('upload fail');
+                            })
+                        }
                     }
+
+                    /**
+                     * 关闭上传附件
+                     */
+                    // $scope.getUpload = function () {
+                    //     $('#coverModal').modal('hide');
+                    //     var formFile = new FormData();
+                    //
+                    //     var fileObj = document.querySelector('input[type=file]').files[0];
+                    //     formFile.append("files", fileObj); //加入文件对象
+                    //
+                    //     $http({
+                    //             method: 'post',
+                    //             url: apiPrefix + '/duban/v1/DubanSupervision/upload',
+                    //             data: formFile,
+                    //             headers: {'Content-Type': undefined},
+                    //             transformRequest: angular.identity
+                    //         }
+                    //     ).success(function (res) {
+                    //         if (res.resCode == 1) {
+                    //             layer.msg("上传成功");
+                    //             $scope.assessory.push(res.data[0]);
+                    //             $('#problemFile').fileinput('clear');
+                    //         } else {
+                    //             layer.msg("服务器异常，请稍后再试");
+                    //         }
+                    //     }).error(function (res) {
+                    //         layer.msg('服务器异常，请稍后再试');
+                    //     });
+                    // }
 
 
 

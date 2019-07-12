@@ -137,11 +137,11 @@
 
                     <div class="form-item">
                         <label>问题附件：</label>
-                        <button class="btn btn-info" ng-click="getUploadFile(1)"><i class="fa fa-css3"></i>查看附件</button>
-                        <div class="form-item" style="position: relative;width: 426px;top: -10px;">
-                                <span ng-repeat="item in problemAttant" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item)">{{item.split('/')[item.split('/').length - 1]}}
-                                </span>
-                        </div>
+                        <button class="btn btn-info" ng-click="getUploadFile()"><i class="fa fa-css3"></i>上传附件</button>
+                        <!--<div class="form-item" style="position: relative;width: 426px;top: -10px;">-->
+                                <!--<span ng-repeat="item in problemAttant" style="color: #333;cursor: pointer;display: block;margin: 8px 10px;" ng-click="downFile(item)">{{item.split('/')[item.split('/').length - 1]}}-->
+                                <!--</span>-->
+                        <!--</div>-->
                     </div>
                     <br/>
                     <!--<div class="form-item">-->
@@ -191,6 +191,10 @@
                 </div>
             </div>
         </div>
+
+
+
+
         <!--描述：所属区域树-->
         <div class="modal fade" id="regionTreeModal" role="dialog_region" data-backdrop="static">
             <div class="modal-dialog modal-jm " role="document">
@@ -212,8 +216,8 @@
                 </div>
             </div>
         </div>
-        <!--描述：附件-->
-        <div class="modal fade" id="coverModal1" data-backdrop="static">
+
+        <div class="modal fade" id="coverModal" data-backdrop="static">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -221,20 +225,30 @@
                             <li class="fa fa-remove"></li>
                         </button>
                         <h4>上传附件</h4>
-
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal">
-                            <div class="form-group">
-                                <div class="wid-100 announcementCoverPanel">
-                                    <input class="uploadfile" id="uploadfile1" type="file" name="file" multiple="multiple">
-                               </div>
+
+                        <div>
+                            <input type="file" class="hidden" id="J-attandUploader" ng-model="attandUrl"
+                                   onchange="angular.element(this).scope().uploadFile(this)"/>
+                            <input type="hidden" ng-model="attandName" value=""/>
+                            <button class="btn btn-default" onclick="document.getElementById('J-attandUploader').click()">
+                                选择文件
+                            </button>
+                        </div>
+
+
+                        <div class="file-list-show">
+                            <div class="file-list-content" ng-repeat="(index,item) in fileUploadList">
+                                <span class="file-list-title">{{item.fileName}}</span>
+                                <span class="file-list-delete" ng-click="deleteFile(index)">删除</span>
                             </div>
-                        </form>
+                        </div>
+
                     </div>
-                    .
+
                     <div class="modal-footer">
-                        <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload(1)">
+                        <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload()">
                             <i class="fa fa-check"></i>
                             <span>确定</span>
                         </a>
@@ -246,93 +260,8 @@
                 </div>
             </div>
         </div>
-        <!--描述：附件-->
-        <div class="modal fade" id="coverModal2" data-backdrop="static">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            <li class="fa fa-remove"></li>
-                        </button>
-                        <h4>上传附件</h4>
 
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-horizontal">
-                            <div class="form-group">
-                                <div class="wid-100 announcementCoverPanel">
-                                    <input class="uploadfile" id="uploadfile2" type="file" name="file">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    .
-                    <div class="modal-footer">
-                        <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload(2)">
-                            <i class="fa fa-check"></i>
-                            <span>确定</span>
-                        </a>
-                        <a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
-                            <i class="fa fa-reply"></i>
-                            <span>取消</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--描述：附件-->
-        <div class="modal fade" id="coverModal3" data-backdrop="static">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            <li class="fa fa-remove"></li>
-                        </button>
-                        <h4>上传附件</h4>
-
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-horizontal">
-                            <div class="form-group">
-                                <div class="wid-100 announcementCoverPanel">
-                                    <input class="uploadfile" id="uploadfile3" type="file" name="file">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload(3)">
-                            <i class="fa fa-check"></i>
-                            <span>确定</span>
-                        </a>
-                        <a href="javascript:;" class="btn btn-default btn-o" data-dismiss="modal">
-                            <i class="fa fa-reply"></i>
-                            <span>取消</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </div>
 
 </div>
-<script>
-    $(".uploadfile").fileinput({
-        allowedFileExtensions: ['doc','docx','png','jpeg'],
-        uploadAsync: true, //默认异步上传
-        showRemove: true, //显示移除按钮
-        // maxFileCount: 1, //表示允许同时上传的最大文件个数
-        language: 'zh', //设置语言
-        uploadUrl: '#', //上传的地址
-        showUpload: false, //显示批量上传按钮
-        showCaption: true, //是否显示标题
-        browseClass: "btn btn-primary", //按钮样式
-        showPreview: true, //是否显示预览
-        dropZoneEnabled: true, //是否显示拖拽区域
-        validateInitialCount: true,
-        slugCallback: function (filename) {
-            return filename.replace('(', '_').replace(']', '_');
-        }
-    });
-</script>

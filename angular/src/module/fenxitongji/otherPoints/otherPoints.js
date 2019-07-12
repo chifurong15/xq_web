@@ -128,6 +128,7 @@
                         })
                     }
 
+                    //新增or修改
                     $scope.add = function (id,editId) {
                         $scope.id = id;
                         $scope.editId = editId;

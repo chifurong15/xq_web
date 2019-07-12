@@ -47,6 +47,14 @@
                         getList();
                     }
 
+                    $scope.fileUploadList = [];
+
+                    //删除附件
+                    $scope.deleteFile = function (i) {
+                        $scope.fileUploadList.splice(i,1);
+                        // console.log($scope.fileUploadList);
+                    }
+
                     // 表格排序
                     $scope.sort = function (id , name) {
                         $scope.column = name;
@@ -92,6 +100,8 @@
                     //显示新增模态框
                     $scope.add = function () {
                         $scope.assessory = [];
+                        $scope.fileUploadList = [];
+
                         $('#myModal').modal('show');
                     }
                     //显示修改模态框
@@ -117,6 +127,21 @@
                                     $scope.sentRegion = res.data.regionList;
                                     $scope.sentUnit = res.data.unitList;
                                     $scope.assessoryEdit = res.data.accessory
+
+
+                                    if(res.data.accessory){
+                                        var viewUrl = [] ;
+                                        viewUrl = res.data.accessory.split(',');
+
+                                        if(viewUrl){
+                                            viewUrl.map((item,i)=>{
+                                                $scope.fileUploadList.push({
+                                                    fileName:item.substring(item.lastIndexOf('/')+1),
+                                                    fileUrl:item
+                                                });
+                                            })
+                                        }
+                                    }
 
                                 }
                             }
@@ -148,6 +173,8 @@
                                     if(res.resCode == 1){
                                         layer.msg('修改成功',{times:2000});
                                         getList();
+                                        $scope.fileUploadList = [];
+
                                         $('#myModaledit').modal('hide');
                                     }else{
                                         layer.msg('服务器异常，请稍后再试',{times:500})
@@ -215,6 +242,8 @@
                     //清空新增表单
                     $scope.close = function () {
                         $('#myModal').modal('hide');
+                        $scope.fileUploadList = [];
+
                         $scope.title = '';
                         $scope.Time = '';
                         $scope.renumber = '';
@@ -319,31 +348,47 @@
                      */
                     $scope.getUpload = function () {
                         $('#coverModal').modal('hide');
-                        var formFile = new FormData();
+                        $scope.fileUploadList.map(function (item) {
+                            $scope.assessory.push(item.fileUrl)
+                        })
+                        // console.log($scope.assessory);
+                    }
 
-                        var fileObj = document.querySelector('input[type=file]').files[0];
-                        formFile.append("files", fileObj); //加入文件对象
 
-                        $http({
-                                method: 'post',
+                    // 上传文件
+                    $scope.uploadFile = function (e) {
+
+                        for (var i = 0; i < e.files.length; i++) {
+                            var form = new FormData();
+                            var file = e.files[i];
+                            $scope.attandName = file.name;
+                            form.append('files', file);
+                            $http({
+                                method: 'POST',
                                 url: apiPrefix + '/inspection/v1/Inspection/upload',
-                                data: formFile,
+                                data: form,
                                 headers: {'Content-Type': undefined},
                                 transformRequest: angular.identity
-                            }
-                        ).success(function (res) {
-                            if (res.resCode == 1) {
-                                layer.msg("上传成功");
-                                $scope.assessory.push(res.data[0]);
-                                $('#problemFile').fileinput('clear');
+                            }).success(function (res) {
+                                if(res.resCode == 1){
+                                    layer.msg('上传成功',{times:2000})
+                                    $scope.attandUrl = res.data[0];
+                                    $scope.fileUploadList.push({
+                                        fileName:$scope.attandName,
+                                        fileUrl:$scope.attandUrl
+                                    });
+                                    // console.log($scope.fileUploadList);
+                                }else{
+                                    layer.msg('上传失败',{times:2000})
+                                }
 
-                            } else {
-                                layer.msg("服务器异常，请稍后再试");
-                            }
-                        }).error(function (res) {
-                            layer.msg('服务器异常，请稍后再试');
-                        });
+                            }).error(function (data) {
+                                console.log('upload fail');
+                            })
+                        }
                     }
+
+
 
                     // 期号
                     var startTime = $('#startTime').datetimepicker({

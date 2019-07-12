@@ -643,7 +643,7 @@
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通知内容</font></font></label>
                                 <textarea class="form-control" ng-model="noticeData.noticeContent" readonly rows="3" style="width: 425px;max-width: 425px;"></textarea>
                             </div>
-                            <div class="form-item" ng-if="noticeData.fileList.length > 0">
+                            <div class="form-item" ng-if="accessoryURL1.length > 0">
                                 <label><font style="vertical-align: inherit;"><font
                                         style="vertical-align: inherit;">附件</font></font></label>
                             </div>
@@ -702,7 +702,7 @@
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">问题详情</font></font></label>
                                 <textarea class="form-control" ng-model="problemData.problemContent" readonly rows="3" style="width: 425px;max-width: 425px;"></textarea>
                             </div>
-                            <div class="form-item" ng-if="problemData.fileList.length > 0">
+                            <div class="form-item" ng-if="accessoryURL.length > 0">
                                 <label><font style="vertical-align: inherit;"><font
                                         style="vertical-align: inherit;">附件</font></font></label>
                             </div>
@@ -826,7 +826,7 @@
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通报说明</font></font></label>
                                 <textarea class="form-control" ng-model="reportData.notificationExplain" readonly rows="3" style="width: 425px;max-width: 425px;"></textarea>
                             </div>
-                            <div class="form-item" ng-if="reportData.fileList.length > 0">
+                            <div class="form-item" ng-if="accessoryURL2.length > 0">
                                 <label><font style="vertical-align: inherit;"><font
                                         style="vertical-align: inherit;">附件</font></font></label>
 
@@ -873,7 +873,7 @@
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">反馈说明</font></font></label>
                                 <textarea class="form-control" ng-model="reportBackData.description" readonly rows="3" style="width: 425px;max-width: 425px;"></textarea>
                             </div>
-                            <div class="form-item" ng-if="reportBackData.fileList.length > 0">
+                            <div class="form-item" ng-if="accessoryURL3.length > 0">
                                 <label><font style="vertical-align: inherit;"><font
                                         style="vertical-align: inherit;">反馈附件</font></font></label>
 
@@ -947,7 +947,7 @@
             </div>
         </div>
 
-        <!--问题清单详情-->
+        <!--查看一区一单-->
         <div class="modal fade" id="viewOneRegion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -984,7 +984,7 @@
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一区一单说明</font></font></label>
                                 <textarea class="form-control" ng-model="oneRegionData.billExplain" readonly rows="3" style="width: 425px;max-width: 425px;"></textarea>
                             </div>
-                            <div class="form-item" ng-if="oneRegionData.fileList.length > 0">
+                            <div class="form-item" ng-if="accessoryURL4.length > 0">
                                 <label><font style="vertical-align: inherit;"><font
                                         style="vertical-align: inherit;">附件</font></font></label>
                             </div>
@@ -1030,7 +1030,7 @@
                                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">反馈说明</font></font></label>
                                 <textarea class="form-control" ng-model="oneRegionBackData.description" readonly rows="3" style="width: 425px;max-width: 425px;"></textarea>
                             </div>
-                            <div class="form-item" ng-if="oneRegionBackData.fileList.length > 0">
+                            <div class="form-item" ng-if="accessoryURL5.length > 0">
                                 <label><font style="vertical-align: inherit;"><font
                                         style="vertical-align: inherit;">反馈附件</font></font></label>
 
@@ -1101,14 +1101,26 @@
                         <h4>上传附件</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal">
-                            <div class="form-group">
-                                <div class="wid-100 announcementCoverPanel">
-                                    <input class="uploadfile" id="problemFile" type="file" name="file">
-                                </div>
+
+                        <div>
+                            <input type="file" class="hidden" id="J-attandUploader" ng-model="attandUrl"
+                                   onchange="angular.element(this).scope().uploadFile(this)"/>
+                            <input type="hidden" ng-model="attandName" value=""/>
+                            <button class="btn btn-default" onclick="document.getElementById('J-attandUploader').click()">
+                                选择文件
+                            </button>
+                        </div>
+
+
+                        <div class="file-list-show">
+                            <div class="file-list-content" ng-repeat="(index,item) in fileUploadList">
+                                <span class="file-list-title">{{item.fileName}}</span>
+                                <span class="file-list-delete" ng-click="deleteFile(index)">删除</span>
                             </div>
-                        </form>
+                        </div>
+
                     </div>
+
                     <div class="modal-footer">
                         <a href="javascript:;" class="btn btn-primary btn-o" ng-click="getUpload()">
                             <i class="fa fa-check"></i>
@@ -1148,23 +1160,7 @@
     </div>
 </div>
 <script>
-    $(".uploadfile").fileinput({
-        allowedFileExtensions: ['doc','docx','pdf','png','jpg','jpeg'],
-        uploadAsync: true, //默认异步上传
-        showRemove: true, //显示移除按钮
-        maxFileCount: 5, //表示允许同时上传的最大文件个数
-        language: 'zh', //设置语言
-        uploadUrl: '#', //上传的地址
-        showUpload: false, //显示批量上传按钮
-        showCaption: true, //是否显示标题
-        browseClass: "btn btn-primary", //按钮样式
-        showPreview: true, //是否显示预览
-        dropZoneEnabled: false, //是否显示拖拽区域
-        validateInitialCount: true,
-        slugCallback: function (filename) {
-            return filename.replace('(', '_').replace(']', '_');
-        }
-    });
+
     layui.use('element', function () {
         var $ = layui.jquery
             , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
