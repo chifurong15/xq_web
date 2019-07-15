@@ -453,6 +453,7 @@ body .align-left .cross-simple-icon, body .align-left .cross-text{
     color: #f00;
     line-height: 34px;
     font-weight: bold;
+    margin: 0;
 }
 
 .form-item .input-group-addon {

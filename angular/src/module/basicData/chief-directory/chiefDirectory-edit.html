@@ -56,31 +56,31 @@
                         <label><input type="radio" name="examRadio" value="2" ng-model="chief.isAssess"> 否</label>
                     </div>
                     <br>
-                    <div class="form-item" style="width: 583px;">
+                    <div class="form-item">
                         <label>责任河段</label>
-                        <input ng-model="chief.reach" type="text" class="form-control input-long-o" ng-click="waterbodyShow(0)">
-                        <a class="input-group-addon" ng-click="waterbodyShow(0)"><i class="icon-jx_search"></i></a>
+                        <input ng-model="chief.reach" type="text" class="form-control input-short-o" ng-click="waterbodyShow(0)">
+                        <a class="input-group-addon" ng-click="waterbodyShow(0)"><i class="fa fa-search"></i></a>
                     </div>
                     <div class="form-item">
                         <label>责任湖泊</label>
-                        <input ng-model="chief.lake" type="text" class="form-control input-long-o" ng-click="waterbodyShow(1)">
-                        <a class="input-group-addon" ng-click="waterbodyShow(1)"><i class="icon-jx_search"></i></a>
+                        <input ng-model="chief.lake" type="text" class="form-control input-short-o" ng-click="waterbodyShow(1)">
+                        <a class="input-group-addon" ng-click="waterbodyShow(1)"><i class="fa fa-search"></i></a>
                     </div>
-                    <div class="form-item" style="width: 583px;">
+                    <div class="form-item">
                         <label>责任水库</label>
-                        <input ng-model="chief.reservoir" type="text" class="form-control input-long-o" ng-click="waterbodyShow(2)">
-                        <a class="input-group-addon" ng-click="waterbodyShow(2)"><i class="icon-jx_search"></i></a>
+                        <input ng-model="chief.reservoir" type="text" class="form-control input-short-o" ng-click="waterbodyShow(2)">
+                        <a class="input-group-addon" ng-click="waterbodyShow(2)"><i class="fa fa-search"></i></a>
                     </div>
                     <div class="form-item" >
                         <label>责任坑塘</label>
-                        <input ng-model="chief.pond" type="text" class="form-control input-long-o" ng-click="waterbodyShow(3)">
-                        <a class="input-group-addon" ng-click="waterbodyShow(3)"><i class="icon-jx_search"></i></a>
+                        <input ng-model="chief.pond" type="text" class="form-control input-short-o" ng-click="waterbodyShow(3)">
+                        <a class="input-group-addon" ng-click="waterbodyShow(3)"><i class="fa fa-search"></i></a>
                     </div>
                     <br>
                     <div class="form-item">
                         <label>发文信息</label>
-                        <input ng-model="chief.docName" type="text" class="form-control input-long-o" data-toggle="modal" data-target="#fileModal">
-                        <a class="input-group-addon" data-toggle="modal" data-target="#fileModal"><i class="icon-jx_search"></i></a>
+                        <input ng-model="chief.docName" type="text" class="form-control input-short-o" data-toggle="modal" data-target="#fileModal">
+                        <a class="input-group-addon" data-toggle="modal" data-target="#fileModal"><i class="fa fa-search"></i></a>
                         <!-- <span class="required">*</span> -->
                     </div>
                     <br>
@@ -116,7 +116,7 @@
                         <div class="form-item">
                             <label>发文区域</label>
                             <input ng-model="doc.regionName" type="text" class="form-control input-short-o" ng-click="regionShow(2)" readonly>
-                            <a class="input-group-addon" ng-click="regionShow(2)"><i class="icon-jx_search"></i></a>
+                            <a class="input-group-addon" ng-click="regionShow(2)"><i class="fa fa-search"></i></a>
                         </div>
                         <button type="button" class="btn btn-search" ng-click="search()">搜 索</button>
                         <button type="button" class="btn btn-reset" ng-click="reSet()">重 置</button>
@@ -175,7 +175,7 @@
                         <div class="form-item">
                             <label>发文区域</label>
                             <input ng-model="file.regionName" type="text" class="form-control input-short-o" ng-click="regionShow(3)" readonly>
-                            <a class="input-group-addon" ng-click="regionShow(3)"><i class="icon-jx_search"></i></a>
+                            <a class="input-group-addon" ng-click="regionShow(3)"><i class="fa fa-search"></i></a>
                             <span class="required">*</span>
                         </div>
                          <div class="form-item">
@@ -196,8 +196,8 @@
                         </div>
                         <div class="form-item">
                             <label>附件上传</label>
-                            <input ng-model="file.docName" type="text" class="form-control input-long-o" ng-click="attachBoxShow()">
-                            <a class="input-group-addon" ng-click="attachBoxShow()"><i class="icon-jx_search"></i></a>
+                            <input ng-model="file.docName" type="text" class="form-control input-short-o" ng-click="attachBoxShow()">
+                            <a class="input-group-addon" ng-click="attachBoxShow()"><i class="fa fa-search"></i></a>
                             <span class="required">*</span>
                         </div>
                     </form>
