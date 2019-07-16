@@ -69,15 +69,46 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                     var latreg = /^(\-|\+)?([0-8]?\d{1}\.\d{0,6}|90\.0{0,6}|[0-8]?\d{1}|90)$/;
                     $scope.submit = function() {
                         var chairmanList = '';
-                        $scope.pond.overView = CKEDITOR.instances.editor.getData();
+                        // $scope.pond.overView = CKEDITOR.instances.editor.getData();
                         if(!$scope.pond.pondName || !jsname.test($scope.pond.pondName)) {
                             layer.msg('请完善坑塘名称');
                             return;
                         }else if (!$scope.pond.regionName){
                             layer.msg('请完善所属区域');
                             return;
-                        }else if($scope.reachadmins.length != 0){
-                            var flag = 1;
+                        }else {
+                            $http({
+                                method: "put",
+                                url: moduleService.getServiceUrl() + '/watersource/v1/pond/update',
+                                data: {
+                                    id: $scope.pond.id,
+                                    pondName: $scope.pond.pondName,
+                                    pondType: $scope.pond.pondType,
+                                    regionCode: $scope.pond.regionCode,
+                                    acreage: $scope.pond.acreage,
+                                    longitude: $scope.pond.longitude,
+                                    latitude: $scope.pond.latitude,
+                                    location: $scope.pond.location,
+                                    linePoints: $scope.pond.linePoints,
+                                    spatialData: $scope.pond.spatialData,
+                                    overView: $scope.pond.overView,
+                                    remark: $scope.pond.remark,
+                                    chairmanList: chairmanList,
+                                },
+                                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                                transformRequest:function(obj){return $.param(obj)}
+                            }).success(function(res) {
+                                if(res.resCode == 1){
+                                    layer.msg('修改成功',{shift:-1},function(){
+                                        $scope.back();
+                                    });
+                                }else{
+                                    layer.msg(res.resMsg || '请求失败,请稍后再试');
+                                }
+                            }).error(function(res){
+                                layer.msg('服务器错误,请稍后再试')
+                            });
+                            /*var flag = 1;
                             var reachadmins = $scope.reachadmins;
                             reachadmins = angular.forEach(reachadmins, function (each){
                                 if(!each.chairmanid) {
@@ -100,39 +131,9 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                                 each.isAssess = each.isAssess == true ? 'Y':'N';
                             })
                             if(!flag) return;
-                            chairmanList = JSON.stringify(reachadmins);
+                            chairmanList = JSON.stringify(reachadmins);*/
                         }
-                        $http({
-                            method: "put",
-                            url: moduleService.getServiceUrl() + '/watersource/v1/pond/update',
-                            data: {
-                                id: $scope.pond.id,
-                                pondName: $scope.pond.pondName,
-                                pondType: $scope.pond.pondType,
-                                regionCode: $scope.pond.regionCode,
-                                acreage: $scope.pond.acreage,
-                                longitude: $scope.pond.longitude,
-                                latitude: $scope.pond.latitude,
-                                location: $scope.pond.location,
-                                linePoints: $scope.pond.linePoints,
-                                spatialData: $scope.pond.spatialData,
-                                overView: $scope.pond.overView,
-                                remark: $scope.pond.remark,
-                                chairmanList: chairmanList,
-                            },
-                            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                            transformRequest:function(obj){return $.param(obj)}
-                        }).success(function(res) {
-                            if(res.resCode == 1){
-                                layer.msg('修改成功',{shift:-1},function(){
-                                    $scope.back();
-                                });
-                            }else{
-                                layer.msg(res.resMsg || '请求失败,请稍后再试');
-                            }
-                        }).error(function(res){
-                            layer.msg('服务器错误,请稍后再试')
-                        });
+
                     };
 
                     // 返回按钮

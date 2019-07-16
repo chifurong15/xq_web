@@ -23,16 +23,16 @@ angular.module('app').directive('basicMap', [
 				'<div class="proMgr-map-tool" ng-if="objOpera != \'view\'">' +
 				'<ul class="drawTool">' +
 				'<li ng-click="doDraw();">' +
-				'<a id="doDraw" href="javascript:void(0);" title="画面"><i class="icon-jx_mapmark"></i></a>' +
+				'<a id="doDraw" href="javascript:void(0);" title="画面"><i class="fa fa-pencil"></i></a>' +
 				'</li>' +
 				'<li ng-click="clearDraw();">' +
-				'<a id="clearDraw" href="javascript:void(0);" title="清除"><i class="icon-jx_mapremove"></i></a>' +
+				'<a id="clearDraw" href="javascript:void(0);" title="清除"><i class="fa fa-eraser"></i></a>' +
 				'</li>' +
 				'<li ng-click="showDraw();">' +
-				'<a id="showDraw" href="javascript:void(0);" title="显示"><i class="icon-jx_mapinfo"></i></a>' +
+				'<a id="showDraw" href="javascript:void(0);" title="显示"><i class="fa fa-map-marker"></i></a>' +
 				'</li>' +
 				'<li ng-click="mapExpand();">' +
-				'<a id="mapExpand"  href="javascript:void(0);" title="缩放"><i ng-class="{true : \'icon-jx_fullscreen\',false : \'icon-jx_narrow\' }[mapMin]"></i></a>' +
+				'<a id="mapExpand"  href="javascript:void(0);" title="缩放"><i ng-class="{true : \'fa fa-expand\',false : \'fa-compress\' }[mapMin]"></i></a>' +
 				'</li>' +
 				'</ul>' +
 				'</div>' +
