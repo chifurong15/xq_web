@@ -427,6 +427,7 @@ body .align-left .cross-simple-icon, body .align-left .cross-text{
     margin: 5px 0;
     padding-right: 15px;
     vertical-align: middle;
+    min-width: 285px;
 }
 
 .form-item label {

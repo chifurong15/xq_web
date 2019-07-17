@@ -78,7 +78,8 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                         classify: $scope.classify,
 						page: $scope.paginationConf.currentPage,
 						size: $scope.paginationConf.itemsPerPage,
-						isNext: true
+						isNext: true,
+						queryPatrolReach:true
 					},
 				}).success(function(res) {
 					$scope.paginationConf.totalItems = res.data.total;

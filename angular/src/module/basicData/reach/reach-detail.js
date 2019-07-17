@@ -15,7 +15,7 @@
             $scope.reach = $localStorage.reachDetailData;
 
 			$scope.back = function() {// 跳转到菜单页面
-				routeService.route(108, true);
+                history.go(-1)
 			}
 		}
 	]);

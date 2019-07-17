@@ -77,9 +77,9 @@
       "isRoot": false,
       "name": "河段管理",
       "icon": "menu-icon-14",
-      "url": "module/menus/info-management/basic-data/reach/reach-manage.html",
+      "url": "module/basicData/reach/reach.html",
       "requireJS": [
-        "module/js/info-management/basic-data/reach/reach-manage.js"
+        "module/basicData/reach/reach.js"
       ],
       "description": "三级菜单-基础资料-河湖库段"
     },
@@ -2070,9 +2070,9 @@
     {
       "seqId": "505",
       "name": "河流页面",
-      "url": "module/menus/info-management/basic-data/river/river-manage.html",
+      "url": "module/basicData/river/river.html",
       "requireJS": [
-        "module/js/info-management/basic-data/river/river-manage.js"
+        "module/basicData/river/river.js"
       ],
       "description": "河流页面"
     },

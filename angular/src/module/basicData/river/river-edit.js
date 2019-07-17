@@ -127,7 +127,7 @@ var riverUrl = modulePrefix + "/v1/river";
 		var jsname = /^[\u4e00-\u9fa5_a-zA-Z0-9_]{2,16}$/;
         var len =/^\d+(?:\.\d{1,4})?$/;
 		$scope.submit = function() {
-			$scope.river.overView = CKEDITOR.instances.editor.getData();
+			// $scope.river.overView = CKEDITOR.instances.editor.getData();
 			if(!$scope.river.riverName || !jsname.test($scope.river.riverName)) {
 				layer.msg('河流名称输入有误');
                 return;

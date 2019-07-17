@@ -1,301 +1,188 @@
 var modulePrefix = "/watersource";
-var basicUrl = modulePrefix + "/v1/drainageBasin";
-var waterUrl = modulePrefix + "/v1/waterSystem";
 var riverUrl = modulePrefix + "/v1/river";
-var lakesUrl = modulePrefix + "/v1/lakes";
-var reservoirUrl = modulePrefix + "/v1/reservoir";
-var reachUrl = modulePrefix + "/v1/reach";
-var dictionaryUrl = modulePrefix + "/v1/dictionary";
 (function(window, angular) {
 	'use strict';
 
-	angular
-			.module("app")
-			.controller(
-					'imRiverEdit',
-					[
-							'$localStorage',
-							'$scope',
-							'$location',
-							'$log',
-							'$q',
-							'$rootScope',
-							'globalParam',
-							'$window',
-							'routeService',
-							'$http',
-							function imRiverEdit($localStorage, $scope, $location,
-									$log, $q, $rootScope,globalParam, $window,
-									routeService, $http) {
-								//获取当前数据
-								$scope.riverDetail = $localStorage.riverEditData;
-                                CKEDITOR.instances.editor.setData($scope.riverDetail.overView);
+	angular.module("app").controller(
+	'imRiverEdit',['$localStorage','$scope','routeService','moduleService','$http','MapUtil','OneMapqueryAdminregionFromMysql',
+	function imRiverEdit($localStorage, $scope, routeService, moduleService, $http, MapUtil,OneMapqueryAdminregionFromMysql) {
+		if(!$localStorage.riverEditData){
+			layer.msg('获取数据失败,请重试');
+			return;
+		}
+		$scope.river = $localStorage.riverEditData;
 
-								//所属区域树模态框【show】
-								$scope.regionShow = function(){
-									$scope.areaName = '';
-									$("#region_ztree").modal('show');
-		                            var regionTreeUrl = $localStorage.gwUrl +basicUrl + "/tree";
-		                            treeList_region(regionTreeUrl);
-		                            var setting = {
-		                                view: {
-		                                    selectedMulti: true,
-		                                    showLine: true,
-		                                    showIcon: true
-		                                },
-		                                data: {
-		                                    simpleData: {enable: true},
-		                                    keep: {parent: true}
-		                                },
-		                                callback: {
-		                                    beforeExpand: zTreeOnExpand,
-		                                    onClick: zTreeOnClick
-		                                }
-		                            };
-		                            //生成区域树
-									function treeList_region(regionTreeUrl) {
-		      	                        $http({
-		                                    method: "GET",
-		                                    url: regionTreeUrl,
-		                                    dataType: 'json'
-		                                }).success(function (data) {
-		                                    regionTree = $.fn.zTree.init($("#regionTree"), setting, data.data);
-		                                }).error(function () {});
-									};
+		/*判断名称是否重复*/
+		var oldName = $scope.river.riverName;
+        $scope.isRepeat = function(){
+        	if($scope.river.riverName == oldName){
+                return;
+            }else if(!$scope.river.riverName){
+                return;
+            }
+            $http({
+                method:'get',
+                url:moduleService.getServiceUrl() + riverUrl + "/isRepeat",
+                params:{
+                    name:$scope.river.riverName
+                }
+            }).success(function (res) {
+                if (res.resCode === 0){
+                    layer.msg('河流名称重复',{time:2000});
+                    $scope.river.riverName = '';
+                }
+            }).error();
+        };
+		/*河流类型*/
+		$scope.riverTypeList = function() {
+			$http({
+				method: "get",
+				url: moduleService.getServiceUrl() + riverUrl + "/riverType",
+                params:{
+				    type: '104'
+                }
+			}).success(function(res) {
+				if(res.resCode == 1){
+					$scope.riverTypes = res.data;
+				}else{
+        			layer.msg(res.resMsg || '请求错误,请稍后再试');
+				}
+			}).error(function(res){
+                layer.msg('服务器异常，请稍后再试');
+            });
+		}
+		$scope.riverFeatureList = function() {
+			$http({
+				method: "get",
+				url: moduleService.getServiceUrl() + riverUrl + "/riverFeature",
+			}).success(function(res) {
+				if(res.resCode == 1){
+					$scope.riverFeatureList = res.data;
+				}else{
+        			layer.msg(res.resMsg || '请求错误,请稍后再试');
+				}
+			}).error(function(res){
+                layer.msg('服务器异常，请稍后再试');
+            });
+		}
 
-									//所属区域树节点点击
-		                            function zTreeOnClick(event, treeId, treeNode) {
-										treeNode_find = treeNode.id,
-		                            	_areaCode = treeNode.name;
-		                                //改变区域树数值，清空水系、河流数值
-		                                $scope.water_ztree = '';
-									};
-
-		                            function zTreeOnExpand(treeId, treeNode) {
-		                                var cnodes = treeNode.children;
-		                                if (cnodes !=null && cnodes.length > 0){
-		                                    return;
-		                                }
-		                                $http({
-		                                    method: "GET",
-		                                    url: regionTreeUrl,
-		                                    params: {
-		                                        parentCode: treeNode.id,
-		                                    }
-		                                }).success(function (res) {
-		                                    regionTree.addNodes(treeNode, res.data, true);
-		                                });
-		                            }
-
-									//区域模态框搜索框
-									$scope.select_region = function() {
-										if($scope.areaName == null || $scope.areaName == ''){
-											$scope.treeList_region(regionTreeUrl);
-										}else{
-											$http({
-												method: "GET",
-												url: $localStorage.gwUrl + basicUrl + "/fingByRegionName",
-												params: {
-													regionName: $scope.areaName
-												},
-											}).success(function(res) {
-												regionTree = $.fn.zTree.init($("#regionTree"), setting, res.data);
-											});
-										}
-									};
-									//关闭所属区域模态框【确定按钮】
-									$scope.region_modalOk = function (){
-										$("#region_ztree").modal('hide');
-		                                $scope.riverDetail.regionCode = treeNode_find;
-		                                $scope.riverDetail.regionName = _areaCode;
-									};
-								};
-
-		                        $scope.$watch('riverDetail.remark', function (newValue) {
-		                        	if(newValue == undefined || newValue == ''){
-		                        		return;
-		                        	}else if (newValue.length >= 512) {
-		                                layer.msg('总共可以输入512个字符',{time:2000});
-		                            }
-		                        });
-
-                                //判断名称是否重复
-                                $scope.isRepeat = function(){
-                                    $http({
-                                        method:'get',
-                                        url:$localStorage.gwUrl + riverUrl + "/isRepeat",
-                                        params:{
-                                            name: $scope.riverDetail.riverName
-                                        }
-                                    }).success(function (res) {
-                                        if (res.resCode === 0){
-                                            layer.msg('河流名称重复');
-                                            $window.document.getElementById('riverName').focus();
-                                        }
-                                    }).error();
-                                };
+		/*所属区域树模态框*/
+		$scope.regionShow = function(type){
+			if(type == 'multiple'){
+				$scope.modalTreeInfo = {'treeType': 'region' ,'setting': {'check': {'enable': true,'chkStyle': "checkbox",'chkboxType': { "Y": "", "N": "" }}}};
+			}else{
+				$scope.modalTreeInfo = {'treeType': 'region'};
+			}
+			$("#treeModal").modal('show');
+		};
+		/*水系树模态框*/
+		$scope.waterShow = function() {
+			$scope.modalTreeInfo = {'treeType': 'water'};
+			$("#treeModal").modal('show');
+		}
+		/*断面模态框*/
+		$scope.sectionShow = function(section) {
+			$scope.section = section;
+            $scope.modalTreeInfo = {'treeType': 'section'};
+            $("#treeModal").modal('show');
+        }
+		$scope.$on('zTreeOnClick', function(event,treeNode) { //点击事件通信 返回treeNode参数
+			if($scope.modalTreeInfo.treeType == 'region'){
+				OneMapqueryAdminregionFromMysql.getRegionData(treeNode.id, treeNode.regionLevel);
+				if(MapUtil.isCoordValid(treeNode["longitude"], treeNode["latitude"])){
+					if ($localStorage.mapType != "arcgisDynamic") {
+                        MapUtil.center2LongLat(treeNode["longitude"],treeNode["latitude"],treeNode["grade"]);
+                    }
+                }else {
+                    console.warn("定位失败！坐标为空！");//父级能得到值
+                    // layer.msg('坐标为空！绘制失败');
+                }
+			}
+	    });
+	    $scope.$on('zTreeModalClose', function(event,data) { //树弹窗关闭事件通信 返回data = {treeNodeId,treeNodeName}
+	    	if($scope.modalTreeInfo.treeType == 'region'){
+	    		if($scope.modalTreeInfo.setting && $scope.modalTreeInfo.setting.check && $scope.modalTreeInfo.setting.check.enable == true){
+	    			$scope.river.throughAreaName = data.treeNodeNames.join(',');
+	    			$scope.river.throughArea = data.treeNodeIds.join(',');
+	    		}else{
+	    			$scope.river.regionName = data.treeNodeName;
+	    			$scope.river.regionCode = data.treeNodeId;
+	    		}
+	    	}else if($scope.modalTreeInfo.treeType == 'water'){
+	    		$scope.river.waterName = data.treeNodeName;
+	    		$scope.river.waterCode = data.treeNodeId;
+	    	}else if($scope.modalTreeInfo.treeType == 'section'){
+	    		if($scope.section == 1){
+	    			$scope.river.startSectionName = data.treeNodeName;
+	    			$scope.river.startSection = data.treeNodeId;
+	    		}else if($scope.section == 2){
+	    			$scope.river.endSectionName = data.treeNodeName;
+	    			$scope.river.endSection = data.treeNodeId;
+	    		}
+	    	}
+	    })
 
 
-								//水系选择模态框【show】
-								var _treeNode_find,water_ztree_name,water_ztree_code;
-								$scope.waterShow = function() {
-									var _treeNode_find = treeNode_find;
-									$scope.waterName = '';
-									$("#water_ztree").modal('show');
-									waterTreelist();
-									//初始化水系树
-									function waterTreelist(){
-										$http({
-											method: "get",
-											url: $localStorage.gwUrl +waterUrl + "/belongWater",
-											params: {
-												areaCode:_treeNode_find
-											},
-										}).success(function(res) {;
-											var setting1 = {
-												enable: true,
-												callback: {
-													onClick: zTreeOnClick_water
-												}
-											};
-											var zNodes1 = [{
-												name: "根节点",
-												icon: "/vendor/zTree_v3/css/zTreeStyle/img/diy/10.png",
-												open: true,
-												children: res.data
-											}];
-											$.fn.zTree.init($("#waterZtree"), setting1, zNodes1);
-										});
-									}
+		/*河流编辑*/
+		var jsname = /^[\u4e00-\u9fa5_a-zA-Z0-9_]{2,16}$/;
+        var len =/^\d+(?:\.\d{1,4})?$/;
+		$scope.submit = function() {
+			// $scope.river.overView = CKEDITOR.instances.editor.getData();
+			if(!$scope.river.riverName || !jsname.test($scope.river.riverName)) {
+				layer.msg('河流名称输入有误');
+                return;
+			} else if (!$scope.river.regionName){
+                layer.msg('请完善所属区域');
+                return;
+            } else if (!$scope.river.waterName){
+            	layer.msg('请完善所属水系');
+                return;
+            }
+            $http({
+				method: "post",
+				url: moduleService.getServiceUrl() + riverUrl + "/update",
+				data: {
+					id: $scope.river.id,
+                    riverName: $scope.river.riverName,
+                    riverCode: $scope.river.riverCode,
+					length: $scope.river.length,
+					area: $scope.river.area,
+					riverType: $scope.river.riverType,
+					feature: $scope.river.feature,
+					regionCode: $scope.river.regionCode,
+					waterCode: $scope.river.waterCode,
+					startPoint: $scope.river.startPoint,
+					endPoint: $scope.river.endPoint,
+					startSection: $scope.river.startSection,
+					endSection: $scope.river.endSection,
+					throughArea: $scope.river.throughArea,
+                    midPointLongitude: $scope.river.midPointLongitude,
+                    midPointLatitude: $scope.river.midPointLatitude,
+					linePoints: $scope.river.linePoints,
+                    spatialData: $scope.river.spatialData,
+					overView: $scope.river.overView,
+					remark: $scope.river.remark,
+					jsonFiles: JSON.stringify($scope.river.jsonFiles),
+                    jsonImages: JSON.stringify($scope.river.jsonImages)
+				},
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    			transformRequest:function(obj){return $.param(obj)}
+			}).success(function(res) {
+				if (res.resCode === 1){
+                    layer.msg('修改成功',{shift:-1},function(){
+                    	$scope.back();
+                    });
+                } else {
+                    layer.msg(res.resMsg || '请求错误,请稍后再试');
+                }
+			}).error(function(res){
+				layer.msg('服务器异常，请稍后再试');
+			});
+        }
 
-									//树节点点击问题
-									function zTreeOnClick_water(event, treeId, treeNode) {
-										$http({
-											method: "GET",
-											url: $localStorage.gwUrl + waterUrl + "/findByWaterCode",
-											params: {
-												waterCode: treeNode.id
-											},
-										}).success(function(res) {
-											if (res.resCode == 1){
-												water_ztree_name = res.data.waterName;
-												water_ztree_code = res.data.waterCode;
-											}else{
-												$scope.water_ztree = '';
-											}
-										});
-									};
-									//水系模态框搜索框
-									$scope.select_water = function() {
-										if($scope.waterName == null || $scope.waterName == ''){
-											waterTreelist();
-										}else{
-											$http({
-												method: "GET",
-												url: $localStorage.gwUrl +waterUrl + "/belongWater",
-												params: {
-													waterName: $scope.waterName
-												},
-											}).success(function(res) {
-												var setting1 = {
-													enable: true,
-													callback: {
-														onClick: zTreeOnClick_water
-													}
-												};
-												var zNodes1 = [{
-													name: "根节点",
-													icon: "/vendor/zTree_v3/css/zTreeStyle/img/diy/10.png",
-													open: true,
-													children: res.data
-												}];
-												$.fn.zTree.init($("#waterZtree"), setting1, zNodes1);
-											});
-										}
-									};
-									//关闭模态框【确定按钮】
-									$scope.water_modalOk = function (){
-										$("#water_ztree").modal('hide');
-                                        $scope.riverDetail.waterName = water_ztree_name;
-                                        $scope.riverDetail.waterCode = water_ztree_code;
-									};
-								};
-
-								//河流类型
-								$scope.riverType = function () {
-							    	$http({
-							            method: "get",
-                                        url: $localStorage.gwUrl + riverUrl + "/riverType",
-										params: {
-                                            type: '104'
-										},
-							    	}).success(function (res) {
-									    $scope.riverTypes = res.data;
-									});
-							    }
-
-								/* 修改 */
-                                var jsname = /^[a-zA-Z0-9_-]{4,16}$/;
-                                var len =/^\d+(?:\.\d{1,2})?$/;
-								$scope.submit = function() {
-                                    var overView = CKEDITOR.instances.editor.getData();
-                                    if (!$scope.riverDetail.riverName || !jsname.test($scope.riverDetail.riverName) == null) {
-                                        layer.alert("请完善河流名称", {
-                                            skin: 'my-skin',
-                                            closeBtn: 1,
-                                            anim: 3
-                                        });
-                                    } else if ($scope.riverDetail.length == null || $scope.riverDetail.length == '' || eval($scope.riverDetail.length)<=0 ||!len.test($scope.riverDetail.length)) {
-                                        layer.alert("河流长度请输入正数，最多保留两位小数！", {
-                                            skin: 'my-skin',
-                                            closeBtn: 1,
-                                            anim: 3
-                                        });
-                                    } else if (!$scope.riverDetail.riverType) {
-                                        layer.alert("请完善河流类型", {
-                                            skin: 'my-skin',
-                                            closeBtn: 1,
-                                            anim: 3
-                                        });
-                                    } else if (!$scope.riverDetail.regionName) {
-                                        layer.alert("请完善所属区域", {
-                                            skin: 'my-skin',
-                                            closeBtn: 1,
-                                            anim: 3
-                                        });
-                                    } else if (!$scope.riverDetail.waterName) {
-                                        layer.alert("请完善所属水系", {
-                                            skin: 'my-skin',
-                                            closeBtn: 1,
-                                            anim: 3
-                                        });
-                                    } else {
-                                        $http({
-                                            url: $localStorage.gwUrl +riverUrl + "/update",
-                                            method: "post",
-                                            params: {
-                                                id: $scope.riverDetail.editId,
-                                                riverName: $scope.riverDetail.riverName,
-                                                length: $scope.riverDetail.length,
-                                                riverType: $scope.riverDetail.riverType,
-                                                regionCode: $scope.riverDetail.regionCode,
-                                                waterCode: $scope.riverDetail.waterCode,
-                                                startPoint: $scope.riverDetail.startPoint,
-                                                endPoint: $scope.riverDetail.endPoint,
-                                                overView: overView,
-                                                remark: $scope.riverDetail.remark
-                                            }
-                                        }).success(
-                                            function () {
-                                                layer.msg('修改成功', {time: 1000});
-                                                routeService.route(51, true);
-                                            }
-                                        );
-                                    }
-                                }
-								// 返回按钮
-								$scope.back = function() {
-									routeService.route(11, true);
-								}
-							} ]);
+		// 返回按钮
+		$scope.back = function() {
+			routeService.route(105, true);
+		}
+	}]);
 })(window, angular);

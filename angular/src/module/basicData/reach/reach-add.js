@@ -196,7 +196,8 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
 
 			$scope.back = function() {
 				// 跳转到菜单页面
-				routeService.route(108, true);
+				// routeService.route(108, true);
+                history.go(-1)
 			}
 
 			//新增河湖库数据
@@ -204,7 +205,7 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
             var len =/^\d+(?:\.\d{1,2})?$/;
 			$scope.submit = function() {
 				var chairmanList = '';
-				$scope.reach.overView = CKEDITOR.instances.editor.getData();
+				// $scope.reach.overView = CKEDITOR.instances.editor.getData();
 				if(!$scope.reach.reachName || !jsname.test($scope.reach.reachName) == null) {
                     layer.msg('请完善河段名称');
                     return;
@@ -220,78 +221,55 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
                 }else if(!$scope.reach.shore) {
                     layer.msg('请完善河段岸别');
                     return;
-                }else if($scope.reachadmins.length != 0){
-                    var flag = 1;
-                    var reachadmins = $scope.reachadmins;
-                    reachadmins = angular.forEach(reachadmins, function (each){
-                        if(!each.chairmanid) {
-                            flag = 0;
-                            layer.msg('请完善履职人员');
-                            return false;
-                        }else if(!each.chairmanlevel) {
-                            flag = 0;
-                            layer.msg('请完善履职级别');
-                            return false;
-                        }else if(!each.chairmanRole) {
-                            flag = 0;
-                            layer.msg('请完善履职类型');
-                            return false
-                        }else if(!each.administrationCoast) {
-                            layer.msg('请完善管理岸面');
-                            flag = 0;
-                            return false;
+                }else {
+                    $http({
+                        method: "post",
+                        url: moduleService.getServiceUrl() +reachUrl + "/add",
+                        data: {
+                            classify: 'A',
+                            reachName: $scope.reach.reachName,
+                            alias: $scope.reach.alias,
+                            waterGrade: $scope.reach.waterGrade,
+                            silty: $scope.reach.silty,
+                            regionName: $scope.reach.regionName,
+                            regionCode: $scope.reach.regionCode,
+                            grade: $scope.reach.grade,
+                            startPoint: $scope.reach.startPoint,
+                            endPoint: $scope.reach.endPoint,
+                            startSection: $scope.reach.startSection,
+                            endSection: $scope.reach.endSection,
+                            whether: $scope.reach.whether,
+                            isVirtual: $scope.reach.isVirtual,
+                            length: $scope.reach.length,
+                            width: $scope.reach.width,
+                            throughArea: $scope.reach.throughArea,
+                            parentsCode: $scope.reach.parentsCode,
+                            shore: $scope.reach.shore,
+                            pName: $scope.reach.pName,
+                            theirCode: $scope.reach.theirCode,
+                            overView: $scope.reach.overView,
+                            linePoints: $scope.reach.linePoints,
+                            spatialData: $scope.reach.spatialData,
+                            remark: $scope.reach.remark,
+                            jsonFiles: JSON.stringify($scope.reach.jsonFiles),
+                            jsonImages: JSON.stringify($scope.reach.jsonImages),
+                            chairmanList: chairmanList
+                        },
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                        transformRequest:function(obj){return $.param(obj)}
+                    }).success(function(res) {
+                        if(res.resCode == 1){
+                            layer.msg('新增成功',{shift:-1},function(){
+                                history.go(-1)
+                            });
+                        }else{
+                            layer.msg(res.resMsg || '请求失败,请稍后再试');
                         }
-                        each.isAssess = each.isAssess == true ? 'Y':'N';
-                    })
-                    if(!flag) return;
-                    chairmanList = JSON.stringify(reachadmins);
+                    }).error(function(res) {
+                        layer.msg('服务器出错，请稍后再试！');
+                    });
                 }
-            	$http({
-                    method: "post",
-                    url: moduleService.getServiceUrl() +reachUrl + "/add",
-                    data: {
-                        classify: 'A',
-                        reachName: $scope.reach.reachName,
-                        alias: $scope.reach.alias,
-                        waterGrade: $scope.reach.waterGrade,
-                        silty: $scope.reach.silty,
-                        regionName: $scope.reach.regionName,
-                        regionCode: $scope.reach.regionCode,
-                        grade: $scope.reach.grade,
-                        startPoint: $scope.reach.startPoint,
-                        endPoint: $scope.reach.endPoint,
-                        startSection: $scope.reach.startSection,
-                        endSection: $scope.reach.endSection,
-                        whether: $scope.reach.whether,
-                        isVirtual: $scope.reach.isVirtual,
-                        length: $scope.reach.length,
-                        width: $scope.reach.width,
-                        throughArea: $scope.reach.throughArea,
-                        parentsCode: $scope.reach.parentsCode,
-                        shore: $scope.reach.shore,
-                        pName: $scope.reach.pName,
-                        theirCode: $scope.reach.theirCode,
-                        overView: $scope.reach.overView,
-                        linePoints: $scope.reach.linePoints,
-                        spatialData: $scope.reach.spatialData,
-                        remark: $scope.reach.remark,
-                        jsonFiles: JSON.stringify($scope.reach.jsonFiles),
-                        jsonImages: JSON.stringify($scope.reach.jsonImages),
-                        chairmanList: chairmanList
-                    },
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                    transformRequest:function(obj){return $.param(obj)}
-                }).success(function(res) {
-                	if(res.resCode == 1){
-                        layer.msg('新增成功',{shift:-1},function(){
-                            $scope.back();
-                        });
-                    }else{
-                        layer.msg(res.resMsg || '请求失败,请稍后再试');
-                    }
-                }).error(function(res) {
-            		layer.msg('服务器出错，请稍后再试！');
-                });
+
 			}
         }]
     );

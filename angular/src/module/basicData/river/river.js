@@ -40,12 +40,22 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
 				}
 
 				/*水系树模态框*/
-				$scope.waterShow = function() {
-					$scope.modalTreeInfo = {'treeType': 'water'};
-					$("#treeModal").modal('show');
-				}
+				// $scope.waterShow = function() {
+				// 	$scope.modalTreeInfo = {'treeType': 'water'};
+				// 	$("#treeModal").modal('show');
+				// }
+
+				/*区域选择模态框*/
+				 $scope.regionShow = function(type){
+                    if(type == 'multiple'){
+                        $scope.modalTreeInfo = {'treeType': 'region' ,'setting': {'check': {'enable': true,'chkStyle': "checkbox",'chkboxType': { "Y": "", "N": "" }}}};
+                    }else{
+                        $scope.modalTreeInfo = {'treeType': 'region'};
+                    }
+                    $("#treeModal").modal('show');
+                };
 			    $scope.$on('zTreeModalClose', function(event,data) {
-			    	$scope.waterName = data.treeNodeName;
+			    	$scope.regionName = data.treeNodeName;
 			    	$scope.waterCode = data.treeNodeId;
 			    })
 
@@ -143,8 +153,11 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
 					$scope.riverType = null;
 					$scope.waterName = null;
 					$scope.waterCode = null;
+					$scope.regionName = null;
 					reGetProducts();
 				}
+
+				var regionCode =  $localStorage.userLoginInfo && $localStorage.userLoginInfo.userInfo.regionId ? $localStorage.userLoginInfo.userInfo.regionId : null;
 
 				/*表单分页*/
 				var reGetProducts = function() {
@@ -154,8 +167,9 @@ var dictionaryUrl = modulePrefix + "/v1/dictionary";
 						params: {
                             riverName: $scope.riverName,
                             riverType: $scope.riverType,
-                            waterCode: $scope.waterCode,
+                            // waterCode: $scope.waterCode,
 							page: $scope.paginationConf.currentPage,
+							regionCode:$scope.waterCode == null ? regionCode : $scope.waterCode,
 							size: $scope.paginationConf.itemsPerPage,
 							status: -1
 						},

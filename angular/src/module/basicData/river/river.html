@@ -13,10 +13,15 @@
                             <option value="">请选择</option>
                         </select>
                     </div>
-                    <div class="form-item">
+                   <!--  <div class="form-item">
                         <label>所属水系</label>
                         <input ng-model="waterName" type="text" class="form-control input-short-o" ng-click="waterShow()" readonly>
-						<a class="input-group-addon" ng-click="waterShow()"><i class="fa fa-search"></i></a>
+						<a class="input-group-addon" ng-click="waterShow()"><i class="icon-jx_search"></i></a>
+                    </div> -->
+                    <div class="form-item">
+                        <label>所属区域</label>
+                        <input ng-model="regionName" type="text" class="form-control input-short-o" ng-click="regionShow()">
+                        <a class="input-group-addon" ng-click="regionShow()"><i class="fa fa-search"></i></a>
                     </div>
                     <button type="button" class="btn btn-search" ng-click="riverSearch()">搜 索</button>
                     <button type="button" class="btn btn-reset" ng-click="reSet()">重 置</button>
@@ -28,7 +33,7 @@
                 <div class="table-responsive">
                     <div class="table-bar">
                         <button class="btn btn-primary" ng-click="riverAdd()">
-                            <i class="icon-jx_add"></i> 新增
+                            <i class="fa fa-plus"></i> 新增
                         </button>
                        <!--  <button class="btn btn-default">
                             <a href="#/app/index/9805804528df43cebebad36098a44a70_1_537"><i class="icon-jx_import"></i> 导入</a>
